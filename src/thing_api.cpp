@@ -632,10 +632,10 @@ int Thing::is_unused_flag84(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag84());
 }
-int Thing::is_unused_flag85(void)
+int Thing::is_dog(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag85());
+  return (tp()->is_dog());
 }
 int Thing::is_drinkable(void)
 {

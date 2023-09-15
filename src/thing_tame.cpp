@@ -52,15 +52,19 @@ bool Thing::attempt_to_tame_with(Thingp it, Thingp what)
     return false;
   }
 
-  it->eat(what);
-
-  it->leader_set(this);
-
   if (is_player()) {
-    msg("You tame %s.", it->text_the().c_str());
+    msg("%%fg=green$You tame %s.%%fg=reset$", it->text_the().c_str());
   } else {
     msg("%s tames %s.", text_The().c_str(), it->text_the().c_str());
   }
+
+  if (it->is_sleeping) {
+    it->wake("food");
+  } else {
+    it->eat(what);
+  }
+
+  it->leader_set(this);
 
   return true;
 }

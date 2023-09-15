@@ -84,7 +84,6 @@ static PyObject *thing_hit_common(PyObject *obj, PyObject *args, PyObject *keywd
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
   }
-  CON("-");
   Py_RETURN_FALSE;
 }
 

@@ -514,6 +514,7 @@ int Tp::is_described_when_hovering_over(void) const { return _is_described_when_
 int Tp::is_destroyed_on_hit_or_miss(void) const { return _is_destroyed_on_hit_or_miss; }
 int Tp::is_destroyed_on_hitting(void) const { return _is_destroyed_on_hitting; }
 int Tp::is_dirt(void) const { return _is_dirt; }
+int Tp::is_dog(void) const { return _is_dog; }
 int Tp::is_door(void) const { return _is_door; }
 int Tp::is_drinkable(void) const { return _is_drinkable; }
 int Tp::is_droppable(void) const { return _is_droppable; }
@@ -866,7 +867,6 @@ int Tp::is_unused_flag81(void) const { return _is_unused_flag81; }
 int Tp::is_unused_flag82(void) const { return _is_unused_flag82; }
 int Tp::is_unused_flag83(void) const { return _is_unused_flag83; }
 int Tp::is_unused_flag84(void) const { return _is_unused_flag84; }
-int Tp::is_unused_flag85(void) const { return _is_unused_flag85; }
 int Tp::is_unused_flag8(void) const { return _is_unused_flag8; }
 int Tp::is_unused_flag9(void) const { return _is_unused_flag9; }
 int Tp::is_usable(void) const { return _is_usable; }
@@ -1284,6 +1284,7 @@ void Tp::is_described_when_hovering_over_set(int v) { _is_described_when_hoverin
 void Tp::is_destroyed_on_hit_or_miss_set(int v) { _is_destroyed_on_hit_or_miss = v; }
 void Tp::is_destroyed_on_hitting_set(int v) { _is_destroyed_on_hitting = v; }
 void Tp::is_dirt_set(int v) { _is_dirt = v; }
+void Tp::is_dog_set(int v) { _is_dog = v; }
 void Tp::is_door_set(int v) { _is_door = v; }
 void Tp::is_drinkable_set(int v) { _is_drinkable = v; }
 void Tp::is_droppable_set(int v) { _is_droppable = v; }
@@ -1636,7 +1637,6 @@ void Tp::is_unused_flag81_set(int v) { _is_unused_flag81 = v; }
 void Tp::is_unused_flag82_set(int v) { _is_unused_flag82 = v; }
 void Tp::is_unused_flag83_set(int v) { _is_unused_flag83 = v; }
 void Tp::is_unused_flag84_set(int v) { _is_unused_flag84 = v; }
-void Tp::is_unused_flag85_set(int v) { _is_unused_flag85 = v; }
 void Tp::is_unused_flag8_set(int v) { _is_unused_flag8 = v; }
 void Tp::is_unused_flag9_set(int v) { _is_unused_flag9 = v; }
 void Tp::is_usable_set(int v) { _is_usable = v; }

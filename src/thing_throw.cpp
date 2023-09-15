@@ -78,7 +78,15 @@ bool Thing::throw_item_choose_target(Thingp what)
 void Thing::on_thrown_callback(ThingId owner_id_when_thrown)
 {
   dbg("Thrown callback");
-  on_thrown(owner_id_when_thrown);
+
+  //
+  // Bit of a hack, but it avoids attacking the monster you just tamed
+  //
+  if (! is_being_used_to_tame) {
+    is_being_used_to_tame = false;
+    on_thrown(owner_id_when_thrown);
+  }
+
   visible("thrown");
   dbg("Thrown callback done");
 }
@@ -387,6 +395,7 @@ bool Thing::throw_at(Thingp what, Thingp target)
       if (what->top_owner()) {
         if (attempt_to_tame_with(target->curr_at, what)) {
           dbg("Tamed with thrown item");
+          what->is_being_used_to_tame = true;
           TRACE_AND_INDENT();
           drop(what, target, drop_options);
         } else if (target && target->is_portal()) {

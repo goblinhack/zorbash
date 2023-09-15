@@ -350,6 +350,7 @@ public:
   uint64_t inited_tiles          : 1 {};
   uint64_t is_being_dropped      : 1 {};
   uint64_t is_being_thrown       : 1 {};
+  uint64_t is_being_used_to_tame : 1 {};
   uint64_t is_blitted            : 1 {};
   uint64_t is_in_lava            : 1 {}; // Updated on level pop/push
   uint64_t is_in_water           : 1 {}; // Updated on level pop/push
@@ -1585,6 +1586,7 @@ public:
   int is_destroyed_on_hit_or_miss(void);
   int is_destroyed_on_hitting(void);
   int is_dirt(void);
+  int is_dog(void);
   int is_door(void);
   int is_drinkable(void);
   int is_droppable(void);
@@ -1938,7 +1940,6 @@ public:
   int is_unused_flag82(void);
   int is_unused_flag83(void);
   int is_unused_flag84(void);
-  int is_unused_flag85(void);
   int is_unused_flag8(void);
   int is_unused_flag9(void);
   int is_usable(void);

@@ -290,6 +290,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     wid_thing_info_add_immunity(wid_popup_window, t);
     wid_thing_info_add_charge_count(wid_popup_window, t);
     wid_thing_info_add_danger_level(wid_popup_window, t);
+    wid_thing_info_add_leader_info(wid_popup_window, t);
   }
 
   //
@@ -3540,17 +3541,6 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
     return;
   }
 
-  //
-  // A possessed being?
-  //
-  if (! t->is_player()) {
-    auto l = t->leader();
-    if (l && (l == level->player)) {
-      w->log("%%fg=green$Is beholden to you");
-      return;
-    }
-  }
-
   const std::string danger_level = player->danger_level_str(t);
   w->log(danger_level);
 
@@ -3605,6 +3595,33 @@ void Game::wid_thing_info_add_danger_level(WidPopup *w, Thingp t)
       w->log("More likely, " + std::to_string(player_defeat_count * 2) + " hits.");
     } else {
       w->log("Will take many hits to beat.");
+    }
+  }
+}
+
+void Game::wid_thing_info_add_leader_info(WidPopup *w, Thingp t)
+{
+  TRACE_AND_INDENT();
+  auto player = game->level->player;
+  if (! player) {
+    return;
+  }
+
+  if (! t->is_player()) {
+    auto l = t->leader();
+    if (l && (l == level->player)) {
+      if (t->is_tameable()) {
+        //
+        // Tamed?
+        //
+        w->log("%%fg=green$Is tamed by you");
+      } else {
+        //
+        // A possessed being?
+        //
+        w->log("%%fg=green$Is beholden to you");
+      }
+      return;
     }
   }
 }

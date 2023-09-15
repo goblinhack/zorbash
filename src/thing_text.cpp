@@ -28,22 +28,6 @@ std::string Thing::text_a_or_an(size_t max_len)
     }
   }
 
-  if (is_frozen) {
-    out += "frozen ";
-  } else if (is_burnt) {
-    out += "burnt ";
-  } else if (tpp->charge_count() && ! charge_count()) {
-    out += "spent ";
-  }
-
-  //
-  // Tamed?
-  //
-  auto l = leader();
-  if (l && (l == level->player)) {
-    out += "pet ";
-  }
-
   if (out == "") {
     auto prefix = tpp->text_a_or_an();
     if (prefix == "") {
@@ -53,6 +37,14 @@ std::string Thing::text_a_or_an(size_t max_len)
     }
   } else {
     out += tpp->text_long_name();
+  }
+
+  //
+  // Tamed?
+  //
+  auto l = leader();
+  if (l && (l == level->player)) {
+    out += ", your pet";
   }
 
   if (max_len) {
@@ -75,6 +67,14 @@ std::string Thing::text_the(bool include_owner)
   }
 
   std::string out = "the ";
+
+  //
+  // Tamed?
+  //
+  auto l = leader();
+  if (l && (l == level->player)) {
+    out = "your ";
+  }
 
   //
   // "the goblin's short sword" for example
@@ -110,7 +110,6 @@ std::string Thing::text_the(bool include_owner)
   //
   // Tamed?
   //
-  auto l = leader();
   if (l && (l == level->player)) {
     out += "pet ";
   }
@@ -139,6 +138,14 @@ std::string Thing::text_the_no_dying(bool include_owner)
   }
 
   std::string out = "the ";
+
+  //
+  // Tamed?
+  //
+  auto l = leader();
+  if (l && (l == level->player)) {
+    out = "your ";
+  }
 
   //
   // "the goblin's short sword" for example
@@ -241,6 +248,14 @@ std::string Thing::text_short_the(size_t max_len)
 
   std::string out = "the ";
 
+  //
+  // Tamed?
+  //
+  auto l = leader();
+  if (l && (l == level->player)) {
+    out = "your ";
+  }
+
   if (is_dead) {
     if (is_undead()) {
       out += "extra dead ";
@@ -254,7 +269,6 @@ std::string Thing::text_short_the(size_t max_len)
   //
   // Tamed?
   //
-  auto l = leader();
   if (l && (l == level->player)) {
     out += "pet ";
   }

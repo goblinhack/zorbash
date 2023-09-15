@@ -420,6 +420,7 @@ private:
   int _is_destroyed_on_hit_or_miss {};
   int _is_destroyed_on_hitting {};
   int _is_dirt {};
+  int _is_dog {};
   int _is_door {};
   int _is_drinkable {};
   int _is_droppable {};
@@ -775,7 +776,6 @@ private:
   int _is_unused_flag82 {};
   int _is_unused_flag83 {};
   int _is_unused_flag84 {};
-  int _is_unused_flag85 {};
   int _is_unused_flag9 {};
   int _is_usable {};
   int _is_used_when_thrown {};
@@ -1788,6 +1788,7 @@ public:
   int is_destroyed_on_hit_or_miss(void) const;
   int is_destroyed_on_hitting(void) const;
   int is_dirt(void) const;
+  int is_dog(void) const;
   int is_door(void) const;
   int is_drinkable(void) const;
   int is_droppable(void) const;
@@ -2141,7 +2142,6 @@ public:
   int is_unused_flag82(void) const;
   int is_unused_flag83(void) const;
   int is_unused_flag84(void) const;
-  int is_unused_flag85(void) const;
   int is_unused_flag8(void) const;
   int is_unused_flag9(void) const;
   int is_usable(void) const;
@@ -2559,6 +2559,7 @@ public:
   void is_destroyed_on_hit_or_miss_set(int v);
   void is_destroyed_on_hitting_set(int v);
   void is_dirt_set(int v);
+  void is_dog_set(int v);
   void is_door_set(int v);
   void is_drinkable_set(int v);
   void is_droppable_set(int v);
@@ -2912,7 +2913,6 @@ public:
   void is_unused_flag82_set(int v);
   void is_unused_flag83_set(int v);
   void is_unused_flag84_set(int v);
-  void is_unused_flag85_set(int v);
   void is_unused_flag8_set(int v);
   void is_unused_flag9_set(int v);
   void is_usable_set(int v);
