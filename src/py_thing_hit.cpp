@@ -58,10 +58,13 @@ static PyObject *thing_hit_common(PyObject *obj, PyObject *args, PyObject *keywd
     attack_options.damage  = damage;
   }
 
-  attack_options.thrown         = thrown ? true : false;
-  attack_options.crit           = crit ? true : false;
-  attack_options.attack[ type ] = true;
-  attack_options.real_hitter    = real_hitter;
+  attack_options.thrown = thrown ? true : false;
+  attack_options.crit   = crit ? true : false;
+  if (type != THING_ATTACK_NONE) {
+    attack_options.attack_type_set = true;
+    attack_options.attack[ type ]  = true;
+  }
+  attack_options.real_hitter = real_hitter;
 
   if (attack_options.real_hitter) {
     if (damage) {
@@ -81,10 +84,17 @@ static PyObject *thing_hit_common(PyObject *obj, PyObject *args, PyObject *keywd
   if (hitter->attack(target, &attack_options)) {
     Py_RETURN_TRUE;
   }
+  CON("-");
   Py_RETURN_FALSE;
 }
 
 PyObject *thing_hit(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  return thing_hit_common(obj, args, keywds, THING_ATTACK_NONE);
+}
+
+PyObject *thing_hit_dmg_melee(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
   return thing_hit_common(obj, args, keywds, THING_ATTACK_MELEE);

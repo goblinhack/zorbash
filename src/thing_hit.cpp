@@ -555,7 +555,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
 
     if (! damage || ! is_crushable()) {
       if (is_player()) {
-        msg("You take no crush damage!");
+        msg("You take no damage due to being super uncrushable!");
       } else if (real_hitter->is_player()) {
         msg("%s takes no crush damage!", text_The().c_str());
       } else {
@@ -575,9 +575,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     TRACE_NO_INDENT();
     attack_set = true;
 
-    if (! damage || ! is_very_hard()) {
+    if (! damage || is_very_hard()) {
       if (is_player()) {
-        msg("You take no impact damage!");
+        msg("You take no impact damage due to being super tough!");
       } else if (real_hitter->is_player()) {
         msg("%s takes no impact damage!", text_The().c_str());
       } else {
@@ -1117,7 +1117,23 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   TRACE_NO_INDENT();
   if (is_immune_to_fire()) {
     TRACE_NO_INDENT();
-    if (hitter->is_fire() || real_hitter->is_fire()) {
+
+    bool fire_hit = false;
+
+    if (attack_options->attack_type_set) {
+      //
+      // Explosions are firey but also do impact damage.
+      //
+      if (attack_options->attack[ THING_ATTACK_HEAT ] || attack_options->attack[ THING_ATTACK_FIRE ]) {
+        fire_hit = true;
+      }
+    } else {
+      if (hitter->is_fire() || real_hitter->is_fire()) {
+        fire_hit = true;
+      }
+    }
+
+    if (fire_hit) {
       if (is_player()) {
         msg("You bask in the fire!");
       } else if (real_hitter->is_player()) {
@@ -1512,7 +1528,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         } else if (attack_options->attack[ THING_ATTACK_CRUSH ]) {
           msg("%%fg=red$You are flattened by %s!%%fg=reset$", real_hitter->text_the().c_str());
         } else if (attack_options->attack[ THING_ATTACK_IMPACT ]) {
-          msg("%%fg=red$You are blasted by %s!%%fg=reset$", real_hitter->text_the().c_str());
+          msg("%%fg=red$You are impacted by %s!%%fg=reset$", real_hitter->text_the().c_str());
         } else if (attack_options->attack[ THING_ATTACK_FIRE ]) {
           msg("%%fg=red$You are burnt to a crisp by %s!%%fg=reset$", real_hitter->text_the().c_str());
         } else if (attack_options->attack[ THING_ATTACK_DIGEST ]) {
@@ -1623,11 +1639,11 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           msg("%%fg=orange$You are being crushed by %s for %d damage!%%fg=reset$", real_hitter->text_the().c_str(),
               damage);
         } else if (attack_options->attack[ THING_ATTACK_IMPACT ]) {
-          msg("%%fg=orange$You are being blasted by %s for %d damage!%%fg=reset$", real_hitter->text_the().c_str(),
+          msg("%%fg=orange$You are being hit by %s for %d damage!%%fg=reset$", real_hitter->text_the().c_str(),
               damage);
         } else if (attack_options->attack[ THING_ATTACK_FIRE ]) {
           if (real_hitter->is_explosion()) {
-            msg("%%fg=orange$You are blasted by %s for %d damage!%%fg=reset$", real_hitter->text_the().c_str(),
+            msg("%%fg=orange$You are kaboomed by %s for %d damage!%%fg=reset$", real_hitter->text_the().c_str(),
                 damage);
           } else {
             msg("%%fg=orange$You are burnt by %s for %d damage!%%fg=reset$", real_hitter->text_the().c_str(), damage);
@@ -1693,7 +1709,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_CRUSH ]) {
         msg("Your %s is being crushed.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_IMPACT ]) {
-        msg("Your %s is being blasted.", text_long_name().c_str());
+        msg("Your %s is being impacted.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_LIGHTNING ]) {
         msg("Your %s is being zapped.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_ENERGY ]) {
@@ -1941,7 +1957,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_CRUSH ]) {
         msg("Your %s is being crushed.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_IMPACT ]) {
-        msg("Your %s is being blasted.", text_long_name().c_str());
+        msg("Your %s is being impacted.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_LIGHTNING ]) {
         msg("Your %s is being zapped.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_ENERGY ]) {
@@ -1981,7 +1997,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_CRUSH ]) {
         msg("Your %s is being crushed.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_IMPACT ]) {
-        msg("Your %s is being blasted.", text_long_name().c_str());
+        msg("Your %s is being impacted.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_LIGHTNING ]) {
         msg("Your %s is being zapped.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_ENERGY ]) {
@@ -2021,7 +2037,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_CRUSH ]) {
         real_hitter->msg("%s is being crushed.", text_The().c_str());
       } else if (attack_options->attack[ THING_ATTACK_IMPACT ]) {
-        real_hitter->msg("%s is being blasted.", text_The().c_str());
+        real_hitter->msg("%s is being impacted.", text_The().c_str());
       } else if (attack_options->attack[ THING_ATTACK_LIGHTNING ]) {
         real_hitter->msg("%s is being electrified.", text_The().c_str());
       } else if (attack_options->attack[ THING_ATTACK_ENERGY ]) {
@@ -2102,6 +2118,26 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   // In player robot mode we want to keep track of enemies also
   //
   add_attacker(real_hitter);
+
+  //
+  // Need to check this after immunity checks, so that if an explosion occurs and
+  // we take no fire damage, we're still hit by impact damage.
+  //
+  if (maybe_aip()) {
+    if (is_dead) {
+      //
+      // If dead, allow things to chomp on your bones
+      //
+    } else {
+      //
+      // If alive, one hit per tick
+      //
+      // NOTE: this needs to be before on_fire_set() as that leads to multiple hits by lava
+      //
+      IF_DEBUG { log("Set recently hit: %s", to_short_string().c_str()); }
+      aip()->recently_hit_by[ real_hitter->id ]++;
+    }
+  }
 
   //
   // If sufficiently far away, the hitter message might be hard to associate
@@ -2607,22 +2643,6 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
         }
       }
     }
-
-    if (maybe_aip()) {
-      if (is_dead) {
-        //
-        // If dead, allow things to chomp on your bones
-        //
-      } else {
-        //
-        // If alive, one hit per tick
-        //
-        // NOTE: this needs to be before on_fire_set() as that leads to multiple hits by lava
-        //
-        IF_DEBUG { real_hitter->log("Set recently hit: %s", to_short_string().c_str()); }
-        aip()->recently_hit_by[ real_hitter->id ]++;
-      }
-    }
   }
 
   //
@@ -2716,10 +2736,6 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
     //
     if (training) {
       hitter->physical_training_tick();
-    }
-
-    if (hitter->is_fire()) {
-      IF_DEBUG { hitter->log("Fire attack"); }
     }
   }
 

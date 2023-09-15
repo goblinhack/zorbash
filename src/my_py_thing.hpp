@@ -147,6 +147,7 @@ PyObject *thing_hit_dmg_negation(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_hit_dmg_poison(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_hit_dmg_stamina(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_hit_dmg_water(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_hit_dmg_melee(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_hit_hunger_clock_tick_freq(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_hit(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_hunger_clock_tick_freq(PyObject *obj, PyObject *args, PyObject *keywds);

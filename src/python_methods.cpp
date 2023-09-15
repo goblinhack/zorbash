@@ -439,6 +439,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_hit_dmg_negation),
     MY_ADD_PYTHON_FUNCTION(thing_hit_dmg_poison),
     MY_ADD_PYTHON_FUNCTION(thing_hit_dmg_stamina),
+    MY_ADD_PYTHON_FUNCTION(thing_hit_dmg_melee),
     MY_ADD_PYTHON_FUNCTION(thing_hit_dmg_water),
     MY_ADD_PYTHON_FUNCTION(thing_hunger_clock_tick_freq),
     MY_ADD_PYTHON_FUNCTION(thing_hunger_is_insatiable),

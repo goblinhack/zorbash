@@ -836,592 +836,812 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     TRACE_AND_INDENT();
 
     //
-    // Chance of poison damage?
+    // This first path is used by things that explicitly set an attack type,
+    // like explosions.
     //
-    if (! attack_options->attack[ THING_ATTACK_POISON ]) {
-      if (! attack_options->dmg_set || attack_options->prefer_nat_att) {
-        if (d1000() < dmg_chance_d1000_poison(attack_options->attack_num)) {
-          int dmg_poison_val = dmg_poison(victim);
-          if (dmg_poison_val > 0) {
-            attack_options->damage                        = dmg_poison_val;
-            attack_options->dmg_set                       = true;
-            attack_options->attack[ THING_ATTACK_POISON ] = true;
-            victim->poison_reason_set(text_a_or_an());
-            dbg("Set poison damage %d", attack_options->damage);
-          }
-        }
-      }
-    } else if (! attack_options->dmg_set) {
+    if (attack_options->attack_type_set) {
       //
       // Here we've indicated the attack type is mandatory, but not set the damage
       //
-      int dmg_poison_val = dmg_poison(victim);
-      if (dmg_poison_val > 0) {
-        attack_options->damage                        = dmg_poison_val;
-        attack_options->dmg_set                       = true;
-        attack_options->attack[ THING_ATTACK_POISON ] = true;
-        victim->poison_reason_set(text_a_or_an());
-        dbg("Set poison damage %d", attack_options->damage);
-      }
-    }
-
-    //
-    // Chance of attack[THING_ATTACK_DROWN] damage?
-    //
-    if (! attack_options->attack[ THING_ATTACK_DROWN ]) {
-      if (! attack_options->dmg_set) {
-        if (d1000() < dmg_chance_d1000_drown(attack_options->attack_num)) {
-          int dmg_drown_val = dmg_drown(victim);
-          if (dmg_drown_val > 0) {
-            attack_options->damage                       = dmg_drown_val;
-            attack_options->dmg_set                      = true;
-            attack_options->attack[ THING_ATTACK_DROWN ] = true;
-            dbg("Set drown damage %d", attack_options->damage);
-          }
-        }
-      }
-    } else if (! attack_options->dmg_set) {
-      //
-      // Here we've indicated the attack type is mandatory, but not set the damage
-      //
-      int dmg_drown_val = dmg_drown(victim);
-      if (dmg_drown_val > 0) {
-        attack_options->damage                       = dmg_drown_val;
-        attack_options->dmg_set                      = true;
-        attack_options->attack[ THING_ATTACK_DROWN ] = true;
-        dbg("Set drown damage %d", attack_options->damage);
-      }
-    }
-
-    //
-    // Chance of attack[THING_ATTACK_BITE] damage?
-    //
-    if (! attack_options->attack[ THING_ATTACK_BITE ]) {
-      if (! attack_options->dmg_set) {
-        if (d1000() < dmg_chance_d1000_bite(attack_options->attack_num)) {
-          int dmg_bite_val = dmg_bite(victim);
-          if (dmg_bite_val > 0) {
-            attack_options->damage                      = dmg_bite_val;
-            attack_options->dmg_set                     = true;
-            attack_options->attack[ THING_ATTACK_BITE ] = true;
-            dbg("Set bite damage %d", attack_options->damage);
-          }
-        }
-      }
-    } else if (! attack_options->dmg_set) {
-      //
-      // Here we've indicated the attack type is mandatory, but not set the damage
-      //
-      int dmg_bite_val = dmg_bite(victim);
-      if (dmg_bite_val > 0) {
-        attack_options->damage                      = dmg_bite_val;
-        attack_options->dmg_set                     = true;
-        attack_options->attack[ THING_ATTACK_BITE ] = true;
-        dbg("Set bite damage %d", attack_options->damage);
-      }
-    }
-
-    //
-    // Chance of attack[THING_ATTACK_CLAW] damage?
-    //
-    if (! attack_options->attack[ THING_ATTACK_CLAW ]) {
-      if (! attack_options->dmg_set) {
-        if (d1000() < dmg_chance_d1000_claw(attack_options->attack_num)) {
-          int dmg_claw_val = dmg_claw(victim);
-          if (dmg_claw_val > 0) {
-            attack_options->damage                      = dmg_claw_val;
-            attack_options->dmg_set                     = true;
-            attack_options->attack[ THING_ATTACK_CLAW ] = true;
-            dbg("Set claw damage %d", attack_options->damage);
-          }
-        }
-      }
-    } else if (! attack_options->dmg_set) {
-      //
-      // Here we've indicated the attack type is mandatory, but not set the damage
-      //
-      int dmg_claw_val = dmg_claw(victim);
-      if (dmg_claw_val > 0) {
-        attack_options->damage                      = dmg_claw_val;
-        attack_options->dmg_set                     = true;
-        attack_options->attack[ THING_ATTACK_CLAW ] = true;
-        dbg("Set claw damage %d", attack_options->damage);
-      }
-    }
-
-    //
-    // Chance of attack[THING_ATTACK_COLD] damage?
-    //
-    if (! attack_options->attack[ THING_ATTACK_COLD ]) {
-      if (! attack_options->dmg_set) {
-        if (d1000() < dmg_chance_d1000_cold(attack_options->attack_num)) {
-          int dmg_cold_val = dmg_cold(victim);
-          if (dmg_cold_val > 0) {
-            attack_options->damage                      = dmg_cold_val;
-            attack_options->dmg_set                     = true;
-            attack_options->attack[ THING_ATTACK_COLD ] = true;
-            dbg("Set cold damage %d", attack_options->damage);
-          }
-        }
-      }
-    } else if (! attack_options->dmg_set) {
-      //
-      // Here we've indicated the attack type is mandatory, but not set the damage
-      //
-      int dmg_cold_val = dmg_cold(victim);
-      if (dmg_cold_val > 0) {
-        attack_options->damage                      = dmg_cold_val;
-        attack_options->dmg_set                     = true;
-        attack_options->attack[ THING_ATTACK_COLD ] = true;
-        dbg("Set cold damage %d", attack_options->damage);
-      }
-    }
-
-    //
-    // Chance of attack[THING_ATTACK_FIRE] damage?
-    //
-    if (! attack_options->attack[ THING_ATTACK_FIRE ]) {
-      if (! attack_options->dmg_set) {
-        if (d1000() < dmg_chance_d1000_fire(attack_options->attack_num)) {
-          int dmg_fire_val = dmg_fire(victim);
-          if (dmg_fire_val > 0) {
-            attack_options->damage                      = dmg_fire_val;
-            attack_options->dmg_set                     = true;
-            attack_options->attack[ THING_ATTACK_FIRE ] = true;
-            dbg("Set fire damage %d", attack_options->damage);
-          }
-        }
-      }
-    } else if (! attack_options->dmg_set) {
-      //
-      // Here we've indicated the attack type is mandatory, but not set the damage
-      //
-      int dmg_fire_val = dmg_fire(victim);
-      if (dmg_fire_val > 0) {
-        attack_options->damage                      = dmg_fire_val;
-        attack_options->dmg_set                     = true;
-        attack_options->attack[ THING_ATTACK_FIRE ] = true;
-        dbg("Set fire damage %d", attack_options->damage);
-      }
-    }
-
-    //
-    // Chance of attack[THING_ATTACK_HEAT] damage?
-    //
-    if (! attack_options->attack[ THING_ATTACK_HEAT ]) {
-      if (! attack_options->dmg_set) {
-        if (d1000() < dmg_chance_d1000_heat(attack_options->attack_num)) {
-          int dmg_heat_val = dmg_heat(victim);
-          if (dmg_heat_val > 0) {
-            attack_options->damage                      = dmg_heat_val;
-            attack_options->dmg_set                     = true;
-            attack_options->attack[ THING_ATTACK_FIRE ] = true;
-            dbg("Set heat damage %d", attack_options->damage);
-          }
-        }
-      }
-    } else if (! attack_options->dmg_set) {
-      //
-      // Here we've indicated the attack type is mandatory, but not set the damage
-      //
-      int dmg_heat_val = dmg_heat(victim);
-      if (dmg_heat_val > 0) {
-        attack_options->damage                      = dmg_heat_val;
-        attack_options->dmg_set                     = true;
-        attack_options->attack[ THING_ATTACK_FIRE ] = true;
-        dbg("Set heat damage %d", attack_options->damage);
-      }
-    }
-
-    //
-    // Chance of attack[THING_ATTACK_CRUSH] damage?
-    //
-    if (! attack_options->attack[ THING_ATTACK_CRUSH ]) {
-      if (! attack_options->dmg_set) {
-        if (d1000() < dmg_chance_d1000_crush(attack_options->attack_num)) {
-          int dmg_crush_val = dmg_crush(victim);
-          if (dmg_crush_val > 0) {
-            attack_options->damage                       = dmg_crush_val;
-            attack_options->dmg_set                      = true;
-            attack_options->attack[ THING_ATTACK_CRUSH ] = true;
-            dbg("Set crush damage %d", attack_options->damage);
-          }
-        }
-      }
-    } else if (! attack_options->dmg_set) {
-      //
-      // Here we've indicated the attack type is mandatory, but not set the damage
-      //
-      int dmg_crush_val = dmg_crush(victim);
-      if (dmg_crush_val > 0) {
-        attack_options->damage                       = dmg_crush_val;
-        attack_options->dmg_set                      = true;
-        attack_options->attack[ THING_ATTACK_CRUSH ] = true;
-        dbg("Set crush damage %d", attack_options->damage);
-      }
-    }
-
-    //
-    // Chance of attack[THING_ATTACK_IMPACT] damage?
-    //
-    if (! attack_options->attack[ THING_ATTACK_IMPACT ]) {
-      if (! attack_options->dmg_set) {
-        if (d1000() < dmg_chance_d1000_impact(attack_options->attack_num)) {
-          int dmg_impact_val = dmg_impact(victim);
-          if (dmg_impact_val > 0) {
-            attack_options->damage                        = dmg_impact_val;
-            attack_options->dmg_set                       = true;
-            attack_options->attack[ THING_ATTACK_IMPACT ] = true;
-            dbg("Set impact damage %d", attack_options->damage);
-          }
-        }
-      }
-    } else if (! attack_options->dmg_set) {
-      //
-      // Here we've indicated the attack type is mandatory, but not set the damage
-      //
-      int dmg_impact_val = dmg_impact(victim);
-      if (dmg_impact_val > 0) {
-        attack_options->damage                        = dmg_impact_val;
-        attack_options->dmg_set                       = true;
-        attack_options->attack[ THING_ATTACK_IMPACT ] = true;
-        dbg("Set impact damage %d", attack_options->damage);
-      }
-    }
-
-    //
-    // Chance of attack[THING_ATTACK_MISSILE] damage?
-    //
-    if (! attack_options->attack[ THING_ATTACK_MISSILE ]) {
-      if (! attack_options->dmg_set) {
-        if (d1000() < dmg_chance_d1000_missile(attack_options->attack_num)) {
-          int dmg_missile_val = dmg_missile(victim);
-          if (dmg_missile_val > 0) {
-            attack_options->damage                         = dmg_missile_val;
-            attack_options->dmg_set                        = true;
-            attack_options->attack[ THING_ATTACK_MISSILE ] = true;
-            dbg("Set impact damage %d", attack_options->damage);
-          }
-        }
-      }
-    } else if (! attack_options->dmg_set) {
-      //
-      // Here we've indicated the attack type is mandatory, but not set the damage
-      //
-      int dmg_missile_val = dmg_missile(victim);
-      if (dmg_missile_val > 0) {
-        attack_options->damage                         = dmg_missile_val;
-        attack_options->dmg_set                        = true;
-        attack_options->attack[ THING_ATTACK_MISSILE ] = true;
-        dbg("Set impact damage %d", attack_options->damage);
-      }
-    }
-
-    //
-    // Chance of attack[THING_ATTACK_LIGHTNING] damage?
-    //
-    if (! attack_options->attack[ THING_ATTACK_LIGHTNING ]) {
-      if (! attack_options->dmg_set) {
-        if (d1000() < dmg_chance_d1000_lightning(attack_options->attack_num)) {
-          int dmg_lightning_val = dmg_lightning(victim);
-          if (dmg_lightning_val > 0) {
-            attack_options->damage                           = dmg_lightning_val;
-            attack_options->dmg_set                          = true;
-            attack_options->attack[ THING_ATTACK_LIGHTNING ] = true;
-            dbg("Set lightning damage %d", attack_options->damage);
-          }
-        }
-      }
-    } else if (! attack_options->dmg_set) {
-      //
-      // Here we've indicated the attack type is mandatory, but not set the damage
-      //
-      int dmg_lightning_val = dmg_lightning(victim);
-      if (dmg_lightning_val > 0) {
-        attack_options->damage                           = dmg_lightning_val;
-        attack_options->dmg_set                          = true;
-        attack_options->attack[ THING_ATTACK_LIGHTNING ] = true;
-        dbg("Set lightning damage %d", attack_options->damage);
-      }
-    }
-
-    //
-    // Chance of attack[THING_ATTACK_ENERGY] damage?
-    //
-    if (! attack_options->attack[ THING_ATTACK_ENERGY ]) {
-      if (! attack_options->dmg_set) {
-        if (d1000() < dmg_chance_d1000_energy(attack_options->attack_num)) {
-          int dmg_energy_val = dmg_energy(victim);
-          if (dmg_energy_val > 0) {
-            attack_options->damage                        = dmg_energy_val;
-            attack_options->dmg_set                       = true;
-            attack_options->attack[ THING_ATTACK_ENERGY ] = true;
-            dbg("Set energy damage %d", attack_options->damage);
-          }
-        }
-      }
-    } else if (! attack_options->dmg_set) {
-      //
-      // Here we've indicated the attack type is mandatory, but not set the damage
-      //
-      int dmg_energy_val = dmg_energy(victim);
-      if (dmg_energy_val > 0) {
-        attack_options->damage                        = dmg_energy_val;
-        attack_options->dmg_set                       = true;
-        attack_options->attack[ THING_ATTACK_ENERGY ] = true;
-        dbg("Set energy damage %d", attack_options->damage);
-      }
-    }
-
-    //
-    // Chance of attack[THING_ATTACK_NEGATION] damage?
-    //
-    if (! attack_options->attack[ THING_ATTACK_NEGATION ]) {
-      if (! attack_options->dmg_set) {
-        if (d1000() < dmg_chance_d1000_negation(attack_options->attack_num)) {
-          int dmg_negation_val = dmg_negation(victim);
-          if (dmg_negation_val > 0) {
-            attack_options->damage                          = dmg_negation_val;
-            attack_options->dmg_set                         = true;
-            attack_options->attack[ THING_ATTACK_NEGATION ] = true;
-            dbg("Set negation damage %d", attack_options->damage);
-          }
-        }
-      }
-    } else if (! attack_options->dmg_set) {
-      //
-      // Here we've indicated the attack type is mandatory, but not set the damage
-      //
-      int dmg_negation_val = dmg_negation(victim);
-      if (dmg_negation_val > 0) {
-        attack_options->damage                          = dmg_negation_val;
-        attack_options->dmg_set                         = true;
-        attack_options->attack[ THING_ATTACK_NEGATION ] = true;
-        dbg("Set negation damage %d", attack_options->damage);
-      }
-    }
-
-    //
-    // Chance of attack[THING_ATTACK_ACID] damage?
-    //
-    if (! attack_options->attack[ THING_ATTACK_ACID ]) {
-      if (! attack_options->dmg_set) {
-        if (d1000() < dmg_chance_d1000_acid(attack_options->attack_num)) {
-          int dmg_acid_val = dmg_acid(victim);
-          if (dmg_acid_val > 0) {
-            attack_options->damage                      = dmg_acid_val;
-            attack_options->dmg_set                     = true;
-            attack_options->attack[ THING_ATTACK_ACID ] = true;
-            dbg("Set acid damage %d", attack_options->damage);
-          }
-        }
-      }
-    } else if (! attack_options->dmg_set) {
-      //
-      // Here we've indicated the attack type is mandatory, but not set the damage
-      //
-      int dmg_acid_val = dmg_acid(victim);
-      if (dmg_acid_val > 0) {
-        attack_options->damage                      = dmg_acid_val;
-        attack_options->dmg_set                     = true;
-        attack_options->attack[ THING_ATTACK_ACID ] = true;
-        dbg("Set acid damage %d", attack_options->damage);
-      }
-    }
-
-    //
-    // Chance of attack[THING_ATTACK_WATER] damage?
-    //
-    if (! attack_options->attack[ THING_ATTACK_WATER ]) {
-      if (! attack_options->dmg_set) {
-        if (d1000() < dmg_chance_d1000_water(attack_options->attack_num)) {
-          int dmg_water_val = dmg_water(victim);
-          if (dmg_water_val > 0) {
-            attack_options->damage                       = dmg_water_val;
-            attack_options->dmg_set                      = true;
-            attack_options->attack[ THING_ATTACK_WATER ] = true;
-            dbg("Set water damage %d", attack_options->damage);
-          }
-        }
-      }
-    } else if (! attack_options->dmg_set) {
-      //
-      // Here we've indicated the attack type is mandatory, but not set the damage
-      //
-      int dmg_water_val = dmg_water(victim);
-      if (dmg_water_val > 0) {
-        attack_options->damage                       = dmg_water_val;
-        attack_options->dmg_set                      = true;
-        attack_options->attack[ THING_ATTACK_WATER ] = true;
-        dbg("Set water damage %d", attack_options->damage);
-      }
-    }
-
-    //
-    // Chance of attack[THING_ATTACK_DIGEST] damage?
-    //
-    if (! attack_options->attack[ THING_ATTACK_DIGEST ]) {
-      if (! attack_options->dmg_set) {
-        if (d1000() < dmg_chance_d1000_digest(attack_options->attack_num)) {
-          int dmg_digest_val = dmg_digest(victim);
-          if (dmg_digest_val > 0) {
-            attack_options->damage                        = dmg_digest_val;
-            attack_options->dmg_set                       = true;
-            attack_options->attack[ THING_ATTACK_DIGEST ] = true;
-            dbg("Set digest damage %d", attack_options->damage);
-          }
-        }
-      }
-    } else if (! attack_options->dmg_set) {
-      //
-      // Here we've indicated the attack type is mandatory, but not set the damage
-      //
-      int dmg_digest_val = dmg_digest(victim);
-      if (dmg_digest_val > 0) {
-        attack_options->damage                        = dmg_digest_val;
-        attack_options->dmg_set                       = true;
-        attack_options->attack[ THING_ATTACK_DIGEST ] = true;
-        dbg("Set digest damage %d", attack_options->damage);
-      }
-    }
-
-    //
-    // Chance of necrosis damage?
-    //
-    if (! attack_options->attack[ THING_ATTACK_NECROSIS ]) {
-      if (! attack_options->dmg_set) {
-        if (d1000() < dmg_chance_d1000_necrosis(attack_options->attack_num)) {
-          int dmg_necrosis_val = dmg_necrosis(victim);
-          if (dmg_necrosis_val > 0) {
-            attack_options->damage                          = dmg_necrosis_val;
-            attack_options->dmg_set                         = true;
-            attack_options->attack[ THING_ATTACK_NECROSIS ] = true;
-            dbg("Set necro damage %d", attack_options->damage);
-          }
-        }
-      }
-    } else if (! attack_options->dmg_set) {
-      //
-      // Here we've indicated the attack type is mandatory, but not set the damage
-      //
-      int dmg_necrosis_val = dmg_necrosis(victim);
-      if (dmg_necrosis_val > 0) {
-        attack_options->damage                          = dmg_necrosis_val;
-        attack_options->dmg_set                         = true;
-        attack_options->attack[ THING_ATTACK_NECROSIS ] = true;
-        dbg("Set necro damage %d", attack_options->damage);
-      }
-    }
-
-    //
-    // Chance of stamina damage?
-    //
-    if (! attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
-      if (! attack_options->dmg_set) {
-        if (d1000() < dmg_chance_d1000_stamina_drain(attack_options->attack_num)) {
-          int dmg_stamina_val = dmg_stamina(victim);
-          if (dmg_stamina_val > 0) {
-            attack_options->damage                               = dmg_stamina_val;
-            attack_options->dmg_set                              = true;
-            attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ] = true;
-            dbg("Set stamina drain damage %d", attack_options->damage);
-          }
-        }
-      }
-    } else if (! attack_options->dmg_set) {
-      //
-      // Here we've indicated the attack type is mandatory, but not set the damage
-      //
-      int dmg_stamina_val = dmg_stamina(victim);
-      if (dmg_stamina_val > 0) {
-        attack_options->damage                               = dmg_stamina_val;
-        attack_options->dmg_set                              = true;
-        attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ] = true;
-        dbg("Set stamina drain damage %d", attack_options->damage);
-      }
-    }
-
-    //
-    // Chance of magic damage?
-    //
-    if (! attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
-      if (! attack_options->dmg_set) {
-        if (d1000() < dmg_chance_d1000_magic_drain(attack_options->attack_num)) {
-          int dmg_magic_val = dmg_magic(victim);
-          if (dmg_magic_val > 0) {
-            attack_options->damage                             = dmg_magic_val;
-            attack_options->dmg_set                            = true;
-            attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ] = true;
-            dbg("Set magical drain damage %d", attack_options->damage);
-          }
-        }
-      }
-    } else if (! attack_options->dmg_set) {
-      //
-      // Here we've indicated the attack type is mandatory, but not set the damage
-      //
-      int dmg_magic_val = dmg_magic(victim);
-      if (dmg_magic_val > 0) {
-        attack_options->damage                             = dmg_magic_val;
-        attack_options->dmg_set                            = true;
-        attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ] = true;
-        dbg("Set magical drain damage %d", attack_options->damage);
-      }
-    }
-
-    //
-    // Bite?
-    //
-    if (! attack_options->attack[ THING_ATTACK_NATURAL ]) {
-      if (! attack_options->dmg_set || attack_options->prefer_nat_att) {
-        if (d1000() < dmg_chance_d1000_nat_att(attack_options->attack_num)) {
-          int dmg_nat_att_val = dmg_nat_att(victim);
-          if (dmg_nat_att_val > 0) {
-            attack_options->damage                         = dmg_nat_att_val + attacker_att_bonus;
-            attack_options->dmg_set                        = true;
-            attack_options->attack[ THING_ATTACK_NATURAL ] = true;
-            dbg("Set natural damage %d", attack_options->damage);
-          }
-        }
-      }
-    } else if (! attack_options->dmg_set) {
-      //
-      // Here we've indicated the attack type is mandatory, but not set the damage
-      //
-      int dmg_nat_att_val = dmg_nat_att(victim);
-      if (dmg_nat_att_val > 0) {
-        attack_options->damage                         = dmg_nat_att_val + attacker_att_bonus;
-        attack_options->dmg_set                        = true;
-        attack_options->attack[ THING_ATTACK_NATURAL ] = true;
-        dbg("Set natural damage %d", attack_options->damage);
-      }
-    }
-
-    //
-    // Melee?
-    //
-    // Not sure if I should keep melee chance as it is the fallback attack if nothing
-    // else hits.
-    //
-    if (! attack_options->dmg_set) {
-      if (d1000() < dmg_chance_d1000_melee(attack_options->attack_num)) {
-        auto damage            = dmg_melee(victim);
-        attack_options->damage = damage + attacker_att_bonus;
-        dbg("Set melee damage %d attacker_att_bonus %d", damage, attacker_att_bonus);
-        if (attack_options->damage > 0) {
+      if (attack_options->attack[ THING_ATTACK_POISON ] && ! attack_options->dmg_set) {
+        int dmg_poison_val = dmg_poison(victim);
+        if (dmg_poison_val > 0) {
+          attack_options->damage  = dmg_poison_val;
           attack_options->dmg_set = true;
+          victim->poison_reason_set(text_a_or_an());
+          dbg("Set poison damage %d", attack_options->damage);
         }
       }
-    }
 
-    if (! attack_options->dmg_set) {
-      if (owner) {
-        if (d1000() < owner->dmg_chance_d1000_melee(attack_options->attack_num)) {
+      if (attack_options->attack[ THING_ATTACK_DROWN ] && ! attack_options->dmg_set) {
+        int dmg_drown_val = dmg_drown(victim);
+        if (dmg_drown_val > 0) {
+          attack_options->damage  = dmg_drown_val;
+          attack_options->dmg_set = true;
+          dbg("Set drown damage %d", attack_options->damage);
+        }
+      }
+
+      if (attack_options->attack[ THING_ATTACK_BITE ] && ! attack_options->dmg_set) {
+        int dmg_bite_val = dmg_bite(victim);
+        if (dmg_bite_val > 0) {
+          attack_options->damage  = dmg_bite_val;
+          attack_options->dmg_set = true;
+          dbg("Set bite damage %d", attack_options->damage);
+        }
+      }
+
+      if (attack_options->attack[ THING_ATTACK_CLAW ] && ! attack_options->dmg_set) {
+        int dmg_claw_val = dmg_claw(victim);
+        if (dmg_claw_val > 0) {
+          attack_options->damage  = dmg_claw_val;
+          attack_options->dmg_set = true;
+          dbg("Set claw damage %d", attack_options->damage);
+        }
+      }
+
+      if (attack_options->attack[ THING_ATTACK_COLD ] && ! attack_options->dmg_set) {
+        int dmg_cold_val = dmg_cold(victim);
+        if (dmg_cold_val > 0) {
+          attack_options->damage  = dmg_cold_val;
+          attack_options->dmg_set = true;
+          dbg("Set cold damage %d", attack_options->damage);
+        }
+      }
+
+      if (attack_options->attack[ THING_ATTACK_FIRE ] && ! attack_options->dmg_set) {
+        int dmg_fire_val = dmg_fire(victim);
+        if (dmg_fire_val > 0) {
+          attack_options->damage  = dmg_fire_val;
+          attack_options->dmg_set = true;
+          dbg("Set fire damage %d", attack_options->damage);
+        }
+      }
+
+      if (attack_options->attack[ THING_ATTACK_HEAT ] && ! attack_options->dmg_set) {
+        int dmg_heat_val = dmg_heat(victim);
+        if (dmg_heat_val > 0) {
+          attack_options->damage  = dmg_heat_val;
+          attack_options->dmg_set = true;
+          dbg("Set heat damage %d", attack_options->damage);
+        }
+      }
+
+      if (attack_options->attack[ THING_ATTACK_CRUSH ] && ! attack_options->dmg_set) {
+        int dmg_crush_val = dmg_crush(victim);
+        if (dmg_crush_val > 0) {
+          attack_options->damage  = dmg_crush_val;
+          attack_options->dmg_set = true;
+          dbg("Set crush damage %d", attack_options->damage);
+        }
+      }
+
+      if (attack_options->attack[ THING_ATTACK_IMPACT ] && ! attack_options->dmg_set) {
+        int dmg_impact_val = dmg_impact(victim);
+        if (dmg_impact_val > 0) {
+          attack_options->damage  = dmg_impact_val;
+          attack_options->dmg_set = true;
+          dbg("Set impact damage %d", attack_options->damage);
+        }
+      }
+
+      if (attack_options->attack[ THING_ATTACK_MISSILE ] && ! attack_options->dmg_set) {
+        int dmg_missile_val = dmg_missile(victim);
+        if (dmg_missile_val > 0) {
+          attack_options->damage  = dmg_missile_val;
+          attack_options->dmg_set = true;
+          dbg("Set impact damage %d", attack_options->damage);
+        }
+      }
+
+      if (attack_options->attack[ THING_ATTACK_LIGHTNING ] && ! attack_options->dmg_set) {
+        int dmg_lightning_val = dmg_lightning(victim);
+        if (dmg_lightning_val > 0) {
+          attack_options->damage  = dmg_lightning_val;
+          attack_options->dmg_set = true;
+          dbg("Set lightning damage %d", attack_options->damage);
+        }
+      }
+
+      if (attack_options->attack[ THING_ATTACK_ENERGY ] && ! attack_options->dmg_set) {
+        int dmg_energy_val = dmg_energy(victim);
+        if (dmg_energy_val > 0) {
+          attack_options->damage  = dmg_energy_val;
+          attack_options->dmg_set = true;
+          dbg("Set energy damage %d", attack_options->damage);
+        }
+      }
+
+      if (attack_options->attack[ THING_ATTACK_NEGATION ] && ! attack_options->dmg_set) {
+        int dmg_negation_val = dmg_negation(victim);
+        if (dmg_negation_val > 0) {
+          attack_options->damage  = dmg_negation_val;
+          attack_options->dmg_set = true;
+          dbg("Set negation damage %d", attack_options->damage);
+        }
+      }
+
+      if (attack_options->attack[ THING_ATTACK_ACID ] && ! attack_options->dmg_set) {
+        int dmg_acid_val = dmg_acid(victim);
+        if (dmg_acid_val > 0) {
+          attack_options->damage  = dmg_acid_val;
+          attack_options->dmg_set = true;
+          dbg("Set acid damage %d", attack_options->damage);
+        }
+      }
+
+      if (attack_options->attack[ THING_ATTACK_WATER ] && ! attack_options->dmg_set) {
+        int dmg_water_val = dmg_water(victim);
+        if (dmg_water_val > 0) {
+          attack_options->damage  = dmg_water_val;
+          attack_options->dmg_set = true;
+          dbg("Set water damage %d", attack_options->damage);
+        }
+      }
+
+      if (attack_options->attack[ THING_ATTACK_DIGEST ] && ! attack_options->dmg_set) {
+        int dmg_digest_val = dmg_digest(victim);
+        if (dmg_digest_val > 0) {
+          attack_options->damage  = dmg_digest_val;
+          attack_options->dmg_set = true;
+          dbg("Set digest damage %d", attack_options->damage);
+        }
+      }
+
+      if (attack_options->attack[ THING_ATTACK_NECROSIS ] && ! attack_options->dmg_set) {
+        int dmg_necrosis_val = dmg_necrosis(victim);
+        if (dmg_necrosis_val > 0) {
+          attack_options->damage  = dmg_necrosis_val;
+          attack_options->dmg_set = true;
+          dbg("Set necro damage %d", attack_options->damage);
+        }
+      }
+
+      if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ] && ! attack_options->dmg_set) {
+        int dmg_stamina_val = dmg_stamina(victim);
+        if (dmg_stamina_val > 0) {
+          attack_options->damage  = dmg_stamina_val;
+          attack_options->dmg_set = true;
+          dbg("Set stamina drain damage %d", attack_options->damage);
+        }
+      }
+
+      if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ] && ! attack_options->dmg_set) {
+        int dmg_magic_val = dmg_magic(victim);
+        if (dmg_magic_val > 0) {
+          attack_options->damage  = dmg_magic_val;
+          attack_options->dmg_set = true;
+          dbg("Set magical drain damage %d", attack_options->damage);
+        }
+      }
+
+      if (attack_options->attack[ THING_ATTACK_NATURAL ] && ! attack_options->dmg_set) {
+        int dmg_nat_att_val = dmg_nat_att(victim);
+        if (dmg_nat_att_val > 0) {
+          attack_options->damage  = dmg_nat_att_val + attacker_att_bonus;
+          attack_options->dmg_set = true;
+          dbg("Set natural damage %d", attack_options->damage);
+        }
+      }
+
+      //
+      // Melee?
+      //
+      // Not sure if I should keep melee chance as it is the fallback attack if nothing
+      // else hits.
+      //
+      if (! attack_options->dmg_set) {
+        if (d1000() < dmg_chance_d1000_melee(attack_options->attack_num)) {
           auto damage            = dmg_melee(victim);
           attack_options->damage = damage + attacker_att_bonus;
-          dbg("Set owner melee damage %d attacker_att_bonus %d", damage, attacker_att_bonus);
+          dbg("Set melee damage %d attacker_att_bonus %d", damage, attacker_att_bonus);
           if (attack_options->damage > 0) {
             attack_options->dmg_set = true;
+          }
+        }
+      }
+
+      if (! attack_options->dmg_set) {
+        if (owner) {
+          if (d1000() < owner->dmg_chance_d1000_melee(attack_options->attack_num)) {
+            auto damage            = dmg_melee(victim);
+            attack_options->damage = damage + attacker_att_bonus;
+            dbg("Set owner melee damage %d attacker_att_bonus %d", damage, attacker_att_bonus);
+            if (attack_options->damage > 0) {
+              attack_options->dmg_set = true;
+            }
+          }
+        }
+      }
+    } else {
+      //
+      // Chance of poison damage?
+      //
+      if (! attack_options->attack[ THING_ATTACK_POISON ]) {
+        if (! attack_options->dmg_set || attack_options->prefer_nat_att) {
+          if (d1000() < dmg_chance_d1000_poison(attack_options->attack_num)) {
+            int dmg_poison_val = dmg_poison(victim);
+            if (dmg_poison_val > 0) {
+              attack_options->damage                        = dmg_poison_val;
+              attack_options->dmg_set                       = true;
+              attack_options->attack[ THING_ATTACK_POISON ] = true;
+              victim->poison_reason_set(text_a_or_an());
+              dbg("Set poison damage %d", attack_options->damage);
+            }
+          }
+        }
+      } else if (! attack_options->dmg_set) {
+        //
+        // Here we've indicated the attack type is mandatory, but not set the damage
+        //
+        int dmg_poison_val = dmg_poison(victim);
+        if (dmg_poison_val > 0) {
+          attack_options->damage                        = dmg_poison_val;
+          attack_options->dmg_set                       = true;
+          attack_options->attack[ THING_ATTACK_POISON ] = true;
+          victim->poison_reason_set(text_a_or_an());
+          dbg("Set poison damage %d", attack_options->damage);
+        }
+      }
+
+      //
+      // Chance of attack[THING_ATTACK_DROWN] damage?
+      //
+      if (! attack_options->attack[ THING_ATTACK_DROWN ]) {
+        if (! attack_options->dmg_set) {
+          if (d1000() < dmg_chance_d1000_drown(attack_options->attack_num)) {
+            int dmg_drown_val = dmg_drown(victim);
+            if (dmg_drown_val > 0) {
+              attack_options->damage                       = dmg_drown_val;
+              attack_options->dmg_set                      = true;
+              attack_options->attack[ THING_ATTACK_DROWN ] = true;
+              dbg("Set drown damage %d", attack_options->damage);
+            }
+          }
+        }
+      } else if (! attack_options->dmg_set) {
+        //
+        // Here we've indicated the attack type is mandatory, but not set the damage
+        //
+        int dmg_drown_val = dmg_drown(victim);
+        if (dmg_drown_val > 0) {
+          attack_options->damage                       = dmg_drown_val;
+          attack_options->dmg_set                      = true;
+          attack_options->attack[ THING_ATTACK_DROWN ] = true;
+          dbg("Set drown damage %d", attack_options->damage);
+        }
+      }
+
+      //
+      // Chance of attack[THING_ATTACK_BITE] damage?
+      //
+      if (! attack_options->attack[ THING_ATTACK_BITE ]) {
+        if (! attack_options->dmg_set) {
+          if (d1000() < dmg_chance_d1000_bite(attack_options->attack_num)) {
+            int dmg_bite_val = dmg_bite(victim);
+            if (dmg_bite_val > 0) {
+              attack_options->damage                      = dmg_bite_val;
+              attack_options->dmg_set                     = true;
+              attack_options->attack[ THING_ATTACK_BITE ] = true;
+              dbg("Set bite damage %d", attack_options->damage);
+            }
+          }
+        }
+      } else if (! attack_options->dmg_set) {
+        //
+        // Here we've indicated the attack type is mandatory, but not set the damage
+        //
+        int dmg_bite_val = dmg_bite(victim);
+        if (dmg_bite_val > 0) {
+          attack_options->damage                      = dmg_bite_val;
+          attack_options->dmg_set                     = true;
+          attack_options->attack[ THING_ATTACK_BITE ] = true;
+          dbg("Set bite damage %d", attack_options->damage);
+        }
+      }
+
+      //
+      // Chance of attack[THING_ATTACK_CLAW] damage?
+      //
+      if (! attack_options->attack[ THING_ATTACK_CLAW ]) {
+        if (! attack_options->dmg_set) {
+          if (d1000() < dmg_chance_d1000_claw(attack_options->attack_num)) {
+            int dmg_claw_val = dmg_claw(victim);
+            if (dmg_claw_val > 0) {
+              attack_options->damage                      = dmg_claw_val;
+              attack_options->dmg_set                     = true;
+              attack_options->attack[ THING_ATTACK_CLAW ] = true;
+              dbg("Set claw damage %d", attack_options->damage);
+            }
+          }
+        }
+      } else if (! attack_options->dmg_set) {
+        //
+        // Here we've indicated the attack type is mandatory, but not set the damage
+        //
+        int dmg_claw_val = dmg_claw(victim);
+        if (dmg_claw_val > 0) {
+          attack_options->damage                      = dmg_claw_val;
+          attack_options->dmg_set                     = true;
+          attack_options->attack[ THING_ATTACK_CLAW ] = true;
+          dbg("Set claw damage %d", attack_options->damage);
+        }
+      }
+
+      //
+      // Chance of attack[THING_ATTACK_COLD] damage?
+      //
+      if (! attack_options->attack[ THING_ATTACK_COLD ]) {
+        if (! attack_options->dmg_set) {
+          if (d1000() < dmg_chance_d1000_cold(attack_options->attack_num)) {
+            int dmg_cold_val = dmg_cold(victim);
+            if (dmg_cold_val > 0) {
+              attack_options->damage                      = dmg_cold_val;
+              attack_options->dmg_set                     = true;
+              attack_options->attack[ THING_ATTACK_COLD ] = true;
+              dbg("Set cold damage %d", attack_options->damage);
+            }
+          }
+        }
+      } else if (! attack_options->dmg_set) {
+        //
+        // Here we've indicated the attack type is mandatory, but not set the damage
+        //
+        int dmg_cold_val = dmg_cold(victim);
+        if (dmg_cold_val > 0) {
+          attack_options->damage                      = dmg_cold_val;
+          attack_options->dmg_set                     = true;
+          attack_options->attack[ THING_ATTACK_COLD ] = true;
+          dbg("Set cold damage %d", attack_options->damage);
+        }
+      }
+
+      //
+      // Chance of attack[THING_ATTACK_FIRE] damage?
+      //
+      if (! attack_options->attack[ THING_ATTACK_FIRE ]) {
+        if (! attack_options->dmg_set) {
+          if (d1000() < dmg_chance_d1000_fire(attack_options->attack_num)) {
+            int dmg_fire_val = dmg_fire(victim);
+            if (dmg_fire_val > 0) {
+              attack_options->damage                      = dmg_fire_val;
+              attack_options->dmg_set                     = true;
+              attack_options->attack[ THING_ATTACK_FIRE ] = true;
+              dbg("Set fire damage %d", attack_options->damage);
+            }
+          }
+        }
+      } else if (! attack_options->dmg_set) {
+        //
+        // Here we've indicated the attack type is mandatory, but not set the damage
+        //
+        int dmg_fire_val = dmg_fire(victim);
+        if (dmg_fire_val > 0) {
+          attack_options->damage                      = dmg_fire_val;
+          attack_options->dmg_set                     = true;
+          attack_options->attack[ THING_ATTACK_FIRE ] = true;
+          dbg("Set fire damage %d", attack_options->damage);
+        }
+      }
+
+      //
+      // Chance of attack[THING_ATTACK_HEAT] damage?
+      //
+      if (! attack_options->attack[ THING_ATTACK_HEAT ]) {
+        if (! attack_options->dmg_set) {
+          if (d1000() < dmg_chance_d1000_heat(attack_options->attack_num)) {
+            int dmg_heat_val = dmg_heat(victim);
+            if (dmg_heat_val > 0) {
+              attack_options->damage                      = dmg_heat_val;
+              attack_options->dmg_set                     = true;
+              attack_options->attack[ THING_ATTACK_FIRE ] = true;
+              dbg("Set heat damage %d", attack_options->damage);
+            }
+          }
+        }
+      } else if (! attack_options->dmg_set) {
+        //
+        // Here we've indicated the attack type is mandatory, but not set the damage
+        //
+        int dmg_heat_val = dmg_heat(victim);
+        if (dmg_heat_val > 0) {
+          attack_options->damage                      = dmg_heat_val;
+          attack_options->dmg_set                     = true;
+          attack_options->attack[ THING_ATTACK_FIRE ] = true;
+          dbg("Set heat damage %d", attack_options->damage);
+        }
+      }
+
+      //
+      // Chance of attack[THING_ATTACK_CRUSH] damage?
+      //
+      if (! attack_options->attack[ THING_ATTACK_CRUSH ]) {
+        if (! attack_options->dmg_set) {
+          if (d1000() < dmg_chance_d1000_crush(attack_options->attack_num)) {
+            int dmg_crush_val = dmg_crush(victim);
+            if (dmg_crush_val > 0) {
+              attack_options->damage                       = dmg_crush_val;
+              attack_options->dmg_set                      = true;
+              attack_options->attack[ THING_ATTACK_CRUSH ] = true;
+              dbg("Set crush damage %d", attack_options->damage);
+            }
+          }
+        }
+      } else if (! attack_options->dmg_set) {
+        //
+        // Here we've indicated the attack type is mandatory, but not set the damage
+        //
+        int dmg_crush_val = dmg_crush(victim);
+        if (dmg_crush_val > 0) {
+          attack_options->damage                       = dmg_crush_val;
+          attack_options->dmg_set                      = true;
+          attack_options->attack[ THING_ATTACK_CRUSH ] = true;
+          dbg("Set crush damage %d", attack_options->damage);
+        }
+      }
+
+      //
+      // Chance of attack[THING_ATTACK_IMPACT] damage?
+      //
+      if (! attack_options->attack[ THING_ATTACK_IMPACT ]) {
+        if (! attack_options->dmg_set) {
+          if (d1000() < dmg_chance_d1000_impact(attack_options->attack_num)) {
+            int dmg_impact_val = dmg_impact(victim);
+            if (dmg_impact_val > 0) {
+              attack_options->damage                        = dmg_impact_val;
+              attack_options->dmg_set                       = true;
+              attack_options->attack[ THING_ATTACK_IMPACT ] = true;
+              dbg("Set impact damage %d", attack_options->damage);
+            }
+          }
+        }
+      } else if (! attack_options->dmg_set) {
+        //
+        // Here we've indicated the attack type is mandatory, but not set the damage
+        //
+        int dmg_impact_val = dmg_impact(victim);
+        if (dmg_impact_val > 0) {
+          attack_options->damage                        = dmg_impact_val;
+          attack_options->dmg_set                       = true;
+          attack_options->attack[ THING_ATTACK_IMPACT ] = true;
+          dbg("Set impact damage %d", attack_options->damage);
+        }
+      }
+
+      //
+      // Chance of attack[THING_ATTACK_MISSILE] damage?
+      //
+      if (! attack_options->attack[ THING_ATTACK_MISSILE ]) {
+        if (! attack_options->dmg_set) {
+          if (d1000() < dmg_chance_d1000_missile(attack_options->attack_num)) {
+            int dmg_missile_val = dmg_missile(victim);
+            if (dmg_missile_val > 0) {
+              attack_options->damage                         = dmg_missile_val;
+              attack_options->dmg_set                        = true;
+              attack_options->attack[ THING_ATTACK_MISSILE ] = true;
+              dbg("Set impact damage %d", attack_options->damage);
+            }
+          }
+        }
+      } else if (! attack_options->dmg_set) {
+        //
+        // Here we've indicated the attack type is mandatory, but not set the damage
+        //
+        int dmg_missile_val = dmg_missile(victim);
+        if (dmg_missile_val > 0) {
+          attack_options->damage                         = dmg_missile_val;
+          attack_options->dmg_set                        = true;
+          attack_options->attack[ THING_ATTACK_MISSILE ] = true;
+          dbg("Set impact damage %d", attack_options->damage);
+        }
+      }
+
+      //
+      // Chance of attack[THING_ATTACK_LIGHTNING] damage?
+      //
+      if (! attack_options->attack[ THING_ATTACK_LIGHTNING ]) {
+        if (! attack_options->dmg_set) {
+          if (d1000() < dmg_chance_d1000_lightning(attack_options->attack_num)) {
+            int dmg_lightning_val = dmg_lightning(victim);
+            if (dmg_lightning_val > 0) {
+              attack_options->damage                           = dmg_lightning_val;
+              attack_options->dmg_set                          = true;
+              attack_options->attack[ THING_ATTACK_LIGHTNING ] = true;
+              dbg("Set lightning damage %d", attack_options->damage);
+            }
+          }
+        }
+      } else if (! attack_options->dmg_set) {
+        //
+        // Here we've indicated the attack type is mandatory, but not set the damage
+        //
+        int dmg_lightning_val = dmg_lightning(victim);
+        if (dmg_lightning_val > 0) {
+          attack_options->damage                           = dmg_lightning_val;
+          attack_options->dmg_set                          = true;
+          attack_options->attack[ THING_ATTACK_LIGHTNING ] = true;
+          dbg("Set lightning damage %d", attack_options->damage);
+        }
+      }
+
+      //
+      // Chance of attack[THING_ATTACK_ENERGY] damage?
+      //
+      if (! attack_options->attack[ THING_ATTACK_ENERGY ]) {
+        if (! attack_options->dmg_set) {
+          if (d1000() < dmg_chance_d1000_energy(attack_options->attack_num)) {
+            int dmg_energy_val = dmg_energy(victim);
+            if (dmg_energy_val > 0) {
+              attack_options->damage                        = dmg_energy_val;
+              attack_options->dmg_set                       = true;
+              attack_options->attack[ THING_ATTACK_ENERGY ] = true;
+              dbg("Set energy damage %d", attack_options->damage);
+            }
+          }
+        }
+      } else if (! attack_options->dmg_set) {
+        //
+        // Here we've indicated the attack type is mandatory, but not set the damage
+        //
+        int dmg_energy_val = dmg_energy(victim);
+        if (dmg_energy_val > 0) {
+          attack_options->damage                        = dmg_energy_val;
+          attack_options->dmg_set                       = true;
+          attack_options->attack[ THING_ATTACK_ENERGY ] = true;
+          dbg("Set energy damage %d", attack_options->damage);
+        }
+      }
+
+      //
+      // Chance of attack[THING_ATTACK_NEGATION] damage?
+      //
+      if (! attack_options->attack[ THING_ATTACK_NEGATION ]) {
+        if (! attack_options->dmg_set) {
+          if (d1000() < dmg_chance_d1000_negation(attack_options->attack_num)) {
+            int dmg_negation_val = dmg_negation(victim);
+            if (dmg_negation_val > 0) {
+              attack_options->damage                          = dmg_negation_val;
+              attack_options->dmg_set                         = true;
+              attack_options->attack[ THING_ATTACK_NEGATION ] = true;
+              dbg("Set negation damage %d", attack_options->damage);
+            }
+          }
+        }
+      } else if (! attack_options->dmg_set) {
+        //
+        // Here we've indicated the attack type is mandatory, but not set the damage
+        //
+        int dmg_negation_val = dmg_negation(victim);
+        if (dmg_negation_val > 0) {
+          attack_options->damage                          = dmg_negation_val;
+          attack_options->dmg_set                         = true;
+          attack_options->attack[ THING_ATTACK_NEGATION ] = true;
+          dbg("Set negation damage %d", attack_options->damage);
+        }
+      }
+
+      //
+      // Chance of attack[THING_ATTACK_ACID] damage?
+      //
+      if (! attack_options->attack[ THING_ATTACK_ACID ]) {
+        if (! attack_options->dmg_set) {
+          if (d1000() < dmg_chance_d1000_acid(attack_options->attack_num)) {
+            int dmg_acid_val = dmg_acid(victim);
+            if (dmg_acid_val > 0) {
+              attack_options->damage                      = dmg_acid_val;
+              attack_options->dmg_set                     = true;
+              attack_options->attack[ THING_ATTACK_ACID ] = true;
+              dbg("Set acid damage %d", attack_options->damage);
+            }
+          }
+        }
+      } else if (! attack_options->dmg_set) {
+        //
+        // Here we've indicated the attack type is mandatory, but not set the damage
+        //
+        int dmg_acid_val = dmg_acid(victim);
+        if (dmg_acid_val > 0) {
+          attack_options->damage                      = dmg_acid_val;
+          attack_options->dmg_set                     = true;
+          attack_options->attack[ THING_ATTACK_ACID ] = true;
+          dbg("Set acid damage %d", attack_options->damage);
+        }
+      }
+
+      //
+      // Chance of attack[THING_ATTACK_WATER] damage?
+      //
+      if (! attack_options->attack[ THING_ATTACK_WATER ]) {
+        if (! attack_options->dmg_set) {
+          if (d1000() < dmg_chance_d1000_water(attack_options->attack_num)) {
+            int dmg_water_val = dmg_water(victim);
+            if (dmg_water_val > 0) {
+              attack_options->damage                       = dmg_water_val;
+              attack_options->dmg_set                      = true;
+              attack_options->attack[ THING_ATTACK_WATER ] = true;
+              dbg("Set water damage %d", attack_options->damage);
+            }
+          }
+        }
+      } else if (! attack_options->dmg_set) {
+        //
+        // Here we've indicated the attack type is mandatory, but not set the damage
+        //
+        int dmg_water_val = dmg_water(victim);
+        if (dmg_water_val > 0) {
+          attack_options->damage                       = dmg_water_val;
+          attack_options->dmg_set                      = true;
+          attack_options->attack[ THING_ATTACK_WATER ] = true;
+          dbg("Set water damage %d", attack_options->damage);
+        }
+      }
+
+      //
+      // Chance of attack[THING_ATTACK_DIGEST] damage?
+      //
+      if (! attack_options->attack[ THING_ATTACK_DIGEST ]) {
+        if (! attack_options->dmg_set) {
+          if (d1000() < dmg_chance_d1000_digest(attack_options->attack_num)) {
+            int dmg_digest_val = dmg_digest(victim);
+            if (dmg_digest_val > 0) {
+              attack_options->damage                        = dmg_digest_val;
+              attack_options->dmg_set                       = true;
+              attack_options->attack[ THING_ATTACK_DIGEST ] = true;
+              dbg("Set digest damage %d", attack_options->damage);
+            }
+          }
+        }
+      } else if (! attack_options->dmg_set) {
+        //
+        // Here we've indicated the attack type is mandatory, but not set the damage
+        //
+        int dmg_digest_val = dmg_digest(victim);
+        if (dmg_digest_val > 0) {
+          attack_options->damage                        = dmg_digest_val;
+          attack_options->dmg_set                       = true;
+          attack_options->attack[ THING_ATTACK_DIGEST ] = true;
+          dbg("Set digest damage %d", attack_options->damage);
+        }
+      }
+
+      //
+      // Chance of necrosis damage?
+      //
+      if (! attack_options->attack[ THING_ATTACK_NECROSIS ]) {
+        if (! attack_options->dmg_set) {
+          if (d1000() < dmg_chance_d1000_necrosis(attack_options->attack_num)) {
+            int dmg_necrosis_val = dmg_necrosis(victim);
+            if (dmg_necrosis_val > 0) {
+              attack_options->damage                          = dmg_necrosis_val;
+              attack_options->dmg_set                         = true;
+              attack_options->attack[ THING_ATTACK_NECROSIS ] = true;
+              dbg("Set necro damage %d", attack_options->damage);
+            }
+          }
+        }
+      } else if (! attack_options->dmg_set) {
+        //
+        // Here we've indicated the attack type is mandatory, but not set the damage
+        //
+        int dmg_necrosis_val = dmg_necrosis(victim);
+        if (dmg_necrosis_val > 0) {
+          attack_options->damage                          = dmg_necrosis_val;
+          attack_options->dmg_set                         = true;
+          attack_options->attack[ THING_ATTACK_NECROSIS ] = true;
+          dbg("Set necro damage %d", attack_options->damage);
+        }
+      }
+
+      //
+      // Chance of stamina damage?
+      //
+      if (! attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
+        if (! attack_options->dmg_set) {
+          if (d1000() < dmg_chance_d1000_stamina_drain(attack_options->attack_num)) {
+            int dmg_stamina_val = dmg_stamina(victim);
+            if (dmg_stamina_val > 0) {
+              attack_options->damage                               = dmg_stamina_val;
+              attack_options->dmg_set                              = true;
+              attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ] = true;
+              dbg("Set stamina drain damage %d", attack_options->damage);
+            }
+          }
+        }
+      } else if (! attack_options->dmg_set) {
+        //
+        // Here we've indicated the attack type is mandatory, but not set the damage
+        //
+        int dmg_stamina_val = dmg_stamina(victim);
+        if (dmg_stamina_val > 0) {
+          attack_options->damage                               = dmg_stamina_val;
+          attack_options->dmg_set                              = true;
+          attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ] = true;
+          dbg("Set stamina drain damage %d", attack_options->damage);
+        }
+      }
+
+      //
+      // Chance of magic damage?
+      //
+      if (! attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
+        if (! attack_options->dmg_set) {
+          if (d1000() < dmg_chance_d1000_magic_drain(attack_options->attack_num)) {
+            int dmg_magic_val = dmg_magic(victim);
+            if (dmg_magic_val > 0) {
+              attack_options->damage                             = dmg_magic_val;
+              attack_options->dmg_set                            = true;
+              attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ] = true;
+              dbg("Set magical drain damage %d", attack_options->damage);
+            }
+          }
+        }
+      } else if (! attack_options->dmg_set) {
+        //
+        // Here we've indicated the attack type is mandatory, but not set the damage
+        //
+        int dmg_magic_val = dmg_magic(victim);
+        if (dmg_magic_val > 0) {
+          attack_options->damage                             = dmg_magic_val;
+          attack_options->dmg_set                            = true;
+          attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ] = true;
+          dbg("Set magical drain damage %d", attack_options->damage);
+        }
+      }
+
+      //
+      // Bite?
+      //
+      if (! attack_options->attack[ THING_ATTACK_NATURAL ]) {
+        if (! attack_options->dmg_set || attack_options->prefer_nat_att) {
+          if (d1000() < dmg_chance_d1000_nat_att(attack_options->attack_num)) {
+            int dmg_nat_att_val = dmg_nat_att(victim);
+            if (dmg_nat_att_val > 0) {
+              attack_options->damage                         = dmg_nat_att_val + attacker_att_bonus;
+              attack_options->dmg_set                        = true;
+              attack_options->attack[ THING_ATTACK_NATURAL ] = true;
+              dbg("Set natural damage %d", attack_options->damage);
+            }
+          }
+        }
+      } else if (! attack_options->dmg_set) {
+        //
+        // Here we've indicated the attack type is mandatory, but not set the damage
+        //
+        int dmg_nat_att_val = dmg_nat_att(victim);
+        if (dmg_nat_att_val > 0) {
+          attack_options->damage                         = dmg_nat_att_val + attacker_att_bonus;
+          attack_options->dmg_set                        = true;
+          attack_options->attack[ THING_ATTACK_NATURAL ] = true;
+          dbg("Set natural damage %d", attack_options->damage);
+        }
+      }
+
+      //
+      // Melee?
+      //
+      // Not sure if I should keep melee chance as it is the fallback attack if nothing
+      // else hits.
+      //
+      if (! attack_options->dmg_set) {
+        if (d1000() < dmg_chance_d1000_melee(attack_options->attack_num)) {
+          auto damage            = dmg_melee(victim);
+          attack_options->damage = damage + attacker_att_bonus;
+          dbg("Set melee damage %d attacker_att_bonus %d", damage, attacker_att_bonus);
+          if (attack_options->damage > 0) {
+            attack_options->dmg_set = true;
+          }
+        }
+      }
+
+      if (! attack_options->dmg_set) {
+        if (owner) {
+          if (d1000() < owner->dmg_chance_d1000_melee(attack_options->attack_num)) {
+            auto damage            = dmg_melee(victim);
+            attack_options->damage = damage + attacker_att_bonus;
+            dbg("Set owner melee damage %d attacker_att_bonus %d", damage, attacker_att_bonus);
+            if (attack_options->damage > 0) {
+              attack_options->dmg_set = true;
+            }
           }
         }
       }

@@ -9,6 +9,7 @@
 #define FOR_ALL_ATTACK_TYPES(_attack_) for (auto _attack_ = 0; _attack_ < THING_ATTACK_MAX; _attack_++)
 
 typedef enum {
+  THING_ATTACK_NONE,
   THING_ATTACK_ACID,
   THING_ATTACK_BITE,
   THING_ATTACK_CLAW,
@@ -83,6 +84,7 @@ public:
   // Attack types;
   //
   bool attack[ THING_ATTACK_MAX ] = {};
+  bool attack_type_set            = {};
   //
   // Set if damage is already pre calculated
   //

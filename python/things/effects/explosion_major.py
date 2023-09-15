@@ -5,7 +5,7 @@ import tp
 def attack(me, it):
     if my.thing_possible_to_attack(me, it):
         if it != me:
-            my.thing_hit(0, me, it)
+            my.thing_hit_dmg_fire(0, me, it)
             my.thing_hit_dmg_impact(0, me, it)
 
 

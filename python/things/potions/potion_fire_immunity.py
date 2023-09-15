@@ -34,11 +34,11 @@ def shatters(item, target, x, y):
     owner = my.thing_top_owner_id_get(item)
     if owner:
         if my.thing_is_player(owner):
-            my.thing_msg(owner, "Your potion of fire immunitu shatters.")
+            my.thing_msg(owner, "Your potion of fire immunity shatters.")
         else:
-            my.thing_msg(owner, f"The {my.thing_name_get(owner)}'s potion of fire immunitu shatters.")
+            my.thing_msg(owner, f"The {my.thing_name_get(owner)}'s potion of fire immunity shatters.")
     else:
-        my.thing_msg(item, "The potion of fire immunitu shatters.")
+        my.thing_msg(item, "The potion of fire immunity shatters.")
 
     my.spawn_at_my_position(target, "explosion_major")
     my.thing_dead(item, "broken")

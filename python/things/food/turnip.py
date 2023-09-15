@@ -9,7 +9,7 @@ def on_thrown(owner, me, x, y):
                 continue
             if it == owner:
                 continue
-            my.thing_hit(owner, me, it, damage=my.py_pcg_random_range_inclusive(1, 20), thrown=True)
+            my.thing_hit_dmg_impact(owner, me, it, damage=my.py_pcg_random_range_inclusive(1, 20), thrown=True)
 
 
 def tp_init(name, text_long_name, text_short_name):
