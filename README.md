@@ -10,7 +10,7 @@
 <!-- DONE Potion of Strength - Permanently increases you strength by one point. Cures weakness.                                                   -->
 <!-- DONE Potion of Paralysis - Produces a cloud of paraylsis gas.                                                                                -->
 <!-- DONE Potion of Speed - Increases your speed to twice normal, even if previously slowed.                                                      -->
-<!-- TODO Potion of Fire Immunity - Make you immune to fire/burning/lava, but not explosions.                                                     -->
+<!-- DONE Potion of Fire Immunity - Make you immune to fire/burning/lava, but not explosions.                                                     -->
 <!-- TODO Potion of Incineration - Bursts into cloud of flames. Sets nearby monsters and terrain on fire.                                         -->
 <!-- TODO Potion of Telepathy - Allows you to see the location of most enemies, and see whatever they can see.                                    -->
 <!-- TODO Potion of Descent - Instantly erodes an area of the floor. Nearby monsters/objects will fall to the next level.                         -->

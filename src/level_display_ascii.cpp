@@ -159,6 +159,34 @@ void Level::display_ascii_beast_map(point tl, point br)
         }
       }
     }
+  } else if (player->stat_psi_total() > 10) {
+    //
+    // Allow psi to reveal monsters
+    //
+    auto psi = (player->stat_psi_total() - 10) * 3;
+    for (auto z = (int) 0; z < MAP_DEPTH; z++) {
+      for (auto y = miny; y < maxy; y++) {
+        for (auto x = minx; x < maxx; x++) {
+          point p(x, y);
+
+          if (distance(p, player->curr_at) > psi) {
+            continue;
+          }
+
+          FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
+          {
+            if (t->is_monst() || t->is_spiderweb() || t->is_mob()) {
+              if (t->gfx_ascii_animated) {
+                t->animate();
+              }
+
+              t->blit_ascii(tl, br, p, true);
+            }
+          }
+          FOR_ALL_THINGS_END()
+        }
+      }
+    }
   }
 }
 

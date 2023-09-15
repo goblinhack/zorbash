@@ -13,12 +13,24 @@
 //
 bool Level::update_map_mini_should_show_monst(int x, int y)
 {
-  if (! is_monst(x, y)) {
+  point p(x, y);
+
+  if (! is_monst(p)) {
     return false;
   }
 
   if (player && (player->map_beast_count() > 0)) {
     return true;
+  }
+
+  //
+  // Allow psi to reveal monsters
+  //
+  if (player && player->stat_psi_total() > 10) {
+    auto psi = (player->stat_psi_total() - 10) * 3;
+    if (distance(p, player->curr_at) <= psi) {
+      return true;
+    }
   }
 
   TRACE_NO_INDENT();
@@ -39,7 +51,6 @@ bool Level::update_map_mini_should_show_monst(int x, int y)
       }
     }
   }
-  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
   return false;
