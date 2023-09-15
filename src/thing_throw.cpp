@@ -215,7 +215,6 @@ bool Thing::throw_at(Thingp what, Thingp target)
       target = t;
       break;
     }
-    TRACE_NO_INDENT();
     FOR_ALL_THINGS_END()
   } else {
     if (is_player()) {
@@ -386,7 +385,11 @@ bool Thing::throw_at(Thingp what, Thingp target)
       // this point there would be no owner. Double check the item is still owned.
       //
       if (what->top_owner()) {
-        if (target && target->is_portal()) {
+        if (attempt_to_tame_with(target->curr_at, what)) {
+          dbg("Tamed with thrown item");
+          TRACE_AND_INDENT();
+          drop(what, target, drop_options);
+        } else if (target && target->is_portal()) {
           dbg("Drop into portal");
           TRACE_AND_INDENT();
           drop(what, target, drop_options);

@@ -533,6 +533,7 @@ void Game::place_player(void)
         auto d = level->thing_new("dogman", point(x + 2, y));
         d->wake("");
       }
+      level->thing_new("rat_large", point(x + 1, y + 3));
       if (0) {
         level->thing_new("troll_stone", point(x + 2, y));
         level->thing_new("troll_fire", point(x + 2, y + 2));
@@ -570,7 +571,6 @@ void Game::place_player(void)
         level->thing_new("goat_battle", point(x + 2, y + 1));
         level->thing_new("goat_demon", point(x + 2, y + 1));
         level->thing_new("gnome_dwarf", point(x + 2, y + 1));
-        level->thing_new("rat_large", point(x + 1, y + 3));
         level->thing_new("dogman", point(x + 1, y + 3));
         level->thing_new("golem_cement", point(x + 4, y + 2));
         level->thing_new("amulet_healing", point(x + 1, y - 3));

@@ -480,6 +480,8 @@ public:
   bool ascend_sewer(void);
   bool attack(point future_pos);
   bool attack(Thingp victim, ThingAttackOptionsp);
+  bool attempt_to_tame_with(point p, Thingp what);
+  bool attempt_to_tame_with(Thingp it, Thingp what);
   bool bag_add_test(Thingp);
   bool bag_add(Thingp);
   bool bag_can_place_anywhere(Thingp item, point &pos);

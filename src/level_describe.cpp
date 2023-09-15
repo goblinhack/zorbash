@@ -129,7 +129,6 @@ void Level::describe(point p)
       hover_over = t;
     }
   }
-  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
   TRACE_NO_INDENT();
