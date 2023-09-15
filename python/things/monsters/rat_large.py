@@ -176,7 +176,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="rat_large", text_long_name="large rat")
+    tp_init(name="rat_large", text_long_name="rat")
 
 
 init()

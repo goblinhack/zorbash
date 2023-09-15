@@ -33,7 +33,18 @@ bool Thing::attempt_to_tame_with(Thingp it, Thingp what)
 {
   TRACE_NO_INDENT();
 
-  if (d1000() >= it->chance_d1000_tameable()) {
+  if (! it->is_tameable()) {
+    return false;
+  }
+
+  if (it->leader() == this) {
+    return false;
+  }
+
+  //
+  // Smarter more dominant things can tame others.
+  //
+  if (d1000() + (stat_int_total() * 10) + (stat_psi_total() * 10) >= it->chance_d1000_tameable()) {
     return false;
   }
 

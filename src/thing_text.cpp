@@ -36,6 +36,14 @@ std::string Thing::text_a_or_an(size_t max_len)
     out += "spent ";
   }
 
+  //
+  // Tamed?
+  //
+  auto l = leader();
+  if (l && (l == level->player)) {
+    out += "pet ";
+  }
+
   if (out == "") {
     auto prefix = tpp->text_a_or_an();
     if (prefix == "") {
@@ -97,6 +105,14 @@ std::string Thing::text_the(bool include_owner)
     out += "burnt ";
   } else if (tpp->charge_count() && ! charge_count()) {
     out += "spent ";
+  }
+
+  //
+  // Tamed?
+  //
+  auto l = leader();
+  if (l && (l == level->player)) {
+    out += "pet ";
   }
 
   out += tpp->text_long_name();
@@ -184,6 +200,14 @@ std::string Thing::text_short_a_or_an(size_t max_len)
     out += "spent ";
   }
 
+  //
+  // Tamed?
+  //
+  auto l = leader();
+  if (l && (l == level->player)) {
+    out += "pet ";
+  }
+
   if (out == "") {
     auto prefix = tpp->text_a_or_an();
     if (prefix == "") {
@@ -225,6 +249,14 @@ std::string Thing::text_short_the(size_t max_len)
     } else {
       out += "dead ";
     }
+  }
+
+  //
+  // Tamed?
+  //
+  auto l = leader();
+  if (l && (l == level->player)) {
+    out += "pet ";
   }
 
   out += tpp->text_short_name();
@@ -340,6 +372,14 @@ std::string Thing::text_short_and_state_capitalised(size_t max_len)
     out += "spent ";
   }
 
+  //
+  // Tamed?
+  //
+  auto l = leader();
+  if (l && (l == level->player)) {
+    out += "pet ";
+  }
+
   out += text_short_name();
 
   char *b          = (char *) out.c_str();
@@ -383,6 +423,14 @@ std::string Thing::text_long_and_state_capitalised(size_t max_len)
     } else if (is_dying) {
       out += "dying ";
     }
+  }
+
+  //
+  // Tamed?
+  //
+  auto l = leader();
+  if (l && (l == level->player)) {
+    out += "pet ";
   }
 
   out += text_long_name();
