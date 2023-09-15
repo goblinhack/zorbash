@@ -85,7 +85,7 @@ def init():
     tp_init(
         name="amulet_endurance",
         text_long_name="amulet of endurance",
-        text_short_name="amulet endur",
+        text_short_name="amulet, endurance",
     )
 
 

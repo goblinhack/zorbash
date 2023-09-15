@@ -255,20 +255,21 @@ std::initializer_list< std::string > tps = {
     "bridge_lr",
     "bridge_ud",
     "bridge_x",
-    "buff_status_full",
-    "buff_temporary_hasted",
     "buff_permanent_immune_to_cold",
     "buff_permanent_immune_to_fire",
     "buff_permanent_immune_to_negation",
     "buff_permanent_immune_to_poison",
     "buff_permanent_immune_to_teleport_attack",
     "buff_permanent_immune_to_water",
-    "buff_temporary_invisible",
     "buff_permanent_missile_protection",
     "buff_permanent_raging",
     "buff_permanent_slime_protection",
     "buff_permanent_slippery",
     "buff_permanent_undead_protection",
+    "buff_status_full",
+    "buff_temporary_hasted",
+    "buff_temporary_immune_to_fire",
+    "buff_temporary_invisible",
     "carcas_creeper",
     "centipede",
     "chasm1",
@@ -326,9 +327,9 @@ std::initializer_list< std::string > tps = {
     "debuff_status_necrotized",
     "debuff_status_paralysis",
     "debuff_status_poisoned",
-    "debuff_temporary_slow",
     "debuff_status_starving",
     "debuff_status_stuck",
+    "debuff_temporary_slow",
     "debug_path",
     "deep_water",
     "demon_fire",
@@ -581,8 +582,8 @@ std::initializer_list< std::string > tps = {
     "portal",
     "potato",
     "potion_darkness",
-    "potion_fire_immunity",
     "potion_effect",
+    "potion_fire_immunity",
     "potion_gas_paralysis",
     "potion_gas_poison",
     "potion_haste",
@@ -895,7 +896,7 @@ void tp_get_id(const std::string &tp_name, int *id_out)
   //
   if (tp_preferred_id.find(tp_name) == tp_preferred_id.end()) {
     tp_preferred_id[ tp_name ] = *id_out = ++id;
-    CON("*** Thing template not found %s. Please edit thing_template_ids.cpp and add it. ***", tp_name.c_str());
+    CON("*** Thing template not found [%s] Please edit thing_template_ids.cpp and add it. ***", tp_name.c_str());
     return;
   }
 

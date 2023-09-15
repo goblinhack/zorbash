@@ -347,6 +347,10 @@ void Game::place_player(void)
         t->carry(w, carry_options);
       }
       if (0) {
+        auto w = level->thing_new("amulet_mindseeing", point(x, y - 2));
+        t->carry(w, carry_options);
+      }
+      if (0) {
         level->thing_new("portal", point(x - 2, y));
         level->thing_new("portable_hole", point(x - 3, y));
         auto w = level->thing_new("amulet_teleport_attack", point(x, y - 2));

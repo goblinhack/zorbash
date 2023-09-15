@@ -371,7 +371,7 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
 
       tile = tile_find(std::string(tile_name));
       if (unlikely(! tile)) {
-        ERR("%s: Cannot find tile '%s' for tp %s", __FUNCTION__, tile_name, tp_name);
+        DIE("%s: Cannot find tile '%s' for tp %s", __FUNCTION__, tile_name, tp_name);
         Py_RETURN_FALSE;
       }
 

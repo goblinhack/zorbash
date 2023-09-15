@@ -552,6 +552,7 @@ void wid_rightbar_stats_over_stat_psi_b(Widp w, int relx, int rely, int wheelx, 
       "Not to be confused with pounds per square inch, Psi gives you the ability to defend yourself against dominion "
       "attacks and spells.",
       TEXT_FORMAT_LHS);
+  wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
   wid_rightbar_popup->log("At higher levels it will allow you to sense the presence of enemies.", TEXT_FORMAT_LHS);
   wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
   wid_rightbar_popup->log("Psi bonuses are also applied to your spell attacks.", TEXT_FORMAT_LHS);
