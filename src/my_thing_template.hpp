@@ -1530,12 +1530,12 @@ public:
   int dmg_chance_d1000_claw(int index) const;
   int dmg_chance_d1000_cold(int index) const;
   int dmg_chance_d1000_crush(int index) const;
-  int dmg_chance_d1000_impact(int index) const;
   int dmg_chance_d1000_digest(int index) const;
   int dmg_chance_d1000_drown(int index) const;
   int dmg_chance_d1000_energy(int index) const;
   int dmg_chance_d1000_fire(int index) const;
   int dmg_chance_d1000_heat(int index) const;
+  int dmg_chance_d1000_impact(int index) const;
   int dmg_chance_d1000_lightning(int index) const;
   int dmg_chance_d1000_magic_drain(int index) const;
   int dmg_chance_d1000_melee(int index) const;

@@ -1221,12 +1221,12 @@ public:
   int dmg_chance_d1000_claw(int);
   int dmg_chance_d1000_cold(int);
   int dmg_chance_d1000_crush(int);
-  int dmg_chance_d1000_impact(int);
   int dmg_chance_d1000_digest(int);
   int dmg_chance_d1000_drown(int);
   int dmg_chance_d1000_energy(int);
   int dmg_chance_d1000_fire(int);
   int dmg_chance_d1000_heat(int);
+  int dmg_chance_d1000_impact(int);
   int dmg_chance_d1000_lightning(int);
   int dmg_chance_d1000_magic_drain(int);
   int dmg_chance_d1000_melee(int);
