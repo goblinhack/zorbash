@@ -1860,61 +1860,62 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         real_hitter->msg("You zap %s.", text_the().c_str());
       } else if (hitter->is_magical() && hitter->is_item()) {
         if (attack_options->attack[ THING_ATTACK_POISON ]) {
-          real_hitter->msg("%%fg=yellow$You magically poison %s for %d %sdamage.", text_the().c_str(), damage,
-                           dmg_type.c_str());
+          real_hitter->msg("%%fg=yellow$You magically poison %s for %d %sdamage.%%fg=reset$", text_the().c_str(),
+                           damage, dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_BITE ]) {
-          real_hitter->msg("%%fg=yellow$You magically bite %s for %d %sdamage.", text_the().c_str(), damage,
-                           dmg_type.c_str());
+          real_hitter->msg("%%fg=yellow$You magically bite %s for %d %sdamage.%%fg=reset$", text_the().c_str(),
+                           damage, dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_CLAW ]) {
-          real_hitter->msg("%%fg=yellow$You magically rake %s for %d %sdamage.", text_the().c_str(), damage,
-                           dmg_type.c_str());
+          real_hitter->msg("%%fg=yellow$You magically rake %s for %d %sdamage.%%fg=reset$", text_the().c_str(),
+                           damage, dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_COLD ]) {
-          real_hitter->msg("%%fg=yellow$You magically freeze %s for %d %sdamage.", text_the().c_str(), damage,
-                           dmg_type.c_str());
+          real_hitter->msg("%%fg=yellow$You magically freeze %s for %d %sdamage.%%fg=reset$", text_the().c_str(),
+                           damage, dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_FIRE ]) {
-          real_hitter->msg("%%fg=yellow$You magically burn %s for %d %sdamage.", text_the().c_str(), damage,
-                           dmg_type.c_str());
+          real_hitter->msg("%%fg=yellow$You magically burn %s for %d %sdamage.%%fg=reset$", text_the().c_str(),
+                           damage, dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_CRUSH ]) {
-          real_hitter->msg("%%fg=yellow$You magically crush %s for %d %sdamage.", text_the().c_str(), damage,
-                           dmg_type.c_str());
+          real_hitter->msg("%%fg=yellow$You magically crush %s for %d %sdamage.%%fg=reset$", text_the().c_str(),
+                           damage, dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_IMPACT ]) {
-          real_hitter->msg("%%fg=yellow$You magically blast %s for %d %sdamage.", text_the().c_str(), damage,
-                           dmg_type.c_str());
+          real_hitter->msg("%%fg=yellow$You magically blast %s for %d %sdamage.%%fg=reset$", text_the().c_str(),
+                           damage, dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_LIGHTNING ]) {
-          real_hitter->msg("%%fg=yellow$You magically zap %s for %d %sdamage.", text_the().c_str(), damage,
+          real_hitter->msg("%%fg=yellow$You magically zap %s for %d %sdamage.%%fg=reset$", text_the().c_str(), damage,
                            dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_ENERGY ]) {
-          real_hitter->msg("%%fg=yellow$You magically blast %s for %d %sdamage.", text_the().c_str(), damage,
-                           dmg_type.c_str());
+          real_hitter->msg("%%fg=yellow$You magically blast %s for %d %sdamage.%%fg=reset$", text_the().c_str(),
+                           damage, dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_NEGATION ]) {
-          real_hitter->msg("%%fg=yellow$You magically blast %s for %d %sdamage.", text_the().c_str(), damage,
-                           dmg_type.c_str());
+          real_hitter->msg("%%fg=yellow$You magically blast %s for %d %sdamage.%%fg=reset$", text_the().c_str(),
+                           damage, dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_ACID ]) {
-          real_hitter->msg("%%fg=yellow$You magically dissolve %s for %d %sdamage.", text_the().c_str(), damage,
-                           dmg_type.c_str());
+          real_hitter->msg("%%fg=yellow$You magically dissolve %s for %d %sdamage.%%fg=reset$", text_the().c_str(),
+                           damage, dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_DIGEST ]) {
-          real_hitter->msg("%%fg=yellow$You magically digest %s for %d %sdamage.", text_the().c_str(), damage,
-                           dmg_type.c_str());
+          real_hitter->msg("%%fg=yellow$You magically digest %s for %d %sdamage.%%fg=reset$", text_the().c_str(),
+                           damage, dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
-          real_hitter->msg("%%fg=yellow$You magically rot %s for %d %sdamage.", text_the().c_str(), damage,
+          real_hitter->msg("%%fg=yellow$You magically rot %s for %d %sdamage.%%fg=reset$", text_the().c_str(), damage,
                            dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
-          real_hitter->msg("%%fg=yellow$You are drained %s for %d %sdamage.", text_the().c_str(), damage,
+          real_hitter->msg("%%fg=yellow$You are drained %s for %d %sdamage.%%fg=reset$", text_the().c_str(), damage,
                            dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
-          real_hitter->msg("%%fg=yellow$You are drained %s for %d %sdamage.", text_the().c_str(), damage,
+          real_hitter->msg("%%fg=yellow$You are drained %s for %d %sdamage.%%fg=reset$", text_the().c_str(), damage,
                            dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {
-          real_hitter->msg("%%fg=yellow$You magically drown %s for %d %sdamage.", text_the().c_str(), damage,
-                           dmg_type.c_str());
+          real_hitter->msg("%%fg=yellow$You magically drown %s for %d %sdamage.%%fg=reset$", text_the().c_str(),
+                           damage, dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
-          real_hitter->msg("%%fg=yellow$You magically strike down %s for %d %sdamage.", text_the().c_str(), damage,
-                           dmg_type.c_str());
+          real_hitter->msg("%%fg=yellow$You magically strike down %s for %d %sdamage.%%fg=reset$", text_the().c_str(),
+                           damage, dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
-          real_hitter->msg("%%fg=yellow$You magically burn %s for %d %sdamage.", text_the().c_str(), damage,
-                           dmg_type.c_str());
+          real_hitter->msg("%%fg=yellow$You magically burn %s for %d %sdamage.%%fg=reset$", text_the().c_str(),
+                           damage, dmg_type.c_str());
         } else {
-          real_hitter->msg("%%fg=yellow$You blast %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+          real_hitter->msg("%%fg=yellow$You blast %s for %d %sdamage.%%fg=reset$", text_the().c_str(), damage,
+                           dmg_type.c_str());
         }
       } else {
         real_hitter->msg("You hit %s.", text_the().c_str());
@@ -1929,22 +1930,23 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       //
       if (hitter->is_weapon()) {
         if (hitter->is_weapon() && (hitter->weapon_dmgd_pct() > 50)) {
-          hitter->msg("%%fg=yellow$You pointlessly hit %s with your very damaged weapon.", text_the().c_str());
+          hitter->msg("%%fg=yellow$You pointlessly hit %s with your very damaged weapon.%%fg=reset$",
+                      text_the().c_str());
         } else if (hitter->is_weapon() && (hitter->weapon_dmgd_pct() > 0)) {
-          hitter->msg("%%fg=yellow$You hit %s with your damaged weapon.", text_the().c_str());
+          hitter->msg("%%fg=yellow$You hit %s with your damaged weapon.%%fg=reset$", text_the().c_str());
         } else {
           if (pcg_random_range(1, 100) < 10) {
-            hitter->msg("%%fg=yellow$You hit %s, why though?", text_the().c_str());
+            hitter->msg("%%fg=yellow$You hit %s, why though?%%fg=reset$", text_the().c_str());
           } else {
-            hitter->msg("%%fg=yellow$You hit %s.", text_the().c_str());
+            hitter->msg("%%fg=yellow$You hit %s.%%fg=reset$", text_the().c_str());
           }
         }
       } else if (hitter->is_laser()) {
-        real_hitter->msg("%%fg=yellow$You zap %s.", text_the().c_str());
+        real_hitter->msg("%%fg=yellow$You zap %s.%%fg=reset$", text_the().c_str());
       } else if (hitter->is_magical() && hitter->is_item()) {
-        real_hitter->msg("%%fg=yellow$You blast %s.", text_the().c_str());
+        real_hitter->msg("%%fg=yellow$You blast %s.%%fg=reset$", text_the().c_str());
       } else {
-        hitter->msg("%%fg=yellow$You hit %s.", text_the().c_str());
+        hitter->msg("%%fg=yellow$You hit %s.%%fg=reset$", text_the().c_str());
       }
 
       if (game->robot_mode) {
@@ -1955,13 +1957,17 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       // Player hitting something.
       //
       if (hitter->is_weapon()) {
-        real_hitter->msg("%%fg=yellow$You hit %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+        real_hitter->msg("%%fg=yellow$You hit %s for %d %sdamage.%%fg=reset$", text_the().c_str(), damage,
+                         dmg_type.c_str());
       } else if (hitter->is_laser()) {
-        real_hitter->msg("%%fg=yellow$You zap %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+        real_hitter->msg("%%fg=yellow$You zap %s for %d %sdamage.%%fg=reset$", text_the().c_str(), damage,
+                         dmg_type.c_str());
       } else if (hitter->is_magical() && hitter->is_item()) {
-        real_hitter->msg("%%fg=yellow$You blast %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+        real_hitter->msg("%%fg=yellow$You blast %s for %d %sdamage.%%fg=reset$", text_the().c_str(), damage,
+                         dmg_type.c_str());
       } else {
-        real_hitter->msg("%%fg=yellow$You hit %s for %d %sdamage.", text_the().c_str(), damage, dmg_type.c_str());
+        real_hitter->msg("%%fg=yellow$You hit %s for %d %sdamage.%%fg=reset$", text_the().c_str(), damage,
+                         dmg_type.c_str());
       }
 
       if (game->robot_mode) {
