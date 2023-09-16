@@ -9,7 +9,6 @@ def on_born(me, x, y):
 def on_you_nat_attack_attempt(me, x, y):
     sound = f"growl{my.py_non_pcg_random_range_inclusive(1, 10)}"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
-    my.thing_popup(me, "Bark!")
 
 
 def on_hit_and_still_alive(me, hitter, real_hitter, x, y, crit, damage):
@@ -21,7 +20,6 @@ def on_hit_and_still_alive(me, hitter, real_hitter, x, y, crit, damage):
 def on_hit_dodge_do(me, hitter, x, y):
     sound = f"hiss{my.py_non_pcg_random_range_inclusive(1, 10)}"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
-    my.thing_popup(me, "Bark!")
 
 
 def on_death(me, x, y):

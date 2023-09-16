@@ -5,8 +5,6 @@ import tp
 def on_born(me, x, y):
     my.thing_friend(me, "is_molekin")
     my.thing_carry(me, "rock2")
-    my.thing_carry(me, "rock2")
-    my.thing_carry(me, "rock2")
 
 
 def on_you_nat_attack_attempt(me, x, y):
@@ -145,7 +143,7 @@ def tp_init(name, text_long_name):
     my.rarity(self, my.RARITY_UNCOMMON)  # how rare within this monster class
     my.shove_bonus(self, 2)
     my.spawn_group_radius(self, 6)
-    my.spawn_group_size_dice(self, "1d4")
+    my.spawn_group_size_dice(self, "1d3")
     my.stamina(self, 100)
     my.stat_con(self, 10)
     my.stat_def(self, 12)
