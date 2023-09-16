@@ -212,12 +212,12 @@ void dmap_process_no_diagonals(Dmap *D, point tl, point br, bool place_border)
   // Need a wall around the dmap or the search will sort of trickle off the map
   //
   for (y = miny; y <= maxy; y++) {
-    set(D->val, minx, y, DMAP_IS_WALL);
-    set(D->val, maxx, y, DMAP_IS_WALL);
+    set_no_check(D->val, minx, y, DMAP_IS_WALL);
+    set_no_check(D->val, maxx, y, DMAP_IS_WALL);
   }
   for (x = minx; x <= maxx; x++) {
-    set(D->val, x, miny, DMAP_IS_WALL);
-    set(D->val, x, maxy, DMAP_IS_WALL);
+    set_no_check(D->val, x, miny, DMAP_IS_WALL);
+    set_no_check(D->val, x, maxy, DMAP_IS_WALL);
   }
 
   bool all_walls;
@@ -267,17 +267,17 @@ void dmap_process_no_diagonals(Dmap *D, point tl, point br, bool place_border)
 
   for (y = miny + 1; y <= maxy - 1; y++) {
     for (x = minx + 1; x <= maxx - 1; x++) {
-      set(orig, x, y, get_no_check(D->val, x, y));
+      set_no_check(orig, x, y, get_no_check(D->val, x, y));
 
       e = &getref(D->val, x, y);
       if (*e != DMAP_IS_WALL) {
-        set(valid, x, y, (uint8_t) 1);
-        set(orig_valid, x, y, (uint8_t) 1);
+        set_no_check(valid, x, y, (uint8_t) 1);
+        set_no_check(orig_valid, x, y, (uint8_t) 1);
         continue;
       }
 
-      set(valid, x, y, (uint8_t) 0);
-      set(orig_valid, x, y, (uint8_t) 0);
+      set_no_check(valid, x, y, (uint8_t) 0);
+      set_no_check(orig_valid, x, y, (uint8_t) 0);
     }
   }
 
@@ -484,12 +484,12 @@ void dmap_process_allow_diagonals(Dmap *D, point tl, point br, bool place_border
   // Need a wall around the dmap or the search will sort of trickle off the map
   //
   for (y = miny; y <= maxy; y++) {
-    set(D->val, minx, y, DMAP_IS_WALL);
-    set(D->val, maxx, y, DMAP_IS_WALL);
+    set_no_check(D->val, minx, y, DMAP_IS_WALL);
+    set_no_check(D->val, maxx, y, DMAP_IS_WALL);
   }
   for (x = minx; x <= maxx; x++) {
-    set(D->val, x, miny, DMAP_IS_WALL);
-    set(D->val, x, maxy, DMAP_IS_WALL);
+    set_no_check(D->val, x, miny, DMAP_IS_WALL);
+    set_no_check(D->val, x, maxy, DMAP_IS_WALL);
   }
 
   bool all_walls;
@@ -539,17 +539,17 @@ void dmap_process_allow_diagonals(Dmap *D, point tl, point br, bool place_border
 
   for (y = miny + 1; y <= maxy - 1; y++) {
     for (x = minx + 1; x <= maxx - 1; x++) {
-      set(orig, x, y, get_no_check(D->val, x, y));
+      set_no_check(orig, x, y, get_no_check(D->val, x, y));
 
       e = &getref(D->val, x, y);
       if (*e != DMAP_IS_WALL) {
-        set(valid, x, y, (uint8_t) 1);
-        set(orig_valid, x, y, (uint8_t) 1);
+        set_no_check(valid, x, y, (uint8_t) 1);
+        set_no_check(orig_valid, x, y, (uint8_t) 1);
         continue;
       }
 
-      set(valid, x, y, (uint8_t) 0);
-      set(orig_valid, x, y, (uint8_t) 0);
+      set_no_check(valid, x, y, (uint8_t) 0);
+      set_no_check(orig_valid, x, y, (uint8_t) 0);
     }
   }
 
@@ -731,12 +731,12 @@ void dmap_process_reverse_allow_diagonals(Dmap *D, point tl, point br, bool plac
   // Need a wall around the dmap or the search will sort of trickle off the map
   //
   for (y = miny; y <= maxy; y++) {
-    set(D->val, minx, y, DMAP_IS_WALL);
-    set(D->val, maxx, y, DMAP_IS_WALL);
+    set_no_check(D->val, minx, y, DMAP_IS_WALL);
+    set_no_check(D->val, maxx, y, DMAP_IS_WALL);
   }
   for (x = minx; x <= maxx; x++) {
-    set(D->val, x, miny, DMAP_IS_WALL);
-    set(D->val, x, maxy, DMAP_IS_WALL);
+    set_no_check(D->val, x, miny, DMAP_IS_WALL);
+    set_no_check(D->val, x, maxy, DMAP_IS_WALL);
   }
 
   bool all_walls;
@@ -786,17 +786,17 @@ void dmap_process_reverse_allow_diagonals(Dmap *D, point tl, point br, bool plac
 
   for (y = miny + 1; y <= maxy - 1; y++) {
     for (x = minx + 1; x <= maxx - 1; x++) {
-      set(orig, x, y, get_no_check(D->val, x, y));
+      set_no_check(orig, x, y, get_no_check(D->val, x, y));
 
       e = &getref(D->val, x, y);
       if (*e != DMAP_IS_WALL) {
-        set(valid, x, y, (uint8_t) 1);
-        set(orig_valid, x, y, (uint8_t) 1);
+        set_no_check(valid, x, y, (uint8_t) 1);
+        set_no_check(orig_valid, x, y, (uint8_t) 1);
         continue;
       }
 
-      set(valid, x, y, (uint8_t) 0);
-      set(orig_valid, x, y, (uint8_t) 0);
+      set_no_check(valid, x, y, (uint8_t) 0);
+      set_no_check(orig_valid, x, y, (uint8_t) 0);
     }
   }
 
@@ -1064,7 +1064,7 @@ static std::vector< point > dmap_solve_(const Dmap *D, const point start, const 
 
     out.push_back(best);
     at = best;
-    set(walked, best.x, best.y, true);
+    set_no_check(walked, best.x, best.y, true);
   }
   return out;
 }
@@ -1140,14 +1140,14 @@ std::vector< point > dmap_solve(const Dmap *D, const point start)
   path_size = p.size();
 
   for (int i = 0; i < (int) path_size; i++) {
-    auto hop0 = get(p, i);
+    auto hop0 = get_no_check(p, i);
 
     if (i == (int) path_size - 1) {
       out.push_back(hop0);
       break;
     }
 
-    auto hop1 = get(p, i + 1);
+    auto hop1 = get_no_check(p, i + 1);
 
     // s.
     // .e
