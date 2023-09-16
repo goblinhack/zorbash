@@ -10,15 +10,12 @@ int Tp::get_danger_level(void)
   TRACE_NO_INDENT();
 
   if (is_player()) {
-    return 100;
+    return 50;
   }
 
   int danger_level = 0;
   danger_level     = health_initial_max_roll();
 
-  if (is_player()) {
-    return 100;
-  }
   if (is_undead()) {
     danger_level++;
   }
@@ -134,7 +131,7 @@ int Thing::danger_initial_level(void)
   TRACE_NO_INDENT();
 
   if (is_player()) {
-    return 100;
+    return 50;
   }
 
   int danger_level = 0;
@@ -284,7 +281,7 @@ int Thing::danger_current_level(void)
   }
 
   if (is_player()) {
-    return 100;
+    return 50;
   }
 
   int danger_level = 0;
