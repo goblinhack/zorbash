@@ -123,6 +123,7 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
         set(dmap.val, x, y, DMAP_IS_WALL);
         continue;
       }
+
       if (c >= DMAP_LESS_PREFERRED_TERRAIN) {
         set(dmap.val, x, y, c);
       } else {
@@ -138,17 +139,17 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
 
   set(dmap.val, start.x, start.y, DMAP_IS_PASSABLE);
 
-#if 0
-  log("before:");
-  dmap_print(&dmap, start, dmap_start, dmap_end);
-#endif
+  if (is_debug_type()) {
+    log("before:");
+    dmap_print(&dmap, start, dmap_start, dmap_end);
+  }
 
   dmap_process_allow_diagonals(&dmap, dmap_start, dmap_end, true);
 
-#if 0
-  log("after:");
-  dmap_print(&dmap, start, dmap_start, dmap_end);
-#endif
+  if (is_debug_type()) {
+    log("after:");
+    dmap_print(&dmap, start, dmap_start, dmap_end);
+  }
 
   char path_debug           = '\0'; // astart path debug
   auto [ result, fallback ] = astar_solve(nullptr, path_debug, start, end, &dmap, false /* allow diagonals */);
@@ -160,16 +161,19 @@ bool Thing::ai_create_path(point &nh, const point start, const point end)
   }
 
 #if 0
+  if (is_debug_type()) {
   for (auto i : result.path) {
     set(dmap.val, i.x, i.y, (uint8_t) 0);
   }
+  }
   dmap_print(&dmap, start, dmap_start, dmap_end);
 #endif
-#ifdef ENABLE_DEBUG_AI_WANDER
-  for (auto i : result.path) {
-    thing_new("ai_path1", fpoint(i.x, i.y));
+
+  if (is_debug_type()) {
+    for (auto i : result.path) {
+      level->thing_new("ai_path1", point(i.x, i.y));
+    }
   }
-#endif
 
   std::string goal_path_str = "Path:";
   for (auto i : result.path) {

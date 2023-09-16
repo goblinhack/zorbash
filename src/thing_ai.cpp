@@ -657,7 +657,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
           if (level->is_obs_wall_or_door(x, y)) {
             printf("#");
           } else if (level->is_dirt(x, y) || level->is_water(x, y) || level->is_floor(x, y)
-                     || level->is_corridor(x, y)) {
+                     || level->is_corridor(x, y) || level->is_hazard(x, y)) {
             if (get(ai->can_see_currently.can_see, x, y)) {
               printf("L");
             } else if (get(ai->can_see_ever.can_see, x, y)) {
@@ -672,7 +672,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
           if (level->is_obs_wall_or_door(x, y)) {
             printf("#");
           } else if (level->is_dirt(x, y) || level->is_water(x, y) || level->is_floor(x, y)
-                     || level->is_corridor(x, y)) {
+                     || level->is_corridor(x, y) || level->is_hazard(x, y)) {
             if (get(ai->can_see_currently.can_see, x, y)) {
               printf("l");
             } else if (get(ai->can_see_ever.can_see, x, y)) {

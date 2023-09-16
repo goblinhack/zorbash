@@ -35,7 +35,7 @@ void Game::init(void)
 
 void Game::set_seed(void)
 {
-  LOG("Game init");
+  LOG("Game set seed");
   TRACE_AND_INDENT();
 
   if (g_opt_seed_name != "") {

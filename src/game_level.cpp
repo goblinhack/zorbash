@@ -10,6 +10,13 @@ bool Game::init_level(point3d world_at, point grid_at, int difficulty_depth, int
   DBG("Game init level %d,%d,%d", world_at.x, world_at.y, world_at.z);
   TRACE_AND_INDENT();
 
+  //
+  // Make sure init has occurred.
+  //
+  if (jump_paths.empty()) {
+    init();
+  }
+
   if (world_at.z >= LEVELS_DEEP) {
     LOG("Cannot create new level at: %d,%d,%d, too deep", world_at.x, world_at.y, world_at.z);
     return false;
