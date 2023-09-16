@@ -187,7 +187,7 @@ bool Thing::collision_obstacle(Thingp it)
     // Allow the player to walk through pets without attacking
     //
     auto l = it->leader();
-    if (l && (l == level->player)) {
+    if (l && (l == this)) {
       IF_DEBUG3 { dbg("Collision obstacle (pet): %s", it->to_short_string().c_str()); }
       return false;
     }
@@ -292,6 +292,13 @@ bool Thing::collision_obstacle(Thingp it)
     }
   }
 
+  if (is_friend(it)) {
+    if (debug && is_debug_type()) {
+      IF_DEBUG3 { dbg("Collision obstacle (friend): %s", it->to_short_string().c_str()); }
+    }
+    return true;
+  }
+
   return false;
 }
 
@@ -327,11 +334,13 @@ bool Thing::is_obs_ai(Thingp it)
   // Intelligent monsters avoid traps
   //
   if (is_intelligent()) {
-    if (level->is_trap(it->curr_at)) {
-      if (debug && is_debug_type()) {
-        con("check collision with %s, no at line %d", it->to_string().c_str(), __LINE__);
+    if (! is_player()) {
+      if (level->is_trap(it->curr_at)) {
+        if (debug && is_debug_type()) {
+          con("check collision with %s, no at line %d", it->to_string().c_str(), __LINE__);
+        }
+        return true;
       }
-      return true;
     }
   }
 
@@ -511,13 +520,6 @@ bool Thing::is_obs_ai(Thingp it)
     }
   }
 
-  if (is_friend(it)) {
-    if (debug && is_debug_type()) {
-      con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
-    }
-    return true;
-  }
-
   if (is_monst() || (is_player() && game->robot_mode)) {
     if (it->is_chasm()) {
       if (! is_floating() && ! is_flying()) {
@@ -604,8 +606,10 @@ bool Tp::is_obs_ai(Thingp it)
   // Intelligent monsters avoid traps
   //
   if (is_intelligent()) {
-    if (it->is_trap()) {
-      return true;
+    if (! is_player()) {
+      if (it->is_trap()) {
+        return true;
+      }
     }
   }
 

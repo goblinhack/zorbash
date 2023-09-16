@@ -22,6 +22,14 @@ void Thing::lunge(point to)
   }
 
   //
+  // Followers try to get to the leader, but it just looks odd when they lunge at you.
+  //
+  auto l = leader();
+  if (l && (l->curr_at == to)) {
+    return;
+  }
+
+  //
   // Already lunging? This can happen when swinging a weapon that hits in multiple
   // directions. Don't make the player dizzy and focus on the intial lunge.
   //

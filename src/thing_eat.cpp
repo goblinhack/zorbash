@@ -148,6 +148,11 @@ bool Thing::eat(Thingp victim)
   dbg("Consume %s", victim->to_short_string().c_str());
   TRACE_AND_INDENT();
 
+  //
+  // Makes no sense to sleep eat.
+  //
+  wake("eating");
+
   auto nutr   = victim->nutrition_get();
   auto poison = victim->dmg_poison();
 

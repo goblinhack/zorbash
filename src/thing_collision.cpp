@@ -720,6 +720,17 @@ bool Thing::collision_check_only(Thingp it, point future_pos)
     }
   }
 
+  if (is_player()) {
+    //
+    // Allow the player to walk through pets without attacking
+    //
+    auto l = it->leader();
+    if (l && (l == level->player)) {
+      dbg2("No collision; overlaps and is a pet");
+      return false;
+    }
+  }
+
   //
   // Important to have this check before can_eat or krakens will try to eat their
   // own tentacles.

@@ -166,6 +166,10 @@ void Game::place_player(void)
         t->carry(w, carry_options);
       }
       if (1) {
+        auto w = level->thing_new("bacon", point(x, y));
+        t->carry(w, carry_options);
+      }
+      if (1) {
         auto w = level->thing_new("pottedmeat", point(x, y));
         t->carry(w, carry_options);
       }
@@ -539,8 +543,8 @@ void Game::place_player(void)
       if (1) {
         level->thing_new("dog", point(x + 1, y + 3));
       }
-      level->thing_new("mimic_sleeping", point(x - 2, y + 2));
       if (0) {
+        level->thing_new("mimic_sleeping", point(x - 2, y + 2));
         level->thing_new("rat_large", point(x + 1, y + 3));
         level->thing_new("troll_stone", point(x + 2, y));
         level->thing_new("troll_fire", point(x + 2, y + 2));
