@@ -3082,86 +3082,17 @@ public:
   ThingItemsp get_or_alloc_itemsp(void);
   ThingAip    get_or_alloc_aip(void);
 
-  ThingInfop maybe_infop(void)
-  {
-    //
-    // Expensive, hence debug level 3
-    //
-    IF_DEBUG3
-    {
-      if (_infop) {
-        verify(MTYPE_INFOP, _infop);
-      }
-    }
-    return _infop;
-  }
+  inline ThingInfop maybe_infop(void) { return _infop; }
 
-  ThingItemsp maybe_itemsp(void)
-  {
-    //
-    // Expensive, hence debug level 3
-    //
-    IF_DEBUG3
-    {
-      if (_itemsp) {
-        verify(MTYPE_ITEMP, _itemsp);
-      }
-    }
-    return _itemsp;
-  }
+  inline ThingItemsp maybe_itemsp(void) { return _itemsp; }
 
-  ThingAip maybe_aip(void)
-  {
-    //
-    // Expensive, hence debug level 3
-    //
-    IF_DEBUG3
-    {
-      if (_aip) {
-        verify(MTYPE_AIP, _aip);
-      }
-    }
-    return _aip;
-  }
+  inline ThingAip maybe_aip(void) { return _aip; }
 
-  ThingInfop infop(void)
-  {
-    if (! _infop) {
-      die("no _infop");
-    }
+  inline ThingInfop infop(void) { return _infop; }
 
-    //
-    // Called a lot and is hence expensive, so debug level 3
-    //
-    IF_DEBUG3 { verify(MTYPE_INFOP, _infop); }
-    return _infop;
-  }
+  inline ThingItemsp itemsp(void) { return _itemsp; }
 
-  ThingItemsp itemsp(void)
-  {
-    if (! _itemsp) {
-      die("no _itemsp");
-    }
-
-    //
-    // Called a lot and is hence expensive, so debug level 3
-    //
-    IF_DEBUG3 { verify(MTYPE_ITEMP, _itemsp); }
-    return _itemsp;
-  }
-
-  ThingAip aip(void)
-  {
-    if (! _aip) {
-      die("no _aip");
-    }
-
-    //
-    // Called a lot and is hence expensive, so debug level 3
-    //
-    IF_DEBUG3 { verify(MTYPE_AIP, _aip); }
-    return _aip;
-  }
+  inline ThingAip aip(void) { return _aip; }
 
   std::vector< ThingId > copy_of_carrying(void);
 

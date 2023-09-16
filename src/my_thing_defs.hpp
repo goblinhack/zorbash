@@ -11,16 +11,16 @@
 #define PARTICLE_SPEED_DROPPED_ITEM_ASCII_MS      500  // Not used yet, if ever
 #define PARTICLE_SPEED_DROPPED_ITEM_PIXELART_MS   500  // For dropping potions etc...
 #define PARTICLE_SPEED_INVENTORY_ITEM_ASCII_MS    500  // Not used yet, if ever
-#define PARTICLE_SPEED_INVENTORY_ITEM_PIXELART_MS 500  // For dropping items from the inventory to the sidebat
+#define PARTICLE_SPEED_INVENTORY_ITEM_PIXELART_MS 500  // For dropping items from the inventory to the sidebar
 #define PARTICLE_SPEED_THROWN_ITEM_ASCII_MS       500  // Not used yet, if ever
-#define PARTICLE_SPEED_THROWN_ITEM_PIXELART_MS    500  // For dropping potions etc...
+#define PARTICLE_SPEED_THROWN_ITEM_PIXELART_MS    200  // For dropping potions etc...
 #define PARTICLE_SPEED_THROWN_WEAPON_ASCII_MS     400  // Is used for throwing darts etc...
 #define PARTICLE_SPEED_THROWN_WEAPON_PIXELART_MS  200  // For throwing darts etc...
 #define PARTICLE_SPEED_SPELL_CAST_ASCII_MS        400  // Casting spells
 #define PARTICLE_SPEED_SPELL_CAST_PIXELART_MS     200  // Casting spells
-#define TEMPERATURE_MAX                           1000 // Celcius
-#define TEMPERATURE_MIN                           -273 // Celcius
-#define TEMPERATURE_ROOM                          20   // Celcius
+#define TEMPERATURE_MAX                           1000 // Celsius
+#define TEMPERATURE_MIN                           -273 // Celsius
+#define TEMPERATURE_ROOM                          20   // Celsius
 #define TEMPERATURE_THRESHOLD                     50   // Consider things cold or hot when outside this range (-X..X)
 #define THING_AI_CAN_SEE_SECRET_DOOR_DIST         3    // How close to a secret door can a monst see it?
 #define THING_AI_ESCAPE_ATTEMPTS                  4    // Quite CPU heavy
