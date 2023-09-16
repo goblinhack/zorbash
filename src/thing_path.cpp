@@ -265,6 +265,9 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
   }
 
   if (is_able_to_shove() && (is_monst() || (is_player() && game->robot_mode))) {
+    dbg("Can try to shove");
+    TRACE_AND_INDENT();
+
     //
     // Someone in our way?
     //
@@ -373,6 +376,9 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
   }
 
   if (is_able_to_grapple() && (is_monst() || (is_player() && game->robot_mode))) {
+    dbg("Can try to grapple");
+    TRACE_AND_INDENT();
+
     //
     // Someone in our way we can grab?
     //

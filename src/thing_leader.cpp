@@ -109,7 +109,7 @@ bool Thing::too_far_from_leader(void)
 
   auto m = distance_leader_max_float();
   if (! m) {
-    m = l->stat_int_total();
+    m = l->stat_int_total() / 2;
     if (! m) {
       m = 3;
       log("distance_leader_max() is not set for thing");
@@ -128,7 +128,7 @@ bool Thing::too_far_from_leader(point p)
 
   auto m = distance_leader_max_float();
   if (! m) {
-    m = l->stat_int_total();
+    m = l->stat_int_total() / 2;
     if (! m) {
       m = 3;
       log("distance_leader_max() is not set for thing");
@@ -147,7 +147,7 @@ bool Thing::too_far_from_leader(point p, float delta)
 
   auto m = distance_leader_max_float();
   if (! m) {
-    m = l->stat_int_total();
+    m = l->stat_int_total() / 2;
     if (! m) {
       m = 3;
       log("distance_leader_max() is not set for thing");

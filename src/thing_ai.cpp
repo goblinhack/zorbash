@@ -559,7 +559,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
       }
 
       if (is_disliked_by_me(p)) {
-        set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
+        set(dmap_can_see->val, x, y, DMAP_IS_WALL);
       }
 
       //
@@ -657,7 +657,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
           if (level->is_obs_wall_or_door(x, y)) {
             printf("#");
           } else if (level->is_dirt(x, y) || level->is_water(x, y) || level->is_floor(x, y)
-                     || level->is_corridor(x, y) || level->is_hazard(x, y)) {
+                     || level->is_corridor(x, y)) {
             if (get(ai->can_see_currently.can_see, x, y)) {
               printf("L");
             } else if (get(ai->can_see_ever.can_see, x, y)) {
@@ -672,7 +672,7 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
           if (level->is_obs_wall_or_door(x, y)) {
             printf("#");
           } else if (level->is_dirt(x, y) || level->is_water(x, y) || level->is_floor(x, y)
-                     || level->is_corridor(x, y) || level->is_hazard(x, y)) {
+                     || level->is_corridor(x, y)) {
             if (get(ai->can_see_currently.can_see, x, y)) {
               printf("l");
             } else if (get(ai->can_see_ever.can_see, x, y)) {
@@ -867,6 +867,17 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
     }
   }
 
+  for (int y = miny; y <= maxy; y++) {
+    for (int x = minx; x <= maxx; x++) {
+      if (get(can_jump, x, y)) {
+        set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
+        if (level->is_obs_wall_or_door(x, y)) {
+          set(dmap_can_see->val, x, y, DMAP_IS_WALL);
+        }
+      }
+    }
+  }
+
   //
   // Check for changes in the dmap worthy of note
   //
@@ -874,12 +885,6 @@ int Thing::ai_dmap_can_see_init(int minx, int miny, int maxx, int maxy, int sear
     auto dmap_can_see_old = dmap_can_see_old_get();
     for (int y = miny; y <= maxy; y++) {
       for (int x = minx; x <= maxx; x++) {
-
-        if (get(can_jump, x, y)) {
-          set(dmap_can_see->val, x, y, DMAP_IS_PASSABLE);
-          continue;
-        }
-
         //
         // Ignore interruptions too far away
         //
@@ -1009,6 +1014,7 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         //
         if (is_friend(it)) {
           AI_LOG("My fellow thing", it);
+          GOAL_ADD(GOAL_PRIO_VERY_LOW, 1, "follow friend", it);
           continue;
         }
 

@@ -390,7 +390,7 @@ void Dungeon::make_dungeon(void)
                 2 /* generations */);
 
   DBG2("INF: Generate foliage");
-  foliage_gen(10, // fill prob
+  foliage_gen(2,  // fill prob
               10, // R1
               5,  // R2
               2 /* generations */);
@@ -4178,6 +4178,21 @@ void Dungeon::cave_generation(void)
   const int16_t maze_h = MAP_HEIGHT - 2;
   int16_t       x, y;
 
+  if (0) {
+    printf("before:\n");
+    for (y = 2; y < maze_h; y++) {
+      for (x = 2; x < maze_w; x++) {
+        if (get(map_curr, x, y)) {
+          printf("x");
+        } else {
+          printf(" ");
+        }
+      }
+      printf("\n");
+    }
+    printf("\n");
+  }
+
   for (x = 2; x < maze_w; x++) {
     for (y = 2; y < maze_h; y++) {
 
@@ -4229,6 +4244,21 @@ void Dungeon::cave_generation(void)
         set(map_save, x, y, (uint8_t) 1);
       }
     }
+  }
+
+  if (0) {
+    printf("after:\n");
+    for (y = 2; y < maze_h; y++) {
+      for (x = 2; x < maze_w; x++) {
+        if (get(map_curr, x, y)) {
+          printf("x");
+        } else {
+          printf(" ");
+        }
+      }
+      printf("\n");
+    }
+    printf("\n");
   }
 }
 
