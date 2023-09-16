@@ -480,6 +480,19 @@ void Thing::show_botcon_description(void)
   TRACE_NO_INDENT();
   auto text = text_description_short();
 
+  //
+  // Show mimics?
+  //
+  if (pcg_random_allowed) {
+    if (is_mimic()) {
+      if (level->player) {
+        if (d20() < level->player->stat_psi_total()) {
+          text += " %%fg=orange$(I have a bad feeling about this)%%fg=reset$";
+        }
+      }
+    }
+  }
+
   bool skip_showing_keys_to_use = true;
   switch (game->state) {
     case Game::STATE_CHOOSING_LEVEL : return;
@@ -523,6 +536,7 @@ void Thing::show_botcon_description(void)
     if (text.empty()) {
       return;
     }
+
     BOTCON("%s", text.c_str());
     return;
   }

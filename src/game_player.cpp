@@ -536,7 +536,10 @@ void Game::place_player(void)
         auto d = level->thing_new("dogman", point(x + 2, y));
         d->wake("");
       }
-      level->thing_new("dog", point(x + 1, y + 3));
+      if (1) {
+        level->thing_new("dog", point(x + 1, y + 3));
+      }
+      level->thing_new("mimic_sleeping", point(x - 2, y + 2));
       if (0) {
         level->thing_new("rat_large", point(x + 1, y + 3));
         level->thing_new("troll_stone", point(x + 2, y));
@@ -563,7 +566,6 @@ void Game::place_player(void)
         level->thing_new("cthulite", point(x + 2, y));
         level->thing_new("cyclops", point(x + 2, y));
         level->thing_new("gargoyle_baby", point(x + 2, y + 2));
-        level->thing_new("mimic_sleeping", point(x - 2, y + 2));
         level->thing_new("chest1", point(x + 2, y + 2));
         level->thing_new("chest2", point(x + 3, y + 2));
         level->thing_new("scorpion_colossal", point(x + 3, y + 2));

@@ -114,6 +114,7 @@ def tp_init(name, test_short_name, text_long_name):
     my.stat_psi(self, 0)
     my.stat_str(self, 8)
     my.temperature_max(self, 50)
+    my.text_real_name(self, "hungry mimic")
     my.temperature_min(self, 0)
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
@@ -129,28 +130,28 @@ def tp_init(name, test_short_name, text_long_name):
 
     delay = 200
     my.tile(self,
-            ascii_fg_char="up_triangle", ascii_bg_col_name="", ascii_fg_col_name="gold",
+            ascii_fg_char="up_triangle", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile="chest1", is_sleeping=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="up_triangle", ascii_bg_col_name="", ascii_fg_col_name="gold",
+            ascii_fg_char="up_triangle", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile="mimic.1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="up_triangle", ascii_bg_col_name="", ascii_fg_col_name="gold",
+            ascii_fg_char="up_triangle", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile="mimic.2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="up_triangle", ascii_bg_col_name="", ascii_fg_col_name="gold",
+            ascii_fg_char="up_triangle", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile="mimic.3", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="up_triangle", ascii_bg_col_name="", ascii_fg_col_name="gold",
+            ascii_fg_char="up_triangle", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile="mimic.4", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="up_triangle", ascii_bg_col_name="", ascii_fg_col_name="gold",
+            ascii_fg_char="up_triangle", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile="mimic.5", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="up_triangle", ascii_bg_col_name="", ascii_fg_col_name="gold",
+            ascii_fg_char="up_triangle", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile="mimic.6", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="up_triangle", ascii_bg_col_name="", ascii_fg_col_name="gold",
+            ascii_fg_char="up_triangle", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile="mimic.7", delay_ms=delay)
     my.tile(self,
             ascii_fg_char="up_triangle", ascii_bg_col_name="", ascii_fg_col_name="gray30",

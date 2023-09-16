@@ -182,6 +182,19 @@ bool Thing::collision_obstacle(Thingp it)
 
   if (is_player()) {
     TRACE_NO_INDENT();
+    if (is_player()) {
+      //
+      // Allow the player to walk through pets without attacking
+      //
+      auto l = it->leader();
+      if (l && (l == level->player)) {
+        if (debug && is_debug_type()) {
+          con("check collision with %s, no at line %d", it->to_string().c_str(), __LINE__);
+        }
+        return false;
+      }
+    }
+
     if (it->is_alive_monst()) {
       //
       // Ignore is_ethereal to make it easier to attack ghosts
@@ -535,6 +548,17 @@ bool Thing::is_obs_ai(Thingp it)
     //     return true;
     // }
   } else if (is_player()) {
+    //
+    // Allow the player to walk through pets without attacking
+    //
+    auto l = it->leader();
+    if (l && (l == level->player)) {
+      if (debug && is_debug_type()) {
+        con("check collision with %s, no at line %d", it->to_string().c_str(), __LINE__);
+      }
+      return false;
+    }
+
     if (it->is_alive_monst()) {
       //
       // Ignore is_ethereal to make it easier to attack ghosts
