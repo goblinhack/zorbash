@@ -183,7 +183,7 @@ bool Game::tick_end(void)
     }
   }
 
-  CON("-");
+  CON("%%fg=blue$-%%fg=reset$");
 
   if (level) {
     level->update();

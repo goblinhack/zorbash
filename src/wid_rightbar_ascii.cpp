@@ -127,7 +127,7 @@ bool wid_rightbar_ascii_create(void)
     point br = make_point(width - 1, y_at);
 
     wid_set_pos(w, tl, br);
-    auto g = dynprintf(" %%fg=gray$%06d    %-6d%%fg=white$", player->gold(), player->keys());
+    auto g = dynprintf(" %%fg=gray$%06d    %-6d%%fg=reset$", player->gold(), player->keys());
     wid_set_text(w, g);
     wid_set_text_lhs(w, true);
     wid_set_shape_none(w);
@@ -162,7 +162,7 @@ bool wid_rightbar_ascii_create(void)
     point br = make_point(width - 1, y_at);
 
     wid_set_pos(w, tl, br);
-    auto g = dynprintf(" %%fg=gray$%06d    %-6d%%fg=white$", player->score(), player->move_count());
+    auto g = dynprintf(" %%fg=gray$%06d    %-6d%%fg=reset$", player->score(), player->move_count());
     wid_set_text(w, g);
     wid_set_text_lhs(w, true);
     wid_set_shape_none(w);

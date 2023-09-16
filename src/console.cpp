@@ -78,6 +78,10 @@ static term_color term_color_string_to_index(const wchar_t **s)
     *s += sizeof("yellow$") - 1;
     return (TERM_COLOR_YELLOW);
   }
+  if (! wcsncmp(*s, L"orange$", sizeof("orange$") - 1)) {
+    *s += sizeof("orange$") - 1;
+    return (TERM_COLOR_YELLOW);
+  }
   if (! wcsncmp(*s, L"blue$", sizeof("blue$") - 1)) {
     *s += sizeof("blue$") - 1;
     return (TERM_COLOR_BLUE);
@@ -122,6 +126,10 @@ static term_color term_color_string_to_index(const char **s)
   }
   if (! strncmp(*s, "yellow$", sizeof("yellow$") - 1)) {
     *s += sizeof("yellow$") - 1;
+    return (TERM_COLOR_YELLOW);
+  }
+  if (! strncmp(*s, "orange$", sizeof("orange$") - 1)) {
+    *s += sizeof("orange$") - 1;
     return (TERM_COLOR_YELLOW);
   }
   if (! strncmp(*s, "blue$", sizeof("blue$") - 1)) {
@@ -273,7 +281,7 @@ int term_color_to_console_color(color c)
   if (c == MAGENTA)
     return TERM_COLOR_PINK;
   if (c == ORANGE)
-    return TERM_COLOR_RED;
+    return TERM_COLOR_YELLOW;
   if (c == PEACHPUFF)
     return TERM_COLOR_RED;
   if (c == PINK)

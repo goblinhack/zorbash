@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- color bleed on ghosts next to lava                                                                                                           -->
 <!-- if clicking through a pet do not attack it                                                                                                   -->
 <!-- throw potion at monster to help it                                                                                                           -->
 <!-- psi can reveal monsters at higher levels / mimic                                                                                             -->

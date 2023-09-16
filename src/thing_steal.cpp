@@ -92,10 +92,10 @@ bool Thing::steal_treasure_from(Thingp victim)
 
   if (victim->is_player()) {
     if (chosen->is_able_to_be_equipped()) {
-      victim->popup(string_sprintf("%%fg=white$Where's my equipment?!"));
+      victim->popup(string_sprintf("%%fg=yellow$Where's my equipment?!"));
       victim->msg("%%fg=orange$You feel naked...%%fg=reset$");
     } else {
-      victim->popup(string_sprintf("%%fg=white$Where's my money?!"));
+      victim->popup(string_sprintf("%%fg=yellow$Where's my money?!"));
       victim->msg("%%fg=orange$You feel less wealthy somehow...%%fg=reset$");
     }
   }
@@ -144,7 +144,7 @@ bool Thing::steal_item_from(Thingp victim)
   chosen->hide("stolen");
 
   if (victim->is_player()) {
-    victim->popup(string_sprintf("%%fg=white$Where's my stuff?!"));
+    victim->popup(string_sprintf("%%fg=yellow$Where's my stuff?!"));
     victim->msg("%%fg=orange$You feel lighter somehow...%%fg=reset$");
   }
 
