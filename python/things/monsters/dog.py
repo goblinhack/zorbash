@@ -127,7 +127,7 @@ def tp_init(name, text_long_name):
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")
     my.on_you_nat_attack_attempt_do(self, "me.on_you_nat_attack_attempt()")
-    my.rarity(self, my.RARITY_COMMON)  # how rare within this monster class
+    my.rarity(self, my.RARITY_UNCOMMON)  # how rare within this monster class
     my.stamina(self, 100)
     my.stat_con(self, 12)
     my.stat_int(self, 8)
@@ -141,7 +141,7 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description_long(self, "A ferocious semi wild dog.")
+    my.text_description_long(self, "A ferocious semi wild dog. Care to pet it?")
     my.text_description_short(self, "A large dog")
     my.text_hits(self, "claws")
     my.thing_size(self, my.THING_SIZE_NORMAL)
