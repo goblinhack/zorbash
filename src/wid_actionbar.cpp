@@ -823,7 +823,7 @@ uint8_t wid_actionbar_repeat_wait(Widp w, int x, int y, uint32_t button)
     return true;
   }
 
-  if (! time_have_x_tenths_passed_since(5, wid_last_wait)) {
+  if (! time_have_x_tenths_passed_since(1, wid_last_wait)) {
     return true;
   }
 
@@ -835,7 +835,7 @@ uint8_t wid_actionbar_repeat_wait(Widp w, int x, int y, uint32_t button)
 
   wid_actionbar_close_all_popups();
   TOPCON("You continue to pass the time...");
-  game->tick_begin("wait");
+  game->player_tick(false, false, false, false, false, true, false);
 
   return true;
 }
