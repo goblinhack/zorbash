@@ -1,13 +1,12 @@
 import my
 import tp
-import fungus_common
+import fungus_common_withered
 
 
 def tp_init(name, tiles=[]):
     self = tp.Tp(name, "withered fungus", "withered fungus")
-    fungus_common.tp_init(self)
+    fungus_common_withered.tp_init(self)
     # begin sort marker
-    my.is_combustible(self, True)
     my.is_fungus_withered(self, True)
     my.text_a_or_an(self, "the")
     my.text_description_long2(self, "When even the mushrooms die, you know this is not the place to be...")

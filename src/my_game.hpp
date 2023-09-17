@@ -685,7 +685,6 @@ public:
   void wid_thing_info_add_charge_count(WidPopup *w, Thingp t);
   void wid_thing_info_add_crit_chance(WidPopup *w, Thingp t);
   void wid_thing_info_add_danger_level(WidPopup *w, Thingp t);
-  void wid_thing_info_add_leader_info(WidPopup *w, Thingp t);
   void wid_thing_info_add_dmg_acid(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_dmg_bite(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_dmg_claw(WidPopup *w, Thingp t, int index);
@@ -713,6 +712,7 @@ public:
   void wid_thing_info_add_health(WidPopup *w, Thingp t);
   void wid_thing_info_add_immunity(WidPopup *w, Thingp t);
   void wid_thing_info_add_jump_distance(WidPopup *w, Thingp t);
+  void wid_thing_info_add_leader_info(WidPopup *w, Thingp t);
   void wid_thing_info_add_move_speed(WidPopup *w, Thingp t);
   void wid_thing_info_add_noise(WidPopup *w, Thingp t);
   void wid_thing_info_add_nutrition(WidPopup *w, Thingp t);
