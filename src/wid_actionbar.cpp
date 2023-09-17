@@ -864,6 +864,14 @@ void wid_actionbar_wait_over_begin(Widp w, int relx, int rely, int wheelx, int w
     bry -= 4;
   }
 
+  if (! time_have_x_tenths_passed_since(10, wid_last_wait)) {
+    return;
+  }
+
+  if (! time_have_x_tenths_passed_since(10, wid_last_wait_repeat)) {
+    return;
+  }
+
   point tl(tlx, tly);
   point br(brx, bry);
 
