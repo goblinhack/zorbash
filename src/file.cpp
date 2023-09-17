@@ -233,7 +233,7 @@ int file_write(const char *filename, unsigned char *buffer, int len)
 
   file = fopen(filename, "w");
   if (! file) {
-    fprintf(MY_STDERR, "Failed to open file \"%s\" for writing: %s\n", filename, strerror(errno));
+    ERR("Failed to open file \"%s\" for writing: %s\n", filename, strerror(errno));
     return (-1);
   }
 
@@ -245,13 +245,13 @@ int file_write(const char *filename, unsigned char *buffer, int len)
    * Check written one object.
    */
   if (! rc) {
-    fprintf(MY_STDERR, "Failed to write file \"%s\": %s\n", filename, strerror(errno));
+    ERR("Failed to write file \"%s\": %s\n", filename, strerror(errno));
     fclose(file);
     return (-1);
   }
 
   if (ferror(file)) {
-    fprintf(MY_STDERR, "Error writing to write file \"%s\": %s\n", filename, strerror(errno));
+    ERR("Error writing to write file \"%s\": %s\n", filename, strerror(errno));
     fclose(file);
     return (-1);
   }

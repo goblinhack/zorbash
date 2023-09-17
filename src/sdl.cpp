@@ -785,6 +785,7 @@ uint8_t config_errored(class Tokens *tokens, void *context)
   g_errored = false;
   TOPCON("SDL: Errored mode cleared.");
   wid_hide(wid_console_window);
+  sdl_display_reset();
   return true;
 }
 

@@ -1128,6 +1128,12 @@ bool Game::save(std::string file_to_save)
   uint32_t cs = csum((char *) uncompressed, uncompressed_len);
 
   auto ofile = fopen(file_to_save.c_str(), "wb");
+  if (! ofile) {
+    ERR("Failed to open %s for writing: %s", file_to_save.c_str(), strerror(errno));
+    return false;
+  }
+  CON("INF: Opened [%s] for writing", file_to_save.c_str());
+
   fwrite((char *) &uncompressed_len, sizeof(uncompressed_len), 1, ofile);
   fwrite((char *) &cs, sizeof(cs), 1, ofile);
   fwrite(compressed, compressed_len, 1, ofile);
@@ -1235,6 +1241,11 @@ void Game::save_config(void)
   TRACE_AND_INDENT();
   auto          filename = saved_dir + "config";
   std::ofstream out(filename, std::ios::binary);
+  if (! out) {
+    ERR("Failed to open %s for writing: %s", filename.c_str(), strerror(errno));
+    return;
+  }
+  CON("INF: Opened [%s] for writing", filename.c_str());
   const Config &c = game->config;
   out << bits(c);
 }
