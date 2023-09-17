@@ -484,7 +484,13 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
         point tl = make_point(0, y_at);
         point br = make_point(width - 1, y_at);
         wid_set_pos(w, tl, br);
-        wid_set_text(w, "(Beholden)");
+
+        if (t->is_tameable()) {
+          wid_set_text(w, "(Pet)");
+        } else {
+          wid_set_text(w, "(Beholden)");
+        }
+
         if (g_opt_ascii) {
           wid_set_tilename(TILE_LAYER_FG_0, w, "status_bar_ascii_green");
         } else {
