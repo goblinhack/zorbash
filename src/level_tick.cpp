@@ -395,13 +395,13 @@ void Level::tick_(void)
       //
       game->things_are_moving = true;
 
-      auto speed = t->move_speed_total();
+      auto speed = t->move_speed_curr();
       if (speed > 0) {
         if (player) {
           //
           // The speed of monsters moving is always relative to the player
           //
-          auto player_speed = player->move_speed_total();
+          auto player_speed = player->move_speed_curr();
           if (player_speed > 0) {
             //
             // e.g. if the monster speed is 100 and the player 50, then the monster will
@@ -854,7 +854,7 @@ void Level::tick_begin_now(void)
     //
     // Give things a bit of time to move
     //
-    auto speed = t->move_speed_total();
+    auto speed = t->move_speed_curr();
     if (speed) {
       t->movement_remaining_incr(speed);
     } else {

@@ -2660,12 +2660,11 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
     //
     if (attack_options->attack_num == 0) {
       if (aip()->recently_hit_by.find(real_hitter->id) != aip()->recently_hit_by.end()) {
-        dbg("recently_hit_by size %d", (int) aip()->recently_hit_by.size());
         //
         // Faster things get more moves and hits
         //
-        auto speed             = move_speed_total();
-        auto real_hitter_speed = real_hitter->move_speed_total();
+        auto speed             = move_speed_curr();
+        auto real_hitter_speed = real_hitter->move_speed_curr();
         if (speed && real_hitter_speed) {
           auto hit_count     = aip()->recently_hit_by[ real_hitter->id ];
           auto max_hit_count = real_hitter_speed / speed;

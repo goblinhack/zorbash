@@ -645,7 +645,7 @@ void Thing::update_interpolated_position(void)
     //
     // The speed of monsters moving is always relative to the player
     //
-    auto player_speed = level->player->move_speed_total();
+    auto player_speed = level->player->move_speed_curr();
     if (player_speed <= 0) {
       player_speed = 100;
     }

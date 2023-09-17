@@ -95,20 +95,6 @@ Thingp Thing::equip_get(int equip)
 {
   TRACE_NO_INDENT();
 
-  switch (equip) {
-    case MONST_EQUIP_HELMET : break;
-    case MONST_EQUIP_AMULET : break;
-    case MONST_EQUIP_GAUNTLET : break;
-    case MONST_EQUIP_CLOAK : break;
-    case MONST_EQUIP_SHIELD : break;
-    case MONST_EQUIP_ARMOR : break;
-    case MONST_EQUIP_WEAPON : break;
-    case MONST_EQUIP_RING1 : break;
-    case MONST_EQUIP_BOOTS : break;
-    case MONST_EQUIP_RING2 : break;
-    default : err("Unknown equip type %d", equip); return nullptr;
-  }
-
   auto id = equip_id(equip);
   if (id.ok()) {
     return (level->thing_find(id));

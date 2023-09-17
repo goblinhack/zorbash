@@ -127,7 +127,7 @@ bool Thing::is_stuck_check(void)
   // Slowed so much it cannot move?
   //
   if (tp()->move_speed()) {
-    if (move_speed_total() == 0) {
+    if (move_speed_curr() == 0) {
       dbg("Stuck, yes: no move speed");
       return true;
     }
@@ -135,7 +135,7 @@ bool Thing::is_stuck_check(void)
     //
     // So slow that your body stops functioning?
     //
-    if (move_speed_total() < 0) {
+    if (move_speed_curr() < 0) {
       if (is_player()) {
         //
         // Body shutdown due to being too slow

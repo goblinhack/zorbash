@@ -377,8 +377,8 @@ Bestiary
 | Carcass Creeper | A/common | 60 | 1d6+2 | 1 | Bite:1d8<br />Claw:1d6<br />Poison:1d10<br /> | Poison<br /> |
 | Rock Gnome | B/common | 60 | 1d6+1 | 1 |  | Poison<br /> |
 | Piranha | A/rare | 59 | 1d4+3 | 1 | Bite:1d4<br /> | Water<br /> |
-| Brown Extrovert Spider | A/uncommon | 58 | 1d3 | 1 | Necrotic:1<br />Poison:1d4<br /> | Necrosis<br />Webs<br /> |
 | Gnorf | A/common | 58 | 1d4+1 | 1 |  | Cold<br />Poison<br /> |
+| Brown Extrovert Spider | A/uncommon | 57 | 1d3 | 1 | Necrotic:1<br />Poison:1d3<br /> | Necrosis<br />Webs<br /> |
 | Battle Goat | B/uncommon | 56 | 1d6+2 | 1 |  | Poison<br />Water<br /> |
 | Flaming Skeleton | B/common | 56 | 1d4 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
 | Gnome Thief | A/common | 52 | 1d2+1 | 1 |  | Cold<br />Poison<br /> |

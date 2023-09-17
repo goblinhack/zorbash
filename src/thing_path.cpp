@@ -25,13 +25,13 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
     return false;
   }
 
-  dbg("Pop next move (move speed %d)", move_speed_total());
+  dbg("Pop next move (move speed %d)", move_speed_curr());
   TRACE_AND_INDENT();
 
   //
   // If a monster has been slowed so it can no longer move, stop it
   //
-  if (move_speed_total() <= 0) {
+  if (move_speed_curr() <= 0) {
     clear_move_path("unable to move; slowed");
     return false;
   }

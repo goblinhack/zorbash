@@ -200,7 +200,13 @@ int Thing::move_speed_bonus_incr(void)
 int Thing::move_speed_curr(void)
 {
   TRACE_NO_INDENT();
+
   auto n = infop();
+
+  if (! n->move_speed_curr) {
+    n->move_speed_curr = move_speed_total();
+  }
+
   return n->move_speed_curr;
 }
 
