@@ -32,7 +32,7 @@ def shatters(item, target, x, y):
     else:
         my.thing_msg(item, "The potion of poison gas shatters.")
 
-    for it in my.level_flood_fill_gas_get_all_grid_things(item, x, y, 3):
+    for it in my.level_flood_fill_gas_get_all_grid_things(item, x, y, 2):
         my.spawn_gas_poison_around_thing(it, 1)
     my.thing_dead(item, "broken")
 

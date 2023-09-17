@@ -85,7 +85,7 @@ def tp_init(name, text_long_name):
     my.on_you_nat_attack_attempt_do(self, "me.on_you_nat_attack_attempt()")
     my.rarity(self, my.RARITY_COMMON)  # how rare within this monster class
     my.stat_con(self, 10)
-    my.stat_def(self, 11)
+    my.stat_def(self, 1)
     my.stat_dex(self, 13)
     my.stat_int(self, 0)
     my.stat_luck(self, 8)

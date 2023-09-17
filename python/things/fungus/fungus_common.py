@@ -14,6 +14,7 @@ def tp_init(self):
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
     my.gfx_pixelart_submergible(self, True)
+    my.is_always_hit(self, True)
     my.is_able_to_be_teleported(self, True)
     my.is_able_to_fall(self, True)
     my.is_able_to_freeze(self, True)
