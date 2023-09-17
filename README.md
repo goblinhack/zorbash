@@ -1,9 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- color bleed on ghosts next to lava                                                                                                           -->
-<!-- if clicking through a pet do not attack it                                                                                                   -->
-<!-- throw potion at monster to help it                                                                                                           -->
-<!-- psi can reveal monsters at higher levels / mimic                                                                                             -->
 <!-- DONE Potion of Caustic Gas - Produces a cloud of damaging caustic gas.                                                                       -->
 <!-- DONE Potion of Darkness - Produces a cloud of darkness that obscures an area of the dungeon.                                                 -->
 <!-- DONE Potion of Invisibility - Reduces you stealth radius considerably.                                                                       -->
