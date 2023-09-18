@@ -1141,20 +1141,20 @@ void ascii_display(void)
   // Dump the level output as ascii if the content changes, useful in debugging.
   // Also used in testing.
   //
-  TRACE_NO_INDENT();
-  if (ascii_changed()) {
+  IF_DEBUG
+  {
     TRACE_NO_INDENT();
-    prev_cells = cells;
-
-    if (g_opt_test_dungeon_gen) {
+    if (ascii_changed()) {
       TRACE_NO_INDENT();
-      ascii_dump_to_console(stdout, ! g_opt_gfx_monochrome);
+      prev_cells = cells;
 
-      TRACE_NO_INDENT();
-      ascii_dump_to_console(MY_STDOUT, false);
-    } else {
-      IF_DEBUG
-      {
+      if (g_opt_test_dungeon_gen) {
+        TRACE_NO_INDENT();
+        ascii_dump_to_console(stdout, ! g_opt_gfx_monochrome);
+
+        TRACE_NO_INDENT();
+        ascii_dump_to_console(MY_STDOUT, false);
+      } else {
         TRACE_NO_INDENT();
         ascii_dump_to_console(MY_STDOUT, false);
       }
