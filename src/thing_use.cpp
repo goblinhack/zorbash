@@ -322,7 +322,9 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
       on_use(what, target);
     } else {
       on_use(what);
-      game->change_state(Game::STATE_NORMAL, "choose a target");
+      if (is_player()) {
+        game->change_state(Game::STATE_NORMAL, "choose a target");
+      }
     }
 
     //

@@ -541,14 +541,14 @@ void Game::place_player(void)
         d->wake("");
       }
       if (0) {
-        level->thing_new("dog", point(x + 1, y + 3));
+        level->thing_new("dog", point(x + 1, y + 2));
+        level->thing_new("exit1", point(x - 1, y + 1));
       }
       if (0) {
         level->thing_new("mimic_sleeping", point(x - 2, y + 2));
         level->thing_new("rat_large", point(x + 1, y + 3));
         level->thing_new("troll_stone", point(x + 2, y));
         level->thing_new("troll_fire", point(x + 2, y + 2));
-        level->thing_new("exit1", point(x - 3, y + 2));
         level->thing_new("gnome_rock", point(x + 2, y + 1));
         level->thing_new("tentacleye", point(x + 1, y + 1));
         level->thing_new("scorpion_death", point(x + 2, y + 1));

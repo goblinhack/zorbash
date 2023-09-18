@@ -86,7 +86,10 @@ bool Thing::is_target_select(Thingp item)
     msg("Choose a target to use %s at.", item->text_the().c_str());
   }
 
-  game->change_state(Game::STATE_CHOOSING_TARGET, "choosing a target");
+  if (is_player()) {
+    game->change_state(Game::STATE_CHOOSING_TARGET, "choosing a target");
+  }
+
   level->cursor_recreate();
   if (level->cursor) {
     level->cursor->visible("target select");

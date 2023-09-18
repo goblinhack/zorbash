@@ -388,10 +388,10 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
 
   if (is_player()) {
     game->tick_begin("player cast a spell");
-  }
 
-  if (game->state == Game::STATE_CHOOSING_TARGET) {
-    game->change_state(Game::STATE_NORMAL, "finished choosing a target");
+    if (game->state == Game::STATE_CHOOSING_TARGET) {
+      game->change_state(Game::STATE_NORMAL, "finished choosing a target");
+    }
   }
 
   return target;
