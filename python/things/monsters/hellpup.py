@@ -14,7 +14,7 @@ def on_you_nat_attack_attempt(me, x, y):
 def on_hit_and_still_alive(me, hitter, real_hitter, x, y, crit, damage):
     sound = f"hiss{my.py_non_pcg_random_range_inclusive(1, 10)}"
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound)
-    my.thing_popup(me, "Bark!")
+    my.thing_popup(me, "Howl!")
 
 
 def on_hit_dodge_do(me, hitter, x, y):
@@ -79,9 +79,6 @@ def tp_init(name, text_long_name):
     my.is_able_to_see_in_the_dark(self, True)
     my.is_able_to_shoot_at_close_range(self, True)
     my.is_able_to_shoot_at(self, True)
-    my.is_able_to_swim(self, True)
-    my.is_able_to_tire(self, True)
-    my.is_air_breather(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)
@@ -103,12 +100,9 @@ def tp_init(name, text_long_name):
     my.is_hellpup(self, True)
     my.is_hittable(self, True)
     my.is_immune_to_fire(self, True)
-    my.is_immune_to_water(self, True)
     my.is_intelligent(self, True)
     my.is_interesting(self, True)
-    my.is_living(self, True)
     my.is_loggable(self, True)
-    my.is_meat(self, True)
     my.is_monst_class_B(self, True)
     my.is_monst(self, True)
     my.is_moveable(self, True)
@@ -139,7 +133,7 @@ def tp_init(name, text_long_name):
     my.stat_def(self, 12)
     my.stat_dex(self, 13)
     my.stat_int(self, 8)
-    my.stat_luck(self, 8)
+    my.stat_luck(self, 0)
     my.stat_psi(self, 0)
     my.stat_str(self, 9)
     my.temperature_max(self, 50)
@@ -148,7 +142,7 @@ def tp_init(name, text_long_name):
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "The hellpup is the junior edition of the much feared hellhound. Underestimate its cute undead puppy eyes at your peril!")
-    my.text_description_short(self, "A large hellpup")
+    my.text_description_short(self, "Hellhound, junior edition")
     my.text_hits(self, "claws")
     my.thing_size(self, my.THING_SIZE_NORMAL)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -200,7 +194,7 @@ def tp_init(name, text_long_name):
             ascii_fg_char="h", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile="hellpup.6", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="f", ascii_bg_col_name="", ascii_fg_col_name="gray30",
+            ascii_fg_char="h", ascii_bg_col_name="", ascii_fg_col_name="gray30",
             tile="hellpup.dead", is_dead=True, delay_ms=delay)
 
     my.tp_update(self)
