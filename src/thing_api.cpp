@@ -617,15 +617,15 @@ int Thing::is_unused_flag81(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag81());
 }
-int Thing::is_unused_flag82(void)
+int Thing::is_hellpup(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag82());
+  return (tp()->is_hellpup());
 }
-int Thing::is_unused_flag83(void)
+int Thing::is_firefox(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag83());
+  return (tp()->is_firefox());
 }
 int Thing::is_thylacine(void)
 {

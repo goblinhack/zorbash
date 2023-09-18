@@ -462,6 +462,7 @@ private:
   int _is_fearless {};
   int _is_fire {};
   int _is_fire_elemental {};
+  int _is_firefox {};
   int _is_flat {};
   int _is_floating {};
   int _is_floor {};
@@ -498,6 +499,7 @@ private:
   int _is_hazard {};
   int _is_health_booster {};
   int _is_heavy {};
+  int _is_hellpup {};
   int _is_helmet {};
   int _is_herbivore {};
   int _is_hittable {};
@@ -774,8 +776,6 @@ private:
   int _is_unused_flag8 {};
   int _is_unused_flag80 {};
   int _is_unused_flag81 {};
-  int _is_unused_flag82 {};
-  int _is_unused_flag83 {};
   int _is_unused_flag9 {};
   int _is_usable {};
   int _is_used_when_thrown {};
@@ -1829,6 +1829,7 @@ public:
   int is_fairy(void) const;
   int is_fearless(void) const;
   int is_fire_elemental(void) const;
+  int is_firefox(void) const;
   int is_fire(void) const;
   int is_flat(void) const;
   int is_floating(void) const;
@@ -1866,6 +1867,7 @@ public:
   int is_hazard(void) const;
   int is_health_booster(void) const;
   int is_heavy(void) const;
+  int is_hellpup(void) const;
   int is_helmet(void) const;
   int is_herbivore(void) const;
   int is_hittable(void) const;
@@ -2140,8 +2142,6 @@ public:
   int is_unused_flag7(void) const;
   int is_unused_flag80(void) const;
   int is_unused_flag81(void) const;
-  int is_unused_flag82(void) const;
-  int is_unused_flag83(void) const;
   int is_unused_flag8(void) const;
   int is_unused_flag9(void) const;
   int is_usable(void) const;
@@ -2600,6 +2600,7 @@ public:
   void is_fairy_set(int v);
   void is_fearless_set(int v);
   void is_fire_elemental_set(int v);
+  void is_firefox_set(int v);
   void is_fire_set(int v);
   void is_flat_set(int v);
   void is_floating_set(int v);
@@ -2637,6 +2638,7 @@ public:
   void is_hazard_set(int v);
   void is_health_booster_set(int v);
   void is_heavy_set(int v);
+  void is_hellpup_set(int v);
   void is_helmet_set(int v);
   void is_herbivore_set(int v);
   void is_hittable_set(int v);
@@ -2911,8 +2913,6 @@ public:
   void is_unused_flag7_set(int v);
   void is_unused_flag80_set(int v);
   void is_unused_flag81_set(int v);
-  void is_unused_flag82_set(int v);
-  void is_unused_flag83_set(int v);
   void is_unused_flag8_set(int v);
   void is_unused_flag9_set(int v);
   void is_usable_set(int v);

@@ -1627,6 +1627,7 @@ public:
   int is_fairy(void);
   int is_fearless(void);
   int is_fire_elemental(void);
+  int is_firefox(void);
   int is_fire(void);
   int is_flat(void);
   int is_floating(void);
@@ -1665,6 +1666,7 @@ public:
   int is_hazard(void);
   int is_health_booster(void);
   int is_heavy(void);
+  int is_hellpup(void);
   int is_helmet(void);
   int is_herbivore(void);
   int is_hittable(void);
@@ -1938,8 +1940,6 @@ public:
   int is_unused_flag7(void);
   int is_unused_flag80(void);
   int is_unused_flag81(void);
-  int is_unused_flag82(void);
-  int is_unused_flag83(void);
   int is_unused_flag8(void);
   int is_unused_flag9(void);
   int is_usable(void);

@@ -585,7 +585,7 @@ Content
 Other content
 -------------
 <!-- begin type marker -->
-- 110 x monsters
+- 112 x monsters
 - 52 x food
 - 24 x treasure
 - 23 x items

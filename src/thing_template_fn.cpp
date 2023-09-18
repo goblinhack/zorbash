@@ -555,6 +555,7 @@ int Tp::is_explosion(void) const { return _is_explosion; }
 int Tp::is_fairy(void) const { return _is_fairy; }
 int Tp::is_fearless(void) const { return _is_fearless; }
 int Tp::is_fire_elemental(void) const { return _is_fire_elemental; }
+int Tp::is_firefox(void) const { return _is_firefox; }
 int Tp::is_fire(void) const { return _is_fire; }
 int Tp::is_flat(void) const { return _is_flat; }
 int Tp::is_floating(void) const { return _is_floating; }
@@ -592,6 +593,7 @@ int Tp::is_hard(void) const { return _is_hard; }
 int Tp::is_hazard(void) const { return _is_hazard; }
 int Tp::is_health_booster(void) const { return _is_health_booster; }
 int Tp::is_heavy(void) const { return _is_heavy; }
+int Tp::is_hellpup(void) const { return _is_hellpup; }
 int Tp::is_helmet(void) const { return _is_helmet; }
 int Tp::is_herbivore(void) const { return _is_herbivore; }
 int Tp::is_hittable(void) const { return _is_hittable; }
@@ -865,8 +867,6 @@ int Tp::is_unused_flag79(void) const { return _is_unused_flag79; }
 int Tp::is_unused_flag7(void) const { return _is_unused_flag7; }
 int Tp::is_unused_flag80(void) const { return _is_unused_flag80; }
 int Tp::is_unused_flag81(void) const { return _is_unused_flag81; }
-int Tp::is_unused_flag82(void) const { return _is_unused_flag82; }
-int Tp::is_unused_flag83(void) const { return _is_unused_flag83; }
 int Tp::is_unused_flag8(void) const { return _is_unused_flag8; }
 int Tp::is_unused_flag9(void) const { return _is_unused_flag9; }
 int Tp::is_usable(void) const { return _is_usable; }
@@ -1325,6 +1325,7 @@ void Tp::is_explosion_set(int v) { _is_explosion = v; }
 void Tp::is_fairy_set(int v) { _is_fairy = v; }
 void Tp::is_fearless_set(int v) { _is_fearless = v; }
 void Tp::is_fire_elemental_set(int v) { _is_fire_elemental = v; }
+void Tp::is_firefox_set(int v) { _is_firefox = v; }
 void Tp::is_fire_set(int v) { _is_fire = v; }
 void Tp::is_flat_set(int v) { _is_flat = v; }
 void Tp::is_floating_set(int v) { _is_floating = v; }
@@ -1362,6 +1363,7 @@ void Tp::is_hard_set(int v) { _is_hard = v; }
 void Tp::is_hazard_set(int v) { _is_hazard = v; }
 void Tp::is_health_booster_set(int v) { _is_health_booster = v; }
 void Tp::is_heavy_set(int v) { _is_heavy = v; }
+void Tp::is_hellpup_set(int v) { _is_hellpup = v; }
 void Tp::is_helmet_set(int v) { _is_helmet = v; }
 void Tp::is_herbivore_set(int v) { _is_herbivore = v; }
 void Tp::is_hittable_set(int v) { _is_hittable = v; }
@@ -1635,8 +1637,6 @@ void Tp::is_unused_flag79_set(int v) { _is_unused_flag79 = v; }
 void Tp::is_unused_flag7_set(int v) { _is_unused_flag7 = v; }
 void Tp::is_unused_flag80_set(int v) { _is_unused_flag80 = v; }
 void Tp::is_unused_flag81_set(int v) { _is_unused_flag81 = v; }
-void Tp::is_unused_flag82_set(int v) { _is_unused_flag82 = v; }
-void Tp::is_unused_flag83_set(int v) { _is_unused_flag83 = v; }
 void Tp::is_unused_flag8_set(int v) { _is_unused_flag8 = v; }
 void Tp::is_unused_flag9_set(int v) { _is_unused_flag9 = v; }
 void Tp::is_usable_set(int v) { _is_usable = v; }

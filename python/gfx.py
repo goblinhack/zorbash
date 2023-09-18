@@ -2638,6 +2638,26 @@ def init_tiles_16x16_main():
         "",
         "",
         ############################################################
+        "firefox.1",
+        "firefox.2",
+        "firefox.3",
+        "firefox.4",
+        "firefox.sleeping.1",
+        "firefox.sleeping.2",
+        "firefox.dead",
+        "hellpup.1",
+        "hellpup.2",
+        "hellpup.3",
+        "hellpup.4",
+        "hellpup.sleeping.1",
+        "hellpup.sleeping.2",
+        "hellpup.dead",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ############################################################
     ]
 
     my.tile_load_arr_sprites(
