@@ -627,10 +627,10 @@ int Thing::is_unused_flag83(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag83());
 }
-int Thing::is_unused_flag84(void)
+int Thing::is_thylacine(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag84());
+  return (tp()->is_thylacine());
 }
 int Thing::is_dog(void)
 {

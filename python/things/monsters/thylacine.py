@@ -3,7 +3,7 @@ import tp
 
 
 def on_born(me, x, y):
-    my.thing_friend(me, "is_dog")
+    my.thing_friend(me, "is_thylacine")
 
 
 def on_you_nat_attack_attempt(me, x, y):
@@ -37,13 +37,13 @@ def tp_init(name, text_long_name):
     my.ai_wanderer(self, True)
     my.attack_eater(self, True)
     my.chance_d1000_shove(self, 500)
-    my.chance_d1000_tameable(self, 900)
+    my.chance_d1000_tameable(self, 500)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 20)
-    my.consume_per_bite_amount(self, 3)
+    my.consume_per_bite_amount(self, 5)
     my.distance_avoid(self, 7)
     my.distance_vision(self, 7)
-    my.dmg_nat_att_dice(self, "1d4+2")
+    my.dmg_nat_att_dice(self, "1d6+2")
     my.dmg_nat_att_type(self, "bite")
     my.environ_dislikes_poison(self, 100)
     my.gfx_anim_use(self, "attack_red")
@@ -60,7 +60,7 @@ def tp_init(name, text_long_name):
     my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_submergible(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
-    my.health_initial_dice(self, "1d8+8")
+    my.health_initial_dice(self, "2d6+8")
     my.hunger_clock_tick_freq(self, 50)
     my.hunger_is_insatiable(self, True)
     my.is_able_to_be_surprised(self, True)
@@ -90,7 +90,6 @@ def tp_init(name, text_long_name):
     my.is_daring(self, True)
     my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
-    my.is_dog(self, True)
     my.is_eater_of_food(self, True)
     my.is_eater_of_meat(self, True)
     my.is_eater_of_red_blood(self, True)
@@ -101,7 +100,7 @@ def tp_init(name, text_long_name):
     my.is_living(self, True)
     my.is_loggable(self, True)
     my.is_meat(self, True)
-    my.is_monst_class_A(self, True)
+    my.is_monst_class_B(self, True)
     my.is_monst(self, True)
     my.is_moveable(self, True)
     my.is_msg_allowed_hears_something(self, True)
@@ -113,11 +112,12 @@ def tp_init(name, text_long_name):
     my.is_red_blooded(self, True)
     my.is_shootable(self, True)
     my.is_shovable(self, True)
+    my.is_thylacine(self, True)
     my.is_tickable(self, True)
     my.jump_distance(self, 3)
     my.move_speed(self, 150)
     my.noise_decibels_hearing(self, 10)
-    my.noise_on_moving(self, 35)
+    my.noise_on_moving(self, 5)
     my.normal_placement_rules(self, True)
     my.nutrition_dice(self, "1d6")
     my.on_born_do(self, "me.on_born()")
@@ -125,13 +125,13 @@ def tp_init(name, text_long_name):
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")
     my.on_you_nat_attack_attempt_do(self, "me.on_you_nat_attack_attempt()")
-    my.rarity(self, my.RARITY_UNCOMMON)  # how rare within this monster class
+    my.rarity(self, my.RARITY_VERY_RARE)  # how rare within this monster class
     my.stamina(self, 100)
-    my.stat_con(self, 12)
+    my.stat_con(self, 13)
     my.stat_def(self, 12)
-    my.stat_dex(self, 12)
+    my.stat_dex(self, 13)
     my.stat_int(self, 8)
-    my.stat_luck(self, 12)
+    my.stat_luck(self, 8)
     my.stat_psi(self, 0)
     my.stat_str(self, 9)
     my.temperature_max(self, 50)
@@ -139,8 +139,10 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description_long(self, "A ferocious semi wild dog. Care to pet it?")
-    my.text_description_short(self, "A large dog")
+    my.text_description_long2(self, "History lesson: The thylacine was known as the Tasmanian tiger because it displayed dark stripes that radiated from the top of its back, and it was known as the Tasmanian wolf because it had the general appearance of a medium-to-large-size canid. The name thylacine refers to its the marsupial like pouch.")
+    my.text_description_long3(self, "Once common upon the surface world, but hunted down by evil humans to near extinction, the beautiful thylacines have taken refuge in dark dungeons such as this.")
+    my.text_description_long(self, "A thylacine. Can you believe it?")
+    my.text_description_short(self, "A large thylacine")
     my.text_hits(self, "claws")
     my.thing_size(self, my.THING_SIZE_NORMAL)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -150,58 +152,58 @@ def tp_init(name, text_long_name):
 
     delay = 300
     my.tile(self,
-            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="brown",
-            tile="dog.1", delay_ms=delay)
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="thylacine.1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="brown",
-            tile="dog.2", delay_ms=delay)
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="thylacine.2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="brown",
-            tile="dog.1", delay_ms=delay)
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="thylacine.1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="brown",
-            tile="dog.2", delay_ms=delay)
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="thylacine.2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="brown",
-            tile="dog.1", delay_ms=delay)
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="thylacine.1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="brown",
-            tile="dog.2", delay_ms=delay)
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="thylacine.2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="brown",
-            tile="dog.1", delay_ms=delay)
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="thylacine.1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="brown",
-            tile="dog.2", delay_ms=delay)
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="thylacine.2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="brown",
-            tile="dog.1", delay_ms=delay)
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="thylacine.1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="brown",
-            tile="dog.2", delay_ms=delay)
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="thylacine.2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="brown",
-            tile="dog.3", delay_ms=delay)
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="thylacine.3", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="brown",
-            tile="dog.4", delay_ms=delay)
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="thylacine.4", delay_ms=delay)
     delay = 1500
     my.tile(self,
-            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="brown",
-            tile="dog.sleeping.1", is_sleeping=True, delay_ms=delay)
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="thylacine.sleeping.1", is_sleeping=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="brown",
-            tile="dog.sleeping.2", is_sleeping=True, delay_ms=delay)
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="brown",
+            tile="thylacine.sleeping.2", is_sleeping=True, delay_ms=delay)
     delay = 150
     my.tile(self,
-            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="gray30",
-            tile="dog.dead", is_dead=True, delay_ms=delay)
+            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="gray30",
+            tile="thylacine.dead", is_dead=True, delay_ms=delay)
 
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="dog", text_long_name="dog")
+    tp_init(name="thylacine", text_long_name="thylacine")
 
 
 init()

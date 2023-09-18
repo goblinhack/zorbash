@@ -674,6 +674,7 @@ private:
   int _is_thief {};
   int _is_throwable {};
   int _is_thrown_as_a_weapon {};
+  int _is_thylacine {};
   int _is_tickable {}; // e.g. a monst or player or something moveable
   int _is_tireless {};
   int _is_tmp_thing {};
@@ -775,7 +776,6 @@ private:
   int _is_unused_flag81 {};
   int _is_unused_flag82 {};
   int _is_unused_flag83 {};
-  int _is_unused_flag84 {};
   int _is_unused_flag9 {};
   int _is_usable {};
   int _is_used_when_thrown {};
@@ -2041,6 +2041,7 @@ public:
   int is_thief(void) const;
   int is_throwable(void) const;
   int is_thrown_as_a_weapon(void) const;
+  int is_thylacine(void) const;
   int is_tickable(void) const;
   int is_tireless(void) const;
   int is_tmp_thing(void) const;
@@ -2141,7 +2142,6 @@ public:
   int is_unused_flag81(void) const;
   int is_unused_flag82(void) const;
   int is_unused_flag83(void) const;
-  int is_unused_flag84(void) const;
   int is_unused_flag8(void) const;
   int is_unused_flag9(void) const;
   int is_usable(void) const;
@@ -2812,6 +2812,7 @@ public:
   void is_thief_set(int v);
   void is_throwable_set(int v);
   void is_thrown_as_a_weapon_set(int v);
+  void is_thylacine_set(int v);
   void is_tickable_set(int v);
   void is_tireless_set(int v);
   void is_tmp_thing_set(int v);
@@ -2912,7 +2913,6 @@ public:
   void is_unused_flag81_set(int v);
   void is_unused_flag82_set(int v);
   void is_unused_flag83_set(int v);
-  void is_unused_flag84_set(int v);
   void is_unused_flag8_set(int v);
   void is_unused_flag9_set(int v);
   void is_usable_set(int v);

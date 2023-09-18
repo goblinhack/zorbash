@@ -540,8 +540,8 @@ void Game::place_player(void)
         auto d = level->thing_new("dogman", point(x + 2, y));
         d->wake("");
       }
-      if (0) {
-        level->thing_new("dog", point(x + 1, y + 2));
+      if (1) {
+        level->thing_new("thylacine", point(x + 1, y + 2));
         level->thing_new("exit1", point(x - 1, y + 1));
       }
       if (0) {

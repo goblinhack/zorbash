@@ -1840,6 +1840,7 @@ public:
   int is_thief(void);
   int is_throwable(void);
   int is_thrown_as_a_weapon(void);
+  int is_thylacine(void);
   int is_tickable(void);
   int is_tireless(void);
   int is_tmp_thing(void);
@@ -1939,7 +1940,6 @@ public:
   int is_unused_flag81(void);
   int is_unused_flag82(void);
   int is_unused_flag83(void);
-  int is_unused_flag84(void);
   int is_unused_flag8(void);
   int is_unused_flag9(void);
   int is_usable(void);

@@ -316,6 +316,25 @@ Bestiary
 Weapons
 -------
 <!-- begin weapons type marker -->
+| Name | Class/Rarity | Damage | Damage Roll | Special | Weapon Damaged Chance | Runic Chance | Gold Value |
+| :--- | --- | --- | --- | --- | --- | --- | --- |
+| Warhammer | C/common | 4 - 32 | 4d8 |  Swing-penalty<br />Hits all surrounding<br /> | 0.01 % | 10.00% | 450 |
+| Very Broadsword | C/uncommon | 2 - 24 | 2d12 |  Hits adjacent<br /> | 0.01 % | 10.00% | 350 |
+| Mace | C/common | 3 - 24 | 3d8 |  Swing-penalty<br /> | 0.01 % | 5.00% | 350 |
+| Double Shovel | C/uncommon | 2 - 20 | 2d10 |  Hits in-front and behind<br /> | 1.00 % | 7.50% | 50 |
+| Holy Sword Of Clonrichet | C/v-rare | 5 - 20 | 1d16+4 |  Immunity-Acid<br />Immunity-Cold<br />Immunity-poison<br />x2 undead<br />Hits all surrounding<br /> | 0.01 % | 10.00% | 2500 |
+| Scythe | C/uncommon | 3 - 18 | 3d6 |  Hits all surrounding<br /> | 0.05 % | 2.00% | 250 |
+| Sword Of Plutonium | C/v-rare | 5 - 16 | 1d12+4 |  Immunity-Acid<br /> | 0.01 % | 5.00% | 1000 |
+| Sword Of Duck Summoning | C/v-rare | 3 - 12 | 1d10+2 |  Immunity-Acid<br /> | 0.01 % | 10.00% | 1500 |
+| Sword Of Draining | C/v-rare | 1 - 12 | 1d12 | Damage-Drain:1d20<br /> Immunity-Drain<br /> Additional-attack<br /> | 0.05 % | 5.00% | 1000 |
+| Cutlass | B/rare | 1 - 10 | 1d10 |   | 0.20 % | 0.50% | 100 |
+| Pike | B/uncommon | 1 - 10 | 1d10 |  Hits two ahead<br /> | 0.50 % | 1.00% | 10 |
+| Short Sword | A/common | 1 - 8 | 1d8 |   | 0.10 % | 0.10% | 100 |
+| Shovel | B/uncommon | 1 - 8 | 1d8 |   | 0.50 % | 5.00% | 5 |
+| Rusty Short Sword | A/common | 2 - 7 | 1d6+1 | Damage-Poison:1d2+1<br />  | 2.00 % | 0.05% | 50 |
+| Short Axe | B/uncommon | 1 - 6 | 1d6 |  Hits all surrounding<br /> | 0.10 % | 5.00% | 150 |
+| Wooden Short Sword | A/common | 1 - 4 | 1d4 |   | 1.00 % | 0.01% | 25 |
+| Dagger | A/common | 1 - 4 | 1d4 |   | 0.05 % | 5.00% | 15 |
 <!-- end weapons type marker -->
 
 Pixelart Screenshots
@@ -566,7 +585,7 @@ Content
 Other content
 -------------
 <!-- begin type marker -->
-- 109 x monsters
+- 110 x monsters
 - 52 x food
 - 24 x treasure
 - 23 x items

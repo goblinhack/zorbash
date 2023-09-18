@@ -767,6 +767,7 @@ int Tp::is_the_grid(void) const { return _is_the_grid; }
 int Tp::is_thief(void) const { return _is_thief; }
 int Tp::is_throwable(void) const { return _is_throwable; }
 int Tp::is_thrown_as_a_weapon(void) const { return _is_thrown_as_a_weapon; }
+int Tp::is_thylacine(void) const { return _is_thylacine; }
 int Tp::is_tickable(void) const { return _is_tickable; }
 int Tp::is_tireless(void) const { return _is_tireless; }
 int Tp::is_tmp_thing(void) const { return _is_tmp_thing; }
@@ -866,7 +867,6 @@ int Tp::is_unused_flag80(void) const { return _is_unused_flag80; }
 int Tp::is_unused_flag81(void) const { return _is_unused_flag81; }
 int Tp::is_unused_flag82(void) const { return _is_unused_flag82; }
 int Tp::is_unused_flag83(void) const { return _is_unused_flag83; }
-int Tp::is_unused_flag84(void) const { return _is_unused_flag84; }
 int Tp::is_unused_flag8(void) const { return _is_unused_flag8; }
 int Tp::is_unused_flag9(void) const { return _is_unused_flag9; }
 int Tp::is_usable(void) const { return _is_usable; }
@@ -1537,6 +1537,7 @@ void Tp::is_the_grid_set(int v) { _is_the_grid = v; }
 void Tp::is_thief_set(int v) { _is_thief = v; }
 void Tp::is_throwable_set(int v) { _is_throwable = v; }
 void Tp::is_thrown_as_a_weapon_set(int v) { _is_thrown_as_a_weapon = v; }
+void Tp::is_thylacine_set(int v) { _is_thylacine = v; }
 void Tp::is_tickable_set(int v) { _is_tickable = v; }
 void Tp::is_tireless_set(int v) { _is_tireless = v; }
 void Tp::is_tmp_thing_set(int v) { _is_tmp_thing = v; }
@@ -1636,7 +1637,6 @@ void Tp::is_unused_flag80_set(int v) { _is_unused_flag80 = v; }
 void Tp::is_unused_flag81_set(int v) { _is_unused_flag81 = v; }
 void Tp::is_unused_flag82_set(int v) { _is_unused_flag82 = v; }
 void Tp::is_unused_flag83_set(int v) { _is_unused_flag83 = v; }
-void Tp::is_unused_flag84_set(int v) { _is_unused_flag84 = v; }
 void Tp::is_unused_flag8_set(int v) { _is_unused_flag8 = v; }
 void Tp::is_unused_flag9_set(int v) { _is_unused_flag9 = v; }
 void Tp::is_usable_set(int v) { _is_usable = v; }
