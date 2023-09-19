@@ -7,15 +7,18 @@ def on_thrown(owner, me, x, y):
 
 
 def on_use(owner, item, target, x, y):
-    owner = my.thing_top_owner_id_get(item)
-    if owner:
-        my.thing_stat_psi_incr(owner, 1)
-        if my.thing_is_player(owner):
-            my.thing_msg(owner, "The darkness envelops you!")
-            my.thing_blinded_count_incr(owner, 30)
-            my.thing_popup(owner, "!!!")
-    for it in my.level_flood_fill_gas_get_all_grid_things(item, x, y, 3):
-        my.spawn_darkness_around_thing(it, 1)
+    radius = my.thing_effect_radius_get(item)
+    # my.con("targeted {} {:X} at {} {} radius {}".format(my.thing_name_get(me), me, x, y, radius))
+
+    for dx in range(-radius, radius + 1):
+        for dy in range(-radius, radius + 1):
+            x1 = x + dx
+            y1 = y + dy
+            distance = (((x1 - x)**2 + (y1 - y)**2)**0.5)
+            if distance > radius + 0.5:
+                continue
+
+            my.place_at(item, "explosion_destroy_floor", x1, y1)
     my.thing_dead(item, "broken")
 
 
@@ -26,14 +29,25 @@ def shatters(item, target, x, y):
     owner = my.thing_top_owner_id_get(item)
     if owner:
         if my.thing_is_player(owner):
-            my.thing_msg(owner, "Your potion of darkness shatters.")
+            my.thing_msg(owner, "Your potion of descent shatters.")
         else:
-            my.thing_msg(owner, f"The {my.thing_name_get(owner)}'s potion of darkness shatters.")
+            my.thing_msg(owner, f"The {my.thing_name_get(owner)}'s potion of descent shatters.")
     else:
-        my.thing_msg(item, "The potion of darkness shatters.")
+        my.thing_msg(item, "The potion of descent shatters.")
 
-    for it in my.level_flood_fill_gas_get_all_grid_things(item, x, y, 3):
-        my.spawn_darkness_around_thing(it, 1)
+    radius = my.thing_effect_radius_get(item)
+    # my.con("targeted {} {:X} at {} {} radius {}".format(my.thing_name_get(me), me, x, y, radius))
+
+    for dx in range(-radius, radius + 1):
+        for dy in range(-radius, radius + 1):
+            x1 = x + dx
+            y1 = y + dy
+            distance = (((x1 - x)**2 + (y1 - y)**2)**0.5)
+            if distance > radius + 0.5:
+                continue
+
+            my.place_at(item, "explosion_destroy_floor", x1, y1)
+
     my.thing_dead(item, "broken")
 
 
@@ -103,23 +117,22 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_use_do(self, "me.on_use()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.text_a_or_an(self, "a")
-    my.text_description_long2(self, "The darkness is so profound that not even other gasses may co-exist in the same tile.")
-    my.text_description_long(self, "A bubbling black elixir that will spawn a thick gas cloud of utter darkness when opened. Use this cloud to escape your enemies. Or to get thoroughly lost.")
-    my.text_description_short(self, "A potion of darkness.")
+    my.text_description_long(self, "A bubbling dark elixir that provides express access to the next level!")
+    my.text_description_short(self, "A potion of descent.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
 
     my.tile(self,
-            ascii_fg_char="!", ascii_bg_col_name="white", ascii_fg_col_name="black",
+            ascii_fg_char="!", ascii_bg_col_name="", ascii_fg_col_name="gray50",
             tile=name, delay_ms=500)
 
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="potion_darkness", text_long_name="potion of darkness", text_short_name="potion, darkness")
+    tp_init(name="potion_descent", text_long_name="potion of descent", text_short_name="potion, descent")
 
 
 init()

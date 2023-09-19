@@ -108,6 +108,11 @@ void Game::place_player(void)
         level->player->on_fire_set("");
       }
       if (0) {
+        auto w = level->thing_new("potion_descent", point(x, y));
+        t->carry(w, carry_options);
+        level->thing_new("dogman", point(x + 2, y));
+      }
+      if (0) {
         auto w = level->thing_new("potion_telepathy", point(x, y));
         t->carry(w, carry_options);
       }
@@ -117,6 +122,7 @@ void Game::place_player(void)
         t->carry(w, carry_options);
       }
       if (0) {
+        level->thing_new("potion_darkness", point(x + 2, y));
         auto w = level->thing_new("potion_darkness", point(x, y));
         level->thing_new("dogman", point(x + 2, y));
         t->carry(w, carry_options);
