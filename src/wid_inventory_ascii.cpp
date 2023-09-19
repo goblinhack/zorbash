@@ -32,15 +32,15 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
   }
 
   wid_inventory_fini(true /* remake */);
-  wid_inventory_thing_over     = over;
-  wid_inventory_thing_selected = selected;
+  wid_inventory_thing_over   = over;
+  wid_inventory_thing_select = selected;
 
-  if (wid_inventory_thing_selected) {
-    wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected set");
+  if (wid_inventory_thing_select) {
+    wid_inventory_thing_select->log("Inventory wid_inventory_thing_select set");
   }
 
   if (wid_inventory_thing_over) {
-    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected set");
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_select set");
   }
 
   auto box_style           = UI_WID_STYLE_HORIZ_DARK;
@@ -171,8 +171,8 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
             wid_set_color(wid_icon, WID_COLOR_TEXT_FG, tile->ascii_fg_col_value);
           }
 
-          if (wid_inventory_thing_selected) {
-            if (wid_inventory_thing_selected == t) {
+          if (wid_inventory_thing_select) {
+            if (wid_inventory_thing_select == t) {
               wid_set_style(wid_icon, UI_WID_STYLE_RED);
             }
           }
@@ -203,8 +203,8 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
             wid_set_text(wid_item, " " + std::to_string(slot + 1) + ". " + t->tp()->text_short_name());
           }
 
-          if (wid_inventory_thing_selected) {
-            if (wid_inventory_thing_selected == t) {
+          if (wid_inventory_thing_select) {
+            if (wid_inventory_thing_select == t) {
               wid_set_style(wid_item, UI_WID_STYLE_RED);
             }
           }
@@ -236,9 +236,9 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
     brx -= 3;
     bry -= 2;
     game->wid_thing_info_clear_popup();
-    if (wid_inventory_thing_selected) {
+    if (wid_inventory_thing_select) {
       wid_inventory_thing_info
-          = game->wid_thing_info_create_popup(wid_inventory_thing_selected, point(tlx, tly), point(brx, bry));
+          = game->wid_thing_info_create_popup(wid_inventory_thing_select, point(tlx, tly), point(brx, bry));
     } else if (wid_inventory_thing_over) {
       wid_inventory_thing_info
           = game->wid_thing_info_create_popup(wid_inventory_thing_over, point(tlx, tly), point(brx, bry));
@@ -251,8 +251,8 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
   // Highlight the thing we're over, or the selected thing with preference.
   //
   Thingp item = wid_inventory_thing_over;
-  if (wid_inventory_thing_selected) {
-    item = wid_inventory_thing_selected;
+  if (wid_inventory_thing_select) {
+    item = wid_inventory_thing_select;
   }
 
   if (item) {

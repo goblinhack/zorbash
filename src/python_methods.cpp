@@ -2,6 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_py_game.hpp"
 #include "my_py_level.hpp"
 #include "my_py_thing.hpp"
 #include "my_py_tp.hpp"
@@ -20,6 +21,32 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(chance_d1000_thing_is_able_to_jump_randomly),
     MY_ADD_PYTHON_FUNCTION(chance_d1000_thing_is_able_to_teleport_self),
     MY_ADD_PYTHON_FUNCTION(chance_d1000_thing_is_steal_item),
+    MY_ADD_PYTHON_FUNCTION(game_set_currently_saving_snapshot),
+    MY_ADD_PYTHON_FUNCTION(game_set_request_reset_state_change),
+    MY_ADD_PYTHON_FUNCTION(game_set_request_to_remake_actionbar),
+    MY_ADD_PYTHON_FUNCTION(game_set_request_to_remake_buffbox),
+    MY_ADD_PYTHON_FUNCTION(game_set_request_to_remake_debuffbox),
+    MY_ADD_PYTHON_FUNCTION(game_set_request_to_remake_inventory),
+    MY_ADD_PYTHON_FUNCTION(game_set_request_to_remake_rightbar),
+    MY_ADD_PYTHON_FUNCTION(game_set_request_to_remake_skillbox),
+    MY_ADD_PYTHON_FUNCTION(game_set_request_to_remake_spellbox),
+    MY_ADD_PYTHON_FUNCTION(game_set_request_to_save_snapshot),
+    MY_ADD_PYTHON_FUNCTION(game_set_request_to_update_inventory_thing_over),
+    MY_ADD_PYTHON_FUNCTION(game_set_request_to_update_inventory_thing_select),
+    MY_ADD_PYTHON_FUNCTION(game_set_request_to_update_same_level),
+    MY_ADD_PYTHON_FUNCTION(game_unset_currently_saving_snapshot),
+    MY_ADD_PYTHON_FUNCTION(game_unset_request_reset_state_change),
+    MY_ADD_PYTHON_FUNCTION(game_unset_request_to_remake_actionbar),
+    MY_ADD_PYTHON_FUNCTION(game_unset_request_to_remake_buffbox),
+    MY_ADD_PYTHON_FUNCTION(game_unset_request_to_remake_debuffbox),
+    MY_ADD_PYTHON_FUNCTION(game_unset_request_to_remake_inventory),
+    MY_ADD_PYTHON_FUNCTION(game_unset_request_to_remake_rightbar),
+    MY_ADD_PYTHON_FUNCTION(game_unset_request_to_remake_skillbox),
+    MY_ADD_PYTHON_FUNCTION(game_unset_request_to_remake_spellbox),
+    MY_ADD_PYTHON_FUNCTION(game_unset_request_to_save_snapshot),
+    MY_ADD_PYTHON_FUNCTION(game_unset_request_to_update_inventory_thing_over),
+    MY_ADD_PYTHON_FUNCTION(game_unset_request_to_update_inventory_thing_select),
+    MY_ADD_PYTHON_FUNCTION(game_unset_request_to_update_same_level),
     MY_ADD_PYTHON_FUNCTION(level_ai_detect_secret_doors_at),
     MY_ADD_PYTHON_FUNCTION(level_ai_resent_count_at),
     MY_ADD_PYTHON_FUNCTION(level_ai_wanderer_at),

@@ -6655,11 +6655,11 @@ static void wid_handle_requests(void)
   //
   // Update the inventory if needed. This is valid in both normal and inventory states.
   //
-  if (game->request_to_update_inventory_with_thing_selected) {
+  if (game->request_to_update_inventory_thing_select) {
     DBG("Inventory: handle over selected thing");
-    wid_inventory_select(game->request_inventory_thing_selected);
-    game->request_inventory_thing_selected = nullptr;
-    game->unset_request_to_update_inventory_with_thing_selected();
+    wid_inventory_select(game->request_inventory_thing_select);
+    game->request_inventory_thing_select = nullptr;
+    game->unset_request_to_update_inventory_thing_select();
   }
 
   switch (game->state) {
@@ -6724,11 +6724,11 @@ static void wid_handle_requests(void)
       //
       // Update the inventory if needed
       //
-      if (game->request_to_update_inventory_with_thing_over) {
+      if (game->request_to_update_inventory_thing_over) {
         DBG2("Inventory: handle over thing");
         wid_inventory_over(game->request_inventory_thing_over);
         game->request_inventory_thing_over = nullptr;
-        game->unset_request_to_update_inventory_with_thing_over();
+        game->unset_request_to_update_inventory_thing_over();
       }
 
       if (game->request_to_remake_inventory) {

@@ -164,16 +164,16 @@ void Thing::destroy(void)
     game->request_inventory_thing_over = nullptr;
   }
 
-  if (game->request_inventory_thing_selected == this) {
-    game->request_inventory_thing_selected = nullptr;
+  if (game->request_inventory_thing_select == this) {
+    game->request_inventory_thing_select = nullptr;
   }
 
   if (wid_inventory_thing_over == this) {
     wid_inventory_thing_over = nullptr;
   }
 
-  if (wid_inventory_thing_selected == this) {
-    wid_inventory_thing_selected = nullptr;
+  if (wid_inventory_thing_select == this) {
+    wid_inventory_thing_select = nullptr;
   }
 
   for (const auto w : wid_thing_info_window) {

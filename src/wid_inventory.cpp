@@ -20,7 +20,7 @@ WidPopup *wid_inventory_thing_info;
 WidBag   *wid_inventory_bag;
 
 Thingp wid_inventory_thing_over;
-Thingp wid_inventory_thing_selected;
+Thingp wid_inventory_thing_select;
 
 int wid_inventory_tab = WID_INVENTORY_TAB_BAG1;
 
@@ -51,15 +51,15 @@ void wid_inventory_fini(bool remake)
     wid_inventory_bag = nullptr;
   }
 
-  if (wid_inventory_thing_selected) {
+  if (wid_inventory_thing_select) {
     DBG2("Close inventory; delete inventory thing selected");
-    wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected cleared");
+    wid_inventory_thing_select->log("Inventory wid_inventory_thing_select cleared");
   }
-  wid_inventory_thing_selected = nullptr;
+  wid_inventory_thing_select = nullptr;
 
   if (wid_inventory_thing_over) {
     DBG2("Close inventory; delete inventory thing over");
-    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected cleared");
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_select cleared");
   }
   wid_inventory_thing_over = nullptr;
 
@@ -213,15 +213,15 @@ uint8_t wid_inventory_item_option_use(Widp w, int x, int y, uint32_t button)
     return true;
   }
 
-  if (wid_inventory_thing_selected) {
-    wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected use");
+  if (wid_inventory_thing_select) {
+    wid_inventory_thing_select->log("Inventory wid_inventory_thing_select use");
   }
 
   if (wid_inventory_thing_over) {
-    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected use");
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_select use");
   }
 
-  auto what = wid_inventory_thing_selected;
+  auto what = wid_inventory_thing_select;
   if (! what) {
     what = wid_inventory_thing_over;
   }
@@ -258,15 +258,15 @@ uint8_t wid_inventory_item_option_unequip(Widp w, int x, int y, uint32_t button)
     return true;
   }
 
-  if (wid_inventory_thing_selected) {
-    wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected use");
+  if (wid_inventory_thing_select) {
+    wid_inventory_thing_select->log("Inventory wid_inventory_thing_select use");
   }
 
   if (wid_inventory_thing_over) {
-    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected use");
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_select use");
   }
 
-  auto what = wid_inventory_thing_selected;
+  auto what = wid_inventory_thing_select;
   if (! what) {
     what = wid_inventory_thing_over;
   }
@@ -313,15 +313,15 @@ uint8_t wid_inventory_item_option_use_radial(Widp w, int x, int y, uint32_t butt
     return true;
   }
 
-  if (wid_inventory_thing_selected) {
-    wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected select");
+  if (wid_inventory_thing_select) {
+    wid_inventory_thing_select->log("Inventory wid_inventory_thing_select select");
   }
 
   if (wid_inventory_thing_over) {
-    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected select");
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_select select");
   }
 
-  auto what = wid_inventory_thing_selected;
+  auto what = wid_inventory_thing_select;
   if (! what) {
     what = wid_inventory_thing_over;
   }
@@ -360,15 +360,15 @@ uint8_t wid_inventory_item_option_eat(Widp w, int x, int y, uint32_t button)
     return true;
   }
 
-  if (wid_inventory_thing_selected) {
-    wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected eat");
+  if (wid_inventory_thing_select) {
+    wid_inventory_thing_select->log("Inventory wid_inventory_thing_select eat");
   }
 
   if (wid_inventory_thing_over) {
-    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected eat");
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_select eat");
   }
 
-  auto what = wid_inventory_thing_selected;
+  auto what = wid_inventory_thing_select;
   if (! what) {
     what = wid_inventory_thing_over;
   }
@@ -406,15 +406,15 @@ uint8_t wid_inventory_item_option_throw(Widp w, int x, int y, uint32_t button)
     return true;
   }
 
-  if (wid_inventory_thing_selected) {
-    wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected throw");
+  if (wid_inventory_thing_select) {
+    wid_inventory_thing_select->log("Inventory wid_inventory_thing_select throw");
   }
 
   if (wid_inventory_thing_over) {
-    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected throw");
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_select throw");
   }
 
-  auto what = wid_inventory_thing_selected;
+  auto what = wid_inventory_thing_select;
   if (! what) {
     what = wid_inventory_thing_over;
   }
@@ -451,15 +451,15 @@ uint8_t wid_inventory_item_option_drop(Widp w, int x, int y, uint32_t button)
     return true;
   }
 
-  if (wid_inventory_thing_selected) {
-    wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected drop");
+  if (wid_inventory_thing_select) {
+    wid_inventory_thing_select->log("Inventory wid_inventory_thing_select drop");
   }
 
   if (wid_inventory_thing_over) {
-    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected drop");
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_select drop");
   }
 
-  auto what = wid_inventory_thing_selected;
+  auto what = wid_inventory_thing_select;
   if (! what) {
     what = wid_inventory_thing_over;
   }
@@ -482,13 +482,13 @@ uint8_t wid_inventory_item_option_drop(Widp w, int x, int y, uint32_t button)
     wid_inventory_fini();
   }
 
-  if (wid_inventory_thing_selected) {
-    wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected post drop");
+  if (wid_inventory_thing_select) {
+    wid_inventory_thing_select->log("Inventory wid_inventory_thing_select post drop");
   }
-  wid_inventory_thing_selected = nullptr;
+  wid_inventory_thing_select = nullptr;
 
   if (wid_inventory_thing_over) {
-    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected port drop");
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_select port drop");
   }
   wid_inventory_thing_over = nullptr;
 
@@ -529,7 +529,7 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
       return true;
     }
 
-    if (wid_inventory_thing_selected) {
+    if (wid_inventory_thing_select) {
       DBG2("Inventory: Unselect thing");
       wid_inventory_select_requested(nullptr);
       //
@@ -707,7 +707,7 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
                     return true;
                   }
 
-                  if (wid_inventory_thing_selected) {
+                  if (wid_inventory_thing_select) {
                     wid_inventory_select_requested(nullptr);
                     return true;
                   }
@@ -733,20 +733,20 @@ void wid_inventory_over_requested(Thingp over)
     over->log("Inventory over this thing");
   }
   game->request_inventory_thing_over = over;
-  game->set_request_to_update_inventory_with_thing_over();
+  game->set_request_to_update_inventory_thing_over();
 }
 
 void wid_inventory_select_requested(Thingp selected)
 {
   TRACE_NO_INDENT();
-  if (selected == wid_inventory_thing_selected) {
+  if (selected == wid_inventory_thing_select) {
     return;
   }
   if (selected) {
     selected->log("Inventory over this thing");
   }
-  game->request_inventory_thing_selected = selected;
-  game->set_request_to_update_inventory_with_thing_selected();
+  game->request_inventory_thing_select = selected;
+  game->set_request_to_update_inventory_thing_select();
 }
 
 bool wid_inventory_over(Thingp over)
@@ -761,47 +761,47 @@ bool wid_inventory_over(Thingp over)
   if (over) {
     if (! over->immediate_owner()) {
       DBG2("Inventory: over item was dropped in the interim");
-      over                         = nullptr;
-      wid_inventory_thing_selected = nullptr;
-      wid_inventory_thing_over     = nullptr;
+      over                       = nullptr;
+      wid_inventory_thing_select = nullptr;
+      wid_inventory_thing_over   = nullptr;
     }
   }
 
-  if (wid_inventory_thing_selected) {
-    wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected over");
+  if (wid_inventory_thing_select) {
+    wid_inventory_thing_select->log("Inventory wid_inventory_thing_select over");
   }
 
   if (wid_inventory_thing_over) {
-    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected over");
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_select over");
   }
 
   DBG2("Inventory: create inventory for this thing");
-  return wid_inventory_create(wid_inventory_thing_selected, over);
+  return wid_inventory_create(wid_inventory_thing_select, over);
 }
 
 bool wid_inventory_select(Thingp selected)
 {
   DBG2("Inventory: select");
   TRACE_NO_INDENT();
-  if (selected == wid_inventory_thing_selected) {
+  if (selected == wid_inventory_thing_select) {
     return true;
   }
 
   if (selected) {
     if (! selected->immediate_owner()) {
       DBG2("Inventory: selected item was dropped in the interim");
-      selected                     = nullptr;
-      wid_inventory_thing_selected = nullptr;
-      wid_inventory_thing_over     = nullptr;
+      selected                   = nullptr;
+      wid_inventory_thing_select = nullptr;
+      wid_inventory_thing_over   = nullptr;
     }
   }
 
-  if (wid_inventory_thing_selected) {
-    wid_inventory_thing_selected->log("Inventory wid_inventory_thing_selected create");
+  if (wid_inventory_thing_select) {
+    wid_inventory_thing_select->log("Inventory wid_inventory_thing_select create");
   }
 
   if (wid_inventory_thing_over) {
-    wid_inventory_thing_over->log("Inventory wid_inventory_thing_selected create");
+    wid_inventory_thing_over->log("Inventory wid_inventory_thing_select create");
   }
 
   return wid_inventory_create(selected, wid_inventory_thing_over);
@@ -858,7 +858,7 @@ uint8_t wid_slot_item_mouse_up(Widp w, int x, int y, uint32_t button)
     return true;
   }
 
-  if (wid_inventory_thing_selected == t) {
+  if (wid_inventory_thing_select == t) {
     wid_inventory_select_requested(nullptr);
   } else {
     wid_inventory_select_requested(t);
@@ -901,8 +901,8 @@ void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, const c
     }
 
     wid_set_style(w, UI_WID_STYLE_DARK);
-    if (wid_inventory_thing_selected) {
-      if (wid_inventory_thing_selected == t) {
+    if (wid_inventory_thing_select) {
+      if (wid_inventory_thing_select == t) {
         wid_set_style(w, UI_WID_STYLE_RED);
       }
     }

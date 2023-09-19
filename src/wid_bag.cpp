@@ -59,7 +59,7 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
     wid_set_pos(w, tl, br);
     wid_set_style(w, UI_WID_STYLE_DARK);
 
-    if (t == wid_inventory_thing_selected) {
+    if (t == wid_inventory_thing_select) {
       wid_set_style(w, UI_WID_STYLE_RED);
     }
 
@@ -586,7 +586,7 @@ uint8_t wid_bag_item_mouse_up(Widp w, int x, int y, uint32_t button)
     return false;
   }
 
-  if (wid_inventory_thing_selected == t) {
+  if (wid_inventory_thing_select == t) {
     wid_inventory_select_requested(nullptr);
   } else {
     wid_inventory_select_requested(t);

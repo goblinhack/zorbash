@@ -92,20 +92,20 @@ void Game::set_currently_saving_snapshot(void)
   currently_saving_snapshot = true;
 }
 
-void Game::set_request_to_update_inventory_with_thing_over(void)
+void Game::set_request_to_update_inventory_thing_over(void)
 {
-  if (request_to_update_inventory_with_thing_over)
+  if (request_to_update_inventory_thing_over)
     return;
-  DBG("Set request_to_update_inventory_with_thing_over");
-  request_to_update_inventory_with_thing_over = true;
+  DBG("Set request_to_update_inventory_thing_over");
+  request_to_update_inventory_thing_over = true;
 }
 
-void Game::set_request_to_update_inventory_with_thing_selected(void)
+void Game::set_request_to_update_inventory_thing_select(void)
 {
-  if (request_to_update_inventory_with_thing_selected)
+  if (request_to_update_inventory_thing_select)
     return;
-  DBG("Set request_to_update_inventory_with_thing_selected");
-  request_to_update_inventory_with_thing_selected = true;
+  DBG("Set request_to_update_inventory_thing_select");
+  request_to_update_inventory_thing_select = true;
 }
 
 void Game::unset_request_reset_state_change(void)
@@ -196,18 +196,18 @@ void Game::unset_currently_saving_snapshot(void)
   currently_saving_snapshot = false;
 }
 
-void Game::unset_request_to_update_inventory_with_thing_over(void)
+void Game::unset_request_to_update_inventory_thing_over(void)
 {
-  if (! request_to_update_inventory_with_thing_over)
+  if (! request_to_update_inventory_thing_over)
     return;
-  DBG("Unset request_to_update_inventory_with_thing_over");
-  request_to_update_inventory_with_thing_over = false;
+  DBG("Unset request_to_update_inventory_thing_over");
+  request_to_update_inventory_thing_over = false;
 }
 
-void Game::unset_request_to_update_inventory_with_thing_selected(void)
+void Game::unset_request_to_update_inventory_thing_select(void)
 {
-  if (! request_to_update_inventory_with_thing_selected)
+  if (! request_to_update_inventory_thing_select)
     return;
-  DBG("Unset request_to_update_inventory_with_thing_selected");
-  request_to_update_inventory_with_thing_selected = false;
+  DBG("Unset request_to_update_inventory_thing_select");
+  request_to_update_inventory_thing_select = false;
 }

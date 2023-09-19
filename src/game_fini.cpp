@@ -79,28 +79,28 @@ void Game::fini(void)
   request_to_choose_level = {};
 
   // begin sort marker3 {
-  currently_saving_snapshot                       = {};
-  request_player_move_down                        = {};
-  request_player_move_left                        = {};
-  request_player_move_right                       = {};
-  request_player_move_up                          = {};
-  request_player_to_ascend_level                  = {};
-  request_player_to_descend_level                 = {};
-  request_player_to_wait_or_collect               = {};
-  request_recreate_cursor_path                    = {};
-  request_reset_state_change                      = {};
-  request_to_remake_actionbar                     = {};
-  request_to_remake_buffbox                       = {};
-  request_to_remake_debuffbox                     = {};
-  request_to_remake_inventory                     = {};
-  request_to_remake_rightbar                      = {};
-  request_to_remake_skillbox                      = {};
-  request_to_remake_spellbox                      = {};
-  request_to_save_snapshot                        = {};
-  request_to_toggle_gfx                           = {};
-  request_to_update_inventory_with_thing_over     = {};
-  request_to_update_inventory_with_thing_selected = {};
-  request_to_update_same_level                    = {};
+  currently_saving_snapshot                = {};
+  request_player_move_down                 = {};
+  request_player_move_left                 = {};
+  request_player_move_right                = {};
+  request_player_move_up                   = {};
+  request_player_to_ascend_level           = {};
+  request_player_to_descend_level          = {};
+  request_player_to_wait_or_collect        = {};
+  request_recreate_cursor_path             = {};
+  request_reset_state_change               = {};
+  request_to_remake_actionbar              = {};
+  request_to_remake_buffbox                = {};
+  request_to_remake_debuffbox              = {};
+  request_to_remake_inventory              = {};
+  request_to_remake_rightbar               = {};
+  request_to_remake_skillbox               = {};
+  request_to_remake_spellbox               = {};
+  request_to_save_snapshot                 = {};
+  request_to_toggle_gfx                    = {};
+  request_to_update_inventory_thing_over   = {};
+  request_to_update_inventory_thing_select = {};
+  request_to_update_same_level             = {};
   // end sort marker3 }
 
   //
@@ -123,8 +123,8 @@ void Game::fini(void)
   //
   // Which inventory items are we over.
   //
-  request_inventory_thing_over     = {};
-  request_inventory_thing_selected = {};
+  request_inventory_thing_over   = {};
+  request_inventory_thing_select = {};
 
   //
   // Projectile or laser we're firing

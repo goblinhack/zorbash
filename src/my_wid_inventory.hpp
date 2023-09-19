@@ -43,7 +43,7 @@ extern class WidPopup *wid_inventory_tp_info;
 extern class Wid      *wid_inventory_window;
 
 extern Thingp wid_inventory_thing_over;
-extern Thingp wid_inventory_thing_selected;
+extern Thingp wid_inventory_thing_select;
 
 extern int wid_inventory_tab;
 

@@ -458,8 +458,8 @@ public:
   bool request_to_remake_spellbox {};
   bool request_to_save_snapshot {}; // Something has requested a game snapshot
   bool request_to_toggle_gfx {};
-  bool request_to_update_inventory_with_thing_over {};
-  bool request_to_update_inventory_with_thing_selected {};
+  bool request_to_update_inventory_thing_over {};
+  bool request_to_update_inventory_thing_select {};
   bool request_to_update_same_level {};
   // end sort marker3 }
 
@@ -484,7 +484,7 @@ public:
   // Which inventory items are we over.
   //
   Thingp request_inventory_thing_over {};
-  Thingp request_inventory_thing_selected {};
+  Thingp request_inventory_thing_select {};
 
   //
   // Projectile or laser we're firing
@@ -634,8 +634,8 @@ public:
   void set_request_to_remake_skillbox(void);
   void set_request_to_remake_spellbox(void);
   void set_request_to_save_snapshot(void);
-  void set_request_to_update_inventory_with_thing_over(void);
-  void set_request_to_update_inventory_with_thing_selected(void);
+  void set_request_to_update_inventory_thing_over(void);
+  void set_request_to_update_inventory_thing_select(void);
   void set_request_to_update_same_level(void);
   void set_seed(void);
   void start(void);
@@ -653,8 +653,8 @@ public:
   void unset_request_to_remake_skillbox(void);
   void unset_request_to_remake_spellbox(void);
   void unset_request_to_save_snapshot(void);
-  void unset_request_to_update_inventory_with_thing_over(void);
-  void unset_request_to_update_inventory_with_thing_selected(void);
+  void unset_request_to_update_inventory_thing_over(void);
+  void unset_request_to_update_inventory_thing_select(void);
   void unset_request_to_update_same_level(void);
   void wid_choose_avatar_select(void);
   void wid_choose_from_skill_tree(std::string tree_name);

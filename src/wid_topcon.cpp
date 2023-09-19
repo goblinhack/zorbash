@@ -311,7 +311,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
         return true;
       }
 
-      if (wid_inventory_thing_selected) {
+      if (wid_inventory_thing_select) {
         DBG2("Inventory: Unselect thing");
         wid_inventory_select_requested(nullptr);
         return true;
