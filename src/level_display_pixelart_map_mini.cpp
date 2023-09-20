@@ -10,7 +10,15 @@
 
 void Level::display_pixelart_map_mini(void)
 {
-  if (unlikely(player && player->blinded_count())) {
+  if (! player) {
+    return;
+  }
+
+  if (player->stat_psi_total() > 10) {
+    //
+    // Can see monsters even when blinded.
+    //
+  } else if (player->blinded_count()) {
     //
     // No minimap when blinded. Too cruel?
     //

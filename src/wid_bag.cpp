@@ -96,6 +96,9 @@ static void wid_bag_add_items(Widp wid_bag_container, Thingp bag)
         text += tile->ascii_fg_char;
         wid_set_text(w, text);
         wid_set_color(w, WID_COLOR_TEXT_FG, tile->ascii_fg_col_value);
+        if (tile->ascii_bg_col_value != FCOLOR_NONE) {
+          wid_set_color(w, WID_COLOR_TEXT_BG, tile->ascii_bg_col_value);
+        }
       }
     } else {
       wid_set_tile(TILE_LAYER_FG_0, w, tile);

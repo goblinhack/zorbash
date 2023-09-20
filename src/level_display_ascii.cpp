@@ -104,6 +104,13 @@ void Level::display_ascii_treasure_map(point tl, point br)
     return;
   }
 
+  //
+  // You can only "see" yourself when blinded.
+  //
+  if (player->blinded_count()) {
+    return;
+  }
+
   if (player->map_treasure_available()) {
     for (auto z = (int) 0; z < MAP_DEPTH; z++) {
       for (auto y = miny; y < maxy; y++) {
@@ -136,6 +143,17 @@ void Level::display_ascii_beast_map(point tl, point br)
   TRACE_NO_INDENT();
 
   if (! player) {
+    return;
+  }
+
+  if (player->stat_psi_total() > 10) {
+    //
+    // Can see monsters even when blinded.
+    //
+  } else if (player->blinded_count()) {
+    //
+    // You can only "see" yourself when blinded.
+    //
     return;
   }
 
@@ -225,6 +243,16 @@ void Level::display_ascii_map(point tl, point br)
           if (t->gfx_ascii_animated) {
             t->animate();
           }
+
+          //
+          // You can only "see" yourself when blinded.
+          //
+          if (unlikely(player && player->blinded_count())) {
+            if (! t->is_player()) {
+              continue;
+            }
+          }
+
           t->blit_ascii(tl, br, p);
         }
         FOR_ALL_THINGS_END()

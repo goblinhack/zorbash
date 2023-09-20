@@ -542,18 +542,6 @@ void Thing::blit_ascii(point tl, point br, point p, bool left_bar)
   auto tpp  = tp();
   auto blit = true;
 
-  //
-  // You can only "see" yourself when blinded.
-  //
-  //
-  // You can only "see" yourself when blinded.
-  //
-  if (unlikely(level->player && level->player->blinded_count())) {
-    if (! is_player()) {
-      blit = false;
-    }
-  }
-
   if (unlikely(is_changing_level)) {
     blit = false;
   } else if (unlikely(is_hidden)) {
