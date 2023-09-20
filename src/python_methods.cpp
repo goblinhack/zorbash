@@ -355,6 +355,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_blinded_count),
     MY_ADD_PYTHON_FUNCTION(thing_blinded_count_decr),
     MY_ADD_PYTHON_FUNCTION(thing_blinded_count_incr),
+    MY_ADD_PYTHON_FUNCTION(thing_blinded_count_set),
     MY_ADD_PYTHON_FUNCTION(thing_buff_add),
     MY_ADD_PYTHON_FUNCTION(thing_buff_remove),
     MY_ADD_PYTHON_FUNCTION(thing_carry),
