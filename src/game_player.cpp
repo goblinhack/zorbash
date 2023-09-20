@@ -113,6 +113,12 @@ void Game::place_player(void)
         level->thing_new("dogman", point(x + 2, y));
       }
       if (0) {
+        auto w = level->thing_new("potion_immolation", point(x, y));
+        t->carry(w, carry_options);
+        level->thing_new("dogman", point(x + 2, y));
+        level->thing_new("water", point(x + 1, y));
+      }
+      if (0) {
         auto w = level->thing_new("potion_telepathy", point(x, y));
         t->carry(w, carry_options);
       }

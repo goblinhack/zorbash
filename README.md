@@ -10,7 +10,7 @@
 <!-- DONE Potion of Fire Immunity - Make you immune to fire/burning/lava, but not explosions.                                                     -->
 <!-- DONE Potion of Telepathy - Allows you to see the location of most enemies, and see whatever they can see.                                    -->
 <!-- DONE Potion of Descent - Instantly erodes an area of the floor. Nearby monsters/objects will fall to the next level.                         -->
-<!-- TODO Potion of Incineration - Bursts into cloud of flames. Sets nearby monsters and terrain on fire.                                         -->
+<!-- DONE Potion of Incineration - Bursts into cloud of flames. Sets nearby monsters and terrain on fire.                                         -->
 <!-- TODO Potion of Creeping Death - Unleashes a spreading fungus that inflicts poisoning when stepped upon.                                      -->
 <!-- TODO Potion of Confusion - Produces a cloud of confusion gas.                                                                                -->
 <!-- TODO Potion of Hallucination - Causes long term hal                                                                                          -->
@@ -698,9 +698,9 @@ Other content
 - 23 x items
 - 20 x spells
 - 17 x weapons
-- 16 x buffs
+- 17 x buffs
 - 11 x skills
-- 10 x potions
+- 11 x potions
 - 8 x debuffs
 - 6 x traps
 - 6 x staffs
