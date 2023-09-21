@@ -342,16 +342,16 @@ Bestiary
 | Demon Goat | B/rare | 103 | 2d6+2 | 1 |  | Fire<br />Necrosis<br />Poison<br /> |
 | Giant Piranha | B/v-rare | 101 | 1d10+3 | 1 | Bite:1d8<br /> | Water<br /> |
 | Giant Battle Duck | C/v-rare | 96 | 1d8+4 | 1 | Bite:1d10<br />Claw:1d6<br /> | Water<br /> |
-| Mimic | B/common | 91 | 1d8+4 | 1 |  | Water<br /> |
+| Hungry Treasure Chest Mimic | B/common | 91 | 1d8+4 | 1 |  | Water<br /> |
 | Treasure Chest | B/common | 91 | 1d8+4 | 1 |  | Water<br /> |
 | Mantisman | B/uncommon | 85 | 1d12+8 | 1 |  |  |
-| Cuddly Electric Eel | B/rare | 83 | 1d3+1 | 1 | Bite:1d4<br /> | Electricity<br />Water<br /> |
+| Electric Eel | B/rare | 83 | 1d3+1 | 1 | Bite:1d4<br /> | Electricity<br />Water<br /> |
 | Dreadfire Snake | C/rare | 81 | 1d3+1 | 1 | Poison:1d4<br /> | Webs<br />Water<br /> |
 | Zorblin Priest | B/common | 78 | 1d6+2 | 1 |  |  |
 | Flux Spider | B/uncommon | 77 | 1d3 | 1 | Necrotic:1<br />Poison:1d4<br /> | Cold<br />Necrosis<br />Poison<br />Webs<br /> |
 | Zorblin Pirate | B/common | 76 | 1d4+2 | 1 |  |  |
 | Zorblin Leader | B/common | 76 | 1d4+2 | 1 |  |  |
-| White Assassin Duck | B/v-rare | 75 | 1d6+1 | 1 | Bite:1d8<br />Claw:1d6<br /> | Water<br /> |
+| Assassin Duck | B/v-rare | 75 | 1d6+1 | 1 | Bite:1d8<br />Claw:1d6<br /> | Water<br /> |
 | Gaseous Gloat | B/common | 74 | 1d20 | 1 | Digest:1d40<br /> |  |
 | Gargoyle Baby | C/common | 74 | 1d6 | 1 |  | Cold<br />Necrosis<br />Poison<br />Draining<br />Water<br /> |
 | Hellpup | B/rare | 73 | 1d6+2 | 1 |  | Cold<br />Fire<br />Necrosis<br />Poison<br />Draining<br /> |
@@ -368,7 +368,7 @@ Bestiary
 | Pyrolizard | B/common | 63 | 1d6+1 | 1 |  | Fire<br /> |
 | Molekin | A/uncommon | 63 | 1d4+2 | 1 |  | Water<br /> |
 | Gnome Knight | B/common | 62 | 1d6+1 | 1 |  | Poison<br /> |
-| Zorblin Necromancer | B/common | 62 | 1d4+2 | 1 |  |  |
+| Zorblomancer | B/common | 62 | 1d4+2 | 1 |  |  |
 | Zorblin Eldster | B/common | 62 | 1d4+2 | 1 |  |  |
 | Carcass Creeper | A/common | 60 | 1d6+2 | 1 | Bite:1d8<br />Claw:1d6<br />Poison:1d10<br /> | Poison<br /> |
 | Zoblin | A/common | 60 | 1d6 | 1 |  | Cold<br />Necrosis<br />Poison<br />Draining<br /> |
