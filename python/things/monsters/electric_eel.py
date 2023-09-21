@@ -172,7 +172,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="electric_eel", text_long_name="cuddly electric eel")
+    tp_init(name="electric_eel", text_long_name="electric eel")
 
 
 init()

@@ -55,7 +55,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="trap_pressure_plate_gas2", text_long_name="inconspicuous floor tile")
+    tp_init(name="trap_pressure_plate_gas2", text_long_name="uneven floor tile")
 
 
 init()

@@ -55,7 +55,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="trap_monster", text_long_name="inconspicuous floor tile")
+    tp_init(name="trap_monster", text_long_name="uneven floor tile")
 
 
 init()

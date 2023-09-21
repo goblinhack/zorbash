@@ -174,7 +174,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="duck2", text_long_name="white assassin duck")
+    tp_init(name="duck2", text_long_name="assassin duck")
 
 
 init()

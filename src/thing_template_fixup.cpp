@@ -71,9 +71,16 @@ void tp_fixup(void)
     if (tp->is_item()) {
       if (! tp->is_collected_as_keys() && ! tp->is_collected_as_gold()) {
         if (tp->text_short_name().size() > UI_LEFTBAR_WIDTH) {
-          DIE("Tp %s short name [%s] is too long and will be truncated (max %d)?", tp->name().c_str(),
-              tp->text_short_name().c_str(), UI_LEFTBAR_WIDTH);
+          DIE("Tp %s short name [%s] long name [%s] is too long and will be truncated (max %d)?", tp->name().c_str(),
+              tp->text_short_name().c_str(), tp->text_long_name().c_str(), UI_LEFTBAR_WIDTH);
         }
+      }
+    }
+
+    if (tp->is_described_in_leftbar()) {
+      if (tp->text_short_name().size() > UI_LEFTBAR_WIDTH) {
+        DIE("Tp %s short name [%s] long name [%s] is too long and will be truncated (max %d)?", tp->name().c_str(),
+            tp->text_short_name().c_str(), tp->text_long_name().c_str(), UI_LEFTBAR_WIDTH);
       }
     }
 

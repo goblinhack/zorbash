@@ -10,8 +10,8 @@ def on_open(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_IMPACT, "door_stone")
 
 
-def tp_init(name, text_long_name):
-    self = tp.Tp(name, text_long_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_reflection(self, True)
@@ -27,7 +27,6 @@ def tp_init(name, text_long_name):
     my.is_biome_swamp(self, True)
     my.is_cursor_can_hover_over(self, True)
     my.is_cursor_path_blocker(self, True)
-    my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_gas_blocker(self, True)
     my.is_interesting(self, True)
@@ -103,7 +102,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="door_secret", text_long_name="inconspicious dungeon wall")
+    tp_init(name="door_secret", text_long_name="uneven dungeon wall", text_short_name="dungeon wall")
 
 
 init()

@@ -23,8 +23,8 @@ def on_death(me, x, y):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
 
-def tp_init(name, text_long_name):
-    self = tp.Tp(name, text_long_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.aggression_pct(self, 100)
     my.ai_resent_count(self, 90)
@@ -162,7 +162,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="scorpion_death", text_long_name="deathstalker scorpion")
+    tp_init(name="scorpion_death", text_long_name="deathstalker scorpion", text_short_name="deathstalker")
 
 
 init()

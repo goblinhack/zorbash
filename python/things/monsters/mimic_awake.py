@@ -23,8 +23,8 @@ def on_death(me, x, y):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
 
-def tp_init(name, test_short_name, text_long_name):
-    self = tp.Tp(name, test_short_name, text_long_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.aggression_pct(self, 100)
     my.ai_resent_count(self, 100)
@@ -161,7 +161,7 @@ def tp_init(name, test_short_name, text_long_name):
 
 
 def init():
-    tp_init(name="mimic_awake", test_short_name="mimic", text_long_name="hungry treasure chest mimic")
+    tp_init(name="mimic_awake", text_short_name="mimic", text_long_name="hungry treasure chest mimic")
 
 
 init()

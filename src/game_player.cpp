@@ -640,8 +640,8 @@ void Game::place_player(void)
       }
 
       if (0) {
-        level->thing_new("belcher", point(x - 1, y));
-        level->thing_new("spider_flux", point(x - 1, y - 1));
+        // level->thing_new("belcher", point(x - 1, y));
+        // level->thing_new("spider_flux", point(x - 1, y - 1));
         // level->thing_new("spider_bone", point(x + 2, y + 3));
         // level->thing_new("crab_sewer", point(x + 3, y + 3));
         // level->thing_new("sheep", point(x + 1, y + 3));
