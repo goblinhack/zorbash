@@ -62,7 +62,19 @@ do_retry:
   // Try to clean up some slots
   //
   if (retry < MAP_SLOTS) {
-    t->log("Out of thing slots at map (%d,%d) for put of %" PRIX32 ", try to cleanup", x, y, id.id);
+    t->log("Out of thing slots at map (%d,%d) for put of %" PRIX32 ", current content", x, y, id.id);
+    for (auto slot = 0; slot < MAP_SLOTS; slot++) {
+      auto idp = &getref(all_things_id_at, x, y, slot);
+      if (idp->id) {
+        auto t = thing_find(*idp);
+        if (unlikely(! t)) {
+          continue;
+        }
+        t->log("- slot %u", slot);
+      }
+    }
+
+    t->log("Out of thing slots at map (%d,%d) for put of %" PRIX32 ", try to cleanup, retry %d", x, y, id.id, retry);
     for (auto slot = 0; slot < MAP_SLOTS; slot++) {
       auto idp = &getref(all_things_id_at, x, y, slot);
       if (idp->id) {
@@ -101,6 +113,8 @@ do_retry:
     }
   }
   t->err("Out of thing slots at map (%d,%d) for put of %" PRIX32 "", x, y, id.id);
+
+  IF_DEBUG { DIE("Out of slots after a number of retries"); }
 }
 
 void Level::put_thing(point p, ThingId id) { put_thing(p.x, p.y, id); }
