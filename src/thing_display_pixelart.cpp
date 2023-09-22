@@ -1025,6 +1025,9 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
 
   glcolor(c);
 
+  bool square_outline = tpp->gfx_pixelart_show_square_outlined();
+  bool outline        = tpp->gfx_pixelart_show_outlined() || square_outline;
+
   auto wobble = update_wobble();
   if (wobble != 0.0) {
     auto mid = (blit_tl + blit_br) / (short) 2;
@@ -1035,9 +1038,6 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
     glRotatef(wobble, 0.0f, 0.0f, 1.0f);
     glTranslatef(-mid.x, -mid.y, 0);
   }
-
-  bool square_outline = tpp->gfx_pixelart_show_square_outlined();
-  bool outline        = tpp->gfx_pixelart_show_outlined() || square_outline;
 
   if (! g_render_monochrome) {
     if (blit_options->reflection) {
@@ -1059,7 +1059,7 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
             //
             // Avoid foliage floating one pixel above the water
             //
-            if (tpp->gfx_pixelart_show_outlined()) {
+            if (outline) {
               blit_br.y -= 1;
               blit_tl.y -= 1;
             }

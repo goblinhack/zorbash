@@ -280,6 +280,12 @@ bool Thing::possible_to_attack(const Thingp victim)
           return true;
         }
       }
+    } else if (victim->is_undead()) {
+      //
+      // Avoids skeletons attacking each other!
+      //
+      dbg("Cannot attack undead: %s", victim->to_short_string().c_str());
+      return false;
     }
   }
 

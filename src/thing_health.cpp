@@ -145,7 +145,7 @@ int Thing::health_decr(int v)
 
   if (g_opt_test_dungeon) {
     if (is_player()) {
-      return info->health;
+      v /= 2;
     }
   }
 

@@ -19,7 +19,7 @@ void Level::chances_of_creating_set(void)
       for (auto monst_type = (int) MONST_ENVIRON_NORMAL; monst_type < MONST_ENVIRON_MAX; monst_type++) {
         d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_ANY ] = 1000;
         d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_A ]   = 1000;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_B ]   = 10;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_B ]   = 500;
         d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_C ]   = 10;
         d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_D ]   = 1;
         d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_E ]   = 1;
@@ -38,7 +38,7 @@ void Level::chances_of_creating_set(void)
       for (auto monst_type = (int) MONST_ENVIRON_NORMAL; monst_type < MONST_ENVIRON_MAX; monst_type++) {
         d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_ANY ] = 1000;
         d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_A ]   = 1000;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_B ]   = 100;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_B ]   = 1000;
         d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_C ]   = 10;
         d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_D ]   = 1;
         d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_E ]   = 1;
@@ -57,8 +57,8 @@ void Level::chances_of_creating_set(void)
       for (auto monst_type = (int) MONST_ENVIRON_NORMAL; monst_type < MONST_ENVIRON_MAX; monst_type++) {
         d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_ANY ] = 1000;
         d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_A ]   = 1000;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_B ]   = 500;
-        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_C ]   = 100;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_B ]   = 1000;
+        d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_C ]   = 500;
         d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_D ]   = 10;
         d1000_chance_creating_monst[ monst_type ][ MONST_CLASS_E ]   = 1;
       }

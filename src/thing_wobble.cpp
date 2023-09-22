@@ -28,12 +28,12 @@ float Thing::update_wobble(void)
     return 0.0;
   }
 
-  if (fabs(w) < 0.01) {
+  if (fabs(w) < 2.0) {
     return 0.0;
   }
 
   auto new_w = w;
-  new_w *= 0.99;
+  new_w *= 0.90;
   new_w = -new_w;
   wobble_set(new_w);
 

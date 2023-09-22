@@ -460,12 +460,10 @@ void Thing::is_stuck_update(void)
   //
   // Shake the web or block of ice or barrel...
   //
+  wobble(pcg_random_range(5, 20));
   TRACE_NO_INDENT();
   FOR_ALL_NON_INTERNAL_THINGS(level, t, curr_at.x, curr_at.y)
   {
-    if (t->is_player() || t->is_monst()) {
-      t->wobble(pcg_random_range(5, 20));
-    }
     if (t->is_spiderweb()) {
       t->wobble(5);
     }
