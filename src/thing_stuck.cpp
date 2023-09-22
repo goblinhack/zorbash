@@ -335,6 +335,13 @@ bool Thing::is_stuck_check(void)
       continue;
     }
 
+    //
+    // Don't get stuck under your fellow minion or mob spawner
+    //
+    if (is_friend(it) || same_mob(it)) {
+      continue;
+    }
+
     if (it->is_engulfer() || it->is_heavy()) {
       if (is_engulfer()) {
         //

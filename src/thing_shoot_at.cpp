@@ -211,7 +211,7 @@ bool Thing::shoot_at_target(void)
         //
         // Don't attack thy leader or follower
         //
-        if (same_leader_or_owner(victim) || is_friend(victim) || same_mob(victim)) {
+        if (is_friend(victim) || same_mob(victim)) {
           continue;
         }
 

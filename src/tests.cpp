@@ -25,7 +25,7 @@ void run_tests()
     DIE("end of save load test");
   }
 
-  if (g_opt_test_dungeon_gen) {
+  if (g_opt_test_dungeon) {
     dungeon_test();
   }
 }

@@ -391,7 +391,7 @@ void dmap_process_no_diagonals(Dmap *D, point tl, point br, bool place_border)
       dmap_print(D);
     }
     if (after - before > 0) {
-      if (! g_opt_test_dungeon_gen) {
+      if (! g_opt_test_dungeon) {
         LOG("DMAP took %u ms: tl %d,%d br %d %d", after - before, tl.x, tl.y, br.x, br.y);
       }
     }
@@ -638,7 +638,7 @@ void dmap_process_allow_diagonals(Dmap *D, point tl, point br, bool place_border
       dmap_print(D);
     }
     if (after - before > 0) {
-      if (! g_opt_test_dungeon_gen) {
+      if (! g_opt_test_dungeon) {
         LOG("DMAP took %u ms: tl %d,%d br %d %d", after - before, tl.x, tl.y, br.x, br.y);
       }
     }
@@ -910,7 +910,7 @@ void dmap_process_reverse_allow_diagonals(Dmap *D, point tl, point br, bool plac
       dmap_print(D);
     }
     if (after - before > 0) {
-      if (! g_opt_test_dungeon_gen) {
+      if (! g_opt_test_dungeon) {
         LOG("DMAP took %u ms: tl %d,%d br %d %d", after - before, tl.x, tl.y, br.x, br.y);
       }
     }

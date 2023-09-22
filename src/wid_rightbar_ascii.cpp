@@ -59,7 +59,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_text(w, s);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     myfree(s);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
@@ -79,7 +79,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_text(w, s);
     wid_set_shape_none(w);
     myfree(s);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
@@ -97,7 +97,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_pos(w, tl, br);
     wid_set_text(w, capitalise(player->title()));
     wid_set_shape_none(w);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
@@ -113,7 +113,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_pos(w, tl, br);
     wid_set_text(w, "Gold      Keys  ");
     wid_set_style(w, UI_WID_STYLE_NORMAL);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -132,7 +132,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_text_lhs(w, true);
     wid_set_shape_none(w);
     myfree(g);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
@@ -148,7 +148,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_pos(w, tl, br);
     wid_set_text(w, "Score     Move# ");
     wid_set_style(w, UI_WID_STYLE_NORMAL);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -167,7 +167,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_text_lhs(w, true);
     wid_set_shape_none(w);
     myfree(g);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
@@ -183,7 +183,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_pos(w, tl, br);
     wid_set_text(w, "(Blinded)");
     wid_set_style(w, UI_WID_STYLE_RED);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -196,7 +196,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_pos(w, tl, br);
     wid_set_text(w, "(Paralysis)");
     wid_set_style(w, UI_WID_STYLE_RED);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   } else if (player->stuck_count() > 1) {
@@ -208,7 +208,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_pos(w, tl, br);
     wid_set_text(w, "(Stuck)");
     wid_set_style(w, UI_WID_STYLE_RED);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   } else if (player->is_sleeping) {
@@ -220,7 +220,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_pos(w, tl, br);
     wid_set_text(w, "(Sleeping)");
     wid_set_style(w, UI_WID_STYLE_DARK);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -234,7 +234,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_pos(w, tl, br);
     wid_set_text(w, "Vitality");
     wid_set_style(w, UI_WID_STYLE_NORMAL);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -258,7 +258,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_tilename(TILE_LAYER_FG_0, w, icon);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -273,7 +273,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_text_lhs(w, true);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -291,7 +291,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_text_rhs(w, true);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -315,7 +315,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_tilename(TILE_LAYER_FG_0, w, icon);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -330,7 +330,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_text_lhs(w, true);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -348,7 +348,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_text_rhs(w, true);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -372,7 +372,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_tilename(TILE_LAYER_FG_0, w, icon);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -387,7 +387,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_text_lhs(w, true);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -405,7 +405,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_text_rhs(w, true);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_end);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -419,7 +419,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_pos(w, tl, br);
     wid_set_text(w, "Stats");
     wid_set_style(w, UI_WID_STYLE_NORMAL);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -441,7 +441,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
     wid_set_style(w, UI_WID_STYLE_NORMAL);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -455,7 +455,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_def_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
 
@@ -480,7 +480,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_att_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -494,7 +494,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_att_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
 
@@ -519,7 +519,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_str_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -533,7 +533,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_str_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
 
@@ -560,7 +560,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_con_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -574,7 +574,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_con_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
 
@@ -599,7 +599,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_dex_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -613,7 +613,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_dex_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
 
@@ -638,7 +638,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_luck_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -652,7 +652,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_luck_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
 
@@ -679,7 +679,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_thv_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -693,7 +693,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_thv_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
 
@@ -718,7 +718,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_psi_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -732,7 +732,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_psi_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
 
@@ -757,7 +757,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_int_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
     wid_set_color(w, WID_COLOR_TEXT_FG, WHITE);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -771,7 +771,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_shape_none(w);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_stat_int_b);
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
 
@@ -801,7 +801,7 @@ bool wid_rightbar_ascii_create(void)
     wid_set_pos(w, tl, br);
     wid_set_text(w, "Equipped");
     wid_set_style(w, UI_WID_STYLE_NORMAL);
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
   }
@@ -823,7 +823,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_on_mouse_over_begin(w, wid_rightbar_inventory_over_begin);
         wid_set_on_mouse_over_end(w, wid_rightbar_inventory_over_end);
         wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
-        if (g_opt_test_dungeon_gen) {
+        if (g_opt_test_dungeon) {
           wid_set_shape_none(w);
         }
         wid_update(w);
@@ -845,7 +845,7 @@ bool wid_rightbar_ascii_create(void)
       wid_set_pos(w, tl, br);
       wid_set_text(w, "Shortcuts");
       wid_set_style(w, UI_WID_STYLE_NORMAL);
-      if (g_opt_test_dungeon_gen) {
+      if (g_opt_test_dungeon) {
         wid_set_shape_none(w);
       }
     }
@@ -883,7 +883,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_on_mouse_over_begin(w, wid_rightbar_inventory_over_begin);
         wid_set_on_mouse_over_end(w, wid_rightbar_inventory_over_end);
         wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
-        if (g_opt_test_dungeon_gen) {
+        if (g_opt_test_dungeon) {
           wid_set_shape_none(w);
         }
         wid_update(w);
@@ -917,7 +917,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_pos(w, tl, br);
         wid_set_text(w, "Active Skills");
         wid_set_style(w, UI_WID_STYLE_NORMAL);
-        if (g_opt_test_dungeon_gen) {
+        if (g_opt_test_dungeon) {
           wid_set_shape_none(w);
         }
         wid_update(w);
@@ -940,7 +940,7 @@ bool wid_rightbar_ascii_create(void)
               wid_set_on_mouse_up(w, wid_skill_item_mouse_up);
               wid_set_text_lhs(w, true);
               wid_set_text(w, skill->text_short_and_state_capitalised());
-              if (g_opt_test_dungeon_gen) {
+              if (g_opt_test_dungeon) {
                 wid_set_shape_none(w);
               }
               wid_update(w);
@@ -977,7 +977,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_pos(w, tl, br);
         wid_set_text(w, "Inactive Skills");
         wid_set_style(w, UI_WID_STYLE_NORMAL);
-        if (g_opt_test_dungeon_gen) {
+        if (g_opt_test_dungeon) {
           wid_set_shape_none(w);
         }
         wid_update(w);
@@ -1000,7 +1000,7 @@ bool wid_rightbar_ascii_create(void)
               wid_set_on_mouse_up(w, wid_skill_item_mouse_up);
               wid_set_text_lhs(w, true);
               wid_set_text(w, skill->text_short_and_state_capitalised());
-              if (g_opt_test_dungeon_gen) {
+              if (g_opt_test_dungeon) {
                 wid_set_shape_none(w);
               }
               wid_update(w);
@@ -1037,7 +1037,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_pos(w, tl, br);
         wid_set_text(w, "Active Spells");
         wid_set_style(w, UI_WID_STYLE_NORMAL);
-        if (g_opt_test_dungeon_gen) {
+        if (g_opt_test_dungeon) {
           wid_set_shape_none(w);
         }
         wid_update(w);
@@ -1060,7 +1060,7 @@ bool wid_rightbar_ascii_create(void)
               wid_set_on_mouse_up(w, wid_spell_item_mouse_up);
               wid_set_text_lhs(w, true);
               wid_set_text(w, spell->text_short_and_state_capitalised());
-              if (g_opt_test_dungeon_gen) {
+              if (g_opt_test_dungeon) {
                 wid_set_shape_none(w);
               }
               wid_update(w);
@@ -1097,7 +1097,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_pos(w, tl, br);
         wid_set_text(w, "Inactive Spells");
         wid_set_style(w, UI_WID_STYLE_NORMAL);
-        if (g_opt_test_dungeon_gen) {
+        if (g_opt_test_dungeon) {
           wid_set_shape_none(w);
         }
         wid_update(w);
@@ -1120,7 +1120,7 @@ bool wid_rightbar_ascii_create(void)
               wid_set_on_mouse_up(w, wid_spell_item_mouse_up);
               wid_set_text_lhs(w, true);
               wid_set_text(w, spell->text_short_and_state_capitalised());
-              if (g_opt_test_dungeon_gen) {
+              if (g_opt_test_dungeon) {
                 wid_set_shape_none(w);
               }
               wid_update(w);
@@ -1153,7 +1153,7 @@ bool wid_rightbar_ascii_create(void)
         point br = make_point(width, y_at);
         wid_set_pos(w, tl, br);
         wid_set_text(w, "Buffs");
-        if (g_opt_test_dungeon_gen) {
+        if (g_opt_test_dungeon) {
           wid_set_shape_none(w);
         }
         wid_set_style(w, UI_WID_STYLE_NORMAL);
@@ -1180,7 +1180,7 @@ bool wid_rightbar_ascii_create(void)
             wid_set_on_mouse_over_begin(w, wid_buffbox_mouse_over_begin);
             wid_set_on_mouse_over_end(w, wid_buffbox_mouse_over_end);
             wid_set_int_context(w, idx++);
-            if (g_opt_test_dungeon_gen) {
+            if (g_opt_test_dungeon) {
               wid_set_shape_none(w);
             }
             wid_update(w);
@@ -1213,7 +1213,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_pos(w, tl, br);
         wid_set_text(w, "Debuffs");
         wid_set_style(w, UI_WID_STYLE_NORMAL);
-        if (g_opt_test_dungeon_gen) {
+        if (g_opt_test_dungeon) {
           wid_set_shape_none(w);
         }
       }
@@ -1239,7 +1239,7 @@ bool wid_rightbar_ascii_create(void)
             wid_set_on_mouse_over_begin(w, wid_debuffbox_mouse_over_begin);
             wid_set_on_mouse_over_end(w, wid_debuffbox_mouse_over_end);
             wid_set_int_context(w, idx++);
-            if (g_opt_test_dungeon_gen) {
+            if (g_opt_test_dungeon) {
               wid_set_shape_none(w);
             }
             wid_update(w);
@@ -1261,7 +1261,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_pos(w, tl, br);
         wid_set_text(w, "Status");
         wid_set_style(w, UI_WID_STYLE_NORMAL);
-        if (g_opt_test_dungeon_gen) {
+        if (g_opt_test_dungeon) {
           wid_set_shape_none(w);
         }
       }
@@ -1278,7 +1278,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Burning!");
-        if (g_opt_test_dungeon_gen) {
+        if (g_opt_test_dungeon) {
           wid_set_shape_none(w);
         }
         wid_update(w);
@@ -1296,7 +1296,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_color(w, WID_COLOR_TEXT_FG, LIGHTBLUE);
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Frozen!");
-        if (g_opt_test_dungeon_gen) {
+        if (g_opt_test_dungeon) {
           wid_set_shape_none(w);
         }
         wid_update(w);
@@ -1314,7 +1314,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Sleeping");
-        if (g_opt_test_dungeon_gen) {
+        if (g_opt_test_dungeon) {
           wid_set_shape_none(w);
         }
         wid_update(w);
@@ -1332,7 +1332,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_color(w, WID_COLOR_TEXT_FG, RED);
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Blinded!");
-        if (g_opt_test_dungeon_gen) {
+        if (g_opt_test_dungeon) {
           wid_set_shape_none(w);
         }
         wid_update(w);
@@ -1350,7 +1350,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_color(w, WID_COLOR_TEXT_FG, RED);
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Paralysis!");
-        if (g_opt_test_dungeon_gen) {
+        if (g_opt_test_dungeon) {
           wid_set_shape_none(w);
         }
         wid_update(w);
@@ -1367,7 +1367,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Stuck!");
-        if (g_opt_test_dungeon_gen) {
+        if (g_opt_test_dungeon) {
           wid_set_shape_none(w);
         }
         wid_update(w);
@@ -1385,7 +1385,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_color(w, WID_COLOR_TEXT_FG, RED);
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Exhausted");
-        if (g_opt_test_dungeon_gen) {
+        if (g_opt_test_dungeon) {
           wid_set_shape_none(w);
         }
         wid_update(w);
@@ -1402,7 +1402,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Tired");
-        if (g_opt_test_dungeon_gen) {
+        if (g_opt_test_dungeon) {
           wid_set_shape_none(w);
         }
         wid_update(w);
@@ -1420,7 +1420,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_color(w, WID_COLOR_TEXT_FG, RED);
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Critical");
-        if (g_opt_test_dungeon_gen) {
+        if (g_opt_test_dungeon) {
           wid_set_shape_none(w);
         }
         wid_update(w);
@@ -1437,7 +1437,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
         wid_set_text_lhs(w, true);
         wid_set_text(w, "Injured");
-        if (g_opt_test_dungeon_gen) {
+        if (g_opt_test_dungeon) {
           wid_set_shape_none(w);
         }
         wid_update(w);

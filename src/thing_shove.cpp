@@ -44,13 +44,8 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, ShoveOptions shove_o
     return (THING_SHOVE_NEVER_TRIED);
   }
 
-  if (is_friend(victim)) {
-    dbg("Not able to shove (same owner) %s", victim->to_short_string().c_str());
-    return (THING_SHOVE_NEVER_TRIED);
-  }
-
-  if (same_mob(victim)) {
-    dbg("Not able to shove (same master) %s", victim->to_short_string().c_str());
+  if (is_friend(victim) || same_mob(victim)) {
+    dbg("Not able to shove (friend) %s", victim->to_short_string().c_str());
     return (THING_SHOVE_NEVER_TRIED);
   }
 

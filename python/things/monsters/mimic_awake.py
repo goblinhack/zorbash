@@ -161,7 +161,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="mimic_awake", text_short_name="mimic", text_long_name="hungry treasure chest mimic")
+    tp_init(name="mimic_awake", text_short_name="mimic", text_long_name="treasure chest mimic")
 
 
 init()

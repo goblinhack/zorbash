@@ -512,6 +512,9 @@ bool Thing::is_obs_ai(Thingp it)
     // This lets you skip around mobs to avoid ghosts
     //
   } else {
+    //
+    // No walking through your fellow minions
+    //
     if (same_mob(it)) {
       if (debug && is_debug_type()) {
         con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);

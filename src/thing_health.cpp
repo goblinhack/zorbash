@@ -143,6 +143,10 @@ int Thing::health_decr(int v)
 
   auto info = infop();
 
+  if (g_opt_test_dungeon) {
+    return info->health;
+  }
+
   auto max_damage_per_tick = health_max() / 2;
   if (is_monst() || is_player()) {
     if (health_max() > 1) {

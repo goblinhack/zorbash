@@ -22,7 +22,7 @@ void Thing::log_(const char *fmt, va_list args)
   int  len = 0;
 
   buf[ 0 ] = '\0';
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     get_timestamp(buf, MAXLONGSTR);
     len = (int) strlen(buf);
   }
@@ -72,7 +72,7 @@ void Thing::die_(const char *fmt, va_list args)
   int  len = 0;
 
   buf[ 0 ] = '\0';
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     get_timestamp(buf, MAXLONGSTR);
     len = (int) strlen(buf);
   }
@@ -107,7 +107,7 @@ void Thing::con_(const char *fmt, va_list args)
   int  len = 0;
 
   buf[ 0 ] = '\0';
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     get_timestamp(buf, MAXLONGSTR);
     len = (int) strlen(buf);
   }
@@ -133,7 +133,7 @@ void Thing::topcon_(const char *fmt, va_list args)
   int  len = 0;
 
   buf[ 0 ] = '\0';
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     get_timestamp(buf, MAXLONGSTR);
     len = (int) strlen(buf);
   }
@@ -202,7 +202,7 @@ void Thing::err_(const char *fmt, va_list args)
   int  len = 0;
 
   buf[ 0 ] = '\0';
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     get_timestamp(buf, MAXLONGSTR);
     len = (int) strlen(buf);
   }
@@ -262,7 +262,7 @@ void Thing::botcon_(const char *fmt, va_list args)
   int  len = 0;
 
   buf[ 0 ] = '\0';
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     get_timestamp(buf, MAXLONGSTR);
     len = (int) strlen(buf);
   }

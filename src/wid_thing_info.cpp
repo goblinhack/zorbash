@@ -395,7 +395,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
     }
     wid_popup_window->log(tmp);
 
-    if (! g_opt_test_dungeon_gen) {
+    if (! g_opt_test_dungeon) {
       IF_DEBUG2 { t->topcon("compact over"); }
     }
 
@@ -701,7 +701,7 @@ bool Game::wid_thing_info_create_list(std::vector< Thingp > &ts)
         continue;
       }
 
-      if (! g_opt_test_dungeon_gen) {
+      if (! g_opt_test_dungeon) {
         IF_DEBUG2
         {
           if (! t->is_visible_to_player) {

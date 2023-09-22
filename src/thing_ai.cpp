@@ -2168,7 +2168,7 @@ bool Thing::ai_tick(bool recursing)
     return false;
   }
 
-  if (! g_opt_test_dungeon_gen && ! g_opt_ascii && level->ts_fade_in_begin) {
+  if (! g_opt_test_dungeon && ! g_opt_ascii && level->ts_fade_in_begin) {
     return false;
   }
 

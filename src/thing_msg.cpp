@@ -18,7 +18,7 @@ bool Thing::player_is_player_is_ready_for_messages(void)
     return false;
   }
 
-  if (g_opt_test_dungeon_gen) {
+  if (g_opt_test_dungeon) {
     return true;
   }
 

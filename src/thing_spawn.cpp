@@ -487,7 +487,6 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, i
       //
       bool skip = false;
       if (tpp->is_monst_pack()) {
-        TRACE_AND_INDENT();
         TRACE_NO_INDENT();
         FOR_ALL_NON_INTERNAL_THINGS(level, it, x, y)
         {
@@ -500,7 +499,6 @@ int Thing::spawn_randomly_in_radius_range(const std::string &what, int amount, i
             break;
           }
         }
-        TRACE_NO_INDENT();
         FOR_ALL_THINGS_END()
       }
       if (skip) {
@@ -1034,6 +1032,25 @@ Thingp Thing::spawn_minion_at_my_position(const std::string &what)
   dbg("Spawn minion thing at: %s", what.c_str());
   TRACE_AND_INDENT();
 
+  //
+  // Avoid spawn storms
+  //
+  auto monst_count = 0;
+  FOR_ALL_NON_INTERNAL_THINGS(level, it, curr_at.x, curr_at.y)
+  {
+    if (it->is_monst()) {
+      monst_count++;
+    }
+    if (it->is_minion()) {
+      return nullptr;
+    }
+  }
+  FOR_ALL_THINGS_END()
+
+  if (monst_count > 10) {
+    return nullptr;
+  }
+
   auto it = level->thing_new(what, curr_at, nullptr /* no owner */);
   if (! it) {
     return it;
@@ -1123,7 +1140,27 @@ Thingp Thing::spawn_minion_next_to(const std::string &what)
   }
 
   auto chosen = possible[ pcg_random_range(0, cands) ];
-  auto it     = level->thing_new(what, chosen);
+
+  //
+  // Avoid spawn storms
+  //
+  auto monst_count = 0;
+  FOR_ALL_NON_INTERNAL_THINGS(level, it, chosen.x, chosen.y)
+  {
+    if (it->is_monst()) {
+      monst_count++;
+    }
+    if (it->is_minion()) {
+      return nullptr;
+    }
+  }
+  FOR_ALL_THINGS_END()
+
+  if (monst_count > 10) {
+    return nullptr;
+  }
+
+  auto it = level->thing_new(what, chosen);
   if (it) {
     //
     // Allow non normal minions to also be minions. No minion left behind.

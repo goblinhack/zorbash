@@ -325,7 +325,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
   //
   AI_LOG("Nothing to do at all.");
   if (is_player()) {
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       //
       // Keep on ticking even if stuck
       //
@@ -337,7 +337,7 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
       wid_actionbar_robot_mode_off();
     }
 
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       dead("Robot is stuck.");
     } else {
       msg("%%fg=orange$Robot is stuck and needs human intervention.%%fg=reset$");

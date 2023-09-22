@@ -17,7 +17,7 @@ void Game::tick_begin(const std::string &why)
   if (level) {
     auto player = level->player;
 
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       if (player) {
         CON("Seed (%s) tick requested (%s): %s", game->seed_name.c_str(), why.c_str(), player->to_string().c_str());
       } else {
@@ -58,7 +58,7 @@ void Game::tick_begin_now(void)
   tick_set_speed();
 
   auto level = game->get_current_level();
-  if (g_opt_test_dungeon_gen) {
+  if (g_opt_test_dungeon) {
     if (level) {
       auto player = level->player;
       if (player) {
@@ -156,7 +156,7 @@ bool Game::tick_end(void)
 
   auto level = game->get_current_level();
 
-  if (g_opt_test_dungeon_gen) {
+  if (g_opt_test_dungeon) {
     if (level) {
       auto player = level->player;
       if (player) {
@@ -248,7 +248,7 @@ void Game::tick_update(void)
     //
     // We need reliable durations when testing
     //
-    if (g_opt_test_dungeon_gen || g_opt_ascii) {
+    if (g_opt_test_dungeon || g_opt_ascii) {
       game->tick_dt = 1;
     }
   }

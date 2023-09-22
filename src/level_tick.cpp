@@ -117,7 +117,7 @@ void Level::tick_(void)
   TRACE_NO_INDENT();
   dbg("Level tick");
 
-  if (g_opt_test_dungeon_gen) {
+  if (g_opt_test_dungeon) {
     //
     // Testing the dungeon
     //
@@ -148,7 +148,7 @@ void Level::tick_(void)
   // Update the cursor position. But only if the mouse has moved. So if the player is moving via keyboard alone, we
   // don't pollute the screen.
   //
-  if (g_opt_test_dungeon_gen || g_opt_ascii) {
+  if (g_opt_test_dungeon || g_opt_ascii) {
     cursor_move();
   } else {
     if ((sdl.wheel_x != 0) || (sdl.wheel_y != 0)) {
@@ -217,7 +217,7 @@ void Level::tick_(void)
     //
     // If the level has started, we can enter robot mode.
     //
-    if (g_opt_test_dungeon_gen || g_opt_ascii || ! ts_fade_in_begin) {
+    if (g_opt_test_dungeon || g_opt_ascii || ! ts_fade_in_begin) {
       if (game->robot_mode_requested != game->robot_mode) {
         LOG("INF: Pressed requested robot change");
         game->robot_mode                = game->robot_mode_requested;
@@ -235,7 +235,7 @@ void Level::tick_(void)
     //
     // Check for level transitions
     //
-    if (g_opt_test_dungeon_gen || g_opt_ascii || fade_out_finished) {
+    if (g_opt_test_dungeon || g_opt_ascii || fade_out_finished) {
       if (player && player->is_waiting_to_descend_dungeon) {
         dbg("Level tick: player is waiting to descend into the dungeon");
         if (! player->descend_dungeon()) {
@@ -431,7 +431,7 @@ void Level::tick_(void)
       //
       IF_DEBUG2
       {
-        if (! g_opt_test_dungeon_gen) {
+        if (! g_opt_test_dungeon) {
           auto tick_duration = time_ms() - tick_begin_ms;
           if (tick_duration > 1) {
             // t->log("PERF: Thing took tick duration %u ms", tick_duration);
@@ -708,7 +708,7 @@ void Level::tick_(void)
   //
   // Check for robot mode changes
   //
-  if (g_opt_test_dungeon_gen || g_opt_ascii || ! ts_fade_in_begin) {
+  if (g_opt_test_dungeon || g_opt_ascii || ! ts_fade_in_begin) {
     dbg("Check for robot mode changes");
 
     if (game->robot_mode_requested != game->robot_mode) {

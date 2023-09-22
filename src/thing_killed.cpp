@@ -400,7 +400,7 @@ void Thing::killed(Thingp defeater, const char *reason)
       //
       // Don't add to the hi-score table in test mode
       //
-      if (! g_opt_test_dungeon_gen) {
+      if (! g_opt_test_dungeon) {
         //
         // New hi-score?
         //

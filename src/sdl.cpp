@@ -861,14 +861,14 @@ void config_game_gfx_update(void)
 
   if (! game->config.game_pix_zoom) {
     game->config.game_pix_zoom = GAME_DEFAULT_PIX_ZOOM;
-    if (! g_opt_test_dungeon_gen) {
+    if (! g_opt_test_dungeon) {
       ERR("Game->config.game_pix_zoom is zero");
     }
   }
 
   if (! game->config.ui_pix_zoom) {
     game->config.ui_pix_zoom = GAME_DEFAULT_UI_ZOOM;
-    if (! g_opt_test_dungeon_gen) {
+    if (! g_opt_test_dungeon) {
       ERR("Game->config.ui_pix_zoom is zero");
     }
   }
@@ -877,14 +877,14 @@ void config_game_gfx_update(void)
   game->config.game_pix_scale_height = game->config.game_pix_zoom;
 
   if (! game->config.game_pix_scale_width) {
-    if (! g_opt_test_dungeon_gen) {
+    if (! g_opt_test_dungeon) {
       ERR("Game->config.game_pix_scale_width is zero");
       return;
     }
   }
 
   if (! game->config.game_pix_scale_height) {
-    if (! g_opt_test_dungeon_gen) {
+    if (! g_opt_test_dungeon) {
       ERR("Game->config.game_pix_scale_height is zero");
       return;
     }
@@ -893,13 +893,13 @@ void config_game_gfx_update(void)
   game->config.game_pix_width  = game->config.window_pix_width / game->config.game_pix_scale_width;
   game->config.game_pix_height = game->config.window_pix_height / game->config.game_pix_scale_height;
   if (! game->config.game_pix_width) {
-    if (! g_opt_test_dungeon_gen) {
+    if (! g_opt_test_dungeon) {
       ERR("game->config.game_pix_width is zero");
       return;
     }
   }
   if (! game->config.game_pix_height) {
-    if (! g_opt_test_dungeon_gen) {
+    if (! g_opt_test_dungeon) {
       ERR("game->config.game_pix_height is zero");
       return;
     }
@@ -955,20 +955,20 @@ void config_game_gfx_update(void)
   game->config.video_w_h_ratio = (double) game->config.game_pix_width / (double) game->config.game_pix_height;
 
   if (! TILES_VISIBLE_ACROSS) {
-    if (! g_opt_test_dungeon_gen) {
+    if (! g_opt_test_dungeon) {
       ERR("TILES_VISIBLE_ACROSS is zero");
       return;
     }
   }
 
   if (! TILES_VISIBLE_DOWN) {
-    if (! g_opt_test_dungeon_gen) {
+    if (! g_opt_test_dungeon) {
       ERR("TILES_VISIBLE_DOWN is zero");
       return;
     }
   }
 
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     game->config.tile_pixel_width  = game->config.game_pix_width / TILES_VISIBLE_ACROSS;
     game->config.tile_pixel_height = game->config.game_pix_height / TILES_VISIBLE_DOWN;
   }

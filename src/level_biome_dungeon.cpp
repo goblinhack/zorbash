@@ -34,7 +34,7 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
       continue;
     }
 
-    if (! g_opt_test_dungeon_gen) {
+    if (! g_opt_test_dungeon) {
       log("INF: Create dungeon layout took %u ms", time_ms() - start);
     }
 
@@ -817,7 +817,7 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
     break;
   }
 
-  if (g_opt_test_dungeon_gen) {
+  if (g_opt_test_dungeon) {
     dbg("INF: Populated dungeon with %u monsters at world map (%d,%d,%d)", monst_count, at.x, at.y, at.z);
   } else {
     dbg("INF: Populated dungeon with %u monsters at world map (%d,%d,%d) took %u ms, slowest element took %u ms (%s)",

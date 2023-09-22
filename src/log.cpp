@@ -55,7 +55,7 @@ static void log_(const char *fmt, va_list args)
   int  len = 0;
 
   buf[ 0 ] = '\0';
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     get_timestamp(buf, MAXLONGSTR);
     len = (int) strlen(buf);
   }
@@ -80,7 +80,7 @@ static void log_missing_(const char *fmt, va_list args)
   int  len = 0;
 
   buf[ 0 ] = '\0';
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     get_timestamp(buf, MAXLONGSTR);
     len = (int) strlen(buf);
   }
@@ -126,7 +126,7 @@ static void warn_(const char *fmt, va_list args)
   int  len = 0;
 
   buf[ 0 ] = '\0';
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     get_timestamp(buf, MAXLONGSTR);
     len = (int) strlen(buf);
   }
@@ -157,7 +157,7 @@ static void con_(const char *fmt, va_list args)
   int  len = 0;
 
   buf[ 0 ] = '\0';
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     get_timestamp(buf, MAXLONGSTR);
     len = (int) strlen(buf);
   }
@@ -177,7 +177,7 @@ static void con_(const wchar_t *fmt, va_list args)
 {
   TRACE_NO_INDENT();
 
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     char buf[ MAXLONGSTR ];
 
     buf[ 0 ] = '\0';
@@ -212,7 +212,7 @@ void con(const wchar_t *fmt)
 {
   TRACE_NO_INDENT();
 
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     char buf[ MAXLONGSTR ];
 
     buf[ 0 ] = '\0';
@@ -240,7 +240,7 @@ void topcon_(const char *fmt, va_list args)
   int  len = 0;
 
   buf[ 0 ] = '\0';
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     get_timestamp(ts, MAXLONGSTR);
     snprintf(buf, sizeof(buf) - 1, "%s", ts);
     len = (int) strlen(buf);
@@ -261,7 +261,7 @@ void topcon_(const wchar_t *fmt, va_list args)
 {
   TRACE_NO_INDENT();
 
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     char ts[ MAXLONGSTR ];
     ts[ 0 ] = '\0';
     get_timestamp(ts, MAXLONGSTR);
@@ -296,7 +296,7 @@ void topcon(const wchar_t *fmt)
 {
   TRACE_NO_INDENT();
 
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     char ts[ MAXLONGSTR ];
     ts[ 0 ] = '\0';
     get_timestamp(ts, MAXLONGSTR);
@@ -367,7 +367,7 @@ static void dying_(const char *fmt, va_list args)
   int  len = 0;
 
   buf[ 0 ] = '\0';
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     get_timestamp(buf, MAXLONGSTR);
     len = (int) strlen(buf);
   }
@@ -412,7 +412,7 @@ static void err_(const char *fmt, va_list args)
     int  len = 0;
 
     buf[ 0 ] = '\0';
-    if (! g_opt_test_dungeon_gen) {
+    if (! g_opt_test_dungeon) {
       get_timestamp(buf, MAXLONGSTR);
       len = (int) strlen(buf);
     }
@@ -446,7 +446,7 @@ static void croak_(const char *fmt, va_list args)
   int  tslen = 0;
 
   buf[ 0 ] = '\0';
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     get_timestamp(buf, MAXLONGSTR);
     tslen = len = (int) strlen(buf);
   }
@@ -568,7 +568,7 @@ static void msgerr_(const char *fmt, va_list args)
   backtrace_dump();
 
   buf[ 0 ] = '\0';
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     get_timestamp(buf, MAXLONGSTR);
     len = (int) strlen(buf);
   }
@@ -639,7 +639,7 @@ static void botcon_(const char *fmt, va_list args)
   int  len = 0;
 
   buf[ 0 ] = '\0';
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     get_timestamp(ts, MAXLONGSTR);
     snprintf(buf, sizeof(buf) - 1, "%sBOTCON: ", ts);
     len = (int) strlen(buf);
@@ -660,7 +660,7 @@ static void botcon_(const wchar_t *fmt, va_list args)
 {
   TRACE_NO_INDENT();
 
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     char ts[ MAXLONGSTR ];
     ts[ 0 ] = '\0';
     get_timestamp(ts, MAXLONGSTR);

@@ -16,7 +16,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
   Tilep tile = {};
   auto  tpp  = tp();
 
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     if (is_tmp_thing()) {
       if (game->tick_current_is_too_slow) {
 #ifdef DEBUG_ANIM
@@ -82,7 +82,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
     }
   }
 
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     if (time_game_ms_cached() <= ts_anim_delay_end()) {
 #ifdef DEBUG_ANIM
       if (debug || is_debug_type()) {
@@ -113,7 +113,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
     //
     // If within the animate time of this frame, keep with it.
     //
-    if (! g_opt_test_dungeon_gen) {
+    if (! g_opt_test_dungeon) {
       if (ts_next_frame > time_game_ms_cached()) {
 #ifdef DEBUG_ANIM
         if (debug || is_debug_type()) {
@@ -620,7 +620,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
     //
     // This is to get the next frame.
     //
-    if (g_opt_test_dungeon_gen || g_opt_ascii) {
+    if (g_opt_test_dungeon || g_opt_ascii) {
       ts_next_frame = time_game_ms_cached() + delay;
     } else if ((speedup || (delay > 0)) && (ts_next_frame + delay < time_game_ms_cached())) {
       //

@@ -16,7 +16,7 @@ static void py_log_(const char *fmt, va_list args)
   int  len = 0;
 
   buf[ 0 ] = '\0';
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     get_timestamp(buf, MAXLONGSTR);
     len = (int) strlen(buf);
   }

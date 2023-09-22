@@ -68,7 +68,7 @@ void Level::handle_external_particles(void)
     //
     // We need reliable durations when testing
     //
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       dt = 1;
     }
 

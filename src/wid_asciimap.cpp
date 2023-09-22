@@ -19,7 +19,7 @@ void wid_asciimap_fini(void)
 
 bool wid_asciimap_init(void)
 {
-  if (! g_opt_test_dungeon_gen && ! g_opt_ascii) {
+  if (! g_opt_test_dungeon && ! g_opt_ascii) {
     return false;
   }
 

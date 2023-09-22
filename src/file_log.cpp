@@ -15,7 +15,7 @@ static void file_log_(const char *fmt, va_list args)
   char buf[ MAXLONGSTR ];
   int  len = 0;
 
-  if (! g_opt_test_dungeon_gen) {
+  if (! g_opt_test_dungeon) {
     buf[ 0 ] = '\0';
     get_timestamp(buf, MAXLONGSTR);
     len = (int) strlen(buf);

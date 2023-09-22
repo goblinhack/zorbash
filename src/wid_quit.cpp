@@ -45,7 +45,7 @@ static uint8_t wid_quit_yes(Widp w, int x, int y, uint32_t button)
         //
         // Don't add to the hi-score table in test mode
         //
-        if (! g_opt_test_dungeon_gen) {
+        if (! g_opt_test_dungeon) {
           //
           // New hi-score?
           //

@@ -40,7 +40,7 @@ bool g_opt_no_slow_log_flush;    // Do not flush after each console log at start
 bool g_opt_override_debug_level; // Temporary used to disable debugs on load
 bool g_opt_resume;               // Load last snapshot
 bool g_opt_silent;               // No sound
-bool g_opt_test_dungeon_gen;     // Enable dungeon tests
+bool g_opt_test_dungeon;     // Enable dungeon tests
 bool g_opt_test_level_start;     // Start in the game immediately
 bool g_opt_tests;                // Any test enabled?
 bool g_opt_test_save_load;       // Enable save load tests
@@ -95,7 +95,7 @@ void reset_globals(void)
   g_opt_override_debug_level = false;
   g_opt_resume               = false;
   g_opt_silent               = false;
-  g_opt_test_dungeon_gen     = false;
+  g_opt_test_dungeon     = false;
   g_opt_test_level_start     = false;
   g_opt_test_save_load       = false;
   g_opt_tests                = false;

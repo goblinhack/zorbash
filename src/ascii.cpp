@@ -1148,7 +1148,7 @@ void ascii_display(void)
       TRACE_NO_INDENT();
       prev_cells = cells;
 
-      if (g_opt_test_dungeon_gen) {
+      if (g_opt_test_dungeon) {
         TRACE_NO_INDENT();
         ascii_dump_to_console(stdout, ! g_opt_gfx_monochrome);
 

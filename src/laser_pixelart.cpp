@@ -38,7 +38,7 @@ void Level::display_pixelart_lasers(point tl, point br)
     //
     // We need reliable durations when testing
     //
-    if (g_opt_test_dungeon_gen) {
+    if (g_opt_test_dungeon) {
       dt = 1;
     }
 

@@ -1464,7 +1464,7 @@ PyObject *thing_sound_play_(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  if (g_opt_test_dungeon_gen) {
+  if (g_opt_test_dungeon) {
     Py_RETURN_TRUE;
   }
 
@@ -1508,7 +1508,7 @@ PyObject *thing_sound_play_channel_(PyObject *obj, PyObject *args, PyObject *key
     Py_RETURN_FALSE;
   }
 
-  if (g_opt_test_dungeon_gen) {
+  if (g_opt_test_dungeon) {
     Py_RETURN_TRUE;
   }
 

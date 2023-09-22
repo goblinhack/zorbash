@@ -7,7 +7,7 @@
 
 bool Level::create_wandering_monster(void)
 {
-  if (g_opt_test_dungeon_gen) {
+  if (g_opt_test_dungeon) {
     if (d100() < 10) {
       return false;
     }
