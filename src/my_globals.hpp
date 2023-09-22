@@ -35,7 +35,7 @@ extern bool g_opt_no_slow_log_flush;    // Do not flush after each console log a
 extern bool g_opt_override_debug_level; // Temporary, used to disable existing debugs
 extern bool g_opt_resume;               // Load last snapshot
 extern bool g_opt_silent;               // No audio
-extern bool g_opt_test_dungeon;     // Enable dungeon tests
+extern bool g_opt_test_dungeon;         // Enable dungeon tests
 extern bool g_opt_test_level_start;     // Start in the game immediately
 extern bool g_opt_tests;                // Any test enabled?
 extern bool g_opt_test_save_load;       // Enable save load tests

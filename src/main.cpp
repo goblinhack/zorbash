@@ -631,7 +631,7 @@ static void parse_args(int argc, char *argv[])
 
     if (! strcasecmp(argv[ i ], "--test-dungeon") || ! strcasecmp(argv[ i ], "-test-dungeon")) {
       g_opt_test_dungeon = true;
-      g_opt_tests            = true;
+      g_opt_tests        = true;
       continue;
     }
 

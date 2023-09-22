@@ -342,7 +342,7 @@ Bestiary
 | Demon Goat | B/rare | 103 | 2d6+2 | 1 |  | Fire<br />Necrosis<br />Poison<br /> |
 | Giant Piranha | B/v-rare | 101 | 1d10+3 | 1 | Bite:1d8<br /> | Water<br /> |
 | Giant Battle Duck | C/v-rare | 96 | 1d8+4 | 1 | Bite:1d10<br />Claw:1d6<br /> | Water<br /> |
-| Hungry Treasure Chest Mimic | B/common | 91 | 1d8+4 | 1 |  | Water<br /> |
+| Treasure Chest Mimic | B/common | 91 | 1d8+4 | 1 |  | Water<br /> |
 | Treasure Chest | B/common | 91 | 1d8+4 | 1 |  | Water<br /> |
 | Mantisman | B/uncommon | 85 | 1d12+8 | 1 |  |  |
 | Electric Eel | B/rare | 83 | 1d3+1 | 1 | Bite:1d4<br /> | Electricity<br />Water<br /> |
