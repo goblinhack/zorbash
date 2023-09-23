@@ -36,7 +36,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_ooze(self, True)
     my.is_tickable(self, True)
     my.text_a_or_an(self, "the")
-    my.text_description_short(self, "Black ooze.")
+    my.text_description_short(self, "toxic ooze.")
     my.z_depth(self, my.MAP_DEPTH_LIQUID)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
