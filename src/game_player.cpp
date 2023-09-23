@@ -639,7 +639,9 @@ void Game::place_player(void)
         t->enchant_without_stone(w);
       }
 
-      if (0) {
+      if (1) {
+        level->thing_new("acid1", point(x - 1, y - 2));
+        level->thing_new("acid1", point(x - 1, y - 3));
         level->thing_new("ooze", point(x + 1, y));
         level->thing_new("ooze", point(x + 2, y));
         level->thing_new("ooze", point(x + 3, y));

@@ -30,7 +30,7 @@ void Thing::acid_tick(void)
 
     hit = (d100() < 50);
   } else {
-    hit = false;
+    hit = true;
   }
 
   if (hit) {
@@ -40,7 +40,11 @@ void Thing::acid_tick(void)
     //
     // Attack if we are standing on acid
     //
-    FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_FLOOR2)
+    TRACE_NO_INDENT();
+    //
+    // Cannot use the acid depth here as ooze shares this code and is at depth liquid
+    //
+    FOR_ALL_NON_INTERNAL_THINGS(level, t, curr_at.x, curr_at.y)
     {
       if (! t->is_acid()) {
         continue;

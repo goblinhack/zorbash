@@ -2985,6 +2985,7 @@ public:
   void on_you_are_declared_leader(void);
   void on_you_nat_attack_attempt(void);
   void on_you_nat_attack_success(void);
+  void ooze_tick(void);
   void owner_set(Thingp owner);
   void owner_unset(void);
   void paralysis_tick(void);

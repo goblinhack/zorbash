@@ -21,6 +21,8 @@ enum {
   MAP_DEPTH,
 };
 
+#define MAP_DEPTH_ACID MAP_DEPTH_FLOOR2
+
 //
 // This is a sub level of sorting in addition to MAP_DEPTH. It allows
 // for example OBJs to be sorted. It's really only used for that layer

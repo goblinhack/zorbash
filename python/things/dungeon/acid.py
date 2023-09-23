@@ -29,7 +29,7 @@ def acid_init(name, text_long_name, text_short_name, tiles=[], left_tiles=[]):
     my.text_description_short(self, "A pool of hissing acid.")
     my.text_hits(self, "burns")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
-    my.z_depth(self, my.MAP_DEPTH_FLOOR2)
+    my.z_depth(self, my.MAP_DEPTH_ACID)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
 

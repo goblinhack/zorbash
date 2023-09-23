@@ -51,7 +51,6 @@ void Thing::move_set_dir_from_dest_or_delta(point delta)
   //
   if (level) {
     TRACE_NO_INDENT();
-    TRACE_NO_INDENT();
     FOR_ALL_THINGS_AT_DEPTH(level, t, curr_at.x, curr_at.y, MAP_DEPTH_OBJ)
     {
       if (t->is_spell_of_holding_barrier() && ! is_immune_to_spell_of_holding()) {

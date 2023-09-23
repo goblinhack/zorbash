@@ -23,6 +23,7 @@ void py_my_module_add_stat_consts(void)
   PyModule_AddIntConstant(my_mod, "CHANNEL_WEAPON", CHANNEL_WEAPON);
   PyModule_AddIntConstant(my_mod, "MAP_DEPTH_CHASM", MAP_DEPTH_CHASM);
   PyModule_AddIntConstant(my_mod, "MAP_DEPTH_FLOOR2", MAP_DEPTH_FLOOR2);
+  PyModule_AddIntConstant(my_mod, "MAP_DEPTH_ACID", MAP_DEPTH_ACID);
   PyModule_AddIntConstant(my_mod, "MAP_DEPTH_FLOOR", MAP_DEPTH_FLOOR);
   PyModule_AddIntConstant(my_mod, "MAP_DEPTH_LIQUID", MAP_DEPTH_LIQUID);
   PyModule_AddIntConstant(my_mod, "MAP_DEPTH_OBJ", MAP_DEPTH_OBJ);

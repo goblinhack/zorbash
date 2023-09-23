@@ -570,6 +570,7 @@ std::initializer_list< std::string > tps = {
     "ogre",
     "ogre_totem",
     "onion",
+    "ooze",
     "orange_slices",
     "peach",
     "pickled_eggs",
