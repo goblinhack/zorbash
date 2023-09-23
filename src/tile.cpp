@@ -790,7 +790,7 @@ Tilep tile_find_mand(std::string name)
 
   auto result = all_tiles.find(name);
   if (result == all_tiles.end()) {
-    ERR("Tile name %s not found", name.c_str());
+    DIE("Tile name %s not found", name.c_str());
     return nullptr;
   }
 

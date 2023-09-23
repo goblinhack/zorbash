@@ -61,6 +61,9 @@ int Tp::get_danger_level(void)
   if (is_lava()) {
     danger_level++;
   }
+  if (is_ooze()) {
+    danger_level++;
+  }
   if (is_poisonous_danger_level()) {
     danger_level += is_poisonous_danger_level();
   }
@@ -183,6 +186,9 @@ int Thing::danger_initial_level(void)
     danger_level++;
   }
   if (is_lava()) {
+    danger_level++;
+  }
+  if (is_ooze()) {
     danger_level++;
   }
   if (is_poisonous_danger_level()) {
@@ -335,6 +341,9 @@ int Thing::danger_current_level(void)
     danger_level++;
   }
   if (is_lava()) {
+    danger_level++;
+  }
+  if (is_ooze()) {
     danger_level++;
   }
   if (is_poisonous_danger_level()) {

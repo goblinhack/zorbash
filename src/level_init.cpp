@@ -17,6 +17,7 @@ void Level::clear(void)
   TRACE_NO_INDENT();
   // begin sort marker1 {
   _fade_in_map                       = {};
+  _gfx_ooze                          = {};
   _gfx_water                         = {};
   _heatmap                           = {};
   _is_able_to_amplify_footsteps      = {};
@@ -71,6 +72,7 @@ void Level::clear(void)
   _is_obs_spawn_monst                = {};
   _is_obs_wall_or_door               = {};
   _is_obs_when_dead                  = {};
+  _is_ooze                           = {};
   _is_portal                         = {};
   _is_red_blood                      = {};
   _is_rock                           = {};

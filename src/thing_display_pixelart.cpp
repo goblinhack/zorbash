@@ -623,7 +623,7 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   //
   // Bouncing. But not in water, that just looks odd.
   //
-  if (unlikely((! (is_in_water || is_in_lava)) && (is_bouncing || (o_top && o_top->is_bouncing)))) {
+  if (unlikely((! (is_in_water || is_in_lava || is_in_ooze)) && (is_bouncing || (o_top && o_top->is_bouncing)))) {
     float bounce;
     if (o_top) {
       bounce = o_top->bounce_curr();

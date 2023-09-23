@@ -13,22 +13,22 @@ void Level::display_pixelart_gas_poison(int fbo, int16_t minx, int16_t miny, int
 #define GAS_TILES 16
   static std::array< Tilep, GAS_TILES > gas;
   if (! gas[ 0 ]) {
-    set(gas, 0, tile_find("gas_poison.1"));
-    set(gas, 1, tile_find("gas_poison.2"));
-    set(gas, 2, tile_find("gas_poison.3"));
-    set(gas, 3, tile_find("gas_poison.4"));
-    set(gas, 4, tile_find("gas_poison.5"));
-    set(gas, 5, tile_find("gas_poison.6"));
-    set(gas, 6, tile_find("gas_poison.7"));
-    set(gas, 7, tile_find("gas_poison.8"));
-    set(gas, 8, tile_find("gas_poison.9"));
-    set(gas, 9, tile_find("gas_poison.10"));
-    set(gas, 10, tile_find("gas_poison.11"));
-    set(gas, 11, tile_find("gas_poison.12"));
-    set(gas, 12, tile_find("gas_poison.13"));
-    set(gas, 13, tile_find("gas_poison.14"));
-    set(gas, 14, tile_find("gas_poison.15"));
-    set(gas, 15, tile_find("gas_poison.16"));
+    set(gas, 0, tile_find_mand("gas_poison.1"));
+    set(gas, 1, tile_find_mand("gas_poison.2"));
+    set(gas, 2, tile_find_mand("gas_poison.3"));
+    set(gas, 3, tile_find_mand("gas_poison.4"));
+    set(gas, 4, tile_find_mand("gas_poison.5"));
+    set(gas, 5, tile_find_mand("gas_poison.6"));
+    set(gas, 6, tile_find_mand("gas_poison.7"));
+    set(gas, 7, tile_find_mand("gas_poison.8"));
+    set(gas, 8, tile_find_mand("gas_poison.9"));
+    set(gas, 9, tile_find_mand("gas_poison.10"));
+    set(gas, 10, tile_find_mand("gas_poison.11"));
+    set(gas, 11, tile_find_mand("gas_poison.12"));
+    set(gas, 12, tile_find_mand("gas_poison.13"));
+    set(gas, 13, tile_find_mand("gas_poison.14"));
+    set(gas, 14, tile_find_mand("gas_poison.15"));
+    set(gas, 15, tile_find_mand("gas_poison.16"));
   }
 
   int fbo_mask1 = FBO_MASK1;
@@ -165,22 +165,22 @@ void Level::display_pixelart_gas_paralysis(int fbo, int16_t minx, int16_t miny, 
 #define GAS_TILES 16
   static std::array< Tilep, GAS_TILES > gas;
   if (! gas[ 0 ]) {
-    set(gas, 0, tile_find("gas_paralysis.1"));
-    set(gas, 1, tile_find("gas_paralysis.2"));
-    set(gas, 2, tile_find("gas_paralysis.3"));
-    set(gas, 3, tile_find("gas_paralysis.4"));
-    set(gas, 4, tile_find("gas_paralysis.5"));
-    set(gas, 5, tile_find("gas_paralysis.6"));
-    set(gas, 6, tile_find("gas_paralysis.7"));
-    set(gas, 7, tile_find("gas_paralysis.8"));
-    set(gas, 8, tile_find("gas_paralysis.9"));
-    set(gas, 9, tile_find("gas_paralysis.10"));
-    set(gas, 10, tile_find("gas_paralysis.11"));
-    set(gas, 11, tile_find("gas_paralysis.12"));
-    set(gas, 12, tile_find("gas_paralysis.13"));
-    set(gas, 13, tile_find("gas_paralysis.14"));
-    set(gas, 14, tile_find("gas_paralysis.15"));
-    set(gas, 15, tile_find("gas_paralysis.16"));
+    set(gas, 0, tile_find_mand("gas_paralysis.1"));
+    set(gas, 1, tile_find_mand("gas_paralysis.2"));
+    set(gas, 2, tile_find_mand("gas_paralysis.3"));
+    set(gas, 3, tile_find_mand("gas_paralysis.4"));
+    set(gas, 4, tile_find_mand("gas_paralysis.5"));
+    set(gas, 5, tile_find_mand("gas_paralysis.6"));
+    set(gas, 6, tile_find_mand("gas_paralysis.7"));
+    set(gas, 7, tile_find_mand("gas_paralysis.8"));
+    set(gas, 8, tile_find_mand("gas_paralysis.9"));
+    set(gas, 9, tile_find_mand("gas_paralysis.10"));
+    set(gas, 10, tile_find_mand("gas_paralysis.11"));
+    set(gas, 11, tile_find_mand("gas_paralysis.12"));
+    set(gas, 12, tile_find_mand("gas_paralysis.13"));
+    set(gas, 13, tile_find_mand("gas_paralysis.14"));
+    set(gas, 14, tile_find_mand("gas_paralysis.15"));
+    set(gas, 15, tile_find_mand("gas_paralysis.16"));
   }
 
   int fbo_mask1 = FBO_MASK1;
@@ -317,22 +317,22 @@ void Level::display_pixelart_gas_healing(int fbo, int16_t minx, int16_t miny, in
 #define GAS_TILES 16
   static std::array< Tilep, GAS_TILES > gas;
   if (! gas[ 0 ]) {
-    set(gas, 0, tile_find("gas_healing.1"));
-    set(gas, 1, tile_find("gas_healing.2"));
-    set(gas, 2, tile_find("gas_healing.3"));
-    set(gas, 3, tile_find("gas_healing.4"));
-    set(gas, 4, tile_find("gas_healing.5"));
-    set(gas, 5, tile_find("gas_healing.6"));
-    set(gas, 6, tile_find("gas_healing.7"));
-    set(gas, 7, tile_find("gas_healing.8"));
-    set(gas, 8, tile_find("gas_healing.9"));
-    set(gas, 9, tile_find("gas_healing.10"));
-    set(gas, 10, tile_find("gas_healing.11"));
-    set(gas, 11, tile_find("gas_healing.12"));
-    set(gas, 12, tile_find("gas_healing.13"));
-    set(gas, 13, tile_find("gas_healing.14"));
-    set(gas, 14, tile_find("gas_healing.15"));
-    set(gas, 15, tile_find("gas_healing.16"));
+    set(gas, 0, tile_find_mand("gas_healing.1"));
+    set(gas, 1, tile_find_mand("gas_healing.2"));
+    set(gas, 2, tile_find_mand("gas_healing.3"));
+    set(gas, 3, tile_find_mand("gas_healing.4"));
+    set(gas, 4, tile_find_mand("gas_healing.5"));
+    set(gas, 5, tile_find_mand("gas_healing.6"));
+    set(gas, 6, tile_find_mand("gas_healing.7"));
+    set(gas, 7, tile_find_mand("gas_healing.8"));
+    set(gas, 8, tile_find_mand("gas_healing.9"));
+    set(gas, 9, tile_find_mand("gas_healing.10"));
+    set(gas, 10, tile_find_mand("gas_healing.11"));
+    set(gas, 11, tile_find_mand("gas_healing.12"));
+    set(gas, 12, tile_find_mand("gas_healing.13"));
+    set(gas, 13, tile_find_mand("gas_healing.14"));
+    set(gas, 14, tile_find_mand("gas_healing.15"));
+    set(gas, 15, tile_find_mand("gas_healing.16"));
   }
 
   int fbo_mask1 = FBO_MASK1;
@@ -469,22 +469,22 @@ void Level::display_pixelart_darkness(int fbo, int16_t minx, int16_t miny, int16
 #define GAS_TILES 16
   static std::array< Tilep, GAS_TILES > gas;
   if (! gas[ 0 ]) {
-    set(gas, 0, tile_find("darkness.1"));
-    set(gas, 1, tile_find("darkness.2"));
-    set(gas, 2, tile_find("darkness.3"));
-    set(gas, 3, tile_find("darkness.4"));
-    set(gas, 4, tile_find("darkness.5"));
-    set(gas, 5, tile_find("darkness.6"));
-    set(gas, 6, tile_find("darkness.7"));
-    set(gas, 7, tile_find("darkness.8"));
-    set(gas, 8, tile_find("darkness.9"));
-    set(gas, 9, tile_find("darkness.10"));
-    set(gas, 10, tile_find("darkness.11"));
-    set(gas, 11, tile_find("darkness.12"));
-    set(gas, 12, tile_find("darkness.13"));
-    set(gas, 13, tile_find("darkness.14"));
-    set(gas, 14, tile_find("darkness.15"));
-    set(gas, 15, tile_find("darkness.16"));
+    set(gas, 0, tile_find_mand("darkness.1"));
+    set(gas, 1, tile_find_mand("darkness.2"));
+    set(gas, 2, tile_find_mand("darkness.3"));
+    set(gas, 3, tile_find_mand("darkness.4"));
+    set(gas, 4, tile_find_mand("darkness.5"));
+    set(gas, 5, tile_find_mand("darkness.6"));
+    set(gas, 6, tile_find_mand("darkness.7"));
+    set(gas, 7, tile_find_mand("darkness.8"));
+    set(gas, 8, tile_find_mand("darkness.9"));
+    set(gas, 9, tile_find_mand("darkness.10"));
+    set(gas, 10, tile_find_mand("darkness.11"));
+    set(gas, 11, tile_find_mand("darkness.12"));
+    set(gas, 12, tile_find_mand("darkness.13"));
+    set(gas, 13, tile_find_mand("darkness.14"));
+    set(gas, 14, tile_find_mand("darkness.15"));
+    set(gas, 15, tile_find_mand("darkness.16"));
   }
 
   int fbo_mask1 = FBO_MASK1;

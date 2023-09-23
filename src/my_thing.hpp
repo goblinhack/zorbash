@@ -308,6 +308,7 @@ public:
   uint64_t i_set_is_obs_spawn_monst           : 1 {};
   uint64_t i_set_is_obs_wall_or_door          : 1 {};
   uint64_t i_set_is_obs_when_dead             : 1 {};
+  uint64_t i_set_is_ooze                      : 1 {};
   uint64_t i_set_is_poisonous_danger_level    : 1 {};
   uint64_t i_set_is_portal                    : 1 {};
   uint64_t i_set_is_potion                    : 1 {};
@@ -353,6 +354,7 @@ public:
   uint64_t is_being_used_to_tame : 1 {};
   uint64_t is_blitted            : 1 {};
   uint64_t is_in_lava            : 1 {}; // Updated on level pop/push
+  uint64_t is_in_ooze            : 1 {}; // Updated on level pop/push
   uint64_t is_in_water           : 1 {}; // Updated on level pop/push
 #ifdef ENABLE_DEBUG_THING_SER
   std::string debug_str;
@@ -1325,6 +1327,7 @@ public:
   int gfx_ascii_shown(void);
   int gfx_glows(void);
   int gfx_on_fire_anim(void);
+  int gfx_ooze(void);
   int gfx_pixelart_animated_can_hflip(void);
   int gfx_pixelart_animated_can_vflip(void);
   int gfx_pixelart_animated_no_dir(void);
@@ -1768,6 +1771,7 @@ public:
   int is_obs_when_dead(void);
   int is_ogre(void);
   int is_only_one_per_tile(void);
+  int is_ooze(void);
   int is_openable(void);
   int is_organic(void);
   int is_pillar(void);
@@ -1938,8 +1942,6 @@ public:
   int is_unused_flag78(void);
   int is_unused_flag79(void);
   int is_unused_flag7(void);
-  int is_unused_flag80(void);
-  int is_unused_flag81(void);
   int is_unused_flag8(void);
   int is_unused_flag9(void);
   int is_usable(void);

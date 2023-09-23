@@ -337,6 +337,11 @@ void Thing::level_pop(void)
       i_set_water = false;
       level->gfx_water_unset(x, y);
     }
+    if (i_set_is_ooze) {
+      i_set_is_ooze = false;
+      level->gfx_ooze_unset(x, y);
+      level->is_ooze_unset(x, y);
+    }
     if (is_obs_when_dead() && is_dead) {
       i_set_is_obs_when_dead = false;
       level->is_obs_when_dead_unset(x, y);

@@ -247,6 +247,11 @@ void Thing::level_push(void)
       level->is_deep_water_set(x, y);
     }
   }
+  if (is_ooze()) {
+    i_set_is_ooze = true;
+    level->gfx_ooze_set(x, y);
+    level->is_ooze_set(x, y);
+  }
 
   if (! is_dead && ! is_open) {
     //
@@ -415,6 +420,13 @@ void Thing::level_push(void)
     }
   }
 
+  if (! is_ooze()) {
+    is_in_ooze = level->is_ooze(curr_at);
+    if (o_top && o_top->is_in_ooze) {
+      is_in_ooze = true;
+    }
+  }
+
   //
   // Update submerged status
   //
@@ -429,6 +441,8 @@ void Thing::level_push(void)
     if (level->is_deep_water((int) map_loc.x, (int) map_loc.y)) {
       submerged_offset_set(8);
     } else if (level->is_lava((int) map_loc.x, (int) map_loc.y)) {
+      submerged_offset_set(TILE_HEIGHT / 2);
+    } else if (level->is_ooze((int) map_loc.x, (int) map_loc.y)) {
       submerged_offset_set(TILE_HEIGHT / 2);
     } else if (level->is_shallow_water((int) map_loc.x, (int) map_loc.y)) {
       submerged_offset_set(4);

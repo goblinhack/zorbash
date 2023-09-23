@@ -113,6 +113,7 @@ PyObject *thing_get_paralysis_count(PyObject *obj, PyObject *args, PyObject *key
 PyObject *thing_get_stuck_count(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_ascii_color_bg_unchanged_by_lights(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_ascii_color_fg_unchanged_by_lights(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_gfx_ooze(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_pixelart_oversized_and_centered(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_pixelart_show_highlighted(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_pixelart_show_square_outlined(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -507,6 +508,7 @@ PyObject *thing_is_obs_when_dead(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_ogre(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_on_fire(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_only_one_per_tile(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_ooze(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_openable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_organic(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_pack(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -678,8 +680,6 @@ PyObject *thing_is_unused_flag77(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag78(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag79(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag80(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag81(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag8(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag9(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_usable(PyObject *obj, PyObject *args, PyObject *keywds);

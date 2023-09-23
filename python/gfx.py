@@ -11687,6 +11687,38 @@ def init_tiles_32x32_surface_effects():
         "gas_paralysis.14",
         "gas_paralysis.15",
         "gas_paralysis.16",
+        "ooze.1",
+        "ooze.2",
+        "ooze.3",
+        "ooze.4",
+        "ooze.5",
+        "ooze.6",
+        "ooze.7",
+        "ooze.8",
+        "ooze.9",
+        "ooze.10",
+        "ooze.11",
+        "ooze.12",
+        "ooze.13",
+        "ooze.14",
+        "ooze.15",
+        "ooze.16",
+        "ooze.17",
+        "ooze.18",
+        "ooze.19",
+        "ooze.20",
+        "ooze.21",
+        "ooze.22",
+        "ooze.23",
+        "ooze.24",
+        "ooze.25",
+        "ooze.26",
+        "ooze.27",
+        "ooze.28",
+        "ooze.29",
+        "ooze.30",
+        "ooze.31",
+        "ooze.32",
     ]
 
     my.tile_load_arr_sprites(
@@ -11770,6 +11802,28 @@ def init_tiles_32x32_water():
     my.tile_load_arr_sprites(
         file="data/gfx/tiles_32x32_water.tga",
         name="tiles_32x32_water",
+        width=32,
+        height=32,
+        arr=tiles,
+    )
+
+
+@timeme
+def init_tiles_32x32_ooze():
+    tiles = [
+        "ooze1",
+        "ooze2",
+        "ooze3",
+        "ooze4",
+        "ooze5",
+        "ooze6",
+        "ooze7",
+        "ooze8",
+    ]
+
+    my.tile_load_arr_sprites(
+        file="data/gfx/tiles_32x32_ooze.tga",
+        name="tiles_32x32_ooze",
         width=32,
         height=32,
         arr=tiles,
@@ -14813,6 +14867,7 @@ init_tiles_32x32_lava()
 init_tiles_32x32_sewer_water()
 init_tiles_32x32_surface_effects()
 init_tiles_32x32_water()
+init_tiles_32x32_ooze()
 init_tiles_64x64()
 init_tiles_burnt()
 init_tiles_ice()

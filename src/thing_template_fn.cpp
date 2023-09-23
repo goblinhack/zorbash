@@ -318,6 +318,7 @@ int Tp::gfx_ascii_shown_in_bg(void) const { return _gfx_ascii_shown_in_bg; }
 int Tp::gfx_ascii_shown(void) const { return _gfx_ascii_shown; }
 int Tp::gfx_glows(void) const { return _gfx_glows; }
 int Tp::gfx_on_fire_anim(void) const { return _gfx_on_fire_anim; }
+int Tp::gfx_ooze(void) const { return _gfx_ooze; }
 int Tp::gfx_pixelart_animated_can_hflip(void) const { return _gfx_pixelart_animated_can_hflip; }
 int Tp::gfx_pixelart_animated_can_vflip(void) const { return _gfx_pixelart_animated_can_vflip; }
 int Tp::gfx_pixelart_animated_no_dir(void) const { return _gfx_pixelart_animated_no_dir; }
@@ -695,6 +696,7 @@ int Tp::is_obs_wall_or_door(void) const { return _is_obs_wall_or_door; }
 int Tp::is_obs_when_dead(void) const { return _is_obs_when_dead; }
 int Tp::is_ogre(void) const { return _is_ogre; }
 int Tp::is_only_one_per_tile(void) const { return _is_only_one_per_tile; }
+int Tp::is_ooze(void) const { return _is_ooze; }
 int Tp::is_openable(void) const { return _is_openable; }
 int Tp::is_organic(void) const { return _is_organic; }
 int Tp::is_pillar(void) const { return _is_pillar; }
@@ -865,8 +867,6 @@ int Tp::is_unused_flag77(void) const { return _is_unused_flag77; }
 int Tp::is_unused_flag78(void) const { return _is_unused_flag78; }
 int Tp::is_unused_flag79(void) const { return _is_unused_flag79; }
 int Tp::is_unused_flag7(void) const { return _is_unused_flag7; }
-int Tp::is_unused_flag80(void) const { return _is_unused_flag80; }
-int Tp::is_unused_flag81(void) const { return _is_unused_flag81; }
 int Tp::is_unused_flag8(void) const { return _is_unused_flag8; }
 int Tp::is_unused_flag9(void) const { return _is_unused_flag9; }
 int Tp::is_usable(void) const { return _is_usable; }
@@ -1084,6 +1084,7 @@ void Tp::gfx_ascii_shown_in_bg_set(int v) { _gfx_ascii_shown_in_bg = v; }
 void Tp::gfx_ascii_shown_set(int v) { _gfx_ascii_shown = v; }
 void Tp::gfx_glows_set(int v) { _gfx_glows = v; }
 void Tp::gfx_on_fire_anim_set(int v) { _gfx_on_fire_anim = v; }
+void Tp::gfx_ooze_set(int v) { _gfx_ooze = v; }
 void Tp::gfx_pixelart_animated_can_hflip_set(int v) { _gfx_pixelart_animated_can_hflip = v; }
 void Tp::gfx_pixelart_animated_can_vflip_set(int v) { _gfx_pixelart_animated_can_vflip = v; }
 void Tp::gfx_pixelart_animated_no_dir_set(int v) { _gfx_pixelart_animated_no_dir = v; }
@@ -1465,6 +1466,7 @@ void Tp::is_obs_wall_or_door_set(int v) { _is_obs_wall_or_door = v; }
 void Tp::is_obs_when_dead_set(int v) { _is_obs_when_dead = v; }
 void Tp::is_ogre_set(int v) { _is_ogre = v; }
 void Tp::is_only_one_per_tile_set(int v) { _is_only_one_per_tile = v; }
+void Tp::is_ooze_set(int v) { _is_ooze = v; }
 void Tp::is_openable_set(int v) { _is_openable = v; }
 void Tp::is_organic_set(int v) { _is_organic = v; }
 void Tp::is_pillar_set(int v) { _is_pillar = v; }
@@ -1635,8 +1637,6 @@ void Tp::is_unused_flag77_set(int v) { _is_unused_flag77 = v; }
 void Tp::is_unused_flag78_set(int v) { _is_unused_flag78 = v; }
 void Tp::is_unused_flag79_set(int v) { _is_unused_flag79 = v; }
 void Tp::is_unused_flag7_set(int v) { _is_unused_flag7 = v; }
-void Tp::is_unused_flag80_set(int v) { _is_unused_flag80 = v; }
-void Tp::is_unused_flag81_set(int v) { _is_unused_flag81 = v; }
 void Tp::is_unused_flag8_set(int v) { _is_unused_flag8 = v; }
 void Tp::is_unused_flag9_set(int v) { _is_unused_flag9 = v; }
 void Tp::is_usable_set(int v) { _is_usable = v; }

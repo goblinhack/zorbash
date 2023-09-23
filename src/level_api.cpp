@@ -736,6 +736,44 @@ uint8_t Level::is_water(const int x, const int y)
   return is_shallow_water(x, y) || is_deep_water(x, y);
 }
 
+uint8_t Level::gfx_ooze(const point p)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(p.x, p.y))) {
+    return false;
+  }
+  return (get(_gfx_ooze, p.x, p.y));
+}
+
+uint8_t Level::gfx_ooze(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return false;
+  }
+  return (get(_gfx_ooze, x, y));
+}
+
+void Level::gfx_ooze_set(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  is_map_changed = true;
+  incr(_gfx_ooze, x, y, (uint8_t) 1);
+}
+
+void Level::gfx_ooze_unset(const int x, const int y)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(is_oob(x, y))) {
+    return;
+  }
+  is_map_changed = true;
+  decr(_gfx_ooze, x, y, (uint8_t) 1);
+}
+
 uint8_t Level::is_wall(const point p)
 {
   TRACE_NO_INDENT();

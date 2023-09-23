@@ -471,6 +471,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_obs_spawn_monst               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_obs_wall_or_door              ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_obs_when_dead                 ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_ooze                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_portal                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_spell_of_holding_barrier      ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_trap                          ? 1LLU : 0LLU) << shift; shift++;
@@ -593,6 +594,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
 
   // begin sort marker5 {
   out << bits(my.t->_fade_in_map);
+  out << bits(my.t->_gfx_ooze);
   out << bits(my.t->_gfx_water);
   out << bits(my.t->_heatmap);
   out << bits(my.t->_is_able_to_amplify_footsteps);
@@ -654,6 +656,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_obs_spawn_monst);
   out << bits(my.t->_is_obs_wall_or_door);
   out << bits(my.t->_is_obs_when_dead);
+  out << bits(my.t->_is_ooze);
   out << bits(my.t->_is_portal);
   out << bits(my.t->_is_potion);
   out << bits(my.t->_is_red_blood);

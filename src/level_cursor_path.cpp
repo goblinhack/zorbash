@@ -192,6 +192,29 @@ std::vector< point > Level::cursor_path_draw_line_attempt(Thingp it, point start
           }
         }
       }
+    } else if (is_ooze(cursor->curr_at.x, cursor->curr_at.y)) {
+      //
+      // If the cursor is on a hazard then allow creating a path via hazards.
+      //
+      // However, be careful. If we click on ooze, and the shortest path
+      // to that ooze is via a chasm, then we do not want to jump into the
+      // chasm.
+      //
+      for (auto y = miny; y < maxy; y++) {
+        for (auto x = minx; x < maxx; x++) {
+          if (is_cursor_path_hazard(x, y)) {
+            if (! is_ooze(x, y)) {
+              set(d.val, x, y, DMAP_IS_WALL);
+              continue;
+            }
+          }
+          if (is_cursor_path_blocker(it, x, y)) {
+            set(d.val, x, y, DMAP_IS_WALL);
+          } else {
+            set(d.val, x, y, DMAP_IS_PASSABLE);
+          }
+        }
+      }
     } else if (is_chasm(cursor->curr_at.x, cursor->curr_at.y)) {
       //
       // If the cursor is on a hazard then allow creating a path via hazards.

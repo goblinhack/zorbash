@@ -15,6 +15,7 @@ void Level::update_hazard_tile_map(void)
   basalt_tile_map     = {};
   chasm_tile_map      = {};
   water_tile_map      = {};
+  ooze_tile_map       = {};
   deep_water_tile_map = {};
 
   for (auto y = 2; y < MAP_HEIGHT - 2; y++) {
@@ -26,6 +27,14 @@ void Level::update_hazard_tile_map(void)
             if (is_deep_water(x, y)) {
               incr(deep_water_tile_map, x + dx, y + dy, (uint8_t) 1);
             }
+          }
+        }
+      }
+
+      if (is_ooze(x, y)) {
+        for (auto dx = -2; dx <= 2; dx++) {
+          for (auto dy = -2; dy <= 2; dy++) {
+            incr(ooze_tile_map, x + dx, y + dy, (uint8_t) 1);
           }
         }
       }

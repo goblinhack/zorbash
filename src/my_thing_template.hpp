@@ -222,6 +222,7 @@ private:
   int _gfx_ascii_shown_in_bg {};
   int _gfx_glows {};
   int _gfx_on_fire_anim {};
+  int _gfx_ooze {};
   int _gfx_pixelart_animated {};
   int _gfx_pixelart_animated_can_hflip {};
   int _gfx_pixelart_animated_can_vflip {};
@@ -602,6 +603,7 @@ private:
   int _is_obs_when_dead {};
   int _is_ogre {};
   int _is_only_one_per_tile {};
+  int _is_ooze {};
   int _is_openable {};
   int _is_organic {};
   int _is_pillar {};
@@ -774,8 +776,6 @@ private:
   int _is_unused_flag78 {};
   int _is_unused_flag79 {};
   int _is_unused_flag8 {};
-  int _is_unused_flag80 {};
-  int _is_unused_flag81 {};
   int _is_unused_flag9 {};
   int _is_usable {};
   int _is_used_when_thrown {};
@@ -1592,6 +1592,7 @@ public:
   int gfx_ascii_shown(void) const;
   int gfx_glows(void) const;
   int gfx_on_fire_anim(void) const;
+  int gfx_ooze(void) const;
   int gfx_pixelart_animated_can_hflip(void) const;
   int gfx_pixelart_animated_can_vflip(void) const;
   int gfx_pixelart_animated_no_dir(void) const;
@@ -1969,6 +1970,7 @@ public:
   int is_obs_when_dead(void) const;
   int is_ogre(void) const;
   int is_only_one_per_tile(void) const;
+  int is_ooze(void) const;
   int is_openable(void) const;
   int is_organic(void) const;
   int is_pillar(void) const;
@@ -2140,8 +2142,6 @@ public:
   int is_unused_flag78(void) const;
   int is_unused_flag79(void) const;
   int is_unused_flag7(void) const;
-  int is_unused_flag80(void) const;
-  int is_unused_flag81(void) const;
   int is_unused_flag8(void) const;
   int is_unused_flag9(void) const;
   int is_usable(void) const;
@@ -2359,6 +2359,7 @@ public:
   void gfx_ascii_shown_set(int v);
   void gfx_glows_set(int v);
   void gfx_on_fire_anim_set(int v);
+  void gfx_ooze_set(int v);
   void gfx_pixelart_animated_can_hflip_set(int v);
   void gfx_pixelart_animated_can_vflip_set(int v);
   void gfx_pixelart_animated_no_dir_set(int v);
@@ -2740,6 +2741,7 @@ public:
   void is_obs_when_dead_set(int v);
   void is_ogre_set(int v);
   void is_only_one_per_tile_set(int v);
+  void is_ooze_set(int v);
   void is_openable_set(int v);
   void is_organic_set(int v);
   void is_pillar_set(int v);
@@ -2911,8 +2913,6 @@ public:
   void is_unused_flag78_set(int v);
   void is_unused_flag79_set(int v);
   void is_unused_flag7_set(int v);
-  void is_unused_flag80_set(int v);
-  void is_unused_flag81_set(int v);
   void is_unused_flag8_set(int v);
   void is_unused_flag9_set(int v);
   void is_usable_set(int v);

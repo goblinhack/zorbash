@@ -147,6 +147,9 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           c = WHITE;
         } else if (is_door(x, y)) {
           c = BROWN;
+        } else if (is_ooze(x, y)) {
+          c   = PURPLE;
+          c.a = 50;
         } else if (is_lava(x, y)) {
           c = ORANGE;
         } else if (is_wall(x, y)) {
@@ -282,7 +285,10 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         } else if (player && (x == (int) player->curr_at.x) && (y == (int) player->curr_at.y)) {
           c = WHITE;
         } else if (is_door(x, y)) {
-          c.a = 255;
+          c = BROWN;
+        } else if (is_ooze(x, y)) {
+          c   = PURPLE;
+          c.a = 100;
         } else if (is_lava(x, y)) {
           c.a = 100;
         } else if (is_floor(x, y) || is_corridor(x, y)) {
@@ -358,6 +364,9 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           no_fade = true;
         } else if (is_door(x, y)) {
           c = BROWN;
+        } else if (is_ooze(x, y)) {
+          c   = PURPLE;
+          c.a = 50;
         } else if (is_lava(x, y)) {
           c = ORANGE;
         } else if (is_wall(x, y)) {

@@ -49,6 +49,7 @@ public:
 
   // begin sort marker1 {
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _fade_in_map {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _gfx_ooze {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _gfx_water {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _heatmap {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_able_to_amplify_footsteps {};
@@ -104,6 +105,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_lava {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_mob {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_monst {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_ooze {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_portal {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_potion {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_red_blood {};
@@ -375,6 +377,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX + 8 >, MAP_WIDTH_MAX + 8 > water_tile_map      = {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX + 8 >, MAP_WIDTH_MAX + 8 > deep_water_tile_map = {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX + 8 >, MAP_WIDTH_MAX + 8 > lava_tile_map       = {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX + 8 >, MAP_WIDTH_MAX + 8 > ooze_tile_map       = {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX + 8 >, MAP_WIDTH_MAX + 8 > basalt_tile_map     = {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX + 8 >, MAP_WIDTH_MAX + 8 > chasm_tile_map      = {};
 
@@ -864,6 +867,8 @@ public:
   uint8_t fade_in_map(const point p);
   uint8_t fade_in_map_no_check(const int x, const int y);
   uint8_t fade_in_map_no_check(const point p);
+  uint8_t gfx_ooze(const int x, const int y);
+  uint8_t gfx_ooze(const point p);
   uint8_t gfx_water(const int x, const int y);
   uint8_t gfx_water(const point p);
   uint8_t heatmap(const int x, const int y);
@@ -1181,6 +1186,7 @@ public:
   void display_pixelart_map_mini(void);
   void display_pixelart_map_things(const int, const int16_t, const int16_t, const int16_t, const int16_t);
   void display_pixelart_map(void);
+  void display_pixelart_ooze(const int fbo, const int16_t, const int16_t, const int16_t, const int16_t);
   void display_pixelart_projectiles(point tl, point br);
   void display_pixelart_water(const int fbo, const int16_t, const int16_t, const int16_t, const int16_t);
   void display_projectiles(point tl, point br);
@@ -1195,6 +1201,8 @@ public:
   void fade_in_unset(const int x, const int y);
   void fini(void);
   void gas_poison_explosion(point at);
+  void gfx_ooze_set(const int x, const int y);
+  void gfx_ooze_unset(const int x, const int y);
   void gfx_water_set(const int x, const int y);
   void gfx_water_unset(const int x, const int y);
   void handle_all_pending_things(void);
@@ -1497,6 +1505,12 @@ public:
   uint8_t is_lava_no_check(const int x, const int y);
   void    is_lava_set(const int x, const int y);
   void    is_lava_unset(const int x, const int y);
+
+  uint8_t is_ooze(const int x, const int y);
+  uint8_t is_ooze(const point p);
+  uint8_t is_ooze_no_check(const int x, const int y);
+  void    is_ooze_set(const int x, const int y);
+  void    is_ooze_unset(const int x, const int y);
 
   uint8_t is_basalt(const int x, const int y);
   uint8_t is_basalt(const point p);

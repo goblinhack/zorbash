@@ -63,6 +63,10 @@ void Level::update_map_debug(int x, int y)
       } else if (is_wall(x, y) || is_rock(x, y)) {
         continue;
       } else if (is_door(x, y)) {
+        c = BROWN;
+      } else if (is_ooze(x, y)) {
+        c   = PURPLE;
+        c.a = 50;
       } else if (is_lava(x, y)) {
         c   = ORANGE;
         c.a = 200;

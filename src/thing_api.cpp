@@ -607,15 +607,10 @@ int Thing::is_unused_flag79(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag79());
 }
-int Thing::is_unused_flag80(void)
+int Thing::is_ooze(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag80());
-}
-int Thing::is_unused_flag81(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_unused_flag81());
+  return (tp()->is_ooze());
 }
 int Thing::is_hellpup(void)
 {
@@ -1227,6 +1222,12 @@ int Thing::gfx_water(void)
 {
   TRACE_NO_INDENT();
   return (tp()->gfx_water());
+}
+
+int Thing::gfx_ooze(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->gfx_ooze());
 }
 
 int Thing::gfx_pixelart_equip_carry_anim(void)

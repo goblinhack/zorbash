@@ -108,6 +108,7 @@ void Level::display_pixelart_map_bg_things(void)
 
     display_pixelart_water(fbo, 0, 0, MAP_WIDTH, MAP_HEIGHT);
     display_pixelart_deep_water(fbo, 0, 0, MAP_WIDTH, MAP_HEIGHT);
+    display_pixelart_ooze(fbo, 0, 0, MAP_WIDTH, MAP_HEIGHT);
     display_pixelart_lava(fbo, 0, 0, MAP_WIDTH, MAP_HEIGHT);
     display_pixelart_basalt(fbo, 0, 0, MAP_WIDTH, MAP_HEIGHT);
 
@@ -177,6 +178,7 @@ void Level::display_pixelart_map_things(int fbo, const int16_t minx, const int16
 
   display_pixelart_water(fbo, minx, miny, maxx, maxy);
   display_pixelart_deep_water(fbo, minx, miny, maxx, maxy);
+  display_pixelart_ooze(fbo, minx, miny, maxx, maxy);
   display_pixelart_lava(fbo, minx, miny, maxx, maxy);
   display_pixelart_basalt(fbo, minx, miny, maxx, maxy);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
