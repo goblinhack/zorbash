@@ -5,10 +5,6 @@ import tp
 def on_thrown(owner, me, x, y):
     for it in my.level_get_all(me, x, y):
         if my.thing_is_interesting(it):
-            if it == me:
-                continue
-            if it == owner:
-                continue
             my.thing_hit(owner, me, it, thrown=True)
 
     if my.py_pcg_random_range_inclusive(1, 100) < 90:

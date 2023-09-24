@@ -153,7 +153,7 @@ bool Thing::is_stuck_check(void)
         //
         // Body shutdown due to being too slow
         //
-        dead("bu falling to the ground dead");
+        dead("by falling to the ground dead");
         dbg("Stuck, yes: falling down dead");
         return true;
       } else if (is_humanoid()) {

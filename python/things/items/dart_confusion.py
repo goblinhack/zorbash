@@ -5,10 +5,6 @@ import tp
 def on_thrown(owner, me, x, y):
     for it in my.level_get_all(me, x, y):
         if my.thing_is_alive_monst(it) or my.thing_is_player(it):
-            if it == me:
-                continue
-            if it == owner:
-                continue
             if not my.thing_confusion_count_incr(it, 10):
                 if my.thing_is_player(it):
                     my.thing_msg(it, "%%fg=red$The confusion dart has no effect on you.")
@@ -19,9 +15,9 @@ def on_thrown(owner, me, x, y):
                     my.thing_msg(it, f"%%fg=red$You are struck by a {my.thing_name_get(me)}!%%fg=reset$")
                 if owner and my.thing_is_player(owner):
                     if owner == it:
-                        my.thing_msg(owner, "%%fg=red$You paralyse yourself!%%fg=reset$")
+                        my.thing_msg(owner, "%%fg=red$You confuse yourself!%%fg=reset$")
                     else:
-                        my.thing_msg(owner, f"%%fg=red$You paralyse the {my.thing_name_get(it)}!%%fg=reset$")
+                        my.thing_msg(owner, f"%%fg=red$You confuse the {my.thing_name_get(it)}!%%fg=reset$")
 
     if my.py_pcg_random_range_inclusive(1, 100) < 90:
         my.thing_dead(me, "used")

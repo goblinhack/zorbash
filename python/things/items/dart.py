@@ -7,10 +7,6 @@ def on_thrown(owner, me, x, y):
     # if owner:
     #     my.con("owner  {} {:X}".format(my.thing_name_get(owner), owner))
     for it in my.level_get_all(me, x, y):
-        if it == me:
-            continue
-        if it == owner:
-            continue
         # my.con("it {} {:X}".format(my.thing_name_get(it), it))
         if my.thing_is_interesting(it):
             my.thing_hit_dmg_missile(owner, me, it, thrown=True)

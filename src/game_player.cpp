@@ -177,6 +177,11 @@ void Game::place_player(void)
           auto w = level->thing_new("dart_poison", point(x, y));
           t->carry(w, carry_options);
         }
+        if (1) {
+          auto w = level->thing_new("dart_confusion", point(x, y));
+          t->carry(w, carry_options);
+          level->thing_new("dogman", point(x + 2, y));
+        }
         if (0) {
           auto w = level->thing_new("dart_paralysis", point(x, y));
           t->carry(w, carry_options);

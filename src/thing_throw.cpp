@@ -226,10 +226,15 @@ bool Thing::throw_at(Thingp what, Thingp target)
     FOR_ALL_THINGS_END()
   } else {
     if (is_player()) {
-      if (target->is_cursor()) {
-        msg("You throw %s at the ground.", what->text_the().c_str());
-      } else {
-        msg("You throw %s at %s", what->text_the().c_str(), target->text_the().c_str());
+      //
+      // No need for a message if it has a projectile as we will log "You shoot..." later.
+      //
+      if (what->gfx_targeted_projectile().empty()) {
+        if (target->is_cursor()) {
+          msg("You throw %s at the ground.", what->text_the().c_str());
+        } else {
+          msg("You throw %s at %s", what->text_the().c_str(), target->text_the().c_str());
+        }
       }
     }
   }

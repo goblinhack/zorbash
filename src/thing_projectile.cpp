@@ -94,10 +94,18 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &effect_name, T
   }
 
   if (is_player()) {
-    if (item && item->is_spell()) {
-      msg("You cast %s at %s.", item->text_the().c_str(), target->text_the().c_str());
+    if (target->curr_at == curr_at) {
+      if (item && item->is_spell()) {
+        msg("You cast %s at yourself.", item->text_the().c_str());
+      } else {
+        msg("You shoot %s at yourself.", item->text_the().c_str());
+      }
     } else {
-      msg("You shoot %s at %s.", item->text_the().c_str(), target->text_the().c_str());
+      if (item && item->is_spell()) {
+        msg("You cast %s at %s.", item->text_the().c_str(), target->text_the().c_str());
+      } else {
+        msg("You shoot %s at %s.", item->text_the().c_str(), target->text_the().c_str());
+      }
     }
   } else if (item) {
     if (item->is_spell()) {
