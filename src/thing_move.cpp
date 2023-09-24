@@ -832,6 +832,14 @@ void Thing::move_delta(point delta)
       // normal
       //
     }
+
+    //
+    // This avoids walking into solid rock by accident.
+    //
+    if (collision_check_only(curr_at + delta)) {
+      dbg2("Cannot move when confused");
+      return;
+    }
   }
 
   move_set_dir_from_dest_or_delta(delta);
