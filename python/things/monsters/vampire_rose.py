@@ -7,17 +7,16 @@ def on_you_nat_attack_attempt(me, x, y):
 
 
 def try_to_grow(me, x, y, dx, dy):
-    if my.level_is_monst_at(me, x + dx, y + dy) or \
-       my.level_is_player_at(me, x + dx, y + dy) or \
+    if my.level_is_carnivorous_plant_at(me, x + dx, y + dy) or \
        my.level_is_lava_at(me, x + dx, y + dy) or \
        my.level_is_chasm_at(me, x + dx, y + dy) or \
        my.level_is_brazier_at(me, x + dx, y + dy) or \
        my.level_is_fire_at(me, x + dx, y + dy) or \
-       my.level_is_carnivorous_plant_at(me, x + dx, y + dy) or \
        my.level_is_wall_at(me, x + dx, y + dy) or \
        my.level_is_water_at(me, x + dx, y + dy):
         return
-    if my.level_is_floor_at(me, x + dx, y + dy):
+    if my.level_is_floor_at(me, x + dx, y + dy) or \
+       my.level_is_corridor_at(me, x + dx, y + dy):
         if my.py_pcg_random_range_inclusive(1, 100) < 10:
             my.spawn_at(me, "vampire_rose_stem1", x + dx, y + dy)
             return

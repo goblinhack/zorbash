@@ -2,6 +2,28 @@ import my
 import tp
 
 
+def try_to_grow(me, x, y, dx, dy):
+    if my.level_is_ooze_at(me, x + dx, y + dy) or \
+       my.level_is_lava_at(me, x + dx, y + dy) or \
+       my.level_is_chasm_at(me, x + dx, y + dy) or \
+       my.level_is_brazier_at(me, x + dx, y + dy) or \
+       my.level_is_fire_at(me, x + dx, y + dy) or \
+       my.level_is_wall_at(me, x + dx, y + dy) or \
+       my.level_is_water_at(me, x + dx, y + dy):
+        return
+    if my.level_is_floor_at(me, x + dx, y + dy) or \
+       my.level_is_corridor_at(me, x + dx, y + dy):
+        my.spawn_at(me, "ooze", x + dx, y + dy)
+        return
+
+
+def on_idle(me, x, y):
+    try_to_grow(me, x, y, -1, 0)
+    try_to_grow(me, x, y,  1, 0)
+    try_to_grow(me, x, y, 0, -1)
+    try_to_grow(me, x, y, 0,  1)
+
+
 def tp_init(name, text_long_name, tiles=[]):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
@@ -35,6 +57,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_only_one_per_tile(self, True)
     my.is_ooze(self, True)
     my.is_tickable(self, True)
+    my.on_idle_tick_freq_dice(self, "1d40:me.on_idle()")
     my.text_a_or_an(self, "the")
     my.text_description_short(self, "toxic ooze.")
     my.z_depth(self, my.MAP_DEPTH_LIQUID)

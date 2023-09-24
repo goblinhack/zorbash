@@ -238,6 +238,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(level_is_obs_wall_or_door_at),
     MY_ADD_PYTHON_FUNCTION(level_is_obs_when_dead_at),
     MY_ADD_PYTHON_FUNCTION(level_is_on_want_to_shoot_at),
+    MY_ADD_PYTHON_FUNCTION(level_is_ooze_at),
     MY_ADD_PYTHON_FUNCTION(level_is_openable_at),
     MY_ADD_PYTHON_FUNCTION(level_is_organic_at),
     MY_ADD_PYTHON_FUNCTION(level_is_pack_at),
