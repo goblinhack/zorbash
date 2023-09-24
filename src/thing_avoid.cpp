@@ -61,7 +61,7 @@ bool Thing::will_avoid_monst(const Thingp it)
   // It's really stuck?
   //
   if (it->paralysis_count()) {
-    dbg2("Avoid %s? no it's paralysis", it->to_short_string().c_str());
+    dbg2("Avoid %s? no it's paralysed", it->to_short_string().c_str());
     return false;
   }
 

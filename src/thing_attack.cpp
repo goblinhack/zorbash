@@ -1863,6 +1863,10 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         //
         // If paralysis, it cannot avoid the hits.
         //
+      } else if (victim->confusion_count()) {
+        //
+        // If confusion, it cannot avoid the hits.
+        //
       } else if (victim->blinded_count()) {
         //
         // If blinded, it cannot avoid the hits.

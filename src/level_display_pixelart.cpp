@@ -473,6 +473,9 @@ void Level::display_pixelart_map_all(void)
       if (display_gas_paralysis) {
         display_pixelart_gas_paralysis(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
       }
+      if (display_gas_confusion) {
+        display_pixelart_gas_confusion(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
+      }
       if (display_gas_healing) {
         display_pixelart_gas_healing(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
       }

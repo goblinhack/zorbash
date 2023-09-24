@@ -511,6 +511,7 @@ private:
   int _is_immune_to_acid {};
   int _is_immune_to_blinding {};
   int _is_immune_to_cold {};
+  int _is_immune_to_confusion {};
   int _is_immune_to_electricity {};
   int _is_immune_to_fire {};
   int _is_immune_to_magic_drain {};
@@ -1879,6 +1880,7 @@ public:
   int is_immune_to_acid(void) const;
   int is_immune_to_blinding(void) const;
   int is_immune_to_cold(void) const;
+  int is_immune_to_confusion(void) const;
   int is_immune_to_electricity(void) const;
   int is_immune_to_fire(void) const;
   int is_immune_to_magic_drain(void) const;
@@ -2650,6 +2652,7 @@ public:
   void is_immune_to_acid_set(int v);
   void is_immune_to_blinding_set(int v);
   void is_immune_to_cold_set(int v);
+  void is_immune_to_confusion_set(int v);
   void is_immune_to_electricity_set(int v);
   void is_immune_to_fire_set(int v);
   void is_immune_to_magic_drain_set(int v);

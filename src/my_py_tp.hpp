@@ -15,6 +15,7 @@ PyObject *spawn_set_fire_to_things_around_me(PyObject *obj, PyObject *args, PyOb
 PyObject *spawn_things_around_me(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_gas_poison_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_gas_paralysis_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *spawn_gas_confusion_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_darkness_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_gas_healing_around_thing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -499,6 +500,7 @@ TP_SET_PROTO(is_iceman)
 TP_SET_PROTO(is_immune_to_acid)
 TP_SET_PROTO(is_immune_to_blinding)
 TP_SET_PROTO(is_immune_to_cold)
+TP_SET_PROTO(is_immune_to_confusion)
 TP_SET_PROTO(is_immune_to_electricity)
 TP_SET_PROTO(is_immune_to_fire)
 TP_SET_PROTO(is_immune_to_magic_drain)

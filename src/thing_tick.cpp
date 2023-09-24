@@ -112,6 +112,14 @@ void Thing::achieve_goals_in_life(void)
   }
 
   //
+  // Check if confused
+  //
+  confusion_tick();
+  if (is_dead) {
+    return;
+  }
+
+  //
   // Lifespan tick for carried torches must be before is_hidden check
   //
   lifespan_tick();

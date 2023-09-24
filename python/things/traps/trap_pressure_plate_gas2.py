@@ -11,7 +11,7 @@ def on_death(me, x, y):
 def on_activated(me, victim, x, y):
     if my.thing_is_player(victim):
         my.thing_msg(victim, "You hear a pressure plate click beneath you...")
-        my.thing_msg(victim, "%%fg=red$Gas surrounds you!%%fg=reset$")
+        my.thing_msg(victim, "%%fg=red$Paralysis gas surrounds you!%%fg=reset$")
     else:
         my.thing_msg(victim, "The pressure plate clicks...")
     my.thing_dead(me, "activated")

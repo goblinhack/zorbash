@@ -97,3 +97,21 @@ int Thing::is_immune_to_electricity(void)
   TRACE_NO_INDENT();
   return (tp()->is_immune_to_electricity());
 }
+
+int Thing::is_immune_to_paralysis(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_immune_to_paralysis());
+}
+
+int Thing::is_immune_to_confusion(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_immune_to_confusion());
+}
+
+int Thing::is_immune_to_blinding(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_immune_to_blinding());
+}

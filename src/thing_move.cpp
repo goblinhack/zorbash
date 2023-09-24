@@ -389,6 +389,8 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
 
       if (level->is_gas_paralysis(curr_at.x, curr_at.y)) {
         msg("You hang out in the paralysis gas cloud.");
+      } else if (level->is_gas_confusion(curr_at.x, curr_at.y)) {
+        msg("You look puzzled in the confusing gas cloud.");
       } else if (level->is_gas_poison(curr_at.x, curr_at.y)) {
         msg("You hang out in the poison gas cloud.");
       } else if (level->is_gas_healing(curr_at.x, curr_at.y)) {
@@ -405,7 +407,9 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       move_count_incr();
     } else {
       if (level->is_gas_paralysis(curr_at.x, curr_at.y)) {
-        msg("You rest in the paralysis gas cloud.");
+        msg("You stiffly rest in the paralysis gas cloud.");
+      } else if (level->is_gas_confusion(curr_at.x, curr_at.y)) {
+        msg("You look puzzled in the confusing gas cloud.");
       } else if (level->is_gas_poison(curr_at.x, curr_at.y)) {
         msg("You rest in the poison gas cloud.");
       } else if (level->is_gas_healing(curr_at.x, curr_at.y)) {
@@ -810,6 +814,26 @@ void Thing::move_delta(point delta)
 {
   TRACE_NO_INDENT();
   move_finish();
+
+  //
+  // Confused. Change the intended direction.
+  //
+  if (confusion_count() > 0) {
+    auto roll = d100();
+    if (roll < 25) {
+      delta.x = -delta.x;
+    } else if (roll < 50) {
+      delta.y = -delta.y;
+    } else if (roll < 75) {
+      delta.x = -delta.x;
+      delta.y = -delta.y;
+    } else {
+      //
+      // normal
+      //
+    }
+  }
+
   move_set_dir_from_dest_or_delta(delta);
 
   //

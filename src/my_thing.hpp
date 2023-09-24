@@ -678,6 +678,7 @@ public:
   bool skill_remove(Thingp it);
   bool skill_use(Thingp it);
   bool spawn_darkness_around_thing(int radius);
+  bool spawn_gas_confusion_around_thing(int radius);
   bool spawn_gas_healing_around_thing(int radius);
   bool spawn_gas_paralysis_around_thing(int radius);
   bool spawn_gas_poison_around_thing(int radius);
@@ -1192,6 +1193,12 @@ public:
   int collision_hit_adj(void);
   int collision_hit_priority(void);
   int collision_hit_two_tiles_ahead(void);
+  int confusion_count_decr(int);
+  int confusion_count_decr(void);
+  int confusion_count_incr(int);
+  int confusion_count_incr(void);
+  int confusion_count_set(int);
+  int confusion_count(void);
   int consume_per_bite_amount(void);
   int damaged_count_decr(int);
   int damaged_count_decr(void);
@@ -1681,6 +1688,7 @@ public:
   int is_immune_to_acid(void);
   int is_immune_to_blinding(void);
   int is_immune_to_cold(void);
+  int is_immune_to_confusion(void);
   int is_immune_to_electricity(void);
   int is_immune_to_fire(void);
   int is_immune_to_magic_drain(void);
@@ -2621,6 +2629,13 @@ public:
   int tick_last_gas_paralysis_exposure_set(uint32_t);
   int tick_last_gas_paralysis_exposure(void);
 
+  int tick_last_gas_confusion_exposure_decr(uint32_t);
+  int tick_last_gas_confusion_exposure_decr(void);
+  int tick_last_gas_confusion_exposure_incr(uint32_t);
+  int tick_last_gas_confusion_exposure_incr(void);
+  int tick_last_gas_confusion_exposure_set(uint32_t);
+  int tick_last_gas_confusion_exposure(void);
+
   int tick_last_gas_healing_exposure_decr(uint32_t);
   int tick_last_gas_healing_exposure_decr(void);
   int tick_last_gas_healing_exposure_incr(uint32_t);
@@ -2809,6 +2824,8 @@ public:
   void collect_penalty_tick(void);
   void con(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void con_(const char *fmt, va_list args); // compile error without
+  void confusion_tick(void);
+  void confusion_update(void);
   void corrode_tick(void);
   void cursor_hover_over_check(void);
   void dbg_(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
@@ -2868,6 +2885,7 @@ public:
   void fall_into_the_void(void);
   void frozen_set(void);
   void frozen_unset(bool quiet = false);
+  void gas_confusion_tick(void);
   void gas_healing_tick(void);
   void gas_paralysis_tick(void);
   void gas_poison_tick(void);

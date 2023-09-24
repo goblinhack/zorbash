@@ -591,6 +591,9 @@ void tp_dump_monsters(void)
     if (tp->is_immune_to_paralysis()) {
       imm_str += "Paralysis<newline>";
     }
+    if (tp->is_immune_to_confusion()) {
+      imm_str += "Confusion<newline>";
+    }
     if (tp->is_immune_to_blinding()) {
       imm_str += "Blinding<newline>";
     }
@@ -782,11 +785,14 @@ void tp_dump_weapons(void)
     if (tp->is_immune_to_paralysis()) {
       imm_str += "Immunity-Paralysis<newline>";
     }
+    if (tp->is_immune_to_confusion()) {
+      imm_str += "Immunity-Confusion<newline>";
+    }
     if (tp->is_immune_to_blinding()) {
-      imm_str += "Immunity-Paralysis<newline>";
+      imm_str += "Immunity-Blinding<newline>";
     }
     if (tp->is_immune_to_poison()) {
-      imm_str += "Immunity-poison<newline>";
+      imm_str += "Immunity-Poison<newline>";
     }
     if (tp->is_immune_to_spell_of_holding()) {
       imm_str += "Immunity-Holding<newline>";

@@ -782,16 +782,6 @@ int Thing::is_grass_trampled(void)
   TRACE_NO_INDENT();
   return (tp()->is_grass_trampled());
 }
-int Thing::is_immune_to_paralysis(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_immune_to_paralysis());
-}
-int Thing::is_immune_to_blinding(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_immune_to_blinding());
-}
 int Thing::is_holy(void)
 {
   TRACE_NO_INDENT();

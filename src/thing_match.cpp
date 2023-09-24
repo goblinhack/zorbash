@@ -308,6 +308,7 @@ bool Tp::matches(const std::string &what)
   if (is_immune_to_acid() && (what == "is_immune_to_acid")) { return true; }
   if (is_immune_to_blinding() && (what == "is_immune_to_blinding")) { return true; }
   if (is_immune_to_cold() && (what == "is_immune_to_cold")) { return true; }
+  if (is_immune_to_confusion() && (what == "is_immune_to_confusion")) { return true; }
   if (is_immune_to_electricity() && (what == "is_immune_to_electricity")) { return true; }
   if (is_immune_to_fire() && (what == "is_immune_to_fire")) { return true; }
   if (is_immune_to_magic_drain() && (what == "is_immune_to_magic_drain")) { return true; }
@@ -911,6 +912,7 @@ bool Thing::matches(const std::string &what)
   if (is_immune_to_acid() && (what == "is_immune_to_acid")) { return true; }
   if (is_immune_to_blinding() && (what == "is_immune_to_blinding")) { return true; }
   if (is_immune_to_cold() && (what == "is_immune_to_cold")) { return true; }
+  if (is_immune_to_confusion() && (what == "is_immune_to_confusion")) { return true; }
   if (is_immune_to_electricity() && (what == "is_immune_to_electricity")) { return true; }
   if (is_immune_to_fire() && (what == "is_immune_to_fire")) { return true; }
   if (is_immune_to_magic_drain() && (what == "is_immune_to_magic_drain")) { return true; }
@@ -1508,6 +1510,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_immune_to_acid") { return &Thing::is_immune_to_acid; }
   if (what == "is_immune_to_blinding") { return &Thing::is_immune_to_blinding; }
   if (what == "is_immune_to_cold") { return &Thing::is_immune_to_cold; }
+  if (what == "is_immune_to_confusion") { return &Thing::is_immune_to_confusion; }
   if (what == "is_immune_to_electricity") { return &Thing::is_immune_to_electricity; }
   if (what == "is_immune_to_fire") { return &Thing::is_immune_to_fire; }
   if (what == "is_immune_to_magic_drain") { return &Thing::is_immune_to_magic_drain; }

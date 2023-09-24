@@ -27,7 +27,7 @@ void Thing::gas_paralysis_tick(void)
 
   //
   // Due to location checks, we check the start and end move so we end
-  // up being paralysised twice per move. As this is a bit cruel, check
+  // up being paralysed twice per move. As this is a bit cruel, check
   //
   if (game->tick_current == tick_last_gas_paralysis_exposure()) {
     return;

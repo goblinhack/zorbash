@@ -605,6 +605,7 @@ int Tp::is_iceman(void) const { return _is_iceman; }
 int Tp::is_immune_to_acid(void) const { return _is_immune_to_acid; }
 int Tp::is_immune_to_blinding(void) const { return _is_immune_to_blinding; }
 int Tp::is_immune_to_cold(void) const { return _is_immune_to_cold; }
+int Tp::is_immune_to_confusion(void) const { return _is_immune_to_confusion; }
 int Tp::is_immune_to_electricity(void) const { return _is_immune_to_electricity; }
 int Tp::is_immune_to_fire(void) const { return _is_immune_to_fire; }
 int Tp::is_immune_to_magic_drain(void) const { return _is_immune_to_magic_drain; }
@@ -1375,6 +1376,7 @@ void Tp::is_iceman_set(int v) { _is_iceman = v; }
 void Tp::is_immune_to_acid_set(int v) { _is_immune_to_acid = v; }
 void Tp::is_immune_to_blinding_set(int v) { _is_immune_to_blinding = v; }
 void Tp::is_immune_to_cold_set(int v) { _is_immune_to_cold = v; }
+void Tp::is_immune_to_confusion_set(int v) { _is_immune_to_confusion = v; }
 void Tp::is_immune_to_electricity_set(int v) { _is_immune_to_electricity = v; }
 void Tp::is_immune_to_fire_set(int v) { _is_immune_to_fire = v; }
 void Tp::is_immune_to_magic_drain_set(int v) { _is_immune_to_magic_drain = v; }

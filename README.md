@@ -12,8 +12,8 @@
 <!-- DONE Potion of Descent - Instantly erodes an area of the floor. Nearby monsters/objects will fall to the next level.                         -->
 <!-- DONE Potion of Incineration - Bursts into cloud of flames. Sets nearby monsters and terrain on fire.                                         -->
 <!-- DONE Potion of Creeping Death - Unleashes a spreading fungus that inflicts poisoning when stepped upon.                                      -->
+<!-- SKIP Potion of Hallucination - Causes long term hal                                                                                          -->
 <!-- TODO Potion of Confusion - Produces a cloud of confusion gas.                                                                                -->
-<!-- TODO Potion of Hallucination - Causes long term hal                                                                                          -->
 <!-- TODO Potion of Levitation - Causes you to float, Useful for escaping and crossing dangerous terrains.                                        -->
 <!-- TODO Potion of Malevolent (when applied or thrown):                                                                                          -->
 <!-- TODO Runics on weapons, like vampirism, force, quietus, lightning                                                                            -->
@@ -695,14 +695,14 @@ Other content
 - 112 x monsters
 - 52 x food
 - 24 x treasure
-- 23 x items
+- 24 x items
 - 20 x spells
 - 17 x weapons
 - 16 x buffs
-- 12 x potions
+- 13 x potions
 - 11 x skills
-- 10 x debuffs
-- 6 x traps
+- 11 x debuffs
+- 7 x traps
 - 6 x staffs
 - 6 x shield
 - 6 x boots

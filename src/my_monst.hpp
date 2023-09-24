@@ -238,6 +238,10 @@ public:
   //
   int tick_last_gas_paralysis_exposure {-1 /* std::numeric_limits< uint32_t >::max() */};
   //
+  // Last time we had to hold our breath
+  //
+  int tick_last_gas_confusion_exposure {-1 /* std::numeric_limits< uint32_t >::max() */};
+  //
   // Last time we were healed by gas
   //
   int tick_last_gas_healing_exposure {-1 /* std::numeric_limits< uint32_t >::max() */};
@@ -357,6 +361,7 @@ public:
   uint8_t idle_count      = {}; // How long we have not moved
   uint8_t stuck_count     = {}; // How long we have not moved due to being stuck
   uint8_t paralysis_count = {}; // How long we have not moved due to paralysis
+  uint8_t confusion_count = {}; // How long we have not moved due to confusion
   uint8_t blinded_count   = {}; // How long we have not moved due to blinded
 
   Dmap dmap_can_see; // What the monster can reach during AI
