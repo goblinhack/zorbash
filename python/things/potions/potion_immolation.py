@@ -21,7 +21,7 @@ def on_use(owner, item, target, x, y):
     my.thing_wake(target, "potion")
     my.spawn_set_fire_to_things_around_me(target, "fire")
     my.spawn_at_my_position(target, "fire")
-    my.thing_buff_add(target, "buff_temporary_immolation")
+    my.thing_debuff_add(owner, "debuff_temporary_immolation")
 
 
 def shatters(item, target, x, y):
@@ -57,7 +57,6 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.collision_hit_priority(self, 5)
-    my.collision_hit_priority(self, 6)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_reflection(self, True)

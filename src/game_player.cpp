@@ -108,6 +108,11 @@ void Game::place_player(void)
         level->player->on_fire_set("");
       }
       if (0) {
+        auto w = level->thing_new("potion_ooze", point(x, y));
+        t->carry(w, carry_options);
+        level->thing_new("dogman", point(x + 2, y));
+      }
+      if (0) {
         auto w = level->thing_new("potion_descent", point(x, y));
         t->carry(w, carry_options);
         level->thing_new("dogman", point(x + 2, y));
@@ -639,7 +644,7 @@ void Game::place_player(void)
         t->enchant_without_stone(w);
       }
 
-      if (1) {
+      if (0) {
         level->thing_new("acid1", point(x - 1, y - 2));
         level->thing_new("acid1", point(x - 1, y - 3));
         level->thing_new("ooze", point(x + 1, y));
