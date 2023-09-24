@@ -347,7 +347,13 @@ void Thing::killed(Thingp defeater, const char *reason)
       //
       // Darts are destroyed sometimes when thrown, so avoid a pointless message
       //
-      if (! is_being_thrown) {
+      if (is_being_used) {
+        if (is_potion()) {
+          msg("Your %s is empty.", text_long_name().c_str());
+        } else {
+          msg("Your %s is used.", text_long_name().c_str());
+        }
+      } else if (! is_being_thrown) {
         if (is_drained) {
           if (is_enchantstone()) {
             msg("Your %s is drained and vanishes.", text_long_name().c_str());

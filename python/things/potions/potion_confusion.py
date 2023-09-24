@@ -12,8 +12,6 @@ def on_use(owner, item, target, x, y):
         my.thing_stat_con_incr(owner, 1)
         if my.thing_is_player(owner):
             my.thing_msg(owner, "The confusion gas fills your lungs!")
-            roll = my.py_d20()
-            my.thing_hit_dmg_confusion(item, item, owner, roll)
     for it in my.level_flood_fill_gas_get_all_grid_things(item, x, y, 0):
         my.spawn_gas_confusion_around_thing(it, 1)
     my.thing_dead(item, "broken")
@@ -117,7 +115,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="potion_gas_confusion", text_long_name="potion of confusion gas", text_short_name="potion, confusion")
+    tp_init(name="potion_confusion", text_long_name="potion of confusion gas", text_short_name="potion, confusion")
 
 
 init()

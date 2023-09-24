@@ -117,7 +117,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="potion_gas_poison", text_long_name="potion of poison gas", text_short_name="potion, gas")
+    tp_init(name="potion_poison", text_long_name="potion of poison gas", text_short_name="potion, gas")
 
 
 init()

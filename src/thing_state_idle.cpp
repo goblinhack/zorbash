@@ -321,9 +321,9 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
   }
 
   //
-  // If confused, wait it out
+  // If confused, wait it out. If clueless, wander around and fall down a chasm.
   //
-  if (confusion_count() > 0) {
+  if (is_intelligent() && (confusion_count() > 0)) {
     change_state(MONST_STATE_RESTING, "nothing to do, rest");
     if (is_player()) {
       game->tick_begin("nothing to do, confused, rest");

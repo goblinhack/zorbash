@@ -19,6 +19,8 @@ void Thing::on_use(Thingp what)
     return;
   }
 
+  what->is_being_used = true;
+
   auto on_use = what->tp()->on_use_do();
   if (std::empty(on_use)) {
     dbg("Has no on use");
@@ -56,6 +58,8 @@ void Thing::on_use_skill(Thingp what)
     err("Cannot use null thing");
     return;
   }
+
+  what->is_being_used = true;
 
   auto on_use_skill = what->tp()->on_use_skill_do();
   if (std::empty(on_use_skill)) {
@@ -139,6 +143,8 @@ void Thing::on_use(Thingp what, Thingp target)
     return;
   }
 
+  what->is_being_used = true;
+
   auto on_use = what->tp()->on_use_do();
   if (! std::empty(on_use)) {
     auto t = split_tokens(on_use, '.');
@@ -180,6 +186,8 @@ void Thing::on_use_skill(Thingp what, Thingp target)
     err("Cannot on_use_skill null target");
     return;
   }
+
+  what->is_being_used = true;
 
   auto on_use_skill = what->tp()->on_use_skill_do();
   if (! std::empty(on_use_skill)) {

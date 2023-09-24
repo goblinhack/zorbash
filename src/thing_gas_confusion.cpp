@@ -41,7 +41,7 @@ void Thing::gas_confusion_tick(void)
     return;
   }
 
-  confusion_count_incr();
+  confusion_count_incr(5);
 
   if (stamina()) {
     if (is_player()) {

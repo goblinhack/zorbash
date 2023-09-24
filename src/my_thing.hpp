@@ -352,6 +352,7 @@ public:
   uint64_t is_being_dropped      : 1 {};
   uint64_t is_being_thrown       : 1 {};
   uint64_t is_being_used_to_tame : 1 {};
+  uint64_t is_being_used         : 1 {};
   uint64_t is_blitted            : 1 {};
   uint64_t is_in_lava            : 1 {}; // Updated on level pop/push
   uint64_t is_in_ooze            : 1 {}; // Updated on level pop/push

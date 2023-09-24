@@ -29,13 +29,14 @@ def on_use(owner, item, target, x, y):
 
     my.thing_poisoned_amount_set(target, 0)
 
-    my.thing_debuff_remove(target, "debuff_temporary_slow")
+    my.thing_debuff_remove(target, "debuff_status_blinded")
+    my.thing_debuff_remove(target, "debuff_status_confusion")
+    my.thing_debuff_remove(target, "debuff_status_hungry")
     my.thing_debuff_remove(target, "debuff_status_necrotized")
     my.thing_debuff_remove(target, "debuff_status_paralysis")
     my.thing_debuff_remove(target, "debuff_status_poisoned")
     my.thing_debuff_remove(target, "debuff_status_starving")
-    my.thing_debuff_remove(target, "debuff_status_hungry")
-    my.thing_debuff_remove(target, "debuff_status_blinded")
+    my.thing_debuff_remove(target, "debuff_temporary_slow")
     my.thing_blinded_count_set(owner, 0)
 
     my.spawn_using_items_radius_range(target, item, target, "potion_effect")
