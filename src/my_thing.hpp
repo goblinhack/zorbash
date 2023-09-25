@@ -2982,6 +2982,7 @@ public:
   void on_jump(void);
   void on_lifespan_tick(Thingp hitter);
   void on_move(void);
+  void on_move_player(void);
   void on_open(void);
   void on_owner_add(Thingp owner);
   void on_owner_unset(Thingp owner);

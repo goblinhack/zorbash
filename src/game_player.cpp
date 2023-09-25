@@ -108,6 +108,14 @@ void Game::place_player(void)
         level->player->on_fire_set("");
       }
       if (0) {
+        auto w = level->thing_new("potion_levitation", point(x, y));
+        t->carry(w, carry_options);
+        level->thing_new("water", point(x + 1, y));
+        level->thing_new("water", point(x + 2, y));
+        level->thing_new("water", point(x + 3, y));
+        level->thing_new("water", point(x + 4, y));
+      }
+      if (0) {
         auto w = level->thing_new("potion_ooze", point(x, y));
         t->carry(w, carry_options);
         level->thing_new("dogman", point(x + 2, y));

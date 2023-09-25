@@ -176,29 +176,6 @@ def on_death(me, x, y):
     my.topcon(f"{messages[a]}")
 
 
-# Don't repeat footsteps and wait for the current channel to finish so sounds do not overlap
-last_footstep = 0
-
-
-def on_move(me, x, y):
-    global last_footstep
-
-    if my.level_is_water_at(me, x, y):
-        footstep = my.py_non_pcg_random_range_inclusive(1, 6)
-        while footstep == last_footstep:
-            footstep = my.py_non_pcg_random_range_inclusive(1, 6)
-
-        if my.thing_sound_play_channel(me, my.CHANNEL_FOOTSTEPS, f"splash{footstep}"):
-            last_footstep = footstep
-    else:
-        footstep = my.py_non_pcg_random_range_inclusive(1, 8)
-        while footstep == last_footstep:
-            footstep = my.py_non_pcg_random_range_inclusive(1, 8)
-
-        if my.thing_sound_play_channel(me, my.CHANNEL_FOOTSTEPS, f"footsteps{footstep}"):
-            last_footstep = footstep
-
-
 def tp_init(name, text_long_name, text_short_name, title):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
@@ -311,7 +288,6 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.on_death_do(self, "player.on_death()")
     my.on_fall_begin_do(self, "player.on_fall_begin()")
     my.on_hit_and_still_alive_do(self, "player.on_hit_and_still_alive()")
-    my.on_move_do(self, "player.on_move()")
     my.on_you_nat_attack_attempt_do(self, "player.on_you_nat_attack_attempt()")
     my.stamina(self, 100)
     my.stat_att_penalty_when_idle_max(self, 0)

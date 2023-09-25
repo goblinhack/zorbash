@@ -8,18 +8,60 @@
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_sdl_proto.hpp"
+#include "my_sound.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_thing_attack_options.hpp"
 
+void Thing::on_move_player(void)
+{
+  if (is_floating_currently()) {
+    return;
+  }
+
+  if (is_ethereal()) {
+    return;
+  }
+
+  if (level->is_water(curr_at)) {
+    auto       footstep = d6();
+    static int last_footstep;
+
+    while (footstep == last_footstep) {
+      footstep = d6();
+    }
+
+    thing_sound_play_channel(CHANNEL_FOOTSTEPS, "splash" + std::to_string(footstep));
+    last_footstep = footstep;
+    return;
+  }
+
+  if (level->is_floor(curr_at) || level->is_corridor(curr_at)) {
+    {
+      auto       footstep = d6();
+      static int last_footstep;
+
+      while (footstep == last_footstep) {
+        footstep = d6();
+      }
+
+      thing_sound_play_channel(CHANNEL_FOOTSTEPS, "footsteps" + std::to_string(footstep));
+      last_footstep = footstep;
+    }
+  }
+}
+
 void Thing::on_move(void)
 {
   TRACE_NO_INDENT();
+
   if (is_player()) {
     //
     // Update reachability for the player
     //
     level->request_dmap_to_player_update = true;
+
+    on_move_player();
   }
 
   auto on_move = tp()->on_move_do();
