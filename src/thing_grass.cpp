@@ -14,7 +14,7 @@ void Thing::grass_tick(void)
     return;
   }
 
-  if (is_floating() || is_flying() || is_ethereal()) {
+  if (is_floating_currently() || is_flying() || is_ethereal()) {
     return;
   }
 

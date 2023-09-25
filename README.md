@@ -13,9 +13,8 @@
 <!-- DONE Potion of Incineration - Bursts into cloud of flames. Sets nearby monsters and terrain on fire.                                         -->
 <!-- DONE Potion of Creeping Death - Unleashes a spreading fungus that inflicts poisoning when stepped upon.                                      -->
 <!-- SKIP Potion of Hallucination - Causes long term hal                                                                                          -->
-<!-- TODO Potion of Confusion - Produces a cloud of confusion gas.                                                                                -->
+<!-- DONE Potion of Confusion - Produces a cloud of confusion gas.                                                                                -->
 <!-- TODO Potion of Levitation - Causes you to float, Useful for escaping and crossing dangerous terrains.                                        -->
-<!-- TODO Potion of Malevolent (when applied or thrown):                                                                                          -->
 <!-- TODO Runics on weapons, like vampirism, force, quietus, lightning                                                                            -->
 <!-- TODO Scroll of Aggravate Monsters                                                                                                            -->
 <!-- TODO Scroll of Discord                                                                                                                       -->
@@ -698,8 +697,8 @@ Other content
 - 24 x items
 - 20 x spells
 - 17 x weapons
-- 16 x buffs
-- 13 x potions
+- 17 x buffs
+- 14 x potions
 - 11 x skills
 - 11 x debuffs
 - 7 x traps

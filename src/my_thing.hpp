@@ -209,6 +209,7 @@ public:
   uint64_t is_facing_left                               : 1 {}; // It's in the process of dying
   uint64_t is_fadeup                                    : 1 {}; // For text that fades upwards
   uint64_t is_falling                                   : 1 {}; // Falling to a new level
+  uint64_t is_floating_                                 : 1 {}; // Updated per tick
   uint64_t is_frozen                                    : 1 {}; // Frozen by ice and cannot move
   uint64_t is_hidden                                    : 1 {}; // Carried perhaps and hence not visible
   uint64_t is_hunger_level_gorged                       : 1 {}; // Hunger levels
@@ -461,6 +462,7 @@ public:
   // begin sort marker3 {
   bool ai_blocked_completely(void);
   bool ai_blocked(void);
+  bool is_floating(void);
   bool ai_choose_avoid_goals(std::multiset< Goal > &avoid_goals, const Goal &goal);
   bool ai_choose_immediately_adjacent_goal(int dx, int dy);
   bool ai_choose_immediately_adjacent_goal(void);
@@ -515,6 +517,7 @@ public:
   bool buff_immune_to_teleport_attack(void);
   bool buff_immune_to_water(void);
   bool buff_invisible(void);
+  bool buff_floating(void);
   bool buff_remove(Thingp it);
   bool buff_remove(Tpp what);
   bool buff_slippery(void);
@@ -608,6 +611,7 @@ public:
   bool is_hated_by_me(const point p);
   bool is_hated_by_me(const Thingp it);
   bool is_invisible_currently(void);
+  bool is_floating_currently(void);
   bool is_invisible(void);
   bool is_obs_ai_for_me(point);
   bool is_obs_ai(fpoint);
@@ -1641,7 +1645,6 @@ public:
   int is_firefox(void);
   int is_fire(void);
   int is_flat(void);
-  int is_floating(void);
   int is_floor_deco(void);
   int is_floor(void);
   int is_flying(void);
@@ -2884,6 +2887,7 @@ public:
   void fadeup_height_set(float);
   void fall_height_set(float);
   void fall_into_the_void(void);
+  void floating_tick(void);
   void frozen_set(void);
   void frozen_unset(bool quiet = false);
   void gas_confusion_tick(void);

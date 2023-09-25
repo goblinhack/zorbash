@@ -398,7 +398,7 @@ bool Thing::teleport(TeleportOptions teleport_options, point to, bool *too_far)
   // If something moves on the water, make a ripple
   //
   if (is_monst() || is_player()) {
-    if (! is_floating() && ! is_flying()) {
+    if (! is_floating_currently() && ! is_flying()) {
 
       //
       // Ripples at the source

@@ -566,7 +566,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   // If something moves on the water, make a ripple
   //
   if (is_monst() || is_player()) {
-    if (! is_floating() && ! is_flying()) {
+    if (! is_floating_currently() && ! is_flying()) {
       if (level->is_shallow_water((int) curr_at.x, (int) curr_at.y)) {
         point at(curr_at.x, curr_at.y);
         dbg("Causes ripples");

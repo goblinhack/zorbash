@@ -422,3 +422,39 @@ bool Thing::buff_invisible(void)
 
   return false;
 }
+
+bool Thing::buff_floating(void)
+{
+  TRACE_NO_INDENT();
+
+  if (! maybe_itemsp()) {
+    return false;
+  }
+
+  TRACE_NO_INDENT();
+  FOR_ALL_BUFFS(id)
+  {
+    auto t = level->thing_find(id);
+    if (t) {
+      if (t->is_floating()) {
+        return true;
+      }
+    }
+  }
+
+  auto owner = top_owner();
+  if (owner) {
+    TRACE_NO_INDENT();
+    FOR_ALL_BUFFS_FOR(owner, item)
+    {
+      auto iter = level->thing_find(item.id);
+      if (iter) {
+        if (iter->is_floating()) {
+          return true;
+        }
+      }
+    }
+  }
+
+  return false;
+}

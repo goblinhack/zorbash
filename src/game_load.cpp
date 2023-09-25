@@ -431,6 +431,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->is_facing_left                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_fadeup                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_falling                                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->is_floating_                                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_frozen                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_hidden                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_hunger_level_gorged                       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;

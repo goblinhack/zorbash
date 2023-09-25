@@ -64,7 +64,7 @@ bool Thing::is_disliked_by_me(const point p)
     }
   }
 
-  if (! is_floating() && ! is_flying()) {
+  if (! is_floating_currently() && ! is_flying()) {
     if (level->is_chasm(p)) {
       // log("%s is disliked line %d", p.to_string().c_str(), __LINE__);
       return true;

@@ -138,9 +138,9 @@ bool Thing::collision_obstacle(Thingp it)
   //
   // Stop tentacleyes piling on top of each other
   //
-  if (it->is_floating() || it->is_flying()) {
+  if (it->is_floating_currently() || it->is_flying()) {
     TRACE_NO_INDENT();
-    if (is_floating() || is_flying()) {
+    if (is_floating_currently() || is_flying()) {
       IF_DEBUG3 { dbg("Collision obstacle (flying): %s", it->to_short_string().c_str()); }
       return true;
     }
@@ -252,7 +252,7 @@ bool Thing::collision_obstacle(Thingp it)
     }
 
     if (it->is_chasm()) {
-      if (! is_floating() && ! is_flying()) {
+      if (! is_floating_currently() && ! is_flying()) {
         IF_DEBUG3 { dbg("Collision obstacle (floating): %s", it->to_short_string().c_str()); }
         return true;
       }
@@ -396,8 +396,8 @@ bool Thing::is_obs_ai(Thingp it)
   //
   // Stop tentacleyes piling on top of each other
   //
-  if (it->is_floating() || it->is_flying()) {
-    if (is_floating() || is_flying()) {
+  if (it->is_floating_currently() || it->is_flying()) {
+    if (is_floating_currently() || is_flying()) {
       if (debug && is_debug_type()) {
         con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
       }
@@ -525,7 +525,7 @@ bool Thing::is_obs_ai(Thingp it)
 
   if (is_monst() || (is_player() && game->robot_mode)) {
     if (it->is_chasm()) {
-      if (! is_floating() && ! is_flying()) {
+      if (! is_floating_currently() && ! is_flying()) {
         if (debug && is_debug_type()) {
           con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
         }
@@ -635,7 +635,7 @@ bool Tp::is_obs_ai(Thingp it)
   //
   // Stop tentacleyes piling on top of each other
   //
-  if (it->is_floating() || it->is_flying()) {
+  if (it->is_floating_currently() || it->is_flying()) {
     if (is_floating() || is_flying()) {
       return true;
     }

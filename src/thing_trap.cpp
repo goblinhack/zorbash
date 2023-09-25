@@ -10,7 +10,7 @@
 
 void Thing::trap_tick(void)
 {
-  if (is_trap() || is_floating() || is_flying() || is_ethereal()) {
+  if (is_trap() || is_floating_currently() || is_flying() || is_ethereal()) {
     return;
   }
 

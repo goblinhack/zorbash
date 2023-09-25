@@ -1724,12 +1724,6 @@ int Thing::is_fire(void)
   return (tp()->is_fire());
 }
 
-int Thing::is_floating(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_floating());
-}
-
 int Thing::is_floor_deco(void)
 {
   TRACE_NO_INDENT();

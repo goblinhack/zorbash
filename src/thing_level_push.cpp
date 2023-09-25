@@ -448,7 +448,7 @@ void Thing::level_push(void)
       submerged_offset_set(4);
     }
 
-    if (! is_dead && (is_floating() || is_flying())) {
+    if (! is_dead && (is_floating_currently() || is_flying())) {
       //
       // Ghosts do not sink into lava
       //

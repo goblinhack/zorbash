@@ -197,7 +197,7 @@ int Thing::danger_initial_level(void)
   if (is_necrotic_danger_level()) {
     danger_level += is_necrotic_danger_level() * 20;
   }
-  if (is_floating()) {
+  if (is_floating_currently()) {
     danger_level += 2;
   }
   if (is_flying()) {
@@ -352,7 +352,7 @@ int Thing::danger_current_level(void)
   if (is_necrotic_danger_level()) {
     danger_level += is_necrotic_danger_level() * 20;
   }
-  if (is_floating()) {
+  if (is_floating_currently()) {
     danger_level += 2;
   }
   if (is_flying()) {

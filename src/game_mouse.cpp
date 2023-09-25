@@ -315,14 +315,14 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
         IF_DEBUG2 { player->log("Needs confirm"); }
 
         if (level->is_chasm(to)) {
-          if (! player->is_ethereal() && ! player->is_floating() && ! player->is_flying()) {
+          if (! player->is_ethereal() && ! player->is_floating_currently() && ! player->is_flying()) {
             std::string msg                             = "Do you really want to leap into a chasm.";
             game->warning_popup_exists_for_move_confirm = to;
             wid_warning(msg);
             return true;
           }
         } else if (level->is_lava(to)) {
-          if (! player->is_immune_to_fire() && ! player->is_ethereal() && ! player->is_floating()
+          if (! player->is_immune_to_fire() && ! player->is_ethereal() && ! player->is_floating_currently()
               && ! player->is_flying()) {
             std::string msg                             = "Do you really want to leap into lava.";
             game->warning_popup_exists_for_move_confirm = to;

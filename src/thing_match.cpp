@@ -867,7 +867,7 @@ bool Thing::matches(const std::string &what)
   if (is_firefox() && (what == "is_firefox")) { return true; }
   if (is_fire() && (what == "is_fire")) { return true; }
   if (is_flat() && (what == "is_flat")) { return true; }
-  if (is_floating() && (what == "is_floating")) { return true; }
+  if (is_floating_currently() && (what == "is_floating")) { return true; }
   if (is_floor_deco() && (what == "is_floor_deco")) { return true; }
   if (is_floor() && (what == "is_floor")) { return true; }
   if (is_flying() && (what == "is_flying")) { return true; }
