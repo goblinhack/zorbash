@@ -162,19 +162,17 @@ bool Thing::collision_obstacle(Thingp it)
   //
   if (it->is_obs_wall_or_door()) {
     TRACE_NO_INDENT();
-    if (is_able_to_walk_through_walls()) {
-      return false;
-    }
-
-    if (! it->is_open) {
-      IF_DEBUG3 { dbg("Collision obstacle (not open): %s", it->to_short_string().c_str()); }
-      return true;
+    if (! is_able_to_walk_through_walls()) {
+      if (! it->is_open && ! it->is_dead) {
+        IF_DEBUG3 { dbg("Collision obstacle (not open): %s", it->to_short_string().c_str()); }
+        return true;
+      }
     }
   }
 
   if (it->is_obs_destructable()) {
     TRACE_NO_INDENT();
-    if (! it->is_open) {
+    if (! it->is_open && ! it->is_dead) {
       IF_DEBUG3 { dbg("Collision obstacle (not open and destructable): %s", it->to_short_string().c_str()); }
       return true;
     }
@@ -461,9 +459,9 @@ bool Thing::is_obs_ai(Thingp it)
     }
 
     //
-    // Check for open doors.
+    // Check for open doors. Ignore dead/broken doors.
     //
-    if (! it->is_open) {
+    if (! it->is_open && ! it->is_dead) {
       if (it->is_door()) {
         if (is_able_to_open_doors()) {
           if (keys()) {
@@ -687,7 +685,7 @@ bool Tp::is_obs_ai(Thingp it)
       return false;
     }
 
-    if (! it->is_open) {
+    if (! it->is_open && ! it->is_dead) {
       if (it->is_door()) {
         if (is_able_to_open_doors()) {
           return false;
