@@ -6,17 +6,12 @@
 #include "my_level.hpp"
 #include "my_thing.hpp"
 
+//
+// Called for barrels to see what they interact with
+//
 void Thing::barrel_tick(void)
 {
-  if (is_floating_currently() || is_flying() || is_ethereal()) {
-    return;
-  }
-
-  if (! is_soft() && ! is_barrel()) {
-    return;
-  }
-
-  if (! level->is_barrel(curr_at.x, curr_at.y)) {
+  if (! is_barrel()) {
     return;
   }
 
@@ -26,7 +21,6 @@ void Thing::barrel_tick(void)
   //
   // Find all non barrels and crush them
   //
-  TRACE_NO_INDENT();
   FOR_ALL_THINGS_THAT_INTERACT(level, t, curr_at.x, curr_at.y)
   {
     if (t->is_barrel()) {
@@ -45,7 +39,6 @@ void Thing::barrel_tick(void)
       continue;
     }
   }
-  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 }
 

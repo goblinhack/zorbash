@@ -29,6 +29,7 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, ShoveOptions shove_o
   if (! is_daring() && ! is_fearless()) {
     if (victim->thing_size() - thing_size() > 1) {
       dbg("Too large to shove, don't even try to shove %s", victim->to_short_string().c_str());
+      msg("%s is too large to be shoved!", victim->text_The().c_str());
       return (THING_SHOVE_NEVER_TRIED);
     }
   }

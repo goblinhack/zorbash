@@ -311,8 +311,8 @@ Bestiary
 <!-- begin monsters type marker -->
 | Monster | Class/Rarity | Dngr | Attack | # Attcks | Other attacks | Immunity |
 | :--- | --- | --- | --- | --- | --- | --- |
-| Reaper | E/common | 712 | 1d6+6 | 2 |  | Acid<br />Cold<br />Fire<br />Necrosis<br />Negation<br />Paralysis<br />Blinding<br />Poison<br />Holding<br />Slowing<br />Webs<br />Draining<br /> |
-| Cthulite | D/rare | 424 | 1d14+4 | 2 | Acid:2d6<br />Poison:2d12<br /> | Acid<br />Cold<br />Necrosis<br />Poison<br />Draining<br /> |
+| Reaper | E/common | 712 | 1d6+6 | 2 |  | Acid<br />Cold<br />Fire<br />Necrosis<br />Negation<br />Paralysis<br />Confusion<br />Blinding<br />Poison<br />Holding<br />Slowing<br />Webs<br />Draining<br /> |
+| Cthulite | D/rare | 424 | 1d14+4 | 2 | Acid:2d6<br />Poison:2d12<br /> | Acid<br />Cold<br />Necrosis<br />Confusion<br />Poison<br />Draining<br /> |
 | Ettin, Two Headed Giant | D/rare | 382 | 1d10+4 | 2 |  |  |
 | Flesh Golem | C/rare | 336 | 2d8+4 | 2 |  | Cold<br />Poison<br />Draining<br /> |
 | Fire Demon | D/uncommon | 328 | 1d14+4 | 2 | Fire:1d6+6<br /> | Cold<br />Fire<br />Necrosis<br />Poison<br /> |

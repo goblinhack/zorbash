@@ -216,24 +216,46 @@ void Thing::temperature_tick(void)
   }
 
   if (thing_temp < 0) {
-    if (is_dead || is_dying) {
-      if (is_able_to_freeze()) {
-        if (! is_frozen) {
-          dbg("Freeze the dead monst");
-          frozen_set();
+    if (is_player() || is_monst()) {
+      if (is_dead || is_dying) {
+        if (is_able_to_freeze()) {
+          if (! is_frozen) {
+            dbg("Freeze the dead monst");
+            frozen_set();
+          }
         }
+        return;
+      }
+    } else if (is_able_to_freeze()) {
+      //
+      // Allows doors to freeze
+      //
+      if (! is_frozen) {
+        dbg("Freeze it");
+        frozen_set();
       }
       return;
     }
   }
 
-  if (is_burnable()) {
-    if (is_dead || is_dying) {
-      if (! is_burnt) {
-        if (thing_temp > 0) {
-          dbg("Burn the dead monst");
-          is_burnt = true;
+  if (thing_temp > TEMPERATURE_THRESHOLD) {
+    if (is_player() || is_monst()) {
+      if (is_dead || is_dying) {
+        if (is_burnable()) {
+          if (! is_burnt) {
+            dbg("Burn the dead monst");
+            is_burnt = true;
+          }
         }
+        return;
+      }
+    } else if (is_burnable()) {
+      //
+      // Allows doors to burn
+      //
+      if (! is_burnt) {
+        dbg("Burn it");
+        is_burnt = true;
       }
       return;
     }
@@ -260,8 +282,19 @@ void Thing::temperature_tick(void)
   if (thing_temp != location_temp) {
     int delta = (location_temp - thing_temp) / 2;
 
-    if (is_lava() || is_wall() || is_door() || is_rock()) {
-      delta = (location_temp - thing_temp) / 10;
+    if (delta > 0) {
+      //
+      // Allow wooden doors to burn quicker
+      //
+      if (is_wooden() || is_burnable()) {
+        delta = (location_temp - thing_temp) / 2;
+      } else if (is_lava() || is_wall() || is_door() || is_rock()) {
+        delta = (location_temp - thing_temp) / 10;
+      }
+    } else {
+      if (is_lava() || is_wall() || is_door() || is_rock()) {
+        delta = (location_temp - thing_temp) / 10;
+      }
     }
 
     temperature_incr(delta);

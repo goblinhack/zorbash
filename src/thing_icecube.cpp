@@ -6,50 +6,42 @@
 #include "my_game.hpp"
 #include "my_thing.hpp"
 
+//
+// Called for blocks of ice to see what they interact with
+//
 void Thing::block_of_ice_tick(void)
 {
-  if (is_floating_currently() || is_flying() || is_ethereal()) {
-    return;
-  }
-
-  if (! is_soft() && ! is_block_of_ice()) {
-    return;
-  }
-
-  if (! level->is_block_of_ice(curr_at.x, curr_at.y)) {
+  if (! is_block_of_ice()) {
     return;
   }
 
   dbg("Icecube tick");
   TRACE_AND_INDENT();
 
-  if (is_block_of_ice()) {
-    //
-    // Find all non block_of_ices and crush them
-    //
-    TRACE_NO_INDENT();
-    FOR_ALL_THINGS_THAT_INTERACT(level, t, curr_at.x, curr_at.y)
-    {
-      if (t == this) {
-        continue;
-      }
-
-      //
-      // Only do crush damage if the thing moved.
-      //
-      if (t->last_at == t->curr_at) {
-        //
-        // Cold damage is handled in temperature checks.
-        //
-        continue;
-      }
-
-      t->log("Crushed by a block of ice");
-      t->is_attacked_with_dmg_crush(this, this, dmg_crush());
+  //
+  // Find all non blocks of ice and crush them
+  //
+  TRACE_NO_INDENT();
+  FOR_ALL_THINGS_THAT_INTERACT(level, t, curr_at.x, curr_at.y)
+  {
+    if (t == this) {
+      continue;
     }
-    TRACE_NO_INDENT();
-    FOR_ALL_THINGS_END()
+
+    //
+    // Only do crush damage if the thing moved.
+    //
+    if (t->last_at == t->curr_at) {
+      //
+      // Cold damage is handled in temperature checks.
+      //
+      continue;
+    }
+
+    t->log("Crushed by a block of ice");
+    t->is_attacked_with_dmg_crush(this, this, dmg_crush());
   }
+  FOR_ALL_THINGS_END()
 }
 
 uint8_t Level::is_block_of_ice(const point p)

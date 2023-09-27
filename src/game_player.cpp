@@ -268,7 +268,8 @@ void Game::place_player(void)
         level->thing_new("brazier", point(x + 2, y));
       }
       if (0) {
-        // level->thing_new("block_of_ice", point(x + 1, y));
+        level->thing_new("barrel", point(x + 1, y));
+        level->thing_new("dogman", point(x + 2, y));
         // level->thing_new("spell_of_holding_barrier", point(x + 1, y + 1));
         // level->thing_new("spell_of_holding_barrier", point(x, y));
         auto w = level->thing_new("spell_of_holding", point(x, y));
@@ -835,6 +836,8 @@ void Game::place_player(void)
         d->dead("x");
       }
       if (0) {
+        level->thing_new("fire", point(x + 1, y));
+        level->thing_new("door_wood", point(x + 1, y));
         level->thing_new("lava", point(x + 2, y + 1));
         level->thing_new("block_of_ice", point(x + 2, y + 1));
       }

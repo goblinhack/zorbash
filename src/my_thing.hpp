@@ -462,7 +462,6 @@ public:
   // begin sort marker3 {
   bool ai_blocked_completely(void);
   bool ai_blocked(void);
-  bool is_floating(void);
   bool ai_choose_avoid_goals(std::multiset< Goal > &avoid_goals, const Goal &goal);
   bool ai_choose_immediately_adjacent_goal(int dx, int dy);
   bool ai_choose_immediately_adjacent_goal(void);
@@ -507,6 +506,7 @@ public:
   bool buff_aquatic(void);
   bool buffbox_id_insert(Thingp what);
   bool buffbox_id_remove(Thingp what);
+  bool buff_floating(void);
   bool buff_immune_to_cold(void);
   bool buff_immune_to_fire(void);
   bool buff_immune_to_magic_drain(void);
@@ -517,7 +517,6 @@ public:
   bool buff_immune_to_teleport_attack(void);
   bool buff_immune_to_water(void);
   bool buff_invisible(void);
-  bool buff_floating(void);
   bool buff_remove(Thingp it);
   bool buff_remove(Tpp what);
   bool buff_slippery(void);
@@ -607,11 +606,12 @@ public:
   bool is_edible(const Thingp it);
   bool is_enemy(Thingp it);
   bool is_equipped(Thingp item);
+  bool is_floating_currently(void);
+  bool is_floating(void);
   bool is_friend(Thingp it);
   bool is_hated_by_me(const point p);
   bool is_hated_by_me(const Thingp it);
   bool is_invisible_currently(void);
-  bool is_floating_currently(void);
   bool is_invisible(void);
   bool is_obs_ai_for_me(point);
   bool is_obs_ai(fpoint);
@@ -2981,8 +2981,8 @@ public:
   void on_hit_dodge_do(Thingp hitter);
   void on_jump(void);
   void on_lifespan_tick(Thingp hitter);
-  void on_move(void);
   void on_move_player(void);
+  void on_move(void);
   void on_open(void);
   void on_owner_add(Thingp owner);
   void on_owner_unset(Thingp owner);
