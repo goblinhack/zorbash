@@ -125,6 +125,12 @@ bool Thing::thing_sound_play_channel(int channel, const std::string &alias)
       //
       // Ok to hit walls or doors.
       //
+      if (! level->can_see_unimpeded(player->curr_at, curr_at)) {
+        //
+        // Only if we can see the wall or door
+        //
+        return false;
+      }
     } else {
       //
       // Likely far away
