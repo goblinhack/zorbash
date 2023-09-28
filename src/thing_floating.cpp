@@ -3,7 +3,9 @@
 //
 
 #include "my_level.hpp"
+#include "my_math.hpp"
 #include "my_thing.hpp"
+#include <math.h>
 
 void Thing::floating_tick(void) { is_floating_ = is_floating(); }
 
@@ -28,3 +30,19 @@ bool Thing::is_floating(void)
 }
 
 bool Thing::is_floating_currently(void) { return is_floating_; }
+
+float Thing::floating_curr(void)
+{
+  if (! is_floating_) {
+    return 0.0;
+  }
+
+  auto t = time_ms_cached();
+
+  float time_step = (float) (t);
+  float height    = 0.15;
+  height *= sin((time_step / 1000.0) * RAD_180);
+  height += 0.3;
+
+  return height;
+}

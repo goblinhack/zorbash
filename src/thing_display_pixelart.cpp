@@ -204,7 +204,7 @@ void Thing::blit_non_player_owned_shadow(const Tpp &tpp, const Tilep &tile, cons
       std::swap(shadow_tl, shadow_tr);
     }
 
-    float bounce = bounce_curr();
+    float bounce = bounce_curr() + floating_curr();
     float tileh  = game->config.tile_pix_height;
     float bh     = (tileh / TILE_HEIGHT) * (int) (bounce * TILE_HEIGHT);
 
@@ -632,6 +632,24 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
     }
 
     float bounce_height = (tileh / TILE_HEIGHT) * (int) (bounce * TILE_HEIGHT);
+    if (reflection) {
+      blit_tl.y += bounce_height;
+      blit_br.y += bounce_height;
+    } else {
+      blit_tl.y -= bounce_height;
+      blit_br.y -= bounce_height;
+    }
+  }
+
+  if (unlikely(is_floating_currently() || (o_top && o_top->is_floating_currently()))) {
+    float float_height;
+    if (o_top) {
+      float_height = o_top->floating_curr();
+    } else {
+      float_height = floating_curr();
+    }
+
+    float bounce_height = (tileh / TILE_HEIGHT) * (int) (float_height * TILE_HEIGHT);
     if (reflection) {
       blit_tl.y += bounce_height;
       blit_br.y += bounce_height;

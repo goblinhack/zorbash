@@ -1056,9 +1056,9 @@ public:
   const std::string &title(void);
   // end sort marker5 {
 
+  float bounce_curr(void);
   float bounce_fade_curr(void);
   float bounce_height_curr(void);
-  float bounce_curr(void);
   float distance_avoid_get(void);
   float distance_from_leader(point p);
   float distance_from_leader(void);
@@ -1070,22 +1070,23 @@ public:
   float distance_minion_from_mob_max_float(void);
   float distance_recruitment_max_float(point p);
   float distance_recruitment_max_float(void);
-  float distance_throw_get(void);
   float distance_spell_cast_get(void);
+  float distance_throw_get(void);
   float distance_vision_get(void);
+  float fadeup_curr(void);
   float fadeup_fade_curr(void);
   float fadeup_height_curr(void);
-  float fadeup_curr(void);
-  float fall_height_curr(void);
   float fall_curr(void);
+  float fall_height_curr(void);
+  float floating_curr(void);
   float health_pct(void);
-  float lunge_curr(void);
-  float wobble_curr(void);
-  float jump_distance_max_get(void);
   float jump_distance_current(void);
+  float jump_distance_max_get(void);
+  float lunge_curr(void);
   float teleport_distance_max_get(void);
   float teleport_distance_with_modifiers_get(void);
   float update_wobble(void);
+  float wobble_curr(void);
 
   // begin sort marker6 {
   int aggression_pct(void);

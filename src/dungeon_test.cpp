@@ -139,7 +139,7 @@ void dungeon_test(void)
       //
       if (player->move_count() > 500) {
         pcg_random_allowed++;
-        player->dead("End of test");
+        player->dead("end of test");
         pcg_random_allowed--;
         break;
       }
