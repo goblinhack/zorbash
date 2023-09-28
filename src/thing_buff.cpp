@@ -77,6 +77,7 @@ bool Thing::buff_remove(Thingp buff)
   auto items = itemsp();
   auto found = std::find(items->buffs.begin(), items->buffs.end(), buff->id);
   if (found != items->buffs.end()) {
+    dbg("Found buff %s", buff->to_short_string().c_str());
     items->buffs.erase(found);
   }
 
@@ -139,6 +140,11 @@ bool Thing::buff_use(Thingp buff)
 bool Thing::buff_add(Tpp buff)
 {
   if (! maybe_itemsp()) {
+    return false;
+  }
+
+  if (buff->is_debuff()) {
+    err("Adding a debuff as a buff: %s", buff->to_short_string().c_str());
     return false;
   }
 

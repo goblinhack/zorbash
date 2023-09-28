@@ -331,12 +331,19 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
   equip_remove_anim(equip);
 
   //
-  // If the weapon has a runic, add it
+  // If the weapon has a runic, remove it
   //
   if (item->is_able_to_have_a_runic_inscribed()) {
     auto runic = item->runic_name_get();
     if (! runic.empty()) {
-      buff_remove(tp_find(runic));
+      auto a_runic = tp_find(runic);
+      if (a_runic->is_buff()) {
+        buff_remove(a_runic);
+      } else if (a_runic->is_debuff()) {
+        debuff_remove(a_runic);
+      } else {
+        err("Could not remove runic: %s", a_runic->text_short_name().c_str());
+      }
     }
   }
 
@@ -547,7 +554,14 @@ bool Thing::equip(Thingp item, int equip)
   if (item->is_able_to_have_a_runic_inscribed()) {
     auto runic = item->runic_name_get();
     if (! runic.empty()) {
-      buff_add(tp_find(runic));
+      auto a_runic = tp_find(runic);
+      if (a_runic->is_buff()) {
+        buff_add(a_runic);
+      } else if (a_runic->is_debuff()) {
+        debuff_add(a_runic);
+      } else {
+        err("Could not add runic: %s", a_runic->text_short_name().c_str());
+      }
     }
   }
 

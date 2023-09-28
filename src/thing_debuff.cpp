@@ -17,9 +17,14 @@ bool Thing::debuff_add(Thingp debuff)
     return false;
   }
 
-  FOR_ALL_DEBUFFS(item)
+  if (debuff->is_buff()) {
+    err("Adding a buff as a debuff: %s", debuff->to_short_string().c_str());
+    return false;
+  }
+
+  FOR_ALL_DEBUFFS(id)
   {
-    if (item == debuff->id) {
+    if (id == debuff->id) {
       dbg("No; already carried");
       return false;
     }
@@ -76,6 +81,7 @@ bool Thing::debuff_remove(Thingp debuff)
   auto items = itemsp();
   auto found = std::find(items->debuffs.begin(), items->debuffs.end(), debuff->id);
   if (found != items->debuffs.end()) {
+    dbg("Found debuff %s", debuff->to_short_string().c_str());
     items->debuffs.erase(found);
   }
 
