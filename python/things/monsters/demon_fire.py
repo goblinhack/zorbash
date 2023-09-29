@@ -97,6 +97,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_teleport_escape(self, True)
     my.is_able_to_teleport_self(self, True)
     my.is_able_to_teleport_without_tiring(self, True)
+    my.is_always_submerged_in_lava(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)

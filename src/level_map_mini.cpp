@@ -40,7 +40,7 @@ bool Level::update_map_mini_should_show_monst(int x, int y)
       //
       // Only show on the map once it has been seen.
       //
-      if (t->is_always_submerged_in_water()) {
+      if (t->is_always_submerged_in_water() || t->is_always_submerged_in_lava()) {
         if (t->has_attacked_player) {
           return true;
         }

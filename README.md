@@ -312,10 +312,10 @@ Bestiary
 | Monster | Class/Rarity | Dngr | Attack | # Attcks | Other attacks | Immunity |
 | :--- | --- | --- | --- | --- | --- | --- |
 | Reaper | E/common | 712 | 1d6+6 | 2 |  | Acid<br />Cold<br />Fire<br />Necrosis<br />Negation<br />Paralysis<br />Confusion<br />Blinding<br />Poison<br />Holding<br />Slowing<br />Webs<br />Draining<br /> |
+| Fire Demon | D/uncommon | 546 | 1d14+4 | 2 | Fire:1d6+6<br /> | Cold<br />Fire<br />Necrosis<br />Poison<br /> |
 | Cthulite | D/rare | 424 | 1d14+4 | 2 | Acid:2d6<br />Poison:2d12<br /> | Acid<br />Cold<br />Necrosis<br />Confusion<br />Poison<br />Draining<br /> |
 | Ettin, Two Headed Giant | D/rare | 382 | 1d10+4 | 2 |  |  |
 | Flesh Golem | C/rare | 336 | 2d8+4 | 2 |  | Cold<br />Poison<br />Draining<br /> |
-| Fire Demon | D/uncommon | 328 | 1d14+4 | 2 | Fire:1d6+6<br /> | Cold<br />Fire<br />Necrosis<br />Poison<br /> |
 | Undead Bear | C/common | 320 | 2d8+5 | 2 | Necrotic:1<br /> | Cold<br />Necrosis<br />Poison<br />Draining<br /> |
 | Bearowl | C/common | 290 | 2d8+5 | 2 |  |  |
 | Baby Kraken | D/rare | 249 |  | 1 | Bite:3d8+10<br />Digest:1d20<br />Drown:1d20<br /> | Water<br /> |
@@ -414,9 +414,9 @@ Bestiary
 | Goldfish | A/common | 27 | 1 | 1 | Bite:1d1+1<br /> | Water<br /> |
 | Baby Slime Jumper | A/common | 27 | 1 | 1 | Acid:1d3<br /> | Acid<br />Necrosis<br /> |
 | Sheep | B/common | 26 | 1d3+2 | 1 |  | Water<br /> |
+| Lava Ant | A/common | 25 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d3<br />Fire:1d3+1<br /> | Fire<br /> |
 | Bloated Bloodbug | A/common | 24 | 1d2+1 | 1 | Bite:1d2<br />Drain:1d1<br /> |  |
 | Vampire Rose | A/common | 22 | 1d3 | 1 | Digest:1d5<br /> |  |
-| Lava Ant | A/common | 22 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d3<br />Fire:1d3+1<br /> | Fire<br /> |
 <!-- end monsters type marker -->
 
 Weapons

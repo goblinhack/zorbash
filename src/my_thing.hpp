@@ -1488,6 +1488,7 @@ public:
   int is_alive_on_end_of_anim(void);
   int is_always_activated(void);
   int is_always_hit(void);
+  int is_always_submerged_in_lava(void);
   int is_always_submerged_in_water(void);
   int is_amulet(void);
   int is_animation(void);
@@ -1953,7 +1954,6 @@ public:
   int is_unused_flag76(void);
   int is_unused_flag77(void);
   int is_unused_flag78(void);
-  int is_unused_flag79(void);
   int is_unused_flag7(void);
   int is_unused_flag8(void);
   int is_unused_flag9(void);

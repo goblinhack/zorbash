@@ -761,13 +761,25 @@ void Game::place_player(void)
         auto h = level->thing_new("holy_water", point(x, y + 2));
         t->carry(h, carry_options);
       }
+      if (0) {
+        auto w = level->thing_new("potion_levitation", point(x, y));
+        t->carry(w, carry_options);
+        level->thing_new("demon_fire", point(x + 2, y));
+        level->thing_new("lava", point(x + 1, y));
+        level->thing_new("lava", point(x + 2, y));
+        level->thing_new("lava", point(x + 3, y));
+        level->thing_new("lava", point(x + 4, y));
+        level->thing_new("lava", point(x + 1, y + 1));
+        level->thing_new("lava", point(x + 2, y + 1));
+        level->thing_new("lava", point(x + 3, y + 1));
+        level->thing_new("lava", point(x + 4, y + 1));
+        level->thing_new("lava", point(x + 1, y + 2));
+        level->thing_new("lava", point(x + 2, y + 2));
+        level->thing_new("lava", point(x + 3, y + 2));
+        level->thing_new("lava", point(x + 4, y + 2));
+      }
       IF_DEBUG2
       {
-        if (0) {
-          level->thing_new("lava", point(x + 1, y));
-          level->thing_new("lava", point(x + 2, y));
-          level->thing_new("lava", point(x + 3, y));
-        }
         if (0) {
           level->thing_new("coffin_mob", point(x + 2, y + 1));
         }

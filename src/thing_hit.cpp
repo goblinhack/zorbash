@@ -2732,6 +2732,23 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
     }
   }
 
+  if (is_floating_currently() && hitter->is_always_submerged_in_lava()) {
+    if (thing_size() > (int) THING_SIZE_NORMAL) {
+      //
+      // Demon?
+      //
+    } else {
+      //
+      // Fire ant
+      //
+      IF_DEBUG { hitter->log("Cannot hit: %s is floating above me", to_short_string().c_str()); }
+      if (is_player()) {
+        msg("You watch the lava roil beneath you.");
+      }
+      return false;
+    }
+  }
+
   //
   // Cruel to let things keep on hitting you when you're dead
   // Even worse, to let them eat you, but better if you are dead first.

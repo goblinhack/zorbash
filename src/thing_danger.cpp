@@ -85,6 +85,9 @@ int Tp::get_danger_level(void)
   if (is_always_submerged_in_water()) {
     danger_level *= 2;
   }
+  if (is_always_submerged_in_lava()) {
+    danger_level *= 2;
+  }
   if (is_able_to_teleport_attack()) {
     danger_level += 100;
   }
@@ -222,6 +225,9 @@ int Thing::danger_initial_level(void)
     danger_level /= 10;
   }
   if (is_always_submerged_in_water()) {
+    danger_level *= 2;
+  }
+  if (is_always_submerged_in_lava()) {
     danger_level *= 2;
   }
   if (is_able_to_teleport_attack()) {
@@ -377,6 +383,9 @@ int Thing::danger_current_level(void)
     danger_level /= 10;
   }
   if (is_always_submerged_in_water()) {
+    danger_level *= 2;
+  }
+  if (is_always_submerged_in_lava()) {
     danger_level *= 2;
   }
   if (is_able_to_teleport_attack()) {

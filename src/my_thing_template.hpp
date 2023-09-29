@@ -334,6 +334,7 @@ private:
   int _is_alive_on_end_of_anim {};
   int _is_always_activated {};
   int _is_always_hit {};
+  int _is_always_submerged_in_lava {};
   int _is_always_submerged_in_water {};
   int _is_amulet {};
   int _is_animation {};
@@ -775,7 +776,6 @@ private:
   int _is_unused_flag76 {};
   int _is_unused_flag77 {};
   int _is_unused_flag78 {};
-  int _is_unused_flag79 {};
   int _is_unused_flag8 {};
   int _is_unused_flag9 {};
   int _is_usable {};
@@ -1703,6 +1703,7 @@ public:
   int is_alive_on_end_of_anim(void) const;
   int is_always_activated(void) const;
   int is_always_hit(void) const;
+  int is_always_submerged_in_lava(void) const;
   int is_always_submerged_in_water(void) const;
   int is_amulet(void) const;
   int is_animation(void) const;
@@ -2142,7 +2143,6 @@ public:
   int is_unused_flag76(void) const;
   int is_unused_flag77(void) const;
   int is_unused_flag78(void) const;
-  int is_unused_flag79(void) const;
   int is_unused_flag7(void) const;
   int is_unused_flag8(void) const;
   int is_unused_flag9(void) const;
@@ -2475,6 +2475,7 @@ public:
   void is_allied_with_set(const std::string &v);
   void is_always_activated_set(int v);
   void is_always_hit_set(int v);
+  void is_always_submerged_in_lava_set(int v);
   void is_always_submerged_in_water_set(int v);
   void is_amulet_set(int v);
   void is_animation_set(int v);
@@ -2914,7 +2915,6 @@ public:
   void is_unused_flag76_set(int v);
   void is_unused_flag77_set(int v);
   void is_unused_flag78_set(int v);
-  void is_unused_flag79_set(int v);
   void is_unused_flag7_set(int v);
   void is_unused_flag8_set(int v);
   void is_unused_flag9_set(int v);

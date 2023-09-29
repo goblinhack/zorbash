@@ -602,10 +602,10 @@ int Thing::is_unused_flag78(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag78());
 }
-int Thing::is_unused_flag79(void)
+int Thing::is_always_submerged_in_lava(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag79());
+  return (tp()->is_always_submerged_in_lava());
 }
 int Thing::is_ooze(void)
 {

@@ -76,6 +76,15 @@ void Thing::temperature_tick(void)
     }
 
     //
+    // Ignore lava heat if floating above it.
+    //
+    if (is_floating_currently()) {
+      if (t->is_lava()) {
+        continue;
+      }
+    }
+
+    //
     // Do not count hidden player body parts
     //
     if (t->is_player_bodypart()) {
