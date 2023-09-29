@@ -17,18 +17,18 @@ def on_born(me, x, y):
                     # my.con("cand    {} {:X} {},{}".format(my.thing_name_get(it), it, water_x, water_y))
                     if it != me:
                         if my.thing_possible_to_attack(me, it):
-                            my.thing_hit(0, me, it)
-                            if my.thing_is_player(it):
-                                my.thing_msg(it, "Current surges through your body!")
+                            if my.thing_hit(0, me, it):
+                                if my.thing_is_player(it):
+                                    my.thing_msg(it, "Current surges through your body!")
 
                             my.thing_shoot_projectile_or_laser_at(source, "laser_lightning_fork", it)
             return
 
         it = source
         if my.thing_possible_to_attack(me, it):
-            my.thing_hit(0, me, it)
-            if my.thing_is_player(it):
-                my.thing_msg(it, "Current surges through your body!")
+            if my.thing_hit(0, me, it):
+                if my.thing_is_player(it):
+                    my.thing_msg(it, "Current surges through your body!")
 
 
 #

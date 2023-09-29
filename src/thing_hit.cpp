@@ -2689,6 +2689,50 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
   }
 
   //
+  // Unable to hit?
+  //
+  if (is_floating_currently() && real_hitter->is_water()) {
+    //
+    // Electric eel fork lightning attack in water
+    //
+    if (is_player()) {
+      msg("You watch the electrics going on beneath you.");
+    }
+    IF_DEBUG { hitter->log("Cannot hit: %s is floating above water", to_short_string().c_str()); }
+    return false;
+  }
+
+  if (attack_options->attack[ THING_ATTACK_LIGHTNING ]) {
+    if (is_floating_currently() && real_hitter->is_always_submerged_in_water()) {
+      //
+      // Electric eel first lightning hit
+      //
+      IF_DEBUG { hitter->log("Cannot hit: %s is floating above me", to_short_string().c_str()); }
+      if (is_player()) {
+        msg("You watch the electrics going on beneath you.");
+      }
+      return false;
+    }
+  }
+
+  if (is_floating_currently() && hitter->is_always_submerged_in_water()) {
+    if (thing_size() > (int) THING_SIZE_NORMAL) {
+      //
+      // Krakens etc... Allow large things in the water to attack though.
+      //
+    } else {
+      //
+      // Eels etc...
+      //
+      IF_DEBUG { hitter->log("Cannot hit: %s is floating above me", to_short_string().c_str()); }
+      if (is_player()) {
+        msg("You watch the water thrash beneath you.");
+      }
+      return false;
+    }
+  }
+
+  //
   // Cruel to let things keep on hitting you when you're dead
   // Even worse, to let them eat you, but better if you are dead first.
   //

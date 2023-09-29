@@ -128,7 +128,7 @@ def tp_init(name, text_long_name):
     my.text_description_long(self, "Slime jumpers are numerous, bouncy and lots of fun! They will eat almost anything, including their own. They have the annoying habit of jumping when threatened.")
     my.text_description_short(self, "A small pile of semi sentient slime.")
     my.text_hits(self, "splats")
-    my.thing_size(self, my.THING_SIZE_TINY)
+    my.thing_size(self, my.THING_SIZE_SMALL)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_MONST)

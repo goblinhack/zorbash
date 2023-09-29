@@ -110,10 +110,19 @@ void Game::place_player(void)
       if (0) {
         auto w = level->thing_new("potion_levitation", point(x, y));
         t->carry(w, carry_options);
+        level->thing_new("electric_eel", point(x + 2, y + 1));
         level->thing_new("water", point(x + 1, y));
         level->thing_new("water", point(x + 2, y));
         level->thing_new("water", point(x + 3, y));
         level->thing_new("water", point(x + 4, y));
+        level->thing_new("water", point(x + 1, y + 1));
+        level->thing_new("water", point(x + 2, y + 1));
+        level->thing_new("water", point(x + 3, y + 1));
+        level->thing_new("water", point(x + 4, y + 1));
+        level->thing_new("water", point(x + 1, y + 2));
+        level->thing_new("water", point(x + 2, y + 2));
+        level->thing_new("water", point(x + 3, y + 2));
+        level->thing_new("water", point(x + 4, y + 2));
       }
       if (0) {
         auto w = level->thing_new("potion_ooze", point(x, y));

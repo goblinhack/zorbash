@@ -135,7 +135,7 @@ Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, Thingp
       }
     } else if (use_options && use_options->radial_effect) {
       if (item) {
-        msg("%s zaps %s.", text_The().c_str(), item->text_the().c_str());
+        msg("%s zaps at %s.", text_The().c_str(), item->text_the().c_str());
       } else {
         msg("%s zaps.", text_The().c_str());
       }
@@ -143,9 +143,9 @@ Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, Thingp
       if (item) {
         msg("%s zaps %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
       } else if (is_water()) {
-        msg("%s electrifies %s.", text_The().c_str(), target->text_the().c_str());
+        msg("%s electrifies around %s.", text_The().c_str(), target->text_the().c_str());
       } else {
-        msg("%s zaps %s.", text_The().c_str(), target->text_the().c_str());
+        msg("%s zaps at %s.", text_The().c_str(), target->text_the().c_str());
       }
     }
 
@@ -178,7 +178,7 @@ Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, Thingp
 
     auto collatoral_dmg = in_the_way_for_shooting(curr_at, target->curr_at);
     if (collatoral_dmg.size()) {
-      dbg("Firing laser effect (collatoral damage)");
+      dbg("Firing laser effect (collateral damage)");
       TRACE_AND_INDENT();
 
       for (auto other_target : collatoral_dmg) {
@@ -193,7 +193,7 @@ Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, Thingp
           }
         } else if (use_options && use_options->radial_effect) {
           if (item) {
-            msg("%s zaps %s.", text_The().c_str(), item->text_the().c_str());
+            msg("%s zaps at %s.", text_The().c_str(), item->text_the().c_str());
           } else {
             msg("%s zaps.", text_The().c_str());
           }
@@ -201,9 +201,9 @@ Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, Thingp
           if (item) {
             msg("%s zaps %s at %s.", text_The().c_str(), item->text_the().c_str(), other_target->text_the().c_str());
           } else if (is_water()) {
-            msg("%s electrifies %s.", text_The().c_str(), other_target->text_the().c_str());
+            msg("%s electrifies around %s.", text_The().c_str(), other_target->text_the().c_str());
           } else {
-            msg("%s zaps %s.", text_The().c_str(), other_target->text_the().c_str());
+            msg("%s zaps at %s.", text_The().c_str(), other_target->text_the().c_str());
           }
         }
 
@@ -324,17 +324,17 @@ Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, Thingp
         }
       } else if (use_options && use_options->radial_effect) {
         if (item) {
-          msg("%s zaps %s.", text_The().c_str(), item->text_the().c_str());
+          msg("%s zaps at %s.", text_The().c_str(), item->text_the().c_str());
         } else {
           msg("%s zaps.", text_The().c_str());
         }
       } else {
         if (item) {
-          msg("%s zaps %s %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
+          msg("%s zaps at %s %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
         } else if (is_water()) {
-          msg("%s electrifies %s.", text_The().c_str(), target->text_the().c_str());
+          msg("%s electrifies around %s.", text_The().c_str(), target->text_the().c_str());
         } else {
-          msg("%s zaps %s.", text_The().c_str(), target->text_the().c_str());
+          msg("%s zaps at %s.", text_The().c_str(), target->text_the().c_str());
         }
       }
 
