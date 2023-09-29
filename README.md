@@ -14,8 +14,20 @@
 <!-- DONE Potion of Creeping Death - Unleashes a spreading fungus that inflicts poisoning when stepped upon.                                      -->
 <!-- SKIP Potion of Hallucination - Causes long term hal                                                                                          -->
 <!-- DONE Potion of Confusion - Produces a cloud of confusion gas.                                                                                -->
-<!-- TODO Potion of Levitation - Causes you to float, Useful for escaping and crossing dangerous terrains.                                        -->
-<!-- TODO Runics on weapons, like vampirism, force, quietus, lightning                                                                            -->
+<!-- DONE Potion of Levitation - Causes you to float, Useful for escaping and crossing dangerous terrains.                                        -->
+<!-- TODO Staves and Wands fire blasts of magical energy but have a finite number of charges. Staves recharge over time, but wands do not.        -->
+<!-- TODO Staff of Conjuration                                                                                                                    -->
+<!-- TODO Staff of Discord                                                                                                                        -->
+<!-- TODO Staff of Entrancement                                                                                                                   -->
+<!-- TODO Staff of Firebolt                                                                                                                       -->
+<!-- TODO Staff of Haste                                                                                                                          -->
+<!-- TODO Staff of Healing                                                                                                                        -->
+<!-- TODO Staff of Lightning                                                                                                                      -->
+<!-- TODO Staff of Obstruction                                                                                                                    -->
+<!-- TODO Staff of Poison                                                                                                                         -->
+<!-- TODO Staff of Protection                                                                                                                     -->
+<!-- TODO Staff of Tunneling                                                                                                                      -->
+<!-- TODO Scrolls and Potions disappear when used. Potions can be thrown.                                                                         -->
 <!-- TODO Scroll of Aggravate Monsters                                                                                                            -->
 <!-- TODO Scroll of Discord                                                                                                                       -->
 <!-- TODO Scroll of Enchanting                                                                                                                    -->
@@ -30,19 +42,6 @@
 <!-- TODO Scroll of Shattering                                                                                                                    -->
 <!-- TODO Scroll of Summon Monsters                                                                                                               -->
 <!-- TODO Scroll of Teleportation                                                                                                                 -->
-<!-- TODO Scrolls and Potions disappear when used. Potions can be thrown.                                                                         -->
-<!-- TODO Staff of Conjuration                                                                                                                    -->
-<!-- TODO Staff of Discord                                                                                                                        -->
-<!-- TODO Staff of Entrancement                                                                                                                   -->
-<!-- TODO Staff of Firebolt                                                                                                                       -->
-<!-- TODO Staff of Haste                                                                                                                          -->
-<!-- TODO Staff of Healing                                                                                                                        -->
-<!-- TODO Staff of Lightning                                                                                                                      -->
-<!-- TODO Staff of Obstruction                                                                                                                    -->
-<!-- TODO Staff of Poison                                                                                                                         -->
-<!-- TODO Staff of Protection                                                                                                                     -->
-<!-- TODO Staff of Tunneling                                                                                                                      -->
-<!-- TODO Staves and Wands fire blasts of magical energy but have a finite number of charges. Staves recharge over time, but wands do not.        -->
 <!-- TODO Wand of Beckoning                                                                                                                       -->
 <!-- TODO Wand of Domination                                                                                                                      -->
 <!-- TODO Wand of Empowerment                                                                                                                     -->
@@ -52,6 +51,7 @@
 <!-- TODO Wand of Polymorphism                                                                                                                    -->
 <!-- TODO Wand of Slowness                                                                                                                        -->
 <!-- TODO Wand of Teleportation                                                                                                                   -->
+<!-- TODO Runics on weapons, like vampirism, force, quietus, lightning                                                                            -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
