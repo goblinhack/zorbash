@@ -1376,6 +1376,7 @@ public:
   int gold_set(int);
   int gold_value(void);
   int gold(void);
+  int has_tentacles(void);
   int health_boost(Thingp victim, int v);
   int health_decr(int);
   int health_decr(void);
@@ -1953,7 +1954,6 @@ public:
   int is_unused_flag75(void);
   int is_unused_flag76(void);
   int is_unused_flag77(void);
-  int is_unused_flag78(void);
   int is_unused_flag7(void);
   int is_unused_flag8(void);
   int is_unused_flag9(void);

@@ -127,6 +127,7 @@ PyObject *thing_gfx_pixelart_submergible(PyObject *obj, PyObject *args, PyObject
 PyObject *thing_gold_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gold_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gold(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_has_tentacles(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_health_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_health_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_health_max_decr(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -685,7 +686,6 @@ PyObject *thing_is_unused_flag74(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag75(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag76(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag77(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag78(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag8(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag9(PyObject *obj, PyObject *args, PyObject *keywds);

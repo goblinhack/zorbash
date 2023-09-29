@@ -58,6 +58,7 @@ bool Tp::matches(const std::string &what)
   if (gfx_ooze() && (what == "gfx_ooze")) { return true; }
   if (gfx_pixelart_show_highlighted() && (what == "gfx_pixelart_show_highlighted")) { return true; }
   if (gfx_pixelart_show_square_outlined() && (what == "gfx_pixelart_show_square_outlined")) { return true; }
+  if (has_tentacles() && (what == "has_tentacles")) { return true; }
   if (hunger_is_insatiable() && (what == "hunger_is_insatiable")) { return true; }
   if (is_able_to_amplify_footsteps() && (what == "is_able_to_amplify_footsteps")) { return true; }
   if (is_able_to_attack_mobs() && (what == "is_able_to_attack_mobs")) { return true; }
@@ -556,7 +557,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag75() && (what == "is_unused_flag75")) { return true; }
   if (is_unused_flag76() && (what == "is_unused_flag76")) { return true; }
   if (is_unused_flag77() && (what == "is_unused_flag77")) { return true; }
-  if (is_unused_flag78() && (what == "is_unused_flag78")) { return true; }
   if (is_unused_flag7() && (what == "is_unused_flag7")) { return true; }
   if (is_unused_flag8() && (what == "is_unused_flag8")) { return true; }
   if (is_unused_flag9() && (what == "is_unused_flag9")) { return true; }
@@ -661,6 +661,7 @@ bool Thing::matches(const std::string &what)
   if (gfx_ooze() && (what == "gfx_ooze")) { return true; }
   if (gfx_pixelart_show_highlighted() && (what == "gfx_pixelart_show_highlighted")) { return true; }
   if (gfx_pixelart_show_square_outlined() && (what == "gfx_pixelart_show_square_outlined")) { return true; }
+  if (has_tentacles() && (what == "has_tentacles")) { return true; }
   if (hunger_is_insatiable() && (what == "hunger_is_insatiable")) { return true; }
   if (is_able_to_amplify_footsteps() && (what == "is_able_to_amplify_footsteps")) { return true; }
   if (is_able_to_attack_mobs() && (what == "is_able_to_attack_mobs")) { return true; }
@@ -1161,7 +1162,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag75() && (what == "is_unused_flag75")) { return true; }
   if (is_unused_flag76() && (what == "is_unused_flag76")) { return true; }
   if (is_unused_flag77() && (what == "is_unused_flag77")) { return true; }
-  if (is_unused_flag78() && (what == "is_unused_flag78")) { return true; }
   if (is_unused_flag7() && (what == "is_unused_flag7")) { return true; }
   if (is_unused_flag8() && (what == "is_unused_flag8")) { return true; }
   if (is_unused_flag9() && (what == "is_unused_flag9")) { return true; }
@@ -1262,6 +1262,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "gfx_pixelart_show_square_outlined") { return &Thing::gfx_pixelart_show_square_outlined; }
   if (what == "grass_dry") { return &Thing::is_grass_dry; }
   if (what == "grass_dry_trampled") { return &Thing::is_grass_dry_trampled; }
+  if (what == "has_tentacles") { return &Thing::has_tentacles; }
   if (what == "hunger_is_insatiable") { return &Thing::hunger_is_insatiable; }
   if (what == "internal") { return &Thing::is_internal; }
   if (what == "is_able_to_amplify_footsteps") { return &Thing::is_able_to_amplify_footsteps; }
@@ -1754,7 +1755,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag75") { return &Thing::is_unused_flag75; }
   if (what == "is_unused_flag76") { return &Thing::is_unused_flag76; }
   if (what == "is_unused_flag77") { return &Thing::is_unused_flag77; }
-  if (what == "is_unused_flag78") { return &Thing::is_unused_flag78; }
   if (what == "is_unused_flag7") { return &Thing::is_unused_flag7; }
   if (what == "is_unused_flag8") { return &Thing::is_unused_flag8; }
   if (what == "is_unused_flag9") { return &Thing::is_unused_flag9; }

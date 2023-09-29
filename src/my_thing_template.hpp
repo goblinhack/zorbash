@@ -253,6 +253,7 @@ private:
   int _gfx_pixelart_wobbles_when_hit {};
   int _gfx_water {};
   int _has_temperature {};
+  int _has_tentacles {};
   int _hunger_clock_tick_freq {};
   int _hunger_is_hunger_level_hungry_at_pct {};
   int _hunger_is_hunger_level_starving_at_pct {};
@@ -775,7 +776,6 @@ private:
   int _is_unused_flag75 {};
   int _is_unused_flag76 {};
   int _is_unused_flag77 {};
-  int _is_unused_flag78 {};
   int _is_unused_flag8 {};
   int _is_unused_flag9 {};
   int _is_usable {};
@@ -1622,6 +1622,7 @@ public:
   int gfx_pixelart_submergible(void) const;
   int gfx_pixelart_wobbles_when_hit(void) const;
   int gfx_water(void) const;
+  int has_tentacles(void) const;
   int hunger_clock_tick_freq(void) const;
   int hunger_is_hunger_level_hungry_at_pct(void) const;
   int hunger_is_hunger_level_starving_at_pct(void) const;
@@ -2142,7 +2143,6 @@ public:
   int is_unused_flag75(void) const;
   int is_unused_flag76(void) const;
   int is_unused_flag77(void) const;
-  int is_unused_flag78(void) const;
   int is_unused_flag7(void) const;
   int is_unused_flag8(void) const;
   int is_unused_flag9(void) const;
@@ -2394,6 +2394,7 @@ public:
   void gfx_targeted_projectile_set(const std::string &v);
   void gfx_targeted_radial_set(const std::string &v);
   void gfx_water_set(int v);
+  void has_tentacles_set(int v);
   void hunger_clock_tick_freq_set(int v);
   void hunger_is_hunger_level_hungry_at_pct_set(int v);
   void hunger_is_hunger_level_starving_at_pct_set(int v);
@@ -2914,7 +2915,6 @@ public:
   void is_unused_flag75_set(int v);
   void is_unused_flag76_set(int v);
   void is_unused_flag77_set(int v);
-  void is_unused_flag78_set(int v);
   void is_unused_flag7_set(int v);
   void is_unused_flag8_set(int v);
   void is_unused_flag9_set(int v);

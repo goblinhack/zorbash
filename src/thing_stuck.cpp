@@ -247,7 +247,11 @@ bool Thing::is_stuck_check(void)
       stuck = true;
     }
   } else if (level->is_tentacle(curr_at.x, curr_at.y)) {
-    if (is_tentacle()) {
+    if (has_tentacles()) {
+      //
+      // ok
+      //
+    } else if (is_tentacle()) {
       //
       // ok
       //

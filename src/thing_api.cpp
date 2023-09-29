@@ -597,10 +597,10 @@ int Thing::is_unused_flag77(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag77());
 }
-int Thing::is_unused_flag78(void)
+int Thing::has_tentacles(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag78());
+  return (tp()->has_tentacles());
 }
 int Thing::is_always_submerged_in_lava(void)
 {
