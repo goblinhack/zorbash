@@ -405,7 +405,7 @@ Tpp tp_load(int id, std::string const &name, const std::string &text_long_name, 
 {
   TRACE_NO_INDENT();
   if (tp_find(name)) {
-    ERR("Thing template name [%s] already loaded", name.c_str());
+    DIE("Thing template name [%s] already loaded", name.c_str());
   }
 
   auto tp = new Tp();

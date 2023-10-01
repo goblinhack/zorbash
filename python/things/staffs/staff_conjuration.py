@@ -14,12 +14,7 @@ def on_targeted(me, x, y):
             if distance > radius + 0.5:
                 continue
 
-            my.place_at(me, "fire", x1, y1)
-            for it in my.level_get_all(me, x1, y1):
-                if my.thing_possible_to_attack(me, it):
-                    my.thing_hit_dmg_fire(0, me, it)
-
-    my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
+            my.place_at(me, "spectral_blade", x1, y1)
 
 
 def on_targeted_radially(me, x, y):
@@ -37,12 +32,7 @@ def on_targeted_radially(me, x, y):
             if distance > radius + 0.5:
                 continue
 
-            my.place_at(me, "fire", x1, y1)
-            for it in my.level_get_all(me, x1, y1):
-                if my.thing_possible_to_attack(me, it):
-                    my.thing_hit_dmg_fire(0, me, it)
-
-    my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
+            my.place_at(me, "spectral_blade", x1, y1)
 
 
 def on_idle(me, x, y):
@@ -66,11 +56,11 @@ def explode(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if owner:
         if my.thing_is_player(owner):
-            my.thing_msg(me, "Your staff of fire explodes.")
+            my.thing_msg(me, "Your staff of conjuration explodes.")
         else:
-            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s staff of fire explodes.")
+            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s staff of conjuration explodes.")
     else:
-        my.thing_msg(me, "The staff of fire explodes.")
+        my.thing_msg(me, "The staff of conjuration explodes.")
 
     my.spawn_at_my_position(me, "explosion_major")
     on_targeted(me, x, y)
@@ -98,16 +88,14 @@ def on_fall(me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.chance_d10000_set_on_fire(self, 0)
+    my.chance_d10000_set_on_fire(self, 5000)
     my.charge_count(self, 5)
     my.collision_hit_priority(self, 6)
-    my.dmg_chance_d1000_fire(self, 1, 1000)
-    my.dmg_fire_dice(self, "1d10+10")
-    my.dmg_num_of_attacks(self, 1)
-    my.dmg_received_doubled_from_cold(self, True)
+    my.dmg_num_of_attacks(self, 0)
+    my.dmg_received_doubled_from_fire(self, True)
     my.effect_has_blast_radius(self, True)
-    my.environ_dislikes_water(self, 100)
-    my.equip_carry_anim(self, "staff_fire_carry")
+    my.environ_dislikes_fire(self, 100)
+    my.equip_carry_anim(self, "staff_conjuration_carry")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
@@ -115,12 +103,11 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
-    my.gfx_targeted_projectile(self, "staff_projectile_fire")
     my.gold_value_dice(self, "300")
     my.health_initial_dice(self, "20+1d10")
     my.is_able_to_be_teleported(self, True)
     my.is_able_to_fall(self, True)
-    # my.is_able_to_spawn_things(self, False) else we end up owning fire
+    # my.is_able_to_spawn_things(self, False) else we end up owning blades
     my.is_bag_item(self, True)
     my.is_biome_chasms(self, True)
     my.is_biome_dungeon(self, True)
@@ -135,16 +122,15 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_described_when_hovering_over(self, True)
     my.is_droppable(self, True)
     my.is_enchantable(self, True)
-    my.is_immune_to_fire(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)
     my.is_loggable(self, True)
     my.is_magical(self, True)
     my.is_staff(self, True)
+    my.is_tickable(self, True)
     my.is_target_radial(self, True)
     my.is_target_select(self, True)
     my.is_throwable(self, True)
-    my.is_tickable(self, True)  # So it can interact with fire
     my.is_treasure_class_B(self, True)
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
@@ -161,42 +147,40 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_targeted_radially_do(self, "me.on_targeted_radially()")
     my.on_thrown_do(self, "me.on_thrown()")
     my.range_max(self, 7)
-    my.temperature(self, 30)
+    my.temperature(self, -10)
     my.text_a_or_an(self, "a")
-    my.text_description_enchant(self, "+1 radius")
-    my.text_description_long2(self, "When enchanted, creates a blast radius effect. Ideal for taking out multiple enemies.")
-    my.text_description_long3(self, "Please use responsibly.")
-    my.text_description_long(self, "Discharges a single fireball at an ungrateful recipient...")
-    my.text_description_short(self, "A staff of fireballs.")
+    my.text_description_enchant(self, "+1 blade")
+    my.text_description_long(self, "This staff will conjure a set of ethereal spectral blades around an enemy.")
+    my.text_description_short(self, "A staff of conjuration.")
     my.tick_prio(self, my.MAP_TICK_PRIO_LOW)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
 
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="red",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".1", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="red",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".2", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="red",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".3", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="red",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".4", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="red",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".5", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="red",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
             tile=name + ".6", delay_ms=100)
 
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="staff_fire", text_long_name="staff of fireballs", text_short_name="staff of fireballs")
+    tp_init(name="staff_conjuration", text_long_name="staff of conjuration", text_short_name="staff, conjure")
 
 
 init()
