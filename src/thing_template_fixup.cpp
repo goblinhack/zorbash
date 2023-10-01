@@ -117,9 +117,6 @@ void tp_fixup(void)
       if (tp->is_air_breather()) {
         DIE("Tp %s is ethereal set and breathes air?", tp->name().c_str());
       }
-      if (tp->temperature_sensitive()) {
-        DIE("Tp %s is ethereal set and temperature sensitive set?", tp->name().c_str());
-      }
       if (tp->is_crushable()) {
         DIE("Tp %s is ethereal and crushable?", tp->name().c_str());
       }

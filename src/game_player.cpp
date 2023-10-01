@@ -55,6 +55,7 @@ void Game::place_player(void)
         t->carry(w, carry_options);
         level->thing_new("trap_blinded", point(x + 2, y));
       }
+      level->thing_new("spectral_blade", point(x + 1, y));
       if (0) {
         level->thing_new("trap_blinded", point(x + 2, y + 2));
         level->thing_new("spell_of_holding_barrier", point(x, y));

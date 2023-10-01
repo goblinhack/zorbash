@@ -572,6 +572,7 @@ PyObject *thing_is_slippery(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_smoke(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_snake(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_soft(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_spectal_blade(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spellbook(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spell_of_beckoning(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spell_of_holding_barrier(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -685,7 +686,6 @@ PyObject *thing_is_unused_flag73(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag74(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag75(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag76(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag77(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag8(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag9(PyObject *obj, PyObject *args, PyObject *keywds);

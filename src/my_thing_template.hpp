@@ -656,6 +656,7 @@ private:
   int _is_smoke {};
   int _is_snake {};
   int _is_soft {};
+  int _is_spectal_blade {};
   int _is_spell {};
   int _is_spellbook {};
   int _is_spell_of_beckoning {};
@@ -775,7 +776,6 @@ private:
   int _is_unused_flag74 {};
   int _is_unused_flag75 {};
   int _is_unused_flag76 {};
-  int _is_unused_flag77 {};
   int _is_unused_flag8 {};
   int _is_unused_flag9 {};
   int _is_usable {};
@@ -2024,6 +2024,7 @@ public:
   int is_smoke(void) const;
   int is_snake(void) const;
   int is_soft(void) const;
+  int is_spectal_blade(void) const;
   int is_spellbook(void) const;
   int is_spell_of_beckoning(void) const;
   int is_spell_of_holding_barrier(void) const;
@@ -2142,7 +2143,6 @@ public:
   int is_unused_flag74(void) const;
   int is_unused_flag75(void) const;
   int is_unused_flag76(void) const;
-  int is_unused_flag77(void) const;
   int is_unused_flag7(void) const;
   int is_unused_flag8(void) const;
   int is_unused_flag9(void) const;
@@ -2796,6 +2796,7 @@ public:
   void is_smoke_set(int v);
   void is_snake_set(int v);
   void is_soft_set(int v);
+  void is_spectal_blade_set(int v);
   void is_spellbook_set(int v);
   void is_spell_of_beckoning_set(int v);
   void is_spell_of_holding_barrier_set(int v);
@@ -2914,7 +2915,6 @@ public:
   void is_unused_flag74_set(int v);
   void is_unused_flag75_set(int v);
   void is_unused_flag76_set(int v);
-  void is_unused_flag77_set(int v);
   void is_unused_flag7_set(int v);
   void is_unused_flag8_set(int v);
   void is_unused_flag9_set(int v);

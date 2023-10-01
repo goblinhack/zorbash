@@ -36,10 +36,16 @@ void Thing::temperature_tick(void)
   }
 
   if (is_ethereal()) {
-    //
-    // Ghosts don't burn or freeze.
-    //
-    return;
+    if (temperature_sensitive()) {
+      //
+      // But some things like spectral blades are sensitive to heat
+      //
+    } else {
+      //
+      // Ghosts don't burn or freeze.
+      //
+      return;
+    }
   }
 
   auto initial_temp = initial_temperature_get();

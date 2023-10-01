@@ -1837,6 +1837,7 @@ public:
   int is_smoke(void);
   int is_snake(void);
   int is_soft(void);
+  int is_spectal_blade(void);
   int is_spellbook(void);
   int is_spell_of_beckoning(void);
   int is_spell_of_holding_barrier(void);
@@ -1953,7 +1954,6 @@ public:
   int is_unused_flag74(void);
   int is_unused_flag75(void);
   int is_unused_flag76(void);
-  int is_unused_flag77(void);
   int is_unused_flag7(void);
   int is_unused_flag8(void);
   int is_unused_flag9(void);

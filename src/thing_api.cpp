@@ -592,10 +592,10 @@ int Thing::is_unused_flag76(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag76());
 }
-int Thing::is_unused_flag77(void)
+int Thing::is_spectal_blade(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag77());
+  return (tp()->is_spectal_blade());
 }
 int Thing::has_tentacles(void)
 {
