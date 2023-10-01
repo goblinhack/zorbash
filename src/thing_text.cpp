@@ -44,7 +44,13 @@ std::string Thing::text_a_or_an(size_t max_len)
   //
   auto l = leader();
   if (l && (l == level->player)) {
-    out += ", your pet";
+    if (is_not_shown_as_a_pet()) {
+      //
+      // Not really a pet
+      //
+    } else {
+      out += ", your pet";
+    }
   }
 
   if (max_len) {
@@ -111,7 +117,13 @@ std::string Thing::text_the(bool include_owner)
   // Tamed?
   //
   if (l && (l == level->player)) {
-    out += "pet ";
+    if (is_not_shown_as_a_pet()) {
+      //
+      // Not really a pet
+      //
+    } else {
+      out += "pet ";
+    }
   }
 
   out += tpp->text_long_name();
@@ -212,7 +224,13 @@ std::string Thing::text_short_a_or_an(size_t max_len)
   //
   auto l = leader();
   if (l && (l == level->player)) {
-    out += "pet ";
+    if (is_not_shown_as_a_pet()) {
+      //
+      // Not really a pet
+      //
+    } else {
+      out += "pet ";
+    }
   }
 
   if (out == "") {
@@ -270,7 +288,13 @@ std::string Thing::text_short_the(size_t max_len)
   // Tamed?
   //
   if (l && (l == level->player)) {
-    out += "pet ";
+    if (is_not_shown_as_a_pet()) {
+      //
+      // Not really a pet
+      //
+    } else {
+      out += "pet ";
+    }
   }
 
   out += tpp->text_short_name();
@@ -391,7 +415,13 @@ std::string Thing::text_short_and_state_capitalised(size_t max_len)
   //
   auto l = leader();
   if (l && (l == level->player)) {
-    out += "pet ";
+    if (is_not_shown_as_a_pet()) {
+      //
+      // Not really a pet
+      //
+    } else {
+      out += "pet ";
+    }
   }
 
   out += text_short_name();
@@ -444,7 +474,13 @@ std::string Thing::text_long_and_state_capitalised(size_t max_len)
   //
   auto l = leader();
   if (l && (l == level->player)) {
-    out += "pet ";
+    if (is_not_shown_as_a_pet()) {
+      //
+      // Not really a pet
+      //
+    } else {
+      out += "pet ";
+    }
   }
 
   out += text_long_name();

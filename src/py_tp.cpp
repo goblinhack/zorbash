@@ -425,8 +425,9 @@ PyObject *spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_FALSE;
   }
 
-  if (t->spawn_next_to(std::string(what))) {
-    Py_RETURN_TRUE;
+  auto it = t->spawn_next_to(std::string(what));
+  if (it) {
+    return Py_BuildValue("I", it->id);
   }
   Py_RETURN_FALSE;
 }
@@ -463,8 +464,9 @@ PyObject *spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *ke
     Py_RETURN_FALSE;
   }
 
-  if (t->spawn_next_to_or_on_monst(std::string(what))) {
-    Py_RETURN_TRUE;
+  auto it = t->spawn_next_to_or_on_monst(std::string(what));
+  if (it) {
+    return Py_BuildValue("I", it->id);
   }
   Py_RETURN_FALSE;
 }
@@ -795,7 +797,7 @@ PyObject *place_at(PyObject *obj, PyObject *args, PyObject *keywds)
     //
     IF_DEBUG { it->log("New born location check"); }
     it->location_check_me();
-    Py_RETURN_TRUE;
+    return Py_BuildValue("I", it->id);
   }
 
   Py_RETURN_FALSE;
@@ -1290,6 +1292,7 @@ TP_BODY_SET_INT(is_msg_allowed_senses_danger)
 TP_BODY_SET_INT(is_mummy)
 TP_BODY_SET_INT(is_necrotic_danger_level)
 TP_BODY_SET_INT(is_no_tile)
+TP_BODY_SET_INT(is_not_shown_as_a_pet)
 TP_BODY_SET_INT(is_obj_spawning)
 TP_BODY_SET_INT(is_obj_spawning_monst)
 TP_BODY_SET_INT(is_obs_ai)
@@ -1357,7 +1360,7 @@ TP_BODY_SET_INT(is_slippery)
 TP_BODY_SET_INT(is_smoke)
 TP_BODY_SET_INT(is_snake)
 TP_BODY_SET_INT(is_soft)
-TP_BODY_SET_INT(is_spectal_blade)
+TP_BODY_SET_INT(is_spectral_blade)
 TP_BODY_SET_INT(is_spell)
 TP_BODY_SET_INT(is_spellbook)
 TP_BODY_SET_INT(is_spell_of_beckoning)
@@ -1475,7 +1478,6 @@ TP_BODY_SET_INT(is_unused_flag72)
 TP_BODY_SET_INT(is_unused_flag73)
 TP_BODY_SET_INT(is_unused_flag74)
 TP_BODY_SET_INT(is_unused_flag75)
-TP_BODY_SET_INT(is_unused_flag76)
 TP_BODY_SET_INT(is_unused_flag8)
 TP_BODY_SET_INT(is_unused_flag9)
 TP_BODY_SET_INT(is_usable)

@@ -39,12 +39,12 @@ void Thing::attackers_tick(void)
     }
 
     if (--p.second > 0) {
-      dbg("Enemy timeout %s (%d timeout)", attacker->to_string().c_str(), p.second);
+      dbg("Attacker timeout %s (%d timeout)", attacker->to_string().c_str(), p.second);
       continue;
     }
 
     if (attacker->is_dead) {
-      dbg("Enemy remove as is dead: %s", attacker->to_string().c_str());
+      dbg("Attacker remove as is dead: %s", attacker->to_string().c_str());
       aip()->thing_attackers.erase(p.first);
       return;
     }
@@ -53,7 +53,7 @@ void Thing::attackers_tick(void)
     // If far enough away start to forget this attacker
     //
     if (distance(attacker->curr_at, curr_at) > distance_avoid_get()) {
-      dbg("Enemy remove as is far away: %s", attacker->to_string().c_str());
+      dbg("Attacker remove as is far away: %s", attacker->to_string().c_str());
       aip()->thing_attackers.erase(p.first);
       return;
     }
@@ -61,7 +61,7 @@ void Thing::attackers_tick(void)
     //
     // Be resentful a bit longer
     //
-    dbg("Enemy persists a bit longer: %s", attacker->to_string().c_str());
+    dbg("Attacker persists a bit longer: %s", attacker->to_string().c_str());
     p.second = pcg_random_range(0, 10);
   }
 }

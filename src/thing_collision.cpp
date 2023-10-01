@@ -106,6 +106,16 @@ bool Thing::collision_find_best_target(ThingAttackOptionsp attack_options)
     }
 
     //
+    // Need to check, if this is a sword, that the owner does not attack friends (like spectral blades)
+    //
+    if (owner) {
+      if (owner->is_friend(t) || owner->same_mob(t)) {
+        dbg2("Collision-candidate: %s no same leader", t->to_short_string().c_str());
+        continue;
+      }
+    }
+
+    //
     // Pretty sure we should not be attacking carried items
     //
     if (t->immediate_owner()) {
@@ -739,6 +749,18 @@ bool Thing::collision_check_only(Thingp it, point future_pos)
     if (things_overlap(me, future_pos, it)) {
       dbg2("Collision; cannot pass through my friend");
       return true;
+    }
+  }
+
+  //
+  // Need to check, if this is a sword, that the owner does not attack friends (like spectral blades)
+  //
+  if (owner_me) {
+    if (owner_me->is_friend(it) || owner_me->same_mob(it)) {
+      if (things_overlap(me, future_pos, it)) {
+        dbg2("Collision; cannot pass through my friend");
+        return true;
+      }
     }
   }
 

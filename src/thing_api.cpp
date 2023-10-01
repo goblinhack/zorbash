@@ -587,15 +587,15 @@ int Thing::is_unused_flag75(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag75());
 }
-int Thing::is_unused_flag76(void)
+int Thing::is_not_shown_as_a_pet(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag76());
+  return (tp()->is_not_shown_as_a_pet());
 }
-int Thing::is_spectal_blade(void)
+int Thing::is_spectral_blade(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_spectal_blade());
+  return (tp()->is_spectral_blade());
 }
 int Thing::has_tentacles(void)
 {

@@ -3,36 +3,47 @@ import tp
 
 
 def on_targeted(me, x, y):
-    radius = my.thing_effect_radius_get(me)
+    owner = my.thing_top_owner_id_get(me)
+    radius = 1
     # my.con("targeted {} {:X} radius {}".format(my.thing_name_get(me), me, radius))
 
     for dx in range(-radius, radius + 1):
         for dy in range(-radius, radius + 1):
+            if dx == 0 and dy == 0:
+                continue
+
             x1 = x + dx
             y1 = y + dy
+
             distance = (((x1 - x)**2 + (y1 - y)**2)**0.5)
             if distance > radius + 0.5:
                 continue
 
-            my.place_at(me, "spectral_blade", x1, y1)
+            it = my.place_at(me, "spectral_blade", x1, y1)
+            if it and owner:
+                my.thing_set_leader(it, owner)
 
 
 def on_targeted_radially(me, x, y):
-    radius = my.thing_effect_radius_get(me)
-    radius += 1
+    owner = my.thing_top_owner_id_get(me)
+    radius = 1
 
     # my.con("targeted radially {} {:X}".format(my.thing_name_get(me), me))
     for dx in range(-radius, radius + 1):
         for dy in range(-radius, radius + 1):
             if dx == 0 and dy == 0:
                 continue
+
             x1 = x + dx
             y1 = y + dy
+
             distance = (((x1 - x)**2 + (y1 - y)**2)**0.5)
             if distance > radius + 0.5:
                 continue
 
-            my.place_at(me, "spectral_blade", x1, y1)
+            it = my.place_at(me, "spectral_blade", x1, y1)
+            if it and owner:
+                my.thing_set_leader(it, owner)
 
 
 def on_idle(me, x, y):
@@ -103,6 +114,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
+    my.gfx_targeted_laser(self, "laser_magic_effect")
     my.gold_value_dice(self, "300")
     my.health_initial_dice(self, "20+1d10")
     my.is_able_to_be_teleported(self, True)
@@ -121,16 +133,15 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_droppable(self, True)
-    my.is_enchantable(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)
     my.is_loggable(self, True)
     my.is_magical(self, True)
     my.is_staff(self, True)
-    my.is_tickable(self, True)
     my.is_target_radial(self, True)
     my.is_target_select(self, True)
     my.is_throwable(self, True)
+    my.is_tickable(self, True)
     my.is_treasure_class_B(self, True)
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
@@ -149,7 +160,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.range_max(self, 7)
     my.temperature(self, -10)
     my.text_a_or_an(self, "a")
-    my.text_description_enchant(self, "+1 blade")
     my.text_description_long(self, "This staff will conjure a set of ethereal spectral blades around an enemy.")
     my.text_description_short(self, "A staff of conjuration.")
     my.tick_prio(self, my.MAP_TICK_PRIO_LOW)

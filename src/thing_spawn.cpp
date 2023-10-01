@@ -87,7 +87,7 @@ void Thing::spawned_newborn(Thingp it)
   it->location_check_me();
 }
 
-bool Thing::spawn_next_to(const std::string &what)
+Thingp Thing::spawn_next_to(const std::string &what)
 {
   TRACE_NO_INDENT();
   dbg("Spawn %s next to", what.c_str());
@@ -101,13 +101,13 @@ bool Thing::spawn_next_to(const std::string &what)
   auto tp_cands = tp_find_wildcard(what);
   if (! tp_cands.size()) {
     err("Cannot find any %s to spawn", what.c_str());
-    return false;
+    return nullptr;
   }
 
   auto tpp = pcg_one_of(tp_cands);
   if (unlikely(! tpp)) {
     err("Cannot find %s to spawn", what.c_str());
-    return false;
+    return nullptr;
   }
 
   //
@@ -116,7 +116,7 @@ bool Thing::spawn_next_to(const std::string &what)
   if (tpp->is_monst()) {
     if (level->monst_count >= LEVEL_MONST_COUNT_ABS_MAX) {
       dbg("No; too many monsters");
-      return false;
+      return nullptr;
     }
   }
 
@@ -126,7 +126,7 @@ bool Thing::spawn_next_to(const std::string &what)
   if (is_mob()) {
     if (minion_count() >= minion_limit()) {
       dbg("No; too many minions");
-      return false;
+      return nullptr;
     }
   }
 
@@ -155,19 +155,20 @@ bool Thing::spawn_next_to(const std::string &what)
 
   auto cands = possible.size();
   if (! cands) {
-    return false;
+    return nullptr;
   }
 
   auto chosen = possible[ pcg_random_range(0, cands) ];
   auto it     = level->thing_new(what, chosen);
   if (it) {
     spawned_newborn(it);
+    return it;
   }
 
-  return true;
+  return nullptr;
 }
 
-bool Thing::spawn_next_to_or_on_monst(const std::string &what)
+Thingp Thing::spawn_next_to_or_on_monst(const std::string &what)
 {
   TRACE_NO_INDENT();
   dbg("Spawn %s next to or on monst", what.c_str());
@@ -181,13 +182,13 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
   auto tp_cands = tp_find_wildcard(what);
   if (! tp_cands.size()) {
     err("Cannot find any %s to spawn", what.c_str());
-    return false;
+    return nullptr;
   }
 
   auto tpp = pcg_one_of(tp_cands);
   if (unlikely(! tpp)) {
     err("Cannot find %s to spawn", what.c_str());
-    return false;
+    return nullptr;
   }
 
   //
@@ -196,7 +197,7 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
   if (tpp->is_monst()) {
     if (level->monst_count >= LEVEL_MONST_COUNT_ABS_MAX) {
       dbg("No; too many monsters");
-      return false;
+      return nullptr;
     }
   }
 
@@ -229,7 +230,7 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
 
   auto cands = possible.size();
   if (! cands) {
-    return false;
+    return nullptr;
   }
 
   auto chosen = possible[ pcg_random_range(0, cands) ];
@@ -237,9 +238,10 @@ bool Thing::spawn_next_to_or_on_monst(const std::string &what)
   auto it = level->thing_new(what, chosen);
   if (it) {
     spawned_newborn(it);
+    return it;
   }
 
-  return true;
+  return nullptr;
 }
 
 bool Thing::spawn_radius_range(Thingp item, Thingp target, const std::string &what, int radius_min, int radius_max)

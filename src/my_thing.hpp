@@ -420,6 +420,8 @@ public:
 
   Thingp bag_what_is_at(point pos);
   Thingp best_shoot_at_target_get(void);
+  Thingp spawn_next_to(const std::string &what);
+  Thingp spawn_next_to_or_on_monst(const std::string &what);
   Thingp best_visible_target_get(void);
   Thingp bodypart_carry_anim(int bodypart);
   Thingp bodypart_get(int bodypart);
@@ -687,8 +689,6 @@ public:
   bool spawn_gas_healing_around_thing(int radius);
   bool spawn_gas_paralysis_around_thing(int radius);
   bool spawn_gas_poison_around_thing(int radius);
-  bool spawn_next_to(const std::string &what);
-  bool spawn_next_to_or_on_monst(const std::string &what);
   bool spawn_radius_range(const std::string &what, int rad_min, int rad_max);
   bool spawn_radius_range(Thingp parent, Thingp target, const std::string &what, int rad_min, int rad_max);
   bool spawn_set_fire_to_things_around_me(const std::string &what, int radius);
@@ -1769,6 +1769,7 @@ public:
   int is_mummy(void);
   int is_necrotic_danger_level(void);
   int is_no_tile(void);
+  int is_not_shown_as_a_pet(void);
   int is_obj_spawning_monst(void);
   int is_obj_spawning(void);
   int is_obs_ai(void);
@@ -1837,7 +1838,7 @@ public:
   int is_smoke(void);
   int is_snake(void);
   int is_soft(void);
-  int is_spectal_blade(void);
+  int is_spectral_blade(void);
   int is_spellbook(void);
   int is_spell_of_beckoning(void);
   int is_spell_of_holding_barrier(void);
@@ -1953,7 +1954,6 @@ public:
   int is_unused_flag73(void);
   int is_unused_flag74(void);
   int is_unused_flag75(void);
-  int is_unused_flag76(void);
   int is_unused_flag7(void);
   int is_unused_flag8(void);
   int is_unused_flag9(void);

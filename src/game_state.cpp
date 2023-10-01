@@ -186,13 +186,15 @@ void Game::change_state(int new_state, const std::string &why)
     case STATE_CHOOSING_SPELLS :
     case STATE_CHOOSING_LEVEL : break;
     case STATE_CHOOSING_TARGET : // Looking to somewhere to throw at
-      //
-      // Don't create the cursor right after selecting. Wait until
-      // we move again.
-      //
-      if (level) {
-        level->cursor_recreate();
-        level->cursor_path_clear();
+                                 //
+                                 // Don't create the cursor right after selecting. Wait until
+                                 // we move again.
+                                 //
+      if (pcg_random_allowed) {
+        if (level) {
+          level->cursor_recreate();
+          level->cursor_path_clear();
+        }
       }
       break;
   }
