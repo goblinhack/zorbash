@@ -22,6 +22,7 @@ def tp_init(name, text_long_name):
     my.collision_hit_priority(self, 20)
     my.distance_vision(self, 10)
     my.dmg_cold_dice(self, "1")
+    my.dmg_nat_att_type(self, "touches")
     my.gfx_anim_use(self, "attack_red")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
