@@ -17,7 +17,7 @@ def tp_init(name):
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
-    my.is_only_one_per_tile(self, True)
+    my.is_one_per_tile(self, True)
     my.is_removable_if_out_of_slots(self, True)
     my.is_ripple(self, True)
     my.is_tmp_thing(self, True)

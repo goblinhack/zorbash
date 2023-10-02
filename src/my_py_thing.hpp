@@ -516,8 +516,8 @@ PyObject *thing_is_obs_throwing(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *thing_is_obs_wall_or_door(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_obs_when_dead(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ogre(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_one_per_tile(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_on_fire(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_only_one_per_tile(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ooze(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_openable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_organic(PyObject *obj, PyObject *args, PyObject *keywds);

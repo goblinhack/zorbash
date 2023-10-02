@@ -14,7 +14,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.gfx_pixelart_show_outlined(self, True)
     my.gfx_pixelart_submergible(self, True)
     my.is_able_to_fall(self, True)
-    my.is_only_one_per_tile(self, True)
+    my.is_one_per_tile(self, True)
     my.text_a_or_an(self, "an")
     my.text_description_short(self, "An empty podium. With claw marks.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)

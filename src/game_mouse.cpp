@@ -158,6 +158,10 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
             continue;
           }
 
+          if (player->is_friend(t)) {
+            continue;
+          }
+
           IF_DEBUG { player->log("Yes; close enough to attack %s?", t->to_short_string().c_str()); }
           TRACE_AND_INDENT();
 

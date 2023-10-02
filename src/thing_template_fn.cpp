@@ -699,7 +699,7 @@ int Tp::is_obs_throwing(void) const { return _is_obs_throwing; }
 int Tp::is_obs_wall_or_door(void) const { return _is_obs_wall_or_door; }
 int Tp::is_obs_when_dead(void) const { return _is_obs_when_dead; }
 int Tp::is_ogre(void) const { return _is_ogre; }
-int Tp::is_only_one_per_tile(void) const { return _is_only_one_per_tile; }
+int Tp::is_one_per_tile(void) const { return _is_one_per_tile; }
 int Tp::is_ooze(void) const { return _is_ooze; }
 int Tp::is_openable(void) const { return _is_openable; }
 int Tp::is_organic(void) const { return _is_organic; }
@@ -1470,7 +1470,7 @@ void Tp::is_obs_throwing_set(int v) { _is_obs_throwing = v; }
 void Tp::is_obs_wall_or_door_set(int v) { _is_obs_wall_or_door = v; }
 void Tp::is_obs_when_dead_set(int v) { _is_obs_when_dead = v; }
 void Tp::is_ogre_set(int v) { _is_ogre = v; }
-void Tp::is_only_one_per_tile_set(int v) { _is_only_one_per_tile = v; }
+void Tp::is_one_per_tile_set(int v) { _is_one_per_tile = v; }
 void Tp::is_ooze_set(int v) { _is_ooze = v; }
 void Tp::is_openable_set(int v) { _is_openable = v; }
 void Tp::is_organic_set(int v) { _is_organic = v; }

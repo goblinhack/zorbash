@@ -28,7 +28,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_flat(self, True)
     my.is_interesting(self, True)
     my.is_obs_ai(self, True)
-    my.is_only_one_per_tile(self, True)
+    my.is_one_per_tile(self, True)
     my.is_shallow_water(self, True)
     my.text_a_or_an(self, "the")
     my.text_description_short(self, "Some shallow water.")

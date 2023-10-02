@@ -75,7 +75,7 @@ def tp_init(name, text_long_name):
     my.is_obs_ai(self, True)
     my.is_obs_shoving(self, True)
     my.is_obs_spawn_monst(self, True)
-    my.is_only_one_per_tile(self, True)
+    my.is_one_per_tile(self, True)
     my.is_shootable(self, True)
     my.is_shovable(self, True)
     my.is_very_combustible(self, True)

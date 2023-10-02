@@ -81,6 +81,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_able_to_teleport_self(self, True)
     my.is_able_to_teleport_without_tiring(self, True)
     my.is_able_to_tire(self, True)
+    my.is_able_to_walk_through_walls(self, True)
     my.is_air_breather(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
@@ -109,6 +110,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_msg_allowed_is_wounded(self, True)
     my.is_msg_allowed_senses_danger(self, True)
     my.is_necrotic_danger_level(self, 1)  # danger level
+    my.is_one_per_tile(self, True)
     my.is_poisonous_danger_level(self, 2)  # danger level
     my.is_shootable(self, True)
     my.is_shovable(self, True)

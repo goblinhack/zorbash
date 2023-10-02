@@ -15,7 +15,7 @@ def tp_init(name):
     my.is_explosion(self, True)
     my.is_floating(self, True)
     my.is_loggable(self, True)
-    my.is_only_one_per_tile(self, True)
+    my.is_one_per_tile(self, True)
     my.noise_on_born(self, 21)
     my.tick_prio(self, my.MAP_TICK_PRIO_VERY_HIGH)
     my.z_depth(self, my.MAP_DEPTH_OBJ)

@@ -33,7 +33,7 @@ def tp_init(name, tiles=[]):
     my.is_immune_to_cold(self, True)
     my.is_interesting(self, True)  # So robot can see and break out
     my.is_loggable(self, True)
-    my.is_only_one_per_tile(self, True)
+    my.is_one_per_tile(self, True)
     my.is_shootable(self, True)
     my.is_spiderweb(self, True)
     my.is_sticky(self, True)

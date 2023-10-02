@@ -1018,9 +1018,16 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         // Don't attack your own tentacles
         //
         if (is_friend(it)) {
-          AI_LOG("My fellow thing", it);
-          GOAL_ADD(GOAL_PRIO_VERY_LOW, 1, "follow friend", it);
-          continue;
+          auto it_leader = it->leader();
+          if (it_leader && (it_leader == this)) {
+            //
+            // I'm the leader. I lead, not follow.
+            //
+          } else {
+            AI_LOG("My fellow thing", it);
+            GOAL_ADD(GOAL_PRIO_VERY_LOW, 1, "follow friend", it);
+            continue;
+          }
         }
 
         //

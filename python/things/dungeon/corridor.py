@@ -16,7 +16,7 @@ def tp_init(name, tiles=[], bot3_tiles=[]):
     my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_flat(self, True)
-    my.is_only_one_per_tile(self, True)
+    my.is_one_per_tile(self, True)
     my.text_a_or_an(self, "the")
     my.text_description_short(self, "The dirty dungeon corridor.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)

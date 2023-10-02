@@ -12,7 +12,7 @@ def tp_init(name, tiles=[], left1_tiles=[], bot3_tiles=[]):
     my.gfx_pixelart_shown_in_bg(self, True)
     my.is_cursor_can_hover_over(self, True)
     my.is_floor(self, True)
-    my.is_only_one_per_tile(self, True)
+    my.is_one_per_tile(self, True)
     my.text_a_or_an(self, "the")
     my.text_description_short(self, "The unwashed dungeon foundation.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)

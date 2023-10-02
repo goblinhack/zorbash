@@ -1786,7 +1786,7 @@ public:
   int is_obs_wall_or_door(void);
   int is_obs_when_dead(void);
   int is_ogre(void);
-  int is_only_one_per_tile(void);
+  int is_one_per_tile(void);
   int is_ooze(void);
   int is_openable(void);
   int is_organic(void);

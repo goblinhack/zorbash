@@ -877,10 +877,10 @@ int Thing::is_player_bodypart_hat(void)
   TRACE_NO_INDENT();
   return (tp()->is_player_bodypart_hat());
 }
-int Thing::is_only_one_per_tile(void)
+int Thing::is_one_per_tile(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_only_one_per_tile());
+  return (tp()->is_one_per_tile());
 }
 int Thing::is_unused_flag142(void)
 {

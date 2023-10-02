@@ -16,7 +16,7 @@ def tp_init(name, text_long_name):
     my.is_animation(self, True)
     my.is_loggable(self, True)
     my.is_moveable(self, True)
-    my.is_only_one_per_tile(self, True)
+    my.is_one_per_tile(self, True)
     my.is_removable_if_out_of_slots(self, True)
     my.text_a_or_an(self, "a")
     my.tick_prio(self, my.MAP_TICK_PRIO_VERY_HIGH)

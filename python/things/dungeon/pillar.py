@@ -30,7 +30,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_obs_spell_casting(self, True)
     my.is_obs_throwing(self, True)
     my.is_obs_wall_or_door(self, True)
-    my.is_only_one_per_tile(self, True)
+    my.is_one_per_tile(self, True)
     my.is_pillar(self, True)
     my.text_a_or_an(self, "a")
     my.text_description_short(self, "An aged and moss-covered stone pillar.")

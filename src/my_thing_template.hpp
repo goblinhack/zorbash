@@ -606,7 +606,7 @@ private:
   int _is_obs_wall_or_door {};
   int _is_obs_when_dead {};
   int _is_ogre {};
-  int _is_only_one_per_tile {};
+  int _is_one_per_tile {};
   int _is_ooze {};
   int _is_openable {};
   int _is_organic {};
@@ -1974,7 +1974,7 @@ public:
   int is_obs_wall_or_door(void) const;
   int is_obs_when_dead(void) const;
   int is_ogre(void) const;
-  int is_only_one_per_tile(void) const;
+  int is_one_per_tile(void) const;
   int is_ooze(void) const;
   int is_openable(void) const;
   int is_organic(void) const;
@@ -2746,7 +2746,7 @@ public:
   void is_obs_wall_or_door_set(int v);
   void is_obs_when_dead_set(int v);
   void is_ogre_set(int v);
-  void is_only_one_per_tile_set(int v);
+  void is_one_per_tile_set(int v);
   void is_ooze_set(int v);
   void is_openable_set(int v);
   void is_organic_set(int v);

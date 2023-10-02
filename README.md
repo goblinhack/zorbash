@@ -411,7 +411,7 @@ Bestiary
 | Sewer Crab | A/common | 31 | 1d3+1 | 1 |  | Water<br /> |
 | Skeleton | A/common | 30 | 1d3 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
 | Skeleton Minion | A/common | 30 | 1d3 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
-| Spectal Blade | B/unique | 28 | 1d4 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br /> |
+| Spectral Blade | B/unique | 28 | 1d4 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br /> |
 | Goldfish | A/common | 27 | 1 | 1 | Bite:1d1+1<br /> | Water<br /> |
 | Baby Slime Jumper | A/common | 27 | 1 | 1 | Acid:1d3<br /> | Acid<br />Necrosis<br /> |
 | Sheep | B/common | 26 | 1d3+2 | 1 |  | Water<br /> |

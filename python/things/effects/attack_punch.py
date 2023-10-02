@@ -18,7 +18,7 @@ def init1(name, text_long_name):
     my.is_animation(self, True)
     my.is_loggable(self, True)
     my.is_moveable(self, True)
-    my.is_only_one_per_tile(self, True)
+    my.is_one_per_tile(self, True)
     my.is_removable_if_out_of_slots(self, True)
     my.text_a_or_an(self, "a")
     my.text_description_short(self, "Punch out.")

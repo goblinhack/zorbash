@@ -22,7 +22,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_explosion(self, True)
     my.is_floating(self, True)
     my.is_loggable(self, True)
-    my.is_only_one_per_tile(self, True)
+    my.is_one_per_tile(self, True)
     my.noise_on_born(self, 100)
     my.on_born_do(self, "me.on_born()")
     my.text_hits(self, "blasts")

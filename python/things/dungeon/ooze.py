@@ -54,7 +54,7 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_hazard(self, True)
     my.is_interesting(self, True)
     my.is_obs_ai(self, True)
-    my.is_only_one_per_tile(self, True)
+    my.is_one_per_tile(self, True)
     my.is_ooze(self, True)
     my.is_tickable(self, True)
     my.on_idle_tick_freq_dice(self, "1d40:me.on_idle()")

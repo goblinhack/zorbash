@@ -54,7 +54,7 @@ def tp_init(name, text_long_name):
     my.is_obs_spell_casting(self, True)
     my.is_obs_throwing(self, True)
     my.is_obs_wall_or_door(self, True)
-    my.is_only_one_per_tile(self, True)  # so wands of ice do not pile these up
+    my.is_one_per_tile(self, True)  # so wands of ice do not pile these up
     my.is_shootable(self, True)
     my.is_spell_of_holding_barrier(self, True)
     my.is_tickable(self, True)

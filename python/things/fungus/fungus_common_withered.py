@@ -33,7 +33,7 @@ def tp_init(self):
     my.is_interesting(self, True)
     my.is_item(self, True)
     my.is_light_blocker_for_monst(self, True)  # to give cover
-    my.is_only_one_per_tile(self, True)
+    my.is_one_per_tile(self, True)
     my.is_organic(self, True)
     my.is_shootable(self, True)
     my.is_throwable(self, True)

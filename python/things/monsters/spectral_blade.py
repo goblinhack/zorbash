@@ -10,6 +10,7 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.aggression_pct(self, 100)
+    my.ai_resent_count(self, 100)
     my.ai_wanderer(self, True)
     my.attack_humanoid(self, True)
     my.chance_d1000_tameable(self, 0)
@@ -56,7 +57,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_monst(self, True)
     my.is_moveable(self, True)
     my.is_not_shown_as_a_pet(self, True)
-    my.ai_resent_count(self, 100)
     my.is_shootable(self, True)
     my.is_tickable(self, True)
     my.light_color(self, "white")
@@ -84,7 +84,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.thing_size(self, my.THING_SIZE_NORMAL)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_Z_PRIO_CONSUMER)  # so it appears over things when consuming
+    my.z_prio(self, my.MAP_Z_PRIO_MONST)
     # end sort marker
 
     delay = 20

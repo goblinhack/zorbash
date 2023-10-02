@@ -238,7 +238,7 @@ void Game::place_player(void)
         auto w = level->thing_new("sword_plutonium", point(x, y));
         t->carry(w, carry_options);
       }
-      if (0) {
+      if (1) {
         level->thing_new("dogman", point(x + 2, y));
         auto w = level->thing_new("staff_conjuration", point(x, y));
         t->carry(w, carry_options);

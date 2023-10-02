@@ -25,7 +25,7 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     my.is_described_when_hovering_over(self, True)
     my.is_interesting(self, True)
     my.is_loggable(self, True)
-    my.is_only_one_per_tile(self, True)
+    my.is_one_per_tile(self, True)
     my.is_tickable(self, True)
     my.light_color(self, "lime")
     my.light_dist(self, 1)

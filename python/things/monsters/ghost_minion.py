@@ -72,6 +72,7 @@ def tp_init(name, text_long_name):
     my.is_msg_allowed_is_surprised(self, True)
     my.is_msg_allowed_is_wounded(self, True)
     my.is_msg_allowed_senses_danger(self, True)
+    my.is_one_per_tile(self, True)
     my.is_shootable(self, True)
     my.is_tickable(self, True)
     my.is_undead(self, True)

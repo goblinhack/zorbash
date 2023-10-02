@@ -58,7 +58,7 @@ def tp_init(
     my.is_obs_spell_casting(self, True)
     my.is_obs_throwing(self, True)
     my.is_obs_wall_or_door(self, True)
-    my.is_only_one_per_tile(self, True)
+    my.is_one_per_tile(self, True)
     my.is_rock_ice(self, True)
     my.is_shootable(self, True)
     my.is_very_hard(self, True)

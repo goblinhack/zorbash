@@ -19,7 +19,7 @@ def tp_init(name):
     my.is_described_when_hovering_over(self, True)
     my.is_interesting(self, True)
     my.is_loggable(self, True)
-    my.is_only_one_per_tile(self, True)
+    my.is_one_per_tile(self, True)
     my.is_removable_if_out_of_slots(self, True)
     my.is_steam(self, True)
     my.is_tickable(self, True)

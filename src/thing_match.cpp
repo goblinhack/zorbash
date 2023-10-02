@@ -400,7 +400,7 @@ bool Tp::matches(const std::string &what)
   if (is_obs_wall_or_door() && (what == "is_obs_wall_or_door")) { return true; }
   if (is_obs_when_dead() && (what == "is_obs_when_dead")) { return true; }
   if (is_ogre() && (what == "is_ogre")) { return true; }
-  if (is_only_one_per_tile() && (what == "is_only_one_per_tile")) { return true; }
+  if (is_one_per_tile() && (what == "is_one_per_tile")) { return true; }
   if (is_ooze() && (what == "is_ooze")) { return true; }
   if (is_openable() && (what == "is_openable")) { return true; }
   if (is_organic() && (what == "is_organic")) { return true; }
@@ -1004,7 +1004,7 @@ bool Thing::matches(const std::string &what)
   if (is_obs_wall_or_door() && (what == "is_obs_wall_or_door")) { return true; }
   if (is_obs_when_dead() && (what == "is_obs_when_dead")) { return true; }
   if (is_ogre() && (what == "is_ogre")) { return true; }
-  if (is_only_one_per_tile() && (what == "is_only_one_per_tile")) { return true; }
+  if (is_one_per_tile() && (what == "is_one_per_tile")) { return true; }
   if (is_ooze() && (what == "is_ooze")) { return true; }
   if (is_openable() && (what == "is_openable")) { return true; }
   if (is_organic() && (what == "is_organic")) { return true; }
@@ -1598,7 +1598,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_obs_wall_or_door") { return &Thing::is_obs_wall_or_door; }
   if (what == "is_obs_when_dead") { return &Thing::is_obs_when_dead; }
   if (what == "is_ogre") { return &Thing::is_ogre; }
-  if (what == "is_only_one_per_tile") { return &Thing::is_only_one_per_tile; }
+  if (what == "is_one_per_tile") { return &Thing::is_one_per_tile; }
   if (what == "is_ooze") { return &Thing::is_ooze; }
   if (what == "is_openable") { return &Thing::is_openable; }
   if (what == "is_organic") { return &Thing::is_organic; }

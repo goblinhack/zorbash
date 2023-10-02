@@ -7,6 +7,9 @@
 #include "my_thing.hpp"
 #include "my_vector_bounds_check.hpp"
 
+//
+// Called for non braziers to see what they interact with
+//
 void Thing::brazier_tick(void)
 {
   if (is_brazier()) {
@@ -14,6 +17,13 @@ void Thing::brazier_tick(void)
   }
 
   if (! is_monst() && ! is_player()) {
+    return;
+  }
+
+  //
+  // Ghosts should not knock over things
+  //
+  if (is_ethereal()) {
     return;
   }
 
