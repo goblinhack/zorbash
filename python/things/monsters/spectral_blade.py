@@ -27,9 +27,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_oversized_and_centered(self, True)
     my.gfx_pixelart_reflection(self, True)
-    my.gfx_pixelart_shadow(self, True)
-    my.gfx_pixelart_shadow_short(self, True)
-    my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.health_initial_dice(self, "1")
     my.is_able_to_be_teleported(self, True)
@@ -62,7 +59,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_tickable(self, True)
     my.light_color(self, "white")
     my.light_dist(self, 1)
-    my.move_speed(self, 100)
+    my.move_speed(self, 200)
     my.noise_decibels_hearing(self, 0)
     my.noise_on_moving(self, 0)
     my.normal_placement_rules(self, True)
@@ -88,7 +85,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
     # end sort marker
 
-    delay = 20
+    delay = 25
     my.tile(self,
             ascii_fg_char="/", ascii_fg_col_name="white",
             tile=name + ".1", delay_ms=delay)
