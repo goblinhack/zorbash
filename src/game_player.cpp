@@ -51,6 +51,10 @@ void Game::place_player(void)
       }
 
       if (0) {
+        level->thing_new("potion_poison", point(x + 1, y));
+        level->thing_new("fire", point(x + 1, y));
+      }
+      if (0) {
         auto w = level->thing_new("potion_levitation", point(x, y));
         t->carry(w, carry_options);
         level->thing_new("trap_blinded", point(x + 2, y));
@@ -239,6 +243,7 @@ void Game::place_player(void)
         t->carry(w, carry_options);
       }
       if (0) {
+        level->thing_new("trap_pressure_plate_gas3", point(x - 1, y));
         level->thing_new("exit1", point(x - 1, y + 1));
         level->thing_new("dogman", point(x + 2, y));
         auto w = level->thing_new("staff_conjuration", point(x, y));

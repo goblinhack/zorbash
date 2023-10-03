@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- need explosive gas as poison gas no longer explodes                                                                                          -->
 <!-- DONE Potion of Caustic Gas - Produces a cloud of damaging caustic gas.                                                                       -->
 <!-- DONE Potion of Darkness - Produces a cloud of darkness that obscures an area of the dungeon.                                                 -->
 <!-- DONE Potion of Invisibility - Reduces you stealth radius considerably.                                                                       -->
@@ -16,7 +17,7 @@
 <!-- DONE Potion of Confusion - Produces a cloud of confusion gas.                                                                                -->
 <!-- DONE Potion of Levitation - Causes you to float, Useful for escaping and crossing dangerous terrains.                                        -->
 <!-- TODO Staves and Wands fire blasts of magical energy but have a finite number of charges. Staves recharge over time, but wands do not.        -->
-<!-- TODO Staff of Conjuration                                                                                                                    -->
+<!-- DONE Staff of Conjuration                                                                                                                    -->
 <!-- TODO Staff of Discord                                                                                                                        -->
 <!-- TODO Staff of Entrancement                                                                                                                   -->
 <!-- TODO Staff of Firebolt                                                                                                                       -->

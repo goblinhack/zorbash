@@ -503,7 +503,18 @@ void Thing::temperature_tick(void)
     if (thing_check_for_heat_dmg()) {
       auto damage = abs(thing_temp) / 20;
       popup("Burn!");
-      dbg("Apply heat damage");
+      dbg("Apply burnable heat damage");
+      TRACE_AND_INDENT();
+      is_attacked_with_dmg_heat(this, this, damage);
+      return;
+    }
+  }
+
+  if ((thing_temp >= 50) && is_combustible()) {
+    if (thing_check_for_heat_dmg()) {
+      auto damage = abs(thing_temp) / 20;
+      popup("Burn!");
+      dbg("Apply combustible heat damage");
       TRACE_AND_INDENT();
       is_attacked_with_dmg_heat(this, this, damage);
       return;
@@ -514,7 +525,7 @@ void Thing::temperature_tick(void)
     if (thing_check_for_heat_dmg()) {
       auto damage = abs(thing_temp) / 20;
       popup("Melt!");
-      dbg("Apply heat damage");
+      dbg("Apply melting heat damage");
       TRACE_AND_INDENT();
       is_attacked_with_dmg_heat(this, this, damage);
       return;

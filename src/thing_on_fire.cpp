@@ -110,7 +110,10 @@ bool Thing::on_fire_set(const std::string &why)
   }
 
   if (is_on_fire()) {
-    return true;
+    //
+    // Only return true on changes
+    //
+    return false;
   }
 
   if (is_dead) {

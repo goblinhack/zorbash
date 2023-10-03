@@ -15,7 +15,10 @@ void Thing::gas_poison_tick(void)
     if (intensity) {
       dbg("Poison gas explosion due to fire");
       TRACE_AND_INDENT();
-      level->gas_poison_explosion(curr_at);
+      //
+      // A bit too destructive
+      //
+      // level->gas_poison_explosion(curr_at);
     }
     return;
   }
