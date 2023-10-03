@@ -881,6 +881,8 @@ std::initializer_list< std::string > tps = {
     "wooden_cross_carry",
     "yeti",
     "zoblin",
+    "zoblin_minion",
+    "zob_mob",
     "zorb_all",
     "zorb_captain",
     "zorb_eldster",
