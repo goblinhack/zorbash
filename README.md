@@ -388,8 +388,8 @@ Bestiary
 | Noble Warrior | /common | 50 | 1d3 | 1 |  |  |
 | Moresquito | A/common | 48 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d3<br />Poison:1d4<br />Drain:1d4<br /> |  |
 | Blinkcat | B/common | 47 | 1d3+1 | 1 |  | Cold<br />Water<br /> |
-| Dog | A/uncommon | 45 | 1d4+2 | 1 |  | Water<br /> |
 | Scorpion | A/common | 45 | 1d3+1 | 1 | Poison:1d12<br /> |  |
+| Dog | A/uncommon | 45 | 1d4+2 | 1 |  | Water<br /> |
 | Giant Rat | B/common | 44 | 1d6+2 | 1 |  | Water<br /> |
 | Narhornet | A/uncommon | 44 | 1d4+1 | 1 | Bite:1d4<br />Poison:1d8<br /> |  |
 | Cuddly Eel | A/common | 43 | 1d3+1 | 1 | Bite:1d4<br /> | Water<br /> |
@@ -399,6 +399,7 @@ Bestiary
 | Rabid Bat Minion | A/common | 39 | 1 | 1 | Bite:1d3<br />Claw:1d2<br /> | Water<br /> |
 | Orb Of Energy | B/uncommon | 39 |  | 0 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br /> |
 | Para Spider | B/uncommon | 39 | 1d3 | 1 | Poison:1d4<br /> | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br /> |
+| Spectral Blade | B/unique | 38 | 1d4 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br /> |
 | Fluffy Bat | A/common | 37 | 1 | 1 | Bite:1d3<br />Claw:1d2<br /> | Water<br /> |
 | Giant Dungeon Duck | A/rare | 37 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d3<br /> | Water<br /> |
 | Rat | A/common | 37 | 1d3+2 | 1 |  | Water<br /> |
@@ -412,7 +413,6 @@ Bestiary
 | Sewer Crab | A/common | 31 | 1d3+1 | 1 |  | Water<br /> |
 | Skeleton | A/common | 30 | 1d3 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
 | Skeleton Minion | A/common | 30 | 1d3 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
-| Spectral Blade | B/unique | 28 | 1d4 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br /> |
 | Goldfish | A/common | 27 | 1 | 1 | Bite:1d1+1<br /> | Water<br /> |
 | Baby Slime Jumper | A/common | 27 | 1 | 1 | Acid:1d3<br /> | Acid<br />Necrosis<br /> |
 | Sheep | B/common | 26 | 1d3+2 | 1 |  | Water<br /> |
