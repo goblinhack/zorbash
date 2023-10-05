@@ -797,6 +797,9 @@ void Game::place_player(void)
       IF_DEBUG2
       {
         if (0) {
+          level->thing_new("spectral_mob", point(x + 2, y + 1));
+        }
+        if (0) {
           level->thing_new("zob_mob", point(x + 2, y + 1));
         }
         if (0) {

@@ -325,13 +325,13 @@ Bestiary
 | Yeti | C/rare | 208 | 1d12+8 | 1 |  | Cold<br /> |
 | Stone Troll | B/common | 193 | 1d12+4 | 1 |  | Poison<br /> |
 | Dungeon Cleaner | B/common | 187 | 1d10 | 1 | Digest:1d40<br /> | Acid<br /> |
-| Giant Skeleton | C/common | 184 | 1d6 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
 | Mummy | B/common | 184 | 1d10+10 | 2 | Drain:1d10<br /> | Cold<br />Fire<br />Necrosis<br />Poison<br />Draining<br /> |
+| Giant Skeleton | C/common | 184 | 1d6 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
 | Cement Man | C/common | 178 | 3d8+6 | 1 |  | Cold<br />Fire<br />Poison<br />Draining<br /> |
 | Giant Spider | B/common | 139 | 1d8+3 | 1 | Poison:2d8<br /> | Webs<br /> |
 | Lesser Tentacleye | C/common | 136 | 2d6 | 1 |  | Cold<br />Necrosis<br />Poison<br />Draining<br />Water<br /> |
-| Bone Spider | C/common | 132 | 1d8+3 | 1 | Poison:2d8<br /> | Cold<br />Necrosis<br />Poison<br />Webs<br />Draining<br /> |
 | Murder Bunny | B/rare | 132 | 1d8 | 2 | Bite:1d6<br />Claw:1d4<br /> |  |
+| Bone Spider | C/common | 132 | 1d8+3 | 1 | Poison:2d8<br /> | Cold<br />Necrosis<br />Poison<br />Webs<br />Draining<br /> |
 | Gargoyle | C/common | 128 | 2d6 | 1 |  | Cold<br />Necrosis<br />Poison<br />Draining<br />Water<br /> |
 | Hill Ogre | B/common | 127 | 1d10+4 | 1 |  |  |
 | Iceman | B/common | 125 |  | 1 | Cold:1d8<br /> | Cold<br /> |
@@ -349,67 +349,69 @@ Bestiary
 | Dreadfire Snake | C/rare | 81 | 1d3+1 | 1 | Poison:1d4<br /> | Webs<br />Water<br /> |
 | Zorblin Priest | B/common | 78 | 1d6+2 | 1 |  |  |
 | Flux Spider | B/uncommon | 77 | 1d3 | 1 | Necrotic:1<br />Poison:1d4<br /> | Cold<br />Necrosis<br />Poison<br />Webs<br /> |
-| Zorblin Pirate | B/common | 76 | 1d4+2 | 1 |  |  |
 | Zorblin Leader | B/common | 76 | 1d4+2 | 1 |  |  |
+| Zorblin Pirate | B/common | 76 | 1d4+2 | 1 |  |  |
 | Assassin Duck | B/v-rare | 75 | 1d6+1 | 1 | Bite:1d8<br />Claw:1d6<br /> | Water<br /> |
 | Gaseous Gloat | B/common | 74 | 1d20 | 1 | Digest:1d40<br /> |  |
 | Gargoyle Baby | C/common | 74 | 1d6 | 1 |  | Cold<br />Necrosis<br />Poison<br />Draining<br />Water<br /> |
 | Hellpup | B/rare | 73 | 1d6+2 | 1 |  | Cold<br />Fire<br />Necrosis<br />Poison<br />Draining<br /> |
-| Death Hornet | A/uncommon | 72 | 1d4+1 | 1 | Bite:1d10<br />Poison:1d10<br /> |  |
 | Firefox | B/rare | 72 | 1d6+2 | 1 |  | Fire<br />Water<br /> |
+| Death Hornet | A/uncommon | 72 | 1d4+1 | 1 | Bite:1d10<br />Poison:1d10<br /> |  |
 | Dungeon Belcher | B/common | 72 | 1d20 | 1 | Digest:1d10<br /> |  |
 | Teletoad | B/common | 71 | 1d3+1 | 1 | Poison:1d10<br /> | Cold<br />Water<br /> |
 | Zorblin Soldier | A/common | 70 | 1d4+2 | 1 |  |  |
-| Deathstalker Scorpion | B/rare | 66 | 1d6+1 | 1 | Poison:1d30<br /> |  |
 | Huge Fluffy Bat | B/common | 66 | 1d4+2 | 1 | Bite:1d4<br />Claw:1d6<br />Poison:1d4+1<br /> | Water<br /> |
+| Deathstalker Scorpion | B/rare | 66 | 1d6+1 | 1 | Poison:1d30<br /> |  |
+| Zorblin Wizard | C/common | 64 | 1d4+2 | 1 |  |  |
 | Lesser Zorblin | A/common | 64 | 1d4+2 | 1 |  |  |
 | Dogman | A/common | 64 | 1d4+1 | 1 |  | Water<br /> |
-| Zorblin Wizard | C/common | 64 | 1d4+2 | 1 |  |  |
-| Pyrolizard | B/common | 63 | 1d6+1 | 1 |  | Fire<br /> |
 | Molekin | A/uncommon | 63 | 1d4+2 | 1 |  | Water<br /> |
+| Pyrolizard | B/common | 63 | 1d6+1 | 1 |  | Fire<br /> |
 | Gnome Knight | B/common | 62 | 1d6+1 | 1 |  | Poison<br /> |
-| Zorblomancer | B/common | 62 | 1d4+2 | 1 |  |  |
 | Zorblin Eldster | B/common | 62 | 1d4+2 | 1 |  |  |
-| Carcass Creeper | A/common | 60 | 1d6+2 | 1 | Bite:1d8<br />Claw:1d6<br />Poison:1d10<br /> | Poison<br /> |
+| Zorblomancer | B/common | 62 | 1d4+2 | 1 |  |  |
 | Zoblin | A/common | 60 | 1d6 | 1 |  | Cold<br />Necrosis<br />Poison<br />Draining<br /> |
+| Zoblin | A/common | 60 | 1d6 | 1 |  | Cold<br />Necrosis<br />Poison<br />Draining<br /> |
+| Carcass Creeper | A/common | 60 | 1d6+2 | 1 | Bite:1d8<br />Claw:1d6<br />Poison:1d10<br /> | Poison<br /> |
 | Rock Gnome | B/common | 60 | 1d6+1 | 1 |  | Poison<br /> |
 | Piranha | A/rare | 59 | 1d4+3 | 1 | Bite:1d4<br /> | Water<br /> |
 | Gnorf | A/common | 58 | 1d4+1 | 1 |  | Cold<br />Poison<br /> |
 | Brown Extrovert Spider | A/uncommon | 57 | 1d3 | 1 | Necrotic:1<br />Poison:1d3<br /> | Necrosis<br />Webs<br /> |
-| Flaming Skeleton | B/common | 56 | 1d4 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
 | Battle Goat | B/uncommon | 56 | 1d6+2 | 1 |  | Poison<br />Water<br /> |
-| Gnome Thief | A/common | 52 | 1d2+1 | 1 |  | Cold<br />Poison<br /> |
+| Flaming Skeleton | B/common | 56 | 1d4 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
 | Slime Jumper | A/common | 52 | 2d6+2 | 1 | Acid:1d6<br /> | Acid<br />Necrosis<br /> |
+| Gnome Thief | A/common | 52 | 1d2+1 | 1 |  | Cold<br />Poison<br /> |
 | Burning Skeleton | B/common | 52 | 1d3 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
 | Onyx Widow | A/common | 51 | 1d3 | 1 | Poison:1d4<br /> | Webs<br /> |
 | Thylacine | B/v-rare | 51 | 1d6+2 | 1 |  | Water<br /> |
-| Meatfairy | A/common | 50 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d2<br /> |  |
-| Kraken Tentacle | A/common | 50 | 1d3+1 | 1 | Poison:1d8+1<br /> | Water<br /> |
 | Noble Warrior | /common | 50 | 1d3 | 1 |  |  |
+| Kraken Tentacle | A/common | 50 | 1d3+1 | 1 | Poison:1d8+1<br /> | Water<br /> |
+| Meatfairy | A/common | 50 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d2<br /> |  |
 | Moresquito | A/common | 48 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d3<br />Poison:1d4<br />Drain:1d4<br /> |  |
 | Blinkcat | B/common | 47 | 1d3+1 | 1 |  | Cold<br />Water<br /> |
-| Scorpion | A/common | 45 | 1d3+1 | 1 | Poison:1d12<br /> |  |
 | Dog | A/uncommon | 45 | 1d4+2 | 1 |  | Water<br /> |
+| Scorpion | A/common | 45 | 1d3+1 | 1 | Poison:1d12<br /> |  |
 | Giant Rat | B/common | 44 | 1d6+2 | 1 |  | Water<br /> |
 | Narhornet | A/uncommon | 44 | 1d4+1 | 1 | Bite:1d4<br />Poison:1d8<br /> |  |
-| Cuddly Eel | A/common | 43 | 1d3+1 | 1 | Bite:1d4<br /> | Water<br /> |
-| Centipede | A/common | 43 | 1d4+2 | 1 | Bite:1d8<br />Claw:1d4<br />Poison:1d4<br /> | Poison<br /> |
 | Asp | A/common | 43 | 1d3+1 | 1 | Poison:1d3+1<br /> | Webs<br />Water<br /> |
+| Centipede | A/common | 43 | 1d4+2 | 1 | Bite:1d8<br />Claw:1d4<br />Poison:1d4<br /> | Poison<br /> |
+| Cuddly Eel | A/common | 43 | 1d3+1 | 1 | Bite:1d4<br /> | Water<br /> |
 | Orb Of Fire | B/uncommon | 40 |  | 0 |  | Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br /> |
-| Rabid Bat Minion | A/common | 39 | 1 | 1 | Bite:1d3<br />Claw:1d2<br /> | Water<br /> |
 | Orb Of Energy | B/uncommon | 39 |  | 0 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br /> |
+| Rabid Bat Minion | A/common | 39 | 1 | 1 | Bite:1d3<br />Claw:1d2<br /> | Water<br /> |
 | Para Spider | B/uncommon | 39 | 1d3 | 1 | Poison:1d4<br /> | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br /> |
+| Spectral Blade | B/unique | 38 | 1d4 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br /> |
 | Spectral Blade | B/unique | 38 | 1d4 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br /> |
 | Fluffy Bat | A/common | 37 | 1 | 1 | Bite:1d3<br />Claw:1d2<br /> | Water<br /> |
 | Giant Dungeon Duck | A/rare | 37 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d3<br /> | Water<br /> |
 | Rat | A/common | 37 | 1d3+2 | 1 |  | Water<br /> |
 | Jackalope | A/rare | 36 | 1d4 | 1 |  |  |
 | Clingy Leech | A/common | 35 | 1d3+1 | 1 | Bite:1d4<br />Drain:1d4<br /> | Water<br /> |
-| Jade Viper | B/common | 35 | 1d3+1 | 1 | Poison:1d2<br /> | Webs<br />Water<br /> |
-| Ghost Minion | A/common | 35 |  | 1 | Cold:1<br /> | Acid<br />Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br />Water<br /> |
 | Ghost | A/common | 35 |  | 1 | Cold:1<br /> | Acid<br />Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br />Water<br /> |
-| Skeleton | A/common | 32 | 1d3 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
+| Ghost Minion | A/common | 35 |  | 1 | Cold:1<br /> | Acid<br />Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br />Water<br /> |
+| Jade Viper | B/common | 35 | 1d3+1 | 1 | Poison:1d2<br /> | Webs<br />Water<br /> |
 | Fleshbee | A/common | 32 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d3<br /> |  |
+| Skeleton | A/common | 32 | 1d3 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
 | Sewer Crab | A/common | 31 | 1d3+1 | 1 |  | Water<br /> |
 | Skeleton | A/common | 30 | 1d3 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
 | Skeleton Minion | A/common | 30 | 1d3 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
@@ -693,7 +695,7 @@ Content
 Other content
 -------------
 <!-- begin type marker -->
-- 113 x monsters
+- 115 x monsters
 - 52 x food
 - 24 x treasure
 - 24 x items
@@ -708,12 +710,12 @@ Other content
 - 6 x shield
 - 6 x boots
 - 5 x rings
+- 5 x mobs
 - 5 x keys
 - 5 x amulets
 - 4 x gauntlets
 - 4 x cloaks
 - 4 x armor
-- 3 x mobs
 - 3 x doors
 - 1 x player
 <!-- end type marker -->
