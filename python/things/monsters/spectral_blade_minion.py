@@ -20,7 +20,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.distance_minion_vision_shared(self, True)
     my.distance_vision(self, 8)
     my.dmg_chance_d1000_nat_att(self, 0, 1000)
-    my.dmg_nat_att_dice(self, "1d4")
+    my.dmg_nat_att_dice(self, "1d3")
     my.dmg_nat_att_type(self, "slices")
     my.dmg_num_of_attacks(self, 1)
     my.dmg_received_doubled_from_fire(self, True)

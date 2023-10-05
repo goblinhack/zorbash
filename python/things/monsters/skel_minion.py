@@ -55,7 +55,7 @@ def tp_init(name, text_long_name):
     my.distance_minion_from_mob_max(self, 6)
     my.distance_minion_vision_shared(self, True)
     my.distance_vision(self, 7)
-    my.dmg_nat_att_dice(self, "1d3")
+    my.dmg_nat_att_dice(self, "1d2")
     my.dmg_nat_att_type(self, "gore")
     my.dmg_received_doubled_from_water(self, True)
     my.environ_hates_water(self, 100)
