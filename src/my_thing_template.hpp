@@ -516,6 +516,7 @@ private:
   int _is_immune_to_confusion {};
   int _is_immune_to_electricity {};
   int _is_immune_to_fire {};
+  int _is_immune_to_lightning {};
   int _is_immune_to_magic_drain {};
   int _is_immune_to_necrosis {};
   int _is_immune_to_negation {};
@@ -775,7 +776,6 @@ private:
   int _is_unused_flag72 {};
   int _is_unused_flag73 {};
   int _is_unused_flag74 {};
-  int _is_unused_flag75 {};
   int _is_unused_flag8 {};
   int _is_unused_flag9 {};
   int _is_usable {};
@@ -1885,6 +1885,7 @@ public:
   int is_immune_to_confusion(void) const;
   int is_immune_to_electricity(void) const;
   int is_immune_to_fire(void) const;
+  int is_immune_to_lightning(void) const;
   int is_immune_to_magic_drain(void) const;
   int is_immune_to_necrosis(void) const;
   int is_immune_to_negation(void) const;
@@ -2142,7 +2143,6 @@ public:
   int is_unused_flag72(void) const;
   int is_unused_flag73(void) const;
   int is_unused_flag74(void) const;
-  int is_unused_flag75(void) const;
   int is_unused_flag7(void) const;
   int is_unused_flag8(void) const;
   int is_unused_flag9(void) const;
@@ -2657,6 +2657,7 @@ public:
   void is_immune_to_confusion_set(int v);
   void is_immune_to_electricity_set(int v);
   void is_immune_to_fire_set(int v);
+  void is_immune_to_lightning_set(int v);
   void is_immune_to_magic_drain_set(int v);
   void is_immune_to_necrosis_set(int v);
   void is_immune_to_negation_set(int v);
@@ -2914,7 +2915,6 @@ public:
   void is_unused_flag72_set(int v);
   void is_unused_flag73_set(int v);
   void is_unused_flag74_set(int v);
-  void is_unused_flag75_set(int v);
   void is_unused_flag7_set(int v);
   void is_unused_flag8_set(int v);
   void is_unused_flag9_set(int v);

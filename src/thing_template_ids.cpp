@@ -622,6 +622,8 @@ std::initializer_list< std::string > tps = {
     "projectile_magic_missile",
     "projectile_rock",
     "projectile_web",
+    "pudding_baby",
+    "pudding_parent",
     "pyrolizard",
     "rat_giant",
     "rat_large",

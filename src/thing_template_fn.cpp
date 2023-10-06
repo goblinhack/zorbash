@@ -610,6 +610,7 @@ int Tp::is_immune_to_cold(void) const { return _is_immune_to_cold; }
 int Tp::is_immune_to_confusion(void) const { return _is_immune_to_confusion; }
 int Tp::is_immune_to_electricity(void) const { return _is_immune_to_electricity; }
 int Tp::is_immune_to_fire(void) const { return _is_immune_to_fire; }
+int Tp::is_immune_to_lightning(void) const { return _is_immune_to_lightning; }
 int Tp::is_immune_to_magic_drain(void) const { return _is_immune_to_magic_drain; }
 int Tp::is_immune_to_necrosis(void) const { return _is_immune_to_necrosis; }
 int Tp::is_immune_to_negation(void) const { return _is_immune_to_negation; }
@@ -866,7 +867,6 @@ int Tp::is_unused_flag71(void) const { return _is_unused_flag71; }
 int Tp::is_unused_flag72(void) const { return _is_unused_flag72; }
 int Tp::is_unused_flag73(void) const { return _is_unused_flag73; }
 int Tp::is_unused_flag74(void) const { return _is_unused_flag74; }
-int Tp::is_unused_flag75(void) const { return _is_unused_flag75; }
 int Tp::is_unused_flag7(void) const { return _is_unused_flag7; }
 int Tp::is_unused_flag8(void) const { return _is_unused_flag8; }
 int Tp::is_unused_flag9(void) const { return _is_unused_flag9; }
@@ -1381,6 +1381,7 @@ void Tp::is_immune_to_cold_set(int v) { _is_immune_to_cold = v; }
 void Tp::is_immune_to_confusion_set(int v) { _is_immune_to_confusion = v; }
 void Tp::is_immune_to_electricity_set(int v) { _is_immune_to_electricity = v; }
 void Tp::is_immune_to_fire_set(int v) { _is_immune_to_fire = v; }
+void Tp::is_immune_to_lightning_set(int v) { _is_immune_to_lightning = v; }
 void Tp::is_immune_to_magic_drain_set(int v) { _is_immune_to_magic_drain = v; }
 void Tp::is_immune_to_necrosis_set(int v) { _is_immune_to_necrosis = v; }
 void Tp::is_immune_to_negation_set(int v) { _is_immune_to_negation = v; }
@@ -1637,7 +1638,6 @@ void Tp::is_unused_flag71_set(int v) { _is_unused_flag71 = v; }
 void Tp::is_unused_flag72_set(int v) { _is_unused_flag72 = v; }
 void Tp::is_unused_flag73_set(int v) { _is_unused_flag73 = v; }
 void Tp::is_unused_flag74_set(int v) { _is_unused_flag74 = v; }
-void Tp::is_unused_flag75_set(int v) { _is_unused_flag75 = v; }
 void Tp::is_unused_flag7_set(int v) { _is_unused_flag7 = v; }
 void Tp::is_unused_flag8_set(int v) { _is_unused_flag8 = v; }
 void Tp::is_unused_flag9_set(int v) { _is_unused_flag9 = v; }

@@ -434,6 +434,7 @@ PyObject *thing_is_immune_to_cold(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_immune_to_confusion(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_electricity(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_fire(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_immune_to_lightning(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_magic_drain(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_necrosis(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_negation(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -685,7 +686,6 @@ PyObject *thing_is_unused_flag71(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag72(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag73(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag74(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag75(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag8(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag9(PyObject *obj, PyObject *args, PyObject *keywds);

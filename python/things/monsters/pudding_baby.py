@@ -34,7 +34,7 @@ def tp_init(name, text_long_name):
     my.consume_per_bite_amount(self, 1)
     my.distance_avoid(self, 2)
     my.distance_vision(self, 5)
-    my.dmg_acid_dice(self, "1d3")
+    my.dmg_acid_dice(self, "1d5")
     my.dmg_chance_d1000_acid(self, 0, 500)
     my.dmg_chance_d1000_nat_att(self, 0, 500)
     my.dmg_nat_att_dice(self, "1")
@@ -86,11 +86,14 @@ def tp_init(name, text_long_name):
     my.is_green_blooded(self, True)
     my.is_hittable(self, True)
     my.is_immune_to_acid(self, True)
+    my.is_immune_to_cold(self, True)
+    my.is_immune_to_electricity(self, True)
+    my.is_immune_to_lightning(self, True)
     my.is_immune_to_necrosis(self, True)
     my.is_interesting(self, True)
     my.is_living(self, True)
     my.is_loggable(self, True)
-    my.is_monst_class_A(self, True)
+    my.is_monst_class_B(self, True)
     my.is_monst(self, True)
     my.is_moveable(self, True)
     my.is_msg_allowed_hears_something(self, True)
@@ -102,8 +105,8 @@ def tp_init(name, text_long_name):
     my.is_slime(self, True)
     my.is_soft(self, True)
     my.is_tickable(self, True)
-    my.jump_distance(self, 2)
-    my.move_speed(self, 50)
+    my.jump_distance(self, 3)
+    my.move_speed(self, 120)
     my.noise_decibels_hearing(self, 50)
     my.noise_on_moving(self, 15)
     my.normal_placement_rules(self, True)
@@ -124,9 +127,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description_long2(self, "This one is a baby slime. It tends to avoid adults of its kind. So should you.")
-    my.text_description_long(self, "Slime jumpers are numerous, bouncy and lots of fun! They will eat almost anything, including their own. They have the annoying habit of jumping when threatened.")
-    my.text_description_short(self, "A small pile of semi sentient slime.")
+    my.text_description_long(self, "Baby black puddings are inky masses of gooey nastiness. Much quicker than their heavier parents, they are best avoided.")
+    my.text_description_short(self, "A small black pudding.")
     my.text_hits(self, "splats")
     my.thing_size(self, my.THING_SIZE_SMALL)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -136,35 +138,35 @@ def tp_init(name, text_long_name):
 
     delay = 200
     my.tile(self,
-            ascii_fg_char="j", ascii_bg_col_name="", ascii_fg_col_name="limegreen",
+            ascii_fg_char="j", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="j", ascii_bg_col_name="", ascii_fg_col_name="limegreen",
+            ascii_fg_char="j", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="j", ascii_bg_col_name="", ascii_fg_col_name="limegreen",
+            ascii_fg_char="j", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".3", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="j", ascii_bg_col_name="", ascii_fg_col_name="limegreen",
+            ascii_fg_char="j", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".4", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="j", ascii_bg_col_name="", ascii_fg_col_name="limegreen",
+            ascii_fg_char="j", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".5", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="j", ascii_bg_col_name="", ascii_fg_col_name="limegreen",
+            ascii_fg_char="j", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".6", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="j", ascii_bg_col_name="", ascii_fg_col_name="limegreen",
+            ascii_fg_char="j", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".7", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="j", ascii_bg_col_name="", ascii_fg_col_name="limegreen",
+            ascii_fg_char="j", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".8", delay_ms=delay)
 
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="slime_baby", text_long_name="baby slime jumper")
+    tp_init(name="pudding_baby", text_long_name="baby black pudding")
 
 
 init()

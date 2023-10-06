@@ -68,6 +68,15 @@ int Thing::is_immune_to_necrosis(void)
   return (tp()->is_immune_to_necrosis());
 }
 
+int Thing::is_immune_to_lightning(void)
+{
+  TRACE_NO_INDENT();
+  if (buff_immune_to_lightning()) {
+    return true;
+  }
+  return (tp()->is_immune_to_lightning());
+}
+
 int Thing::is_immune_to_stamina_drain(void)
 {
   TRACE_NO_INDENT();

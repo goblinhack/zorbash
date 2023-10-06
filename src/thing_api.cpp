@@ -582,11 +582,6 @@ int Thing::is_unused_flag74(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag74());
 }
-int Thing::is_unused_flag75(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_unused_flag75());
-}
 int Thing::is_not_shown_as_a_pet(void)
 {
   TRACE_NO_INDENT();

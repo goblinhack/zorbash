@@ -511,6 +511,7 @@ public:
   bool buff_floating(void);
   bool buff_immune_to_cold(void);
   bool buff_immune_to_fire(void);
+  bool buff_immune_to_lightning(void);
   bool buff_immune_to_magic_drain(void);
   bool buff_immune_to_necrosis(void);
   bool buff_immune_to_negation(void);
@@ -1698,6 +1699,7 @@ public:
   int is_immune_to_confusion(void);
   int is_immune_to_electricity(void);
   int is_immune_to_fire(void);
+  int is_immune_to_lightning(void);
   int is_immune_to_magic_drain(void);
   int is_immune_to_necrosis(void);
   int is_immune_to_negation(void);
@@ -1953,7 +1955,6 @@ public:
   int is_unused_flag72(void);
   int is_unused_flag73(void);
   int is_unused_flag74(void);
-  int is_unused_flag75(void);
   int is_unused_flag7(void);
   int is_unused_flag8(void);
   int is_unused_flag9(void);

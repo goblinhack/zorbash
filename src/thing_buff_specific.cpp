@@ -387,6 +387,42 @@ bool Thing::buff_immune_to_necrosis(void)
   return false;
 }
 
+bool Thing::buff_immune_to_lightning(void)
+{
+  TRACE_NO_INDENT();
+
+  if (! maybe_itemsp()) {
+    return false;
+  }
+
+  TRACE_NO_INDENT();
+  FOR_ALL_BUFFS(id)
+  {
+    auto t = level->thing_find(id);
+    if (t) {
+      if (t->is_immune_to_lightning()) {
+        return true;
+      }
+    }
+  }
+
+  auto owner = top_owner();
+  if (owner) {
+    TRACE_NO_INDENT();
+    FOR_ALL_BUFFS_FOR(owner, item)
+    {
+      auto iter = level->thing_find(item.id);
+      if (iter) {
+        if (iter->is_immune_to_lightning()) {
+          return true;
+        }
+      }
+    }
+  }
+
+  return false;
+}
+
 bool Thing::buff_invisible(void)
 {
   TRACE_NO_INDENT();

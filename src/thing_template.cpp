@@ -576,6 +576,9 @@ void tp_dump_monsters(void)
     if (tp->is_immune_to_electricity()) {
       imm_str += "Electricity<newline>";
     }
+    if (tp->is_immune_to_lightning()) {
+      imm_str += "Lightning<newline>";
+    }
     if (tp->is_immune_to_fire()) {
       imm_str += "Fire<newline>";
     }
@@ -769,6 +772,9 @@ void tp_dump_weapons(void)
     }
     if (tp->is_immune_to_electricity()) {
       imm_str += "Immunity-Electricity<newline>";
+    }
+    if (tp->is_immune_to_lightning()) {
+      imm_str += "Immunity-Lightning<newline>";
     }
     if (tp->is_immune_to_fire()) {
       imm_str += "Immunity-Fire<newline>";

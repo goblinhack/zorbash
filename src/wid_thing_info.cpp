@@ -789,6 +789,10 @@ void Game::wid_thing_info_add_immunity(WidPopup *w, Thingp t)
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
+  if (t->is_immune_to_acid()) {
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Acid");
+    w->log(tmp);
+  }
   if (t->is_immune_to_cold()) {
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Cold");
     w->log(tmp);
@@ -803,6 +807,14 @@ void Game::wid_thing_info_add_immunity(WidPopup *w, Thingp t)
   }
   if (t->is_immune_to_necrosis()) {
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Necrosis");
+    w->log(tmp);
+  }
+  if (t->is_immune_to_lightning()) {
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Lightning");
+    w->log(tmp);
+  }
+  if (t->is_immune_to_electricity()) {
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Electricity");
     w->log(tmp);
   }
   if (t->is_immune_to_negation()) {

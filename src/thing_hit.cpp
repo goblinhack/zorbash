@@ -595,7 +595,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   TRACE_NO_INDENT();
   if (attack_options->attack[ THING_ATTACK_LIGHTNING ]) {
     TRACE_NO_INDENT();
-    if (is_immune_to_electricity()) {
+    if (is_immune_to_electricity() || is_immune_to_lightning()) {
       if (real_hitter->is_player()) {
         if (is_player()) {
           msg("You are immune to electrical damage!");
