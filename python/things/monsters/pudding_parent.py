@@ -1,5 +1,6 @@
 import my
 import tp
+import math
 
 
 def on_you_nat_attack_attempt(me, x, y):
@@ -26,6 +27,16 @@ def on_death(me, x, y):
         my.thing_msg(me, "The pudding splits!")
 
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, f"slime{my.py_non_pcg_random_range_inclusive(1, 9)}")
+
+
+def on_receiving_dmg_melee(me, hitter, real_hitter, x, y, damage):
+    # my.topcon("hitter  {} {}".format(my.thing_name_get(hitter), my.thing_health(hitter)))
+    if my.thing_is_pointy(hitter):
+        if my.thing_is_player(real_hitter):
+            my.thing_msg(me, "The {} takes half damage from your {}.".format(
+                         my.thing_name_get(me), my.thing_name_get(hitter)))
+        return int(math.ceil(damage / 2))
+    return damage
 
 
 def on_jump(me, x, y):
@@ -138,6 +149,7 @@ def tp_init(name, text_long_name):
     my.on_death_do(self, "me.on_death()")
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_jump_do(self, "me.on_jump()")
+    my.on_receiving_dmg_melee_do(self, "me.on_receiving_dmg_melee()")
     my.on_you_nat_attack_attempt_do(self, "me.on_you_nat_attack_attempt()")
     my.rarity(self, my.RARITY_COMMON)  # how rare within this monster class
     my.stat_con(self, 16)
@@ -151,6 +163,7 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_description_long2(self, "Black puddings have tough shiny skin and take half damage from slashing weapons.")
     my.text_description_long(self, "An inky black gooey nightmare made real. Black puddings will eat almost anything, even each other. Luckily with its enormous mass, it is a bit slow. Best to avoid or be engulfed.")
     my.text_description_short(self, "A gargantuan inky pudding.")
     my.text_hits(self, "splats")
@@ -162,100 +175,100 @@ def tp_init(name, text_long_name):
 
     delay = 200
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".2.100", is_hp_100_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="p", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".3.100", is_hp_100_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".4.100", is_hp_100_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".5.100", is_hp_100_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".6.100", is_hp_100_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".7.100", is_hp_100_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".8.100", is_hp_100_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="p", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".1.75", is_hp_75_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".2.75", is_hp_75_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".3.75", is_hp_75_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".4.75", is_hp_75_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".5.75", is_hp_75_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".6.75", is_hp_75_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="p", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".7.75", is_hp_75_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".8.75", is_hp_75_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".1.50", is_hp_50_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".2.50", is_hp_50_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".3.50", is_hp_50_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="p", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".4.50", is_hp_50_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".5.50", is_hp_50_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".6.50", is_hp_50_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".7.50", is_hp_50_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".8.50", is_hp_50_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".1.25", is_hp_25_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".2.25", is_hp_25_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".3.25", is_hp_25_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="p", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".4.25", is_hp_25_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".5.25", is_hp_25_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".6.25", is_hp_25_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".7.25", is_hp_25_percent=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="J", ascii_bg_col_name="", ascii_fg_col_name="purple",
+            ascii_fg_char="P", ascii_bg_col_name="", ascii_fg_col_name="purple",
             tile=name + ".8.25", is_hp_25_percent=True, delay_ms=delay)
 
     my.tp_update(self)

@@ -1,5 +1,6 @@
 import my
 import tp
+import math
 
 
 def on_you_nat_attack_attempt(me, x, y):
@@ -28,6 +29,16 @@ def on_death(me, x, y):
     else:
         if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, "bones2"):
             my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, "bones2")
+
+
+def on_receiving_dmg_melee(me, hitter, real_hitter, x, y, damage):
+    # my.topcon("hitter  {} {}".format(my.thing_name_get(hitter), my.thing_health(hitter)))
+    if my.thing_is_pointy(hitter):
+        if my.thing_is_player(real_hitter):
+            my.thing_msg(me, "The {} takes half damage from your {}.".format(
+                         my.thing_name_get(me), my.thing_name_get(hitter)))
+        return int(math.ceil(damage / 2))
+    return damage
 
 
 def tp_init(name, text_long_name):
@@ -115,6 +126,7 @@ def tp_init(name, text_long_name):
     my.on_death_do(self, "me.on_death()")
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")
+    my.on_receiving_dmg_melee_do(self, "me.on_receiving_dmg_melee()")
     my.on_you_nat_attack_attempt_do(self, "me.on_you_nat_attack_attempt()")
     my.rarity(self, my.RARITY_COMMON)  # how rare within this monster class
     my.resurrect_dice(self, "1d20+30")

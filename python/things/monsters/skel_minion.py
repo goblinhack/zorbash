@@ -1,5 +1,6 @@
 import my
 import tp
+import math
 
 
 def on_you_nat_attack_attempt(me, x, y):
@@ -36,7 +37,7 @@ def on_receiving_dmg_melee(me, hitter, real_hitter, x, y, damage):
         if my.thing_is_player(real_hitter):
             my.thing_msg(me, "The {} takes half damage from your {}.".format(
                          my.thing_name_get(me), my.thing_name_get(hitter)))
-        return int(damage / 2)
+        return int(math.ceil(damage / 2))
     return damage
 
 
