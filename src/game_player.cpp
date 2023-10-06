@@ -243,9 +243,11 @@ void Game::place_player(void)
         t->carry(w, carry_options);
       }
       if (0) {
-        level->thing_new("trap_pressure_plate_gas3", point(x - 1, y));
-        level->thing_new("exit1", point(x - 1, y + 1));
-        level->thing_new("dogman", point(x + 2, y));
+        // level->thing_new("trap_pressure_plate_gas3", point(x - 1, y));
+        // level->thing_new("exit1", point(x - 1, y + 1));
+        // level->thing_new("dogman", point(x + 2, y));
+        level->thing_new("slime_parent", point(x, y + 1));
+        level->thing_new("slime_baby", point(x + 1, y + 1));
         auto w = level->thing_new("staff_conjuration", point(x, y));
         t->carry(w, carry_options);
       }
