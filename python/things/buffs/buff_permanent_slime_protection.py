@@ -5,13 +5,13 @@ self = None
 
 
 def on_owner_add(me, owner, x, y):
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         my.thing_msg(me, "A protective green slimy glow surrounds you.")
 
 
 # Called on removing a ring. Not called on death of the owner.
 def on_owner_unset(me, owner, x, y):
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         my.thing_msg(me, "The protective green slimy glow around you fades.")
 
 
@@ -21,7 +21,7 @@ def on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage):
     # my.con("hitter  {} {:X}".format(my.thing_name_get(hitter), hitter))
     # my.con("rhitter {} {:X}".format(my.thing_name_get(real_hitter), real_hitter))
     if my.thing_is_slime(hitter):
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.thing_msg(me, "You take half damage from the slime attack.")
         return int(damage / 2)
     return damage
@@ -34,7 +34,7 @@ def on_owner_attack_dmg_melee(me, owner, victim, x, y, damage):
     # my.con("damage  {}".format(damage))
     my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_impact{my.py_non_pcg_random_range_inclusive(1, 4)}")
     if my.thing_is_slime(victim):
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.thing_msg(me, "You issue double damage slime attack.")
         return (damage + my.thing_enchant_count_get(me)) * 2
     return damage + my.thing_enchant_count_get(me)

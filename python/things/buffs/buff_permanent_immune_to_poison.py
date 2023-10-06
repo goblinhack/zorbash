@@ -5,18 +5,18 @@ self = None
 
 
 def on_owner_add(me, owner, x, y):
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         my.thing_msg(me, "A green glow surrounds you.")
 
 
 # Called on removing a ring. Not called on death of the owner.
 def on_owner_unset(me, owner, x, y):
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         my.thing_msg(me, "The green glow around you fades.")
 
 
 def on_owner_receive_dmg_poison(me, owner, hitter, real_hitter, x, y, damage):
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         my.thing_msg(me, "You take half damage from the poison.")
     return int(damage / 2)
 
@@ -26,7 +26,7 @@ def on_tick(owner, item, x, y):
     if poison == 0:
         return False
     new_poison = int(poison / 2)
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         if new_poison == 0:
             my.thing_msg(owner, "%%fg=green$The poison has little effect on you!%%fg=reset$")
         else:

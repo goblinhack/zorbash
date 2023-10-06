@@ -8,7 +8,7 @@ self = None
 def on_tick_when_deactivated(owner, skill, x, y):
     if owner and (my.thing_health(owner) < my.thing_health_max(owner) / 20):
         my.thing_raging_set(owner, True)
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.thing_msg(owner, "%%fg=red$You feel primal rage coursing through your veins!%%fg=reset$")
         my.thing_skill_activate(owner, skill)
         return True  # didn't do anything
@@ -23,7 +23,7 @@ def on_tick_when_activated(owner, skill, x, y):
                 my.thing_stamina_decr(owner, 1)
         else:
             my.thing_raging_set(owner, False)
-            if my.thing_is_player(owner):
+            if owner and my.thing_is_player(owner):
                 my.thing_msg(owner, "You feel your primal rage dissipate.")
     return False  # didn't do anything
 
@@ -34,7 +34,7 @@ def on_use_skill(owner, skill, target, x, y):
     my.spawn_using_items_radius_range(owner, skill, target, "skill_primal_rage_effect")
     bonus = 6
     my.thing_dmg_current_incr(owner, bonus)
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         my.thing_msg(owner, f"%%fg=red$You rage hit for {bonus} additional damage.%%fg=reset$")
 
 

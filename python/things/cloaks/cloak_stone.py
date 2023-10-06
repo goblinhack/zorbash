@@ -6,7 +6,7 @@ self = None
 
 def on_enchant(me, x, y):
     owner = my.thing_top_owner_id_get(me)
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         my.thing_msg(me, "The stone cloak glistens.")
     my.thing_stat_def_bonus_incr(me, 2)
 
@@ -20,7 +20,7 @@ def on_waiting(me, x, y):
         stamina = my.thing_stamina(owner)
         new_stamina = int(float(stamina) / 100.0 * 90.0)
         my.thing_stamina_set(owner, new_stamina)
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.thing_msg(owner, "You wait inside the wall and feel drained.")
         return True
 
@@ -28,7 +28,7 @@ def on_waiting(me, x, y):
         stamina = my.thing_stamina(owner)
         new_stamina = int(float(stamina) / 100.0 * 80.0)
         my.thing_stamina_set(owner, new_stamina)
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.thing_msg(owner, "You wait inside solid rock and feel very drained.")
         return True
 
@@ -44,7 +44,7 @@ def on_move(me, x, y):
         stamina = my.thing_stamina(owner)
         new_stamina = int(float(stamina) / 100.0 * 80.0)
         my.thing_stamina_set(owner, new_stamina)
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.thing_msg(owner, "You pass into the wall, but feel drained.")
         return True
 
@@ -52,7 +52,7 @@ def on_move(me, x, y):
         stamina = my.thing_stamina(owner)
         new_stamina = int(float(stamina) / 100.0 * 50.0)
         my.thing_stamina_set(owner, new_stamina)
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.thing_msg(owner, "You pass into solid rock, but feel very drained.")
         return True
 

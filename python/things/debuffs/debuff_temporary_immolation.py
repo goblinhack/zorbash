@@ -5,13 +5,13 @@ self = None
 
 
 def on_owner_add(me, owner, x, y):
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         my.thing_msg(me, "You immolate yourself! One in a long series of bad decisions you've made!")
 
 
 # Called on removing a ring. Not called on death of the owner.
 def on_owner_unset(me, owner, x, y):
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         my.thing_msg(me, "You survive and are fire proof!")
     my.thing_buff_add(owner, "buff_permanent_immune_to_fire")
 

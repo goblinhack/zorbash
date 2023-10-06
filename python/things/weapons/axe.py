@@ -15,7 +15,7 @@ def on_thrown(owner, me, x, y):
 
     if my.py_pcg_random_range_inclusive(1, 100) < 5:
         my.thing_dead(me, "broken")
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.topcon("Your axe shatters on impact!")
 
 
@@ -34,7 +34,7 @@ def on_owner_attack_dmg_melee(me, owner, victim, x, y, damage):
 
 def on_enchant(me, x, y):
     owner = my.thing_top_owner_id_get(me)
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         my.thing_msg_if_not_dead_or_dying(me, "The axe glows.")
 
 

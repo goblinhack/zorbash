@@ -17,7 +17,7 @@ def on_owner_attack_dmg_melee(me, owner, victim, x, y, damage):
 
 def on_enchant(me, x, y):
     owner = my.thing_top_owner_id_get(me)
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         my.thing_msg_if_not_dead_or_dying(me, "The broadsword seems even wider somehow.")
 
 

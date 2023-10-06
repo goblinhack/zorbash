@@ -10,7 +10,7 @@ def on_use(owner, item, target, x, y):
     owner = my.thing_top_owner_id_get(item)
     if owner:
         my.thing_stat_con_incr(owner, 1)
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.thing_msg(owner, "The confusion gas fills your lungs!")
     for it in my.level_flood_fill_gas_get_all_grid_things(item, x, y, 0):
         my.spawn_gas_confusion_around_thing(it, 1)
@@ -23,7 +23,7 @@ def shatters(item, target, x, y):
 
     owner = my.thing_top_owner_id_get(item)
     if owner:
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.thing_msg(owner, "Your potion of confusion gas shatters.")
         else:
             my.thing_msg(owner, f"The {my.thing_name_get(owner)}'s potion of confusion gas shatters.")

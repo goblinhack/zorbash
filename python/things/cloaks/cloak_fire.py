@@ -14,7 +14,7 @@ def on_unequip(owner, me, x, y):
 
 def on_enchant(me, x, y):
     owner = my.thing_top_owner_id_get(me)
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         my.thing_msg_if_not_dead_or_dying(me, "The fire cloak burns brighter.")
 
 
@@ -30,14 +30,14 @@ def on_waiting(me, x, y):
     if my.level_is_lava_at(owner, x, y):
         my.thing_stamina_incr(owner, 10 * enchant)
         my.thing_health_incr(owner, 10 * enchant)
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.thing_msg_if_not_dead_or_dying(owner, "You wait inside the lava and feel invigorated.")
         return True
 
     if my.level_is_fire_at(owner, x, y) or my.level_is_lava_at(owner, x, y):
         my.thing_stamina_incr(owner, 5 * enchant)
         my.thing_health_incr(owner, 5 * enchant)
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.thing_msg_if_not_dead_or_dying(owner, "You wait inside the fire and feel invigorated.")
         return True
 

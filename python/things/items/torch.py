@@ -14,7 +14,7 @@ def on_thrown(owner, me, x, y):
 
 
 def on_lifespan_tick(owner, me, x, y):
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         my.thing_msg(me, "One of your torches fizzles out.")
 
 

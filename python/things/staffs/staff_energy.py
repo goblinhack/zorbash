@@ -11,7 +11,7 @@ def on_idle(me, x, y):
     if my.thing_charge_count(me) < my.thing_initial_charge_count(me):
         my.thing_charge_count_incr(me, 1)
         owner = my.thing_top_owner_id_get(me)
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.thing_msg(me, f"%%fg=gold$The {my.thing_name_get(me)} pulses.%%fg=reset$")
 
 
@@ -27,7 +27,7 @@ def on_use(owner, item, target, x, y):
 
 
 def on_final_use(owner, item, target, x, y):
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         my.thing_msg(owner, "The staff fades away into nothingness.")
 
 
@@ -40,7 +40,7 @@ def explode(me, x, y):
 
     owner = my.thing_top_owner_id_get(me)
     if owner:
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.thing_msg(me, "Your staff of energy explodes in a blaze of power.")
         else:
             my.thing_msg(me, f"The {my.thing_name_get(owner)}'s staff of energy explodes in a blaze of power.")
@@ -76,7 +76,7 @@ def on_fire(me, x, y):
 
 def on_enchant(me, x, y):
     owner = my.thing_top_owner_id_get(me)
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         my.thing_msg(me, "The staff glows.")
     my.thing_charge_count_incr(me, 5)
 

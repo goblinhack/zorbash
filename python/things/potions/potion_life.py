@@ -52,7 +52,7 @@ def shatters(me, x, y):
 
     owner = my.thing_top_owner_id_get(me)
     if owner:
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.thing_msg(me, "Your potion of life shatters.")
         else:
             my.thing_msg(me, f"The {my.thing_name_get(owner)}'s potion of life shatters.")

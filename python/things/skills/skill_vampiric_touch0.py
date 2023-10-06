@@ -29,7 +29,7 @@ def do_vampiric_touch(me, owner, hitter, real_hitter, x, y, damage, damage_reduc
             stamina_boost = dmg_reduction
             my.thing_stamina_incr(owner, stamina_boost)
 
-            if my.thing_is_player(owner):
+            if owner and my.thing_is_player(owner):
                 if health_boost > 0:
                     real_hitter_name = my.thing_name_get(real_hitter)
                     my.thing_msg(owner, f"Vampiric touch heals you for {health_boost} and drains the {real_hitter_name} for {dmg_reduction} stamina.")

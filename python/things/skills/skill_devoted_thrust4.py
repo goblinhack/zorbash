@@ -18,12 +18,12 @@ def on_use_skill(owner, skill, target, x, y):
     bonus = int(float(my.thing_stamina(owner) / 100.0) * 75.0)
 
     if bonus > 1:
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.thing_msg(owner, f"%%fg=yellow$You strike with a mighty thrust of {bonus} additional damage.%%fg=reset$")
         my.thing_dmg_current_incr(owner, bonus)
         my.thing_stamina_decr(owner, bonus)
     else:
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.thing_msg(owner, "You run out of devotion.")
         my.thing_skill_deactivate(owner, skill)
 

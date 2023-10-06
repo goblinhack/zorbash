@@ -5,13 +5,13 @@ self = None
 
 
 def on_owner_add(me, owner, x, y):
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         my.thing_msg(me, "You feel at one with the dungeon.")
 
 
 # Called on removing a ring. Not called on death of the owner.
 def on_owner_unset(me, owner, x, y):
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         my.thing_msg(me, "The world seems more empty somehow.")
 
 

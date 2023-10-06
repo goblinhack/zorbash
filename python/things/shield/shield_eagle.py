@@ -6,7 +6,7 @@ self = None
 
 def on_enchant(me, x, y):
     owner = my.thing_top_owner_id_get(me)
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         my.thing_msg(me, "The eagle shield flaps its wings.")
     my.thing_stat_def_bonus_incr(me, 1)
 

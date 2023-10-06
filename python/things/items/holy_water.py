@@ -34,10 +34,10 @@ def on_use(owner, item, target, x, y):
 
     if did_something:
         my.spawn_using_items_radius_range(owner, item, target, "potion_effect")
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.thing_msg(owner, "%%fg=pink$You glow with holiness, however you define that.%%fg=reset$")
     else:
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.thing_msg(owner, "Hmm. The holy water didn't seem to do anything.")
 
 
@@ -47,7 +47,7 @@ def shatters(me, x, y):
 
     owner = my.thing_top_owner_id_get(me)
     if owner:
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.thing_msg(me, "Your beaker of holy water shatters.")
         else:
             my.thing_msg(me, f"The {my.thing_name_get(owner)}'s beaker of holy water shatters.")
@@ -84,7 +84,7 @@ def on_fall(me, x, y):
 
 def on_enchant(me, x, y):
     owner = my.thing_top_owner_id_get(me)
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         my.thing_msg(me, "The holy water shimmers.")
 
 

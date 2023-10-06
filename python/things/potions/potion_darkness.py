@@ -10,7 +10,7 @@ def on_use(owner, item, target, x, y):
     owner = my.thing_top_owner_id_get(item)
     if owner:
         my.thing_stat_psi_incr(owner, 1)
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.thing_msg(owner, "The darkness envelops you!")
             my.thing_blinded_count_incr(owner, 30)
             my.thing_popup(owner, "!!!")
@@ -25,7 +25,7 @@ def shatters(item, target, x, y):
 
     owner = my.thing_top_owner_id_get(item)
     if owner:
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.thing_msg(owner, "Your potion of darkness shatters.")
         else:
             my.thing_msg(owner, f"The {my.thing_name_get(owner)}'s potion of darkness shatters.")

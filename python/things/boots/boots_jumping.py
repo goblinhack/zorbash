@@ -6,7 +6,7 @@ self = None
 
 def on_enchant(me, x, y):
     owner = my.thing_top_owner_id_get(me)
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         my.thing_msg(me, "The boots become a bit less squeaky and yet more jumpy.")
     my.thing_noise_incr(me, -10)
     my.thing_jump_distance_bonus_incr(me, 1)

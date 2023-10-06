@@ -5,12 +5,12 @@ self = None
 
 
 def on_equip(owner, me, x, y):
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         my.thing_msg_if_not_dead_or_dying(me, "Your sense danger all around!")
 
 
 def on_unequip(owner, me, x, y):
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         my.thing_msg_if_not_dead_or_dying(me, "The world seems more boring now!")
 
 

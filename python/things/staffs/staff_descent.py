@@ -36,7 +36,7 @@ def on_idle(me, x, y):
     if my.thing_charge_count(me) < my.thing_initial_charge_count(me):
         my.thing_charge_count_incr(me, 1)
         owner = my.thing_top_owner_id_get(me)
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.thing_msg(owner, f"%%fg=blue$The {my.thing_name_get(me)} pulses.%%fg=reset$")
 
 
@@ -49,7 +49,7 @@ def explode(me, x, y):
 
     owner = my.thing_top_owner_id_get(me)
     if owner:
-        if my.thing_is_player(owner):
+        if owner and my.thing_is_player(owner):
             my.thing_msg(me, "Your staff of descent explodes.")
         else:
             my.thing_msg(me, f"The {my.thing_name_get(owner)}'s staff of descent explodes.")
@@ -63,7 +63,7 @@ def explode(me, x, y):
 
 
 def on_final_use(owner, item, target, x, y):
-    if my.thing_is_player(owner):
+    if owner and my.thing_is_player(owner):
         my.thing_msg(owner, "The staff crumbles into dust.")
 
 
@@ -145,7 +145,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_fall_do(self, "me.on_fall()")
     my.on_final_use_do(self, "me.on_final_use()")
     my.on_hit_and_now_dead_do(self, "me.on_hit_and_now_dead()")
-    my.on_idle_tick_freq_dice(self, "1d300+200:me.on_idle()")
+    my.on_idle_tick_freq_dice(self, "1d3+2:me.on_idle()")
     my.on_targeted_do(self, "me.on_targeted()")
     my.on_targeted_radially_do(self, "me.on_targeted_radially()")
     my.on_thrown_do(self, "me.on_thrown()")
