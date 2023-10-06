@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- floating sword on death again                                                                                                                -->
 <!-- need explosive gas as poison gas no longer explodes                                                                                          -->
 <!-- DONE Potion of Caustic Gas - Produces a cloud of damaging caustic gas.                                                                       -->
 <!-- DONE Potion of Darkness - Produces a cloud of darkness that obscures an area of the dungeon.                                                 -->
