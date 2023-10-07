@@ -158,7 +158,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_targeted_radially_do(self, "me.on_targeted_radially()")
     my.on_thrown_do(self, "me.on_thrown()")
     my.range_max(self, 7)
-    my.temperature(self, -10)
+    my.temperature(self, 20)
     my.text_a_or_an(self, "a")
     my.text_description_long(self, "This staff will conjure a set of ethereal spectral blades around an enemy.")
     my.text_description_short(self, "A staff of conjuration.")
