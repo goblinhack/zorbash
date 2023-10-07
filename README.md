@@ -1,6 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- floating sword on death again                                                                                                                -->
 <!-- DONE Potion of Caustic Gas - Produces a cloud of damaging caustic gas.                                                                       -->
 <!-- DONE Potion of Darkness - Produces a cloud of darkness that obscures an area of the dungeon.                                                 -->
 <!-- DONE Potion of Invisibility - Reduces you stealth radius considerably.                                                                       -->

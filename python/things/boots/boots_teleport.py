@@ -27,7 +27,7 @@ def tp_init(name, text_long_name, text_short_name):
     global self
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
-    my.charge_count(self, 100)
+    my.charge_count(self, 5)
     my.equip_carry_anim(self, "boots_teleport_carry")
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_reflection(self, True)
