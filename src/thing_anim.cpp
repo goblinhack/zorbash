@@ -789,7 +789,10 @@ void Thing::animate(void)
       // If we do not have a tile yet, we need to continue.
       //
       if (tile_curr) {
-        return;
+        auto tile = tile_index_to_tile(tile_curr);
+        if (tile_is_dead(tile)) {
+          return;
+        }
       }
     }
   }

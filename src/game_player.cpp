@@ -877,7 +877,7 @@ void Game::place_player(void)
       }
       // level->thing_new("cleaner", point(x - 3, y + 2));
       if (0) {
-        auto d = level->thing_new("bat_lesser", point(x + 2, y + 2));
+        auto d = level->thing_new("dogman", point(x + 1, y + 2));
         d->wake("");
         d->is_burnt = true;
         d->dead("x");
