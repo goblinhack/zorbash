@@ -788,6 +788,8 @@ std::initializer_list< std::string > tps = {
     "spider_onyx_widow",
     "spider_para",
     "spiderweb",
+    "staff_blinking",
+    "staff_blinking_carry",
     "staff_cold",
     "staff_cold_carry",
     "staff_conjuration",

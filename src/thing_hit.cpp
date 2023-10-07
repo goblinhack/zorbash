@@ -2244,6 +2244,12 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (distance(real_hitter->curr_at, curr_at) > second_message_distance) {
         popup(string_sprintf("%%fg=red$-%d", damage));
       }
+    } else if (attack_options->attack[ THING_ATTACK_COLD ]) {
+      TRACE_NO_INDENT();
+      real_hitter->popup(string_sprintf("%%fg=red$Chills you for -%d", damage));
+      if (distance(real_hitter->curr_at, curr_at) > second_message_distance) {
+        popup(string_sprintf("%%fg=red$-%d", damage));
+      }
     } else {
       TRACE_NO_INDENT();
       real_hitter->popup(string_sprintf("%%fg=orange$Hits you for -%d", damage));

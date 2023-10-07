@@ -685,10 +685,10 @@ PyObject *thing_is_unused_flag70(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag71(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag72(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag73(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag74(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag8(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag9(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_usable_only_after_equipping(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_usable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_used_when_thrown(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_very_combustible(PyObject *obj, PyObject *args, PyObject *keywds);

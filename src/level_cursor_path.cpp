@@ -34,25 +34,7 @@ void Level::cursor_path_draw_circle(void)
   //
   // Check not out of range
   //
-  bool too_far = false;
-  auto dist    = distance(player->curr_at, curr_at);
-
-  if (game->request_to_throw_item) {
-    if (dist > player->distance_throw_get()) {
-      too_far = true;
-    }
-  } else if (game->request_to_use_item) {
-
-    if (what->is_spell()) {
-      if (dist > player->distance_spell_cast_get()) {
-        too_far = true;
-      }
-    } else {
-      if (dist > what->range_max()) {
-        too_far = true;
-      }
-    }
-  }
+  bool is_ok = player->thing_use_distance_is_ok(what, curr_at);
 
   for (auto x = curr_at.x - radius_max; x <= curr_at.x + radius_max; x++) {
     for (auto y = curr_at.y - radius_max; y <= curr_at.y + radius_max; y++) {
@@ -74,12 +56,12 @@ void Level::cursor_path_draw_circle(void)
         continue;
       }
 
-      if (too_far) {
-        game->request_destination_ok = false;
-        thing_new("cursor_select_fail_path", point(x, y));
-      } else {
+      if (is_ok) {
         game->request_destination_ok = true;
         thing_new("cursor_select_path", point(x, y));
+      } else {
+        game->request_destination_ok = false;
+        thing_new("cursor_select_fail_path", point(x, y));
       }
     }
   }

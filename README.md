@@ -1,21 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- DONE Potion of Caustic Gas - Produces a cloud of damaging caustic gas.                                                                       -->
-<!-- DONE Potion of Darkness - Produces a cloud of darkness that obscures an area of the dungeon.                                                 -->
-<!-- DONE Potion of Invisibility - Reduces you stealth radius considerably.                                                                       -->
-<!-- DONE Potion of Life - Restores full health and increases maximum health. Cures most status ailments.                                         -->
-<!-- DONE Potion of Strength - Permanently increases you strength by one point. Cures weakness.                                                   -->
-<!-- DONE Potion of Paralysis - Produces a cloud of paraylsis gas.                                                                                -->
-<!-- DONE Potion of Speed - Increases your speed to twice normal, even if previously slowed.                                                      -->
-<!-- DONE Potion of Fire Immunity - Make you immune to fire/burning/lava, but not explosions.                                                     -->
-<!-- DONE Potion of Telepathy - Allows you to see the location of most enemies, and see whatever they can see.                                    -->
-<!-- DONE Potion of Descent - Instantly erodes an area of the floor. Nearby monsters/objects will fall to the next level.                         -->
-<!-- DONE Potion of Incineration - Bursts into cloud of flames. Sets nearby monsters and terrain on fire.                                         -->
-<!-- DONE Potion of Creeping Death - Unleashes a spreading fungus that inflicts poisoning when stepped upon.                                      -->
-<!-- SKIP Potion of Hallucination - Causes long term hal                                                                                          -->
-<!-- DONE Potion of Confusion - Produces a cloud of confusion gas.                                                                                -->
-<!-- DONE Potion of Levitation - Causes you to float, Useful for escaping and crossing dangerous terrains.                                        -->
-<!-- DONE Staff of Conjuration                                                                                                                    -->
 <!-- TODO Staves and Wands fire blasts of magical energy but have a finite number of charges. Staves recharge over time, but wands do not.        -->
 <!-- TODO Staff of Discord                                                                                                                        -->
 <!-- TODO Staff of Entrancement                                                                                                                   -->
@@ -706,8 +690,8 @@ Other content
 - 14 x potions
 - 11 x skills
 - 11 x debuffs
+- 8 x staffs
 - 7 x traps
-- 7 x staffs
 - 6 x shield
 - 6 x boots
 - 5 x rings

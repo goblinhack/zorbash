@@ -766,3 +766,34 @@ bool Thing::use(Thingp what, UseOptions *use_options)
   }
   return ret;
 }
+
+//
+// Get the distance if:
+// - throwing an item?
+// - teleporting via boots
+// - casting a spell
+//
+int Thing::thing_use_distance(Thingp what)
+{
+  if (game->request_to_throw_item) {
+    return distance_throw_get();
+  }
+
+  if (game->request_to_use_item) {
+    if (what->is_spell()) {
+      return distance_spell_cast_get() + (what->enchant_count_get() * 3);
+    }
+
+    if (what->teleport_distance()) {
+      return what->teleport_distance() + (what->enchant_count_get() * 3);
+    }
+  }
+
+  return what->range_max();
+}
+
+bool Thing::thing_use_distance_is_ok(Thingp what, point target)
+{
+  auto use_distance = thing_use_distance(what);
+  return distance(curr_at, target) <= use_distance;
+}

@@ -182,29 +182,13 @@ void Level::cursor_recreate(point curr_at)
   }
 
   if (what && (game->state == Game::STATE_CHOOSING_TARGET)) {
-    bool too_far = false;
-    auto dist    = DISTANCE(player->curr_at.x, player->curr_at.y, curr_at.x, curr_at.y);
-
-    if (player->distance_throw_get()) {
-      too_far = dist > player->distance_throw_get();
-    }
-
-    if (what->is_spell()) {
-      if (player->distance_spell_cast_get()) {
-        too_far = dist > player->distance_spell_cast_get();
-      }
-    } else {
-      if (what->range_max()) {
-        too_far = too_far || dist > what->range_max();
-      }
-    }
-
-    if (too_far) {
-      cursor                       = thing_new("cursor_select_fail", curr_at);
-      game->request_destination_ok = false;
-    } else {
+    bool is_ok = player->thing_use_distance_is_ok(what, curr_at);
+    if (is_ok) {
       cursor                       = thing_new("cursor_select", curr_at);
       game->request_destination_ok = true;
+    } else {
+      cursor                       = thing_new("cursor_select_fail", curr_at);
+      game->request_destination_ok = false;
     }
   } else {
     cursor                       = cursor_thing_new(curr_at);

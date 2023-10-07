@@ -730,6 +730,7 @@ public:
   bool thing_check_for_heat_dmg(void);
   bool thing_sound_play_channel(int chan, const std::string &alias);
   bool thing_sound_play(const std::string &alias);
+  bool thing_use_distance_is_ok(Thingp what, point target);
   bool throw_at(Thingp w, Thingp target);
   bool throw_item_choose_target(Thingp item);
   bool tile_is_offscreen(void);
@@ -1954,10 +1955,10 @@ public:
   int is_unused_flag71(void);
   int is_unused_flag72(void);
   int is_unused_flag73(void);
-  int is_unused_flag74(void);
   int is_unused_flag7(void);
   int is_unused_flag8(void);
   int is_unused_flag9(void);
+  int is_usable_only_after_equipping(void);
   int is_usable(void);
   int is_used_when_thrown(void);
   int is_very_combustible(void);
@@ -2434,6 +2435,7 @@ public:
   int temperature_sensitive(void);
   int temperature_set(int);
   int thing_size(void);
+  int thing_use_distance(Thingp what);
   int tick_prio(void);
   int torch_count(void);
   int total_dmg_for_on_attacking_dmg_acid(Thingp victim, int damage);

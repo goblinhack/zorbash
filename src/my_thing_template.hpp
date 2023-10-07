@@ -775,10 +775,10 @@ private:
   int _is_unused_flag71 {};
   int _is_unused_flag72 {};
   int _is_unused_flag73 {};
-  int _is_unused_flag74 {};
   int _is_unused_flag8 {};
   int _is_unused_flag9 {};
   int _is_usable {};
+  int _is_usable_only_after_equipping {};
   int _is_used_when_thrown {};
   int _is_very_combustible {};
   int _is_very_hard {};
@@ -2142,10 +2142,10 @@ public:
   int is_unused_flag71(void) const;
   int is_unused_flag72(void) const;
   int is_unused_flag73(void) const;
-  int is_unused_flag74(void) const;
   int is_unused_flag7(void) const;
   int is_unused_flag8(void) const;
   int is_unused_flag9(void) const;
+  int is_usable_only_after_equipping(void) const;
   int is_usable(void) const;
   int is_used_when_thrown(void) const;
   int is_very_combustible(void) const;
@@ -2914,10 +2914,10 @@ public:
   void is_unused_flag71_set(int v);
   void is_unused_flag72_set(int v);
   void is_unused_flag73_set(int v);
-  void is_unused_flag74_set(int v);
   void is_unused_flag7_set(int v);
   void is_unused_flag8_set(int v);
   void is_unused_flag9_set(int v);
+  void is_usable_only_after_equipping_set(int v);
   void is_usable_set(int v);
   void is_used_when_thrown_set(int v);
   void is_very_combustible_set(int v);

@@ -577,10 +577,10 @@ int Thing::is_unused_flag73(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag73());
 }
-int Thing::is_unused_flag74(void)
+int Thing::is_usable_only_after_equipping(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag74());
+  return (tp()->is_usable_only_after_equipping());
 }
 int Thing::is_not_shown_as_a_pet(void)
 {

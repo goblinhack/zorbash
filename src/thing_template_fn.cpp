@@ -866,10 +866,10 @@ int Tp::is_unused_flag70(void) const { return _is_unused_flag70; }
 int Tp::is_unused_flag71(void) const { return _is_unused_flag71; }
 int Tp::is_unused_flag72(void) const { return _is_unused_flag72; }
 int Tp::is_unused_flag73(void) const { return _is_unused_flag73; }
-int Tp::is_unused_flag74(void) const { return _is_unused_flag74; }
 int Tp::is_unused_flag7(void) const { return _is_unused_flag7; }
 int Tp::is_unused_flag8(void) const { return _is_unused_flag8; }
 int Tp::is_unused_flag9(void) const { return _is_unused_flag9; }
+int Tp::is_usable_only_after_equipping(void) const { return _is_usable_only_after_equipping; }
 int Tp::is_usable(void) const { return _is_usable; }
 int Tp::is_used_when_thrown(void) const { return _is_used_when_thrown; }
 int Tp::is_very_combustible(void) const { return _is_very_combustible; }
@@ -1637,10 +1637,10 @@ void Tp::is_unused_flag70_set(int v) { _is_unused_flag70 = v; }
 void Tp::is_unused_flag71_set(int v) { _is_unused_flag71 = v; }
 void Tp::is_unused_flag72_set(int v) { _is_unused_flag72 = v; }
 void Tp::is_unused_flag73_set(int v) { _is_unused_flag73 = v; }
-void Tp::is_unused_flag74_set(int v) { _is_unused_flag74 = v; }
 void Tp::is_unused_flag7_set(int v) { _is_unused_flag7 = v; }
 void Tp::is_unused_flag8_set(int v) { _is_unused_flag8 = v; }
 void Tp::is_unused_flag9_set(int v) { _is_unused_flag9 = v; }
+void Tp::is_usable_only_after_equipping_set(int v) { _is_usable_only_after_equipping = v; }
 void Tp::is_usable_set(int v) { _is_usable = v; }
 void Tp::is_used_when_thrown_set(int v) { _is_used_when_thrown = v; }
 void Tp::is_very_combustible_set(int v) { _is_very_combustible = v; }
