@@ -164,6 +164,7 @@ std::istream &operator>>(std::istream &in, Bits< ThingInfop & > my)
    in >> bits(my.t->tick_last_dropped);
    in >> bits(my.t->tick_last_escape);
    in >> bits(my.t->tick_last_gas_healing_exposure);
+   in >> bits(my.t->tick_last_gas_explosive_exposure);
    in >> bits(my.t->tick_last_gas_poison_exposure);
    in >> bits(my.t->tick_last_gas_paralysis_exposure);
    in >> bits(my.t->tick_last_gas_confusion_exposure);
@@ -631,6 +632,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(l->ts_fade_in_begin);
 
   in >> bits(my.t->darkness_cloud);
+  in >> bits(my.t->gas_explosive_cloud);
   in >> bits(my.t->gas_poison_cloud);
   in >> bits(my.t->gas_paralysis_cloud);
   in >> bits(my.t->gas_confusion_cloud);

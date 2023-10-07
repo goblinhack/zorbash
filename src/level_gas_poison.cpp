@@ -189,41 +189,6 @@ void Level::tick_gas_poison(void)
   }
 }
 
-void Level::gas_poison_explosion(point at)
-{
-  TRACE_NO_INDENT();
-
-  if (is_gas_poison_no_check(at.x, at.y) < 5) {
-    return;
-  }
-
-  //
-  // Protection from explosions
-  //
-  if (is_gas_explosion_blocker(at)) {
-    return;
-  }
-
-  for (auto dx = 0; dx < DUNGEON_GAS_RESOLUTION; dx++) {
-    for (auto dy = 0; dy < DUNGEON_GAS_RESOLUTION; dy++) {
-      uint16_t gx                  = at.x * DUNGEON_GAS_RESOLUTION + dx;
-      uint16_t gy                  = at.y * DUNGEON_GAS_RESOLUTION + dy;
-      gas_poison_cloud[ gx ][ gy ] = 0;
-    }
-  }
-  is_gas_poison_no_check_set(at.x, at.y, 0);
-
-  dbg("Gas explosion");
-  TRACE_AND_INDENT();
-
-  thing_new("explosion_major", at);
-
-  gas_poison_explosion(at + point(1, 0));
-  gas_poison_explosion(at + point(-1, 0));
-  gas_poison_explosion(at + point(1, -1));
-  gas_poison_explosion(at + point(-1, 1));
-}
-
 uint8_t Level::is_gas_poison(const point p) const
 {
   if (unlikely(is_oob(p.x, p.y))) {

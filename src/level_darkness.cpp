@@ -163,6 +163,7 @@ void Level::tick_darkness(void)
         //
         // Clear out other gas types?
         //
+        set_no_check(gas_explosive_cloud, x, y, (uint8_t) 0);
         set_no_check(gas_poison_cloud, x, y, (uint8_t) 0);
         set_no_check(gas_paralysis_cloud, x, y, (uint8_t) 0);
         set_no_check(gas_confusion_cloud, x, y, (uint8_t) 0);

@@ -687,6 +687,7 @@ public:
   bool skill_use(Thingp it);
   bool spawn_darkness_around_thing(int radius);
   bool spawn_gas_confusion_around_thing(int radius);
+  bool spawn_gas_explosive_around_thing(int radius);
   bool spawn_gas_healing_around_thing(int radius);
   bool spawn_gas_paralysis_around_thing(int radius);
   bool spawn_gas_poison_around_thing(int radius);
@@ -2630,6 +2631,13 @@ public:
   int tick_last_gas_poison_exposure_set(uint32_t);
   int tick_last_gas_poison_exposure(void);
 
+  int tick_last_gas_explosive_exposure_decr(uint32_t);
+  int tick_last_gas_explosive_exposure_decr(void);
+  int tick_last_gas_explosive_exposure_incr(uint32_t);
+  int tick_last_gas_explosive_exposure_incr(void);
+  int tick_last_gas_explosive_exposure_set(uint32_t);
+  int tick_last_gas_explosive_exposure(void);
+
   int tick_last_gas_paralysis_exposure_decr(uint32_t);
   int tick_last_gas_paralysis_exposure_decr(void);
   int tick_last_gas_paralysis_exposure_incr(uint32_t);
@@ -2895,6 +2903,7 @@ public:
   void frozen_set(void);
   void frozen_unset(bool quiet = false);
   void gas_confusion_tick(void);
+  void gas_explosive_tick(void);
   void gas_healing_tick(void);
   void gas_paralysis_tick(void);
   void gas_poison_tick(void);

@@ -854,6 +854,7 @@ std::initializer_list< std::string > tps = {
     "trap_pressure_plate_gas1",
     "trap_pressure_plate_gas2",
     "trap_pressure_plate_gas3",
+    "trap_pressure_plate_gas4",
     "troll_fire",
     "troll_stone",
     "turnip",

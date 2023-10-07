@@ -776,6 +776,78 @@ bool Thing::spawn_gas_poison_around_thing(int radius)
   return true;
 }
 
+bool Thing::spawn_gas_explosive_around_thing(int radius)
+{
+  TRACE_NO_INDENT();
+
+  dbg("Spawn explosive gas");
+  TRACE_AND_INDENT();
+
+  std::vector< point > possible;
+
+  for (int dx = -radius; dx <= radius; dx++) {
+    for (int dy = -radius; dy <= radius; dy++) {
+
+      auto x = curr_at.x + dx;
+      auto y = curr_at.y + dy;
+
+      if (x < MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (x >= MAP_WIDTH - MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (y < MAP_BORDER_ROCK) {
+        continue;
+      }
+      if (y >= MAP_HEIGHT - MAP_BORDER_ROCK) {
+        continue;
+      }
+
+      float dist = DISTANCE(x, y, curr_at.x, curr_at.y);
+
+      //
+      // Radius needs to be the same as the check in carried_staff_highest_value_for_target
+      //
+      if (dist > radius) {
+        continue;
+      }
+
+      if (level->is_obs_spawn(x, y)) {
+        continue;
+      }
+
+      auto p = point(x, y);
+
+      if (collision_obstacle(p)) {
+        continue;
+      }
+
+      if (is_obs_ai_for_me(p)) {
+        continue;
+      }
+
+      if (pcg_random_range(0, 100) < 100 - dist * 20) {
+        uint16_t gx
+            = (p.x * DUNGEON_GAS_RESOLUTION) + pcg_random_range(-DUNGEON_GAS_RESOLUTION, DUNGEON_GAS_RESOLUTION);
+        uint16_t gy
+            = (p.y * DUNGEON_GAS_RESOLUTION) + pcg_random_range(-DUNGEON_GAS_RESOLUTION, DUNGEON_GAS_RESOLUTION);
+        gx = (p.x * DUNGEON_GAS_RESOLUTION);
+        gy = (p.y * DUNGEON_GAS_RESOLUTION);
+
+        set(level->gas_explosive_cloud, gx, gy, (uint8_t) 254);
+      }
+    }
+  }
+
+  //
+  // For traps we need to spawn the gas on screen immediately
+  //
+  level->tick_gas_explosive();
+
+  return true;
+}
+
 bool Thing::spawn_gas_paralysis_around_thing(int radius)
 {
   TRACE_NO_INDENT();

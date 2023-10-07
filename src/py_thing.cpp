@@ -1647,6 +1647,44 @@ PyObject *spawn_gas_poison_around_thing(PyObject *obj, PyObject *args, PyObject 
   Py_RETURN_FALSE;
 }
 
+PyObject *spawn_gas_explosive_around_thing(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t id     = 0;
+  uint32_t radius = 0;
+
+  static char *kwlist[] = {(char *) "id", (char *) "radius", nullptr};
+
+  TRACE_NO_INDENT();
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &radius)) {
+    ERR("%s: Bad args", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! id) {
+    ERR("%s: Missing 'id'", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  PY_DBG("%s(%X, %d)", __FUNCTION__, id, radius);
+
+  auto level = game->get_current_level();
+  if (! level) {
+    Py_RETURN_FALSE;
+  }
+
+  auto t = level->thing_find(ThingId(id));
+  if (unlikely(! t)) {
+    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
+    Py_RETURN_FALSE;
+  }
+
+  if (t->spawn_gas_explosive_around_thing(radius)) {
+    Py_RETURN_TRUE;
+  }
+  Py_RETURN_FALSE;
+}
+
 PyObject *spawn_gas_paralysis_around_thing(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();

@@ -140,6 +140,7 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingInfop & > const my)
   out << bits(my.t->tick_last_dropped);
   out << bits(my.t->tick_last_escape);
   out << bits(my.t->tick_last_gas_healing_exposure);
+  out << bits(my.t->tick_last_gas_explosive_exposure);
   out << bits(my.t->tick_last_gas_poison_exposure);
   out << bits(my.t->tick_last_gas_paralysis_exposure);
   out << bits(my.t->tick_last_gas_confusion_exposure);
@@ -591,6 +592,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->ts_fade_in_begin);
 
   out << bits(my.t->darkness_cloud);
+  out << bits(my.t->gas_explosive_cloud);
   out << bits(my.t->gas_poison_cloud);
   out << bits(my.t->gas_paralysis_cloud);
   out << bits(my.t->gas_confusion_cloud);

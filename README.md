@@ -690,8 +690,8 @@ Other content
 - 14 x potions
 - 11 x skills
 - 11 x debuffs
+- 8 x traps
 - 8 x staffs
-- 7 x traps
 - 6 x shield
 - 6 x boots
 - 5 x rings

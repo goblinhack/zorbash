@@ -243,6 +243,8 @@ void Game::place_player(void)
         t->carry(w, carry_options);
       }
       if (0) {
+        level->thing_new("trap_pressure_plate_gas4", point(x - 1, y));
+        level->thing_new("brazier", point(x + 1, y));
         level->thing_new("pudding_parent", point(x, y + 1));
         level->thing_new("pudding_baby", point(x + 1, y + 1));
         // level->thing_new("trap_pressure_plate_gas3", point(x - 1, y));

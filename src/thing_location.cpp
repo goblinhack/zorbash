@@ -179,6 +179,7 @@ void Thing::location_check(Thingp filter_to)
   // check for unrelated things that might spark a fire.
   //
   if (! filter_to) {
+    gas_explosive_tick();
     gas_poison_tick();
     gas_paralysis_tick();
     gas_confusion_tick();

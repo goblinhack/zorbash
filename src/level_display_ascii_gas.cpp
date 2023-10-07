@@ -17,6 +17,35 @@ void Level::display_ascii_gas(point tl, point br, int16_t minx, int16_t miny, in
     last_anim_change = time_ms();
   }
 
+  if (display_gas_explosive) {
+    for (auto y = miny; y < maxy - 1; y++) {
+      for (auto x = minx; x < maxx - 1; x++) {
+
+        auto intensity = is_gas_explosive(x, y);
+        if (intensity != 0) {
+          if (intensity > 255) {
+            intensity = 255;
+          }
+          int alpha = 100 + intensity;
+          if (alpha > 255) {
+            alpha = 255;
+          }
+
+          point p(x, y);
+          int   tx = tl.x + (p.x - minx) - (MAP_BORDER_ROCK - 1);
+          int   ty = tl.y + (p.y - miny) - (MAP_BORDER_ROCK - 1);
+
+          ascii_set(TILE_LAYER_FG_1, tx, ty, UNICODE_ALIAS_FOR_BLOCK);
+
+          color c = ORANGE;
+          c       = color_change_hue(c, non_pcg_random_range(0, 50));
+          c.a     = alpha;
+          ascii_set(TILE_LAYER_FG_1, tx, ty, c);
+        }
+      }
+    }
+  }
+
   if (display_gas_poison) {
     for (auto y = miny; y < maxy - 1; y++) {
       for (auto x = minx; x < maxx - 1; x++) {

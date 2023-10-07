@@ -435,6 +435,8 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         msg("You look puzzled in the confusing gas cloud.");
       } else if (level->is_gas_poison(curr_at.x, curr_at.y)) {
         msg("You hang out in the poison gas cloud.");
+      } else if (level->is_gas_explosive(curr_at.x, curr_at.y)) {
+        msg("You hang out in the explosive gas cloud.");
       } else if (level->is_gas_healing(curr_at.x, curr_at.y)) {
         msg("You hang out in the healing gas cloud.");
       } else if (level->is_trap(curr_at.x, curr_at.y)) {
@@ -454,6 +456,8 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         msg("You look puzzled in the confusing gas cloud.");
       } else if (level->is_gas_poison(curr_at.x, curr_at.y)) {
         msg("You rest in the poison gas cloud.");
+      } else if (level->is_gas_explosive(curr_at.x, curr_at.y)) {
+        msg("You rest in the explosive gas cloud.");
       } else if (level->is_gas_healing(curr_at.x, curr_at.y)) {
         msg("You rest in the healing gas cloud.");
       } else if (level->is_trap(curr_at.x, curr_at.y)) {

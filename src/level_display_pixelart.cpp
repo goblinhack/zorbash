@@ -467,6 +467,9 @@ void Level::display_pixelart_map_all(void)
       //
       // Showing gas is expensive, so only do it if the gas exists
       //
+      if (display_gas_explosive) {
+        display_pixelart_gas_explosive(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
+      }
       if (display_gas_poison) {
         display_pixelart_gas_poison(FBO_MAP_VISIBLE, minx, miny, maxx, maxy);
       }

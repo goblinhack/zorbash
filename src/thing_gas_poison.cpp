@@ -10,19 +10,6 @@ void Thing::gas_poison_tick(void)
 {
   TRACE_NO_INDENT();
 
-  if (is_lava() || is_fire() || is_fire_elemental()) {
-    auto intensity = level->is_gas_poison(curr_at.x, curr_at.y) / 10;
-    if (intensity) {
-      dbg("Poison gas explosion due to fire");
-      TRACE_AND_INDENT();
-      //
-      // A bit too destructive
-      //
-      // level->gas_poison_explosion(curr_at);
-    }
-    return;
-  }
-
   if (! is_air_breather()) {
     return;
   }
