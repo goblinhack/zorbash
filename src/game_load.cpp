@@ -420,6 +420,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   // clang-format off
   // begin sort marker2 {
              my.t->is_activated                                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->is_discorded                                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_attached                                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_being_destroyed                           = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_bouncing                                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;

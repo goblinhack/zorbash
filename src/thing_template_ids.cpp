@@ -817,6 +817,7 @@ std::initializer_list< std::string > tps = {
     "staff_discord",
     "staff_discord_carry",
     "staff_poison",
+    "staff_discord_radial",
     "staff_poison_carry",
     "staff_projectile_cold",
     "staff_projectile_fire",

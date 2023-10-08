@@ -365,6 +365,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   // clang-format off
   // begin sort marker2 {
   bits64 |= (my.t->is_activated                                 ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_discorded                                 ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_attached                                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_being_destroyed                           ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_bouncing                                  ? 1LLU : 0LLU) << shift; shift++;

@@ -867,6 +867,35 @@ PyObject *thing_friend_add(PyObject *obj, PyObject *args, PyObject *keywds)
   Py_RETURN_TRUE;
 }
 
+PyObject *thing_discord(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  uint32_t     id       = 0;
+  uint32_t     it_id    = 0;
+  static char *kwlist[] = {(char *) "it", nullptr};
+
+  TRACE_NO_INDENT();
+  if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id, &it_id)) {
+    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  if (! id) {
+    ERR("%s: No thing ID set", __FUNCTION__);
+    Py_RETURN_FALSE;
+  }
+
+  Thingp t = game->thing_find(id);
+  if (! t) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    Py_RETURN_FALSE;
+  }
+
+  t->discord();
+
+  Py_RETURN_TRUE;
+}
+
 PyObject *thing_polymorph(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();

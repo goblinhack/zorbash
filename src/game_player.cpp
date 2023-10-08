@@ -259,6 +259,12 @@ void Game::place_player(void)
         level->thing_new("dogman", point(x + 2, y));
       }
       if (0) {
+        auto w = level->thing_new("staff_discord", point(x, y));
+        t->carry(w, carry_options);
+        // level->thing_new("spectral_mob", point(x + 2, y + 1));
+        level->thing_new("zob_mob", point(x + 2, y - 1));
+      }
+      if (0) {
         level->thing_new("trap_pressure_plate_gas4", point(x - 1, y));
         level->thing_new("brazier", point(x + 1, y));
         level->thing_new("pudding_parent", point(x, y + 1));
@@ -830,9 +836,6 @@ void Game::place_player(void)
       {
         level->thing_new("staff_blinking", point(x, y + 1));
         level->thing_new("boots_teleport", point(x, y - 1));
-        if (0) {
-          level->thing_new("spectral_mob", point(x + 2, y + 1));
-        }
         if (0) {
           level->thing_new("zob_mob", point(x + 2, y + 1));
         }

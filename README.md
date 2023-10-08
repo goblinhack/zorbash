@@ -683,7 +683,7 @@ Other content
 - 17 x weapons
 - 17 x buffs
 - 14 x potions
-- 11 x staffs
+- 12 x staffs
 - 11 x skills
 - 11 x debuffs
 - 8 x traps

@@ -435,6 +435,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_environ_likes_shallow_water),
     MY_ADD_PYTHON_FUNCTION(thing_freeze),
     MY_ADD_PYTHON_FUNCTION(thing_friend),
+    MY_ADD_PYTHON_FUNCTION(thing_discord),
     MY_ADD_PYTHON_FUNCTION(thing_friend_add),
     MY_ADD_PYTHON_FUNCTION(thing_get_followers),
     MY_ADD_PYTHON_FUNCTION(thing_gfx_ascii_color_bg_unchanged_by_lights),

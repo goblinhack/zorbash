@@ -110,6 +110,7 @@ PyObject *thing_environ_likes_shallow_water(PyObject *obj, PyObject *args, PyObj
 PyObject *thing_freeze(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_friend_add(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_friend(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_discord(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_blinded_count(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_confusion_count(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_get_followers(PyObject *obj, PyObject *args, PyObject *keywds);

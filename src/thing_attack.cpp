@@ -296,8 +296,10 @@ bool Thing::possible_to_attack(const Thingp victim)
       //
       // Avoids skeletons attacking each other!
       //
-      dbg("Cannot attack undead: %s", victim->to_short_string().c_str());
-      return false;
+      if (! is_discorded && ! victim->is_discorded) {
+        dbg("Cannot attack undead: %s", victim->to_short_string().c_str());
+        return false;
+      }
     }
   }
 

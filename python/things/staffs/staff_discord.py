@@ -3,47 +3,42 @@ import tp
 
 
 def on_targeted(me, x, y):
-    owner = my.thing_top_owner_id_get(me)
-    radius = 1
-    # my.con("targeted {} {:X} radius {}".format(my.thing_name_get(me), me, radius))
+    radius = my.thing_effect_radius_get(me)
+    # my.con("targeted {} {:X}".format(my.thing_name_get(me), me))
 
     for dx in range(-radius, radius + 1):
         for dy in range(-radius, radius + 1):
-            if dx == 0 and dy == 0:
-                continue
-
             x1 = x + dx
             y1 = y + dy
-
             distance = (((x1 - x)**2 + (y1 - y)**2)**0.5)
             if distance > radius + 0.5:
                 continue
 
-            it = my.place_at(me, "spectral_blade", x1, y1)
-            if it and owner:
-                my.thing_set_leader(it, owner)
+            my.place_at(me, "magical_effect", x1, y1)
+            for it in my.level_get_all(me, x1, y1):
+                if my.thing_possible_to_attack(me, it):
+                    my.thing_discord(it)
 
 
 def on_targeted_radially(me, x, y):
-    owner = my.thing_top_owner_id_get(me)
-    radius = 1
+    radius = my.thing_effect_radius_get(me)
+    radius += 1
 
     # my.con("targeted radially {} {:X}".format(my.thing_name_get(me), me))
     for dx in range(-radius, radius + 1):
         for dy in range(-radius, radius + 1):
             if dx == 0 and dy == 0:
                 continue
-
             x1 = x + dx
             y1 = y + dy
-
             distance = (((x1 - x)**2 + (y1 - y)**2)**0.5)
             if distance > radius + 0.5:
                 continue
 
-            it = my.place_at(me, "spectral_blade", x1, y1)
-            if it and owner:
-                my.thing_set_leader(it, owner)
+            my.place_at(me, "magical_effect", x1, y1)
+            for it in my.level_get_all(me, x1, y1):
+                if my.thing_possible_to_attack(me, it):
+                    my.thing_discord(it)
 
 
 def on_idle(me, x, y):
@@ -67,14 +62,15 @@ def explode(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if owner:
         if owner and my.thing_is_player(owner):
-            my.thing_msg(me, "Your staff of conjuration explodes.")
+            my.thing_msg(me, "Your staff of discord explodes.")
         else:
-            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s staff of conjuration explodes.")
+            my.thing_msg(me, f"The {my.thing_name_get(owner)}'s staff of discord explodes.")
     else:
-        my.thing_msg(me, "The staff of conjuration explodes.")
+        my.thing_msg(me, "The staff of discord explodes.")
 
     my.spawn_at_my_position(me, "explosion_major")
-    on_targeted(me, x, y)
+    my.spawn_set_fire_to_things_around_me(me, "fire")
+    my.spawn_at_my_position(me, "fire")
     my.thing_dead(me, "exploded")
 
 
@@ -93,10 +89,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.charge_count(self, 5)
     my.collision_hit_priority(self, 6)
     my.dmg_num_of_attacks(self, 0)
-    my.dmg_received_doubled_from_fire(self, True)
     my.effect_has_blast_radius(self, True)
-    my.environ_dislikes_fire(self, 100)
-    my.equip_carry_anim(self, "staff_conjuration_carry")
+    my.equip_carry_anim(self, "staff_discord_carry")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
@@ -104,12 +98,13 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
-    my.gfx_targeted_laser(self, "laser_magic_effect")
-    my.gold_value_dice(self, "500")
+    my.gfx_targeted_laser(self, "laser_discord")
+    my.gfx_targeted_radial(self, "staff_discord_radial")
+    my.gold_value_dice(self, "1000")
     my.health_initial_dice(self, "20+1d10")
     my.is_able_to_be_teleported(self, True)
     my.is_able_to_fall(self, True)
-    # my.is_able_to_spawn_things(self, False) else we end up owning blades
+    # my.is_able_to_spawn_things(self, False) else we end up owning effects
     my.is_bag_item(self, True)
     my.is_biome_chasms(self, True)
     my.is_biome_dungeon(self, True)
@@ -123,6 +118,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
     my.is_droppable(self, True)
+    my.is_enchantable(self, True)
     my.is_interesting(self, True)
     my.is_item(self, True)
     my.is_loggable(self, True)
@@ -131,7 +127,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_target_radial(self, True)
     my.is_target_select(self, True)
     my.is_throwable(self, True)
-    my.is_tickable(self, True)
+    my.is_tickable(self, True)  # So it can interact with discord
     my.is_treasure_class_B(self, True)
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
@@ -147,39 +143,40 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_targeted_do(self, "me.on_targeted()")
     my.on_targeted_radially_do(self, "me.on_targeted_radially()")
     my.range_max(self, 7)
-    my.temperature(self, 20)
+    my.temperature(self, 30)
     my.text_a_or_an(self, "a")
-    my.text_description_long(self, "This staff will conjure a set of ethereal spectral blades around an enemy.")
-    my.text_description_short(self, "A staff of conjuration.")
+    my.text_description_enchant(self, "+1 radius")
+    my.text_description_long(self, "Causes friends to become enemies and followers to abandon their leaders.")
+    my.text_description_short(self, "A staff of discord.")
     my.tick_prio(self, my.MAP_TICK_PRIO_LOW)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
 
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".1", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".2", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".3", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".4", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".5", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="white",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile=name + ".6", delay_ms=100)
 
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="staff_conjuration", text_long_name="staff of conjuration", text_short_name="staff, conjure")
+    tp_init(name="staff_discord", text_long_name="staff of discord", text_short_name="staff of discord")
 
 
 init()
