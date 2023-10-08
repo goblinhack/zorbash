@@ -243,6 +243,11 @@ void Game::place_player(void)
         t->carry(w, carry_options);
       }
       if (0) {
+        auto w = level->thing_new("staff_holding", point(x, y));
+        t->carry(w, carry_options);
+        level->thing_new("dogman", point(x + 2, y));
+      }
+      if (0) {
         auto w = level->thing_new("staff_poison", point(x, y));
         t->carry(w, carry_options);
         level->thing_new("dogman", point(x + 2, y));

@@ -1,12 +1,10 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- TODO Staves and Wands fire blasts of magical energy but have a finite number of charges. Staves recharge over time, but wands do not.        -->
-<!-- TODO Staff of Poison                                                                                                                         -->
 <!-- TODO Staff of Discord                                                                                                                        -->
 <!-- TODO Staff of Entrancement                                                                                                                   -->
 <!-- TODO Staff of Haste                                                                                                                          -->
 <!-- TODO Staff of Healing                                                                                                                        -->
-<!-- TODO Staff of Obstruction                                                                                                                    -->
 <!-- TODO Staff of Protection                                                                                                                     -->
 <!-- TODO Staff of Tunneling                                                                                                                      -->
 <!-- TODO Scrolls and Potions disappear when used. Potions can be thrown.                                                                         -->

@@ -74,16 +74,6 @@ def explode(me, x, y):
     my.thing_dead(me, "exploded")
 
 
-def on_thrown(owner, me, x, y):
-    if my.thing_charge_count(me) == 0:
-        return
-    if my.level_is_chasm_at(me, x, y):
-        return
-    if my.level_is_water_at(me, x, y):
-        return
-    explode(me, x, y)
-
-
 def on_receiving_dmg_negation(me, hitter, real_hitter, x, y, damage):
     explode(me, x, y)
     return damage
@@ -163,7 +153,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_receiving_dmg_negation_do(self, "me.on_receiving_dmg_negation()")
     my.on_targeted_do(self, "me.on_targeted()")
     my.on_targeted_radially_do(self, "me.on_targeted_radially()")
-    my.on_thrown_do(self, "me.on_thrown()")
     my.range_max(self, 7)
     my.temperature(self, 30)
     my.text_a_or_an(self, "a")

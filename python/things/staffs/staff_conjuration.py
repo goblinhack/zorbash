@@ -78,16 +78,6 @@ def explode(me, x, y):
     my.thing_dead(me, "exploded")
 
 
-def on_thrown(owner, me, x, y):
-    if my.thing_charge_count(me) == 0:
-        return
-    if my.level_is_chasm_at(me, x, y):
-        return
-    if my.level_is_water_at(me, x, y):
-        return
-    explode(me, x, y)
-
-
 def on_hit_and_now_dead(me, hitter, real_hitter, x, y, crit, damage):
     explode(me, x, y)
 
@@ -156,7 +146,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_idle_tick_freq_dice(self, "1d200+200:me.on_idle()")
     my.on_targeted_do(self, "me.on_targeted()")
     my.on_targeted_radially_do(self, "me.on_targeted_radially()")
-    my.on_thrown_do(self, "me.on_thrown()")
     my.range_max(self, 7)
     my.temperature(self, 20)
     my.text_a_or_an(self, "a")
