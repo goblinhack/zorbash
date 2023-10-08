@@ -20,6 +20,7 @@ my.map_load_spell_tree(
         "bk", "is_spell_of_beckoning",
         "rp", "is_spell_of_repulsion",
         "HH", "spell_of_holding",
+        "PP", "spell_of_protection",
     ])
 
 my.map_load_spell_tree(
@@ -49,7 +50,7 @@ my.map_load_spell_tree(
     tree_data=[
         "HH                              ",
         "                                ",
-        "                                ",
+        "PP                              ",
         "                                ",
         "                                ",
         "                                ",

@@ -4,8 +4,7 @@ import tp
 
 def on_targeted(me, x, y):
     for it in my.level_get_all(me, x, y):
-        if my.level_is_monst_at(me, x, y) or \
-           my.level_is_player_at(me, x, y):
+        if my.thing_is_monst(it) or my.thing_is_player(it):
             my.place_at(it, "spell_of_holding_barrier", x, y)
 
 

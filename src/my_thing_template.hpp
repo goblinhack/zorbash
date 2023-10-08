@@ -660,10 +660,12 @@ private:
   int _is_soft {};
   int _is_spectral_blade {};
   int _is_spell {};
+  int _is_spell_always_succeeds {};
   int _is_spellbook {};
   int _is_spell_of_beckoning {};
   int _is_spell_of_holding {};
   int _is_spell_of_holding_barrier {};
+  int _is_spell_of_protection {};
   int _is_spell_of_protection_barrier {};
   int _is_spell_of_repulsion {};
   int _is_spell_of_slowing {};
@@ -774,8 +776,6 @@ private:
   int _is_unused_flag7 {};
   int _is_unused_flag70 {};
   int _is_unused_flag71 {};
-  int _is_unused_flag72 {};
-  int _is_unused_flag73 {};
   int _is_unused_flag8 {};
   int _is_unused_flag9 {};
   int _is_usable {};
@@ -2028,11 +2028,13 @@ public:
   int is_snake(void) const;
   int is_soft(void) const;
   int is_spectral_blade(void) const;
+  int is_spell_always_succeeds(void) const;
   int is_spellbook(void) const;
   int is_spell_of_beckoning(void) const;
   int is_spell_of_holding_barrier(void) const;
   int is_spell_of_holding(void) const;
   int is_spell_of_protection_barrier(void) const;
+  int is_spell_of_protection(void) const;
   int is_spell_of_repulsion(void) const;
   int is_spell_of_slowing(void) const;
   int is_spell(void) const;
@@ -2142,8 +2144,6 @@ public:
   int is_unused_flag6(void) const;
   int is_unused_flag70(void) const;
   int is_unused_flag71(void) const;
-  int is_unused_flag72(void) const;
-  int is_unused_flag73(void) const;
   int is_unused_flag7(void) const;
   int is_unused_flag8(void) const;
   int is_unused_flag9(void) const;
@@ -2801,11 +2801,13 @@ public:
   void is_snake_set(int v);
   void is_soft_set(int v);
   void is_spectral_blade_set(int v);
+  void is_spell_always_succeeds_set(int v);
   void is_spellbook_set(int v);
   void is_spell_of_beckoning_set(int v);
   void is_spell_of_holding_barrier_set(int v);
   void is_spell_of_holding_set(int v);
   void is_spell_of_protection_barrier_set(int v);
+  void is_spell_of_protection_set(int v);
   void is_spell_of_repulsion_set(int v);
   void is_spell_of_slowing_set(int v);
   void is_spell_set(int v);
@@ -2915,8 +2917,6 @@ public:
   void is_unused_flag6_set(int v);
   void is_unused_flag70_set(int v);
   void is_unused_flag71_set(int v);
-  void is_unused_flag72_set(int v);
-  void is_unused_flag73_set(int v);
   void is_unused_flag7_set(int v);
   void is_unused_flag8_set(int v);
   void is_unused_flag9_set(int v);

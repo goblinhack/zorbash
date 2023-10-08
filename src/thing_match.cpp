@@ -446,11 +446,13 @@ bool Tp::matches(const std::string &what)
   if (is_snake() && (what == "is_snake")) { return true; }
   if (is_soft() && (what == "is_soft")) { return true; }
   if (is_spectral_blade() && (what == "is_spectral_blade")) { return true; }
+  if (is_spell_always_succeeds() && (what == "is_spell_always_succeeds")) { return true; }
   if (is_spellbook() && (what == "is_spellbook")) { return true; }
   if (is_spell_of_beckoning() && (what == "is_spell_of_beckoning")) { return true; }
   if (is_spell_of_holding_barrier() && (what == "is_spell_of_holding_barrier")) { return true; }
   if (is_spell_of_holding() && (what == "is_spell_of_holding")) { return true; }
   if (is_spell_of_protection_barrier() && (what == "is_spell_of_protection_barrier")) { return true; }
+  if (is_spell_of_protection() && (what == "is_spell_of_protection")) { return true; }
   if (is_spell_of_repulsion() && (what == "is_spell_of_repulsion")) { return true; }
   if (is_spell_of_slowing() && (what == "is_spell_of_slowing")) { return true; }
   if (is_spell() && (what == "is_spell")) { return true; }
@@ -555,8 +557,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag6() && (what == "is_unused_flag6")) { return true; }
   if (is_unused_flag70() && (what == "is_unused_flag70")) { return true; }
   if (is_unused_flag71() && (what == "is_unused_flag71")) { return true; }
-  if (is_unused_flag72() && (what == "is_unused_flag72")) { return true; }
-  if (is_unused_flag73() && (what == "is_unused_flag73")) { return true; }
   if (is_unused_flag7() && (what == "is_unused_flag7")) { return true; }
   if (is_unused_flag8() && (what == "is_unused_flag8")) { return true; }
   if (is_unused_flag9() && (what == "is_unused_flag9")) { return true; }
@@ -1052,11 +1052,13 @@ bool Thing::matches(const std::string &what)
   if (is_snake() && (what == "is_snake")) { return true; }
   if (is_soft() && (what == "is_soft")) { return true; }
   if (is_spectral_blade() && (what == "is_spectral_blade")) { return true; }
+  if (is_spell_always_succeeds() && (what == "is_spell_always_succeeds")) { return true; }
   if (is_spellbook() && (what == "is_spellbook")) { return true; }
   if (is_spell_of_beckoning() && (what == "is_spell_of_beckoning")) { return true; }
   if (is_spell_of_holding_barrier() && (what == "is_spell_of_holding_barrier")) { return true; }
   if (is_spell_of_holding() && (what == "is_spell_of_holding")) { return true; }
   if (is_spell_of_protection_barrier() && (what == "is_spell_of_protection_barrier")) { return true; }
+  if (is_spell_of_protection() && (what == "is_spell_of_protection")) { return true; }
   if (is_spell_of_repulsion() && (what == "is_spell_of_repulsion")) { return true; }
   if (is_spell_of_slowing() && (what == "is_spell_of_slowing")) { return true; }
   if (is_spell() && (what == "is_spell")) { return true; }
@@ -1161,8 +1163,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag6() && (what == "is_unused_flag6")) { return true; }
   if (is_unused_flag70() && (what == "is_unused_flag70")) { return true; }
   if (is_unused_flag71() && (what == "is_unused_flag71")) { return true; }
-  if (is_unused_flag72() && (what == "is_unused_flag72")) { return true; }
-  if (is_unused_flag73() && (what == "is_unused_flag73")) { return true; }
   if (is_unused_flag7() && (what == "is_unused_flag7")) { return true; }
   if (is_unused_flag8() && (what == "is_unused_flag8")) { return true; }
   if (is_unused_flag9() && (what == "is_unused_flag9")) { return true; }
@@ -1647,11 +1647,13 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_snake") { return &Thing::is_snake; }
   if (what == "is_soft") { return &Thing::is_soft; }
   if (what == "is_spectral_blade") { return &Thing::is_spectral_blade; }
+  if (what == "is_spell_always_succeeds") { return &Thing::is_spell_always_succeeds; }
   if (what == "is_spellbook") { return &Thing::is_spellbook; }
   if (what == "is_spell_of_beckoning") { return &Thing::is_spell_of_beckoning; }
   if (what == "is_spell_of_holding_barrier") { return &Thing::is_spell_of_holding_barrier; }
   if (what == "is_spell_of_holding") { return &Thing::is_spell_of_holding; }
   if (what == "is_spell_of_protection_barrier") { return &Thing::is_spell_of_protection_barrier; }
+  if (what == "is_spell_of_protection") { return &Thing::is_spell_of_protection; }
   if (what == "is_spell_of_repulsion") { return &Thing::is_spell_of_repulsion; }
   if (what == "is_spell_of_slowing") { return &Thing::is_spell_of_slowing; }
   if (what == "is_spell") { return &Thing::is_spell; }
@@ -1755,8 +1757,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag6") { return &Thing::is_unused_flag6; }
   if (what == "is_unused_flag70") { return &Thing::is_unused_flag70; }
   if (what == "is_unused_flag71") { return &Thing::is_unused_flag71; }
-  if (what == "is_unused_flag72") { return &Thing::is_unused_flag72; }
-  if (what == "is_unused_flag73") { return &Thing::is_unused_flag73; }
   if (what == "is_unused_flag7") { return &Thing::is_unused_flag7; }
   if (what == "is_unused_flag8") { return &Thing::is_unused_flag8; }
   if (what == "is_unused_flag9") { return &Thing::is_unused_flag9; }

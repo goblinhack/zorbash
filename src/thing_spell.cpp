@@ -344,7 +344,10 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
     dbg("Spell is used on target: %s", target->to_string().c_str());
     TRACE_AND_INDENT();
 
-    if (d20() + stat_psi_bonus() > target->stat_psi()) {
+    //
+    // Spells of protection always succeed
+    //
+    if (what->is_spell_always_succeeds() || (d20() + stat_psi_bonus() > target->stat_psi())) {
       //
       // Spell succeeds
       //

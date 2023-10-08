@@ -8,8 +8,8 @@ def on_born(me, x, y):
             my.spawn_at_my_position(it, "explosion_major")
 
 
-def tp_init(name, text_long_name):
-    self = tp.Tp(name, text_long_name)
+def tp_init(name, text_long_name, text_short_name):
+    self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.collision_check(self, True)
     my.collision_hit_priority(self, 100)
@@ -27,7 +27,7 @@ def tp_init(name, text_long_name):
     my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
     my.gfx_pixelart_submergible(self, True)
-    my.health_initial_dice(self, "1d200")
+    my.health_initial_dice(self, "100+1d100")
     my.is_always_hit(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
@@ -35,6 +35,7 @@ def tp_init(name, text_long_name):
     my.is_cursor_path_blocker(self, True)
     my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
+    my.is_ethereal(self, True)
     my.is_gas_blocker(self, True)
     my.is_gas_explosion_blocker(self, True)
     my.is_hittable(self, True)
@@ -44,6 +45,7 @@ def tp_init(name, text_long_name):
     my.is_immune_to_stamina_drain(self, True)
     my.is_interesting(self, True)  # so it can be shoved
     my.is_loggable(self, True)
+    my.is_not_shown_as_a_pet(self, True)
     my.is_obs_ai(self, True)
     my.is_obs_jump_end(self, True)
     my.is_obs_jumping(self, True)
@@ -69,7 +71,7 @@ def tp_init(name, text_long_name):
     my.text_a_or_an(self, "a")
     my.text_description_short(self, "An impenetrable shimmering field of energy.")
     my.text_hits(self, "chills")
-    my.thing_size(self, my.THING_SIZE_GIANT)
+    my.thing_size(self, my.THING_SIZE_LARGE)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_EFFECT)
     # end sort marker
@@ -97,7 +99,7 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="spell_of_holding_barrier", text_long_name="spell hold barrier")
+    tp_init(name="spell_of_holding_barrier", text_long_name="magic barrier", text_short_name="magic barrier")
 
 
 init()

@@ -567,15 +567,15 @@ int Thing::is_unused_flag71(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag71());
 }
-int Thing::is_unused_flag72(void)
+int Thing::is_spell_always_succeeds(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag72());
+  return (tp()->is_spell_always_succeeds());
 }
-int Thing::is_unused_flag73(void)
+int Thing::is_spell_of_protection(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag73());
+  return (tp()->is_spell_of_protection());
 }
 int Thing::is_usable_only_after_equipping(void)
 {

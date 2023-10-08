@@ -1844,11 +1844,13 @@ public:
   int is_snake(void);
   int is_soft(void);
   int is_spectral_blade(void);
+  int is_spell_always_succeeds(void);
   int is_spellbook(void);
   int is_spell_of_beckoning(void);
   int is_spell_of_holding_barrier(void);
   int is_spell_of_holding(void);
   int is_spell_of_protection_barrier(void);
+  int is_spell_of_protection(void);
   int is_spell_of_repulsion(void);
   int is_spell_of_slowing(void);
   int is_spell(void);
@@ -1956,8 +1958,6 @@ public:
   int is_unused_flag6(void);
   int is_unused_flag70(void);
   int is_unused_flag71(void);
-  int is_unused_flag72(void);
-  int is_unused_flag73(void);
   int is_unused_flag7(void);
   int is_unused_flag8(void);
   int is_unused_flag9(void);

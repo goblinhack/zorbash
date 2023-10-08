@@ -249,6 +249,11 @@ void Game::place_player(void)
         level->thing_new("dogman", point(x + 2, y));
       }
       if (0) {
+        auto w = level->thing_new("staff_protection", point(x, y));
+        t->carry(w, carry_options);
+        level->thing_new("dogman", point(x + 2, y));
+      }
+      if (0) {
         auto w = level->thing_new("staff_poison", point(x, y));
         t->carry(w, carry_options);
         level->thing_new("dogman", point(x + 2, y));
@@ -303,6 +308,8 @@ void Game::place_player(void)
       }
       if (0) {
         level->thing_new("dogman", point(x + 1, y));
+        t->spell_add(level->thing_new("spell_of_holding", point(x, y)));
+        t->spell_add(level->thing_new("spell_of_protection", point(x, y)));
         t->spell_add(level->thing_new("spell_of_repulsion", point(x, y)));
         t->spell_add(level->thing_new("spell_of_beckoning", point(x, y)));
         t->spell_add(level->thing_new("spell_of_magic_missile", point(x, y)));

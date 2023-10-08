@@ -260,14 +260,8 @@ void Thing::release_followers(void)
   dbg("Release followers");
   TRACE_AND_INDENT();
 
-  {
-    for (auto p : level->all_things) {
-      auto follower = p.second;
-      auto o        = follower->leader();
-      if (o && (o == this)) {
-        follower->leader_unset();
-      }
-    }
+  for (auto follower : all_followers_get()) {
+    follower->leader_unset();
   }
 }
 
@@ -299,14 +293,8 @@ void Thing::notify_followers_of_death_of_my_leader(void)
   //
   // Slow, but not used too often
   //
-  {
-    for (auto p : level->all_things) {
-      auto follower = p.second;
-      auto o        = follower->leader();
-      if (o && (o == this)) {
-        follower->notify_of_death_of_my_leader();
-      }
-    }
+  for (auto follower : all_followers_get()) {
+    follower->notify_of_death_of_my_leader();
   }
 }
 
@@ -322,16 +310,10 @@ std::list< Thingp > Thing::all_followers_get(void)
     return out;
   }
 
-  //
-  // Slow, but not used too often
-  //
-  {
-    for (auto p : level->all_things) {
-      auto follower = p.second;
-      auto leader   = follower->leader();
-      if (leader && (leader == this)) {
-        out.push_back(follower);
-      }
+  for (auto id : infop()->followers) {
+    auto follower = level->thing_find(id);
+    if (follower) {
+      out.push_back(follower);
     }
   }
 
@@ -364,7 +346,7 @@ bool Thing::same_leader_or_owner(Thingp it)
   // with the firer the leader. If you remove this check lightning can still
   // hit the firer.
   //
-  if (! is_monst() && ! is_player()) {
+  if (! is_monst() && ! is_player() && ! is_spell_of_protection_barrier()) {
     if (my_owner && my_owner->is_monst()) {
       //
       // Allow this; a sword being swung by a team member
@@ -375,7 +357,7 @@ bool Thing::same_leader_or_owner(Thingp it)
     }
   }
 
-  if (! it->is_monst() && ! it->is_player()) {
+  if (! it->is_monst() && ! it->is_player() && ! it->is_spell_of_protection_barrier()) {
     if (its_owner && its_owner->is_monst()) {
       //
       // Allow this; a sword being swung by a team member

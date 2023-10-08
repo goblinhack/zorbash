@@ -318,6 +318,15 @@ void Thing::move_carried_items(void)
       iter->dir = dir;
     }
   }
+
+  if (follower_count()) {
+    for (auto follower : all_followers_get()) {
+      if (follower->is_spell_of_protection_barrier()) {
+        follower->move_to(curr_at);
+        follower->dir = dir;
+      }
+    }
+  }
 }
 
 void Thing::move_carried_items_immediately(void)
@@ -388,6 +397,15 @@ void Thing::move_carried_items_immediately(void)
     if (w) {
       w->move_to_immediately(curr_at);
       w->dir = dir;
+    }
+  }
+
+  if (follower_count()) {
+    for (auto follower : all_followers_get()) {
+      if (follower->is_spell_of_protection_barrier()) {
+        follower->move_to_immediately(curr_at);
+        follower->dir = dir;
+      }
     }
   }
 }

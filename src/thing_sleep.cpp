@@ -8,6 +8,14 @@
 
 void Thing::sleep(void)
 {
+  //
+  // Make sure we don't try to make things sleep, like magical barriers if they
+  // are attached to a sleeping owner
+  //
+  if (! is_able_to_sleep()) {
+    return;
+  }
+
   change_state(MONST_STATE_SLEEPING, "time to sleep");
   auto followers = all_followers_get();
   for (auto f : followers) {

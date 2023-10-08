@@ -5,7 +5,6 @@
 <!-- TODO Staff of Entrancement                                                                                                                   -->
 <!-- TODO Staff of Haste                                                                                                                          -->
 <!-- TODO Staff of Healing                                                                                                                        -->
-<!-- TODO Staff of Protection                                                                                                                     -->
 <!-- TODO Staff of Tunneling                                                                                                                      -->
 <!-- TODO Scrolls and Potions disappear when used. Potions can be thrown.                                                                         -->
 <!-- TODO Scroll of Aggravate Monsters                                                                                                            -->
@@ -680,13 +679,13 @@ Other content
 - 52 x food
 - 24 x treasure
 - 24 x items
-- 20 x spells
+- 22 x spells
 - 17 x weapons
 - 17 x buffs
 - 14 x potions
+- 11 x staffs
 - 11 x skills
 - 11 x debuffs
-- 10 x staffs
 - 8 x traps
 - 6 x shield
 - 6 x boots
