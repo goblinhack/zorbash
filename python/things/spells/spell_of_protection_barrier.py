@@ -48,7 +48,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_spell_always_succeeds(self, True)
     my.is_spell_of_protection_barrier(self, True)
     my.is_tickable(self, True)
-    my.lifespan_dice(self, "50+1d20")
+    my.lifespan_dice(self, "20+1d20")
     my.light_color(self, "white")
     my.light_dist(self, 3)
     my.noise_blocker(self, True)

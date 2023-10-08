@@ -83,7 +83,7 @@ def tp_init(name, text_long_name, text_short_name):
 def init():
     tp_init(
         name="cloak_protection",
-        text_long_name="cloak of protection",
+        text_long_name="cloak of modest protection",
         text_short_name="cloak, protection",
     )
 
