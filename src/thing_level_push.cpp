@@ -67,6 +67,10 @@ void Thing::level_push(void)
     i_set_is_spell_of_holding_barrier = true;
     level->is_spell_of_holding_barrier_set(x, y);
   }
+  if (is_spell_of_protection_barrier()) {
+    i_set_is_spell_of_protection_barrier = true;
+    level->is_spell_of_protection_barrier_set(x, y);
+  }
   if (is_bridge()) {
     i_set_is_bridge = true;
     level->is_bridge_set(x, y);

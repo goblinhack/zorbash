@@ -478,6 +478,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_ooze                          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_portal                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_spell_of_holding_barrier      ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_spell_of_protection_barrier      ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_trap                          ? 1LLU : 0LLU) << shift; shift++;
   // end sort marker3 }
   // clang-format on
@@ -676,6 +677,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_smoke);
   out << bits(my.t->_is_spellbook);
   out << bits(my.t->_is_spell_of_holding_barrier);
+  out << bits(my.t->_is_spell_of_protection_barrier);
   out << bits(my.t->_is_spiderweb);
   out << bits(my.t->_is_staff);
   out << bits(my.t->_is_steam);

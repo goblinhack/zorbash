@@ -712,6 +712,11 @@ int Thing::is_spell_of_holding_barrier(void)
   TRACE_NO_INDENT();
   return (tp()->is_spell_of_holding_barrier());
 }
+int Thing::is_spell_of_protection_barrier(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_spell_of_protection_barrier());
+}
 int Thing::is_able_to_attack_totems(void)
 {
   TRACE_NO_INDENT();

@@ -579,6 +579,7 @@ PyObject *thing_is_spellbook(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spell_of_beckoning(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spell_of_holding_barrier(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spell_of_holding(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_spell_of_protection_barrier(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spell_of_repulsion(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spell_of_slowing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spell(PyObject *obj, PyObject *args, PyObject *keywds);

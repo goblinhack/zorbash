@@ -39,6 +39,10 @@ bool Thing::is_shielded_from_attack_by(Thingp hitter)
     return false;
   }
 
+  if (is_spell_of_protection_barrier()) {
+    return true;
+  }
+
   if (is_block_of_ice()) {
     return false;
   }
@@ -55,6 +59,11 @@ bool Thing::is_shielded_from_attack_by(Thingp hitter)
   // If you are inside the spell barrier then afford protection.
   //
   if (level->is_spell_of_holding_barrier(curr_at)) {
+    dbg("Attack failed, victim is shielded by magic");
+    return true;
+  }
+
+  if (level->is_spell_of_protection_barrier(curr_at)) {
     dbg("Attack failed, victim is shielded by magic");
     return true;
   }

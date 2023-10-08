@@ -42,12 +42,12 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_interesting(self, True)  # so it can be shoved
     my.is_loggable(self, True)
     my.is_moveable(self, True)
-    my.is_tickable(self, True)
     my.is_obs_ai(self, True)
     my.is_obs_shooting(self, True)
     my.is_obs_throwing(self, True)
     my.is_one_per_tile(self, True)
     my.is_shovable(self, True)
+    my.is_tickable(self, True)
     my.light_color(self, "orange")
     my.light_dist(self, 2)
     my.normal_placement_rules(self, True)

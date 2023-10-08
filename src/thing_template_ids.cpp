@@ -772,6 +772,7 @@ std::initializer_list< std::string > tps = {
     "spell_of_hasted",
     "spell_of_holding",
     "spell_of_holding_barrier",
+    "spell_of_protection_barrier",
     "spell_of_magic_missile",
     "spell_of_repulsion",
     "spell_of_slowing",

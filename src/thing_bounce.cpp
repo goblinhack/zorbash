@@ -35,6 +35,10 @@ bool Thing::bounce(float bounce_height, float bounce_fade, ts_t ms, int bounce_c
       dbg("No bouncing when stuck in a spell barrier");
       return false;
     }
+    if (t->is_spell_of_protection_barrier()) {
+      dbg("No bouncing when stuck in a spell barrier");
+      return false;
+    }
     if (t->is_block_of_ice()) {
       dbg("No bouncing when stuck in ice");
       return false;

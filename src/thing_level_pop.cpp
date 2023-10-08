@@ -73,6 +73,10 @@ void Thing::level_pop(void)
       i_set_is_spell_of_holding_barrier = false;
       level->is_spell_of_holding_barrier_unset(x, y);
     }
+    if (i_set_is_spell_of_protection_barrier) {
+      i_set_is_spell_of_protection_barrier = false;
+      level->is_spell_of_protection_barrier_unset(x, y);
+    }
     if (i_set_is_brazier) {
       i_set_is_brazier = false;
       level->is_brazier_unset(x, y);

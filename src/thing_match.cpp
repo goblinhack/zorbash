@@ -450,6 +450,7 @@ bool Tp::matches(const std::string &what)
   if (is_spell_of_beckoning() && (what == "is_spell_of_beckoning")) { return true; }
   if (is_spell_of_holding_barrier() && (what == "is_spell_of_holding_barrier")) { return true; }
   if (is_spell_of_holding() && (what == "is_spell_of_holding")) { return true; }
+  if (is_spell_of_protection_barrier() && (what == "is_spell_of_protection_barrier")) { return true; }
   if (is_spell_of_repulsion() && (what == "is_spell_of_repulsion")) { return true; }
   if (is_spell_of_slowing() && (what == "is_spell_of_slowing")) { return true; }
   if (is_spell() && (what == "is_spell")) { return true; }
@@ -1055,6 +1056,7 @@ bool Thing::matches(const std::string &what)
   if (is_spell_of_beckoning() && (what == "is_spell_of_beckoning")) { return true; }
   if (is_spell_of_holding_barrier() && (what == "is_spell_of_holding_barrier")) { return true; }
   if (is_spell_of_holding() && (what == "is_spell_of_holding")) { return true; }
+  if (is_spell_of_protection_barrier() && (what == "is_spell_of_protection_barrier")) { return true; }
   if (is_spell_of_repulsion() && (what == "is_spell_of_repulsion")) { return true; }
   if (is_spell_of_slowing() && (what == "is_spell_of_slowing")) { return true; }
   if (is_spell() && (what == "is_spell")) { return true; }
@@ -1649,6 +1651,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_spell_of_beckoning") { return &Thing::is_spell_of_beckoning; }
   if (what == "is_spell_of_holding_barrier") { return &Thing::is_spell_of_holding_barrier; }
   if (what == "is_spell_of_holding") { return &Thing::is_spell_of_holding; }
+  if (what == "is_spell_of_protection_barrier") { return &Thing::is_spell_of_protection_barrier; }
   if (what == "is_spell_of_repulsion") { return &Thing::is_spell_of_repulsion; }
   if (what == "is_spell_of_slowing") { return &Thing::is_spell_of_slowing; }
   if (what == "is_spell") { return &Thing::is_spell; }

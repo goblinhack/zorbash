@@ -63,6 +63,7 @@ void Game::place_player(void)
         level->thing_new("spectral_blade", point(x + 1, y));
         level->thing_new("trap_blinded", point(x + 2, y + 2));
         level->thing_new("spell_of_holding_barrier", point(x, y));
+        level->thing_new("spell_of_protection_barrier", point(x, y));
         level->thing_new("ogre_totem", point(x + 2, y + 2));
         level->thing_new("trap_dart", point(x + 2, y + 2));
         level->thing_new("zorb_totem", point(x + 2, y + 2));
@@ -313,6 +314,14 @@ void Game::place_player(void)
         level->thing_new("dogman", point(x + 2, y));
         // level->thing_new("spell_of_holding_barrier", point(x + 1, y + 1));
         // level->thing_new("spell_of_holding_barrier", point(x, y));
+        auto w = level->thing_new("spell_of_holding", point(x, y));
+        t->spell_add(w);
+      }
+      if (0) {
+        level->thing_new("barrel", point(x + 1, y));
+        level->thing_new("dogman", point(x + 2, y));
+        // level->thing_new("spell_of_protection_barrier", point(x + 1, y + 1));
+        // level->thing_new("spell_of_protection_barrier", point(x, y));
         auto w = level->thing_new("spell_of_holding", point(x, y));
         t->spell_add(w);
       }

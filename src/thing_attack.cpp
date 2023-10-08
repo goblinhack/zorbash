@@ -94,6 +94,18 @@ bool Thing::possible_to_attack(const Thingp victim)
     }
 
     //
+    // If stuck in a spell barrier, we can only attack locally
+    //
+    if (level->is_spell_of_protection_barrier(curr_at)) {
+      if (victim->curr_at != curr_at) {
+        if (is_debug_type()) {
+          dbg("Cannot attack %s, stuck in a spell barrier", victim->to_short_string().c_str());
+        }
+        return false;
+      }
+    }
+
+    //
     // If stuck in a web, we can only attack locally
     //
     if (! is_immune_to_spiderwebs()) {

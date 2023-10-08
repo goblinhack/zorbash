@@ -756,6 +756,7 @@ int Tp::is_spellbook(void) const { return _is_spellbook; }
 int Tp::is_spell_of_beckoning(void) const { return _is_spell_of_beckoning; }
 int Tp::is_spell_of_holding_barrier(void) const { return _is_spell_of_holding_barrier; }
 int Tp::is_spell_of_holding(void) const { return _is_spell_of_holding; }
+int Tp::is_spell_of_protection_barrier(void) const { return _is_spell_of_protection_barrier; }
 int Tp::is_spell_of_repulsion(void) const { return _is_spell_of_repulsion; }
 int Tp::is_spell_of_slowing(void) const { return _is_spell_of_slowing; }
 int Tp::is_spell(void) const { return _is_spell; }
@@ -1527,6 +1528,7 @@ void Tp::is_spellbook_set(int v) { _is_spellbook = v; }
 void Tp::is_spell_of_beckoning_set(int v) { _is_spell_of_beckoning = v; }
 void Tp::is_spell_of_holding_barrier_set(int v) { _is_spell_of_holding_barrier = v; }
 void Tp::is_spell_of_holding_set(int v) { _is_spell_of_holding = v; }
+void Tp::is_spell_of_protection_barrier_set(int v) { _is_spell_of_protection_barrier = v; }
 void Tp::is_spell_of_repulsion_set(int v) { _is_spell_of_repulsion = v; }
 void Tp::is_spell_of_slowing_set(int v) { _is_spell_of_slowing = v; }
 void Tp::is_spell_set(int v) { _is_spell = v; }
