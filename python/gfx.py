@@ -1376,18 +1376,18 @@ def init_tiles_16x16_main():
         "staff_negation_carry.4",
         "staff_negation_carry.5",
         "staff_negation_carry.6",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
+        "staff_discord.1",
+        "staff_discord.2",
+        "staff_discord.3",
+        "staff_discord.4",
+        "staff_discord.5",
+        "staff_discord.6",
+        "staff_discord_carry.1",
+        "staff_discord_carry.2",
+        "staff_discord_carry.3",
+        "staff_discord_carry.4",
+        "staff_discord_carry.5",
+        "staff_discord_carry.6",
         "",
         "",
         "",
@@ -14648,7 +14648,7 @@ def init_effect_negation_tiles():
 
 
 @timeme
-def init_laser_energy_tiles():
+def init_effect_energy_tiles():
     tiles = [
         "laser_energy.1.start",
         "laser_energy.1.mid.1",
@@ -14918,7 +14918,277 @@ def init_laser_energy_tiles():
 
 
 @timeme
-def init_laser_lightning_tiles():
+def init_effect_discord_tiles():
+    tiles = [
+        "laser_discord.1.start",
+        "laser_discord.1.mid.1",
+        "laser_discord.1.mid.2",
+        "laser_discord.1.mid.3",
+        "laser_discord.1.mid.4",
+        "laser_discord.1.mid.5",
+        "laser_discord.1.mid.6",
+        "laser_discord.1.mid.7",
+        "laser_discord.1.mid.8",
+        "laser_discord.1.mid.9",
+        "laser_discord.1.mid.10",
+        "laser_discord.1.mid.11",
+        "laser_discord.1.mid.12",
+        "laser_discord.1.mid.13",
+        "laser_discord.1.mid.14",
+        "laser_discord.1.end",
+        "laser_discord.2.start",
+        "laser_discord.2.mid.1",
+        "laser_discord.2.mid.2",
+        "laser_discord.2.mid.3",
+        "laser_discord.2.mid.4",
+        "laser_discord.2.mid.5",
+        "laser_discord.2.mid.6",
+        "laser_discord.2.mid.7",
+        "laser_discord.2.mid.8",
+        "laser_discord.2.mid.9",
+        "laser_discord.2.mid.10",
+        "laser_discord.2.mid.11",
+        "laser_discord.2.mid.12",
+        "laser_discord.2.mid.13",
+        "laser_discord.2.mid.14",
+        "laser_discord.2.end",
+        "laser_discord.3.start",
+        "laser_discord.3.mid.1",
+        "laser_discord.3.mid.2",
+        "laser_discord.3.mid.3",
+        "laser_discord.3.mid.4",
+        "laser_discord.3.mid.5",
+        "laser_discord.3.mid.6",
+        "laser_discord.3.mid.7",
+        "laser_discord.3.mid.8",
+        "laser_discord.3.mid.9",
+        "laser_discord.3.mid.10",
+        "laser_discord.3.mid.11",
+        "laser_discord.3.mid.12",
+        "laser_discord.3.mid.13",
+        "laser_discord.3.mid.14",
+        "laser_discord.3.end",
+        "laser_discord.4.start",
+        "laser_discord.4.mid.1",
+        "laser_discord.4.mid.2",
+        "laser_discord.4.mid.3",
+        "laser_discord.4.mid.4",
+        "laser_discord.4.mid.5",
+        "laser_discord.4.mid.6",
+        "laser_discord.4.mid.7",
+        "laser_discord.4.mid.8",
+        "laser_discord.4.mid.9",
+        "laser_discord.4.mid.10",
+        "laser_discord.4.mid.11",
+        "laser_discord.4.mid.12",
+        "laser_discord.4.mid.13",
+        "laser_discord.4.mid.14",
+        "laser_discord.4.end",
+        "laser_discord.5.start",
+        "laser_discord.5.mid.1",
+        "laser_discord.5.mid.2",
+        "laser_discord.5.mid.3",
+        "laser_discord.5.mid.4",
+        "laser_discord.5.mid.5",
+        "laser_discord.5.mid.6",
+        "laser_discord.5.mid.7",
+        "laser_discord.5.mid.8",
+        "laser_discord.5.mid.9",
+        "laser_discord.5.mid.10",
+        "laser_discord.5.mid.11",
+        "laser_discord.5.mid.12",
+        "laser_discord.5.mid.13",
+        "laser_discord.5.mid.14",
+        "laser_discord.5.end",
+        "laser_discord.6.start",
+        "laser_discord.6.mid.1",
+        "laser_discord.6.mid.2",
+        "laser_discord.6.mid.3",
+        "laser_discord.6.mid.4",
+        "laser_discord.6.mid.5",
+        "laser_discord.6.mid.6",
+        "laser_discord.6.mid.7",
+        "laser_discord.6.mid.8",
+        "laser_discord.6.mid.9",
+        "laser_discord.6.mid.10",
+        "laser_discord.6.mid.11",
+        "laser_discord.6.mid.12",
+        "laser_discord.6.mid.13",
+        "laser_discord.6.mid.14",
+        "laser_discord.6.end",
+        "laser_discord.7.start",
+        "laser_discord.7.mid.1",
+        "laser_discord.7.mid.2",
+        "laser_discord.7.mid.3",
+        "laser_discord.7.mid.4",
+        "laser_discord.7.mid.5",
+        "laser_discord.7.mid.6",
+        "laser_discord.7.mid.7",
+        "laser_discord.7.mid.8",
+        "laser_discord.7.mid.9",
+        "laser_discord.7.mid.10",
+        "laser_discord.7.mid.11",
+        "laser_discord.7.mid.12",
+        "laser_discord.7.mid.13",
+        "laser_discord.7.mid.14",
+        "laser_discord.7.end",
+        "laser_discord.8.start",
+        "laser_discord.8.mid.1",
+        "laser_discord.8.mid.2",
+        "laser_discord.8.mid.3",
+        "laser_discord.8.mid.4",
+        "laser_discord.8.mid.5",
+        "laser_discord.8.mid.6",
+        "laser_discord.8.mid.7",
+        "laser_discord.8.mid.8",
+        "laser_discord.8.mid.9",
+        "laser_discord.8.mid.10",
+        "laser_discord.8.mid.11",
+        "laser_discord.8.mid.12",
+        "laser_discord.8.mid.13",
+        "laser_discord.8.mid.14",
+        "laser_discord.8.end",
+        "laser_discord.9.start",
+        "laser_discord.9.mid.1",
+        "laser_discord.9.mid.2",
+        "laser_discord.9.mid.3",
+        "laser_discord.9.mid.4",
+        "laser_discord.9.mid.5",
+        "laser_discord.9.mid.6",
+        "laser_discord.9.mid.7",
+        "laser_discord.9.mid.8",
+        "laser_discord.9.mid.9",
+        "laser_discord.9.mid.10",
+        "laser_discord.9.mid.11",
+        "laser_discord.9.mid.12",
+        "laser_discord.9.mid.13",
+        "laser_discord.9.mid.14",
+        "laser_discord.9.end",
+        "laser_discord.10.start",
+        "laser_discord.10.mid.1",
+        "laser_discord.10.mid.2",
+        "laser_discord.10.mid.3",
+        "laser_discord.10.mid.4",
+        "laser_discord.10.mid.5",
+        "laser_discord.10.mid.6",
+        "laser_discord.10.mid.7",
+        "laser_discord.10.mid.8",
+        "laser_discord.10.mid.9",
+        "laser_discord.10.mid.10",
+        "laser_discord.10.mid.11",
+        "laser_discord.10.mid.12",
+        "laser_discord.10.mid.13",
+        "laser_discord.10.mid.14",
+        "laser_discord.10.end",
+        "laser_discord.11.start",
+        "laser_discord.11.mid.1",
+        "laser_discord.11.mid.2",
+        "laser_discord.11.mid.3",
+        "laser_discord.11.mid.4",
+        "laser_discord.11.mid.5",
+        "laser_discord.11.mid.6",
+        "laser_discord.11.mid.7",
+        "laser_discord.11.mid.8",
+        "laser_discord.11.mid.9",
+        "laser_discord.11.mid.10",
+        "laser_discord.11.mid.11",
+        "laser_discord.11.mid.12",
+        "laser_discord.11.mid.13",
+        "laser_discord.11.mid.14",
+        "laser_discord.11.end",
+        "laser_discord.12.start",
+        "laser_discord.12.mid.1",
+        "laser_discord.12.mid.2",
+        "laser_discord.12.mid.3",
+        "laser_discord.12.mid.4",
+        "laser_discord.12.mid.5",
+        "laser_discord.12.mid.6",
+        "laser_discord.12.mid.7",
+        "laser_discord.12.mid.8",
+        "laser_discord.12.mid.9",
+        "laser_discord.12.mid.10",
+        "laser_discord.12.mid.11",
+        "laser_discord.12.mid.12",
+        "laser_discord.12.mid.13",
+        "laser_discord.12.mid.14",
+        "laser_discord.12.end",
+        "laser_discord.13.start",
+        "laser_discord.13.mid.1",
+        "laser_discord.13.mid.2",
+        "laser_discord.13.mid.3",
+        "laser_discord.13.mid.4",
+        "laser_discord.13.mid.5",
+        "laser_discord.13.mid.6",
+        "laser_discord.13.mid.7",
+        "laser_discord.13.mid.8",
+        "laser_discord.13.mid.9",
+        "laser_discord.13.mid.10",
+        "laser_discord.13.mid.11",
+        "laser_discord.13.mid.12",
+        "laser_discord.13.mid.13",
+        "laser_discord.13.mid.14",
+        "laser_discord.13.end",
+        "laser_discord.14.start",
+        "laser_discord.14.mid.1",
+        "laser_discord.14.mid.2",
+        "laser_discord.14.mid.3",
+        "laser_discord.14.mid.4",
+        "laser_discord.14.mid.5",
+        "laser_discord.14.mid.6",
+        "laser_discord.14.mid.7",
+        "laser_discord.14.mid.8",
+        "laser_discord.14.mid.9",
+        "laser_discord.14.mid.10",
+        "laser_discord.14.mid.11",
+        "laser_discord.14.mid.12",
+        "laser_discord.14.mid.13",
+        "laser_discord.14.mid.14",
+        "laser_discord.14.end",
+        "laser_discord.15.start",
+        "laser_discord.15.mid.1",
+        "laser_discord.15.mid.2",
+        "laser_discord.15.mid.3",
+        "laser_discord.15.mid.4",
+        "laser_discord.15.mid.5",
+        "laser_discord.15.mid.6",
+        "laser_discord.15.mid.7",
+        "laser_discord.15.mid.8",
+        "laser_discord.15.mid.9",
+        "laser_discord.15.mid.10",
+        "laser_discord.15.mid.11",
+        "laser_discord.15.mid.12",
+        "laser_discord.15.mid.13",
+        "laser_discord.15.mid.14",
+        "laser_discord.15.end",
+        "laser_discord.16.start",
+        "laser_discord.16.mid.1",
+        "laser_discord.16.mid.2",
+        "laser_discord.16.mid.3",
+        "laser_discord.16.mid.4",
+        "laser_discord.16.mid.5",
+        "laser_discord.16.mid.6",
+        "laser_discord.16.mid.7",
+        "laser_discord.16.mid.8",
+        "laser_discord.16.mid.9",
+        "laser_discord.16.mid.10",
+        "laser_discord.16.mid.11",
+        "laser_discord.16.mid.12",
+        "laser_discord.16.mid.13",
+        "laser_discord.16.mid.14",
+        "laser_discord.16.end",
+    ]
+
+    my.tile_load_arr_sprites(
+        file="data/gfx/laser_discord.tga",
+        name="laser_discord",
+        width=32,
+        height=32,
+        arr=tiles,
+    )
+
+
+@timeme
+def init_effect_lightning_tiles():
     tiles = [
         "laser_lightning.1.start",
         "laser_lightning.1.mid.1",
@@ -15188,7 +15458,7 @@ def init_laser_lightning_tiles():
 
 
 @timeme
-def init_laser_lightning_fork_tiles():
+def init_effect_lightning_fork_tiles():
     tiles = [
         "laser_lightning_fork.1.start",
         "laser_lightning_fork.1.mid.1",
@@ -15458,7 +15728,7 @@ def init_laser_lightning_fork_tiles():
 
 
 @timeme
-def init_laser_magic_effect_tiles():
+def init_effect_magic_effect_tiles():
     tiles = [
         "laser_magic_effect.1.start",
         "laser_magic_effect.1.mid.1",
@@ -15978,13 +16248,14 @@ def init_tiles_burnt():
 init_chasm()
 init_claws_tiles()
 init_effect_descent_tiles()
+init_effect_discord_tiles()
+init_effect_energy_tiles()
+init_effect_lightning_fork_tiles()
+init_effect_lightning_tiles()
+init_effect_magic_effect_tiles()
 init_effect_negation_tiles()
 init_explosion_major_tiles()
 init_grid_bg()
-init_laser_energy_tiles()
-init_laser_lightning_fork_tiles()
-init_laser_lightning_tiles()
-init_laser_magic_effect_tiles()
 init_light()
 init_map_treasure()
 init_progress_bar_ascii()
@@ -15993,20 +16264,20 @@ init_projectiles_tiles()
 init_solid()
 init_teleport_in_tiles()
 init_teleport_out_tiles()
-init_tiles_16x16_main()
-init_tiles_16x16_floors()
-init_tiles_16x16_walls()
 init_tiles_16x16_bodyparts()
+init_tiles_16x16_floors()
+init_tiles_16x16_main()
+init_tiles_16x16_walls()
 init_tiles_24x24()
 init_tiles_32x32()
-init_tiles_32x64()
 init_tiles_32x32_basalt()
 init_tiles_32x32_deep_water()
 init_tiles_32x32_lava()
+init_tiles_32x32_ooze()
 init_tiles_32x32_sewer_water()
 init_tiles_32x32_surface_effects()
 init_tiles_32x32_water()
-init_tiles_32x32_ooze()
+init_tiles_32x64()
 init_tiles_64x64()
 init_tiles_burnt()
 init_tiles_ice()
