@@ -597,6 +597,9 @@ void tp_dump_monsters(void)
     if (tp->is_immune_to_confusion()) {
       imm_str += "Confusion<newline>";
     }
+    if (tp->is_immune_to_entrancement()) {
+      imm_str += "Confusion<newline>";
+    }
     if (tp->is_immune_to_blinding()) {
       imm_str += "Blinding<newline>";
     }
@@ -793,6 +796,9 @@ void tp_dump_weapons(void)
     }
     if (tp->is_immune_to_confusion()) {
       imm_str += "Immunity-Confusion<newline>";
+    }
+    if (tp->is_immune_to_entrancement()) {
+      imm_str += "Immunity-Entrancement<newline>";
     }
     if (tp->is_immune_to_blinding()) {
       imm_str += "Immunity-Blinding<newline>";

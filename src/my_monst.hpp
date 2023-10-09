@@ -365,7 +365,8 @@ public:
   uint8_t idle_count      = {}; // How long we have not moved
   uint8_t stuck_count     = {}; // How long we have not moved due to being stuck
   uint8_t paralysis_count = {}; // How long we have not moved due to paralysis
-  uint8_t confusion_count = {}; // How long we have not moved due to confusion
+  uint8_t confused_count  = {}; // How long we have not moved due to confusion
+  uint8_t entranced_count = {}; // How long we have not moved due to entrancement
   uint8_t blinded_count   = {}; // How long we have not moved due to blinded
 
   Dmap dmap_can_see; // What the monster can reach during AI

@@ -5,7 +5,7 @@ import tp
 def on_thrown(owner, me, x, y):
     for it in my.level_get_all(me, x, y):
         if my.thing_is_alive_monst(it) or my.thing_is_player(it):
-            if not my.thing_confusion_count_incr(it, 10):
+            if not my.thing_confused_count_incr(it, 10):
                 if my.thing_is_player(it):
                     my.thing_msg(it, "%%fg=red$The confusion dart has no effect on you.")
                 if owner and my.thing_is_player(owner):

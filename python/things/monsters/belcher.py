@@ -70,6 +70,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_green_blooded(self, True)
     my.is_heavy(self, True)
     my.is_hittable(self, True)
+    my.is_immune_to_confusion(self, True)
+    my.is_immune_to_entrancement(self, True)
     my.is_interesting(self, True)
     my.is_loggable(self, True)
     my.is_monst_class_B(self, True)

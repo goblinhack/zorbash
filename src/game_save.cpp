@@ -277,7 +277,8 @@ std::ostream &operator<<(std::ostream &out, Bits< ThingAip & > const my)
   out << bits(my.t->idle_count);
   out << bits(my.t->stuck_count);
   out << bits(my.t->paralysis_count);
-  out << bits(my.t->confusion_count);
+  out << bits(my.t->confused_count);
+  out << bits(my.t->entranced_count);
   out << bits(my.t->blinded_count);
   return out;
 }
@@ -365,13 +366,13 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   // clang-format off
   // begin sort marker2 {
   bits64 |= (my.t->is_activated                                 ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->is_discorded                                 ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_attached                                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_being_destroyed                           ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_bouncing                                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_burnt                                     ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_changing_level                            ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_dead                                      ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_discorded                                 ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_discovered                                ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_drained                                   ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_dying                                     ? 1LLU : 0LLU) << shift; shift++;

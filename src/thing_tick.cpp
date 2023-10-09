@@ -123,7 +123,15 @@ void Thing::achieve_goals_in_life(void)
   //
   // Check if confused
   //
-  confusion_tick();
+  confused_tick();
+  if (is_dead) {
+    return;
+  }
+
+  //
+  // Check if entranced
+  //
+  entranced_tick();
   if (is_dead) {
     return;
   }

@@ -64,7 +64,8 @@ bool Thing::thing_check_for_heat_dmg(void)
         }
       }
     } else {
-      if (blinded_count() || confusion_count() || paralysis_count() || stuck_count() || idle_count()) {
+      if (blinded_count() || entranced_count() || confused_count() || paralysis_count() || stuck_count()
+          || idle_count()) {
         //
         // If stuck, you're going to get burnt.
         //

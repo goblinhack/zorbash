@@ -323,10 +323,21 @@ bool Thing::state_idle(Thingp threat, int minx, int miny, int maxx, int maxy)
   //
   // If confused, wait it out. If clueless, wander around and fall down a chasm.
   //
-  if (is_intelligent() && (confusion_count() > 0)) {
+  if (is_intelligent() && (confused_count() > 0)) {
     change_state(MONST_STATE_RESTING, "nothing to do, rest");
     if (is_player()) {
       game->tick_begin("nothing to do, confused, rest");
+    }
+    return true;
+  }
+
+  //
+  // If entranced, wait it out. If clueless, wander around and fall down a chasm.
+  //
+  if (is_intelligent() && (entranced_count() > 0)) {
+    change_state(MONST_STATE_RESTING, "nothing to do, rest");
+    if (is_player()) {
+      game->tick_begin("nothing to do, entranced, rest");
     }
     return true;
   }

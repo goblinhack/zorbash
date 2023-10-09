@@ -212,14 +212,27 @@ bool wid_rightbar_ascii_create(void)
       wid_set_shape_none(w);
     }
   }
-  if (player->confusion_count()) {
+  if (player->confused_count()) {
     y_at++;
     TRACE_NO_INDENT();
-    auto  w  = wid_new_square_button(wid_rightbar, "(Paralysis)");
+    auto  w  = wid_new_square_button(wid_rightbar, "(Confused)");
     point tl = make_point(0, y_at);
     point br = make_point(width - 1, y_at);
     wid_set_pos(w, tl, br);
-    wid_set_text(w, "(Paralysis)");
+    wid_set_text(w, "(Confused)");
+    wid_set_style(w, UI_WID_STYLE_RED);
+    if (g_opt_test_dungeon) {
+      wid_set_shape_none(w);
+    }
+  }
+  if (player->entranced_count()) {
+    y_at++;
+    TRACE_NO_INDENT();
+    auto  w  = wid_new_square_button(wid_rightbar, "(Entranced)");
+    point tl = make_point(0, y_at);
+    point br = make_point(width - 1, y_at);
+    wid_set_pos(w, tl, br);
+    wid_set_text(w, "(Entranced)");
     wid_set_style(w, UI_WID_STYLE_RED);
     if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
@@ -1262,8 +1275,8 @@ bool wid_rightbar_ascii_create(void)
       }
     }
 
-    if (player->is_on_fire() || player->paralysis_count() || player->confusion_count() || player->blinded_count()
-        || player->stuck_count() || player->is_sleeping || player->is_frozen
+    if (player->is_on_fire() || player->paralysis_count() || player->confused_count() || player->entranced_count()
+        || player->blinded_count() || player->stuck_count() || player->is_sleeping || player->is_frozen
         || (player->stamina() < player->stamina_max() / 2) || (player->health() < player->health_max() / 2)) {
       {
         TRACE_AND_INDENT();
@@ -1351,7 +1364,7 @@ bool wid_rightbar_ascii_create(void)
         }
         wid_update(w);
       }
-      if (player->confusion_count()) {
+      if (player->confused_count()) {
         y_at++;
         TRACE_AND_INDENT();
         auto  w  = wid_new_square_button(wid_rightbar, "state");
@@ -1363,12 +1376,31 @@ bool wid_rightbar_ascii_create(void)
         wid_set_mode(w, WID_MODE_NORMAL);
         wid_set_color(w, WID_COLOR_TEXT_FG, RED);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, "Paralysis!");
+        wid_set_text(w, "Confused!");
         if (g_opt_test_dungeon) {
           wid_set_shape_none(w);
         }
         wid_update(w);
-      } else if (player->stuck_count()) {
+      }
+      if (player->entranced_count()) {
+        y_at++;
+        TRACE_AND_INDENT();
+        auto  w  = wid_new_square_button(wid_rightbar, "state");
+        point tl = make_point(0, y_at);
+        point br = make_point(width - 1, y_at);
+        wid_set_pos(w, tl, br);
+        wid_set_mode(w, WID_MODE_OVER);
+        wid_set_color(w, WID_COLOR_TEXT_FG, RED);
+        wid_set_mode(w, WID_MODE_NORMAL);
+        wid_set_color(w, WID_COLOR_TEXT_FG, RED);
+        wid_set_text_lhs(w, true);
+        wid_set_text(w, "Entranced!");
+        if (g_opt_test_dungeon) {
+          wid_set_shape_none(w);
+        }
+        wid_update(w);
+      }
+      if (player->stuck_count()) {
         y_at++;
         TRACE_AND_INDENT();
         auto  w  = wid_new_square_button(wid_rightbar, "state");

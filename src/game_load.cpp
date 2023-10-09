@@ -301,7 +301,8 @@ std::istream &operator>>(std::istream &in, Bits< ThingAip & > my)
   in >> bits(my.t->idle_count);
   in >> bits(my.t->stuck_count);
   in >> bits(my.t->paralysis_count);
-  in >> bits(my.t->confusion_count);
+  in >> bits(my.t->confused_count);
+  in >> bits(my.t->entranced_count);
   in >> bits(my.t->blinded_count);
   return in;
 }
@@ -420,13 +421,13 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   // clang-format off
   // begin sort marker2 {
              my.t->is_activated                                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->is_discorded                                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_attached                                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_being_destroyed                           = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_bouncing                                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_burnt                                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_changing_level                            = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_dead                                      = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->is_discorded                                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_discovered                                = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_drained                                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_dying                                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;

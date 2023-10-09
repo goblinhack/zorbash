@@ -30,7 +30,7 @@ def on_use(owner, item, target, x, y):
     my.thing_poisoned_amount_set(target, 0)
 
     my.thing_debuff_remove(target, "debuff_status_blinded")
-    my.thing_debuff_remove(target, "debuff_status_confusion")
+    my.thing_debuff_remove(target, "debuff_status_confused")
     my.thing_debuff_remove(target, "debuff_status_hungry")
     my.thing_debuff_remove(target, "debuff_status_necrotized")
     my.thing_debuff_remove(target, "debuff_status_paralysis")

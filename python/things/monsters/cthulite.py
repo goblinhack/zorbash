@@ -110,6 +110,7 @@ def tp_init(name, text_long_name):
     my.is_humanoid(self, True)
     my.is_immune_to_acid(self, True)
     my.is_immune_to_confusion(self, True)
+    my.is_immune_to_entrancement(self, True)
     my.is_immune_to_necrosis(self, True)
     my.is_immune_to_poison(self, True)
     my.is_interesting(self, True)

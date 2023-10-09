@@ -60,7 +60,7 @@ bool Thing::possible_to_attack(const Thingp victim)
   //
   if (is_weapon() || is_staff() || is_ring()) {
     //
-    // How can this happen? Confused
+    // How can this happen?
     //
     if (! top_owner()) {
       if (is_debug_type()) {
@@ -1877,9 +1877,13 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         //
         // If paralysis, it cannot avoid the hits.
         //
-      } else if (victim->confusion_count()) {
+      } else if (victim->confused_count()) {
         //
         // If confusion, it cannot avoid the hits.
+        //
+      } else if (victim->entranced_count()) {
+        //
+        // If entranced, it cannot avoid the hits.
         //
       } else if (victim->blinded_count()) {
         //

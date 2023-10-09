@@ -196,7 +196,6 @@ public:
   uint64_t has_light                                    : 1 {}; // Has it a light source?
   uint64_t has_projectile                               : 1 {}; // Current projectile being fired
   uint64_t has_seen_player_msg_shown                    : 1 {}; // Seen by player has been shown
-  uint64_t is_discorded                                 : 1 {}; // Will attack what normally it would not
   uint64_t is_activated                                 : 1 {}; // This skill is activated
   uint64_t is_attached                                  : 1 {}; // Is attached to the level
   uint64_t is_being_destroyed                           : 1 {}; // In the process of deleting the thing
@@ -204,6 +203,7 @@ public:
   uint64_t is_burnt                                     : 1 {}; // Burnt by ice and cannot move
   uint64_t is_changing_level                            : 1 {}; // Is in the process of changing level
   uint64_t is_dead                                      : 1 {}; // It's dead Jim
+  uint64_t is_discorded                                 : 1 {}; // Will attack what normally it would not
   uint64_t is_discovered                                : 1 {}; // Can you see that secret door?
   uint64_t is_drained                                   : 1 {}; // E.g. enchant or skillstone used up
   uint64_t is_dying                                     : 1 {}; // Is currently in the throes of death
@@ -1204,12 +1204,12 @@ public:
   int collision_hit_adj(void);
   int collision_hit_priority(void);
   int collision_hit_two_tiles_ahead(void);
-  int confusion_count_decr(int);
-  int confusion_count_decr(void);
-  int confusion_count_incr(int);
-  int confusion_count_incr(void);
-  int confusion_count_set(int);
-  int confusion_count(void);
+  int confused_count_decr(int);
+  int confused_count_decr(void);
+  int confused_count_incr(int);
+  int confused_count_incr(void);
+  int confused_count_set(int);
+  int confused_count(void);
   int consume_per_bite_amount(void);
   int damaged_count_decr(int);
   int damaged_count_decr(void);
@@ -1310,6 +1310,12 @@ public:
   int enchant_max_current_set(int);
   int enchant_max(void);
   int enchantstone_count(void);
+  int entranced_count_decr(int);
+  int entranced_count_decr(void);
+  int entranced_count_incr(int);
+  int entranced_count_incr(void);
+  int entranced_count_set(int);
+  int entranced_count(void);
   int environ_dislikes_acid(void);
   int environ_dislikes_cold(void);
   int environ_dislikes_fire(void);
@@ -1702,6 +1708,7 @@ public:
   int is_immune_to_cold(void);
   int is_immune_to_confusion(void);
   int is_immune_to_electricity(void);
+  int is_immune_to_entrancement(void);
   int is_immune_to_fire(void);
   int is_immune_to_lightning(void);
   int is_immune_to_magic_drain(void);
@@ -2843,8 +2850,8 @@ public:
   void collect_penalty_tick(void);
   void con(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
   void con_(const char *fmt, va_list args); // compile error without
-  void confusion_tick(void);
-  void confusion_update(void);
+  void confused_tick(void);
+  void confused_update(void);
   void corrode_tick(void);
   void cursor_hover_over_check(void);
   void dbg_(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);
@@ -2890,6 +2897,8 @@ public:
   void enchant_common(Thingp);
   void enchant_randomly(void);
   void enemies_tick(void);
+  void entranced_tick(void);
+  void entranced_update(void);
   void equip_carry_anim_id_set(ThingId equip_carry_anim_id, int equip);
   void equip_carry_anim_set(Thingp equip_carry_anim, int equip);
   void equip_remove_anim(int equip);
@@ -2906,7 +2915,7 @@ public:
   void floating_tick(void);
   void frozen_set(void);
   void frozen_unset(bool quiet = false);
-  void gas_confusion_tick(void);
+  void gas_confused_tick(void);
   void gas_explosive_tick(void);
   void gas_healing_tick(void);
   void gas_paralysis_tick(void);

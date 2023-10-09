@@ -119,6 +119,12 @@ int Thing::is_immune_to_confusion(void)
   return (tp()->is_immune_to_confusion());
 }
 
+int Thing::is_immune_to_entrancement(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_immune_to_entrancement());
+}
+
 int Thing::is_immune_to_blinding(void)
 {
   TRACE_NO_INDENT();

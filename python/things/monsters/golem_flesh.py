@@ -89,6 +89,8 @@ def tp_init(name, text_long_name):
     my.is_heavy(self, True)
     my.is_hittable(self, True)
     my.is_immune_to_cold(self, True)
+    my.is_immune_to_confusion(self, True)
+    my.is_immune_to_entrancement(self, True)
     my.is_immune_to_poison(self, True)
     my.is_immune_to_stamina_drain(self, True)
     my.is_interesting(self, True)

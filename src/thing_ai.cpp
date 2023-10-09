@@ -1268,11 +1268,14 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
                     if (it->paralysis_count()) {
                       desirable_target += 100;
                     }
-                    if (it->confusion_count()) {
+                    if (it->confused_count()) {
                       desirable_target += 100;
                     }
                     if (it->blinded_count()) {
                       desirable_target += 100;
+                    }
+                    if (it->entranced_count()) {
+                      desirable_target += 50;
                     }
                     if (it->is_sleeping) {
                       desirable_target += 20;

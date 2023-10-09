@@ -6,7 +6,7 @@
 #include "my_monst.hpp"
 #include "my_thing.hpp"
 
-void Thing::gas_confusion_tick(void)
+void Thing::gas_confused_tick(void)
 {
   TRACE_NO_INDENT();
 
@@ -41,7 +41,7 @@ void Thing::gas_confusion_tick(void)
     return;
   }
 
-  confusion_count_incr(5);
+  confused_count_incr(5);
 
   if (stamina()) {
     if (is_player()) {

@@ -864,7 +864,7 @@ void Thing::move_delta(point delta)
   //
   // Confused. Change the intended direction.
   //
-  if (confusion_count() > 0) {
+  if (confused_count() > 0) {
     auto roll = d100();
     if (roll < 25) {
       delta.x = -delta.x;
@@ -885,6 +885,68 @@ void Thing::move_delta(point delta)
     if (collision_check_only(curr_at + delta)) {
       dbg2("Cannot move when confused");
       return;
+    }
+  }
+
+  //
+  // Confused. Change the intended direction.
+  //
+  if (entranced_count() > 0) {
+    auto player = level->player;
+
+    //
+    // Entrancing yourself?
+    //
+    if (is_player()) {
+      //
+      // Treat as if confused
+      //
+      auto roll = d100();
+      if (roll < 25) {
+        delta.x = -delta.x;
+      } else if (roll < 50) {
+        delta.y = -delta.y;
+      } else if (roll < 75) {
+        delta.x = -delta.x;
+        delta.y = -delta.y;
+      } else {
+        //
+        // normal
+        //
+      }
+
+      //
+      // This avoids walking into solid rock by accident.
+      //
+      if (collision_check_only(curr_at + delta)) {
+        dbg2("Cannot move when confused");
+        return;
+      }
+    } else if (player) {
+      delta   = (player->curr_at - player->last_at);
+      delta.x = -delta.x;
+      delta.y = -delta.y;
+
+      if (delta.x > 1) {
+        delta.x = 1;
+      }
+      if (delta.x < -1) {
+        delta.x = -1;
+      }
+      if (delta.y > 1) {
+        delta.y = 1;
+      }
+      if (delta.y < -1) {
+        delta.y = -1;
+      }
+
+      //
+      // This avoids walking into solid rock by accident.
+      //
+      if (collision_check_only(curr_at + delta)) {
+        dbg2("Cannot move here when entranced");
+        return;
+      }
     }
   }
 

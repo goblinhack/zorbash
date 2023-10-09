@@ -1,7 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- TODO Staves and Wands fire blasts of magical energy but have a finite number of charges. Staves recharge over time, but wands do not.        -->
-<!-- TODO Staff of Entrancement                                                                                                                   -->
 <!-- TODO Staff of Haste                                                                                                                          -->
 <!-- TODO Staff of Healing                                                                                                                        -->
 <!-- TODO Staff of Tunneling                                                                                                                      -->
@@ -682,9 +681,9 @@ Other content
 - 17 x weapons
 - 17 x buffs
 - 14 x potions
-- 12 x staffs
+- 13 x staffs
+- 12 x debuffs
 - 11 x skills
-- 11 x debuffs
 - 8 x traps
 - 6 x shield
 - 6 x boots
