@@ -267,7 +267,7 @@ void Game::place_player(void)
       if (0) {
         auto w = level->thing_new("staff_entrancement", point(x, y));
         t->carry(w, carry_options);
-        level->thing_new("dogman", point(x + 2, y));
+        level->thing_new("dogman", point(x - 5, y - 2));
       }
       if (0) {
         level->thing_new("trap_pressure_plate_gas4", point(x - 1, y));

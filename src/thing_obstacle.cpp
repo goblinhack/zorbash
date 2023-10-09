@@ -250,8 +250,16 @@ bool Thing::collision_obstacle(Thingp it)
     }
 
     if (it->is_chasm()) {
-      if (! is_floating_currently() && ! is_flying()) {
-        IF_DEBUG2 { dbg("Collision obstacle (floating): %s", it->to_short_string().c_str()); }
+      if (confused_count() || entranced_count()) {
+        //
+        // Walk onto the lava when confused. Is this too cruel?
+        //
+      } else if (is_floating_currently() || is_flying()) {
+        //
+        // Can fly over chasms
+        //
+      } else {
+        IF_DEBUG2 { dbg("Collision obstacle (chasm): %s", it->to_short_string().c_str()); }
         return true;
       }
     }
@@ -532,7 +540,15 @@ bool Thing::is_obs_ai(Thingp it)
 
   if (is_monst() || (is_player() && game->robot_mode)) {
     if (it->is_chasm()) {
-      if (! is_floating_currently() && ! is_flying()) {
+      if (confused_count() || entranced_count()) {
+        //
+        // Walk onto the lava when confused. Is this too cruel?
+        //
+      } else if (is_floating_currently() || is_flying()) {
+        //
+        // Can fly over chasms
+        //
+      } else {
         if (debug && is_debug_type()) {
           con("check collision with %s, yes at line %d", it->to_string().c_str(), __LINE__);
         }
@@ -724,7 +740,11 @@ bool Tp::is_obs_ai(Thingp it)
 
   if (is_monst() || (is_player() && game->robot_mode)) {
     if (it->is_chasm()) {
-      if (! is_floating() && ! is_flying()) {
+      if (is_floating() || is_flying()) {
+        //
+        // Can fly over chasms
+        //
+      } else {
         return true;
       }
     }
