@@ -264,11 +264,10 @@ void Game::place_player(void)
         // level->thing_new("spectral_mob", point(x + 2, y + 1));
         level->thing_new("zob_mob", point(x + 2, y - 1));
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("staff_entrancement", point(x, y));
         t->carry(w, carry_options);
         level->thing_new("dogman", point(x + 2, y));
-        level->thing_new("lava", point(x + 3, y));
       }
       if (0) {
         level->thing_new("trap_pressure_plate_gas4", point(x - 1, y));
@@ -840,9 +839,9 @@ void Game::place_player(void)
       }
       IF_DEBUG2
       {
-        level->thing_new("staff_blinking", point(x, y + 1));
-        level->thing_new("boots_teleport", point(x, y - 1));
         if (0) {
+          level->thing_new("staff_blinking", point(x, y + 1));
+          level->thing_new("boots_teleport", point(x, y - 1));
           level->thing_new("zob_mob", point(x + 2, y + 1));
         }
         if (0) {

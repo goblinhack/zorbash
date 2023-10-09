@@ -260,8 +260,17 @@ bool Thing::collision_obstacle(Thingp it)
     // So we wont walk into fire for example
     //
     if (is_disliked_by_me(it)) {
-      IF_DEBUG2 { dbg("Collision obstacle (disliked): %s", it->to_short_string().c_str()); }
-      return true;
+      if (confused_count() || entranced_count()) {
+        //
+        // Walk onto the lava when confused. Is this too cruel?
+        //
+      } else {
+        //
+        // Avoid walking onto lava
+        //
+        IF_DEBUG2 { dbg("Collision obstacle (disliked): %s", it->to_short_string().c_str()); }
+        return true;
+      }
     }
 
     if (it->is_monst() || it->is_player()) {
