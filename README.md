@@ -1,7 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- TODO Staves and Wands fire blasts of magical energy but have a finite number of charges. Staves recharge over time, but wands do not.        -->
-<!-- TODO Staff of Haste                                                                                                                          -->
 <!-- TODO Staff of Healing                                                                                                                        -->
 <!-- TODO Staff of Tunneling                                                                                                                      -->
 <!-- TODO Scrolls and Potions disappear when used. Potions can be thrown.                                                                         -->
@@ -288,11 +287,11 @@ Bestiary
 <!-- begin monsters type marker -->
 | Monster | Class/Rarity | Dngr | Attack | # Attcks | Other attacks | Immunity |
 | :--- | --- | --- | --- | --- | --- | --- |
-| Reaper | E/common | 712 | 1d6+6 | 2 |  | Acid<br />Cold<br />Fire<br />Necrosis<br />Negation<br />Paralysis<br />Confusion<br />Blinding<br />Poison<br />Holding<br />Slowing<br />Webs<br />Draining<br /> |
+| Reaper | E/common | 712 | 1d6+6 | 2 |  | Acid<br />Cold<br />Fire<br />Necrosis<br />Negation<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Holding<br />Slowing<br />Webs<br />Draining<br /> |
 | Fire Demon | D/uncommon | 546 | 1d14+4 | 2 | Fire:1d6+6<br /> | Cold<br />Fire<br />Necrosis<br />Poison<br /> |
-| Cthulite | D/rare | 424 | 1d14+4 | 2 | Acid:2d6<br />Poison:2d12<br /> | Acid<br />Cold<br />Necrosis<br />Confusion<br />Poison<br />Draining<br /> |
+| Cthulite | D/rare | 424 | 1d14+4 | 2 | Acid:2d6<br />Poison:2d12<br /> | Acid<br />Cold<br />Necrosis<br />Confusion<br />Confusion<br />Poison<br />Draining<br /> |
 | Ettin, Two Headed Giant | D/rare | 382 | 1d10+4 | 2 |  |  |
-| Flesh Golem | C/rare | 336 | 2d8+4 | 2 |  | Cold<br />Poison<br />Draining<br /> |
+| Flesh Golem | C/rare | 336 | 2d8+4 | 2 |  | Cold<br />Confusion<br />Confusion<br />Poison<br />Draining<br /> |
 | Undead Bear | C/common | 320 | 2d8+5 | 2 | Necrotic:1<br /> | Cold<br />Necrosis<br />Poison<br />Draining<br /> |
 | Bearowl | C/common | 290 | 2d8+5 | 2 |  |  |
 | Baby Kraken | D/rare | 249 |  | 1 | Bite:3d8+10<br />Digest:1d20<br />Drown:1d20<br /> | Water<br /> |
@@ -304,7 +303,7 @@ Bestiary
 | Giant Skeleton | C/common | 184 | 1d6 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
 | Mummy | B/common | 184 | 1d10+10 | 2 | Drain:1d10<br /> | Cold<br />Fire<br />Necrosis<br />Poison<br />Draining<br /> |
 | Black Pudding | B/common | 183 | 3d6+2 | 1 | Acid:2d6<br /> | Acid<br />Cold<br />Electricity<br />Lightning<br />Necrosis<br /> |
-| Cement Man | C/common | 178 | 3d8+6 | 1 |  | Cold<br />Fire<br />Poison<br />Draining<br /> |
+| Cement Man | C/common | 178 | 3d8+6 | 1 |  | Cold<br />Fire<br />Confusion<br />Confusion<br />Poison<br />Draining<br /> |
 | Giant Spider | B/common | 139 | 1d8+3 | 1 | Poison:2d8<br /> | Webs<br /> |
 | Lesser Tentacleye | C/common | 136 | 2d6 | 1 |  | Cold<br />Necrosis<br />Poison<br />Draining<br />Water<br /> |
 | Bone Spider | C/common | 132 | 1d8+3 | 1 | Poison:2d8<br /> | Cold<br />Necrosis<br />Poison<br />Webs<br />Draining<br /> |
@@ -333,7 +332,7 @@ Bestiary
 | Gaseous Gloat | B/common | 74 | 1d20 | 1 | Digest:1d40<br /> |  |
 | Hellpup | B/rare | 73 | 1d6+2 | 1 |  | Cold<br />Fire<br />Necrosis<br />Poison<br />Draining<br /> |
 | Death Hornet | A/uncommon | 72 | 1d4+1 | 1 | Bite:1d10<br />Poison:1d10<br /> |  |
-| Dungeon Belcher | B/common | 72 | 1d20 | 1 | Digest:1d10<br /> |  |
+| Dungeon Belcher | B/common | 72 | 1d20 | 1 | Digest:1d10<br /> | Confusion<br />Confusion<br /> |
 | Firefox | B/rare | 72 | 1d6+2 | 1 |  | Fire<br />Water<br /> |
 | Teletoad | B/common | 71 | 1d3+1 | 1 | Poison:1d10<br /> | Cold<br />Water<br /> |
 | Zorblin Soldier | A/common | 70 | 1d4+2 | 1 |  |  |
@@ -377,8 +376,8 @@ Bestiary
 | Para Spider | B/uncommon | 39 | 1d3 | 1 | Poison:1d4<br /> | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br /> |
 | Rabid Bat Minion | A/common | 39 | 1 | 1 | Bite:1d3<br />Claw:1d2<br /> | Water<br /> |
 | Orb Of Energy | B/uncommon | 39 |  | 0 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br /> |
-| Spectral Blade | B/unique | 38 | 1d4 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br /> |
-| Spectral Blade | B/unique | 37 | 1d3 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br /> |
+| Spectral Blade | B/unique | 38 | 1d4 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Webs<br />Draining<br /> |
+| Spectral Blade | B/unique | 37 | 1d3 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Webs<br />Draining<br /> |
 | Fluffy Bat | A/common | 37 | 1 | 1 | Bite:1d3<br />Claw:1d2<br /> | Water<br /> |
 | Giant Dungeon Duck | A/rare | 37 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d3<br /> | Water<br /> |
 | Rat | A/common | 37 | 1d3+2 | 1 |  | Water<br /> |
@@ -398,7 +397,7 @@ Bestiary
 | Sheep | B/common | 26 | 1d3+2 | 1 |  | Water<br /> |
 | Lava Ant | A/common | 25 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d3<br />Fire:1d3+1<br /> | Fire<br /> |
 | Bloated Bloodbug | A/common | 24 | 1d2+1 | 1 | Bite:1d2<br />Drain:1d1<br /> |  |
-| Vampire Rose | A/common | 22 | 1d3 | 1 | Digest:1d5<br /> |  |
+| Vampire Rose | A/common | 22 | 1d3 | 1 | Digest:1d5<br /> | Confusion<br />Confusion<br /> |
 <!-- end monsters type marker -->
 
 Weapons
@@ -680,8 +679,8 @@ Other content
 - 22 x spells
 - 17 x weapons
 - 17 x buffs
+- 14 x staffs
 - 14 x potions
-- 13 x staffs
 - 12 x debuffs
 - 11 x skills
 - 8 x traps
