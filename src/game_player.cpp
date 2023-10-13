@@ -244,6 +244,11 @@ void Game::place_player(void)
         t->carry(w, carry_options);
       }
       if (0) {
+        auto w = level->thing_new("staff_healing", point(x, y));
+        t->carry(w, carry_options);
+        level->thing_new("dogman", point(x + 1, y));
+      }
+      if (0) {
         auto w = level->thing_new("staff_haste", point(x, y));
         t->carry(w, carry_options);
         level->thing_new("dogman", point(x + 1, y));
@@ -477,14 +482,14 @@ void Game::place_player(void)
         auto w = level->thing_new("amulet_teleport_attack", point(x, y - 2));
         t->carry(w, carry_options);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_lightning", point(x, y));
         t->carry(w, carry_options);
       }
       if (0) {
         auto w = level->thing_new("staff_fire", point(x, y));
-        // w->enchant_randomly();
-        // w->enchant_randomly();
+        w->enchant_randomly();
+        w->enchant_randomly();
         t->carry(w, carry_options);
       }
       if (0) {
