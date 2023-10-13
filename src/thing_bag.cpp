@@ -541,6 +541,10 @@ bool Thing::bag_remove(Thingp item)
     return false;
   }
 
+  if (! item->is_bag_item()) {
+    return false;
+  }
+
   if (! log_quiet) {
     dbg2("Bag: remove %s", item->to_short_string().c_str());
   }

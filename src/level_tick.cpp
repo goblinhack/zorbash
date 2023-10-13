@@ -582,7 +582,6 @@ void Level::tick_(void)
     // Make sure weapons keep up
     //
     TRACE_NO_INDENT();
-    TRACE_NO_INDENT();
     FOR_ALL_EQUIP(e)
     {
       auto o = t->equip_carry_anim(e);

@@ -886,6 +886,14 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   }
 
   //
+  // Don't show floating sword animations on the old level when the monster is waiting to join a new level
+  //
+  auto o_top = top_owner();
+  if (o_top && o_top->is_changing_level) {
+    return;
+  }
+
+  //
   // If rendering the background, no shadows
   //
   if (! g_render_monochrome) {

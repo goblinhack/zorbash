@@ -125,6 +125,8 @@ bool Thing::fall(void)
   dbg("Begin falling");
   TRACE_AND_INDENT();
 
+  wake("fell");
+
   //
   // Gives a chance to play a sound effect before falling begins which can have a delay
   // while the level is setup.

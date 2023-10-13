@@ -100,7 +100,7 @@ std::string Thing::to_short_string(void)
 
   if (unlikely(! level)) {
     return (string_sprintf(
-        "%" PRIX32 " <not in level> <no tp>%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id, is_sleeping ? "/dead" : "",
+        "%" PRIX32 " <not in level> <no tp>%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id, is_sleeping ? "/sleeping" : "",
         is_dead ? "/dead" : (is_dying ? "/dying" : ""), is_scheduled_for_death ? "/dead-sched" : "",
         is_stuck_currently() ? "/stuck" : "", is_resurrecting ? "/resurrecting" : "", is_frozen ? "/frozen" : "",
         is_burnt ? "/burnt" : "", is_visible_to_player ? "/visply" : "/offscreen",
@@ -112,7 +112,7 @@ std::string Thing::to_short_string(void)
     TRACE_NO_INDENT();
     return (string_sprintf(
         "%" PRIX32 " L%d <no tp>%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->dungeon_walk_order_level_no,
-        is_sleeping ? "/dead" : "", is_dead ? "/dead" : (is_dying ? "/dying" : ""),
+        is_sleeping ? "/sleeping" : "", is_dead ? "/dead" : (is_dying ? "/dying" : ""),
         is_scheduled_for_death ? "/dead-sched" : "", is_stuck_currently() ? "/stuck" : "",
         is_resurrecting ? "/resurrecting" : "", is_visible_to_player ? "/visply" : "/offscreen",
         is_invisible_currently() ? "/invis" : "", is_on_fire() ? "/onfire" : "", is_hidden ? "/hid" : "",
@@ -121,7 +121,7 @@ std::string Thing::to_short_string(void)
 
   return (string_sprintf(
       "%" PRIX32 " L%d %s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s %d,%d", id.id, level->dungeon_walk_order_level_no,
-      tpp->name().c_str(), is_sleeping ? "/dead" : "", is_dead ? "/dead" : (is_dying ? "/dying" : ""),
+      tpp->name().c_str(), is_sleeping ? "/sleeping" : "", is_dead ? "/dead" : (is_dying ? "/dying" : ""),
       is_scheduled_for_death ? "/dead-sched" : "", is_stuck_currently() ? "/stuck" : "",
       is_resurrecting ? "/resurrecting" : "", is_visible_to_player ? "/visply" : "/offscreen",
       is_invisible_currently() ? "/invis" : "", is_frozen ? "/frozen" : "", is_burnt ? "/burnt" : "",
