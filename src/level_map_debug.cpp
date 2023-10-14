@@ -55,6 +55,8 @@ void Level::update_map_debug(int x, int y)
         c = RED;
       } else if (is_block_of_ice(x, y)) {
         c = CYAN;
+      } else if (is_block_of_crystal(x, y)) {
+        c = GRAY50;
       } else if (is_spell_of_holding_barrier(x, y)) {
         c = LIGHTBLUE;
       } else if (is_spell_of_protection_barrier(x, y)) {

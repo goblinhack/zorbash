@@ -434,6 +434,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_attackable_by_player          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_barrel                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_basalt                        ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_block_of_crystal                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_block_of_ice                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_brazier                       ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_bridge                        ? 1LLU : 0LLU) << shift; shift++;
@@ -616,6 +617,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_attackable_by_player);
   out << bits(my.t->_is_barrel);
   out << bits(my.t->_is_basalt);
+  out << bits(my.t->_is_block_of_crystal);
   out << bits(my.t->_is_block_of_ice);
   out << bits(my.t->_is_brazier);
   out << bits(my.t->_is_bridge);
@@ -710,7 +712,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->dungeon_walk_order_level_no);
 
   out << bits(my.t->is_final_boss_level);
-  out << bits(my.t->is_crystal_level);
+  out << bits(my.t->is_boss_level);
   out << bits(my.t->is_entered);
 
   out << bits(my.t->d1000_chance_creating_mob_class_A);

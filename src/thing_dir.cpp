@@ -62,6 +62,11 @@ void Thing::move_set_dir_from_dest_or_delta(point delta)
         dbg("No direction change when stuck in ice");
         return;
       }
+
+      if (t->is_block_of_crystal()) {
+        dbg("No direction change when stuck in crystal");
+        return;
+      }
     }
     TRACE_NO_INDENT();
     FOR_ALL_THINGS_END()

@@ -261,6 +261,7 @@ public:
   uint64_t i_set_is_attackable_by_player        : 1 {};
   uint64_t i_set_is_barrel                      : 1 {};
   uint64_t i_set_is_basalt                      : 1 {};
+  uint64_t i_set_is_block_of_crystal            : 1 {};
   uint64_t i_set_is_block_of_ice                : 1 {};
   uint64_t i_set_is_brazier                     : 1 {};
   uint64_t i_set_is_bridge                      : 1 {};
@@ -1434,6 +1435,7 @@ public:
   int is_able_to_be_surprised(void);
   int is_able_to_be_teleported(void);
   int is_able_to_break_down_doors(void);
+  int is_able_to_break_out_of_crystal(void);
   int is_able_to_break_out_of_ice(void);
   int is_able_to_break_out_of_spell_of_holding(void);
   int is_able_to_break_out_of_webs(void);
@@ -1556,6 +1558,7 @@ public:
   int is_biome_swamp(void);
   int is_biome_unused(void);
   int is_bleeder(void);
+  int is_block_of_crystal(void);
   int is_block_of_ice(void);
   int is_bloodbug(void);
   int is_blood(void);
@@ -1750,6 +1753,7 @@ public:
   int is_made_of_rock(void);
   int is_magical_effect(void);
   int is_magical(void);
+  int is_magic_crystal(void);
   int is_magic_stone(void);
   int is_mantisman(void);
   int is_map_beast(void);
@@ -1962,10 +1966,7 @@ public:
   int is_unused_flag66(void);
   int is_unused_flag67(void);
   int is_unused_flag68(void);
-  int is_unused_flag69(void);
   int is_unused_flag6(void);
-  int is_unused_flag70(void);
-  int is_unused_flag71(void);
   int is_unused_flag7(void);
   int is_unused_flag8(void);
   int is_unused_flag9(void);

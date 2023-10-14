@@ -194,6 +194,8 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           c = GREEN;
         } else if (is_block_of_ice(x, y)) {
           c = CYAN;
+        } else if (is_block_of_crystal(x, y)) {
+          c = GRAY50;
         } else if (is_spell_of_holding_barrier(x, y)) {
           c = LIGHTBLUE;
         } else if (is_spell_of_protection_barrier(x, y)) {
@@ -276,7 +278,7 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
         } else if (is_descend_dungeon(x, y)) {
           c   = PURPLE;
           c.a = 255;
-        } else if (show_monst || is_block_of_ice(x, y) || is_mob(x, y)) {
+        } else if (show_monst || is_monst(x, y) || is_mob(x, y)) {
           c = RED;
         } else if (is_key(x, y) || is_food(x, y) || is_treasure_type(x, y) || is_skillstone(x, y)
                    || is_spellbook(x, y) || is_enchantstone(x, y)) {
@@ -415,6 +417,8 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           c = GREEN;
         } else if (is_block_of_ice(x, y)) {
           c = CYAN;
+        } else if (is_block_of_crystal(x, y)) {
+          c = GRAY50;
         } else {
           c = BLACK;
         }

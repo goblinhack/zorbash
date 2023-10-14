@@ -66,6 +66,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_attackable_by_player {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_barrel {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_basalt {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_block_of_crystal {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_block_of_ice {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_brazier {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_bridge {};
@@ -207,8 +208,8 @@ public:
   int dungeon_walk_order_level_no {};
 
   bool        is_final_boss_level {};
-  bool        is_crystal_level {};
-  std::string is_crystal_level_name {};
+  bool        is_boss_level {};
+  std::string is_boss_level_name {};
 
   //
   // If this level is new to the player, we reset magic on entering.
@@ -904,6 +905,8 @@ public:
   uint8_t is_barrel(const point p);
   uint8_t is_blocker(const int x, const int y);
   uint8_t is_blocker(const point p);
+  uint8_t is_block_of_crystal(const int x, const int y);
+  uint8_t is_block_of_crystal(const point p);
   uint8_t is_block_of_ice(const int x, const int y);
   uint8_t is_block_of_ice(const point p);
   uint8_t is_brazier(const int x, const int y);
@@ -1257,6 +1260,8 @@ public:
   void is_barrel_unset(const int x, const int y);
   void is_blocker_set(const int x, const int y);
   void is_blocker_unset(const int x, const int y);
+  void is_block_of_crystal_set(const int x, const int y);
+  void is_block_of_crystal_unset(const int x, const int y);
   void is_block_of_ice_set(const int x, const int y);
   void is_block_of_ice_unset(const int x, const int y);
   void is_brazier_set(const int x, const int y);

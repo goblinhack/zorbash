@@ -47,6 +47,10 @@ bool Thing::is_shielded_from_attack_by(Thingp hitter)
     return false;
   }
 
+  if (is_block_of_crystal()) {
+    return false;
+  }
+
   if (is_barrel()) {
     return false;
   }
@@ -70,6 +74,11 @@ bool Thing::is_shielded_from_attack_by(Thingp hitter)
 
   if (level->is_block_of_ice(curr_at)) {
     dbg("Attack failed, victim is shielded by ice");
+    return true;
+  }
+
+  if (level->is_block_of_crystal(curr_at)) {
+    dbg("Attack failed, victim is shielded by crystal");
     return true;
   }
 

@@ -662,6 +662,7 @@ Sound effects
 - Sword sounds by SlavicMagic [found here](https://freesound.org/people/SlavicMagic/sounds/446015/)
 - Water splash by launemax [found here](https://freesound.org/people/launemax/)
 - Wood break by Deathscyp [found here](https://freesound.org/people/Deathscyp/)
+- Crystal break by ccen18 [found here](https://freesound.org/people/ccen18/sounds/686849/)
 
 Content
 -------
@@ -674,12 +675,12 @@ Other content
 <!-- begin type marker -->
 - 117 x monsters
 - 52 x food
+- 25 x items
 - 24 x treasure
-- 24 x items
 - 22 x spells
 - 17 x weapons
 - 17 x buffs
-- 14 x staffs
+- 15 x staffs
 - 14 x potions
 - 12 x debuffs
 - 11 x skills

@@ -1000,6 +1000,15 @@ void Thing::blit_internal(int fbo, point &blit_tl, point &blit_br, const Tilep t
   }
 
   //
+  // Try to look like we are trapped in crystal
+  //
+  if (! is_block_of_crystal()) {
+    if (level->is_block_of_crystal(curr_at)) {
+      c = GRAY50;
+    }
+  }
+
+  //
   // If on fire, flicker the thing color
   //
   if (unlikely(is_on_fire())) {

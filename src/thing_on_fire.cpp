@@ -83,7 +83,7 @@ bool Thing::on_fire_set(const std::string &why)
     return false;
   }
 
-  if (level->is_block_of_ice(curr_at)) {
+  if (level->is_block_of_ice(curr_at) || level->is_block_of_crystal(curr_at)) {
     return false;
   }
 

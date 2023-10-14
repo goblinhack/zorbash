@@ -71,8 +71,9 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
           floor_string += Charmap::CHAR_SPACE;
         }
 
-        if (m.is_foliage || m.is_spiderweb || m.is_block_of_ice || m.is_grass_dry || m.is_grass_wet
-            || m.is_fungus_withered || m.is_fungus_healing || m.is_fungus_edible || m.is_fungus_poison) {
+        if (m.is_foliage || m.is_spiderweb || m.is_block_of_ice || m.is_block_of_crystal || m.is_grass_dry
+            || m.is_grass_wet || m.is_fungus_withered || m.is_fungus_healing || m.is_fungus_edible
+            || m.is_fungus_poison) {
           floor2_string += c;
         } else {
           floor2_string += Charmap::CHAR_SPACE;

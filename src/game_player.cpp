@@ -482,7 +482,7 @@ void Game::place_player(void)
         auto w = level->thing_new("amulet_teleport_attack", point(x, y - 2));
         t->carry(w, carry_options);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("staff_lightning", point(x, y));
         t->carry(w, carry_options);
       }
@@ -930,6 +930,7 @@ void Game::place_player(void)
         d->dead("x");
       }
       if (0) {
+        level->thing_new("block_of_crystal", point(x - 2, y + 0));
         level->thing_new("fire", point(x + 1, y));
         level->thing_new("door_wood", point(x + 1, y));
         level->thing_new("lava", point(x + 2, y + 1));

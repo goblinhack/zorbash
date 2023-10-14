@@ -33,9 +33,9 @@ int Thing::is_able_to_shoot_at(void)
   }
 
   //
-  // If trapped in ice, cannot shoot.
+  // If trapped in ice or crystal, cannot shoot.
   //
-  if (level->is_block_of_ice(curr_at)) {
+  if (level->is_block_of_ice(curr_at) || level->is_block_of_crystal(curr_at)) {
     return false;
   }
 

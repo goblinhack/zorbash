@@ -485,6 +485,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->i_set_is_attackable_by_player          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_barrel                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_basalt                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_block_of_crystal              = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_block_of_ice                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_brazier                       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_bridge                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -656,6 +657,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_attackable_by_player);
   in >> bits(my.t->_is_barrel);
   in >> bits(my.t->_is_basalt);
+  in >> bits(my.t->_is_block_of_crystal);
   in >> bits(my.t->_is_block_of_ice);
   in >> bits(my.t->_is_brazier);
   in >> bits(my.t->_is_bridge);
@@ -750,7 +752,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(l->dungeon_walk_order_level_no);
 
   in >> bits(l->is_final_boss_level);
-  in >> bits(l->is_crystal_level);
+  in >> bits(l->is_boss_level);
   in >> bits(l->is_entered);
 
   in >> bits(l->d1000_chance_creating_mob_class_A);

@@ -270,6 +270,7 @@ private:
   int _is_able_to_be_surprised {};
   int _is_able_to_be_teleported {};
   int _is_able_to_break_down_doors {};
+  int _is_able_to_break_out_of_crystal {};
   int _is_able_to_break_out_of_ice {};
   int _is_able_to_break_out_of_spell_of_holding {};
   int _is_able_to_break_out_of_webs {};
@@ -370,6 +371,7 @@ private:
   int _is_biome_swamp {};
   int _is_biome_unused {};
   int _is_bleeder {};
+  int _is_block_of_crystal {};
   int _is_block_of_ice {};
   int _is_bloodbug {};
   int _is_bones {};
@@ -559,6 +561,7 @@ private:
   int _is_made_of_rock {};
   int _is_magical {};
   int _is_magical_effect {};
+  int _is_magic_crystal {};
   int _is_magic_stone {};
   int _is_mantisman {};
   int _is_map_beast {};
@@ -773,10 +776,7 @@ private:
   int _is_unused_flag66 {};
   int _is_unused_flag67 {};
   int _is_unused_flag68 {};
-  int _is_unused_flag69 {};
   int _is_unused_flag7 {};
-  int _is_unused_flag70 {};
-  int _is_unused_flag71 {};
   int _is_unused_flag8 {};
   int _is_unused_flag9 {};
   int _is_usable {};
@@ -1641,6 +1641,7 @@ public:
   int is_able_to_be_surprised(void) const;
   int is_able_to_be_teleported(void) const;
   int is_able_to_break_down_doors(void) const;
+  int is_able_to_break_out_of_crystal(void) const;
   int is_able_to_break_out_of_ice(void) const;
   int is_able_to_break_out_of_spell_of_holding(void) const;
   int is_able_to_break_out_of_webs(void) const;
@@ -1741,6 +1742,7 @@ public:
   int is_biome_swamp(void) const;
   int is_biome_unused(void) const;
   int is_bleeder(void) const;
+  int is_block_of_crystal(void) const;
   int is_block_of_ice(void) const;
   int is_bloodbug(void) const;
   int is_bones(void) const;
@@ -1929,6 +1931,7 @@ public:
   int is_made_of_rock(void) const;
   int is_magical_effect(void) const;
   int is_magical(void) const;
+  int is_magic_crystal(void) const;
   int is_magic_stone(void) const;
   int is_mantisman(void) const;
   int is_map_beast(void) const;
@@ -2142,10 +2145,7 @@ public:
   int is_unused_flag66(void) const;
   int is_unused_flag67(void) const;
   int is_unused_flag68(void) const;
-  int is_unused_flag69(void) const;
   int is_unused_flag6(void) const;
-  int is_unused_flag70(void) const;
-  int is_unused_flag71(void) const;
   int is_unused_flag7(void) const;
   int is_unused_flag8(void) const;
   int is_unused_flag9(void) const;
@@ -2414,6 +2414,7 @@ public:
   void is_able_to_be_surprised_set(int v);
   void is_able_to_be_teleported_set(int v);
   void is_able_to_break_down_doors_set(int v);
+  void is_able_to_break_out_of_crystal_set(int v);
   void is_able_to_break_out_of_ice_set(int v);
   void is_able_to_break_out_of_spell_of_holding_set(int v);
   void is_able_to_break_out_of_webs_set(int v);
@@ -2515,6 +2516,7 @@ public:
   void is_biome_swamp_set(int v);
   void is_biome_unused_set(int v);
   void is_bleeder_set(int v);
+  void is_block_of_crystal_set(int v);
   void is_block_of_ice_set(int v);
   void is_bloodbug_set(int v);
   void is_bones_set(int v);
@@ -2703,6 +2705,7 @@ public:
   void is_made_of_rock_set(int v);
   void is_magical_effect_set(int v);
   void is_magical_set(int v);
+  void is_magic_crystal_set(int v);
   void is_magic_stone_set(int v);
   void is_mantisman_set(int v);
   void is_map_beast_set(int v);
@@ -2916,10 +2919,7 @@ public:
   void is_unused_flag66_set(int v);
   void is_unused_flag67_set(int v);
   void is_unused_flag68_set(int v);
-  void is_unused_flag69_set(int v);
   void is_unused_flag6_set(int v);
-  void is_unused_flag70_set(int v);
-  void is_unused_flag71_set(int v);
   void is_unused_flag7_set(int v);
   void is_unused_flag8_set(int v);
   void is_unused_flag9_set(int v);

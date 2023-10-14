@@ -11,7 +11,7 @@ bool Thing::thing_check_for_heat_dmg(void)
   TRACE_AND_INDENT();
 
   if (is_block_of_ice()) {
-    if (temperature_get() > 0) {
+    if (temperature_get() > 10) {
       dead("Melted");
       return true;
     }

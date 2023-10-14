@@ -212,7 +212,7 @@ bool Thing::is_stuck_check(void)
       dbg("Stuck, yes: caught in a spell of holding");
       stuck = true;
     }
-  } else if (level->is_block_of_ice(curr_at.x, curr_at.y)) {
+  } else if (level->is_block_of_ice(curr_at.x, curr_at.y) || level->is_block_of_crystal(curr_at.x, curr_at.y)) {
     if (is_able_to_walk_through_walls()) {
       //
       // ok
@@ -431,6 +431,8 @@ void Thing::is_stuck_update(void)
         msg("You are trapped in a magical hold!");
       } else if (level->is_block_of_ice(curr_at.x, curr_at.y)) {
         msg("You are trapped in ice!");
+      } else if (level->is_block_of_crystal(curr_at.x, curr_at.y)) {
+        msg("You are trapped in crystal!");
       } else if (level->is_barrel(curr_at.x, curr_at.y)) {
         msg("You are trapped inside a barrel!");
       } else if (is_frozen) {
@@ -445,6 +447,8 @@ void Thing::is_stuck_update(void)
         msg("%s is trapped in a magical hold!", text_The().c_str());
       } else if (level->is_block_of_ice(curr_at.x, curr_at.y)) {
         msg("%s is trapped in ice!", text_The().c_str());
+      } else if (level->is_block_of_crystal(curr_at.x, curr_at.y)) {
+        msg("%s is trapped in crystal!", text_The().c_str());
       } else if (level->is_barrel(curr_at.x, curr_at.y)) {
         msg("%s is trapped inside a barrel!", text_The().c_str());
       } else if (is_frozen) {
@@ -476,6 +480,9 @@ void Thing::is_stuck_update(void)
     }
     if (t->is_block_of_ice()) {
       t->wobble(5);
+    }
+    if (t->is_block_of_crystal()) {
+      t->wobble(2);
     }
     if (t->is_barrel()) {
       t->wobble(5);

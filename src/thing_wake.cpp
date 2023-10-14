@@ -38,6 +38,14 @@ bool Thing::wake(const std::string &reason)
   }
 
   //
+  // I think if trapped in crystal and asleep, you stay asleep. Forever...
+  //
+  if (level->is_block_of_crystal(curr_at)) {
+    dbg("Wake %s; no, stay asleep in the crystal", reason.c_str());
+    return false;
+  }
+
+  //
   // This should call awake() below now
   //
   change_state(MONST_STATE_IDLE, "wake up: " + reason);

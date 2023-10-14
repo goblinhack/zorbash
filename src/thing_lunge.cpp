@@ -59,6 +59,10 @@ void Thing::lunge(point to)
       dbg("No lunging when stuck in ice");
       return;
     }
+    if (t->is_block_of_crystal()) {
+      dbg("No lunging when stuck in crystal");
+      return;
+    }
     if (t->is_very_heavy()) {
       dbg("No lunging when stuck under something heavy");
       return;

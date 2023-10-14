@@ -69,6 +69,7 @@ my.sound_load(volume=1.0, file="data/sounds/impacts/explosion_b.wav", name="expl
 my.sound_load(volume=1.0, file="data/sounds/impacts/explosion_c.wav", name="explosion_c")
 my.sound_load(volume=1.0, file="data/sounds/impacts/explosion_d.wav", name="explosion_d")
 my.sound_load(volume=1.0, file="data/sounds/impacts/explosion_e.wav", name="explosion_e")
+my.sound_load(volume=1.0, file="data/sounds/impacts/686849__ccen18__glass-shatter.wav", name="explosion_crystal")
 my.sound_load(volume=1.0, file="data/sounds/impacts/splash1.wav", name="splash1")
 my.sound_load(volume=1.0, file="data/sounds/impacts/splash2.wav", name="splash2")
 my.sound_load(volume=1.0, file="data/sounds/impacts/splash3.wav", name="splash3")

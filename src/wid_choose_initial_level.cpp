@@ -260,8 +260,8 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
             }
             TRACE_NO_INDENT();
             if (need_crystal) {
-              if (! l->is_crystal_level) {
-                l->is_crystal_level = true;
+              if (! l->is_boss_level) {
+                l->is_boss_level = true;
                 TRACE_NO_INDENT();
                 pcg_random_allowed++;
                 (void) l->thing_new(fg_tilename, l->stairs_at);
@@ -287,7 +287,7 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
 
     TRACE_NO_INDENT();
     char tmp[ MAXSHORTSTR ];
-    if (l->is_crystal_level) {
+    if (l->is_boss_level) {
       if (g_opt_ascii) {
         snprintf(tmp, sizeof(tmp) - 1, "%d*", node->walk_order_level_no);
       } else {

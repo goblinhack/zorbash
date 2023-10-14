@@ -531,7 +531,7 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
     fg_tilename = "final_boss_icon";
   }
 
-  if (l->is_crystal_level) {
+  if (l->is_boss_level) {
     switch (l->difficulty_depth) {
       case -1 : break;
       case 0 : break;
@@ -818,7 +818,7 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
         }
 
         if (g_opt_ascii) {
-          if (l->is_crystal_level) {
+          if (l->is_boss_level) {
             Widp  b = wid_new_square_button(button_container, "wid level grid connector");
             point tl(tl_x, tl_y);
             point br(br_x, br_y);

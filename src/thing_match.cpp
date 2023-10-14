@@ -69,6 +69,7 @@ bool Tp::matches(const std::string &what)
   if (is_able_to_be_surprised() && (what == "is_able_to_be_surprised")) { return true; }
   if (is_able_to_be_teleported() && (what == "is_able_to_be_teleported")) { return true; }
   if (is_able_to_break_down_doors() && (what == "is_able_to_break_down_doors")) { return true; }
+  if (is_able_to_break_out_of_crystal() && (what == "is_able_to_break_out_of_crystal")) { return true; }
   if (is_able_to_break_out_of_ice() && (what == "is_able_to_break_out_of_ice")) { return true; }
   if (is_able_to_break_out_of_spell_of_holding() && (what == "is_able_to_break_out_of_spell_of_holding")) { return true; }
   if (is_able_to_break_out_of_webs() && (what == "is_able_to_break_out_of_webs")) { return true; }
@@ -169,6 +170,7 @@ bool Tp::matches(const std::string &what)
   if (is_biome_swamp() && (what == "is_biome_swamp")) { return true; }
   if (is_biome_unused() && (what == "is_biome_unused")) { return true; }
   if (is_bleeder() && (what == "is_bleeder")) { return true; }
+  if (is_block_of_crystal() && (what == "is_block_of_crystal")) { return true; }
   if (is_block_of_ice() && (what == "is_block_of_ice")) { return true; }
   if (is_bloodbug() && (what == "is_bloodbug")) { return true; }
   if (is_bones() && (what == "is_bones")) { return true; }
@@ -355,6 +357,7 @@ bool Tp::matches(const std::string &what)
   if (is_made_of_rock() && (what == "is_made_of_rock")) { return true; }
   if (is_magical_effect() && (what == "is_magical_effect")) { return true; }
   if (is_magical() && (what == "is_magical")) { return true; }
+  if (is_magic_crystal() && (what == "is_magic_crystal")) { return true; }
   if (is_magic_stone() && (what == "is_magic_stone")) { return true; }
   if (is_mantisman() && (what == "is_mantisman")) { return true; }
   if (is_map_beast() && (what == "is_map_beast")) { return true; }
@@ -554,10 +557,7 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag66() && (what == "is_unused_flag66")) { return true; }
   if (is_unused_flag67() && (what == "is_unused_flag67")) { return true; }
   if (is_unused_flag68() && (what == "is_unused_flag68")) { return true; }
-  if (is_unused_flag69() && (what == "is_unused_flag69")) { return true; }
   if (is_unused_flag6() && (what == "is_unused_flag6")) { return true; }
-  if (is_unused_flag70() && (what == "is_unused_flag70")) { return true; }
-  if (is_unused_flag71() && (what == "is_unused_flag71")) { return true; }
   if (is_unused_flag7() && (what == "is_unused_flag7")) { return true; }
   if (is_unused_flag8() && (what == "is_unused_flag8")) { return true; }
   if (is_unused_flag9() && (what == "is_unused_flag9")) { return true; }
@@ -674,6 +674,7 @@ bool Thing::matches(const std::string &what)
   if (is_able_to_be_surprised() && (what == "is_able_to_be_surprised")) { return true; }
   if (is_able_to_be_teleported() && (what == "is_able_to_be_teleported")) { return true; }
   if (is_able_to_break_down_doors() && (what == "is_able_to_break_down_doors")) { return true; }
+  if (is_able_to_break_out_of_crystal() && (what == "is_able_to_break_out_of_crystal")) { return true; }
   if (is_able_to_break_out_of_ice() && (what == "is_able_to_break_out_of_ice")) { return true; }
   if (is_able_to_break_out_of_spell_of_holding() && (what == "is_able_to_break_out_of_spell_of_holding")) { return true; }
   if (is_able_to_break_out_of_webs() && (what == "is_able_to_break_out_of_webs")) { return true; }
@@ -774,6 +775,7 @@ bool Thing::matches(const std::string &what)
   if (is_biome_swamp() && (what == "is_biome_swamp")) { return true; }
   if (is_biome_unused() && (what == "is_biome_unused")) { return true; }
   if (is_bleeder() && (what == "is_bleeder")) { return true; }
+  if (is_block_of_crystal() && (what == "is_block_of_crystal")) { return true; }
   if (is_block_of_ice() && (what == "is_block_of_ice")) { return true; }
   if (is_bloodbug() && (what == "is_bloodbug")) { return true; }
   if (is_bones() && (what == "is_bones")) { return true; }
@@ -961,6 +963,7 @@ bool Thing::matches(const std::string &what)
   if (is_made_of_rock() && (what == "is_made_of_rock")) { return true; }
   if (is_magical_effect() && (what == "is_magical_effect")) { return true; }
   if (is_magical() && (what == "is_magical")) { return true; }
+  if (is_magic_crystal() && (what == "is_magic_crystal")) { return true; }
   if (is_magic_stone() && (what == "is_magic_stone")) { return true; }
   if (is_mantisman() && (what == "is_mantisman")) { return true; }
   if (is_map_beast() && (what == "is_map_beast")) { return true; }
@@ -1161,10 +1164,7 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag66() && (what == "is_unused_flag66")) { return true; }
   if (is_unused_flag67() && (what == "is_unused_flag67")) { return true; }
   if (is_unused_flag68() && (what == "is_unused_flag68")) { return true; }
-  if (is_unused_flag69() && (what == "is_unused_flag69")) { return true; }
   if (is_unused_flag6() && (what == "is_unused_flag6")) { return true; }
-  if (is_unused_flag70() && (what == "is_unused_flag70")) { return true; }
-  if (is_unused_flag71() && (what == "is_unused_flag71")) { return true; }
   if (is_unused_flag7() && (what == "is_unused_flag7")) { return true; }
   if (is_unused_flag8() && (what == "is_unused_flag8")) { return true; }
   if (is_unused_flag9() && (what == "is_unused_flag9")) { return true; }
@@ -1278,6 +1278,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_able_to_be_surprised") { return &Thing::is_able_to_be_surprised; }
   if (what == "is_able_to_be_teleported") { return &Thing::is_able_to_be_teleported; }
   if (what == "is_able_to_break_down_doors") { return &Thing::is_able_to_break_down_doors; }
+  if (what == "is_able_to_break_out_of_crystal") { return &Thing::is_able_to_break_out_of_crystal; }
   if (what == "is_able_to_break_out_of_ice") { return &Thing::is_able_to_break_out_of_ice; }
   if (what == "is_able_to_break_out_of_spell_of_holding") { return &Thing::is_able_to_break_out_of_spell_of_holding; }
   if (what == "is_able_to_break_out_of_webs") { return &Thing::is_able_to_break_out_of_webs; }
@@ -1378,6 +1379,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_biome_swamp") { return &Thing::is_biome_swamp; }
   if (what == "is_biome_unused") { return &Thing::is_biome_unused; }
   if (what == "is_bleeder") { return &Thing::is_bleeder; }
+  if (what == "is_block_of_crystal") { return &Thing::is_block_of_crystal; }
   if (what == "is_block_of_ice") { return &Thing::is_block_of_ice; }
   if (what == "is_bloodbug") { return &Thing::is_bloodbug; }
   if (what == "is_bones") { return &Thing::is_bones; }
@@ -1560,6 +1562,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_made_of_rock") { return &Thing::is_made_of_rock; }
   if (what == "is_magical_effect") { return &Thing::is_magical_effect; }
   if (what == "is_magical") { return &Thing::is_magical; }
+  if (what == "is_magic_crystal") { return &Thing::is_magic_crystal; }
   if (what == "is_magic_stone") { return &Thing::is_magic_stone; }
   if (what == "is_mantisman") { return &Thing::is_mantisman; }
   if (what == "is_map_beast") { return &Thing::is_map_beast; }
@@ -1756,10 +1759,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag66") { return &Thing::is_unused_flag66; }
   if (what == "is_unused_flag67") { return &Thing::is_unused_flag67; }
   if (what == "is_unused_flag68") { return &Thing::is_unused_flag68; }
-  if (what == "is_unused_flag69") { return &Thing::is_unused_flag69; }
   if (what == "is_unused_flag6") { return &Thing::is_unused_flag6; }
-  if (what == "is_unused_flag70") { return &Thing::is_unused_flag70; }
-  if (what == "is_unused_flag71") { return &Thing::is_unused_flag71; }
   if (what == "is_unused_flag7") { return &Thing::is_unused_flag7; }
   if (what == "is_unused_flag8") { return &Thing::is_unused_flag8; }
   if (what == "is_unused_flag9") { return &Thing::is_unused_flag9; }

@@ -863,7 +863,8 @@ bool wid_leftbar_display_create(void)
     {
       if (! t->is_door() && ! t->is_ascend_sewer() && ! t->is_descend_sewer() && ! t->is_ascend_dungeon()
           && ! t->is_descend_dungeon() && ! t->is_brazier() && ! t->is_spiderweb() && ! t->is_barrel()
-          && ! t->is_portal() && ! t->is_block_of_ice() && ! t->is_spell_of_holding() && ! t->is_fungus()) {
+          && ! t->is_portal() && ! t->is_block_of_ice() && ! t->is_block_of_crystal() && ! t->is_spell_of_holding()
+          && ! t->is_fungus()) {
         continue;
       }
 

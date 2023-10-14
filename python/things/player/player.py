@@ -220,6 +220,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.is_able_to_be_surprised(self, True)
     my.is_able_to_be_teleported(self, True)
     my.is_able_to_break_down_doors(self, True)
+    my.is_able_to_break_out_of_crystal(self, True)
     my.is_able_to_break_out_of_ice(self, True)
     my.is_able_to_break_out_of_webs(self, True)
     my.is_able_to_change_levels(self, True)

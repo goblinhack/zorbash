@@ -575,6 +575,24 @@ bool Thing::collision_check_only(Thingp it, point future_pos)
     }
   }
 
+  if (it->is_block_of_crystal() && ! is_ethereal() && ! is_flying()) {
+    if (it->curr_at == curr_at) {
+      //
+      // Do not allow movement away. This happens if you are placed inside an block_of_crystal.
+      //
+      IF_DEBUG2 { dbg("Collision; inside block of crystal"); }
+      return true;
+    }
+
+    //
+    // As we want to be able to shove the block_of_crystal, we need to check for collision.
+    //
+    if (things_overlap(me, future_pos, it)) {
+      IF_DEBUG2 { dbg("Collision; overlaps block of crystal"); }
+      return true;
+    }
+  }
+
   if (it->is_brazier() && ! is_ethereal() && ! is_flying()) {
     //
     // As we want to be able to shove the brazier, we need to check for

@@ -597,7 +597,11 @@ void Level::create_biome_ice_place_remaining_rocks(Dungeonp d)
         }
 
         if (d->is_rock(x, y)) {
-          (void) thing_new("block_of_ice", point(x, y));
+          if (d1000() < 10) {
+            (void) thing_new("block_of_crystal", point(x, y));
+          } else {
+            (void) thing_new("block_of_ice", point(x, y));
+          }
           continue;
         }
       }

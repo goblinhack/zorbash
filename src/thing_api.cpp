@@ -552,20 +552,10 @@ int Thing::is_unused_flag68(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag68());
 }
-int Thing::is_unused_flag69(void)
+int Thing::is_magic_crystal(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag69());
-}
-int Thing::is_unused_flag70(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_unused_flag70());
-}
-int Thing::is_unused_flag71(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_unused_flag71());
+  return (tp()->is_magic_crystal());
 }
 int Thing::is_spell_always_succeeds(void)
 {
@@ -2501,18 +2491,6 @@ int Thing::is_shovable_and_sticky(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_shovable_and_sticky());
-}
-
-int Thing::is_block_of_ice(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_block_of_ice());
-}
-
-int Thing::is_able_to_break_out_of_ice(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_able_to_break_out_of_ice());
 }
 
 int Thing::is_brittle(void)

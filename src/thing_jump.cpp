@@ -187,7 +187,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
   //
   // If stuck in ice, cannot jump
   //
-  if (level->is_block_of_ice(curr_at)) {
+  if (level->is_block_of_ice(curr_at) || level->is_block_of_crystal(curr_at)) {
     dbg("Cannot jump, stuck in ice");
     return false;
   }

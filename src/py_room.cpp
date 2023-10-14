@@ -118,9 +118,9 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
           floor_string += c;
         } else if (m.is_red_blood || m.is_ascend_dungeon || m.is_barrel || m.is_brazier || m.is_deep_water
                    || m.is_descend_dungeon || m.is_door || m.is_foliage || m.is_spiderweb || m.is_block_of_ice
-                   || m.is_grass_dry || m.is_grass_wet || m.is_fungus_withered || m.is_fungus_healing
-                   || m.is_fungus_edible || m.is_fungus_poison || m.is_floor_deco || m.is_food || m.is_gold
-                   || m.is_key || m.is_lava || m.is_mob_class_A || m.is_mob_class_B || m.is_mob_class_C
+                   || m.is_block_of_crystal || m.is_grass_dry || m.is_grass_wet || m.is_fungus_withered
+                   || m.is_fungus_healing || m.is_fungus_edible || m.is_fungus_poison || m.is_floor_deco || m.is_food
+                   || m.is_gold || m.is_key || m.is_lava || m.is_mob_class_A || m.is_mob_class_B || m.is_mob_class_C
                    || m.is_monst_class_A || m.is_monst_class_B || m.is_monst_class_C || m.is_potion
                    || m.is_secret_door || m.is_shallow_water || m.is_trap || m.is_monst_class_D || m.is_monst_class_E
                    || m.is_magic_stone || m.is_weapon_class_A || m.is_weapon_class_B || m.is_weapon_class_C
@@ -131,8 +131,9 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
           floor_string += Charmap::CHAR_SPACE;
         }
 
-        if (m.is_foliage || m.is_spiderweb || m.is_block_of_ice || m.is_grass_dry || m.is_grass_wet
-            || m.is_fungus_withered || m.is_fungus_healing || m.is_fungus_edible || m.is_fungus_poison) {
+        if (m.is_foliage || m.is_spiderweb || m.is_block_of_ice || m.is_block_of_crystal || m.is_grass_dry
+            || m.is_grass_wet || m.is_fungus_withered || m.is_fungus_healing || m.is_fungus_edible
+            || m.is_fungus_poison) {
           floor2_string += c;
         } else {
           floor2_string += Charmap::CHAR_SPACE;

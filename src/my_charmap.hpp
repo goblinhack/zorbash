@@ -14,6 +14,8 @@ public:
   enum {
     // begin sort marker1 {
     CHAR_BARREL              = 'b',
+    CHAR_BLOCK_OF_CRYSTAL    = 'c',
+    CHAR_BLOCK_OF_ICE        = 'I',
     CHAR_BLOOD               = '_',
     CHAR_BRAZIER             = 'B',
     CHAR_BRIDGE              = '=',
@@ -40,7 +42,6 @@ public:
     CHAR_GOLD                = 'o',
     CHAR_GRASS_DRY           = '\'',
     CHAR_GRASS_WET           = '"',
-    CHAR_ICE                 = 'I',
     CHAR_KEY                 = 'k',
     CHAR_LAVA                = 'L',
     CHAR_MAGIC_STONE         = '*',
@@ -78,6 +79,7 @@ public:
   // begin sort marker2 {
   bool is_ascend_dungeon {false};
   bool is_barrel {false};
+  bool is_block_of_crystal {false};
   bool is_block_of_ice {false};
   bool is_brazier {false};
   bool is_bridge {false};

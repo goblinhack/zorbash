@@ -39,6 +39,10 @@ bool Thing::bounce(float bounce_height, float bounce_fade, ts_t ms, int bounce_c
       dbg("No bouncing when stuck in ice");
       return false;
     }
+    if (t->is_block_of_crystal()) {
+      dbg("No bouncing when stuck in crystal");
+      return false;
+    }
     if (t->is_very_heavy()) {
       dbg("No bouncing when stuck under something heavy");
       return false;

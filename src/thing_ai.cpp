@@ -1919,6 +1919,33 @@ bool Thing::ai_choose_immediately_adjacent_goal(int dx, int dy)
         return true;
       }
     }
+
+    if (is_able_to_break_out_of_crystal()) {
+      if (it->is_block_of_crystal() && (it->curr_at == curr_at)) {
+        //
+        // Try hitting the crystal
+        //
+        left   = dx < 0;
+        right  = dx > 0;
+        up     = dy < 0;
+        down   = dy > 0;
+        attack = true;
+
+        attack_options.attack_allowed = true;
+        if (up || down || left || right) {
+          attack_options.attack_at     = at;
+          attack_options.attack_at_set = true;
+        }
+
+        AI_LOG("Trying to break out of crystal", it);
+        if (is_player()) {
+          game->player_tick(left, right, up, down, attack, wait, jump);
+        } else if (is_moveable()) {
+          move(curr_at, up, down, left, right, attack, wait, &attack_options);
+        }
+        return true;
+      }
+    }
   }
   TRACE_NO_INDENT();
   FOR_ALL_THINGS_END();

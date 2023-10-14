@@ -364,6 +364,7 @@ int Tp::is_able_to_be_resurrected(void) const { return _is_able_to_be_resurrecte
 int Tp::is_able_to_be_surprised(void) const { return _is_able_to_be_surprised; }
 int Tp::is_able_to_be_teleported(void) const { return _is_able_to_be_teleported; }
 int Tp::is_able_to_break_down_doors(void) const { return _is_able_to_break_down_doors; }
+int Tp::is_able_to_break_out_of_crystal(void) const { return _is_able_to_break_out_of_crystal; }
 int Tp::is_able_to_break_out_of_ice(void) const { return _is_able_to_break_out_of_ice; }
 int Tp::is_able_to_break_out_of_spell_of_holding(void) const { return _is_able_to_break_out_of_spell_of_holding; }
 int Tp::is_able_to_break_out_of_webs(void) const { return _is_able_to_break_out_of_webs; }
@@ -464,6 +465,7 @@ int Tp::is_biome_sewer(void) const { return _is_biome_sewer; }
 int Tp::is_biome_swamp(void) const { return _is_biome_swamp; }
 int Tp::is_biome_unused(void) const { return _is_biome_unused; }
 int Tp::is_bleeder(void) const { return _is_bleeder; }
+int Tp::is_block_of_crystal(void) const { return _is_block_of_crystal; }
 int Tp::is_block_of_ice(void) const { return _is_block_of_ice; }
 int Tp::is_bloodbug(void) const { return _is_bloodbug; }
 int Tp::is_bones(void) const { return _is_bones; }
@@ -652,6 +654,7 @@ int Tp::is_mace(void) const { return _is_mace; }
 int Tp::is_made_of_rock(void) const { return _is_made_of_rock; }
 int Tp::is_magical_effect(void) const { return _is_magical_effect; }
 int Tp::is_magical(void) const { return _is_magical; }
+int Tp::is_magic_crystal(void) const { return _is_magic_crystal; }
 int Tp::is_magic_stone(void) const { return _is_magic_stone; }
 int Tp::is_mantisman(void) const { return _is_mantisman; }
 int Tp::is_map_beast(void) const { return _is_map_beast; }
@@ -864,10 +867,7 @@ int Tp::is_unused_flag65(void) const { return _is_unused_flag65; }
 int Tp::is_unused_flag66(void) const { return _is_unused_flag66; }
 int Tp::is_unused_flag67(void) const { return _is_unused_flag67; }
 int Tp::is_unused_flag68(void) const { return _is_unused_flag68; }
-int Tp::is_unused_flag69(void) const { return _is_unused_flag69; }
 int Tp::is_unused_flag6(void) const { return _is_unused_flag6; }
-int Tp::is_unused_flag70(void) const { return _is_unused_flag70; }
-int Tp::is_unused_flag71(void) const { return _is_unused_flag71; }
 int Tp::is_unused_flag7(void) const { return _is_unused_flag7; }
 int Tp::is_unused_flag8(void) const { return _is_unused_flag8; }
 int Tp::is_unused_flag9(void) const { return _is_unused_flag9; }
@@ -1136,6 +1136,7 @@ void Tp::is_able_to_be_resurrected_set(int v) { _is_able_to_be_resurrected = v; 
 void Tp::is_able_to_be_surprised_set(int v) { _is_able_to_be_surprised = v; }
 void Tp::is_able_to_be_teleported_set(int v) { _is_able_to_be_teleported = v; }
 void Tp::is_able_to_break_down_doors_set(int v) { _is_able_to_break_down_doors = v; }
+void Tp::is_able_to_break_out_of_crystal_set(int v) { _is_able_to_break_out_of_crystal = v; }
 void Tp::is_able_to_break_out_of_ice_set(int v) { _is_able_to_break_out_of_ice = v; }
 void Tp::is_able_to_break_out_of_spell_of_holding_set(int v) { _is_able_to_break_out_of_spell_of_holding = v; }
 void Tp::is_able_to_break_out_of_webs_set(int v) { _is_able_to_break_out_of_webs = v; }
@@ -1237,6 +1238,7 @@ void Tp::is_biome_sewer_set(int v) { _is_biome_sewer = v; }
 void Tp::is_biome_swamp_set(int v) { _is_biome_swamp = v; }
 void Tp::is_biome_unused_set(int v) { _is_biome_unused = v; }
 void Tp::is_bleeder_set(int v) { _is_bleeder = v; }
+void Tp::is_block_of_crystal_set(int v) { _is_block_of_crystal = v; }
 void Tp::is_block_of_ice_set(int v) { _is_block_of_ice = v; }
 void Tp::is_bloodbug_set(int v) { _is_bloodbug = v; }
 void Tp::is_bones_set(int v) { _is_bones = v; }
@@ -1425,6 +1427,7 @@ void Tp::is_mace_set(int v) { _is_mace = v; }
 void Tp::is_made_of_rock_set(int v) { _is_made_of_rock = v; }
 void Tp::is_magical_effect_set(int v) { _is_magical_effect = v; }
 void Tp::is_magical_set(int v) { _is_magical = v; }
+void Tp::is_magic_crystal_set(int v) { _is_magic_crystal = v; }
 void Tp::is_magic_stone_set(int v) { _is_magic_stone = v; }
 void Tp::is_mantisman_set(int v) { _is_mantisman = v; }
 void Tp::is_map_beast_set(int v) { _is_map_beast = v; }
@@ -1637,10 +1640,7 @@ void Tp::is_unused_flag65_set(int v) { _is_unused_flag65 = v; }
 void Tp::is_unused_flag66_set(int v) { _is_unused_flag66 = v; }
 void Tp::is_unused_flag67_set(int v) { _is_unused_flag67 = v; }
 void Tp::is_unused_flag68_set(int v) { _is_unused_flag68 = v; }
-void Tp::is_unused_flag69_set(int v) { _is_unused_flag69 = v; }
 void Tp::is_unused_flag6_set(int v) { _is_unused_flag6 = v; }
-void Tp::is_unused_flag70_set(int v) { _is_unused_flag70 = v; }
-void Tp::is_unused_flag71_set(int v) { _is_unused_flag71 = v; }
 void Tp::is_unused_flag7_set(int v) { _is_unused_flag7 = v; }
 void Tp::is_unused_flag8_set(int v) { _is_unused_flag8 = v; }
 void Tp::is_unused_flag9_set(int v) { _is_unused_flag9 = v; }

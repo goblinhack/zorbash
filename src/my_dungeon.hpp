@@ -88,6 +88,7 @@ public:
   bool is_ascend_dungeon(const int x, const int y);
   bool is_ascend_dungeon_no_check(const int x, const int y);
   bool is_barrel(const int x, const int y);
+  bool is_block_of_crystal(const int x, const int y);
   bool is_block_of_ice(const int x, const int y);
   bool is_brazier(const int x, const int y);
   bool is_bridge(const int x, const int y);
