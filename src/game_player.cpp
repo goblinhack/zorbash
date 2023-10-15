@@ -89,7 +89,7 @@ void Game::place_player(void)
         t->carry(w, carry_options);
         level->thing_new("tentacleye", point(x + 1, y));
       }
-      if (1) {
+      if (0) {
         level->thing_new("skeleton", point(x, y + 3));
         auto w = level->thing_new("sword_holy", point(x, y));
         t->carry(w, carry_options);
@@ -290,6 +290,10 @@ void Game::place_player(void)
         level->thing_new("slime_parent", point(x, y + 1));
         level->thing_new("slime_baby", point(x + 1, y + 1));
         auto w = level->thing_new("staff_conjuration", point(x, y));
+        t->carry(w, carry_options);
+      }
+      if (1) {
+        auto w = level->thing_new("staff_tunneling", point(x, y));
         t->carry(w, carry_options);
       }
       if (0) {
