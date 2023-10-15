@@ -15,6 +15,14 @@ bool Level::is_obs_spawn(int x, int y, Thingp it)
       return true;
     }
   }
+
+  //
+  // Need to allow staff of tunneling explosion to occur over walls
+  //
+  if (it->is_explosion()) {
+    return false;
+  }
+
   return is_obs_spawn(x, y);
 }
 
@@ -25,6 +33,14 @@ bool Level::is_obs_spawn(point p, Thingp it)
       return true;
     }
   }
+
+  //
+  // Need to allow staff of tunneling explosion to occur over walls
+  //
+  if (it->is_explosion()) {
+    return false;
+  }
+
   return is_obs_spawn(p);
 }
 
@@ -35,6 +51,14 @@ bool Level::is_obs_spawn(int x, int y, Tpp it)
       return true;
     }
   }
+
+  //
+  // Need to allow staff of tunneling explosion to occur over walls
+  //
+  if (it->is_explosion()) {
+    return false;
+  }
+
   return is_obs_spawn(x, y);
 }
 
@@ -45,6 +69,14 @@ bool Level::is_obs_spawn(point p, Tpp it)
       return true;
     }
   }
+
+  //
+  // Need to allow staff of tunneling explosion to occur over walls
+  //
+  if (it->is_explosion()) {
+    return false;
+  }
+
   return is_obs_spawn(p);
 }
 

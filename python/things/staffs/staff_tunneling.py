@@ -25,8 +25,6 @@ def on_targeted_radially(me, x, y):
     radius += 1
     # my.con("targeted radially {} {:X}".format(my.thing_name_get(me), me))
     my.spawn_things_around_me(me, "explosion_destroy_wall", radius)
-    owner = my.thing_top_owner_id_get(me)
-    my.thing_popup(owner, "You shall not pass!")
 
 
 def on_idle(me, x, y):

@@ -372,6 +372,7 @@ std::initializer_list< std::string > tps = {
     "exit1",
     "explosion_cold",
     "explosion_destroy_floor",
+    "explosion_destroy_wall",
     "explosion_fire",
     "explosion_major",
     "fire",
