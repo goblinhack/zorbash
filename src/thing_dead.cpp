@@ -110,12 +110,13 @@ bool Thing::if_matches_then_dead(const std::string &what, const point p)
     FOR_ALL_NON_INTERNAL_THINGS(level, t, p.x, p.y)
     {
       if (t->is_critical_to_level()) {
-        return true;
+        return false;
       }
     }
-    TRACE_NO_INDENT();
     FOR_ALL_THINGS_END()
   }
+
+  bool got_one = false;
 
   TRACE_NO_INDENT();
   FOR_ALL_NON_INTERNAL_THINGS(level, t, p.x, p.y)
@@ -123,10 +124,10 @@ bool Thing::if_matches_then_dead(const std::string &what, const point p)
     if (t->matches(what)) {
       t->dead(this, "defeated ");
       t->location_check_me();
+      got_one = true;
     }
   }
-  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
-  return true;
+  return got_one;
 }
