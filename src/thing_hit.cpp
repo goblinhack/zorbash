@@ -2444,6 +2444,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_COLD ]) {
         if (level->is_spell_of_holding_barrier(curr_at.x, curr_at.y)) {
           reason = "by magical holding";
+        } else if (level->is_spell_of_sanctuary_barrier(curr_at.x, curr_at.y)) {
+          reason = "by sanctuary breaking";
         } else if (level->is_block_of_ice(curr_at.x, curr_at.y)) {
           reason = "by refrigeration";
         } else {

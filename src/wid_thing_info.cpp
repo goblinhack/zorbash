@@ -845,6 +845,10 @@ void Game::wid_thing_info_add_immunity(WidPopup *w, Thingp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Holding");
     w->log(tmp);
   }
+  if (t->is_immune_to_spell_of_sanctuary()) {
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Sanctuary");
+    w->log(tmp);
+  }
   if (t->is_immune_to_spell_of_beckoning()) {
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Beckoning");
     w->log(tmp);

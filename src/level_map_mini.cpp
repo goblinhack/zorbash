@@ -198,6 +198,8 @@ void Level::update_map_mini(bool showing_two_levels, bool show_faded)
           c = GRAY50;
         } else if (is_spell_of_holding_barrier(x, y)) {
           c = LIGHTBLUE;
+        } else if (is_spell_of_sanctuary_barrier(x, y)) {
+          c = RED;
         } else if (is_spell_of_protection_barrier(x, y)) {
           c = YELLOW;
         } else {

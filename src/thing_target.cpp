@@ -665,7 +665,8 @@ bool Thing::victim_attack_best_at(int equip, ThingAttackOptionsp attack_options)
   //
   std::vector< point > local_only = {point(0, 0)};
   if (level->is_block_of_ice(curr_at) || level->is_block_of_crystal(curr_at)
-      || level->is_spell_of_holding_barrier(curr_at) || level->is_spiderweb(curr_at)) {
+      || level->is_spell_of_holding_barrier(curr_at) || level->is_spell_of_sanctuary_barrier(curr_at)
+      || level->is_spiderweb(curr_at)) {
     all_deltas = local_only;
     //
     // This prevents us trying to use the attack direction of the weapon when trapped.

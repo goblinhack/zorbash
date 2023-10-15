@@ -1893,6 +1893,33 @@ bool Thing::ai_choose_immediately_adjacent_goal(int dx, int dy)
       }
     }
 
+    if (is_able_to_break_out_of_spell_of_sanctuary()) {
+      if (it->is_spell_of_sanctuary_barrier() && (it->curr_at == curr_at)) {
+        //
+        // Try hitting the barrier
+        //
+        left   = dx < 0;
+        right  = dx > 0;
+        up     = dy < 0;
+        down   = dy > 0;
+        attack = true;
+
+        attack_options.attack_allowed = true;
+        if (up || down || left || right) {
+          attack_options.attack_at     = at;
+          attack_options.attack_at_set = true;
+        }
+
+        AI_LOG("Trying to break out of spell barrier", it);
+        if (is_player()) {
+          game->player_tick(left, right, up, down, attack, wait, jump);
+        } else if (is_moveable()) {
+          move(curr_at, up, down, left, right, attack, wait, &attack_options);
+        }
+        return true;
+      }
+    }
+
     if (is_able_to_break_out_of_ice()) {
       if (it->is_block_of_ice() && (it->curr_at == curr_at)) {
         //

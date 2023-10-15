@@ -478,6 +478,9 @@ void Thing::is_stuck_update(void)
     if (t->is_spell_of_holding_barrier()) {
       t->wobble(5);
     }
+    if (t->is_spell_of_sanctuary_barrier()) {
+      t->wobble(5);
+    }
     if (t->is_block_of_ice()) {
       t->wobble(5);
     }

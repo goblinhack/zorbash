@@ -125,6 +125,13 @@ void Thing::location_check(Thingp filter_to)
     }
   }
 
+  if (! filter_to || filter_to->is_spell_of_sanctuary_barrier()) {
+    spell_of_sanctuary_tick();
+    if (is_dead) {
+      return;
+    }
+  }
+
   if (! filter_to || filter_to->is_secret_door()) {
     secret_door_tick();
     if (is_dead) {

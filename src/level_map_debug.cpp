@@ -59,6 +59,8 @@ void Level::update_map_debug(int x, int y)
         c = GRAY50;
       } else if (is_spell_of_holding_barrier(x, y)) {
         c = LIGHTBLUE;
+      } else if (is_spell_of_sanctuary_barrier(x, y)) {
+        c = LIGHTBLUE;
       } else if (is_spell_of_protection_barrier(x, y)) {
         c = YELLOW;
       } else if (is_key(x, y) || is_food(x, y) || is_treasure_type(x, y) || is_skillstone(x, y) || is_spellbook(x, y)

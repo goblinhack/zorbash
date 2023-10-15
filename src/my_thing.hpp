@@ -327,6 +327,7 @@ public:
   uint64_t i_set_is_spellbook                   : 1 {};
   uint64_t i_set_is_spell_of_holding_barrier    : 1 {};
   uint64_t i_set_is_spell_of_protection_barrier : 1 {};
+  uint64_t i_set_is_spell_of_sanctuary_barrier  : 1 {};
   uint64_t i_set_is_spiderweb                   : 1 {};
   uint64_t i_set_is_staff                       : 1 {};
   uint64_t i_set_is_steam                       : 1 {};
@@ -1440,6 +1441,7 @@ public:
   int is_able_to_break_out_of_crystal(void);
   int is_able_to_break_out_of_ice(void);
   int is_able_to_break_out_of_spell_of_holding(void);
+  int is_able_to_break_out_of_spell_of_sanctuary(void);
   int is_able_to_break_out_of_webs(void);
   int is_able_to_change_levels(void);
   int is_able_to_collect_keys(void);
@@ -1724,6 +1726,7 @@ public:
   int is_immune_to_spell_of_beckoning(void);
   int is_immune_to_spell_of_holding(void);
   int is_immune_to_spell_of_repulsion(void);
+  int is_immune_to_spell_of_sanctuary(void);
   int is_immune_to_spell_of_slowing(void);
   int is_immune_to_spiderwebs(void);
   int is_immune_to_stamina_drain(void);
@@ -1867,6 +1870,8 @@ public:
   int is_spell_of_protection_barrier(void);
   int is_spell_of_protection(void);
   int is_spell_of_repulsion(void);
+  int is_spell_of_sanctuary_barrier(void);
+  int is_spell_of_sanctuary(void);
   int is_spell_of_slowing(void);
   int is_spell(void);
   int is_spider(void);
@@ -3077,6 +3082,7 @@ public:
   void spell_activate(Thingp what);
   void spell_deactivate(Thingp what);
   void spell_of_holding_tick(void);
+  void spell_of_sanctuary_tick(void);
   void spell_remove_all(void);
   void stamina_boost(int v);
   void stats_tick(void);

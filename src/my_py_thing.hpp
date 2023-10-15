@@ -184,6 +184,7 @@ PyObject *thing_is_able_to_break_down_doors(PyObject *obj, PyObject *args, PyObj
 PyObject *thing_is_able_to_break_out_of_crystal(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_break_out_of_ice(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_break_out_of_spell_of_holding(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_break_out_of_spell_of_sanctuary(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_break_out_of_webs(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_change_levels(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_collect_keys(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -453,6 +454,7 @@ PyObject *thing_is_immune_to_poison(PyObject *obj, PyObject *args, PyObject *key
 PyObject *thing_is_immune_to_spell_of_beckoning(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_spell_of_holding(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_spell_of_repulsion(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_immune_to_spell_of_sanctuary(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_spell_of_slowing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_spiderwebs(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_stamina_drain(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -595,6 +597,8 @@ PyObject *thing_is_spell_of_holding(PyObject *obj, PyObject *args, PyObject *key
 PyObject *thing_is_spell_of_protection_barrier(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spell_of_protection(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spell_of_repulsion(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_spell_of_sanctuary_barrier(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_spell_of_sanctuary(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spell_of_slowing(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spell(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spider(PyObject *obj, PyObject *args, PyObject *keywds);

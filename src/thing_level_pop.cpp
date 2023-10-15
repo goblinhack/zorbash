@@ -77,6 +77,10 @@ void Thing::level_pop(void)
       i_set_is_spell_of_holding_barrier = false;
       level->is_spell_of_holding_barrier_unset(x, y);
     }
+    if (i_set_is_spell_of_sanctuary_barrier) {
+      i_set_is_spell_of_sanctuary_barrier = false;
+      level->is_spell_of_sanctuary_barrier_unset(x, y);
+    }
     if (i_set_is_spell_of_protection_barrier) {
       i_set_is_spell_of_protection_barrier = false;
       level->is_spell_of_protection_barrier_unset(x, y);

@@ -661,10 +661,10 @@ Other content
 - 52 x food
 - 25 x items
 - 24 x treasure
-- 22 x spells
+- 24 x spells
+- 19 x staffs
 - 17 x weapons
 - 17 x buffs
-- 16 x staffs
 - 14 x potions
 - 12 x debuffs
 - 11 x skills

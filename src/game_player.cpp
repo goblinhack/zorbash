@@ -350,6 +350,14 @@ void Game::place_player(void)
         t->spell_add(w);
       }
       if (0) {
+        level->thing_new("barrel", point(x + 1, y));
+        level->thing_new("dogman", point(x + 2, y));
+        // level->thing_new("spell_of_protection_barrier", point(x + 1, y + 1));
+        // level->thing_new("spell_of_protection_barrier", point(x, y));
+        auto w = level->thing_new("spell_of_sanctuary", point(x, y));
+        t->spell_add(w);
+      }
+      if (0) {
         auto w = level->thing_new("spell_of_hasted", point(x, y));
         t->spell_add(w);
       }

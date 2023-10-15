@@ -274,6 +274,7 @@ private:
   int _is_able_to_break_out_of_crystal {};
   int _is_able_to_break_out_of_ice {};
   int _is_able_to_break_out_of_spell_of_holding {};
+  int _is_able_to_break_out_of_spell_of_sanctuary {};
   int _is_able_to_break_out_of_webs {};
   int _is_able_to_change_levels {};
   int _is_able_to_collect_keys {};
@@ -529,6 +530,7 @@ private:
   int _is_immune_to_spell_of_beckoning {};
   int _is_immune_to_spell_of_holding {};
   int _is_immune_to_spell_of_repulsion {};
+  int _is_immune_to_spell_of_sanctuary {};
   int _is_immune_to_spell_of_slowing {};
   int _is_immune_to_spiderwebs {};
   int _is_immune_to_stamina_drain {};
@@ -674,6 +676,8 @@ private:
   int _is_spell_of_protection {};
   int _is_spell_of_protection_barrier {};
   int _is_spell_of_repulsion {};
+  int _is_spell_of_sanctuary {};
+  int _is_spell_of_sanctuary_barrier {};
   int _is_spell_of_slowing {};
   int _is_spider {};
   int _is_spiderweb {};
@@ -1645,6 +1649,7 @@ public:
   int is_able_to_break_out_of_crystal(void) const;
   int is_able_to_break_out_of_ice(void) const;
   int is_able_to_break_out_of_spell_of_holding(void) const;
+  int is_able_to_break_out_of_spell_of_sanctuary(void) const;
   int is_able_to_break_out_of_webs(void) const;
   int is_able_to_change_levels(void) const;
   int is_able_to_collect_keys(void) const;
@@ -1900,6 +1905,7 @@ public:
   int is_immune_to_spell_of_beckoning(void) const;
   int is_immune_to_spell_of_holding(void) const;
   int is_immune_to_spell_of_repulsion(void) const;
+  int is_immune_to_spell_of_sanctuary(void) const;
   int is_immune_to_spell_of_slowing(void) const;
   int is_immune_to_spiderwebs(void) const;
   int is_immune_to_stamina_drain(void) const;
@@ -2043,6 +2049,8 @@ public:
   int is_spell_of_protection_barrier(void) const;
   int is_spell_of_protection(void) const;
   int is_spell_of_repulsion(void) const;
+  int is_spell_of_sanctuary_barrier(void) const;
+  int is_spell_of_sanctuary(void) const;
   int is_spell_of_slowing(void) const;
   int is_spell(void) const;
   int is_spider(void) const;
@@ -2418,6 +2426,7 @@ public:
   void is_able_to_break_out_of_crystal_set(int v);
   void is_able_to_break_out_of_ice_set(int v);
   void is_able_to_break_out_of_spell_of_holding_set(int v);
+  void is_able_to_break_out_of_spell_of_sanctuary_set(int v);
   void is_able_to_break_out_of_webs_set(int v);
   void is_able_to_change_levels_set(int v);
   void is_able_to_collect_keys_set(int v);
@@ -2674,6 +2683,7 @@ public:
   void is_immune_to_spell_of_beckoning_set(int v);
   void is_immune_to_spell_of_holding_set(int v);
   void is_immune_to_spell_of_repulsion_set(int v);
+  void is_immune_to_spell_of_sanctuary_set(int v);
   void is_immune_to_spell_of_slowing_set(int v);
   void is_immune_to_spiderwebs_set(int v);
   void is_immune_to_stamina_drain_set(int v);
@@ -2817,6 +2827,8 @@ public:
   void is_spell_of_protection_barrier_set(int v);
   void is_spell_of_protection_set(int v);
   void is_spell_of_repulsion_set(int v);
+  void is_spell_of_sanctuary_barrier_set(int v);
+  void is_spell_of_sanctuary_set(int v);
   void is_spell_of_slowing_set(int v);
   void is_spell_set(int v);
   void is_spider_set(int v);

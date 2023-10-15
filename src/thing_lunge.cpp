@@ -51,10 +51,6 @@ void Thing::lunge(point to)
     if (t == this) {
       continue;
     }
-    if (t->is_spell_of_holding_barrier() && ! is_immune_to_spell_of_holding()) {
-      dbg("No lunging when stuck in a magicial hold");
-      return;
-    }
     if (t->is_block_of_ice()) {
       dbg("No lunging when stuck in ice");
       return;

@@ -368,6 +368,7 @@ int Tp::is_able_to_break_down_doors(void) const { return _is_able_to_break_down_
 int Tp::is_able_to_break_out_of_crystal(void) const { return _is_able_to_break_out_of_crystal; }
 int Tp::is_able_to_break_out_of_ice(void) const { return _is_able_to_break_out_of_ice; }
 int Tp::is_able_to_break_out_of_spell_of_holding(void) const { return _is_able_to_break_out_of_spell_of_holding; }
+int Tp::is_able_to_break_out_of_spell_of_sanctuary(void) const { return _is_able_to_break_out_of_spell_of_sanctuary; }
 int Tp::is_able_to_break_out_of_webs(void) const { return _is_able_to_break_out_of_webs; }
 int Tp::is_able_to_change_levels(void) const { return _is_able_to_change_levels; }
 int Tp::is_able_to_collect_keys(void) const { return _is_able_to_collect_keys; }
@@ -623,6 +624,7 @@ int Tp::is_immune_to_poison(void) const { return _is_immune_to_poison; }
 int Tp::is_immune_to_spell_of_beckoning(void) const { return _is_immune_to_spell_of_beckoning; }
 int Tp::is_immune_to_spell_of_holding(void) const { return _is_immune_to_spell_of_holding; }
 int Tp::is_immune_to_spell_of_repulsion(void) const { return _is_immune_to_spell_of_repulsion; }
+int Tp::is_immune_to_spell_of_sanctuary(void) const { return _is_immune_to_spell_of_sanctuary; }
 int Tp::is_immune_to_spell_of_slowing(void) const { return _is_immune_to_spell_of_slowing; }
 int Tp::is_immune_to_spiderwebs(void) const { return _is_immune_to_spiderwebs; }
 int Tp::is_immune_to_stamina_drain(void) const { return _is_immune_to_stamina_drain; }
@@ -766,6 +768,8 @@ int Tp::is_spell_of_holding(void) const { return _is_spell_of_holding; }
 int Tp::is_spell_of_protection_barrier(void) const { return _is_spell_of_protection_barrier; }
 int Tp::is_spell_of_protection(void) const { return _is_spell_of_protection; }
 int Tp::is_spell_of_repulsion(void) const { return _is_spell_of_repulsion; }
+int Tp::is_spell_of_sanctuary_barrier(void) const { return _is_spell_of_sanctuary_barrier; }
+int Tp::is_spell_of_sanctuary(void) const { return _is_spell_of_sanctuary; }
 int Tp::is_spell_of_slowing(void) const { return _is_spell_of_slowing; }
 int Tp::is_spell(void) const { return _is_spell; }
 int Tp::is_spider(void) const { return _is_spider; }
@@ -1140,6 +1144,7 @@ void Tp::is_able_to_break_down_doors_set(int v) { _is_able_to_break_down_doors =
 void Tp::is_able_to_break_out_of_crystal_set(int v) { _is_able_to_break_out_of_crystal = v; }
 void Tp::is_able_to_break_out_of_ice_set(int v) { _is_able_to_break_out_of_ice = v; }
 void Tp::is_able_to_break_out_of_spell_of_holding_set(int v) { _is_able_to_break_out_of_spell_of_holding = v; }
+void Tp::is_able_to_break_out_of_spell_of_sanctuary_set(int v) { _is_able_to_break_out_of_spell_of_sanctuary = v; }
 void Tp::is_able_to_break_out_of_webs_set(int v) { _is_able_to_break_out_of_webs = v; }
 void Tp::is_able_to_change_levels_set(int v) { _is_able_to_change_levels = v; }
 void Tp::is_able_to_collect_keys_set(int v) { _is_able_to_collect_keys = v; }
@@ -1396,6 +1401,7 @@ void Tp::is_immune_to_poison_set(int v) { _is_immune_to_poison = v; }
 void Tp::is_immune_to_spell_of_beckoning_set(int v) { _is_immune_to_spell_of_beckoning = v; }
 void Tp::is_immune_to_spell_of_holding_set(int v) { _is_immune_to_spell_of_holding = v; }
 void Tp::is_immune_to_spell_of_repulsion_set(int v) { _is_immune_to_spell_of_repulsion = v; }
+void Tp::is_immune_to_spell_of_sanctuary_set(int v) { _is_immune_to_spell_of_sanctuary = v; }
 void Tp::is_immune_to_spell_of_slowing_set(int v) { _is_immune_to_spell_of_slowing = v; }
 void Tp::is_immune_to_spiderwebs_set(int v) { _is_immune_to_spiderwebs = v; }
 void Tp::is_immune_to_stamina_drain_set(int v) { _is_immune_to_stamina_drain = v; }
@@ -1539,6 +1545,8 @@ void Tp::is_spell_of_holding_set(int v) { _is_spell_of_holding = v; }
 void Tp::is_spell_of_protection_barrier_set(int v) { _is_spell_of_protection_barrier = v; }
 void Tp::is_spell_of_protection_set(int v) { _is_spell_of_protection = v; }
 void Tp::is_spell_of_repulsion_set(int v) { _is_spell_of_repulsion = v; }
+void Tp::is_spell_of_sanctuary_barrier_set(int v) { _is_spell_of_sanctuary_barrier = v; }
+void Tp::is_spell_of_sanctuary_set(int v) { _is_spell_of_sanctuary = v; }
 void Tp::is_spell_of_slowing_set(int v) { _is_spell_of_slowing = v; }
 void Tp::is_spell_set(int v) { _is_spell = v; }
 void Tp::is_spider_set(int v) { _is_spider = v; }

@@ -21,6 +21,7 @@ my.map_load_spell_tree(
         "rp", "is_spell_of_repulsion",
         "HH", "spell_of_holding",
         "PP", "spell_of_protection",
+        "Sc", "spell_of_sanctuary",
     ])
 
 my.map_load_spell_tree(
@@ -52,7 +53,7 @@ my.map_load_spell_tree(
         "                                ",
         "PP                              ",
         "                                ",
-        "                                ",
+        "Sc                              ",
         "                                ",
         "                                ",
         "                                ",

@@ -242,6 +242,7 @@ PyObject *level_is_soft_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_spell_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_spellbook_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_spell_of_holding_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_spell_of_sanctuary_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_spider_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_spiderweb_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_staff_at(PyObject *obj, PyObject *args, PyObject *keywds);

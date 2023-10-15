@@ -108,6 +108,18 @@ bool Thing::possible_to_attack(const Thingp victim)
     //
     // If stuck in a spell barrier, we can only attack locally
     //
+    if (level->is_spell_of_sanctuary_barrier(curr_at)) {
+      if (victim->curr_at != curr_at) {
+        if (is_debug_type()) {
+          dbg("Cannot attack %s, stuck in a spell barrier", victim->to_short_string().c_str());
+        }
+        return false;
+      }
+    }
+
+    //
+    // If stuck in a spell barrier, we can only attack locally
+    //
     if (level->is_spell_of_protection_barrier(curr_at)) {
       if (victim->curr_at != curr_at) {
         if (is_debug_type()) {
@@ -435,6 +447,19 @@ bool Thing::possible_to_attack(const Thingp victim)
       return false;
     }
 
+    if (victim->is_spell_of_sanctuary_barrier()) {
+      if (is_able_to_break_out_of_spell_of_sanctuary()) {
+        if (is_debug_type()) {
+          dbg("Can attack and break out of spell barrier %s", victim->to_short_string().c_str());
+        }
+        return true;
+      }
+      if (is_debug_type()) {
+        dbg("Can not break out of spell barrier %s", victim->to_short_string().c_str());
+      }
+      return false;
+    }
+
     if (victim->is_block_of_ice()) {
       if (is_able_to_break_out_of_ice()) {
         if (is_debug_type()) {
@@ -476,8 +501,9 @@ bool Thing::possible_to_attack(const Thingp victim)
       || victim->is_fungus_poison() || victim->is_treasure_type() || victim->is_enchantstone()
       || victim->is_skillstone() || victim->is_spellbook() || victim->is_foliage() || victim->is_carnivorous_plant()
       || victim->is_spiderweb() || victim->is_block_of_ice() || victim->is_block_of_crystal()
-      || victim->is_spell_of_holding() || victim->is_sticky() || victim->is_brazier() || victim->is_barrel()
-      || victim->is_player() || victim->is_food() || victim->is_trap() || victim->is_bag_item()) {
+      || victim->is_spell_of_holding() || victim->is_spell_of_sanctuary() || victim->is_sticky()
+      || victim->is_brazier() || victim->is_barrel() || victim->is_player() || victim->is_food() || victim->is_trap()
+      || victim->is_bag_item()) {
     if (is_laser()) {
       if (is_debug_type()) {
         dbg("Can attack as laser %s", victim->to_short_string().c_str());

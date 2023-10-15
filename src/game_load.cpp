@@ -532,7 +532,8 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->i_set_is_ooze                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_portal                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_spell_of_holding_barrier      = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->i_set_is_spell_of_protection_barrier      = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_spell_of_protection_barrier   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->i_set_is_spell_of_sanctuary_barrier    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->i_set_is_trap                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   // end sort marker3 }
   // clang-format on
@@ -722,6 +723,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_spellbook);
   in >> bits(my.t->_is_spell_of_holding_barrier);
   in >> bits(my.t->_is_spell_of_protection_barrier);
+  in >> bits(my.t->_is_spell_of_sanctuary_barrier);
   in >> bits(my.t->_is_spiderweb);
   in >> bits(my.t->_is_staff);
   in >> bits(my.t->_is_steam);

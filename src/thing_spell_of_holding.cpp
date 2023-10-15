@@ -17,7 +17,7 @@ void Thing::spell_of_holding_tick(void)
   }
 
   //
-  // Occasionally the barrier impacts cold damage to those withing
+  // Occasionally the barrier impacts cold damage to those within
   //
   if (d100() < 80) {
     return;

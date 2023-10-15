@@ -316,6 +316,7 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
     //
   } else if ((target->is_immune_to_spell_of_slowing() && what->is_spell_of_slowing())
              || (target->is_immune_to_spell_of_holding() && what->is_spell_of_holding())
+             || (target->is_immune_to_spell_of_sanctuary() && what->is_spell_of_sanctuary())
              || (target->is_immune_to_spell_of_beckoning() && what->is_spell_of_beckoning())
              || (target->is_immune_to_spell_of_repulsion() && what->is_spell_of_repulsion())) {
     //

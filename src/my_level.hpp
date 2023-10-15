@@ -127,6 +127,7 @@ public:
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_spellbook {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_spell_of_holding_barrier {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_spell_of_protection_barrier {};
+  std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_spell_of_sanctuary_barrier {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_spiderweb {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_staff {};
   std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > _is_steam {};
@@ -1041,6 +1042,8 @@ public:
   uint8_t is_spell_of_holding_barrier(const point p);
   uint8_t is_spell_of_protection_barrier(const int x, const int y);
   uint8_t is_spell_of_protection_barrier(const point p);
+  uint8_t is_spell_of_sanctuary_barrier(const int x, const int y);
+  uint8_t is_spell_of_sanctuary_barrier(const point p);
   uint8_t is_spiderweb(const int x, const int y);
   uint8_t is_spiderweb(const point p);
   uint8_t is_staff(const int x, const int y);
@@ -1441,6 +1444,8 @@ public:
   void is_spell_of_holding_barrier_unset(const int x, const int y);
   void is_spell_of_protection_barrier_set(const int x, const int y);
   void is_spell_of_protection_barrier_unset(const int x, const int y);
+  void is_spell_of_sanctuary_barrier_set(const int x, const int y);
+  void is_spell_of_sanctuary_barrier_unset(const int x, const int y);
   void is_spiderweb_set(const int x, const int y);
   void is_spiderweb_unset(const int x, const int y);
   void is_staff_set(const int x, const int y);

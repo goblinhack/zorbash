@@ -702,6 +702,16 @@ int Thing::is_spell_of_holding_barrier(void)
   TRACE_NO_INDENT();
   return (tp()->is_spell_of_holding_barrier());
 }
+int Thing::is_able_to_break_out_of_spell_of_sanctuary(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_able_to_break_out_of_spell_of_sanctuary());
+}
+int Thing::is_spell_of_sanctuary_barrier(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_spell_of_sanctuary_barrier());
+}
 int Thing::is_spell_of_protection_barrier(void)
 {
   TRACE_NO_INDENT();
@@ -722,6 +732,11 @@ int Thing::is_spell_of_holding(void)
   TRACE_NO_INDENT();
   return (tp()->is_spell_of_holding());
 }
+int Thing::is_spell_of_sanctuary(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_spell_of_sanctuary());
+}
 int Thing::is_spell_of_slowing(void)
 {
   TRACE_NO_INDENT();
@@ -736,6 +751,11 @@ int Thing::is_immune_to_spell_of_holding(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_immune_to_spell_of_holding());
+}
+int Thing::is_immune_to_spell_of_sanctuary(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_immune_to_spell_of_sanctuary());
 }
 int Thing::is_obs_spell_casting(void)
 {
