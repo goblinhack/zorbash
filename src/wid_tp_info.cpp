@@ -228,7 +228,7 @@ WidPopup *Game::wid_tp_info_create_popup(Tpp t, point tl, point br)
   wid_tp_info_add_dmg_digest(wid_popup_window, t, attack_index);
   wid_tp_info_add_dmg_necrosis(wid_popup_window, t, attack_index);
   wid_tp_info_add_dmg_stamina(wid_popup_window, t, attack_index);
-  wid_tp_info_add_dmg_magic(wid_popup_window, t, attack_index);
+  wid_tp_info_add_dmg_magic_drain(wid_popup_window, t, attack_index);
   wid_tp_info_add_dmgd_chance(wid_popup_window, t);
   wid_tp_info_add_crit_chance(wid_popup_window, t);
   wid_tp_info_add_stat_att(wid_popup_window, t);
@@ -1293,22 +1293,22 @@ void Game::wid_tp_info_add_dmg_stamina(WidPopup *w, Tpp t, int index)
   }
 }
 
-void Game::wid_tp_info_add_dmg_magic(WidPopup *w, Tpp t, int index)
+void Game::wid_tp_info_add_dmg_magic_drain(WidPopup *w, Tpp t, int index)
 {
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_ranged_weapon() || t->is_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
-    auto attack_swallow_dice = t->dmg_magic_dice();
+    auto attack_swallow_dice = t->dmg_magic_drain_dice();
     auto min_value           = attack_swallow_dice.min_roll();
     auto max_value           = attack_swallow_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_magic_dice_str().c_str());
+        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_magic_drain_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Magic Drain dmg  %12s", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_magic_dice_str().c_str());
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_magic_drain_dice_str().c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Magic Drain dmg  %12s", tmp2);
       }
       w->log(tmp);

@@ -214,13 +214,13 @@ void               Tp::dmg_stamina_dice_set(const std::string &v)
   _dmg_stamina_dice_str = v;
 }
 
-const Dice        &Tp::dmg_magic_dice(void) const { return _dmg_magic_dice; }
-const int          Tp::dmg_magic(void) const { return _dmg_magic_dice.roll(); }
-const std::string &Tp::dmg_magic_dice_str(void) const { return _dmg_magic_dice_str; }
-void               Tp::dmg_magic_dice_set(const std::string &v)
+const Dice        &Tp::dmg_magic_drain_dice(void) const { return _dmg_magic_drain_dice; }
+const int          Tp::dmg_magic_drain(void) const { return _dmg_magic_drain_dice.roll(); }
+const std::string &Tp::dmg_magic_drain_dice_str(void) const { return _dmg_magic_drain_dice_str; }
+void               Tp::dmg_magic_drain_dice_set(const std::string &v)
 {
-  _dmg_magic_dice     = v;
-  _dmg_magic_dice_str = v;
+  _dmg_magic_drain_dice     = v;
+  _dmg_magic_drain_dice_str = v;
 }
 
 const Dice        &Tp::dmg_nat_att_dice(void) const { return _dmg_nat_att_dice; }

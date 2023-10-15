@@ -9,54 +9,54 @@
 #include "my_string.hpp"
 #include "my_thing.hpp"
 
-const Dice &Thing::dmg_magic_dice(void)
+const Dice &Thing::dmg_magic_drain_dice(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->dmg_magic_dice());
+  return (tp()->dmg_magic_drain_dice());
 }
 
-const std::string Thing::dmg_magic_dice_str(void)
+const std::string Thing::dmg_magic_drain_dice_str(void)
 {
   TRACE_NO_INDENT();
 
   if (enchant_count_get()) {
-    return tp()->dmg_magic_dice_str() + bonus_to_string(enchant_count_get());
+    return tp()->dmg_magic_drain_dice_str() + bonus_to_string(enchant_count_get());
   }
 
-  return (tp()->dmg_magic_dice_str());
+  return (tp()->dmg_magic_drain_dice_str());
 }
 
-int Thing::dmg_magic(Thingp victim)
+int Thing::dmg_magic_drain(Thingp victim)
 {
   TRACE_NO_INDENT();
-  auto roll    = tp()->dmg_magic_dice().roll();
+  auto roll    = tp()->dmg_magic_drain_dice().roll();
   roll         = weapon_dmg_modify(roll, victim);
   auto enchant = enchant_count_get();
   dbg("Damage magic roll %d + enchant %d", roll, enchant);
   return roll + enchant;
 }
 
-int Thing::on_owner_receive_dmg_magic(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
+int Thing::on_owner_receive_dmg_magic_drain(Thingp owner, Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot call owner_dmg_magic null thing");
+    err("Cannot call owner_dmg_magic_drain null thing");
     return damage;
   }
 
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot call owner_dmg_magic null thing");
+    err("Cannot call owner_dmg_magic_drain null thing");
     return damage;
   }
 
-  auto on_owner_receive_dmg_magic = on_owner_receive_dmg_magic_do();
-  if (std::empty(on_owner_receive_dmg_magic)) {
+  auto on_owner_receive_dmg_magic_drain = on_owner_receive_dmg_magic_drain_do();
+  if (std::empty(on_owner_receive_dmg_magic_drain)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_receive_dmg_magic, '.');
+  auto t = split_tokens(on_owner_receive_dmg_magic_drain, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -76,27 +76,27 @@ int Thing::on_owner_receive_dmg_magic(Thingp owner, Thingp hitter, Thingp real_h
                           (unsigned int) curr_at.x, (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_receive_dmg_magic call [%s] expected mod:function, got %d elems",
-      on_owner_receive_dmg_magic.c_str(), (int) on_owner_receive_dmg_magic.size());
+  ERR("Bad on_owner_receive_dmg_magic_drain call [%s] expected mod:function, got %d elems",
+      on_owner_receive_dmg_magic_drain.c_str(), (int) on_owner_receive_dmg_magic_drain.size());
 
   return damage;
 }
 
-int Thing::on_receiving_dmg_magic(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::on_receiving_dmg_magic_drain(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, hitter);
   if (! hitter) {
-    err("Cannot call dmg_magic null thing");
+    err("Cannot call dmg_magic_drain null thing");
     return damage;
   }
 
-  auto on_receiving_dmg_magic = on_receiving_dmg_magic_do();
-  if (std::empty(on_receiving_dmg_magic)) {
+  auto on_receiving_dmg_magic_drain = on_receiving_dmg_magic_drain_do();
+  if (std::empty(on_receiving_dmg_magic_drain)) {
     return damage;
   }
 
-  auto t = split_tokens(on_receiving_dmg_magic, '.');
+  auto t = split_tokens(on_receiving_dmg_magic_drain, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -116,13 +116,13 @@ int Thing::on_receiving_dmg_magic(Thingp hitter, Thingp real_hitter, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_receiving_dmg_magic call [%s] expected mod:function, got %d elems", on_receiving_dmg_magic.c_str(),
-      (int) on_receiving_dmg_magic.size());
+  ERR("Bad on_receiving_dmg_magic_drain call [%s] expected mod:function, got %d elems",
+      on_receiving_dmg_magic_drain.c_str(), (int) on_receiving_dmg_magic_drain.size());
 
   return damage;
 }
 
-int Thing::total_dmg_for_on_receiving_dmg_magic(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::total_dmg_for_on_receiving_dmg_magic_drain(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   if (! maybe_itemsp()) {
@@ -134,7 +134,7 @@ int Thing::total_dmg_for_on_receiving_dmg_magic(Thingp hitter, Thingp real_hitte
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_receive_dmg_magic(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receive_dmg_magic_drain(this, hitter, real_hitter, damage);
     }
   }
 
@@ -143,7 +143,7 @@ int Thing::total_dmg_for_on_receiving_dmg_magic(Thingp hitter, Thingp real_hitte
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_receive_dmg_magic(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receive_dmg_magic_drain(this, hitter, real_hitter, damage);
     }
   }
 
@@ -152,7 +152,7 @@ int Thing::total_dmg_for_on_receiving_dmg_magic(Thingp hitter, Thingp real_hitte
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_receive_dmg_magic(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receive_dmg_magic_drain(this, hitter, real_hitter, damage);
     }
   }
 
@@ -161,7 +161,7 @@ int Thing::total_dmg_for_on_receiving_dmg_magic(Thingp hitter, Thingp real_hitte
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_receive_dmg_magic(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receive_dmg_magic_drain(this, hitter, real_hitter, damage);
     }
   }
 
@@ -170,30 +170,30 @@ int Thing::total_dmg_for_on_receiving_dmg_magic(Thingp hitter, Thingp real_hitte
   {
     auto iter = equip_get(e);
     if (iter) {
-      damage = iter->on_owner_receive_dmg_magic(this, hitter, real_hitter, damage);
+      damage = iter->on_owner_receive_dmg_magic_drain(this, hitter, real_hitter, damage);
     }
   }
 
-  damage = on_receiving_dmg_magic(hitter, real_hitter, damage);
+  damage = on_receiving_dmg_magic_drain(hitter, real_hitter, damage);
 
   return damage;
 }
 
-int Thing::on_attacking_dmg_magic(Thingp victim, int damage)
+int Thing::on_attacking_dmg_magic_drain(Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, victim);
   if (! victim) {
-    err("Cannot call dmg_magic null thing");
+    err("Cannot call dmg_magic_drain null thing");
     return damage;
   }
 
-  auto on_attacking_dmg_magic = on_attacking_dmg_magic_do();
-  if (std::empty(on_attacking_dmg_magic)) {
+  auto on_attacking_dmg_magic_drain = on_attacking_dmg_magic_drain_do();
+  if (std::empty(on_attacking_dmg_magic_drain)) {
     return damage;
   }
 
-  auto t = split_tokens(on_attacking_dmg_magic, '.');
+  auto t = split_tokens(on_attacking_dmg_magic_drain, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -213,33 +213,33 @@ int Thing::on_attacking_dmg_magic(Thingp victim, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_attacking_dmg_magic call [%s] expected mod:function, got %d elems", on_attacking_dmg_magic.c_str(),
-      (int) on_attacking_dmg_magic.size());
+  ERR("Bad on_attacking_dmg_magic_drain call [%s] expected mod:function, got %d elems",
+      on_attacking_dmg_magic_drain.c_str(), (int) on_attacking_dmg_magic_drain.size());
 
   return damage;
 }
 
-int Thing::on_owner_attack_dmg_magic(Thingp owner, Thingp victim, int damage)
+int Thing::on_owner_attack_dmg_magic_drain(Thingp owner, Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   verify(MTYPE_THING, owner);
   if (! owner) {
-    err("Cannot call owner_dmg_magic null thing");
+    err("Cannot call owner_dmg_magic_drain null thing");
     return damage;
   }
 
   verify(MTYPE_THING, victim);
   if (! victim) {
-    err("Cannot call owner_dmg_magic null thing");
+    err("Cannot call owner_dmg_magic_drain null thing");
     return damage;
   }
 
-  auto on_owner_attack_dmg_magic = on_owner_attack_dmg_magic_do();
-  if (std::empty(on_owner_attack_dmg_magic)) {
+  auto on_owner_attack_dmg_magic_drain = on_owner_attack_dmg_magic_drain_do();
+  if (std::empty(on_owner_attack_dmg_magic_drain)) {
     return damage;
   }
 
-  auto t = split_tokens(on_owner_attack_dmg_magic, '.');
+  auto t = split_tokens(on_owner_attack_dmg_magic_drain, '.');
   if (t.size() == 2) {
     auto        mod   = t[ 0 ];
     auto        fn    = t[ 1 ];
@@ -259,13 +259,13 @@ int Thing::on_owner_attack_dmg_magic(Thingp owner, Thingp victim, int damage)
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
-  ERR("Bad on_owner_attack_dmg_magic call [%s] expected mod:function, got %d elems",
-      on_owner_attack_dmg_magic.c_str(), (int) on_owner_attack_dmg_magic.size());
+  ERR("Bad on_owner_attack_dmg_magic_drain call [%s] expected mod:function, got %d elems",
+      on_owner_attack_dmg_magic_drain.c_str(), (int) on_owner_attack_dmg_magic_drain.size());
 
   return damage;
 }
 
-int Thing::total_dmg_for_on_attacking_dmg_magic(Thingp victim, int damage)
+int Thing::total_dmg_for_on_attacking_dmg_magic_drain(Thingp victim, int damage)
 {
   TRACE_NO_INDENT();
   if (! maybe_itemsp()) {
@@ -277,7 +277,7 @@ int Thing::total_dmg_for_on_attacking_dmg_magic(Thingp victim, int damage)
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_attack_dmg_magic(this, victim, damage);
+      damage = iter->on_owner_attack_dmg_magic_drain(this, victim, damage);
     }
   }
 
@@ -286,7 +286,7 @@ int Thing::total_dmg_for_on_attacking_dmg_magic(Thingp victim, int damage)
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_attack_dmg_magic(this, victim, damage);
+      damage = iter->on_owner_attack_dmg_magic_drain(this, victim, damage);
     }
   }
 
@@ -295,7 +295,7 @@ int Thing::total_dmg_for_on_attacking_dmg_magic(Thingp victim, int damage)
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_attack_dmg_magic(this, victim, damage);
+      damage = iter->on_owner_attack_dmg_magic_drain(this, victim, damage);
     }
   }
 
@@ -304,7 +304,7 @@ int Thing::total_dmg_for_on_attacking_dmg_magic(Thingp victim, int damage)
   {
     auto iter = level->thing_find(item.id);
     if (iter) {
-      damage = iter->on_owner_attack_dmg_magic(this, victim, damage);
+      damage = iter->on_owner_attack_dmg_magic_drain(this, victim, damage);
     }
   }
 
@@ -313,11 +313,11 @@ int Thing::total_dmg_for_on_attacking_dmg_magic(Thingp victim, int damage)
   {
     auto iter = equip_get(e);
     if (iter) {
-      damage = iter->on_owner_attack_dmg_magic(this, victim, damage);
+      damage = iter->on_owner_attack_dmg_magic_drain(this, victim, damage);
     }
   }
 
-  damage = on_attacking_dmg_magic(victim, damage);
+  damage = on_attacking_dmg_magic_drain(victim, damage);
 
   return damage;
 }
@@ -328,28 +328,28 @@ int Thing::dmg_chance_d1000_magic_drain(int index)
   return (tp()->dmg_chance_d1000_magic_drain(index));
 }
 
-const std::string &Thing::on_receiving_dmg_magic_do(void)
+const std::string &Thing::on_receiving_dmg_magic_drain_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_receiving_dmg_magic_do());
+  return (tp()->on_receiving_dmg_magic_drain_do());
 }
 
-const std::string &Thing::on_attacking_dmg_magic_do(void)
+const std::string &Thing::on_attacking_dmg_magic_drain_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_attacking_dmg_magic_do());
+  return (tp()->on_attacking_dmg_magic_drain_do());
 }
 
-const std::string &Thing::on_owner_attack_dmg_magic_do(void)
+const std::string &Thing::on_owner_attack_dmg_magic_drain_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_attack_dmg_magic_do());
+  return (tp()->on_owner_attack_dmg_magic_drain_do());
 }
 
-const std::string &Thing::on_owner_receive_dmg_magic_do(void)
+const std::string &Thing::on_owner_receive_dmg_magic_drain_do(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->on_owner_receive_dmg_magic_do());
+  return (tp()->on_owner_receive_dmg_magic_drain_do());
 }
 
 int Tp::dmg_chance_d1000_magic_drain(int index) const

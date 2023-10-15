@@ -794,7 +794,7 @@ public:
   const Dice &dmg_missile_dice(void);
   const Dice &dmg_digest_dice(void);
   const Dice &dmg_stamina_dice(void);
-  const Dice &dmg_magic_dice(void);
+  const Dice &dmg_magic_drain_dice(void);
   const Dice &dmg_energy_dice(void);
   const Dice &dmg_negation_dice(void);
   const Dice &dmg_fire_dice(void);
@@ -859,7 +859,7 @@ public:
   const std::string dmg_heat_dice_str(void);
   const std::string dmg_impact_dice_str(void);
   const std::string dmg_lightning_dice_str(void);
-  const std::string dmg_magic_dice_str(void);
+  const std::string dmg_magic_drain_dice_str(void);
   const std::string dmg_melee_dice_str(void);
   const std::string dmg_missile_dice_str(void);
   const std::string dmg_nat_att_dice_str(void);
@@ -907,7 +907,7 @@ public:
   const std::string &on_attacking_dmg_heat_do(void);
   const std::string &on_attacking_dmg_impact_do(void);
   const std::string &on_attacking_dmg_lightning_do(void);
-  const std::string &on_attacking_dmg_magic_do(void);
+  const std::string &on_attacking_dmg_magic_drain_do(void);
   const std::string &on_attacking_dmg_melee_do(void);
   const std::string &on_attacking_dmg_missile_do(void);
   const std::string &on_attacking_dmg_nat_att_do(void);
@@ -954,7 +954,7 @@ public:
   const std::string &on_owner_attack_dmg_heat_do(void);
   const std::string &on_owner_attack_dmg_impact_do(void);
   const std::string &on_owner_attack_dmg_lightning_do(void);
-  const std::string &on_owner_attack_dmg_magic_do(void);
+  const std::string &on_owner_attack_dmg_magic_drain_do(void);
   const std::string &on_owner_attack_dmg_melee_do(void);
   const std::string &on_owner_attack_dmg_missile_do(void);
   const std::string &on_owner_attack_dmg_nat_att_do(void);
@@ -978,7 +978,7 @@ public:
   const std::string &on_owner_receive_dmg_heat_do(void);
   const std::string &on_owner_receive_dmg_impact_do(void);
   const std::string &on_owner_receive_dmg_lightning_do(void);
-  const std::string &on_owner_receive_dmg_magic_do(void);
+  const std::string &on_owner_receive_dmg_magic_drain_do(void);
   const std::string &on_owner_receive_dmg_melee_do(void);
   const std::string &on_owner_receive_dmg_missile_do(void);
   const std::string &on_owner_receive_dmg_nat_att_do(void);
@@ -1005,7 +1005,7 @@ public:
   const std::string &on_receiving_dmg_heat_do(void);
   const std::string &on_receiving_dmg_impact_do(void);
   const std::string &on_receiving_dmg_lightning_do(void);
-  const std::string &on_receiving_dmg_magic_do(void);
+  const std::string &on_receiving_dmg_magic_drain_do(void);
   const std::string &on_receiving_dmg_melee_do(void);
   const std::string &on_receiving_dmg_missile_do(void);
   const std::string &on_receiving_dmg_nat_att_do(void);
@@ -1279,7 +1279,7 @@ public:
   int dmg_heat(Thingp victim = nullptr);
   int dmg_impact(Thingp victim = nullptr);
   int dmg_lightning(Thingp victim = nullptr);
-  int dmg_magic(Thingp victim = nullptr);
+  int dmg_magic_drain(Thingp victim = nullptr);
   int dmg_max(Thingp victim = nullptr);
   int dmg_melee(Thingp victim = nullptr);
   int dmg_min(Thingp victim = nullptr);
@@ -1531,7 +1531,7 @@ public:
   int is_attacked_with_dmg_heat(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_dmg_impact(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_dmg_lightning(Thingp hitter, Thingp real_hitter, int damage);
-  int is_attacked_with_dmg_magic(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_dmg_magic_drain(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_dmg_melee(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_dmg_missile(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_dmg_nat_att(Thingp hitter, Thingp real_hitter, int damage);
@@ -2112,7 +2112,7 @@ public:
   int on_attacking_dmg_heat(Thingp victim, int damage);
   int on_attacking_dmg_impact(Thingp victim, int damage);
   int on_attacking_dmg_lightning(Thingp victim, int damage);
-  int on_attacking_dmg_magic(Thingp victim, int damage);
+  int on_attacking_dmg_magic_drain(Thingp victim, int damage);
   int on_attacking_dmg_melee(Thingp victim, int damage);
   int on_attacking_dmg_missile(Thingp victim, int damage);
   int on_attacking_dmg_nat_att(Thingp victim, int damage);
@@ -2140,7 +2140,7 @@ public:
   int on_owner_attack_dmg_heat(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_impact(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_lightning(Thingp owner, Thingp victim, int damage);
-  int on_owner_attack_dmg_magic(Thingp owner, Thingp victim, int damage);
+  int on_owner_attack_dmg_magic_drain(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_melee(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_missile(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_nat_att(Thingp owner, Thingp victim, int damage);
@@ -2164,7 +2164,7 @@ public:
   int on_owner_receive_dmg_heat(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_impact(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_lightning(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
-  int on_owner_receive_dmg_magic(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
+  int on_owner_receive_dmg_magic_drain(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_melee(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_missile(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_receive_dmg_nat_att(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
@@ -2188,7 +2188,7 @@ public:
   int on_receiving_dmg_heat(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_impact(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_lightning(Thingp hitter, Thingp real_hitter, int damage);
-  int on_receiving_dmg_magic(Thingp hitter, Thingp real_hitter, int damage);
+  int on_receiving_dmg_magic_drain(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_melee(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_missile(Thingp hitter, Thingp real_hitter, int damage);
   int on_receiving_dmg_nat_att(Thingp hitter, Thingp real_hitter, int damage);
@@ -2468,7 +2468,7 @@ public:
   int total_dmg_for_on_attacking_dmg_heat(Thingp victim, int damage);
   int total_dmg_for_on_attacking_dmg_impact(Thingp victim, int damage);
   int total_dmg_for_on_attacking_dmg_lightning(Thingp victim, int damage);
-  int total_dmg_for_on_attacking_dmg_magic(Thingp victim, int damage);
+  int total_dmg_for_on_attacking_dmg_magic_drain(Thingp victim, int damage);
   int total_dmg_for_on_attacking_dmg_melee(Thingp victim, int damage);
   int total_dmg_for_on_attacking_dmg_missile(Thingp victim, int damage);
   int total_dmg_for_on_attacking_dmg_nat_att(Thingp victim, int damage);
@@ -2492,7 +2492,7 @@ public:
   int total_dmg_for_on_receiving_dmg_heat(Thingp hitter, Thingp real_hitter, int damage);
   int total_dmg_for_on_receiving_dmg_impact(Thingp hitter, Thingp real_hitter, int damage);
   int total_dmg_for_on_receiving_dmg_lightning(Thingp hitter, Thingp real_hitter, int damage);
-  int total_dmg_for_on_receiving_dmg_magic(Thingp hitter, Thingp real_hitter, int damage);
+  int total_dmg_for_on_receiving_dmg_magic_drain(Thingp hitter, Thingp real_hitter, int damage);
   int total_dmg_for_on_receiving_dmg_melee(Thingp hitter, Thingp real_hitter, int damage);
   int total_dmg_for_on_receiving_dmg_missile(Thingp hitter, Thingp real_hitter, int damage);
   int total_dmg_for_on_receiving_dmg_nat_att(Thingp hitter, Thingp real_hitter, int damage);

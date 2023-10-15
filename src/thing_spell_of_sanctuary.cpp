@@ -16,13 +16,6 @@ void Thing::spell_of_sanctuary_tick(void)
     return;
   }
 
-  //
-  // Often the barrier impacts cold damage to those within
-  //
-  if (d100() < 25) {
-    return;
-  }
-
   dbg("Spell of sanctuary tick");
   TRACE_AND_INDENT();
 
@@ -38,20 +31,16 @@ void Thing::spell_of_sanctuary_tick(void)
         continue;
       }
 
-      if (t->temperature_never_changes()) {
-        continue;
-      }
-
       //
-      // Allow a saving throw to avoid cold damage.
+      // Allow a saving throw to avoid fire damage.
       //
       if (d20() < t->stat_con()) {
         continue;
       }
 
-      t->log("Spell of sanctuary cold damage");
+      t->log("Spell of sanctuary fire damage");
       t->move_penalty_incr();
-      t->is_attacked_with_dmg_cold(this, this, dmg_cold());
+      t->on_fire_set("sanctuary");
       t->wake("spell");
     }
     TRACE_NO_INDENT();

@@ -439,7 +439,7 @@ void tp_fixup(void)
     num_attack_types += tp->dmg_digest() ? 1 : 0;
     num_attack_types += tp->dmg_necrosis() ? 1 : 0;
     num_attack_types += tp->dmg_stamina() ? 1 : 0;
-    num_attack_types += tp->dmg_magic() ? 1 : 0;
+    num_attack_types += tp->dmg_magic_drain() ? 1 : 0;
 
     //
     // If only a single attack type then make sure it is 1000%
@@ -505,7 +505,7 @@ void tp_fixup(void)
         if (tp->dmg_stamina() > 0) {
           tp->dmg_chance_d1000_stamina_drain_set(attack_index, 1000);
         }
-        if (tp->dmg_magic() > 0) {
+        if (tp->dmg_magic_drain() > 0) {
           tp->dmg_chance_d1000_magic_drain_set(attack_index, 1000);
         }
         if (tp->dmg_poison() > 0) {

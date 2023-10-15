@@ -698,7 +698,7 @@ public:
   void wid_thing_info_add_dmg_heat(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_dmg_impact(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_dmg_lightning(WidPopup *w, Thingp t, int index);
-  void wid_thing_info_add_dmg_magic(WidPopup *w, Thingp t, int index);
+  void wid_thing_info_add_dmg_magic_drain(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_dmg_melee(WidPopup *w, Thingp t);
   void wid_thing_info_add_dmg_missile(WidPopup *w, Thingp t, int index);
   void wid_thing_info_add_dmg_nat_att(WidPopup *w, Thingp t, int index);
@@ -746,7 +746,7 @@ public:
   void wid_tp_info_add_dmg_heat(WidPopup *w, Tpp t, int index);
   void wid_tp_info_add_dmg_impact(WidPopup *w, Tpp t, int index);
   void wid_tp_info_add_dmg_lightning(WidPopup *w, Tpp t, int index);
-  void wid_tp_info_add_dmg_magic(WidPopup *w, Tpp t, int index);
+  void wid_tp_info_add_dmg_magic_drain(WidPopup *w, Tpp t, int index);
   void wid_tp_info_add_dmg_melee(WidPopup *w, Tpp t, int index);
   void wid_tp_info_add_dmg_missile(WidPopup *w, Tpp t, int index);
   void wid_tp_info_add_dmg_nat_att(WidPopup *w, Tpp t, int index);

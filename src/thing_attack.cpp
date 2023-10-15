@@ -1078,9 +1078,9 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
       }
 
       if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ] && ! attack_options->dmg_set) {
-        int dmg_magic_val = dmg_magic(victim);
-        if (dmg_magic_val > 0) {
-          attack_options->damage  = dmg_magic_val;
+        int dmg_magic_drain_val = dmg_magic_drain(victim);
+        if (dmg_magic_drain_val > 0) {
+          attack_options->damage  = dmg_magic_drain_val;
           attack_options->dmg_set = true;
           dbg("Set magical drain damage %d", attack_options->damage);
         }
@@ -1637,9 +1637,9 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
       if (! attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
         if (! attack_options->dmg_set) {
           if (d1000() < dmg_chance_d1000_magic_drain(attack_options->attack_num)) {
-            int dmg_magic_val = dmg_magic(victim);
-            if (dmg_magic_val > 0) {
-              attack_options->damage                             = dmg_magic_val;
+            int dmg_magic_drain_val = dmg_magic_drain(victim);
+            if (dmg_magic_drain_val > 0) {
+              attack_options->damage                             = dmg_magic_drain_val;
               attack_options->dmg_set                            = true;
               attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ] = true;
               dbg("Set magical drain damage %d", attack_options->damage);
@@ -1650,9 +1650,9 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         //
         // Here we've indicated the attack type is mandatory, but not set the damage
         //
-        int dmg_magic_val = dmg_magic(victim);
-        if (dmg_magic_val > 0) {
-          attack_options->damage                             = dmg_magic_val;
+        int dmg_magic_drain_val = dmg_magic_drain(victim);
+        if (dmg_magic_drain_val > 0) {
+          attack_options->damage                             = dmg_magic_drain_val;
           attack_options->dmg_set                            = true;
           attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ] = true;
           dbg("Set magical drain damage %d", attack_options->damage);
@@ -2234,7 +2234,7 @@ int Thing::is_attacked_with_dmg_stamina(Thingp hitter, Thingp real_hitter, int d
   return is_hit(hitter, &attack_options, damage);
 }
 
-int Thing::is_attacked_with_dmg_magic(Thingp hitter, Thingp real_hitter, int damage)
+int Thing::is_attacked_with_dmg_magic_drain(Thingp hitter, Thingp real_hitter, int damage)
 {
   TRACE_NO_INDENT();
   ThingAttackOptions attack_options {};

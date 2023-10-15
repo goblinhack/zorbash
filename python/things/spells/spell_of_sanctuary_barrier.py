@@ -13,14 +13,17 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.collision_check(self, True)
     my.collision_hit_priority(self, 100)
-    my.dmg_chance_d1000_cold(self, 0, 1000)
-    my.dmg_cold_dice(self, "1")
+    my.dmg_chance_d1000_negation(self, 0, 1000)
+    my.dmg_negation_dice(self, "1")
+    my.dmg_chance_d1000_magic_drain(self, 0, 1000)
+    my.dmg_magic_drain_dice(self, "1")
+    my.dmg_num_of_attacks(self, 2)
     my.gfx_ascii_fade_with_dist(self, True)
+    my.gfx_pixelart_oversized_and_centered(self, True)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
-    my.gfx_pixelart_oversized_and_on_floor(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
@@ -46,16 +49,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_interesting(self, True)  # so it can be shoved
     my.is_loggable(self, True)
     my.is_not_shown_as_a_pet(self, True)
-    my.is_obs_ai(self, True)
-    my.is_obs_jump_end(self, True)
-    my.is_obs_jumping(self, True)
-    my.is_obs_shooting(self, True)
-    my.is_obs_shoving(self, True)
     my.is_obs_spawn_monst(self, True)
     my.is_obs_spawn(self, True)
-    my.is_obs_spell_casting(self, True)
-    my.is_obs_throwing(self, True)
-    my.is_obs_wall_or_door(self, True)
     my.is_one_per_tile(self, True)  # so wands of ice do not pile these up
     my.is_shootable(self, True)
     my.is_spell_of_sanctuary_barrier(self, True)
@@ -69,14 +64,14 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature_never_changes(self, True)
     my.temperature(self, -10)
     my.text_a_or_an(self, "a")
-    my.text_description_short(self, "An impenetrable shimmering field of energy.")
-    my.text_hits(self, "chills")
+    my.text_description_short(self, "A scrawled mark on the floor that repels all of evil intent. Hopefully that does not include you!")
+    my.text_hits(self, "burns")
     my.thing_size(self, my.THING_SIZE_LARGE)
-    my.z_depth(self, my.MAP_DEPTH_OBJ)
-    my.z_prio(self, my.MAP_Z_PRIO_EFFECT)
+    my.z_depth(self, my.MAP_DEPTH_FLOOR2)
+    my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker
 
-    delay = 50
+    delay = 250
 
     my.tile(self, ascii_bg_char="block", ascii_bg_col_name="red", ascii_bg_alpha=255,
             delay_ms=delay, tile="spell_of_sanctuary_barrier.1")

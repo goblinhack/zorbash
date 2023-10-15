@@ -71,7 +71,7 @@ private:
   Dice _dmg_fire_dice {};
   Dice _dmg_heat_dice {};
   Dice _dmg_lightning_dice {};
-  Dice _dmg_magic_dice {};
+  Dice _dmg_magic_drain_dice {};
   Dice _dmg_melee_dice {};
   Dice _dmg_missile_dice {};
   Dice _dmg_nat_att_dice {};
@@ -903,7 +903,7 @@ private:
   std::string _dmg_heat_dice_str;
   std::string _dmg_impact_dice_str;
   std::string _dmg_lightning_dice_str;
-  std::string _dmg_magic_dice_str;
+  std::string _dmg_magic_drain_dice_str;
   std::string _dmg_melee_dice_str;
   std::string _dmg_missile_dice_str;
   std::string _dmg_nat_att_dice_str;
@@ -939,7 +939,7 @@ private:
   std::string _on_attacking_dmg_heat_do;
   std::string _on_attacking_dmg_impact_do;
   std::string _on_attacking_dmg_lightning_do;
-  std::string _on_attacking_dmg_magic_do;
+  std::string _on_attacking_dmg_magic_drain_do;
   std::string _on_attacking_dmg_melee_do;
   std::string _on_attacking_dmg_missile_do;
   std::string _on_attacking_dmg_nat_att_do;
@@ -986,7 +986,7 @@ private:
   std::string _on_owner_attack_dmg_heat_do;
   std::string _on_owner_attack_dmg_impact_do;
   std::string _on_owner_attack_dmg_lightning_do;
-  std::string _on_owner_attack_dmg_magic_do;
+  std::string _on_owner_attack_dmg_magic_drain_do;
   std::string _on_owner_attack_dmg_melee_do;
   std::string _on_owner_attack_dmg_missile_do;
   std::string _on_owner_attack_dmg_nat_att_do;
@@ -1010,7 +1010,7 @@ private:
   std::string _on_owner_receive_dmg_heat_do;
   std::string _on_owner_receive_dmg_impact_do;
   std::string _on_owner_receive_dmg_lightning_do;
-  std::string _on_owner_receive_dmg_magic_do;
+  std::string _on_owner_receive_dmg_magic_drain_do;
   std::string _on_owner_receive_dmg_melee_do;
   std::string _on_owner_receive_dmg_missile_do;
   std::string _on_owner_receive_dmg_nat_att_do;
@@ -1037,7 +1037,7 @@ private:
   std::string _on_receiving_dmg_heat_do;
   std::string _on_receiving_dmg_impact_do;
   std::string _on_receiving_dmg_lightning_do;
-  std::string _on_receiving_dmg_magic_do;
+  std::string _on_receiving_dmg_magic_drain_do;
   std::string _on_receiving_dmg_melee_do;
   std::string _on_receiving_dmg_missile_do;
   std::string _on_receiving_dmg_nat_att_do;
@@ -1148,7 +1148,7 @@ public:
   const Dice &dmg_melee_dice(void) const;
   const Dice &dmg_necrosis_dice(void) const;
   const Dice &dmg_stamina_dice(void) const;
-  const Dice &dmg_magic_dice(void) const;
+  const Dice &dmg_magic_drain_dice(void) const;
   const Dice &dmg_poison_dice(void) const;
   const Dice &health_initial_dice(void) const;
   const Dice &health_regenerate_amount_dice(void) const;
@@ -1179,7 +1179,7 @@ public:
   const int dmg_melee(void) const;
   const int dmg_necrosis(void) const;
   const int dmg_stamina(void) const;
-  const int dmg_magic(void) const;
+  const int dmg_magic_drain(void) const;
   const int dmg_poison(void) const;
   const int health_initial(void) const;
   const int health_initial_max_roll(void) const;
@@ -1231,7 +1231,7 @@ public:
   void show_botcon_description(void);
   void dmg_digest_dice_set(const std::string &);
   void dmg_stamina_dice_set(const std::string &);
-  void dmg_magic_dice_set(const std::string &);
+  void dmg_magic_drain_dice_set(const std::string &);
   void dmg_energy_dice_set(const std::string &);
   void dmg_negation_dice_set(const std::string &);
   void dmg_fire_dice_set(const std::string &);
@@ -1274,7 +1274,7 @@ public:
   const std::string &dmg_heat_dice_str(void) const;
   const std::string &dmg_impact_dice_str(void) const;
   const std::string &dmg_lightning_dice_str(void) const;
-  const std::string &dmg_magic_dice_str(void) const;
+  const std::string &dmg_magic_drain_dice_str(void) const;
   const std::string &dmg_melee_dice_str(void) const;
   const std::string &dmg_missile_dice_str(void) const;
   const std::string &dmg_nat_att_dice_str(void) const;
@@ -1310,7 +1310,7 @@ public:
   const std::string &on_attacking_dmg_heat_do(void) const;
   const std::string &on_attacking_dmg_impact_do(void) const;
   const std::string &on_attacking_dmg_lightning_do(void) const;
-  const std::string &on_attacking_dmg_magic_do(void) const;
+  const std::string &on_attacking_dmg_magic_drain_do(void) const;
   const std::string &on_attacking_dmg_melee_do(void) const;
   const std::string &on_attacking_dmg_missile_do(void) const;
   const std::string &on_attacking_dmg_nat_att_do(void) const;
@@ -1357,7 +1357,7 @@ public:
   const std::string &on_owner_attack_dmg_heat_do(void) const;
   const std::string &on_owner_attack_dmg_impact_do(void) const;
   const std::string &on_owner_attack_dmg_lightning_do(void) const;
-  const std::string &on_owner_attack_dmg_magic_do(void) const;
+  const std::string &on_owner_attack_dmg_magic_drain_do(void) const;
   const std::string &on_owner_attack_dmg_melee_do(void) const;
   const std::string &on_owner_attack_dmg_missile_do(void) const;
   const std::string &on_owner_attack_dmg_nat_att_do(void) const;
@@ -1381,7 +1381,7 @@ public:
   const std::string &on_owner_receive_dmg_heat_do(void) const;
   const std::string &on_owner_receive_dmg_impact_do(void) const;
   const std::string &on_owner_receive_dmg_lightning_do(void) const;
-  const std::string &on_owner_receive_dmg_magic_do(void) const;
+  const std::string &on_owner_receive_dmg_magic_drain_do(void) const;
   const std::string &on_owner_receive_dmg_melee_do(void) const;
   const std::string &on_owner_receive_dmg_missile_do(void) const;
   const std::string &on_owner_receive_dmg_nat_att_do(void) const;
@@ -1408,7 +1408,7 @@ public:
   const std::string &on_receiving_dmg_heat_do(void) const;
   const std::string &on_receiving_dmg_impact_do(void) const;
   const std::string &on_receiving_dmg_lightning_do(void) const;
-  const std::string &on_receiving_dmg_magic_do(void) const;
+  const std::string &on_receiving_dmg_magic_drain_do(void) const;
   const std::string &on_receiving_dmg_melee_do(void) const;
   const std::string &on_receiving_dmg_missile_do(void) const;
   const std::string &on_receiving_dmg_nat_att_do(void) const;
@@ -2988,7 +2988,7 @@ public:
   void on_attacking_dmg_heat_do_set(const std::string &v);
   void on_attacking_dmg_impact_do_set(const std::string &v);
   void on_attacking_dmg_lightning_do_set(const std::string &v);
-  void on_attacking_dmg_magic_do_set(const std::string &v);
+  void on_attacking_dmg_magic_drain_do_set(const std::string &v);
   void on_attacking_dmg_melee_do_set(const std::string &v);
   void on_attacking_dmg_missile_do_set(const std::string &v);
   void on_attacking_dmg_nat_att_do_set(const std::string &v);
@@ -3037,7 +3037,7 @@ public:
   void on_owner_attack_dmg_heat_do_set(const std::string &v);
   void on_owner_attack_dmg_impact_do_set(const std::string &v);
   void on_owner_attack_dmg_lightning_do_set(const std::string &v);
-  void on_owner_attack_dmg_magic_do_set(const std::string &v);
+  void on_owner_attack_dmg_magic_drain_do_set(const std::string &v);
   void on_owner_attack_dmg_melee_do_set(const std::string &v);
   void on_owner_attack_dmg_missile_do_set(const std::string &v);
   void on_owner_attack_dmg_nat_att_do_set(const std::string &v);
@@ -3061,7 +3061,7 @@ public:
   void on_owner_receive_dmg_heat_do_set(const std::string &v);
   void on_owner_receive_dmg_impact_do_set(const std::string &v);
   void on_owner_receive_dmg_lightning_do_set(const std::string &v);
-  void on_owner_receive_dmg_magic_do_set(const std::string &v);
+  void on_owner_receive_dmg_magic_drain_do_set(const std::string &v);
   void on_owner_receive_dmg_melee_do_set(const std::string &v);
   void on_owner_receive_dmg_missile_do_set(const std::string &v);
   void on_owner_receive_dmg_nat_att_do_set(const std::string &v);
@@ -3088,7 +3088,7 @@ public:
   void on_receiving_dmg_heat_do_set(const std::string &v);
   void on_receiving_dmg_impact_do_set(const std::string &v);
   void on_receiving_dmg_lightning_do_set(const std::string &v);
-  void on_receiving_dmg_magic_do_set(const std::string &v);
+  void on_receiving_dmg_magic_drain_do_set(const std::string &v);
   void on_receiving_dmg_melee_do_set(const std::string &v);
   void on_receiving_dmg_missile_do_set(const std::string &v);
   void on_receiving_dmg_nat_att_do_set(const std::string &v);

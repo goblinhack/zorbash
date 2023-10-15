@@ -287,8 +287,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     damage = victim->total_dmg_for_on_receiving_dmg_stamina(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
     TRACE_NO_INDENT();
-    real_hitter->total_dmg_for_on_attacking_dmg_magic(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_magic(hitter, real_hitter, damage);
+    real_hitter->total_dmg_for_on_attacking_dmg_magic_drain(victim, damage);
+    damage = victim->total_dmg_for_on_receiving_dmg_magic_drain(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_NATURAL ]) {
     TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_nat_att(victim, damage);

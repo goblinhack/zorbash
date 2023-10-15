@@ -524,9 +524,9 @@ void tp_dump_monsters(void)
       dmg_str += tp->dmg_lightning_dice_str();
       dmg_str += "<newline>";
     }
-    if (! tp->dmg_magic_dice_str().empty()) {
+    if (! tp->dmg_magic_drain_dice_str().empty()) {
       dmg_str += "Magic:";
-      dmg_str += tp->dmg_magic_dice_str();
+      dmg_str += tp->dmg_magic_drain_dice_str();
       dmg_str += "<newline>";
     }
     if (! tp->dmg_melee_dice_str().empty()) {
@@ -732,9 +732,9 @@ void tp_dump_weapons(void)
       dmg_str += tp->dmg_lightning_dice_str();
       dmg_str += "<newline>";
     }
-    if (! tp->dmg_magic_dice_str().empty()) {
+    if (! tp->dmg_magic_drain_dice_str().empty()) {
       dmg_str += "Damage-Magic:";
-      dmg_str += tp->dmg_magic_dice_str();
+      dmg_str += tp->dmg_magic_drain_dice_str();
       dmg_str += "<newline>";
     }
     if (! tp->dmg_missile_dice_str().empty()) {
