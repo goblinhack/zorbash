@@ -15,9 +15,6 @@ def on_targeted(me, x, y):
                 continue
 
             my.place_at(me, "block_of_crystal", x1, y1)
-            for it in my.level_get_all(me, x1, y1):
-                if my.thing_possible_to_attack(me, it):
-                    my.thing_hit(0, me, it)
 
     my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
 
@@ -38,9 +35,6 @@ def on_targeted_radially(me, x, y):
                 continue
 
             my.place_at(me, "block_of_crystal", x1, y1)
-            for it in my.level_get_all(me, x1, y1):
-                if my.thing_possible_to_attack(me, it):
-                    my.thing_hit(0, me, it)
 
     my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
 

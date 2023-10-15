@@ -7,7 +7,8 @@ def on_born(me, x, y):
     my.if_matches_then_dead(me, "is_wall", x, y)
     my.if_matches_then_dead(me, "is_rock", x, y)
     my.if_matches_then_dead(me, "is_door", x, y)
-    my.if_matches_then_dead(me, "is_crystal", x, y)
+    my.if_matches_then_dead(me, "is_block_of_crystal", x, y)
+    my.if_matches_then_dead(me, "is_block_of_ice", x, y)
 
 
 def tp_init(name, text_long_name, text_short_name):

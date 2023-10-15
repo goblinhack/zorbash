@@ -293,14 +293,6 @@ void Game::place_player(void)
         t->carry(w, carry_options);
       }
       if (0) {
-        auto w = level->thing_new("staff_tunneling", point(x, y));
-        t->carry(w, carry_options);
-      }
-      if (0) {
-        auto w = level->thing_new("staff_descent", point(x, y));
-        t->carry(w, carry_options);
-      }
-      if (0) {
         auto w = level->thing_new("gauntlets_lion", point(x, y - 2));
         t->carry(w, carry_options);
         t->enchant_without_stone(w);
@@ -498,6 +490,14 @@ void Game::place_player(void)
       }
       if (0) {
         auto w = level->thing_new("staff_cold", point(x, y));
+        t->carry(w, carry_options);
+      }
+      if (0) {
+        auto w = level->thing_new("staff_tunneling", point(x, y));
+        t->carry(w, carry_options);
+      }
+      if (0) {
+        auto w = level->thing_new("staff_descent", point(x, y));
         t->carry(w, carry_options);
       }
       if (0) {
