@@ -9,6 +9,8 @@ def on_born(me, x, y):
     my.if_matches_then_dead(me, "is_door", x, y)
     my.if_matches_then_dead(me, "is_block_of_crystal", x, y)
     my.if_matches_then_dead(me, "is_block_of_ice", x, y)
+    my.if_matches_then_dead(me, "is_turret", x, y)
+    my.if_matches_then_dead(me, "is_mob", x, y)
 
 
 def tp_init(name, text_long_name, text_short_name):
