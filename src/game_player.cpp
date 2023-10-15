@@ -89,7 +89,7 @@ void Game::place_player(void)
         t->carry(w, carry_options);
         level->thing_new("tentacleye", point(x + 1, y));
       }
-      if (0) {
+      if (1) {
         level->thing_new("skeleton", point(x, y + 3));
         auto w = level->thing_new("sword_holy", point(x, y));
         t->carry(w, carry_options);
@@ -937,8 +937,8 @@ void Game::place_player(void)
         d->is_burnt = true;
         d->dead("x");
       }
-      level->thing_new("block_of_crystal", point(x - 2, y - 1));
       if (0) {
+        level->thing_new("block_of_crystal", point(x - 2, y - 1));
         level->thing_new("fire", point(x + 1, y));
         level->thing_new("door_wood", point(x + 1, y));
         level->thing_new("lava", point(x + 2, y + 1));
