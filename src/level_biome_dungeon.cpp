@@ -489,7 +489,7 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
     }
 
     //
-    // Update the heatmap to avoid placing monsters next to lava
+    // Update the heat-map to avoid placing monsters next to lava
     //
     {
       uint32_t start = time_ms();
@@ -669,7 +669,7 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
     }
 
     //
-    // Final update of the heatmap to account placement of braziers
+    // Final update of the heat-map to account placement of braziers
     //
     dbg2("INF: Final update heatmap");
 
@@ -682,7 +682,7 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
-        slowest_so_far_which = "updating the heatmap again";
+        slowest_so_far_which = "updating the heat-map again";
       }
     }
 
@@ -1704,10 +1704,6 @@ void Level::create_biome_dungeon_place_foliage(Dungeonp d)
       for (auto dx = -entrance_distance; dx <= entrance_distance; dx++) {
         for (auto dy = -entrance_distance; dy <= entrance_distance; dy++) {
           if (d->is_ascend_dungeon(x + dx, y + dy)) {
-            skip = true;
-            break;
-          }
-          if (d->is_descend_dungeon(x + dx, y + dy)) {
             skip = true;
             break;
           }

@@ -101,14 +101,14 @@ void Game::tick_begin_now(void)
     level->tick_gas_healing();
 
     //
-    // Update the heatmap before the next tick
+    // Update the heat-map before the next tick
     //
     if (! level->is_heatmap_valid) {
       level->update_heatmap();
     }
 
     //
-    // Update the noisemap before the next tick
+    // Update the noise-map before the next tick
     //
     level->update_noisemap();
   }

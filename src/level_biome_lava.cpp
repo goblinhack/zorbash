@@ -399,7 +399,7 @@ bool Level::create_biome_lava(point3d at, uint32_t seed)
     }
 
     //
-    // Final update of the heatmap to account placement of braziers
+    // Final update of the heat-map to account placement of braziers
     //
     dbg2("INF: Final update heatmap");
 
@@ -409,7 +409,7 @@ bool Level::create_biome_lava(point3d at, uint32_t seed)
       uint32_t took = time_ms() - start;
       if (took > slowest_so_far) {
         slowest_so_far       = took;
-        slowest_so_far_which = "updating the heatmap again";
+        slowest_so_far_which = "updating the heat-map again";
       }
     }
 
