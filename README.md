@@ -1,21 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- crystal reflection                                                                                                                           -->
-<!-- TODO Scrolls and Potions disappear when used. Potions can be thrown.                                                                         -->
-<!-- TODO Scroll of Aggravate Monsters                                                                                                            -->
-<!-- TODO Scroll of Discord                                                                                                                       -->
-<!-- TODO Scroll of Enchanting                                                                                                                    -->
-<!-- TODO Scroll of Identify                                                                                                                      -->
-<!-- TODO Scroll of Magic Mapping                                                                                                                 -->
-<!-- TODO Scroll of Negation                                                                                                                      -->
-<!-- TODO Scroll of Protect Armor                                                                                                                 -->
-<!-- TODO Scroll of Protect Weapon                                                                                                                -->
-<!-- TODO Scroll of Recharging                                                                                                                    -->
-<!-- TODO Scroll of Remove Curse                                                                                                                  -->
-<!-- TODO Scroll of Sanctuary                                                                                                                     -->
-<!-- TODO Scroll of Shattering                                                                                                                    -->
-<!-- TODO Scroll of Summon Monsters                                                                                                               -->
-<!-- TODO Scroll of Teleportation                                                                                                                 -->
 <!-- TODO Staves and Wands fire blasts of magical energy but have a finite number of charges. Staves recharge over time, but wands do not.        -->
 <!-- TODO Wand of Beckoning                                                                                                                       -->
 <!-- TODO Wand of Domination                                                                                                                      -->

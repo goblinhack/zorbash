@@ -1695,6 +1695,32 @@ void Level::create_biome_dungeon_place_foliage(Dungeonp d)
       if (is_water(x, y)) {
         continue;
       }
+
+      //
+      // No foliage next to the entrance which obscures the player.
+      //
+      bool skip              = false;
+      int  entrance_distance = MAP_BORDER_ROCK - 1;
+      for (auto dx = -entrance_distance; dx <= entrance_distance; dx++) {
+        for (auto dy = -entrance_distance; dy <= entrance_distance; dy++) {
+          if (d->is_ascend_dungeon(x + dx, y + dy)) {
+            skip = true;
+            break;
+          }
+          if (d->is_descend_dungeon(x + dx, y + dy)) {
+            skip = true;
+            break;
+          }
+        }
+        if (skip) {
+          break;
+        }
+      }
+
+      if (skip) {
+        continue;
+      }
+
       auto tp = tp_random_foliage();
       if (unlikely(! tp)) {
         return;
