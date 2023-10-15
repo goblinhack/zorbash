@@ -12,6 +12,7 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.gfx_targeted_laser(self, "laser_magic_effect")
+    my.is_able_to_be_reflected(self, True)
     my.is_loggable(self, True)
     my.is_spell(self, True)
     my.is_target_select(self, True)

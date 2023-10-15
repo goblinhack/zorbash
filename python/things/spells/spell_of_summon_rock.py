@@ -16,6 +16,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.dmg_chance_d1000_crush(self, 0, 1000)
     my.dmg_crush_dice(self, "4d6")
     my.gfx_targeted_laser(self, "laser_magic_effect")
+    my.is_able_to_be_reflected(self, True)
     my.is_loggable(self, True)
     my.is_spell_always_succeeds(self, True)
     my.is_spell(self, True)

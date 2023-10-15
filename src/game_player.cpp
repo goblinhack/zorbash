@@ -642,22 +642,12 @@ void Game::place_player(void)
         b->carry(w, carry_options);
       }
       if (0) {
-        auto w = level->thing_new("staff_energy", point(x, y));
-        t->carry(w, carry_options);
-        t->enchant_without_stone(w);
-      }
-      if (0) {
         auto w = level->thing_new("map_treasure", point(x, y));
         t->carry(w, carry_options);
       }
       if (0) {
         auto w = level->thing_new("map_beast", point(x, y));
         t->carry(w, carry_options);
-      }
-      if (0) {
-        auto w = level->thing_new("staff_negation", point(x, y));
-        t->carry(w, carry_options);
-        level->thing_new("skeleton", point(x, y + 2));
       }
       if (0) {
         auto d = level->thing_new("dogman", point(x + 2, y));
@@ -744,6 +734,20 @@ void Game::place_player(void)
         auto w = level->thing_new("staff_descent", point(x, y));
         t->carry(w, carry_options);
         t->enchant_without_stone(w);
+      }
+      if (0) {
+        auto w = level->thing_new("staff_energy", point(x, y));
+        t->carry(w, carry_options);
+        t->enchant_without_stone(w);
+      }
+      if (0) {
+        auto w = level->thing_new("staff_negation", point(x, y));
+        t->carry(w, carry_options);
+        level->thing_new("skeleton", point(x + 1, y + 2));
+        level->thing_new("skeleton", point(x + 1, y + 1));
+        level->thing_new("skeleton", point(x + 0, y + 0));
+        level->thing_new("skeleton", point(x + 0, y - 1));
+        level->thing_new("skeleton", point(x + 0, y - 2));
       }
 
       if (0) {
@@ -933,8 +937,8 @@ void Game::place_player(void)
         d->is_burnt = true;
         d->dead("x");
       }
+      level->thing_new("block_of_crystal", point(x - 2, y - 1));
       if (0) {
-        level->thing_new("block_of_crystal", point(x - 2, y + 0));
         level->thing_new("fire", point(x + 1, y));
         level->thing_new("door_wood", point(x + 1, y));
         level->thing_new("lava", point(x + 2, y + 1));

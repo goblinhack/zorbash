@@ -65,6 +65,7 @@ bool Tp::matches(const std::string &what)
   if (is_able_to_attack_owner() && (what == "is_able_to_attack_owner")) { return true; }
   if (is_able_to_attack_totems() && (what == "is_able_to_attack_totems")) { return true; }
   if (is_able_to_be_equipped() && (what == "is_able_to_be_equipped")) { return true; }
+  if (is_able_to_be_reflected() && (what == "is_able_to_be_reflected")) { return true; }
   if (is_able_to_be_resurrected() && (what == "is_able_to_be_resurrected")) { return true; }
   if (is_able_to_be_surprised() && (what == "is_able_to_be_surprised")) { return true; }
   if (is_able_to_be_teleported() && (what == "is_able_to_be_teleported")) { return true; }
@@ -424,6 +425,7 @@ bool Tp::matches(const std::string &what)
   if (is_red_blooded() && (what == "is_red_blooded")) { return true; }
   if (is_red_blood() && (what == "is_red_blood")) { return true; }
   if (is_red_splatter() && (what == "is_red_splatter")) { return true; }
+  if (is_reflective() && (what == "is_reflective")) { return true; }
   if (is_removable_if_out_of_slots() && (what == "is_removable_if_out_of_slots")) { return true; }
   if (is_ring() && (what == "is_ring")) { return true; }
   if (is_ripple() && (what == "is_ripple")) { return true; }
@@ -555,8 +557,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag64() && (what == "is_unused_flag64")) { return true; }
   if (is_unused_flag65() && (what == "is_unused_flag65")) { return true; }
   if (is_unused_flag66() && (what == "is_unused_flag66")) { return true; }
-  if (is_unused_flag67() && (what == "is_unused_flag67")) { return true; }
-  if (is_unused_flag68() && (what == "is_unused_flag68")) { return true; }
   if (is_unused_flag6() && (what == "is_unused_flag6")) { return true; }
   if (is_unused_flag7() && (what == "is_unused_flag7")) { return true; }
   if (is_unused_flag8() && (what == "is_unused_flag8")) { return true; }
@@ -670,6 +670,7 @@ bool Thing::matches(const std::string &what)
   if (is_able_to_attack_owner() && (what == "is_able_to_attack_owner")) { return true; }
   if (is_able_to_attack_totems() && (what == "is_able_to_attack_totems")) { return true; }
   if (is_able_to_be_equipped() && (what == "is_able_to_be_equipped")) { return true; }
+  if (is_able_to_be_reflected() && (what == "is_able_to_be_reflected")) { return true; }
   if (is_able_to_be_resurrected() && (what == "is_able_to_be_resurrected")) { return true; }
   if (is_able_to_be_surprised() && (what == "is_able_to_be_surprised")) { return true; }
   if (is_able_to_be_teleported() && (what == "is_able_to_be_teleported")) { return true; }
@@ -1031,6 +1032,7 @@ bool Thing::matches(const std::string &what)
   if (is_red_blooded() && (what == "is_red_blooded")) { return true; }
   if (is_red_blood() && (what == "is_red_blood")) { return true; }
   if (is_red_splatter() && (what == "is_red_splatter")) { return true; }
+  if (is_reflective() && (what == "is_reflective")) { return true; }
   if (is_removable_if_out_of_slots() && (what == "is_removable_if_out_of_slots")) { return true; }
   if (is_ring() && (what == "is_ring")) { return true; }
   if (is_ripple() && (what == "is_ripple")) { return true; }
@@ -1162,8 +1164,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag64() && (what == "is_unused_flag64")) { return true; }
   if (is_unused_flag65() && (what == "is_unused_flag65")) { return true; }
   if (is_unused_flag66() && (what == "is_unused_flag66")) { return true; }
-  if (is_unused_flag67() && (what == "is_unused_flag67")) { return true; }
-  if (is_unused_flag68() && (what == "is_unused_flag68")) { return true; }
   if (is_unused_flag6() && (what == "is_unused_flag6")) { return true; }
   if (is_unused_flag7() && (what == "is_unused_flag7")) { return true; }
   if (is_unused_flag8() && (what == "is_unused_flag8")) { return true; }
@@ -1274,6 +1274,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_able_to_attack_owner") { return &Thing::is_able_to_attack_owner; }
   if (what == "is_able_to_attack_totems") { return &Thing::is_able_to_attack_totems; }
   if (what == "is_able_to_be_equipped") { return &Thing::is_able_to_be_equipped; }
+  if (what == "is_able_to_be_reflected") { return &Thing::is_able_to_be_reflected; }
   if (what == "is_able_to_be_resurrected") { return &Thing::is_able_to_be_resurrected; }
   if (what == "is_able_to_be_surprised") { return &Thing::is_able_to_be_surprised; }
   if (what == "is_able_to_be_teleported") { return &Thing::is_able_to_be_teleported; }
@@ -1627,6 +1628,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_red_blooded") { return &Thing::is_red_blooded; }
   if (what == "is_red_blood") { return &Thing::is_red_blood; }
   if (what == "is_red_splatter") { return &Thing::is_red_splatter; }
+  if (what == "is_reflective") { return &Thing::is_reflective; }
   if (what == "is_removable_if_out_of_slots") { return &Thing::is_removable_if_out_of_slots; }
   if (what == "is_ring") { return &Thing::is_ring; }
   if (what == "is_ripple") { return &Thing::is_ripple; }
@@ -1757,8 +1759,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag64") { return &Thing::is_unused_flag64; }
   if (what == "is_unused_flag65") { return &Thing::is_unused_flag65; }
   if (what == "is_unused_flag66") { return &Thing::is_unused_flag66; }
-  if (what == "is_unused_flag67") { return &Thing::is_unused_flag67; }
-  if (what == "is_unused_flag68") { return &Thing::is_unused_flag68; }
   if (what == "is_unused_flag6") { return &Thing::is_unused_flag6; }
   if (what == "is_unused_flag7") { return &Thing::is_unused_flag7; }
   if (what == "is_unused_flag8") { return &Thing::is_unused_flag8; }

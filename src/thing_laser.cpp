@@ -3,6 +3,7 @@
 //
 
 #include "my_game.hpp"
+#include "my_math.hpp"
 #include "my_thing.hpp"
 #include "my_thing_attack_options.hpp"
 
@@ -73,6 +74,55 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
   game->request_to_use_item = item;
 
   return is_target_select(item);
+}
+
+Thingp Thing::laser_reflect(Thingp item, const std::string &effect_name, Thingp target, UseOptions *use_options)
+{
+  point old_target = target->curr_at;
+  point delta      = curr_at - old_target;
+  delta.y          = -delta.y;
+  fpoint fdelta    = make_fpoint(delta);
+  float  angle     = angle_radians(fdelta);
+  float  len       = delta.length();
+  float  new_angle = 0;
+
+  float angle_deg = (angle / RAD_360) * 360.0;
+
+  if (angle_deg > 360) {
+    angle -= 360;
+  }
+
+  if (angle_deg < 0) {
+    angle += 360;
+  }
+
+  if (angle_deg == 0) {
+    new_angle = 0;
+  } else if (angle_deg == 90) {
+    new_angle = RAD_90;
+  } else if (angle_deg == 180) {
+    new_angle = RAD_180;
+  } else if (angle_deg == 270) {
+    new_angle = RAD_270;
+  } else if (angle_deg == 360) {
+    new_angle = 0;
+  } else {
+    new_angle = RAD_360 - angle;
+  }
+
+  fpoint new_target_at((float) old_target.x + (cos(new_angle) * len), (float) old_target.y - (sin(new_angle) * len));
+
+  TRACE_NO_INDENT();
+  FOR_ALL_GRID_THINGS(level, grid_thing, new_target_at.x, new_target_at.y)
+  {
+    if (grid_thing->is_the_grid) {
+      return target->laser_shoot_at(item, effect_name, grid_thing, use_options);
+    }
+    break;
+  }
+  FOR_ALL_THINGS_END()
+
+  return target;
 }
 
 Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, Thingp target, UseOptions *use_options)
@@ -266,6 +316,13 @@ Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, Thingp
           }
         }
 
+        //
+        // Reflection ? create another beam
+        //
+        if (other_target && other_target->is_reflective()) {
+          laser_reflect(item, effect_name, other_target, use_options);
+        }
+
         if (laser) {
           dbg("Firing named laser (at collatoral damage) with: %s at %s dist %f", laser->to_string().c_str(),
               other_target->to_short_string().c_str(), distance(curr_at, other_target->curr_at));
@@ -336,6 +393,13 @@ Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, Thingp
         } else {
           msg("%s zaps at %s.", text_The().c_str(), target->text_the().c_str());
         }
+      }
+
+      //
+      // Reflection ? create another beam
+      //
+      if (target->is_reflective()) {
+        laser_reflect(item, effect_name, target, use_options);
       }
 
       auto laser = level->thing_new(effect_name, target->curr_at, owner);

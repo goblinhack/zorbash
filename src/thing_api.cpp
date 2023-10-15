@@ -542,15 +542,15 @@ int Thing::is_unused_flag66(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag66());
 }
-int Thing::is_unused_flag67(void)
+int Thing::is_able_to_be_reflected(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag67());
+  return (tp()->is_able_to_be_reflected());
 }
-int Thing::is_unused_flag68(void)
+int Thing::is_reflective(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag68());
+  return (tp()->is_reflective());
 }
 int Thing::is_magic_crystal(void)
 {

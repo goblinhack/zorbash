@@ -177,6 +177,7 @@ PyObject *thing_is_able_to_attack_mobs(PyObject *obj, PyObject *args, PyObject *
 PyObject *thing_is_able_to_attack_owner(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_attack_totems(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_be_equipped(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_be_reflected(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_be_surprised(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_be_teleported(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_break_down_doors(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -556,6 +557,7 @@ PyObject *thing_is_rat(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_red_blooded(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_red_blood(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_red_splatter(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_reflective(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_removable_if_out_of_slots(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_resurrected_or_resurrecting(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_ring(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -690,8 +692,6 @@ PyObject *thing_is_unused_flag63(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag64(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag65(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag66(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag67(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag68(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag8(PyObject *obj, PyObject *args, PyObject *keywds);

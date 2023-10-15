@@ -57,6 +57,7 @@ def tp_init(name, text_long_name):
     my.is_obs_spell_casting(self, True)
     my.is_obs_throwing(self, True)
     my.is_one_per_tile(self, True)  # so staffs do not pile these up
+    my.is_reflective(self, True)
     my.is_shootable(self, True)
     my.is_tickable(self, True)  # So it can interact with fire
     my.is_very_hard(self, True)

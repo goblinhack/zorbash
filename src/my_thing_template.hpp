@@ -266,6 +266,7 @@ private:
   int _is_able_to_attack_owner {};
   int _is_able_to_attack_totems {};
   int _is_able_to_be_equipped {};
+  int _is_able_to_be_reflected {};
   int _is_able_to_be_resurrected {};
   int _is_able_to_be_surprised {};
   int _is_able_to_be_teleported {};
@@ -637,6 +638,7 @@ private:
   int _is_red_blood {};
   int _is_red_blooded {};
   int _is_red_splatter {};
+  int _is_reflective {};
   int _is_removable_if_out_of_slots {};
   int _is_ring {};
   int _is_ripple {};
@@ -774,8 +776,6 @@ private:
   int _is_unused_flag64 {};
   int _is_unused_flag65 {};
   int _is_unused_flag66 {};
-  int _is_unused_flag67 {};
-  int _is_unused_flag68 {};
   int _is_unused_flag7 {};
   int _is_unused_flag8 {};
   int _is_unused_flag9 {};
@@ -1637,6 +1637,7 @@ public:
   int is_able_to_attack_owner(void) const;
   int is_able_to_attack_totems(void) const;
   int is_able_to_be_equipped(void) const;
+  int is_able_to_be_reflected(void) const;
   int is_able_to_be_resurrected(void) const;
   int is_able_to_be_surprised(void) const;
   int is_able_to_be_teleported(void) const;
@@ -2007,6 +2008,7 @@ public:
   int is_red_blooded(void) const;
   int is_red_blood(void) const;
   int is_red_splatter(void) const;
+  int is_reflective(void) const;
   int is_removable_if_out_of_slots(void) const;
   int is_ring(void) const;
   int is_ripple(void) const;
@@ -2143,8 +2145,6 @@ public:
   int is_unused_flag64(void) const;
   int is_unused_flag65(void) const;
   int is_unused_flag66(void) const;
-  int is_unused_flag67(void) const;
-  int is_unused_flag68(void) const;
   int is_unused_flag6(void) const;
   int is_unused_flag7(void) const;
   int is_unused_flag8(void) const;
@@ -2410,6 +2410,7 @@ public:
   void is_able_to_attack_owner_set(int v);
   void is_able_to_attack_totems_set(int v);
   void is_able_to_be_equipped_set(int v);
+  void is_able_to_be_reflected_set(int v);
   void is_able_to_be_resurrected_set(int v);
   void is_able_to_be_surprised_set(int v);
   void is_able_to_be_teleported_set(int v);
@@ -2781,6 +2782,7 @@ public:
   void is_red_blooded_set(int v);
   void is_red_blood_set(int v);
   void is_red_splatter_set(int v);
+  void is_reflective_set(int v);
   void is_removable_if_out_of_slots_set(int v);
   void is_ring_set(int v);
   void is_ripple_set(int v);
@@ -2917,8 +2919,6 @@ public:
   void is_unused_flag64_set(int v);
   void is_unused_flag65_set(int v);
   void is_unused_flag66_set(int v);
-  void is_unused_flag67_set(int v);
-  void is_unused_flag68_set(int v);
   void is_unused_flag6_set(int v);
   void is_unused_flag7_set(int v);
   void is_unused_flag8_set(int v);

@@ -108,6 +108,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_targeted_radial(self, "staff_descent_radial")
     my.gold_value_dice(self, "750")
     my.health_initial_dice(self, "20+1d10")
+    my.is_able_to_be_reflected(self, True)
     my.is_able_to_be_teleported(self, True)
     my.is_able_to_fall(self, True)
     my.is_bag_item(self, True)

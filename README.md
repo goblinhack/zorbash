@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- crystal reflection                                                                                                                           -->
 <!-- TODO Staves and Wands fire blasts of magical energy but have a finite number of charges. Staves recharge over time, but wands do not.        -->
 <!-- TODO Staff of Tunneling                                                                                                                      -->
 <!-- TODO Scrolls and Potions disappear when used. Potions can be thrown.                                                                         -->

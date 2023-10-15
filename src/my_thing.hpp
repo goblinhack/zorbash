@@ -449,6 +449,7 @@ public:
   Thingp projectile_shoot_at(Thingp item, const std::string &proj_name, Thingp target);
   Thingp laser_shoot_at(Thingp item, const std::string &laser_name, point at, UseOptions *use_options = nullptr);
   Thingp laser_shoot_at(Thingp item, const std::string &laser_name, Thingp target, UseOptions *use_options = nullptr);
+  Thingp laser_reflect(Thingp item, const std::string &laser_name, Thingp target, UseOptions *use_options);
   Thingp spawn_at(const std::string &what);
   Thingp spawn_at(const std::string &what, point p);
   Thingp spawn_minion_at_my_position(const std::string &what);
@@ -1431,6 +1432,7 @@ public:
   int is_able_to_attack_owner(void);
   int is_able_to_attack_totems(void);
   int is_able_to_be_equipped(void);
+  int is_able_to_be_reflected(void);
   int is_able_to_be_resurrected(void);
   int is_able_to_be_surprised(void);
   int is_able_to_be_teleported(void);
@@ -1829,6 +1831,7 @@ public:
   int is_red_blooded(void);
   int is_red_blood(void);
   int is_red_splatter(void);
+  int is_reflective(void);
   int is_removable_if_out_of_slots(void);
   int is_resurrected_or_resurrecting(void);
   int is_ring(void);
@@ -1964,8 +1967,6 @@ public:
   int is_unused_flag64(void);
   int is_unused_flag65(void);
   int is_unused_flag66(void);
-  int is_unused_flag67(void);
-  int is_unused_flag68(void);
   int is_unused_flag6(void);
   int is_unused_flag7(void);
   int is_unused_flag8(void);

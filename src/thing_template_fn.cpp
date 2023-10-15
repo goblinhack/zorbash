@@ -360,6 +360,7 @@ int Tp::is_able_to_attack_mobs(void) const { return _is_able_to_attack_mobs; }
 int Tp::is_able_to_attack_owner(void) const { return _is_able_to_attack_owner; }
 int Tp::is_able_to_attack_totems(void) const { return _is_able_to_attack_totems; }
 int Tp::is_able_to_be_equipped(void) const { return _is_able_to_be_equipped; }
+int Tp::is_able_to_be_reflected(void) const { return _is_able_to_be_reflected; }
 int Tp::is_able_to_be_resurrected(void) const { return _is_able_to_be_resurrected; }
 int Tp::is_able_to_be_surprised(void) const { return _is_able_to_be_surprised; }
 int Tp::is_able_to_be_teleported(void) const { return _is_able_to_be_teleported; }
@@ -730,6 +731,7 @@ int Tp::is_rat(void) const { return _is_rat; }
 int Tp::is_red_blooded(void) const { return _is_red_blooded; }
 int Tp::is_red_blood(void) const { return _is_red_blood; }
 int Tp::is_red_splatter(void) const { return _is_red_splatter; }
+int Tp::is_reflective(void) const { return _is_reflective; }
 int Tp::is_removable_if_out_of_slots(void) const { return _is_removable_if_out_of_slots; }
 int Tp::is_ring(void) const { return _is_ring; }
 int Tp::is_ripple(void) const { return _is_ripple; }
@@ -865,8 +867,6 @@ int Tp::is_unused_flag63(void) const { return _is_unused_flag63; }
 int Tp::is_unused_flag64(void) const { return _is_unused_flag64; }
 int Tp::is_unused_flag65(void) const { return _is_unused_flag65; }
 int Tp::is_unused_flag66(void) const { return _is_unused_flag66; }
-int Tp::is_unused_flag67(void) const { return _is_unused_flag67; }
-int Tp::is_unused_flag68(void) const { return _is_unused_flag68; }
 int Tp::is_unused_flag6(void) const { return _is_unused_flag6; }
 int Tp::is_unused_flag7(void) const { return _is_unused_flag7; }
 int Tp::is_unused_flag8(void) const { return _is_unused_flag8; }
@@ -1132,6 +1132,7 @@ void Tp::is_able_to_attack_mobs_set(int v) { _is_able_to_attack_mobs = v; }
 void Tp::is_able_to_attack_owner_set(int v) { _is_able_to_attack_owner = v; }
 void Tp::is_able_to_attack_totems_set(int v) { _is_able_to_attack_totems = v; }
 void Tp::is_able_to_be_equipped_set(int v) { _is_able_to_be_equipped = v; }
+void Tp::is_able_to_be_reflected_set(int v) { _is_able_to_be_reflected = v; }
 void Tp::is_able_to_be_resurrected_set(int v) { _is_able_to_be_resurrected = v; }
 void Tp::is_able_to_be_surprised_set(int v) { _is_able_to_be_surprised = v; }
 void Tp::is_able_to_be_teleported_set(int v) { _is_able_to_be_teleported = v; }
@@ -1503,6 +1504,7 @@ void Tp::is_rat_set(int v) { _is_rat = v; }
 void Tp::is_red_blooded_set(int v) { _is_red_blooded = v; }
 void Tp::is_red_blood_set(int v) { _is_red_blood = v; }
 void Tp::is_red_splatter_set(int v) { _is_red_splatter = v; }
+void Tp::is_reflective_set(int v) { _is_reflective = v; }
 void Tp::is_removable_if_out_of_slots_set(int v) { _is_removable_if_out_of_slots = v; }
 void Tp::is_ring_set(int v) { _is_ring = v; }
 void Tp::is_ripple_set(int v) { _is_ripple = v; }
@@ -1638,8 +1640,6 @@ void Tp::is_unused_flag63_set(int v) { _is_unused_flag63 = v; }
 void Tp::is_unused_flag64_set(int v) { _is_unused_flag64 = v; }
 void Tp::is_unused_flag65_set(int v) { _is_unused_flag65 = v; }
 void Tp::is_unused_flag66_set(int v) { _is_unused_flag66 = v; }
-void Tp::is_unused_flag67_set(int v) { _is_unused_flag67 = v; }
-void Tp::is_unused_flag68_set(int v) { _is_unused_flag68 = v; }
 void Tp::is_unused_flag6_set(int v) { _is_unused_flag6 = v; }
 void Tp::is_unused_flag7_set(int v) { _is_unused_flag7 = v; }
 void Tp::is_unused_flag8_set(int v) { _is_unused_flag8 = v; }
