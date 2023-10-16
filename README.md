@@ -38,7 +38,6 @@
 <!-- - cracked walls                                                                                                                              -->
 <!-- - spider web spawn small spiders?                                                                                                            -->
 <!-- - monsters with random buffs like vampirism would be interesting                                                                             -->
-<!-- - crystals walls (or chest) that reflect, so can use on yourself or ally                                                                     -->
 <!-- - cursed weapon with bad luck                                                                                                                -->
 <!-- - luck trap                                                                                                                                  -->
 <!-- - boss 1 Mummy mummy, ankh of life                                                                                                           -->
@@ -111,7 +110,6 @@
 <!-- Potions                                                                                                                                      -->
 <!-- ------                                                                                                                                       -->
 <!-- - have a monster use a potion?                                                                                                               -->
-<!-- - antipoison potion                                                                                                                          -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Armor                                                                                                                                        -->
