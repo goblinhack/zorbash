@@ -33,7 +33,7 @@ def tp_init(
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
-    my.health_initial_dice(self, "1d30+10")
+    my.health_initial_dice(self, "1d30+60")
     my.is_always_hit(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
