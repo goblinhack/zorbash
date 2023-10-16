@@ -228,75 +228,75 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   if (attack_options->attack[ THING_ATTACK_POISON ]) {
     TRACE_NO_INDENT();
     damage = real_hitter->total_dmg_for_on_attacking_dmg_poison(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_poison(hitter, real_hitter, damage);
+    damage = victim->total_dmg_for_on_rcv_dmg_poison(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_BITE ]) {
     TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_bite(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_bite(hitter, real_hitter, damage);
+    damage = victim->total_dmg_for_on_rcv_dmg_bite(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_CLAW ]) {
     TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_claw(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_claw(hitter, real_hitter, damage);
+    damage = victim->total_dmg_for_on_rcv_dmg_claw(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_FIRE ]) {
     TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_fire(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_fire(hitter, real_hitter, damage);
+    damage = victim->total_dmg_for_on_rcv_dmg_fire(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_CRUSH ]) {
     TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_crush(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_crush(hitter, real_hitter, damage);
+    damage = victim->total_dmg_for_on_rcv_dmg_crush(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_IMPACT ]) {
     TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_impact(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_impact(hitter, real_hitter, damage);
+    damage = victim->total_dmg_for_on_rcv_dmg_impact(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_LIGHTNING ]) {
     TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_lightning(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_lightning(hitter, real_hitter, damage);
+    damage = victim->total_dmg_for_on_rcv_dmg_lightning(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_ENERGY ]) {
     TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_energy(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_energy(hitter, real_hitter, damage);
+    damage = victim->total_dmg_for_on_rcv_dmg_energy(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_NEGATION ]) {
     TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_negation(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_negation(hitter, real_hitter, damage);
+    damage = victim->total_dmg_for_on_rcv_dmg_negation(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_ACID ]) {
     TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_acid(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_acid(hitter, real_hitter, damage);
+    damage = victim->total_dmg_for_on_rcv_dmg_acid(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_ACID ]) {
     TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_acid(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_acid(hitter, real_hitter, damage);
+    damage = victim->total_dmg_for_on_rcv_dmg_acid(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_WATER ]) {
     TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_water(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_water(hitter, real_hitter, damage);
+    damage = victim->total_dmg_for_on_rcv_dmg_water(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_DIGEST ]) {
     TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_digest(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_digest(hitter, real_hitter, damage);
+    damage = victim->total_dmg_for_on_rcv_dmg_digest(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
     TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_necrosis(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_necrosis(hitter, real_hitter, damage);
+    damage = victim->total_dmg_for_on_rcv_dmg_necrosis(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
     TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_stamina(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_stamina(hitter, real_hitter, damage);
+    damage = victim->total_dmg_for_on_rcv_dmg_stamina(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
     TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_magic_drain(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_magic_drain(hitter, real_hitter, damage);
+    damage = victim->total_dmg_for_on_rcv_dmg_magic_drain(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_NATURAL ]) {
     TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_nat_att(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_nat_att(hitter, real_hitter, damage);
+    damage = victim->total_dmg_for_on_rcv_dmg_nat_att(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_COLD ]) {
     TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_cold(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_cold(hitter, real_hitter, damage);
+    damage = victim->total_dmg_for_on_rcv_dmg_cold(hitter, real_hitter, damage);
 
     if (is_on_fire()) {
       if (is_player()) {
@@ -312,15 +312,15 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {
     TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_drown(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_drown(hitter, real_hitter, damage);
+    damage = victim->total_dmg_for_on_rcv_dmg_drown(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
     TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_missile(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_missile(hitter, real_hitter, damage);
+    damage = victim->total_dmg_for_on_rcv_dmg_missile(hitter, real_hitter, damage);
   } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
     TRACE_NO_INDENT();
     real_hitter->total_dmg_for_on_attacking_dmg_heat(victim, damage);
-    damage = victim->total_dmg_for_on_receiving_dmg_heat(hitter, real_hitter, damage);
+    damage = victim->total_dmg_for_on_rcv_dmg_heat(hitter, real_hitter, damage);
   } else {
     TRACE_NO_INDENT();
     //
@@ -331,7 +331,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     //
     // And use this for damage reduction on the victim.
     //
-    damage = victim->total_dmg_for_on_receiving_dmg_melee(hitter, real_hitter, damage);
+    damage = victim->total_dmg_for_on_rcv_dmg_melee(hitter, real_hitter, damage);
   }
 
   TRACE_NO_INDENT();
@@ -382,7 +382,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     IF_DEBUG { real_hitter->log("Attack poison damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "poison ";
 
-    if (dmg_received_doubled_from_poison()) {
+    if (dmg_rcv_doubled_from_poison()) {
       damage *= 2;
       dmg_type = "double " + dmg_type;
       dbg("Double damage from poison");
@@ -493,7 +493,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     dmg_type = "cold ";
 
     if (temperature_sensitive()) {
-      if ((temperature_get() > TEMPERATURE_THRESHOLD) || is_burnt || dmg_received_doubled_from_cold()) {
+      if ((temperature_get() > TEMPERATURE_THRESHOLD) || is_burnt || dmg_rcv_doubled_from_cold()) {
         dmg_type = "double " + dmg_type;
         damage *= 2;
         dbg("Double damage from cold");
@@ -536,8 +536,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     dmg_type = "fire ";
 
     if (temperature_sensitive()) {
-      if ((temperature_get() < -TEMPERATURE_THRESHOLD) || was_frozen || is_frozen
-          || dmg_received_doubled_from_fire()) {
+      if ((temperature_get() < -TEMPERATURE_THRESHOLD) || was_frozen || is_frozen || dmg_rcv_doubled_from_fire()) {
         dmg_type = "double " + dmg_type;
         damage *= 2;
         dbg("Double damage from fire");
@@ -729,7 +728,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     IF_DEBUG { real_hitter->log("Attack dmg_acid damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "acid ";
 
-    if (dmg_received_doubled_from_acid()) {
+    if (dmg_rcv_doubled_from_acid()) {
       damage *= 2;
       dmg_type = "double " + dmg_type;
       dbg("Double damage from acid");
@@ -772,7 +771,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     IF_DEBUG { real_hitter->log("Attack dmg_water damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "water ";
 
-    if (dmg_received_doubled_from_water()) {
+    if (dmg_rcv_doubled_from_water()) {
       damage *= 2;
       dmg_type = "double " + dmg_type;
       dbg("Double damage from water");
@@ -834,7 +833,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     IF_DEBUG { real_hitter->log("Attack necrosis damage %d on %s", damage, to_short_string().c_str()); }
     dmg_type = "rotting ";
 
-    if (dmg_received_doubled_from_necrosis()) {
+    if (dmg_rcv_doubled_from_necrosis()) {
       damage *= 2;
       dmg_type = "double " + dmg_type;
       dbg("Double damage from necrosis");
@@ -970,8 +969,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     dmg_type = "heat ";
 
     if (temperature_sensitive()) {
-      if ((temperature_get() < -TEMPERATURE_THRESHOLD) || was_frozen || is_frozen
-          || dmg_received_doubled_from_fire()) {
+      if ((temperature_get() < -TEMPERATURE_THRESHOLD) || was_frozen || is_frozen || dmg_rcv_doubled_from_fire()) {
         dmg_type = "double " + dmg_type;
         damage *= 2;
         dbg("Double damage from heat");
@@ -1234,7 +1232,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           } else {
             damage = 1;
           }
-          damage = total_dmg_for_on_receiving_dmg_stat_str(hitter, real_hitter, damage);
+          damage = total_dmg_for_on_rcv_dmg_stat_str(hitter, real_hitter, damage);
           if (! damage) {
             IF_DEBUG { real_hitter->log("No strength damage"); }
             return false;
@@ -1271,7 +1269,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           } else {
             damage = 1;
           }
-          damage = total_dmg_for_on_receiving_dmg_stat_con(hitter, real_hitter, damage);
+          damage = total_dmg_for_on_rcv_dmg_stat_con(hitter, real_hitter, damage);
           if (! damage) {
             IF_DEBUG { real_hitter->log("No con damage"); }
             return false;

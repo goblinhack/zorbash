@@ -23,7 +23,7 @@ def tp_init(name, text_long_name):
     my.dmg_nat_att_dice(self, "1d6+6")
     my.dmg_nat_att_type(self, "icy touch")
     my.dmg_num_of_attacks(self, 2)
-    my.dmg_received_doubled_from_water(self, True)
+    my.dmg_rcv_doubled_from_water(self, True)
     my.environ_hates_water(self, 100)
     my.gfx_anim_use(self, "scythe_swing")
     my.gfx_ascii_fade_with_dist(self, True)

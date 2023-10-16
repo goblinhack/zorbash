@@ -35,7 +35,7 @@ def tp_init(name, text_long_name):
     my.chance_d1000_shove(self, 200)
     my.collision_check(self, True)
     my.collision_hit_priority(self, 5)
-    my.dmg_received_doubled_from_water(self, True)
+    my.dmg_rcv_doubled_from_water(self, True)
     my.environ_hates_water(self, 100)
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)

@@ -13,17 +13,17 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.collision_check(self, True)
     my.collision_hit_priority(self, 100)
-    my.dmg_chance_d1000_negation(self, 0, 1000)
-    my.dmg_negation_dice(self, "1")
     my.dmg_chance_d1000_magic_drain(self, 0, 1000)
+    my.dmg_chance_d1000_negation(self, 0, 1000)
     my.dmg_magic_drain_dice(self, "1")
+    my.dmg_negation_dice(self, "1")
     my.dmg_num_of_attacks(self, 2)
     my.gfx_ascii_fade_with_dist(self, True)
-    my.gfx_pixelart_oversized_and_centered(self, True)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_oversized_and_centered(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
@@ -31,17 +31,12 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_shown_in_bg(self, True)
     my.gfx_pixelart_submergible(self, True)
     my.health_initial_dice(self, "100+1d100")
-    my.is_always_hit(self, True)
     my.is_attackable_by_monst(self, True)
-    my.is_attackable_by_player(self, True)
     my.is_cursor_can_hover_over(self, True)
-    my.is_cursor_path_blocker(self, True)
     my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
-    my.is_ethereal(self, True)
     my.is_gas_blocker(self, True)
     my.is_gas_explosion_blocker(self, True)
-    my.is_hittable(self, True)
     my.is_immune_to_cold(self, True)
     my.is_immune_to_necrosis(self, True)
     my.is_immune_to_poison(self, True)
@@ -52,7 +47,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_obs_spawn_monst(self, True)
     my.is_obs_spawn(self, True)
     my.is_one_per_tile(self, True)  # so wands of ice do not pile these up
-    my.is_shootable(self, True)
     my.is_spell_of_sanctuary_barrier(self, True)
     my.is_tickable(self, True)
     my.lifespan_dice(self, "20+1d20")
@@ -73,21 +67,21 @@ def tp_init(name, text_long_name, text_short_name):
 
     delay = 250
 
-    my.tile(self, ascii_bg_char="block", ascii_bg_col_name="red", ascii_bg_alpha=255,
+    my.tile(self, ascii_fg_char="*", ascii_bg_char="block", ascii_bg_col_name="red", ascii_bg_alpha=200,
             delay_ms=delay, tile="spell_of_sanctuary_barrier.1")
-    my.tile(self, ascii_bg_char="block", ascii_bg_col_name="red", ascii_bg_alpha=200,
+    my.tile(self, ascii_fg_char="*", ascii_bg_char="block", ascii_bg_col_name="red", ascii_bg_alpha=255,
             delay_ms=delay, tile="spell_of_sanctuary_barrier.2")
-    my.tile(self, ascii_bg_char="block", ascii_bg_col_name="red", ascii_bg_alpha=200,
+    my.tile(self, ascii_fg_char="*", ascii_bg_char="block", ascii_bg_col_name="red", ascii_bg_alpha=200,
             delay_ms=delay, tile="spell_of_sanctuary_barrier.3")
-    my.tile(self, ascii_bg_char="block", ascii_bg_col_name="red", ascii_bg_alpha=150,
+    my.tile(self, ascii_fg_char="*", ascii_bg_char="block", ascii_bg_col_name="red", ascii_bg_alpha=150,
             delay_ms=delay, tile="spell_of_sanctuary_barrier.4")
-    my.tile(self, ascii_bg_char="block", ascii_bg_col_name="red", ascii_bg_alpha=150,
+    my.tile(self, ascii_fg_char="*", ascii_bg_char="block", ascii_bg_col_name="red", ascii_bg_alpha=150,
             delay_ms=delay, tile="spell_of_sanctuary_barrier.1")
-    my.tile(self, ascii_bg_char="block", ascii_bg_col_name="red", ascii_bg_alpha=100,
+    my.tile(self, ascii_fg_char="*", ascii_bg_char="block", ascii_bg_col_name="red", ascii_bg_alpha=100,
             delay_ms=delay, tile="spell_of_sanctuary_barrier.2")
-    my.tile(self, ascii_bg_char="block", ascii_bg_col_name="red", ascii_bg_alpha=100,
+    my.tile(self, ascii_fg_char="*", ascii_bg_char="block", ascii_bg_col_name="red", ascii_bg_alpha=150,
             delay_ms=delay, tile="spell_of_sanctuary_barrier.3")
-    my.tile(self, ascii_bg_char="block", ascii_bg_col_name="red", ascii_bg_alpha=50,
+    my.tile(self, ascii_fg_char="*", ascii_bg_char="block", ascii_bg_col_name="red", ascii_bg_alpha=150,
             delay_ms=delay, tile="spell_of_sanctuary_barrier.4")
 
     my.tp_update(self)

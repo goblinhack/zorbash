@@ -54,7 +54,7 @@ def tp_init(name, text_long_name):
     my.dmg_chance_d1000_nat_att(self, 0, 100)
     my.dmg_nat_att_dice(self, "1d4+1")
     my.dmg_nat_att_type(self, "bite")
-    my.dmg_received_doubled_from_fire(self, True)
+    my.dmg_rcv_doubled_from_fire(self, True)
     my.environ_dislikes_acid(self, 100)
     my.environ_dislikes_cold(self, 100)
     my.environ_dislikes_poison(self, 100)

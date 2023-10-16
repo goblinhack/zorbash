@@ -517,7 +517,7 @@ void Game::place_player(void)
         auto w = level->thing_new("staff_descent", point(x, y));
         t->carry(w, carry_options);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_obstruction", point(x, y));
         t->carry(w, carry_options);
       }
@@ -878,6 +878,7 @@ void Game::place_player(void)
       }
       IF_DEBUG2
       {
+        level->thing_new("staff_blinking", point(x, y + 1));
         if (0) {
           level->thing_new("staff_blinking", point(x, y + 1));
           level->thing_new("boots_teleport", point(x, y - 1));

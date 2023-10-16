@@ -41,7 +41,7 @@ def tp_init(name, text_long_name):
     my.dmg_nat_att_dice(self, "1d3+1")
     my.dmg_nat_att_type(self, "bite")
     my.dmg_poison_dice(self, "1d3+1")
-    my.dmg_received_doubled_from_fire(self, True)
+    my.dmg_rcv_doubled_from_fire(self, True)
     my.environ_dislikes_cold(self, 100)
     my.environ_hates_fire(self, 10)
     my.gfx_anim_use(self, "attack_red")

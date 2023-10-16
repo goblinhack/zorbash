@@ -44,7 +44,7 @@ def tp_init(name, text_long_name):
     my.dmg_nat_att_dice(self, "1d3")
     my.dmg_nat_att_type(self, "gore")
     my.dmg_poison_dice(self, "1d4")
-    my.dmg_received_doubled_from_fire(self, True)
+    my.dmg_rcv_doubled_from_fire(self, True)
     my.environ_hates_fire(self, 10)
     my.gfx_anim_use(self, "attack_green")
     my.gfx_ascii_fade_with_dist(self, True)

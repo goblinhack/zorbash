@@ -5,79 +5,79 @@ import skill_vampiric_touch0
 self = None
 
 
-def on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_rcv_dmg(me, owner, hitter, real_hitter, x, y, damage):
     return skill_vampiric_touch0.do_vampiric_touch(me, owner, hitter, real_hitter, x, y, damage, 50)
 
 
-def on_owner_receive_dmg_melee(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage)
+def on_owner_rcv_dmg_melee(me, owner, hitter, real_hitter, x, y, damage):
+    return on_owner_rcv_dmg(me, owner, hitter, real_hitter, x, y, damage)
 
 
-def on_owner_receive_dmg_poison(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage)
+def on_owner_rcv_dmg_poison(me, owner, hitter, real_hitter, x, y, damage):
+    return on_owner_rcv_dmg(me, owner, hitter, real_hitter, x, y, damage)
 
 
-def on_owner_receive_dmg_drown(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage * 2)
+def on_owner_rcv_dmg_drown(me, owner, hitter, real_hitter, x, y, damage):
+    return on_owner_rcv_dmg(me, owner, hitter, real_hitter, x, y, damage * 2)
 
 
-def on_owner_receive_dmg_bite(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage)
+def on_owner_rcv_dmg_bite(me, owner, hitter, real_hitter, x, y, damage):
+    return on_owner_rcv_dmg(me, owner, hitter, real_hitter, x, y, damage)
 
 
-def on_owner_receive_dmg_claw(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage)
+def on_owner_rcv_dmg_claw(me, owner, hitter, real_hitter, x, y, damage):
+    return on_owner_rcv_dmg(me, owner, hitter, real_hitter, x, y, damage)
 
 
-def on_owner_receive_dmg_cold(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage)
+def on_owner_rcv_dmg_cold(me, owner, hitter, real_hitter, x, y, damage):
+    return on_owner_rcv_dmg(me, owner, hitter, real_hitter, x, y, damage)
 
 
-def on_owner_receive_dmg_fire(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage * 2)
+def on_owner_rcv_dmg_fire(me, owner, hitter, real_hitter, x, y, damage):
+    return on_owner_rcv_dmg(me, owner, hitter, real_hitter, x, y, damage * 2)
 
 
-def on_owner_receive_dmg_heat(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage * 2)
+def on_owner_rcv_dmg_heat(me, owner, hitter, real_hitter, x, y, damage):
+    return on_owner_rcv_dmg(me, owner, hitter, real_hitter, x, y, damage * 2)
 
 
-def on_owner_receive_dmg_crush(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_rcv_dmg_crush(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_receive_dmg_missile(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_rcv_dmg_missile(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_receive_dmg_lightning(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage * 2)
+def on_owner_rcv_dmg_lightning(me, owner, hitter, real_hitter, x, y, damage):
+    return on_owner_rcv_dmg(me, owner, hitter, real_hitter, x, y, damage * 2)
 
 
-def on_owner_receive_dmg_energy(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_rcv_dmg_energy(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_receive_dmg_acid(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_rcv_dmg_acid(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_receive_dmg_digest(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_rcv_dmg_digest(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_receive_dmg_nat_att(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage)
+def on_owner_rcv_dmg_nat_att(me, owner, hitter, real_hitter, x, y, damage):
+    return on_owner_rcv_dmg(me, owner, hitter, real_hitter, x, y, damage)
 
 
-def on_owner_receive_dmg_necrosis(me, owner, hitter, real_hitter, x, y, damage):
-    return on_owner_receive_dmg(me, owner, hitter, real_hitter, x, y, damage)
+def on_owner_rcv_dmg_necrosis(me, owner, hitter, real_hitter, x, y, damage):
+    return on_owner_rcv_dmg(me, owner, hitter, real_hitter, x, y, damage)
 
 
-def on_owner_receive_dmg_stat_str(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_rcv_dmg_stat_str(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 
-def on_owner_receive_dmg_stat_con(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_rcv_dmg_stat_con(me, owner, hitter, real_hitter, x, y, damage):
     return damage
 
 

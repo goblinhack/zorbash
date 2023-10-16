@@ -4,10 +4,14 @@ import tp
 
 def on_targeted(me, x, y):
     radius = my.thing_effect_radius_get(me)
+    radius += 1
     # my.con("targeted {} {:X} radius {}".format(my.thing_name_get(me), me, radius))
 
     for dx in range(-radius, radius + 1):
         for dy in range(-radius, radius + 1):
+            if dx == 0 and dy == 0:
+                continue
+
             x1 = x + dx
             y1 = y + dy
             distance = (((x1 - x)**2 + (y1 - y)**2)**0.5)

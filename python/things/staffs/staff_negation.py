@@ -74,7 +74,7 @@ def explode(me, x, y):
     my.thing_dead(me, "exploded")
 
 
-def on_receiving_dmg_negation(me, hitter, real_hitter, x, y, damage):
+def on_rcv_dmg_negation(me, hitter, real_hitter, x, y, damage):
     explode(me, x, y)
     return damage
 
@@ -150,7 +150,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_fall_do(self, "me.on_fall()")
     my.on_hit_and_now_dead_do(self, "me.on_hit_and_now_dead()")
     my.on_idle_tick_freq_dice(self, "1d200+200:me.on_idle()")
-    my.on_receiving_dmg_negation_do(self, "me.on_receiving_dmg_negation()")
+    my.on_rcv_dmg_negation_do(self, "me.on_rcv_dmg_negation()")
     my.on_targeted_do(self, "me.on_targeted()")
     my.on_targeted_radially_do(self, "me.on_targeted_radially()")
     my.range_max(self, 7)

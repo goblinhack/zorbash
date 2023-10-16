@@ -112,60 +112,57 @@ const std::string &Tp::on_owner_attack_dmg_stat_att_do(void) const { return _on_
 const std::string &Tp::on_owner_attack_dmg_stat_con_do(void) const { return _on_owner_attack_dmg_stat_con_do; }
 const std::string &Tp::on_owner_attack_dmg_stat_str_do(void) const { return _on_owner_attack_dmg_stat_str_do; }
 const std::string &Tp::on_owner_attack_dmg_water_do(void) const { return _on_owner_attack_dmg_water_do; }
-const std::string &Tp::on_owner_receive_dmg_acid_do(void) const { return _on_owner_receive_dmg_acid_do; }
-const std::string &Tp::on_owner_receive_dmg_bite_do(void) const { return _on_owner_receive_dmg_bite_do; }
-const std::string &Tp::on_owner_receive_dmg_claw_do(void) const { return _on_owner_receive_dmg_claw_do; }
-const std::string &Tp::on_owner_receive_dmg_cold_do(void) const { return _on_owner_receive_dmg_cold_do; }
-const std::string &Tp::on_owner_receive_dmg_crush_do(void) const { return _on_owner_receive_dmg_crush_do; }
-const std::string &Tp::on_owner_receive_dmg_digest_do(void) const { return _on_owner_receive_dmg_digest_do; }
-const std::string &Tp::on_owner_receive_dmg_drown_do(void) const { return _on_owner_receive_dmg_drown_do; }
-const std::string &Tp::on_owner_receive_dmg_energy_do(void) const { return _on_owner_receive_dmg_energy_do; }
-const std::string &Tp::on_owner_receive_dmg_fire_do(void) const { return _on_owner_receive_dmg_fire_do; }
-const std::string &Tp::on_owner_receive_dmg_heat_do(void) const { return _on_owner_receive_dmg_heat_do; }
-const std::string &Tp::on_owner_receive_dmg_impact_do(void) const { return _on_owner_receive_dmg_impact_do; }
-const std::string &Tp::on_owner_receive_dmg_lightning_do(void) const { return _on_owner_receive_dmg_lightning_do; }
-const std::string &Tp::on_owner_receive_dmg_magic_drain_do(void) const
-{
-  return _on_owner_receive_dmg_magic_drain_do;
-}
-const std::string &Tp::on_owner_receive_dmg_melee_do(void) const { return _on_owner_receive_dmg_melee_do; }
-const std::string &Tp::on_owner_receive_dmg_missile_do(void) const { return _on_owner_receive_dmg_missile_do; }
-const std::string &Tp::on_owner_receive_dmg_nat_att_do(void) const { return _on_owner_receive_dmg_nat_att_do; }
-const std::string &Tp::on_owner_receive_dmg_necrosis_do(void) const { return _on_owner_receive_dmg_necrosis_do; }
-const std::string &Tp::on_owner_receive_dmg_negation_do(void) const { return _on_owner_receive_dmg_negation_do; }
-const std::string &Tp::on_owner_receive_dmg_poison_do(void) const { return _on_owner_receive_dmg_poison_do; }
-const std::string &Tp::on_owner_receive_dmg_stamina_do(void) const { return _on_owner_receive_dmg_stamina_do; }
-const std::string &Tp::on_owner_receive_dmg_stat_att_do(void) const { return _on_owner_receive_dmg_stat_att_do; }
-const std::string &Tp::on_owner_receive_dmg_stat_con_do(void) const { return _on_owner_receive_dmg_stat_con_do; }
-const std::string &Tp::on_owner_receive_dmg_stat_str_do(void) const { return _on_owner_receive_dmg_stat_str_do; }
-const std::string &Tp::on_owner_receive_dmg_water_do(void) const { return _on_owner_receive_dmg_water_do; }
+const std::string &Tp::on_owner_rcv_dmg_acid_do(void) const { return _on_owner_rcv_dmg_acid_do; }
+const std::string &Tp::on_owner_rcv_dmg_bite_do(void) const { return _on_owner_rcv_dmg_bite_do; }
+const std::string &Tp::on_owner_rcv_dmg_claw_do(void) const { return _on_owner_rcv_dmg_claw_do; }
+const std::string &Tp::on_owner_rcv_dmg_cold_do(void) const { return _on_owner_rcv_dmg_cold_do; }
+const std::string &Tp::on_owner_rcv_dmg_crush_do(void) const { return _on_owner_rcv_dmg_crush_do; }
+const std::string &Tp::on_owner_rcv_dmg_digest_do(void) const { return _on_owner_rcv_dmg_digest_do; }
+const std::string &Tp::on_owner_rcv_dmg_drown_do(void) const { return _on_owner_rcv_dmg_drown_do; }
+const std::string &Tp::on_owner_rcv_dmg_energy_do(void) const { return _on_owner_rcv_dmg_energy_do; }
+const std::string &Tp::on_owner_rcv_dmg_fire_do(void) const { return _on_owner_rcv_dmg_fire_do; }
+const std::string &Tp::on_owner_rcv_dmg_heat_do(void) const { return _on_owner_rcv_dmg_heat_do; }
+const std::string &Tp::on_owner_rcv_dmg_impact_do(void) const { return _on_owner_rcv_dmg_impact_do; }
+const std::string &Tp::on_owner_rcv_dmg_lightning_do(void) const { return _on_owner_rcv_dmg_lightning_do; }
+const std::string &Tp::on_owner_rcv_dmg_magic_drain_do(void) const { return _on_owner_rcv_dmg_magic_drain_do; }
+const std::string &Tp::on_owner_rcv_dmg_melee_do(void) const { return _on_owner_rcv_dmg_melee_do; }
+const std::string &Tp::on_owner_rcv_dmg_missile_do(void) const { return _on_owner_rcv_dmg_missile_do; }
+const std::string &Tp::on_owner_rcv_dmg_nat_att_do(void) const { return _on_owner_rcv_dmg_nat_att_do; }
+const std::string &Tp::on_owner_rcv_dmg_necrosis_do(void) const { return _on_owner_rcv_dmg_necrosis_do; }
+const std::string &Tp::on_owner_rcv_dmg_negation_do(void) const { return _on_owner_rcv_dmg_negation_do; }
+const std::string &Tp::on_owner_rcv_dmg_poison_do(void) const { return _on_owner_rcv_dmg_poison_do; }
+const std::string &Tp::on_owner_rcv_dmg_stamina_do(void) const { return _on_owner_rcv_dmg_stamina_do; }
+const std::string &Tp::on_owner_rcv_dmg_stat_att_do(void) const { return _on_owner_rcv_dmg_stat_att_do; }
+const std::string &Tp::on_owner_rcv_dmg_stat_con_do(void) const { return _on_owner_rcv_dmg_stat_con_do; }
+const std::string &Tp::on_owner_rcv_dmg_stat_str_do(void) const { return _on_owner_rcv_dmg_stat_str_do; }
+const std::string &Tp::on_owner_rcv_dmg_water_do(void) const { return _on_owner_rcv_dmg_water_do; }
 const std::string &Tp::on_owner_unset_do(void) const { return _on_owner_unset_do; }
 const std::string &Tp::on_polymorphed_do(void) const { return _on_polymorphed_do; }
 const std::string &Tp::on_pre_teleport_do(void) const { return _on_pre_teleport_do; }
-const std::string &Tp::on_receiving_dmg_acid_do(void) const { return _on_receiving_dmg_acid_do; }
-const std::string &Tp::on_receiving_dmg_bite_do(void) const { return _on_receiving_dmg_bite_do; }
-const std::string &Tp::on_receiving_dmg_claw_do(void) const { return _on_receiving_dmg_claw_do; }
-const std::string &Tp::on_receiving_dmg_cold_do(void) const { return _on_receiving_dmg_cold_do; }
-const std::string &Tp::on_receiving_dmg_crush_do(void) const { return _on_receiving_dmg_crush_do; }
-const std::string &Tp::on_receiving_dmg_digest_do(void) const { return _on_receiving_dmg_digest_do; }
-const std::string &Tp::on_receiving_dmg_drown_do(void) const { return _on_receiving_dmg_drown_do; }
-const std::string &Tp::on_receiving_dmg_energy_do(void) const { return _on_receiving_dmg_energy_do; }
-const std::string &Tp::on_receiving_dmg_fire_do(void) const { return _on_receiving_dmg_fire_do; }
-const std::string &Tp::on_receiving_dmg_heat_do(void) const { return _on_receiving_dmg_heat_do; }
-const std::string &Tp::on_receiving_dmg_impact_do(void) const { return _on_receiving_dmg_impact_do; }
-const std::string &Tp::on_receiving_dmg_lightning_do(void) const { return _on_receiving_dmg_lightning_do; }
-const std::string &Tp::on_receiving_dmg_magic_drain_do(void) const { return _on_receiving_dmg_magic_drain_do; }
-const std::string &Tp::on_receiving_dmg_melee_do(void) const { return _on_receiving_dmg_melee_do; }
-const std::string &Tp::on_receiving_dmg_missile_do(void) const { return _on_receiving_dmg_missile_do; }
-const std::string &Tp::on_receiving_dmg_nat_att_do(void) const { return _on_receiving_dmg_nat_att_do; }
-const std::string &Tp::on_receiving_dmg_necrosis_do(void) const { return _on_receiving_dmg_necrosis_do; }
-const std::string &Tp::on_receiving_dmg_negation_do(void) const { return _on_receiving_dmg_negation_do; }
-const std::string &Tp::on_receiving_dmg_poison_do(void) const { return _on_receiving_dmg_poison_do; }
-const std::string &Tp::on_receiving_dmg_stamina_do(void) const { return _on_receiving_dmg_stamina_do; }
-const std::string &Tp::on_receiving_dmg_stat_att_do(void) const { return _on_receiving_dmg_stat_att_do; }
-const std::string &Tp::on_receiving_dmg_stat_con_do(void) const { return _on_receiving_dmg_stat_con_do; }
-const std::string &Tp::on_receiving_dmg_stat_str_do(void) const { return _on_receiving_dmg_stat_str_do; }
-const std::string &Tp::on_receiving_dmg_water_do(void) const { return _on_receiving_dmg_water_do; }
+const std::string &Tp::on_rcv_dmg_acid_do(void) const { return _on_rcv_dmg_acid_do; }
+const std::string &Tp::on_rcv_dmg_bite_do(void) const { return _on_rcv_dmg_bite_do; }
+const std::string &Tp::on_rcv_dmg_claw_do(void) const { return _on_rcv_dmg_claw_do; }
+const std::string &Tp::on_rcv_dmg_cold_do(void) const { return _on_rcv_dmg_cold_do; }
+const std::string &Tp::on_rcv_dmg_crush_do(void) const { return _on_rcv_dmg_crush_do; }
+const std::string &Tp::on_rcv_dmg_digest_do(void) const { return _on_rcv_dmg_digest_do; }
+const std::string &Tp::on_rcv_dmg_drown_do(void) const { return _on_rcv_dmg_drown_do; }
+const std::string &Tp::on_rcv_dmg_energy_do(void) const { return _on_rcv_dmg_energy_do; }
+const std::string &Tp::on_rcv_dmg_fire_do(void) const { return _on_rcv_dmg_fire_do; }
+const std::string &Tp::on_rcv_dmg_heat_do(void) const { return _on_rcv_dmg_heat_do; }
+const std::string &Tp::on_rcv_dmg_impact_do(void) const { return _on_rcv_dmg_impact_do; }
+const std::string &Tp::on_rcv_dmg_lightning_do(void) const { return _on_rcv_dmg_lightning_do; }
+const std::string &Tp::on_rcv_dmg_magic_drain_do(void) const { return _on_rcv_dmg_magic_drain_do; }
+const std::string &Tp::on_rcv_dmg_melee_do(void) const { return _on_rcv_dmg_melee_do; }
+const std::string &Tp::on_rcv_dmg_missile_do(void) const { return _on_rcv_dmg_missile_do; }
+const std::string &Tp::on_rcv_dmg_nat_att_do(void) const { return _on_rcv_dmg_nat_att_do; }
+const std::string &Tp::on_rcv_dmg_necrosis_do(void) const { return _on_rcv_dmg_necrosis_do; }
+const std::string &Tp::on_rcv_dmg_negation_do(void) const { return _on_rcv_dmg_negation_do; }
+const std::string &Tp::on_rcv_dmg_poison_do(void) const { return _on_rcv_dmg_poison_do; }
+const std::string &Tp::on_rcv_dmg_stamina_do(void) const { return _on_rcv_dmg_stamina_do; }
+const std::string &Tp::on_rcv_dmg_stat_att_do(void) const { return _on_rcv_dmg_stat_att_do; }
+const std::string &Tp::on_rcv_dmg_stat_con_do(void) const { return _on_rcv_dmg_stat_con_do; }
+const std::string &Tp::on_rcv_dmg_stat_str_do(void) const { return _on_rcv_dmg_stat_str_do; }
+const std::string &Tp::on_rcv_dmg_water_do(void) const { return _on_rcv_dmg_water_do; }
 const std::string &Tp::on_resting_do(void) const { return _on_resting_do; }
 const std::string &Tp::on_stealing_do(void) const { return _on_stealing_do; }
 const std::string &Tp::on_stuck_do(void) const { return _on_stuck_do; }
@@ -277,12 +274,12 @@ int Tp::distance_spell_cast(void) const { return _distance_spell_cast; }
 int Tp::distance_throw(void) const { return _distance_throw; }
 int Tp::distance_vision(void) const { return _distance_vision; }
 int Tp::dmg_num_of_attacks(void) const { return _dmg_num_of_attacks; }
-int Tp::dmg_received_doubled_from_acid(void) const { return _dmg_received_doubled_from_acid; }
-int Tp::dmg_received_doubled_from_cold(void) const { return _dmg_received_doubled_from_cold; }
-int Tp::dmg_received_doubled_from_fire(void) const { return _dmg_received_doubled_from_fire; }
-int Tp::dmg_received_doubled_from_necrosis(void) const { return _dmg_received_doubled_from_necrosis; }
-int Tp::dmg_received_doubled_from_poison(void) const { return _dmg_received_doubled_from_poison; }
-int Tp::dmg_received_doubled_from_water(void) const { return _dmg_received_doubled_from_water; }
+int Tp::dmg_rcv_doubled_from_acid(void) const { return _dmg_rcv_doubled_from_acid; }
+int Tp::dmg_rcv_doubled_from_cold(void) const { return _dmg_rcv_doubled_from_cold; }
+int Tp::dmg_rcv_doubled_from_fire(void) const { return _dmg_rcv_doubled_from_fire; }
+int Tp::dmg_rcv_doubled_from_necrosis(void) const { return _dmg_rcv_doubled_from_necrosis; }
+int Tp::dmg_rcv_doubled_from_poison(void) const { return _dmg_rcv_doubled_from_poison; }
+int Tp::dmg_rcv_doubled_from_water(void) const { return _dmg_rcv_doubled_from_water; }
 int Tp::effect_has_blast_radius(void) const { return _effect_has_blast_radius; }
 int Tp::effect_radius(void) const { return _effect_radius; }
 int Tp::enchant_max(void) const { return _enchant_max; }
@@ -1047,12 +1044,12 @@ void Tp::distance_spell_cast_set(int v) { _distance_spell_cast = v; }
 void Tp::distance_throw_set(int v) { _distance_throw = v; }
 void Tp::distance_vision_set(int v) { _distance_vision = v; }
 void Tp::dmg_num_of_attacks_set(int v) { _dmg_num_of_attacks = v; }
-void Tp::dmg_received_doubled_from_acid_set(int v) { _dmg_received_doubled_from_acid = v; }
-void Tp::dmg_received_doubled_from_cold_set(int v) { _dmg_received_doubled_from_cold = v; }
-void Tp::dmg_received_doubled_from_fire_set(int v) { _dmg_received_doubled_from_fire = v; }
-void Tp::dmg_received_doubled_from_necrosis_set(int v) { _dmg_received_doubled_from_necrosis = v; }
-void Tp::dmg_received_doubled_from_poison_set(int v) { _dmg_received_doubled_from_poison = v; }
-void Tp::dmg_received_doubled_from_water_set(int v) { _dmg_received_doubled_from_water = v; }
+void Tp::dmg_rcv_doubled_from_acid_set(int v) { _dmg_rcv_doubled_from_acid = v; }
+void Tp::dmg_rcv_doubled_from_cold_set(int v) { _dmg_rcv_doubled_from_cold = v; }
+void Tp::dmg_rcv_doubled_from_fire_set(int v) { _dmg_rcv_doubled_from_fire = v; }
+void Tp::dmg_rcv_doubled_from_necrosis_set(int v) { _dmg_rcv_doubled_from_necrosis = v; }
+void Tp::dmg_rcv_doubled_from_poison_set(int v) { _dmg_rcv_doubled_from_poison = v; }
+void Tp::dmg_rcv_doubled_from_water_set(int v) { _dmg_rcv_doubled_from_water = v; }
 void Tp::effect_has_blast_radius_set(int v) { _effect_has_blast_radius = v; }
 void Tp::effect_radius_set(int v) { _effect_radius = v; }
 void Tp::enchant_level_set(int v) { _enchant_level = v; }
@@ -1769,57 +1766,57 @@ void Tp::on_owner_attack_dmg_stat_att_do_set(const std::string &v) { _on_owner_a
 void Tp::on_owner_attack_dmg_stat_con_do_set(const std::string &v) { _on_owner_attack_dmg_stat_con_do = v; }
 void Tp::on_owner_attack_dmg_stat_str_do_set(const std::string &v) { _on_owner_attack_dmg_stat_str_do = v; }
 void Tp::on_owner_attack_dmg_water_do_set(const std::string &v) { _on_owner_attack_dmg_water_do = v; }
-void Tp::on_owner_receive_dmg_acid_do_set(const std::string &v) { _on_owner_receive_dmg_acid_do = v; }
-void Tp::on_owner_receive_dmg_bite_do_set(const std::string &v) { _on_owner_receive_dmg_bite_do = v; }
-void Tp::on_owner_receive_dmg_claw_do_set(const std::string &v) { _on_owner_receive_dmg_claw_do = v; }
-void Tp::on_owner_receive_dmg_cold_do_set(const std::string &v) { _on_owner_receive_dmg_cold_do = v; }
-void Tp::on_owner_receive_dmg_crush_do_set(const std::string &v) { _on_owner_receive_dmg_crush_do = v; }
-void Tp::on_owner_receive_dmg_digest_do_set(const std::string &v) { _on_owner_receive_dmg_digest_do = v; }
-void Tp::on_owner_receive_dmg_drown_do_set(const std::string &v) { _on_owner_receive_dmg_drown_do = v; }
-void Tp::on_owner_receive_dmg_energy_do_set(const std::string &v) { _on_owner_receive_dmg_energy_do = v; }
-void Tp::on_owner_receive_dmg_fire_do_set(const std::string &v) { _on_owner_receive_dmg_fire_do = v; }
-void Tp::on_owner_receive_dmg_heat_do_set(const std::string &v) { _on_owner_receive_dmg_heat_do = v; }
-void Tp::on_owner_receive_dmg_impact_do_set(const std::string &v) { _on_owner_receive_dmg_impact_do = v; }
-void Tp::on_owner_receive_dmg_lightning_do_set(const std::string &v) { _on_owner_receive_dmg_lightning_do = v; }
-void Tp::on_owner_receive_dmg_magic_drain_do_set(const std::string &v) { _on_owner_receive_dmg_magic_drain_do = v; }
-void Tp::on_owner_receive_dmg_melee_do_set(const std::string &v) { _on_owner_receive_dmg_melee_do = v; }
-void Tp::on_owner_receive_dmg_missile_do_set(const std::string &v) { _on_owner_receive_dmg_missile_do = v; }
-void Tp::on_owner_receive_dmg_nat_att_do_set(const std::string &v) { _on_owner_receive_dmg_nat_att_do = v; }
-void Tp::on_owner_receive_dmg_necrosis_do_set(const std::string &v) { _on_owner_receive_dmg_necrosis_do = v; }
-void Tp::on_owner_receive_dmg_negation_do_set(const std::string &v) { _on_owner_receive_dmg_negation_do = v; }
-void Tp::on_owner_receive_dmg_poison_do_set(const std::string &v) { _on_owner_receive_dmg_poison_do = v; }
-void Tp::on_owner_receive_dmg_stamina_do_set(const std::string &v) { _on_owner_receive_dmg_stamina_do = v; }
-void Tp::on_owner_receive_dmg_stat_att_do_set(const std::string &v) { _on_owner_receive_dmg_stat_att_do = v; }
-void Tp::on_owner_receive_dmg_stat_con_do_set(const std::string &v) { _on_owner_receive_dmg_stat_con_do = v; }
-void Tp::on_owner_receive_dmg_stat_str_do_set(const std::string &v) { _on_owner_receive_dmg_stat_str_do = v; }
-void Tp::on_owner_receive_dmg_water_do_set(const std::string &v) { _on_owner_receive_dmg_water_do = v; }
+void Tp::on_owner_rcv_dmg_acid_do_set(const std::string &v) { _on_owner_rcv_dmg_acid_do = v; }
+void Tp::on_owner_rcv_dmg_bite_do_set(const std::string &v) { _on_owner_rcv_dmg_bite_do = v; }
+void Tp::on_owner_rcv_dmg_claw_do_set(const std::string &v) { _on_owner_rcv_dmg_claw_do = v; }
+void Tp::on_owner_rcv_dmg_cold_do_set(const std::string &v) { _on_owner_rcv_dmg_cold_do = v; }
+void Tp::on_owner_rcv_dmg_crush_do_set(const std::string &v) { _on_owner_rcv_dmg_crush_do = v; }
+void Tp::on_owner_rcv_dmg_digest_do_set(const std::string &v) { _on_owner_rcv_dmg_digest_do = v; }
+void Tp::on_owner_rcv_dmg_drown_do_set(const std::string &v) { _on_owner_rcv_dmg_drown_do = v; }
+void Tp::on_owner_rcv_dmg_energy_do_set(const std::string &v) { _on_owner_rcv_dmg_energy_do = v; }
+void Tp::on_owner_rcv_dmg_fire_do_set(const std::string &v) { _on_owner_rcv_dmg_fire_do = v; }
+void Tp::on_owner_rcv_dmg_heat_do_set(const std::string &v) { _on_owner_rcv_dmg_heat_do = v; }
+void Tp::on_owner_rcv_dmg_impact_do_set(const std::string &v) { _on_owner_rcv_dmg_impact_do = v; }
+void Tp::on_owner_rcv_dmg_lightning_do_set(const std::string &v) { _on_owner_rcv_dmg_lightning_do = v; }
+void Tp::on_owner_rcv_dmg_magic_drain_do_set(const std::string &v) { _on_owner_rcv_dmg_magic_drain_do = v; }
+void Tp::on_owner_rcv_dmg_melee_do_set(const std::string &v) { _on_owner_rcv_dmg_melee_do = v; }
+void Tp::on_owner_rcv_dmg_missile_do_set(const std::string &v) { _on_owner_rcv_dmg_missile_do = v; }
+void Tp::on_owner_rcv_dmg_nat_att_do_set(const std::string &v) { _on_owner_rcv_dmg_nat_att_do = v; }
+void Tp::on_owner_rcv_dmg_necrosis_do_set(const std::string &v) { _on_owner_rcv_dmg_necrosis_do = v; }
+void Tp::on_owner_rcv_dmg_negation_do_set(const std::string &v) { _on_owner_rcv_dmg_negation_do = v; }
+void Tp::on_owner_rcv_dmg_poison_do_set(const std::string &v) { _on_owner_rcv_dmg_poison_do = v; }
+void Tp::on_owner_rcv_dmg_stamina_do_set(const std::string &v) { _on_owner_rcv_dmg_stamina_do = v; }
+void Tp::on_owner_rcv_dmg_stat_att_do_set(const std::string &v) { _on_owner_rcv_dmg_stat_att_do = v; }
+void Tp::on_owner_rcv_dmg_stat_con_do_set(const std::string &v) { _on_owner_rcv_dmg_stat_con_do = v; }
+void Tp::on_owner_rcv_dmg_stat_str_do_set(const std::string &v) { _on_owner_rcv_dmg_stat_str_do = v; }
+void Tp::on_owner_rcv_dmg_water_do_set(const std::string &v) { _on_owner_rcv_dmg_water_do = v; }
 void Tp::on_owner_unset_do_set(const std::string &v) { _on_owner_unset_do = v; }
 void Tp::on_polymorphed_do_set(const std::string &v) { _on_polymorphed_do = v; }
 void Tp::on_pre_teleport_do_set(const std::string &v) { _on_pre_teleport_do = v; }
-void Tp::on_receiving_dmg_acid_do_set(const std::string &v) { _on_receiving_dmg_acid_do = v; }
-void Tp::on_receiving_dmg_bite_do_set(const std::string &v) { _on_receiving_dmg_bite_do = v; }
-void Tp::on_receiving_dmg_claw_do_set(const std::string &v) { _on_receiving_dmg_claw_do = v; }
-void Tp::on_receiving_dmg_cold_do_set(const std::string &v) { _on_receiving_dmg_cold_do = v; }
-void Tp::on_receiving_dmg_crush_do_set(const std::string &v) { _on_receiving_dmg_crush_do = v; }
-void Tp::on_receiving_dmg_digest_do_set(const std::string &v) { _on_receiving_dmg_digest_do = v; }
-void Tp::on_receiving_dmg_drown_do_set(const std::string &v) { _on_receiving_dmg_drown_do = v; }
-void Tp::on_receiving_dmg_energy_do_set(const std::string &v) { _on_receiving_dmg_energy_do = v; }
-void Tp::on_receiving_dmg_fire_do_set(const std::string &v) { _on_receiving_dmg_fire_do = v; }
-void Tp::on_receiving_dmg_heat_do_set(const std::string &v) { _on_receiving_dmg_heat_do = v; }
-void Tp::on_receiving_dmg_impact_do_set(const std::string &v) { _on_receiving_dmg_impact_do = v; }
-void Tp::on_receiving_dmg_lightning_do_set(const std::string &v) { _on_receiving_dmg_lightning_do = v; }
-void Tp::on_receiving_dmg_magic_drain_do_set(const std::string &v) { _on_receiving_dmg_magic_drain_do = v; }
-void Tp::on_receiving_dmg_melee_do_set(const std::string &v) { _on_receiving_dmg_melee_do = v; }
-void Tp::on_receiving_dmg_missile_do_set(const std::string &v) { _on_receiving_dmg_missile_do = v; }
-void Tp::on_receiving_dmg_nat_att_do_set(const std::string &v) { _on_receiving_dmg_nat_att_do = v; }
-void Tp::on_receiving_dmg_necrosis_do_set(const std::string &v) { _on_receiving_dmg_necrosis_do = v; }
-void Tp::on_receiving_dmg_negation_do_set(const std::string &v) { _on_receiving_dmg_negation_do = v; }
-void Tp::on_receiving_dmg_poison_do_set(const std::string &v) { _on_receiving_dmg_poison_do = v; }
-void Tp::on_receiving_dmg_stamina_do_set(const std::string &v) { _on_receiving_dmg_stamina_do = v; }
-void Tp::on_receiving_dmg_stat_att_do_set(const std::string &v) { _on_receiving_dmg_stat_att_do = v; }
-void Tp::on_receiving_dmg_stat_con_do_set(const std::string &v) { _on_receiving_dmg_stat_con_do = v; }
-void Tp::on_receiving_dmg_stat_str_do_set(const std::string &v) { _on_receiving_dmg_stat_str_do = v; }
-void Tp::on_receiving_dmg_water_do_set(const std::string &v) { _on_receiving_dmg_water_do = v; }
+void Tp::on_rcv_dmg_acid_do_set(const std::string &v) { _on_rcv_dmg_acid_do = v; }
+void Tp::on_rcv_dmg_bite_do_set(const std::string &v) { _on_rcv_dmg_bite_do = v; }
+void Tp::on_rcv_dmg_claw_do_set(const std::string &v) { _on_rcv_dmg_claw_do = v; }
+void Tp::on_rcv_dmg_cold_do_set(const std::string &v) { _on_rcv_dmg_cold_do = v; }
+void Tp::on_rcv_dmg_crush_do_set(const std::string &v) { _on_rcv_dmg_crush_do = v; }
+void Tp::on_rcv_dmg_digest_do_set(const std::string &v) { _on_rcv_dmg_digest_do = v; }
+void Tp::on_rcv_dmg_drown_do_set(const std::string &v) { _on_rcv_dmg_drown_do = v; }
+void Tp::on_rcv_dmg_energy_do_set(const std::string &v) { _on_rcv_dmg_energy_do = v; }
+void Tp::on_rcv_dmg_fire_do_set(const std::string &v) { _on_rcv_dmg_fire_do = v; }
+void Tp::on_rcv_dmg_heat_do_set(const std::string &v) { _on_rcv_dmg_heat_do = v; }
+void Tp::on_rcv_dmg_impact_do_set(const std::string &v) { _on_rcv_dmg_impact_do = v; }
+void Tp::on_rcv_dmg_lightning_do_set(const std::string &v) { _on_rcv_dmg_lightning_do = v; }
+void Tp::on_rcv_dmg_magic_drain_do_set(const std::string &v) { _on_rcv_dmg_magic_drain_do = v; }
+void Tp::on_rcv_dmg_melee_do_set(const std::string &v) { _on_rcv_dmg_melee_do = v; }
+void Tp::on_rcv_dmg_missile_do_set(const std::string &v) { _on_rcv_dmg_missile_do = v; }
+void Tp::on_rcv_dmg_nat_att_do_set(const std::string &v) { _on_rcv_dmg_nat_att_do = v; }
+void Tp::on_rcv_dmg_necrosis_do_set(const std::string &v) { _on_rcv_dmg_necrosis_do = v; }
+void Tp::on_rcv_dmg_negation_do_set(const std::string &v) { _on_rcv_dmg_negation_do = v; }
+void Tp::on_rcv_dmg_poison_do_set(const std::string &v) { _on_rcv_dmg_poison_do = v; }
+void Tp::on_rcv_dmg_stamina_do_set(const std::string &v) { _on_rcv_dmg_stamina_do = v; }
+void Tp::on_rcv_dmg_stat_att_do_set(const std::string &v) { _on_rcv_dmg_stat_att_do = v; }
+void Tp::on_rcv_dmg_stat_con_do_set(const std::string &v) { _on_rcv_dmg_stat_con_do = v; }
+void Tp::on_rcv_dmg_stat_str_do_set(const std::string &v) { _on_rcv_dmg_stat_str_do = v; }
+void Tp::on_rcv_dmg_water_do_set(const std::string &v) { _on_rcv_dmg_water_do = v; }
 void Tp::on_resting_do_set(const std::string &v) { _on_resting_do = v; }
 void Tp::on_stealing_do_set(const std::string &v) { _on_stealing_do = v; }
 void Tp::on_stuck_do_set(const std::string &v) { _on_stuck_do = v; }

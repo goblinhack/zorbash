@@ -49,7 +49,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.dmg_digest_dice(self, "1d5")
     my.dmg_nat_att_dice(self, "1d3")
     my.dmg_nat_att_type(self, "bleed")
-    my.dmg_received_doubled_from_fire(self, True)
+    my.dmg_rcv_doubled_from_fire(self, True)
     my.environ_hates_acid(self, True)
     my.environ_hates_fire(self, 100)
     my.gfx_anim_use(self, "red_splatter")

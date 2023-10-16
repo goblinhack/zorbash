@@ -104,7 +104,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.dmg_chance_d1000_fire(self, 1, 1000)
     my.dmg_fire_dice(self, "1d10+10")
     my.dmg_num_of_attacks(self, 1)
-    my.dmg_received_doubled_from_cold(self, True)
+    my.dmg_rcv_doubled_from_cold(self, True)
     my.effect_has_blast_radius(self, True)
     my.environ_dislikes_water(self, 100)
     my.equip_carry_anim(self, "staff_fire_carry")

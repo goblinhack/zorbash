@@ -32,7 +32,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.dmg_digest_dice(self, "1d10")
     my.dmg_nat_att_dice(self, "1d20")
     my.dmg_nat_att_type(self, "burn")
-    my.dmg_received_doubled_from_fire(self, True)
+    my.dmg_rcv_doubled_from_fire(self, True)
     my.gfx_anim_use(self, "green_splatter")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)

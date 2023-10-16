@@ -19,7 +19,7 @@ def on_hit_dodge_do(me, hitter, x, y):
         my.thing_sound_play_channel(me, my.CHANNEL_MONST_DEATH, sound)
 
 
-def on_receiving_dmg_lightning(me, hitter, real_hitter, x, y, damage):
+def on_rcv_dmg_lightning(me, hitter, real_hitter, x, y, damage):
     # my.topcon("hitter  {} {}".format(my.thing_name_get(hitter), my.thing_health(hitter)))
     owner = my.thing_top_owner_id_get(hitter)
     if (owner and my.thing_is_player(owner)) or my.thing_is_player(hitter):
@@ -49,7 +49,7 @@ def tp_init(name, text_long_name):
     my.dmg_nat_att_dice(self, "2d8+4")
     my.dmg_nat_att_type(self, "gore")
     my.dmg_num_of_attacks(self, 2)
-    my.dmg_received_doubled_from_fire(self, True)
+    my.dmg_rcv_doubled_from_fire(self, True)
     my.environ_hates_fire(self, 100)
     my.gfx_anim_use(self, "attack_red")
     my.gfx_ascii_fade_with_dist(self, True)
@@ -115,7 +115,7 @@ def tp_init(name, text_long_name):
     my.normal_placement_rules(self, True)
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_hit_dodge_do(self, "me.on_hit_dodge_do()")
-    my.on_receiving_dmg_lightning_do(self, "me.on_receiving_dmg_lightning()")
+    my.on_rcv_dmg_lightning_do(self, "me.on_rcv_dmg_lightning()")
     my.on_you_nat_attack_attempt_do(self, "me.on_you_nat_attack_attempt()")
     my.rarity(self, my.RARITY_RARE)  # how rare within this monster class
     my.shove_bonus(self, 2)

@@ -93,7 +93,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.charge_count(self, 5)
     my.collision_hit_priority(self, 6)
     my.dmg_num_of_attacks(self, 0)
-    my.dmg_received_doubled_from_fire(self, True)
+    my.dmg_rcv_doubled_from_fire(self, True)
     my.effect_has_blast_radius(self, True)
     my.environ_dislikes_fire(self, 100)
     my.equip_carry_anim(self, "staff_conjuration_carry")

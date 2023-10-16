@@ -16,7 +16,7 @@ PyObject *level_ai_wanderer_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_attack_no_msg_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_attack_undead_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_dmg_num_of_attacks_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_dmg_received_doubled_from_cold_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_dmg_rcv_doubled_from_cold_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_flood_fill_gas_get_all_grid_things(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_flood_fill_get_all_grid_things(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObject *keywds);

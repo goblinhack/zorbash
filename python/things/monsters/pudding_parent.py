@@ -29,7 +29,7 @@ def on_death(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_MONST, f"slime{my.py_non_pcg_random_range_inclusive(1, 9)}")
 
 
-def on_receiving_dmg_melee(me, hitter, real_hitter, x, y, damage):
+def on_rcv_dmg_melee(me, hitter, real_hitter, x, y, damage):
     # my.topcon("hitter  {} {}".format(my.thing_name_get(hitter), my.thing_health(hitter)))
     if my.thing_is_pointy(hitter):
         if my.thing_is_player(real_hitter):
@@ -67,8 +67,8 @@ def tp_init(name, text_long_name):
     my.dmg_chance_d1000_nat_att(self, 0, 500)
     my.dmg_nat_att_dice(self, "3d6+2")
     my.dmg_nat_att_type(self, "bludgeon")
-    my.dmg_received_doubled_from_cold(self, True)
-    my.dmg_received_doubled_from_fire(self, True)
+    my.dmg_rcv_doubled_from_cold(self, True)
+    my.dmg_rcv_doubled_from_fire(self, True)
     my.environ_hates_fire(self, 100)
     my.gfx_anim_use(self, "green_splatter")
     my.gfx_ascii_fade_with_dist(self, True)
@@ -149,7 +149,7 @@ def tp_init(name, text_long_name):
     my.on_death_do(self, "me.on_death()")
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_jump_do(self, "me.on_jump()")
-    my.on_receiving_dmg_melee_do(self, "me.on_receiving_dmg_melee()")
+    my.on_rcv_dmg_melee_do(self, "me.on_rcv_dmg_melee()")
     my.on_you_nat_attack_attempt_do(self, "me.on_you_nat_attack_attempt()")
     my.rarity(self, my.RARITY_COMMON)  # how rare within this monster class
     my.stat_con(self, 16)

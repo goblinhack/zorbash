@@ -610,7 +610,7 @@ void tp_dump_monsters(void)
       imm_str += "Holding<newline>";
     }
     if (tp->is_immune_to_spell_of_sanctuary()) {
-      imm_str += "Sanctuary<newline>";
+      imm_str += "Sanctuary-tiles<newline>";
     }
     if (tp->is_immune_to_spell_of_beckoning()) {
       imm_str += "Beckoning<newline>";
@@ -813,7 +813,7 @@ void tp_dump_weapons(void)
       imm_str += "Immunity-Holding<newline>";
     }
     if (tp->is_immune_to_spell_of_sanctuary()) {
-      imm_str += "Immunity-Sanctuary<newline>";
+      imm_str += "Immunity-Sanctuary-tiles<newline>";
     }
     if (tp->is_immune_to_spell_of_beckoning()) {
       imm_str += "Immunity-Beckoning<newline>";

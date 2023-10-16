@@ -15,7 +15,7 @@ def on_owner_unset(me, owner, x, y):
         my.thing_msg(me, "The protective red glow around you fades.")
 
 
-def on_owner_receive_dmg_cold(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_rcv_dmg_cold(me, owner, hitter, real_hitter, x, y, damage):
     # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
     # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
     # my.con("hitter  {} {:X}".format(my.thing_name_get(hitter), hitter))
@@ -36,7 +36,7 @@ def tp_init(name, text_long_name):
     my.is_loggable(self, True)
     my.is_runic(self, True)
     my.on_owner_add_do(self, "me.on_owner_add()")
-    my.on_owner_receive_dmg_cold_do(self, "me.on_owner_receive_dmg_cold()")
+    my.on_owner_rcv_dmg_cold_do(self, "me.on_owner_rcv_dmg_cold()")
     my.on_owner_unset_do(self, "me.on_owner_unset()")
     my.text_description_long(self, "You chill in the cold.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)

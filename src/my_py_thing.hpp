@@ -80,7 +80,7 @@ PyObject *thing_dmg_necrosis(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_dmg_negation(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_dmg_num_of_attacks(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_dmg_poison(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_dmg_received_doubled_from_cold(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_dmg_rcv_doubled_from_cold(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_dmg_stamina(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_dmg_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_effect_has_blast_radius(PyObject *obj, PyObject *args, PyObject *keywds);

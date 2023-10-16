@@ -170,7 +170,7 @@ void tp_fixup(void)
         DIE("Tp %s hates fire and is a cold elemental ?", tp->name().c_str());
       }
       tp->is_immune_to_fire_set(true);
-      tp->dmg_received_doubled_from_cold_set(true);
+      tp->dmg_rcv_doubled_from_cold_set(true);
     }
 
     if (tp->is_cold_elemental()) {
@@ -178,7 +178,7 @@ void tp_fixup(void)
         DIE("Tp %s hates cold and is a cold elemental ?", tp->name().c_str());
       }
       tp->is_immune_to_cold_set(true);
-      tp->dmg_received_doubled_from_fire_set(true);
+      tp->dmg_rcv_doubled_from_fire_set(true);
     }
 
     if (tp->is_undead()) {
@@ -190,7 +190,7 @@ void tp_fixup(void)
       tp->is_immune_to_necrosis_set(true);
       tp->is_immune_to_stamina_drain_set(true);
       tp->is_immune_to_cold_set(true);
-      tp->dmg_received_doubled_from_fire_set(true);
+      tp->dmg_rcv_doubled_from_fire_set(true);
     }
 
     if (! tp->on_tick_do().empty()) {

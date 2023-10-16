@@ -15,7 +15,7 @@ def on_owner_unset(me, owner, x, y):
         my.thing_msg(me, "The green glow around you fades.")
 
 
-def on_owner_receive_dmg_poison(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_rcv_dmg_poison(me, owner, hitter, real_hitter, x, y, damage):
     if owner and my.thing_is_player(owner):
         my.thing_msg(me, "You take half damage from the poison.")
     return int(damage / 2)
@@ -48,7 +48,7 @@ def tp_init(name, text_long_name):
     my.is_runic(self, True)
     my.is_tickable(self, True)
     my.on_owner_add_do(self, "me.on_owner_add()")
-    my.on_owner_receive_dmg_poison_do(self, "me.on_owner_receive_dmg_poison()")
+    my.on_owner_rcv_dmg_poison_do(self, "me.on_owner_rcv_dmg_poison()")
     my.on_owner_unset_do(self, "me.on_owner_unset()")
     my.on_tick_do(self, "me.on_tick()")
     my.text_description_long(self, "Poison causes you 50 percent less damage.")

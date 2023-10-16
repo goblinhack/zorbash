@@ -73,7 +73,7 @@ int Thing::magic_decr(int v)
   TRACE_NO_INDENT();
   new_infop();
 
-  v = total_dmg_for_on_receiving_dmg_stamina(this, this, v);
+  v = total_dmg_for_on_rcv_dmg_stamina(this, this, v);
 
   TRACE_NO_INDENT();
   FOR_ALL_EQUIP(e)

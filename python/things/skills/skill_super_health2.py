@@ -16,28 +16,28 @@ def on_tick_when_activated(owner, skill, x, y):
     return False  # did nothing
 
 
-def on_owner_receive_dmg_poison(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_rcv_dmg_poison(me, owner, hitter, real_hitter, x, y, damage):
     new_damage = int(damage / 3)
     if owner and my.thing_is_player(owner):
         my.thing_msg(owner, f"Your superior health reduces the poison damage to {new_damage}.")
     return new_damage
 
 
-def on_owner_receive_dmg_cold(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_rcv_dmg_cold(me, owner, hitter, real_hitter, x, y, damage):
     new_damage = int(damage / 3)
     if owner and my.thing_is_player(owner):
         my.thing_msg(owner, f"Your superior health reduces the cold damage to {new_damage}.")
     return new_damage
 
 
-def on_owner_receive_dmg_necrosis(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_rcv_dmg_necrosis(me, owner, hitter, real_hitter, x, y, damage):
     new_damage = int(damage / 3)
     if owner and my.thing_is_player(owner):
         my.thing_msg(owner, f"Your superior health reduces the necrosis damage to {new_damage}.")
     return new_damage
 
 
-def on_owner_receive_dmg_stat_con(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_rcv_dmg_stat_con(me, owner, hitter, real_hitter, x, y, damage):
     new_damage = int(damage / 3)
     if owner and my.thing_is_player(owner):
         my.thing_msg(owner, f"Your superior health reduces the constitution damage to {new_damage}.")

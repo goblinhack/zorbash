@@ -266,6 +266,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.is_exit_finder(self, True)
     my.is_explorer(self, True)
     my.is_humanoid(self, True)
+    my.is_immune_to_spell_of_sanctuary(self, True)
     my.is_interesting(self, True)
     my.is_item_collector(self, True)
     my.is_living(self, True)

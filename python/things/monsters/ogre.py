@@ -50,7 +50,7 @@ def tp_init(name, text_long_name):
     my.dmg_chance_d1000_nat_att(self, 0, 1000)
     my.dmg_nat_att_dice(self, "1d10+4")
     my.dmg_nat_att_type(self, "bludgeon")
-    my.dmg_received_doubled_from_fire(self, True)
+    my.dmg_rcv_doubled_from_fire(self, True)
     my.gfx_anim_use(self, "sword_plutonium_swing")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)

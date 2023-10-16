@@ -71,7 +71,7 @@ void Thing::weapon_check_for_dmg(Thingp weapon, Thingp victim)
     if (victim->is_acid()) {
       if (! weapon->is_immune_to_acid()) {
         damaged_chance *= 2;
-        if (weapon->dmg_received_doubled_from_acid()) {
+        if (weapon->dmg_rcv_doubled_from_acid()) {
           damaged_chance *= 2;
         }
       }
@@ -82,7 +82,7 @@ void Thing::weapon_check_for_dmg(Thingp weapon, Thingp victim)
     if (victim->is_cold()) {
       if (! weapon->is_immune_to_cold()) {
         damaged_chance *= 2;
-        if (weapon->dmg_received_doubled_from_cold()) {
+        if (weapon->dmg_rcv_doubled_from_cold()) {
           damaged_chance *= 2;
         }
       }
@@ -93,7 +93,7 @@ void Thing::weapon_check_for_dmg(Thingp weapon, Thingp victim)
     if (victim->is_fire()) {
       if (! weapon->is_immune_to_fire()) {
         damaged_chance *= 2;
-        if (weapon->dmg_received_doubled_from_fire()) {
+        if (weapon->dmg_rcv_doubled_from_fire()) {
           damaged_chance *= 2;
         }
       }
@@ -104,7 +104,7 @@ void Thing::weapon_check_for_dmg(Thingp weapon, Thingp victim)
     if (victim->is_water()) {
       if (! weapon->is_immune_to_water()) {
         damaged_chance *= 2;
-        if (weapon->dmg_received_doubled_from_water()) {
+        if (weapon->dmg_rcv_doubled_from_water()) {
           damaged_chance *= 2;
         }
       }

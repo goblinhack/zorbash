@@ -538,6 +538,14 @@ bool Thing::collision_check_only(Thingp it, point future_pos)
     }
   }
 
+  if (it->is_spell_of_sanctuary_barrier() && ! is_immune_to_spell_of_sanctuary()) {
+    //
+    // Do not allow movement away. This happens if you are placed inside an spell_of_sanctuary.
+    //
+    IF_DEBUG2 { dbg("Collision; sanctuary barrier"); }
+    return true;
+  }
+
   if (it->is_barrel() && ! is_ethereal() && ! is_flying()) {
     //
     // As we want to be able to shove the barrel, we need to check for

@@ -27,7 +27,11 @@ void Thing::spell_of_sanctuary_tick(void)
         continue;
       }
 
-      if (! t->is_attackable_by_monst()) {
+      if (t->is_immune_to_spell_of_sanctuary()) {
+        continue;
+      }
+
+      if (! t->is_attackable_by_monst() && ! t->is_attackable_by_player()) {
         continue;
       }
 

@@ -15,7 +15,7 @@ def on_owner_unset(me, owner, x, y):
         my.thing_msg(me, "The protective blue glow around you fades.")
 
 
-def on_owner_receive_dmg_fire(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_rcv_dmg_fire(me, owner, hitter, real_hitter, x, y, damage):
     # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
     # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
     # my.con("hitter  {} {:X}".format(my.thing_name_get(hitter), hitter))
@@ -25,7 +25,7 @@ def on_owner_receive_dmg_fire(me, owner, hitter, real_hitter, x, y, damage):
     return 0
 
 
-def on_owner_receive_dmg_heat(me, owner, hitter, real_hitter, x, y, damage):
+def on_owner_rcv_dmg_heat(me, owner, hitter, real_hitter, x, y, damage):
     # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
     # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
     # my.con("hitter  {} {:X}".format(my.thing_name_get(hitter), hitter))
@@ -47,8 +47,8 @@ def tp_init(name, text_long_name):
     my.is_tickable(self, True)
     my.lifespan_dice(self, "1d100+50")
     my.on_owner_add_do(self, "me.on_owner_add()")
-    my.on_owner_receive_dmg_fire_do(self, "me.on_owner_receive_dmg_fire()")
-    my.on_owner_receive_dmg_heat_do(self, "me.on_owner_receive_dmg_heat()")
+    my.on_owner_rcv_dmg_fire_do(self, "me.on_owner_rcv_dmg_fire()")
+    my.on_owner_rcv_dmg_heat_do(self, "me.on_owner_rcv_dmg_heat()")
     my.on_owner_unset_do(self, "me.on_owner_unset()")
     my.text_description_long(self, "You bask in the fire.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)

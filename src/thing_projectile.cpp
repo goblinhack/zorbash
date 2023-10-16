@@ -25,11 +25,11 @@ bool Thing::projectile_choose_target(Thingp item, Thingp victim /* can be null *
 
     used(item, victim, true);
 
+    //
+    // Staff of blinking has no projectile
+    //
     if (! item->gfx_targeted_projectile().empty()) {
       projectile_shoot_at(item, item->gfx_targeted_projectile(), victim);
-    } else {
-      err("Unknown projectile: %s.", item->text_the().c_str());
-      return false;
     }
 
     //
@@ -216,7 +216,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &effect_name, T
   info.map_stop             = target->curr_at;
   info.follow_moving_target = true;
   info.pixel_map_at         = level->pixel_map_at;
-  level->new_projectile(projectile->id, target->id, info, game->current_move_speed * 2);
+  level->new_projectile(projectile->id, target->id, info, game->current_move_speed);
 
   on_use(projectile, target);
 

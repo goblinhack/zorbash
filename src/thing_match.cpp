@@ -38,7 +38,7 @@ bool Tp::matches(const std::string &what)
   if (collision_hit_two_tiles_ahead() && (what == "collision_hit_two_tiles_ahead")) { return true; }
   if (consume_per_bite_amount() && (what == "consume_per_bite_amount")) { return true; }
   if (dmg_num_of_attacks() && (what == "dmg_num_of_attacks")) { return true; }
-  if (dmg_received_doubled_from_cold() && (what == "dmg_received_doubled_from_cold")) { return true; }
+  if (dmg_rcv_doubled_from_cold() && (what == "dmg_rcv_doubled_from_cold")) { return true; }
   if (enchant_max() && (what == "enchant_max")) { return true; }
   if (environ_dislikes_acid() && (what == "environ_dislikes_acid")) { return true; }
   if (environ_dislikes_cold() && (what == "environ_dislikes_cold")) { return true; }
@@ -647,7 +647,7 @@ bool Thing::matches(const std::string &what)
   if (collision_hit_two_tiles_ahead() && (what == "collision_hit_two_tiles_ahead")) { return true; }
   if (consume_per_bite_amount() && (what == "consume_per_bite_amount")) { return true; }
   if (dmg_num_of_attacks() && (what == "dmg_num_of_attacks")) { return true; }
-  if (dmg_received_doubled_from_cold() && (what == "dmg_received_doubled_from_cold")) { return true; }
+  if (dmg_rcv_doubled_from_cold() && (what == "dmg_rcv_doubled_from_cold")) { return true; }
   if (enchant_max() && (what == "enchant_max")) { return true; }
   if (environ_dislikes_acid() && (what == "environ_dislikes_acid")) { return true; }
   if (environ_dislikes_cold() && (what == "environ_dislikes_cold")) { return true; }
@@ -1252,7 +1252,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "collision_hit_two_tiles_ahead") { return &Thing::collision_hit_two_tiles_ahead; }
   if (what == "consume_per_bite_amount") { return &Thing::consume_per_bite_amount; }
   if (what == "dmg_num_of_attacks") { return &Thing::dmg_num_of_attacks; }
-  if (what == "dmg_received_doubled_from_cold") { return &Thing::dmg_received_doubled_from_cold; }
+  if (what == "dmg_rcv_doubled_from_cold") { return &Thing::dmg_rcv_doubled_from_cold; }
   if (what == "enchant_max") { return &Thing::enchant_max; }
   if (what == "environ_dislikes_acid") { return &Thing::environ_dislikes_acid; }
   if (what == "environ_dislikes_cold") { return &Thing::environ_dislikes_cold; }

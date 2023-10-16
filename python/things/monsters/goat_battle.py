@@ -45,7 +45,7 @@ def tp_init(name, text_long_name):
     my.distance_vision(self, 7)
     my.dmg_nat_att_dice(self, "1d6+2")
     my.dmg_nat_att_type(self, "rutt")
-    my.dmg_received_doubled_from_fire(self, True)
+    my.dmg_rcv_doubled_from_fire(self, True)
     my.environ_hates_fire(self, 100)
     my.gfx_anim_use(self, "attack_green")
     my.gfx_ascii_fade_with_dist(self, True)

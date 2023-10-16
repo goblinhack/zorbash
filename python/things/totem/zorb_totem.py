@@ -60,7 +60,7 @@ def tp_init(name, text_long_name):
     my.dmg_chance_d1000_crush(self, 0, 1000)
     my.dmg_crush_dice(self, "4d6")
     my.dmg_num_of_attacks(self, 0)  # fires only
-    my.dmg_received_doubled_from_water(self, True)
+    my.dmg_rcv_doubled_from_water(self, True)
     my.environ_hates_water(self, 100)
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)

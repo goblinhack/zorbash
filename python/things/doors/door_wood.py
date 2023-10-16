@@ -21,7 +21,7 @@ def tp_init(name):
     my.collision_hit_priority(self, 9)
     my.dmg_chance_d1000_crush(self, 0, 1000)
     my.dmg_crush_dice(self, "2d6")
-    my.dmg_received_doubled_from_fire(self, True)
+    my.dmg_rcv_doubled_from_fire(self, True)
     my.environ_dislikes_fire(self, 100)
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)

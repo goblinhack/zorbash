@@ -270,7 +270,7 @@ Bestiary
 <!-- begin monsters type marker -->
 | Monster | Class/Rarity | Dngr | Attack | # Attcks | Other attacks | Immunity |
 | :--- | --- | --- | --- | --- | --- | --- |
-| Reaper | E/common | 712 | 1d6+6 | 2 |  | Acid<br />Cold<br />Fire<br />Necrosis<br />Negation<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Holding<br />Sanctuary<br />Slowing<br />Webs<br />Draining<br /> |
+| Reaper | E/common | 712 | 1d6+6 | 2 |  | Acid<br />Cold<br />Fire<br />Necrosis<br />Negation<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Holding<br />Sanctuary-tiles<br />Slowing<br />Webs<br />Draining<br /> |
 | Fire Demon | D/uncommon | 546 | 1d14+4 | 2 | Fire:1d6+6<br /> | Cold<br />Fire<br />Necrosis<br />Poison<br /> |
 | Cthulite | D/rare | 424 | 1d14+4 | 2 | Acid:2d6<br />Poison:2d12<br /> | Acid<br />Cold<br />Necrosis<br />Confusion<br />Confusion<br />Poison<br />Draining<br /> |
 | Ettin, Two Headed Giant | D/rare | 382 | 1d10+4 | 2 |  |  |
@@ -343,7 +343,7 @@ Bestiary
 | Burning Skeleton | B/common | 52 | 1d3 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
 | Onyx Widow | A/common | 51 | 1d3 | 1 | Poison:1d4<br /> | Webs<br /> |
 | Thylacine | B/v-rare | 51 | 1d6+2 | 1 |  | Water<br /> |
-| Noble Warrior | /common | 50 | 1d3 | 1 |  |  |
+| Noble Warrior | /common | 50 | 1d3 | 1 |  | Sanctuary-tiles<br /> |
 | Kraken Tentacle | A/common | 50 | 1d3+1 | 1 | Poison:1d8+1<br /> | Water<br /> |
 | Meatfairy | A/common | 50 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d2<br /> |  |
 | Moresquito | A/common | 48 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d3<br />Poison:1d4<br />Drain:1d4<br /> |  |
