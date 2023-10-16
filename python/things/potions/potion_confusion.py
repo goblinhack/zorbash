@@ -30,6 +30,13 @@ def shatters(item, target, x, y):
     else:
         my.thing_msg(item, "The potion of confusion gas shatters.")
 
+    # If throwing at a wall, we can't flood fill, so just break the potion
+    for it in my.level_get_all(target, x, y):
+        if my.thing_is_gas_blocker(it):
+            my.spawn_gas_confusion_around_thing(it, 1)
+            my.thing_dead(item, "broken")
+            return
+
     for it in my.level_flood_fill_gas_get_all_grid_things(item, x, y, 2):
         my.spawn_gas_confusion_around_thing(it, 1)
     my.thing_dead(item, "broken")
