@@ -20,10 +20,10 @@ bool Thing::projectile_choose_target(Thingp item, Thingp victim /* can be null *
       return false;
     }
 
-    dbg("Chosen target: %s", victim->to_short_string().c_str());
+    dbg("Chosen projectile target: %s", victim->to_short_string().c_str());
     TRACE_AND_INDENT();
 
-    used(item, victim, true);
+    used(item, victim, false /* remove_after_use */);
 
     //
     // Staff of blinking has no projectile

@@ -21,10 +21,10 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
       return false;
     }
 
-    dbg("Chosen target: %s", victim->to_short_string().c_str());
+    dbg("Chosen laser target: %s", victim->to_short_string().c_str());
     TRACE_AND_INDENT();
 
-    used(item, victim, true);
+    used(item, victim, false /* remove_after_use */);
 
     if (! item->gfx_targeted_laser().empty()) {
       UseOptions use_options = {};

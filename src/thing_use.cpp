@@ -307,7 +307,11 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
     return;
   }
 
-  dbg("Attempt to use %s", what->to_short_string().c_str());
+  if (remove_after_use) {
+    dbg("Attempt and then remove after use %s", what->to_short_string().c_str());
+  } else {
+    dbg("Attempt to use %s", what->to_short_string().c_str());
+  }
   TRACE_AND_INDENT();
 
   if (what->initial_charge_count() && ! what->charge_count()) {

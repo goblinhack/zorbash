@@ -177,7 +177,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_energy", text_long_name="staff of energy", text_short_name="staff of energy")
+    tp_init(name="staff_energy", text_long_name="staff of energy", text_short_name="staff, energy")
 
 
 init()

@@ -19,17 +19,17 @@ PyObject *sound_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "fss", kwlist, &volume, &file, &name)) {
-    ERR("sound_load: Bad arguments");
+    PY_ERR("sound_load: Bad arguments");
     Py_RETURN_FALSE;
   }
 
   if (! file) {
-    ERR("sound_load: Missing file attr");
+    PY_ERR("sound_load: Missing file attr");
     Py_RETURN_FALSE;
   }
 
   if (! name) {
-    ERR("sound_load: Missing name attr");
+    PY_ERR("sound_load: Missing name attr");
     Py_RETURN_FALSE;
   }
 
@@ -55,12 +55,12 @@ PyObject *sound_play_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "s", kwlist, &name)) {
-    ERR("sound_play: Bad arguments");
+    PY_ERR("sound_play: Bad arguments");
     Py_RETURN_FALSE;
   }
 
   if (! name) {
-    ERR("sound_play: Missing name attr");
+    PY_ERR("sound_play: Missing name attr");
     Py_RETURN_FALSE;
   }
 
@@ -88,12 +88,12 @@ PyObject *sound_play_channel_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "is", kwlist, &channel, &name)) {
-    ERR("sound_play_channel: Bad arguments");
+    PY_ERR("sound_play_channel: Bad arguments");
     Py_RETURN_FALSE;
   }
 
   if (! name) {
-    ERR("sound_play_channel: Missing name attr");
+    PY_ERR("sound_play_channel: Missing name attr");
     Py_RETURN_FALSE;
   }
 

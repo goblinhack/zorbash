@@ -21,18 +21,18 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
   static char *kwlist[] = {(char *) "level_data", (char *) "level_name", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "|Os", kwlist, &py_level_data, &level_name)) {
-    ERR("map_load: Bad args");
+    PY_ERR("map_load: Bad args");
     Py_RETURN_FALSE;
   }
 
   if (! py_level_data) {
-    ERR("Map_load_level, missing floor data");
+    PY_ERR("Map_load_level, missing floor data");
     Py_RETURN_FALSE;
   }
 
   int level_data_elems = PyList_Size(py_level_data);
   if (level_data_elems % MAP_HEIGHT) {
-    ERR("map_load: Level elems needs to be evenly dividable by level height %d, got %d elems when loading %s",
+    PY_ERR("map_load: Level elems needs to be evenly dividable by level height %d, got %d elems when loading %s",
         (int) MAP_HEIGHT, (int) PyList_Size(py_level_data), level_name);
     Py_RETURN_FALSE;
   }
@@ -172,19 +172,19 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
       }
 
       if ((int) floor_string.size() != MAP_WIDTH) {
-        ERR("Level floor width mismatch, %d, expected %d", (int) floor_string.size(), MAP_WIDTH);
+        PY_ERR("Level floor width mismatch, %d, expected %d", (int) floor_string.size(), MAP_WIDTH);
         Py_RETURN_FALSE;
       }
       if ((int) water_string.size() != MAP_WIDTH) {
-        ERR("Level water width mismatch, %d, expected %d", (int) water_string.size(), MAP_WIDTH);
+        PY_ERR("Level water width mismatch, %d, expected %d", (int) water_string.size(), MAP_WIDTH);
         Py_RETURN_FALSE;
       }
       if ((int) walls_string.size() != MAP_WIDTH) {
-        ERR("Level walls width mismatch, %d, expected %d", (int) walls_string.size(), MAP_WIDTH);
+        PY_ERR("Level walls width mismatch, %d, expected %d", (int) walls_string.size(), MAP_WIDTH);
         Py_RETURN_FALSE;
       }
       if ((int) obj_strings.size() != MAP_WIDTH) {
-        ERR("Level items width mismatch, %d, expected %d", (int) obj_strings.size(), MAP_WIDTH);
+        PY_ERR("Level items width mismatch, %d, expected %d", (int) obj_strings.size(), MAP_WIDTH);
         Py_RETURN_FALSE;
       }
 
@@ -211,28 +211,28 @@ PyObject *level_get_all(PyObject *obj, PyObject *args, PyObject *keywds)
   static char *kwlist[] = {(char *) "id", (char *) "x", (char *) "y", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iii", kwlist, &id, &x, &y)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
   if (x == NO_VALUE) {
-    ERR("%s: Missing 'x'", __FUNCTION__);
+    PY_ERR("%s: Missing 'x'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (y == NO_VALUE) {
-    ERR("%s: Missing 'y'", __FUNCTION__);
+    PY_ERR("%s: Missing 'y'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp t = game->thing_find(id);
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
@@ -284,33 +284,33 @@ PyObject *level_flood_fill_get_all_things(PyObject *obj, PyObject *args, PyObjec
   char        *filter   = nullptr;
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iiis", kwlist, &id, &x, &y, &filter)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
   if (! id) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
   if (x == NO_VALUE) {
-    ERR("%s: Missing 'x'", __FUNCTION__);
+    PY_ERR("%s: Missing 'x'", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
   if (y == NO_VALUE) {
-    ERR("%s: Missing 'y'", __FUNCTION__);
+    PY_ERR("%s: Missing 'y'", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
   if (! filter) {
-    ERR("%s: No filter specified %u", __FUNCTION__, id);
+    PY_ERR("%s: No filter specified %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
   Thingp t = game->thing_find(id);
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
@@ -341,28 +341,28 @@ PyObject *level_flood_fill_get_all_grid_things(PyObject *obj, PyObject *args, Py
   static char *kwlist[] = {(char *) "id", (char *) "x", (char *) "y", (char *) "distance", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iiii", kwlist, &id, &x, &y, &distance)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
   if (! id) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
   if (x == NO_VALUE) {
-    ERR("%s: Missing 'x'", __FUNCTION__);
+    PY_ERR("%s: Missing 'x'", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
   if (y == NO_VALUE) {
-    ERR("%s: Missing 'y'", __FUNCTION__);
+    PY_ERR("%s: Missing 'y'", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
   Thingp t = game->thing_find(id);
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
@@ -393,28 +393,28 @@ PyObject *level_flood_fill_gas_get_all_grid_things(PyObject *obj, PyObject *args
   static char *kwlist[] = {(char *) "id", (char *) "x", (char *) "y", (char *) "distance", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iiii", kwlist, &id, &x, &y, &distance)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
   if (! id) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
   if (x == NO_VALUE) {
-    ERR("%s: Missing 'x'", __FUNCTION__);
+    PY_ERR("%s: Missing 'x'", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
   if (y == NO_VALUE) {
-    ERR("%s: Missing 'y'", __FUNCTION__);
+    PY_ERR("%s: Missing 'y'", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
   Thingp t = game->thing_find(id);
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
@@ -442,18 +442,18 @@ PyObject *thing_all_followers_get(PyObject *obj, PyObject *args, PyObject *keywd
   static char *kwlist[] = {(char *) "id", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
   if (! id) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
   Thingp t = game->thing_find(id);
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
@@ -481,18 +481,18 @@ PyObject *thing_all_minions_get(PyObject *obj, PyObject *args, PyObject *keywds)
   static char *kwlist[] = {(char *) "id", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
   if (! id) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
   Thingp t = game->thing_find(id);
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
@@ -523,28 +523,28 @@ PyObject *thing_all_minions_get(PyObject *obj, PyObject *args, PyObject *keywds)
     static char *kwlist[] = {(char *) "id", (char *) "x", (char *) "y", 0};                                          \
                                                                                                                      \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iii", kwlist, &id, &x, &y)) {                                   \
-      ERR("%s: Failed parsing keywords", __FUNCTION__);                                                              \
+      PY_ERR("%s: Failed parsing keywords", __FUNCTION__);                                                              \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     if (! id) {                                                                                                      \
-      ERR("%s: No thing ID set", __FUNCTION__);                                                                      \
+      PY_ERR("%s: No thing ID set", __FUNCTION__);                                                                      \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     if (x == NO_VALUE) {                                                                                             \
-      ERR("%s: Missing 'x'", __FUNCTION__);                                                                          \
+      PY_ERR("%s: Missing 'x'", __FUNCTION__);                                                                          \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     if (y == NO_VALUE) {                                                                                             \
-      ERR("%s: Missing 'y'", __FUNCTION__);                                                                          \
+      PY_ERR("%s: Missing 'y'", __FUNCTION__);                                                                          \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     Thingp t = game->thing_find(id);                                                                                 \
     if (unlikely(! t)) {                                                                                             \
-      ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);                                                          \
+      PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);                                                          \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \

@@ -20,17 +20,17 @@ PyObject *tex_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "ss", kwlist, &file, &name)) {
-    ERR("tex_load: Bad arguments");
+    PY_ERR("tex_load: Bad arguments");
     Py_RETURN_FALSE;
   }
 
   if (! file) {
-    ERR("tex_load: Missing file attr");
+    PY_ERR("tex_load: Missing file attr");
     Py_RETURN_FALSE;
   }
 
   if (! name) {
-    ERR("tex_load: Missing name attr");
+    PY_ERR("tex_load: Missing name attr");
     Py_RETURN_FALSE;
   }
 

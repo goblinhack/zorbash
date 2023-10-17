@@ -26,7 +26,8 @@ def on_targeted_radially(me, x, y):
     # my.con("targeted radially {} {:X}".format(my.thing_name_get(me), me))
     my.spawn_things_around_me(me, "explosion_destroy_floor", radius)
     owner = my.thing_top_owner_id_get(me)
-    my.thing_popup(owner, "You shall not pass!")
+    if owner:
+        my.thing_popup(owner, "You shall not pass!")
 
 
 def on_idle(me, x, y):
@@ -49,7 +50,7 @@ def explode(me, x, y):
 
     owner = my.thing_top_owner_id_get(me)
     if owner:
-        if owner and my.thing_is_player(owner):
+        if my.thing_is_player(owner):
             my.thing_msg(me, "Your staff of descent explodes.")
         else:
             my.thing_msg(me, f"The {my.thing_name_get(owner)}'s staff of descent explodes.")
@@ -184,7 +185,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_descent", text_long_name="staff of sudden descent", text_short_name="staff descent")
+    tp_init(name="staff_descent", text_long_name="staff of sudden descent", text_short_name="staff, descent")
 
 
 init()

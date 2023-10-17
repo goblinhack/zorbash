@@ -28,6 +28,7 @@ void die(void);
 void log_catchup_missing_indent_levels(void);
 void topcon(const wchar_t *fmt);
 void myerr(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
+void py_myerr(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
 void quit(void);
 void restart(void);
 void common_error_handler(const std::string &error);

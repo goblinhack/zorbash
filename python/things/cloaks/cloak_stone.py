@@ -44,7 +44,7 @@ def on_move(me, x, y):
         stamina = my.thing_stamina(owner)
         new_stamina = int(float(stamina) / 100.0 * 80.0)
         my.thing_stamina_set(owner, new_stamina)
-        if owner and my.thing_is_player(owner):
+        if my.thing_is_player(owner):
             my.thing_msg(owner, "You pass into the wall, but feel drained.")
         return True
 
@@ -52,7 +52,7 @@ def on_move(me, x, y):
         stamina = my.thing_stamina(owner)
         new_stamina = int(float(stamina) / 100.0 * 50.0)
         my.thing_stamina_set(owner, new_stamina)
-        if owner and my.thing_is_player(owner):
+        if my.thing_is_player(owner):
             my.thing_msg(owner, "You pass into solid rock, but feel very drained.")
         return True
 

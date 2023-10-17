@@ -98,6 +98,10 @@ extern int TILES_VISIBLE_DOWN;
   TRACE_NO_INDENT();                                                                                                 \
   myerr
 
+#define PY_ERR                                                                                                       \
+  TRACE_NO_INDENT();                                                                                                 \
+  py_myerr
+
 #define dbg                                                                                                          \
   TRACE_NO_INDENT();                                                                                                 \
   if (DEBUG1)                                                                                                        \

@@ -24,32 +24,32 @@ PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "ssiiO", kwlist, &file, &name, &width, &height, &e)) {
-    ERR("tile_load_arr: Bad args");
+    PY_ERR("tile_load_arr: Bad args");
     Py_RETURN_FALSE;
   }
 
   if (! file) {
-    ERR("tile_load_arr: Missing file attr");
+    PY_ERR("tile_load_arr: Missing file attr");
     Py_RETURN_FALSE;
   }
 
   if (! name) {
-    ERR("tile_load_arr: Missing name attr");
+    PY_ERR("tile_load_arr: Missing name attr");
     Py_RETURN_FALSE;
   }
 
   if (! width) {
-    ERR("tile_load_arr: Missing width attr");
+    PY_ERR("tile_load_arr: Missing width attr");
     Py_RETURN_FALSE;
   }
 
   if (! height) {
-    ERR("tile_load_arr: Missing height attr");
+    PY_ERR("tile_load_arr: Missing height attr");
     Py_RETURN_FALSE;
   }
 
   if (! e) {
-    ERR("tile_load_arr: Missing arr attr");
+    PY_ERR("tile_load_arr: Missing arr attr");
     Py_RETURN_FALSE;
   }
 
@@ -98,32 +98,32 @@ PyObject *tile_load_arr_sprites_(PyObject *obj, PyObject *args, PyObject *keywds
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "ssiiO", kwlist, &file, &name, &width, &height, &e)) {
-    ERR("tile_load_arr: Bad args");
+    PY_ERR("tile_load_arr: Bad args");
     Py_RETURN_FALSE;
   }
 
   if (! file) {
-    ERR("tile_load_arr: Sprites, missing file attr");
+    PY_ERR("tile_load_arr: Sprites, missing file attr");
     Py_RETURN_FALSE;
   }
 
   if (! name) {
-    ERR("tile_load_arr: Sprites, missing name attr");
+    PY_ERR("tile_load_arr: Sprites, missing name attr");
     Py_RETURN_FALSE;
   }
 
   if (! width) {
-    ERR("tile_load_arr: Sprites, missing width attr");
+    PY_ERR("tile_load_arr: Sprites, missing width attr");
     Py_RETURN_FALSE;
   }
 
   if (! height) {
-    ERR("tile_load_arr: Sprites, missing height attr");
+    PY_ERR("tile_load_arr: Sprites, missing height attr");
     Py_RETURN_FALSE;
   }
 
   if (! e) {
-    ERR("tile_load_arr: Sprites, missing arr attr");
+    PY_ERR("tile_load_arr: Sprites, missing arr attr");
     Py_RETURN_FALSE;
   }
 
@@ -256,12 +256,12 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
           &is_hp_50_percent, &is_hp_75_percent, &is_hp_100_percent, &is_in_water, &is_sleeping, &is_open, &is_dead,
           &is_end_of_anim, &is_end_of_ascii_anim, &is_dead_on_end_of_anim, &is_dead_on_end_of_ascii_anim,
           &is_alive_on_end_of_anim, &is_alive_on_end_of_ascii_anim, &is_resurrecting)) {
-    ERR("%s: Bad args", __FUNCTION__);
+    PY_ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! py_class) {
-    ERR("%s: Missing class", __FUNCTION__);
+    PY_ERR("%s: Missing class", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -269,7 +269,7 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
 
   tp_name = py_obj_attr_str(py_class, "name");
   if (! tp_name) {
-    ERR("%s: Missing tp name", __FUNCTION__);
+    PY_ERR("%s: Missing tp name", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -277,7 +277,7 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
 
   tp = tp_find(tp_name);
   if (unlikely(! tp)) {
-    ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);
+    PY_ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);
     Py_RETURN_FALSE;
   }
 
@@ -361,7 +361,7 @@ static PyObject *tile_dir(PyObject *obj, PyObject *args, PyObject *keywds, int d
   }
 
   if (! tiles) {
-    ERR("No tiles for [%s]", tile_name);
+    PY_ERR("No tiles for [%s]", tile_name);
     Py_RETURN_FALSE;
   }
 

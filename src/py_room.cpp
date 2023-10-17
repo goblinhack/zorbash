@@ -58,18 +58,18 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
                                     &room_name, &up, &down, &left, &right, &is_ascend_dungeon, &is_descend_dungeon,
                                     &is_lock, &is_key, &is_secret, &biome_dungeon, &biome_swamp, &biome_ice,
                                     &biome_chasms, &biome_lava, &biome_flooded, &depth)) {
-    ERR("map_load_room: Bad args");
+    PY_ERR("map_load_room: Bad args");
     Py_RETURN_FALSE;
   }
 
   if (! py_room_data) {
-    ERR("Map_load_room, missing floor data");
+    PY_ERR("Map_load_room, missing floor data");
     Py_RETURN_FALSE;
   }
 
   int room_data_elems = PyList_Size(py_room_data);
   if (room_data_elems % MAP_ROOM_HEIGHT) {
-    ERR("Room elems needs to be evenly dividable by room height %d, got %d elems", (int) MAP_ROOM_HEIGHT,
+    PY_ERR("Room elems needs to be evenly dividable by room height %d, got %d elems", (int) MAP_ROOM_HEIGHT,
         (int) PyList_Size(py_room_data));
     Py_RETURN_FALSE;
   }

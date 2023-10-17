@@ -88,7 +88,7 @@ void py_init(char *argv[])
   my_mod = PyImport_ImportModule("my");
   if (! my_mod) {
     py_err();
-    ERR("Module my import failed");
+    PY_ERR("Module my import failed");
     return;
   }
 
@@ -99,7 +99,7 @@ void py_init(char *argv[])
   my_mod = PyImport_ImportModule("init");
   if (! my_mod) {
     py_err();
-    ERR("Module init import failed");
+    PY_ERR("Module init import failed");
     return;
   }
 
@@ -121,7 +121,7 @@ PyObject *py_add_module(const char *mod)
   pmod = PyImport_ImportModule(mod);
   if (pmod == nullptr) {
     py_err();
-    ERR("Module init '%s' import failed", mod);
+    PY_ERR("Module init '%s' import failed", mod);
     return nullptr;
   }
   py_mods[ name ] = pmod;

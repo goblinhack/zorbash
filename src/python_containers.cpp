@@ -34,7 +34,7 @@ std::vector< std::string > py_call_std_vector_string_fn(const char *module, cons
       py_err();
     }
   } else {
-    ERR("Cannot call python function: %s", name);
+    PY_ERR("Cannot call python function: %s", name);
   }
 
   py_err();
@@ -69,7 +69,7 @@ std::list< std::string > py_call_std_list_string_fn(const char *module, const ch
       py_err();
     }
   } else {
-    ERR("Cannot call python function: %s", name);
+    PY_ERR("Cannot call python function: %s", name);
   }
 
   py_err();

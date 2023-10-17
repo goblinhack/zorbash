@@ -47,7 +47,7 @@ def explode(me, x, y):
 
     owner = my.thing_top_owner_id_get(me)
     if owner:
-        if owner and my.thing_is_player(owner):
+        if my.thing_is_player(owner):
             my.thing_msg(me, "Your staff of shattering explodes.")
         else:
             my.thing_msg(me, f"The {my.thing_name_get(owner)}'s staff of shattering explodes.")
@@ -182,7 +182,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_shattering", text_long_name="staff of shattering", text_short_name="staff, shattering")
+    tp_init(name="staff_shattering", text_long_name="staff of shattering", text_short_name="staff, shatter")
 
 
 init()

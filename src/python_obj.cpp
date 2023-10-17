@@ -19,7 +19,7 @@ char *py_obj_to_string(const PyObject *py_str)
   str       = nullptr;
 
   if (! PyUnicode_Check((PyObject *) py_str)) {
-    ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_str)->tp_name);
+    PY_ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_str)->tp_name);
     goto err_out;
   }
 
@@ -52,7 +52,7 @@ int py_obj_to_int(PyObject *py_obj)
   val = 0;
 
   if (! PyLong_Check((PyObject *) py_obj)) {
-    ERR("Object is a %s, not a int object.", Py_TYPE((PyObject *) py_obj)->tp_name);
+    PY_ERR("Object is a %s, not a int object.", Py_TYPE((PyObject *) py_obj)->tp_name);
     goto err_out;
   }
 
@@ -60,7 +60,7 @@ int py_obj_to_int(PyObject *py_obj)
 
 err_out:
   if (PyErr_Occurred()) {
-    ERR("Int conversion failed");
+    PY_ERR("Int conversion failed");
   }
 
   return val;
@@ -74,7 +74,7 @@ int py_obj_to_bool(PyObject *py_obj)
   val = 0;
 
   if (! PyLong_Check((PyObject *) py_obj)) {
-    ERR("Object is a %s, not a int object.", Py_TYPE((PyObject *) py_obj)->tp_name);
+    PY_ERR("Object is a %s, not a int object.", Py_TYPE((PyObject *) py_obj)->tp_name);
     goto err_out;
   }
 
@@ -82,7 +82,7 @@ int py_obj_to_bool(PyObject *py_obj)
 
 err_out:
   if (PyErr_Occurred()) {
-    ERR("Int(bool) conversion failed");
+    PY_ERR("Int(bool) conversion failed");
   }
 
   return (val != 0);
@@ -96,7 +96,7 @@ uint64_t py_obj_to_uint64(PyObject *py_obj)
   val = 0;
 
   if (! PyLong_Check((PyObject *) py_obj)) {
-    ERR("Object is a %s, not a uint64 object.", Py_TYPE((PyObject *) py_obj)->tp_name);
+    PY_ERR("Object is a %s, not a uint64 object.", Py_TYPE((PyObject *) py_obj)->tp_name);
     goto err_out;
   }
 
@@ -105,7 +105,7 @@ uint64_t py_obj_to_uint64(PyObject *py_obj)
 err_out:
 
   if (PyErr_Occurred()) {
-    ERR("Int conversion failed");
+    PY_ERR("Int conversion failed");
   }
 
   return val;
@@ -123,14 +123,14 @@ double py_obj_to_double(PyObject *py_obj)
   } else if (PyFloat_Check((PyObject *) py_obj)) {
     val = PyFloat_AsDouble(py_obj);
   } else {
-    ERR("Object is a %s, not a double object.", Py_TYPE((PyObject *) py_obj)->tp_name);
+    PY_ERR("Object is a %s, not a double object.", Py_TYPE((PyObject *) py_obj)->tp_name);
     goto err_out;
   }
 
 err_out:
 
   if (PyErr_Occurred()) {
-    ERR("Int conversion failed");
+    PY_ERR("Int conversion failed");
   }
 
   return val;
@@ -145,7 +145,7 @@ int py_obj_attr_int(const PyObject *py_obj, const char *attr)
   py_encstr = nullptr;
 
   if (! PyObject_HasAttrString((PyObject *) py_obj, attr)) {
-    ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_obj)->tp_name);
+    PY_ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_obj)->tp_name);
     goto err_out;
   }
 
@@ -162,7 +162,7 @@ err_out:
   }
 
   if (PyErr_Occurred()) {
-    ERR("Int conversion failed");
+    PY_ERR("Int conversion failed");
   }
 
   return i;
@@ -177,7 +177,7 @@ uint64_t py_obj_attr_uint64(const PyObject *py_obj, const char *attr)
   py_encstr = nullptr;
 
   if (! PyObject_HasAttrString((PyObject *) py_obj, attr)) {
-    ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_obj)->tp_name);
+    PY_ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_obj)->tp_name);
     goto err_out;
   }
 
@@ -194,7 +194,7 @@ err_out:
   }
 
   if (PyErr_Occurred()) {
-    ERR("Int conversion failed");
+    PY_ERR("Int conversion failed");
   }
 
   return i;
@@ -209,7 +209,7 @@ double py_obj_attr_double(const PyObject *py_obj, const char *attr)
   py_encstr = nullptr;
 
   if (! PyObject_HasAttrString((PyObject *) py_obj, attr)) {
-    ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_obj)->tp_name);
+    PY_ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_obj)->tp_name);
     goto err_out;
   }
 
@@ -226,7 +226,7 @@ err_out:
   }
 
   if (PyErr_Occurred()) {
-    ERR("Int conversion failed");
+    PY_ERR("Int conversion failed");
   }
 
   return i;
@@ -243,7 +243,7 @@ char *py_obj_attr_str(const PyObject *py_obj, const char *attr)
   str       = nullptr;
 
   if (! PyObject_HasAttrString((PyObject *) py_obj, attr)) {
-    ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_obj)->tp_name);
+    PY_ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_obj)->tp_name);
     goto err_out;
   }
 
@@ -276,7 +276,7 @@ PyObject *py_obj_attr(const PyObject *py_obj, const char *attr)
   py_encstr = nullptr;
 
   if (! PyObject_HasAttrString((PyObject *) py_obj, attr)) {
-    ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_obj)->tp_name);
+    PY_ERR("Object is a %s, not a string object.", Py_TYPE((PyObject *) py_obj)->tp_name);
     goto err_out;
   }
 
@@ -293,7 +293,7 @@ err_out:
   }
 
   if (PyErr_Occurred()) {
-    ERR("Obj lookup conversion failed");
+    PY_ERR("Obj lookup conversion failed");
   }
 
   Py_RETURN_NONE;

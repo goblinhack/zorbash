@@ -19,37 +19,37 @@ PyObject *thing_coords_get(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
   if (! id) {
-    ERR("%s: No thing ID set", __FUNCTION__);
+    PY_ERR("%s: No thing ID set", __FUNCTION__);
     Py_RETURN_NONE;
   }
 
   Thingp t = game->thing_find(id);
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
   Py_ssize_t size      = 2;
   auto       the_tuple = PyTuple_New(size);
   if (! the_tuple) {
-    ERR("%s: Cannot create tuple for ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot create tuple for ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
   auto err = PyTuple_SetItem(the_tuple, (Py_ssize_t) 0, PyLong_FromLong((long) t->curr_at.x));
   if (err < 0) {
-    ERR("%s: Cannot create tuple (a) for ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot create tuple (a) for ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
   err = PyTuple_SetItem(the_tuple, (Py_ssize_t) 1, PyLong_FromLong((long) t->curr_at.y));
   if (err < 0) {
-    ERR("%s: Cannot create tuple (a) for ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot create tuple (a) for ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 
@@ -65,29 +65,29 @@ PyObject *thing_possible_to_attack(PyObject *obj, PyObject *args, PyObject *keyw
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &hitter_id, &victim_id)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! hitter_id) {
-    ERR("%s: No hitter thing ID set", __FUNCTION__);
+    PY_ERR("%s: No hitter thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp hitter = game->thing_find(hitter_id);
   if (! hitter) {
-    ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);
+    PY_ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);
     Py_RETURN_FALSE;
   }
 
   if (! victim_id) {
-    ERR("%s: No target thing ID set", __FUNCTION__);
+    PY_ERR("%s: No target thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp target = game->thing_find(victim_id);
   if (! target) {
-    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
+    PY_ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
     Py_RETURN_FALSE;
   }
 
@@ -111,34 +111,34 @@ PyObject *thing_shoot_projectile_or_laser_at(PyObject *obj, PyObject *args, PyOb
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IsI", kwlist, &owner_id, &item, &victim_id)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! owner_id) {
-    ERR("%s: No owner thing ID set", __FUNCTION__);
+    PY_ERR("%s: No owner thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp owner = game->thing_find(owner_id);
   if (! owner) {
-    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    PY_ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
     Py_RETURN_FALSE;
   }
 
   if (! item) {
-    ERR("%s: No item thing ID set", __FUNCTION__);
+    PY_ERR("%s: No item thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! victim_id) {
-    ERR("%s: No target thing ID set", __FUNCTION__);
+    PY_ERR("%s: No target thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp target = game->thing_find(victim_id);
   if (! target) {
-    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
+    PY_ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
     Py_RETURN_FALSE;
   }
 
@@ -147,13 +147,13 @@ PyObject *thing_shoot_projectile_or_laser_at(PyObject *obj, PyObject *args, PyOb
   auto what     = std::string(item);
   auto tp_cands = tp_find_wildcard(what);
   if (! tp_cands.size()) {
-    ERR("Cannot find any %s to spawn", what.c_str());
+    PY_ERR("Cannot find any %s to spawn", what.c_str());
     Py_RETURN_FALSE;
   }
 
   auto itemp = pcg_one_of(tp_cands);
   if (! itemp) {
-    ERR("%s: Cannot find item to shoot %s", __FUNCTION__, item);
+    PY_ERR("%s: Cannot find item to shoot %s", __FUNCTION__, item);
     Py_RETURN_FALSE;
   }
 
@@ -189,34 +189,34 @@ PyObject *thing_throw_at(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IsI", kwlist, &owner_id, &item, &victim_id)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! owner_id) {
-    ERR("%s: No owner thing ID set", __FUNCTION__);
+    PY_ERR("%s: No owner thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp owner = game->thing_find(owner_id);
   if (! owner) {
-    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    PY_ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
     Py_RETURN_FALSE;
   }
 
   if (! item) {
-    ERR("%s: No item thing ID set", __FUNCTION__);
+    PY_ERR("%s: No item thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! victim_id) {
-    ERR("%s: No target thing ID set", __FUNCTION__);
+    PY_ERR("%s: No target thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp target = game->thing_find(victim_id);
   if (! target) {
-    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
+    PY_ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
     Py_RETURN_FALSE;
   }
 
@@ -224,19 +224,19 @@ PyObject *thing_throw_at(PyObject *obj, PyObject *args, PyObject *keywds)
 
   auto tp_cands = tp_find_wildcard(item);
   if (! tp_cands.size()) {
-    ERR("Cannot find any %s to spawn", item);
+    PY_ERR("Cannot find any %s to spawn", item);
     Py_RETURN_FALSE;
   }
 
   auto tp = pcg_one_of(tp_cands);
   if (unlikely(! tp)) {
-    ERR("Could not find to throw %s", item);
+    PY_ERR("Could not find to throw %s", item);
     Py_RETURN_FALSE;
   }
 
   auto what = owner->level->thing_new(tp, target->curr_at);
   if (! what) {
-    ERR("Could not create to throw %s", item);
+    PY_ERR("Could not create to throw %s", item);
     Py_RETURN_FALSE;
   }
 
@@ -258,34 +258,34 @@ PyObject *thing_spell_cast_at(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IsI", kwlist, &owner_id, &item, &victim_id)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! owner_id) {
-    ERR("%s: No owner thing ID set", __FUNCTION__);
+    PY_ERR("%s: No owner thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp owner = game->thing_find(owner_id);
   if (! owner) {
-    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    PY_ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
     Py_RETURN_FALSE;
   }
 
   if (! item) {
-    ERR("%s: No item thing ID set", __FUNCTION__);
+    PY_ERR("%s: No item thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! victim_id) {
-    ERR("%s: No target thing ID set", __FUNCTION__);
+    PY_ERR("%s: No target thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp target = game->thing_find(victim_id);
   if (! target) {
-    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
+    PY_ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
     Py_RETURN_FALSE;
   }
 
@@ -293,19 +293,19 @@ PyObject *thing_spell_cast_at(PyObject *obj, PyObject *args, PyObject *keywds)
 
   auto tp_cands = tp_find_wildcard(item);
   if (! tp_cands.size()) {
-    ERR("Cannot find any %s to spawn", item);
+    PY_ERR("Cannot find any %s to spawn", item);
     Py_RETURN_FALSE;
   }
 
   auto tp = pcg_one_of(tp_cands);
   if (unlikely(! tp)) {
-    ERR("Could not find to spell_cast %s", item);
+    PY_ERR("Could not find to spell_cast %s", item);
     Py_RETURN_FALSE;
   }
 
   auto what = owner->level->thing_new(tp, target->curr_at);
   if (! what) {
-    ERR("Could not create to spell_cast %s", item);
+    PY_ERR("Could not create to spell_cast %s", item);
     Py_RETURN_FALSE;
   }
 
@@ -329,34 +329,34 @@ PyObject *thing_death_by(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IsI", kwlist, &id, &reason, &killer_id)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: No t thing ID set", __FUNCTION__);
+    PY_ERR("%s: No t thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find t thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find t thing ID %u", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
   if (! reason) {
-    ERR("%s: No reason thing ID set", __FUNCTION__);
+    PY_ERR("%s: No reason thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! killer_id) {
-    ERR("%s: No defeater thing ID set", __FUNCTION__);
+    PY_ERR("%s: No defeater thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp defeater = game->thing_find(killer_id);
   if (! defeater) {
-    ERR("%s: Cannot find defeater thing ID %u", __FUNCTION__, killer_id);
+    PY_ERR("%s: Cannot find defeater thing ID %u", __FUNCTION__, killer_id);
     Py_RETURN_FALSE;
   }
 
@@ -375,23 +375,23 @@ PyObject *thing_dead(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &reason)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: No t thing ID set", __FUNCTION__);
+    PY_ERR("%s: No t thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find t thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find t thing ID %u", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
   if (! reason) {
-    ERR("%s: No reason thing ID set", __FUNCTION__);
+    PY_ERR("%s: No reason thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -410,23 +410,23 @@ PyObject *thing_wake(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &reason)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: No t thing ID set", __FUNCTION__);
+    PY_ERR("%s: No t thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find t thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find t thing ID %u", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
   if (! reason) {
-    ERR("%s: No reason thing ID set", __FUNCTION__);
+    PY_ERR("%s: No reason thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -442,18 +442,18 @@ PyObject *thing_freeze(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: No t thing ID set", __FUNCTION__);
+    PY_ERR("%s: No t thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find t thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find t thing ID %u", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -469,18 +469,18 @@ PyObject *thing_unfreeze(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: No t thing ID set", __FUNCTION__);
+    PY_ERR("%s: No t thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -497,29 +497,29 @@ PyObject *thing_beckon(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &me_id, &it_id)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! me_id) {
-    ERR("%s: No me_id thing ID set", __FUNCTION__);
+    PY_ERR("%s: No me_id thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! it_id) {
-    ERR("%s: No it_id thing ID set", __FUNCTION__);
+    PY_ERR("%s: No it_id thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp me = game->thing_find(me_id);
   if (! me) {
-    ERR("%s: Cannot find me thing ID %u", __FUNCTION__, me_id);
+    PY_ERR("%s: Cannot find me thing ID %u", __FUNCTION__, me_id);
     Py_RETURN_FALSE;
   }
 
   Thingp it = game->thing_find(it_id);
   if (! it) {
-    ERR("%s: Cannot find it thing ID %u", __FUNCTION__, it_id);
+    PY_ERR("%s: Cannot find it thing ID %u", __FUNCTION__, it_id);
     Py_RETURN_FALSE;
   }
 
@@ -539,29 +539,29 @@ PyObject *thing_repulse(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &me_id, &it_id)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! me_id) {
-    ERR("%s: No me_id thing ID set", __FUNCTION__);
+    PY_ERR("%s: No me_id thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! it_id) {
-    ERR("%s: No it_id thing ID set", __FUNCTION__);
+    PY_ERR("%s: No it_id thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp me = game->thing_find(me_id);
   if (! me) {
-    ERR("%s: Cannot find me thing ID %u", __FUNCTION__, me_id);
+    PY_ERR("%s: Cannot find me thing ID %u", __FUNCTION__, me_id);
     Py_RETURN_FALSE;
   }
 
   Thingp it = game->thing_find(it_id);
   if (! it) {
-    ERR("%s: Cannot find it thing ID %u", __FUNCTION__, it_id);
+    PY_ERR("%s: Cannot find it thing ID %u", __FUNCTION__, it_id);
     Py_RETURN_FALSE;
   }
 
@@ -581,23 +581,23 @@ PyObject *thing_perma_death(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &reason)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: No thing ID set", __FUNCTION__);
+    PY_ERR("%s: No thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
   if (! reason) {
-    ERR("%s: No reason thing ID set", __FUNCTION__);
+    PY_ERR("%s: No reason thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -615,23 +615,23 @@ PyObject *thing_resurrect(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &reason)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: No thing ID set", __FUNCTION__);
+    PY_ERR("%s: No thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
   if (! reason) {
-    ERR("%s: No reason thing ID set", __FUNCTION__);
+    PY_ERR("%s: No reason thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -652,18 +652,18 @@ PyObject *thing_carry(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: No thing ID set", __FUNCTION__);
+    PY_ERR("%s: No thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -705,18 +705,18 @@ PyObject *thing_new(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: No thing ID set", __FUNCTION__);
+    PY_ERR("%s: No thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -750,18 +750,18 @@ PyObject *thing_enemy(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: No thing ID set", __FUNCTION__);
+    PY_ERR("%s: No thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -793,18 +793,18 @@ PyObject *thing_friend(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: No thing ID set", __FUNCTION__);
+    PY_ERR("%s: No thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -836,29 +836,29 @@ PyObject *thing_friend_add(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &it_id)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: No thing ID set", __FUNCTION__);
+    PY_ERR("%s: No thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! it_id) {
-    ERR("%s: No friend thing ID set", __FUNCTION__);
+    PY_ERR("%s: No friend thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
   Thingp it = game->thing_find(it_id);
   if (! it) {
-    ERR("%s: Cannot find friend thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find friend thing ID %u", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -876,18 +876,18 @@ PyObject *thing_discord(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id, &it_id)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: No thing ID set", __FUNCTION__);
+    PY_ERR("%s: No thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -905,25 +905,25 @@ PyObject *thing_polymorph(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &into)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: No thing ID set", __FUNCTION__);
+    PY_ERR("%s: No thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
   auto cands = tp_find_wildcard(into);
   auto tp    = pcg_one_of(cands);
   if (unlikely(! tp)) {
-    ERR("%s: No polymorph into %s found", __FUNCTION__, into);
+    PY_ERR("%s: No polymorph into %s found", __FUNCTION__, into);
     Py_RETURN_FALSE;
   }
 
@@ -939,18 +939,18 @@ PyObject *thing_teleport_randomly(PyObject *obj, PyObject *args, PyObject *keywd
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: No thing ID set", __FUNCTION__);
+    PY_ERR("%s: No thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -971,28 +971,28 @@ PyObject *thing_teleport(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iii", kwlist, &id, &x, &y)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
   if (x == NO_VALUE) {
-    ERR("%s: Missing 'x'", __FUNCTION__);
+    PY_ERR("%s: Missing 'x'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (y == NO_VALUE) {
-    ERR("%s: Missing 'y'", __FUNCTION__);
+    PY_ERR("%s: Missing 'y'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp t = game->thing_find(id);
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -1019,29 +1019,29 @@ PyObject *thing_set_mob(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &owner_id)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: No thing ID set", __FUNCTION__);
+    PY_ERR("%s: No thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! owner_id) {
-    ERR("%s: No owner thing ID set", __FUNCTION__);
+    PY_ERR("%s: No owner thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
   Thingp owner = game->thing_find(owner_id);
   if (! owner) {
-    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    PY_ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
     Py_RETURN_FALSE;
   }
 
@@ -1058,29 +1058,29 @@ PyObject *thing_is_same_mob(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &owner_id)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: No thing ID set", __FUNCTION__);
+    PY_ERR("%s: No thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! owner_id) {
-    ERR("%s: No owner thing ID set", __FUNCTION__);
+    PY_ERR("%s: No owner thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
   Thingp owner = game->thing_find(owner_id);
   if (! owner) {
-    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    PY_ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
     Py_RETURN_FALSE;
   }
 
@@ -1100,29 +1100,29 @@ PyObject *thing_set_leader(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &owner_id)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: No thing ID set", __FUNCTION__);
+    PY_ERR("%s: No thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! owner_id) {
-    ERR("%s: No owner thing ID set", __FUNCTION__);
+    PY_ERR("%s: No owner thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp t = game->thing_find(id);
   if (! t) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
   Thingp owner = game->thing_find(owner_id);
   if (! owner) {
-    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    PY_ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
     Py_RETURN_FALSE;
   }
 
@@ -1139,35 +1139,35 @@ PyObject *thing_buff_add(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &what)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! owner_id) {
-    ERR("%s: No owner thing ID set", __FUNCTION__);
+    PY_ERR("%s: No owner thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp owner = game->thing_find(owner_id);
   if (! owner) {
-    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    PY_ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
     Py_RETURN_FALSE;
   }
 
   if (! what) {
-    ERR("%s: No buff name set", __FUNCTION__);
+    PY_ERR("%s: No buff name set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   auto tp_cands = tp_find_wildcard(what);
   if (! tp_cands.size()) {
-    ERR("Cannot find any %s to spawn", what);
+    PY_ERR("Cannot find any %s to spawn", what);
     Py_RETURN_FALSE;
   }
 
   auto tp = pcg_one_of(tp_cands);
   if (unlikely(! tp)) {
-    ERR("%s: No buff tp called %s found", __FUNCTION__, what);
+    PY_ERR("%s: No buff tp called %s found", __FUNCTION__, what);
     Py_RETURN_FALSE;
   }
 
@@ -1185,35 +1185,35 @@ PyObject *thing_debuff_add(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &what)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! owner_id) {
-    ERR("%s: No owner thing ID set", __FUNCTION__);
+    PY_ERR("%s: No owner thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp owner = game->thing_find(owner_id);
   if (! owner) {
-    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    PY_ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
     Py_RETURN_FALSE;
   }
 
   if (! what) {
-    ERR("%s: No debuff name set", __FUNCTION__);
+    PY_ERR("%s: No debuff name set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   auto tp_cands = tp_find_wildcard(what);
   if (! tp_cands.size()) {
-    ERR("Cannot find any %s to spawn", what);
+    PY_ERR("Cannot find any %s to spawn", what);
     Py_RETURN_FALSE;
   }
 
   auto tp = pcg_one_of(tp_cands);
   if (unlikely(! tp)) {
-    ERR("%s: No debuff tp called %s found", __FUNCTION__, what);
+    PY_ERR("%s: No debuff tp called %s found", __FUNCTION__, what);
     Py_RETURN_FALSE;
   }
 
@@ -1230,35 +1230,35 @@ PyObject *thing_buff_remove(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &what)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! owner_id) {
-    ERR("%s: No owner thing ID set", __FUNCTION__);
+    PY_ERR("%s: No owner thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp owner = game->thing_find(owner_id);
   if (! owner) {
-    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    PY_ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
     Py_RETURN_FALSE;
   }
 
   if (! what) {
-    ERR("%s: No buff name set", __FUNCTION__);
+    PY_ERR("%s: No buff name set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   auto tp_cands = tp_find_wildcard(what);
   if (! tp_cands.size()) {
-    ERR("Cannot find any %s to spawn", what);
+    PY_ERR("Cannot find any %s to spawn", what);
     Py_RETURN_FALSE;
   }
 
   auto tp = pcg_one_of(tp_cands);
   if (unlikely(! tp)) {
-    ERR("%s: No buff tp called %s found", __FUNCTION__, what);
+    PY_ERR("%s: No buff tp called %s found", __FUNCTION__, what);
     Py_RETURN_FALSE;
   }
 
@@ -1275,35 +1275,35 @@ PyObject *thing_debuff_remove(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &what)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! owner_id) {
-    ERR("%s: No owner thing ID set", __FUNCTION__);
+    PY_ERR("%s: No owner thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp owner = game->thing_find(owner_id);
   if (! owner) {
-    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    PY_ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
     Py_RETURN_FALSE;
   }
 
   if (! what) {
-    ERR("%s: No debuff name set", __FUNCTION__);
+    PY_ERR("%s: No debuff name set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   auto tp_cands = tp_find_wildcard(what);
   if (! tp_cands.size()) {
-    ERR("Cannot find any %s to spawn", what);
+    PY_ERR("Cannot find any %s to spawn", what);
     Py_RETURN_FALSE;
   }
 
   auto tp = pcg_one_of(tp_cands);
   if (unlikely(! tp)) {
-    ERR("%s: No debuff tp called %s found", __FUNCTION__, what);
+    PY_ERR("%s: No debuff tp called %s found", __FUNCTION__, what);
     Py_RETURN_FALSE;
   }
 
@@ -1320,23 +1320,23 @@ PyObject *thing_speaks(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &msg)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! owner_id) {
-    ERR("%s: No owner thing ID set", __FUNCTION__);
+    PY_ERR("%s: No owner thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp owner = game->thing_find(owner_id);
   if (! owner) {
-    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    PY_ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
     Py_RETURN_FALSE;
   }
 
   if (! msg) {
-    ERR("%s: No msg thing ID set", __FUNCTION__);
+    PY_ERR("%s: No msg thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -1358,23 +1358,23 @@ PyObject *thing_msg(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &msg)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! owner_id) {
-    ERR("%s: No owner thing ID set", __FUNCTION__);
+    PY_ERR("%s: No owner thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp owner = game->thing_find(owner_id);
   if (! owner) {
-    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    PY_ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
     Py_RETURN_FALSE;
   }
 
   if (! msg) {
-    ERR("%s: No msg thing ID set", __FUNCTION__);
+    PY_ERR("%s: No msg thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -1392,18 +1392,18 @@ PyObject *thing_msg_if_not_dead_or_dying(PyObject *obj, PyObject *args, PyObject
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &msg)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! owner_id) {
-    ERR("%s: No owner thing ID set", __FUNCTION__);
+    PY_ERR("%s: No owner thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp owner = game->thing_find(owner_id);
   if (! owner) {
-    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    PY_ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
     Py_RETURN_FALSE;
   }
 
@@ -1415,7 +1415,7 @@ PyObject *thing_msg_if_not_dead_or_dying(PyObject *obj, PyObject *args, PyObject
   }
 
   if (! msg) {
-    ERR("%s: No msg thing ID set", __FUNCTION__);
+    PY_ERR("%s: No msg thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -1433,23 +1433,23 @@ PyObject *thing_popup(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &msg)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! owner_id) {
-    ERR("%s: No owner thing ID set", __FUNCTION__);
+    PY_ERR("%s: No owner thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp owner = game->thing_find(owner_id);
   if (! owner) {
-    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    PY_ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
     Py_RETURN_FALSE;
   }
 
   if (! msg) {
-    ERR("%s: No popup msg thing ID set", __FUNCTION__);
+    PY_ERR("%s: No popup msg thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -1473,23 +1473,23 @@ PyObject *thing_sound_play_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &owner_id, &name)) {
-    ERR("thing_sound_play: Bad arguments");
+    PY_ERR("thing_sound_play: Bad arguments");
     Py_RETURN_FALSE;
   }
 
   if (! owner_id) {
-    ERR("%s: No owner thing ID set", __FUNCTION__);
+    PY_ERR("%s: No owner thing ID set", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   Thingp owner = game->thing_find(owner_id);
   if (! owner) {
-    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    PY_ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
     Py_RETURN_FALSE;
   }
 
   if (! name) {
-    ERR("thing_sound_play: Missing name attr");
+    PY_ERR("thing_sound_play: Missing name attr");
     Py_RETURN_FALSE;
   }
 
@@ -1518,22 +1518,22 @@ PyObject *thing_sound_play_channel_(PyObject *obj, PyObject *args, PyObject *key
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iis", kwlist, &owner_id, &channel, &name)) {
-    ERR("thing_sound_play_channel: Bad arguments");
+    PY_ERR("thing_sound_play_channel: Bad arguments");
     Py_RETURN_FALSE;
   }
 
   Thingp owner = game->thing_find(owner_id);
   if (! owner) {
-    ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
+    PY_ERR("%s: Cannot find owner thing ID %u", __FUNCTION__, owner_id);
     Py_RETURN_FALSE;
   }
 
   if (! name) {
-    ERR("thing_sound_play: Missing name attr");
+    PY_ERR("thing_sound_play: Missing name attr");
     Py_RETURN_FALSE;
   }
   if (! name) {
-    ERR("thing_sound_play_channel: Missing name attr");
+    PY_ERR("thing_sound_play_channel: Missing name attr");
     Py_RETURN_FALSE;
   }
 
@@ -1561,17 +1561,17 @@ PyObject *spawn_set_fire_to_things_around_me(PyObject *obj, PyObject *args, PyOb
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
-    ERR("%s: Bad args", __FUNCTION__);
+    PY_ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: Missing 'id'", __FUNCTION__);
+    PY_ERR("%s: Missing 'id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! what) {
-    ERR("%s: Missing 'what'", __FUNCTION__);
+    PY_ERR("%s: Missing 'what'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -1584,7 +1584,7 @@ PyObject *spawn_set_fire_to_things_around_me(PyObject *obj, PyObject *args, PyOb
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -1605,17 +1605,17 @@ PyObject *spawn_things_around_me(PyObject *obj, PyObject *args, PyObject *keywds
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Isi", kwlist, &id, &what, &radius)) {
-    ERR("%s: Bad args", __FUNCTION__);
+    PY_ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: Missing 'id'", __FUNCTION__);
+    PY_ERR("%s: Missing 'id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! what) {
-    ERR("%s: Missing 'what'", __FUNCTION__);
+    PY_ERR("%s: Missing 'what'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -1628,7 +1628,7 @@ PyObject *spawn_things_around_me(PyObject *obj, PyObject *args, PyObject *keywds
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -1648,12 +1648,12 @@ PyObject *spawn_gas_poison_around_thing(PyObject *obj, PyObject *args, PyObject 
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &radius)) {
-    ERR("%s: Bad args", __FUNCTION__);
+    PY_ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: Missing 'id'", __FUNCTION__);
+    PY_ERR("%s: Missing 'id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -1666,7 +1666,7 @@ PyObject *spawn_gas_poison_around_thing(PyObject *obj, PyObject *args, PyObject 
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -1686,12 +1686,12 @@ PyObject *spawn_gas_explosive_around_thing(PyObject *obj, PyObject *args, PyObje
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &radius)) {
-    ERR("%s: Bad args", __FUNCTION__);
+    PY_ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: Missing 'id'", __FUNCTION__);
+    PY_ERR("%s: Missing 'id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -1704,7 +1704,7 @@ PyObject *spawn_gas_explosive_around_thing(PyObject *obj, PyObject *args, PyObje
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -1724,12 +1724,12 @@ PyObject *spawn_gas_paralysis_around_thing(PyObject *obj, PyObject *args, PyObje
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &radius)) {
-    ERR("%s: Bad args", __FUNCTION__);
+    PY_ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: Missing 'id'", __FUNCTION__);
+    PY_ERR("%s: Missing 'id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -1742,7 +1742,7 @@ PyObject *spawn_gas_paralysis_around_thing(PyObject *obj, PyObject *args, PyObje
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -1762,12 +1762,12 @@ PyObject *spawn_gas_confusion_around_thing(PyObject *obj, PyObject *args, PyObje
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &radius)) {
-    ERR("%s: Bad args", __FUNCTION__);
+    PY_ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: Missing 'id'", __FUNCTION__);
+    PY_ERR("%s: Missing 'id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -1780,7 +1780,7 @@ PyObject *spawn_gas_confusion_around_thing(PyObject *obj, PyObject *args, PyObje
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -1800,12 +1800,12 @@ PyObject *spawn_darkness_around_thing(PyObject *obj, PyObject *args, PyObject *k
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &radius)) {
-    ERR("%s: Bad args", __FUNCTION__);
+    PY_ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: Missing 'id'", __FUNCTION__);
+    PY_ERR("%s: Missing 'id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -1818,7 +1818,7 @@ PyObject *spawn_darkness_around_thing(PyObject *obj, PyObject *args, PyObject *k
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -1838,12 +1838,12 @@ PyObject *spawn_gas_healing_around_thing(PyObject *obj, PyObject *args, PyObject
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &radius)) {
-    ERR("%s: Bad args", __FUNCTION__);
+    PY_ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: Missing 'id'", __FUNCTION__);
+    PY_ERR("%s: Missing 'id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -1856,7 +1856,7 @@ PyObject *spawn_gas_healing_around_thing(PyObject *obj, PyObject *args, PyObject
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -1876,17 +1876,17 @@ PyObject *spawn_at_my_position(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
-    ERR("%s: Bad args", __FUNCTION__);
+    PY_ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: Missing 'id'", __FUNCTION__);
+    PY_ERR("%s: Missing 'id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! what) {
-    ERR("%s: Missing 'what'", __FUNCTION__);
+    PY_ERR("%s: Missing 'what'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -1899,7 +1899,7 @@ PyObject *spawn_at_my_position(PyObject *obj, PyObject *args, PyObject *keywds)
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -1920,17 +1920,17 @@ PyObject *spawn_owned_thing_at_my_position(PyObject *obj, PyObject *args, PyObje
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
-    ERR("%s: Bad args", __FUNCTION__);
+    PY_ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: Missing 'id'", __FUNCTION__);
+    PY_ERR("%s: Missing 'id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! what) {
-    ERR("%s: Missing 'what'", __FUNCTION__);
+    PY_ERR("%s: Missing 'what'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -1943,7 +1943,7 @@ PyObject *spawn_owned_thing_at_my_position(PyObject *obj, PyObject *args, PyObje
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -1964,17 +1964,17 @@ PyObject *spawn_minion_at_my_position(PyObject *obj, PyObject *args, PyObject *k
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
-    ERR("%s: Bad args", __FUNCTION__);
+    PY_ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: Missing 'id'", __FUNCTION__);
+    PY_ERR("%s: Missing 'id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! what) {
-    ERR("%s: Missing 'what'", __FUNCTION__);
+    PY_ERR("%s: Missing 'what'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -1987,7 +1987,7 @@ PyObject *spawn_minion_at_my_position(PyObject *obj, PyObject *args, PyObject *k
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -2008,17 +2008,17 @@ PyObject *spawn_minion_next_to(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
-    ERR("%s: Bad args", __FUNCTION__);
+    PY_ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: Missing 'id'", __FUNCTION__);
+    PY_ERR("%s: Missing 'id'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! what) {
-    ERR("%s: Missing 'what'", __FUNCTION__);
+    PY_ERR("%s: Missing 'what'", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
@@ -2031,7 +2031,7 @@ PyObject *spawn_minion_next_to(PyObject *obj, PyObject *args, PyObject *keywds)
 
   auto t = level->thing_find(ThingId(id));
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing %08" PRIX32 "", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
@@ -2049,18 +2049,18 @@ PyObject *thing_get_followers(PyObject *obj, PyObject *args, PyObject *keywds)
   static char *kwlist[] = {(char *) "id", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "I", kwlist, &id)) {
-    ERR("%s: Failed parsing keywords", __FUNCTION__);
+    PY_ERR("%s: Failed parsing keywords", __FUNCTION__);
     Py_RETURN_FALSE;
   }
 
   if (! id) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_FALSE;
   }
 
   Thingp t = game->thing_find(id);
   if (unlikely(! t)) {
-    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
     Py_RETURN_NONE;
   }
 

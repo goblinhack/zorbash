@@ -21,17 +21,17 @@ PyObject *music_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iss", kwlist, &rate, &file, &name)) {
-    ERR("music_load: Bad arguments");
+    PY_ERR("music_load: Bad arguments");
     Py_RETURN_FALSE;
   }
 
   if (! file) {
-    ERR("music_load: Missing file attr");
+    PY_ERR("music_load: Missing file attr");
     Py_RETURN_FALSE;
   }
 
   if (! name) {
-    ERR("music_load: Missing name attr");
+    PY_ERR("music_load: Missing name attr");
     Py_RETURN_FALSE;
   }
 
@@ -53,12 +53,12 @@ PyObject *music_play_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "s", kwlist, &name)) {
-    ERR("music_play: Bad arguments");
+    PY_ERR("music_play: Bad arguments");
     Py_RETURN_FALSE;
   }
 
   if (! name) {
-    ERR("music_play: Missing name attr");
+    PY_ERR("music_play: Missing name attr");
     Py_RETURN_FALSE;
   }
 
@@ -67,7 +67,7 @@ PyObject *music_play_(PyObject *obj, PyObject *args, PyObject *keywds)
   std::string namearg = name;
 
   if (! music_play(namearg)) {
-    ERR("music_play: Failed");
+    PY_ERR("music_play: Failed");
     Py_RETURN_FALSE;
   }
 
@@ -81,7 +81,7 @@ PyObject *music_halt_(PyObject *obj, PyObject *args, PyObject *keywds)
   PY_DBG("music_halt()");
 
   if (! music_halt()) {
-    ERR("music_halt: Failed");
+    PY_ERR("music_halt: Failed");
     Py_RETURN_FALSE;
   }
 

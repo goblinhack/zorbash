@@ -25,7 +25,7 @@ def shatters(item, target, x, y):
 
     owner = my.thing_top_owner_id_get(item)
     if owner:
-        if owner and my.thing_is_player(owner):
+        if my.thing_is_player(owner):
             my.thing_msg(owner, "Your potion of poison gas shatters.")
         else:
             my.thing_msg(owner, f"The {my.thing_name_get(owner)}'s potion of poison gas shatters.")

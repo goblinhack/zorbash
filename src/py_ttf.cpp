@@ -16,12 +16,12 @@ PyObject *text_size_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "u", kwlist, &text)) {
-    ERR("text_size: Bad args");
+    PY_ERR("text_size: Bad args");
     Py_RETURN_NONE;
   }
 
   if (! text) {
-    ERR("No text");
+    PY_ERR("No text");
     Py_RETURN_NONE;
   }
 

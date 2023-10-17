@@ -15,13 +15,13 @@
     static char *kwlist[] = {(char *) "id", (char *) "value", 0};                                                    \
                                                                                                                      \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "Ii", kwlist, &id, &value)) {                                    \
-      ERR("%s: Failed parsing keywords", __FUNCTION__);                                                              \
+      PY_ERR("%s: Failed parsing keywords", __FUNCTION__);                                                              \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     Thingp t = game->thing_find(id);                                                                                 \
     if (unlikely(! t)) {                                                                                             \
-      ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);                                                          \
+      PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);                                                          \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
@@ -38,29 +38,29 @@
     static char *kwlist[] = {(char *) "id", (char *) "oid", 0};                                                      \
                                                                                                                      \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "II", kwlist, &id, &oid)) {                                      \
-      ERR("%s: Failed parsing keywords", __FUNCTION__);                                                              \
+      PY_ERR("%s: Failed parsing keywords", __FUNCTION__);                                                              \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     if (! id) {                                                                                                      \
-      ERR("%s: No thing ID set", __FUNCTION__);                                                                      \
+      PY_ERR("%s: No thing ID set", __FUNCTION__);                                                                      \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     if (! oid) {                                                                                                     \
-      ERR("%s: No oid thing ID set", __FUNCTION__);                                                                  \
+      PY_ERR("%s: No oid thing ID set", __FUNCTION__);                                                                  \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     Thingp t = game->thing_find(id);                                                                                 \
     if (unlikely(! t)) {                                                                                             \
-      ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);                                                          \
+      PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);                                                          \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     Thingp o = game->thing_find(oid);                                                                                \
     if (unlikely(! t)) {                                                                                             \
-      ERR("%s: Cannot find thing ID %u", __FUNCTION__, oid);                                                         \
+      PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, oid);                                                         \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
