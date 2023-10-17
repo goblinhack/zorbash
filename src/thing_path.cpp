@@ -98,13 +98,22 @@ bool Thing::player_or_monst_path_pop_next_move(ThingMoveReason reason)
   // Jump over obstacles if they appear in the path
   //
   if (is_able_to_jump() && (is_monst() || (is_player() && game->robot_mode))) {
-    dbg("Can try to jump");
-    TRACE_AND_INDENT();
-
     //
     // Inject some randomness so we don't repeat cycles of jumping over something and failing.
     //
-    if (d100() < 50) {
+    bool try_to_jump = d100() < 50;
+
+    //
+    // Barrels explode. So not a good idea to not jump over them and end up attacking them.
+    //
+    if (level->is_brazier(future_pos) || level->is_barrel(future_pos)) {
+      try_to_jump = true;
+    }
+
+    if (try_to_jump) {
+      dbg("Can try to jump");
+      TRACE_AND_INDENT();
+
       //
       // Jump over hazards
       //
