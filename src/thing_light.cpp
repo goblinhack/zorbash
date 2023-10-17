@@ -218,8 +218,9 @@ int Thing::light_distance_update(void)
     }
 
     TRACE_NO_INDENT();
-    FOR_ALL_INTERESTING_THINGS_ON_LEVEL(level, t)
-    {
+    for (auto p : level->all_things) {
+      auto t = p.second;
+
       if (get_no_check(level->can_see_currently.can_see, t->curr_at.x, t->curr_at.y)) {
         //
         // In chasm levels we can see further and off-screen. Limit to what is onscreen.
@@ -230,29 +231,27 @@ int Thing::light_distance_update(void)
 
         t->is_visible_to_player = true;
 
-        TRACE_NO_INDENT();
-        FOR_ALL_EQUIP(iter)
-        {
-          auto it = t->equip_carry_anim(iter);
-          if (it) {
-            it->is_visible_to_player = true;
-          }
-        }
-
-        TRACE_NO_INDENT();
-        FOR_ALL_BODYPART(iter)
-        {
-          if (bodypart_id_get(iter).ok()) {
-            auto it = level->thing_find(bodypart_id_get(iter));
+        if (t->is_monst() || t->is_player()) {
+          FOR_ALL_EQUIP(iter)
+          {
+            auto it = t->equip_carry_anim(iter);
             if (it) {
               it->is_visible_to_player = true;
+            }
+          }
+
+          FOR_ALL_BODYPART(iter)
+          {
+            if (bodypart_id_get(iter).ok()) {
+              auto it = level->thing_find(bodypart_id_get(iter));
+              if (it) {
+                it->is_visible_to_player = true;
+              }
             }
           }
         }
       }
     }
-    TRACE_NO_INDENT();
-    FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(level)
   }
 
   return light_dist;
