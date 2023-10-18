@@ -703,7 +703,7 @@ void Thing::animate(void)
   if (unlikely(! tiles || tiles->empty())) {
 #ifdef DEBUG_ANIM
     if (debug || is_debug_type()) {
-      err("Has no tiles");
+      die("Has no tiles");
     }
 #endif
     return;

@@ -33,7 +33,7 @@ PyObject *level_add_(PyObject *obj, PyObject *args, PyObject *keywds)
   int level_data_elems = PyList_Size(py_level_data);
   if (level_data_elems % MAP_HEIGHT) {
     PY_ERR("map_load: Level elems needs to be evenly dividable by level height %d, got %d elems when loading %s",
-        (int) MAP_HEIGHT, (int) PyList_Size(py_level_data), level_name);
+           (int) MAP_HEIGHT, (int) PyList_Size(py_level_data), level_name);
     Py_RETURN_FALSE;
   }
 
@@ -523,28 +523,28 @@ PyObject *thing_all_minions_get(PyObject *obj, PyObject *args, PyObject *keywds)
     static char *kwlist[] = {(char *) "id", (char *) "x", (char *) "y", 0};                                          \
                                                                                                                      \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "Iii", kwlist, &id, &x, &y)) {                                   \
-      PY_ERR("%s: Failed parsing keywords", __FUNCTION__);                                                              \
+      PY_ERR("%s: Failed parsing keywords", __FUNCTION__);                                                           \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     if (! id) {                                                                                                      \
-      PY_ERR("%s: No thing ID set", __FUNCTION__);                                                                      \
+      PY_ERR("%s: No thing ID set", __FUNCTION__);                                                                   \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     if (x == NO_VALUE) {                                                                                             \
-      PY_ERR("%s: Missing 'x'", __FUNCTION__);                                                                          \
+      PY_ERR("%s: Missing 'x'", __FUNCTION__);                                                                       \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     if (y == NO_VALUE) {                                                                                             \
-      PY_ERR("%s: Missing 'y'", __FUNCTION__);                                                                          \
+      PY_ERR("%s: Missing 'y'", __FUNCTION__);                                                                       \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     Thingp t = game->thing_find(id);                                                                                 \
     if (unlikely(! t)) {                                                                                             \
-      PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);                                                          \
+      PY_ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);                                                       \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \

@@ -17,7 +17,7 @@
     static char *kwlist[] = {0};                                                                                     \
                                                                                                                      \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "", kwlist)) {                                                   \
-      PY_ERR("%s: Failed parsing keywords", __FUNCTION__);                                                              \
+      PY_ERR("%s: Failed parsing keywords", __FUNCTION__);                                                           \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \

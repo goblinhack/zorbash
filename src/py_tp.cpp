@@ -68,23 +68,23 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
                                                                                                                      \
     TRACE_NO_INDENT();                                                                                               \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|s", kwlist, &py_class, &value)) {                             \
-      PY_ERR("%s: Bad args", __FUNCTION__);                                                                             \
+      PY_ERR("%s: Bad args", __FUNCTION__);                                                                          \
       return 0;                                                                                                      \
     }                                                                                                                \
                                                                                                                      \
     if (! py_class) {                                                                                                \
-      PY_ERR("%s: Missing class", __FUNCTION__);                                                                        \
+      PY_ERR("%s: Missing class", __FUNCTION__);                                                                     \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     if (! value) {                                                                                                   \
-      PY_ERR("%s: Missing value", __FUNCTION__);                                                                        \
+      PY_ERR("%s: Missing value", __FUNCTION__);                                                                     \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     tp_name = py_obj_attr_str(py_class, "name");                                                                     \
     if (! tp_name) {                                                                                                 \
-      PY_ERR("%s: Missing tp name", __FUNCTION__);                                                                      \
+      PY_ERR("%s: Missing tp name", __FUNCTION__);                                                                   \
       goto done;                                                                                                     \
     }                                                                                                                \
                                                                                                                      \
@@ -92,7 +92,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
                                                                                                                      \
     tp = tp_find(tp_name);                                                                                           \
     if (unlikely(! tp)) {                                                                                            \
-      PY_ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                           \
+      PY_ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                        \
       goto done;                                                                                                     \
     }                                                                                                                \
                                                                                                                      \
@@ -119,23 +119,23 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
                                                                                                                      \
     TRACE_NO_INDENT();                                                                                               \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|s", kwlist, &py_class, &value)) {                             \
-      PY_ERR("%s: Bad args", __FUNCTION__);                                                                             \
+      PY_ERR("%s: Bad args", __FUNCTION__);                                                                          \
       return 0;                                                                                                      \
     }                                                                                                                \
                                                                                                                      \
     if (! py_class) {                                                                                                \
-      PY_ERR("%s: Missing class", __FUNCTION__);                                                                        \
+      PY_ERR("%s: Missing class", __FUNCTION__);                                                                     \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     if (! value) {                                                                                                   \
-      PY_ERR("%s: Missing value", __FUNCTION__);                                                                        \
+      PY_ERR("%s: Missing value", __FUNCTION__);                                                                     \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     tp_name = py_obj_attr_str(py_class, "name");                                                                     \
     if (! tp_name) {                                                                                                 \
-      PY_ERR("%s: Missing tp name", __FUNCTION__);                                                                      \
+      PY_ERR("%s: Missing tp name", __FUNCTION__);                                                                   \
       goto done;                                                                                                     \
     }                                                                                                                \
                                                                                                                      \
@@ -143,7 +143,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
                                                                                                                      \
     tp = tp_find(tp_name);                                                                                           \
     if (unlikely(! tp)) {                                                                                            \
-      PY_ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                           \
+      PY_ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                        \
       goto done;                                                                                                     \
     }                                                                                                                \
                                                                                                                      \
@@ -171,35 +171,35 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
                                                                                                                      \
     TRACE_NO_INDENT();                                                                                               \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|s", kwlist, &py_class, &value)) {                             \
-      PY_ERR("%s: Bad args", __FUNCTION__);                                                                             \
+      PY_ERR("%s: Bad args", __FUNCTION__);                                                                          \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     if (! py_class) {                                                                                                \
-      PY_ERR("%s: Missing class", __FUNCTION__);                                                                        \
+      PY_ERR("%s: Missing class", __FUNCTION__);                                                                     \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     if (! value) {                                                                                                   \
-      PY_ERR("%s: Missing value", __FUNCTION__);                                                                        \
+      PY_ERR("%s: Missing value", __FUNCTION__);                                                                     \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     tp_name = py_obj_attr_str(py_class, "name");                                                                     \
     if (! tp_name) {                                                                                                 \
-      PY_ERR("%s: Missing tp name", __FUNCTION__);                                                                      \
+      PY_ERR("%s: Missing tp name", __FUNCTION__);                                                                   \
       goto done;                                                                                                     \
     }                                                                                                                \
                                                                                                                      \
     tp = tp_find(tp_name);                                                                                           \
     if (unlikely(! tp)) {                                                                                            \
-      PY_ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                           \
+      PY_ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                        \
       goto done;                                                                                                     \
     }                                                                                                                \
                                                                                                                      \
     tp->__field__((__str2val__) (value));                                                                            \
     if (tp->__field__() == (int) (tp->__field__()) - 1) {                                                            \
-      PY_ERR("%s: Cannot find enum %s", __FUNCTION__, value);                                                           \
+      PY_ERR("%s: Cannot find enum %s", __FUNCTION__, value);                                                        \
       goto done;                                                                                                     \
     }                                                                                                                \
                                                                                                                      \
@@ -227,18 +227,18 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
                                                                                                                      \
     TRACE_NO_INDENT();                                                                                               \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|i", kwlist, &py_class, &value)) {                             \
-      PY_ERR("%s: Bad args", __FUNCTION__);                                                                             \
+      PY_ERR("%s: Bad args", __FUNCTION__);                                                                          \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     if (! py_class) {                                                                                                \
-      PY_ERR("%s: Missing class", __FUNCTION__);                                                                        \
+      PY_ERR("%s: Missing class", __FUNCTION__);                                                                     \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     tp_name = py_obj_attr_str(py_class, "name");                                                                     \
     if (! tp_name) {                                                                                                 \
-      PY_ERR("%s: Missing tp name", __FUNCTION__);                                                                      \
+      PY_ERR("%s: Missing tp name", __FUNCTION__);                                                                   \
       goto done;                                                                                                     \
     }                                                                                                                \
                                                                                                                      \
@@ -246,7 +246,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
                                                                                                                      \
     tp = tp_find(tp_name);                                                                                           \
     if (unlikely(! tp)) {                                                                                            \
-      PY_ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                           \
+      PY_ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                        \
       goto done;                                                                                                     \
     }                                                                                                                \
                                                                                                                      \
@@ -273,18 +273,18 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
                                                                                                                      \
     TRACE_NO_INDENT();                                                                                               \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|ii", kwlist, &py_class, &value, &value2)) {                   \
-      PY_ERR("%s: Bad args", __FUNCTION__);                                                                             \
+      PY_ERR("%s: Bad args", __FUNCTION__);                                                                          \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     if (! py_class) {                                                                                                \
-      PY_ERR("%s: Missing class", __FUNCTION__);                                                                        \
+      PY_ERR("%s: Missing class", __FUNCTION__);                                                                     \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     tp_name = py_obj_attr_str(py_class, "name");                                                                     \
     if (! tp_name) {                                                                                                 \
-      PY_ERR("%s: Missing tp name", __FUNCTION__);                                                                      \
+      PY_ERR("%s: Missing tp name", __FUNCTION__);                                                                   \
       goto done;                                                                                                     \
     }                                                                                                                \
                                                                                                                      \
@@ -292,7 +292,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
                                                                                                                      \
     tp = tp_find(tp_name);                                                                                           \
     if (unlikely(! tp)) {                                                                                            \
-      PY_ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                           \
+      PY_ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                        \
       goto done;                                                                                                     \
     }                                                                                                                \
                                                                                                                      \
@@ -318,18 +318,18 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
                                                                                                                      \
     TRACE_NO_INDENT();                                                                                               \
     if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|d", kwlist, &py_class, &value)) {                             \
-      PY_ERR("%s: Bad args", __FUNCTION__);                                                                             \
+      PY_ERR("%s: Bad args", __FUNCTION__);                                                                          \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     if (! py_class) {                                                                                                \
-      PY_ERR("%s: Missing class", __FUNCTION__);                                                                        \
+      PY_ERR("%s: Missing class", __FUNCTION__);                                                                     \
       Py_RETURN_FALSE;                                                                                               \
     }                                                                                                                \
                                                                                                                      \
     tp_name = py_obj_attr_str(py_class, (char *) "name");                                                            \
     if (! tp_name) {                                                                                                 \
-      PY_ERR("%s: Missing tp name", __FUNCTION__);                                                                      \
+      PY_ERR("%s: Missing tp name", __FUNCTION__);                                                                   \
       goto done;                                                                                                     \
     }                                                                                                                \
                                                                                                                      \
@@ -337,7 +337,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
                                                                                                                      \
     tp = tp_find(tp_name);                                                                                           \
     if (unlikely(! tp)) {                                                                                            \
-      PY_ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                           \
+      PY_ERR("%s: Cannot find tp %s", __FUNCTION__, tp_name);                                                        \
       goto done;                                                                                                     \
     }                                                                                                                \
                                                                                                                      \

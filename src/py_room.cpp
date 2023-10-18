@@ -70,7 +70,7 @@ PyObject *map_load_room_(PyObject *obj, PyObject *args, PyObject *keywds)
   int room_data_elems = PyList_Size(py_room_data);
   if (room_data_elems % MAP_ROOM_HEIGHT) {
     PY_ERR("Room elems needs to be evenly dividable by room height %d, got %d elems", (int) MAP_ROOM_HEIGHT,
-        (int) PyList_Size(py_room_data));
+           (int) PyList_Size(py_room_data));
     Py_RETURN_FALSE;
   }
 

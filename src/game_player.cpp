@@ -318,7 +318,6 @@ void Game::place_player(void)
         t->debuff_add(w);
       }
       if (0) {
-        level->thing_new("zorb_wizard", point(x - 4, y));
         level->thing_new("zorb_necro", point(x + 2, y));
         level->thing_new("zorb_pirate", point(x + 2, y + 1));
         level->thing_new("fire", point(x + 1, y - 1));
@@ -927,13 +926,13 @@ void Game::place_player(void)
         // level->thing_new("key_golden", point(x - 1, y + 2));
         // level->thing_new("key_penta", point(x, y + 12));
         // level->thing_new("snake_viper", point(x, y + 2));
-        // level->thing_new("zorb_pack", point(x + 2, y));
         // level->thing_new("mummy_pack", point(x + 2, y + 12));
         // level->thing_new("barrel", point(x - 2, y));
         // level->thing_new("floor_red_blood1", point(x + 2, y + 1));
         // level->thing_new("teleport", point(x + 2, y + 2));
         // level->thing_new("scorpion", point(x + 2, y + 2));
-        level->assign_leaders_and_followers();
+        // level->thing_new("zorb_pack", point(x + 2, y));
+        // level->assign_leaders_and_followers();
       }
       // level->thing_new("sentry_orb_energy", point(x - 3, y));
       if (0) {
@@ -1015,7 +1014,17 @@ void Game::place_player(void)
         auto m = level->thing_new("coffin_mob", point(x, y + 4));
         m->frozen_set();
       }
-      // level->thing_new("flameskull", point(x, y + 4));
+      if (0) {
+        // level->thing_new("flameskull", point(x, y + 4));
+        level->thing_new("zorb_wizard", point(x + 2, y));
+        level->thing_new("zorb_necro", point(x + 0, y - 4));
+        level->thing_new("zorb_soldier", point(x + 1, y + 1));
+        level->thing_new("zorb_pirate", point(x + 0, y - 2));
+        level->thing_new("zorb_single", point(x + 1, y - 2));
+        level->thing_new("zorb_captain", point(x + 2, y - 3));
+        level->thing_new("zorb_priest", point(x + 2, y - 5));
+        level->thing_new("zorb_eldster", point(x + 1, y - 4));
+      }
 
       if (0) {
         auto m = level->thing_new("slime_parent", point(x, y + 4));
