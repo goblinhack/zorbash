@@ -3,6 +3,7 @@
 //
 
 #include "my_thing.hpp"
+#include "my_thing_template.hpp"
 
 //
 // Return a score, higher is better for perceived value to you
@@ -59,4 +60,16 @@ int Thing::value(Thingp it)
   dbg3("Item value for %s is %d", it->to_short_string().c_str(), value);
 
   return value;
+}
+
+int Thing::value_defensive(Thingp it)
+{
+  TRACE_NO_INDENT();
+  return value(it) + it->tp()->is_value_defensive();
+}
+
+int Thing::value_offensive(Thingp it)
+{
+  TRACE_NO_INDENT();
+  return value(it) + it->tp()->is_value_offensive();
 }

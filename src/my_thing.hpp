@@ -1970,8 +1970,6 @@ public:
   int is_unused_flag62(void);
   int is_unused_flag63(void);
   int is_unused_flag64(void);
-  int is_unused_flag65(void);
-  int is_unused_flag66(void);
   int is_unused_flag6(void);
   int is_unused_flag7(void);
   int is_unused_flag8(void);
@@ -1979,6 +1977,8 @@ public:
   int is_usable_only_after_equipping(void);
   int is_usable(void);
   int is_used_when_thrown(void);
+  int is_value_defensive(void);
+  int is_value_offensive(void);
   int is_very_combustible(void);
   int is_very_hard(void);
   int is_very_heavy(void);
@@ -2511,6 +2511,8 @@ public:
   int unused_chance5_d1000(void);
   int unused_chance6_d1000(void);
   int value(const Thingp it);
+  int value_defensive(Thingp);
+  int value_offensive(Thingp);
   int weapon_dmgd_pct(void);
   int weapon_dmg_modify(int damage, Thingp victim = nullptr);
   int weapon_dmg(void);

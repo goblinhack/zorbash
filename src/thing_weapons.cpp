@@ -118,7 +118,7 @@ int Thing::carried_weapon_least_value(Thingp *out)
       continue;
     }
 
-    auto v = value(t);
+    auto v = value_offensive(t) + value_defensive(t);
     dbg("Carried weapon: %s: value %d", t->to_short_string().c_str(), v);
 
     if (! *out) {
@@ -152,7 +152,7 @@ int Thing::carried_weapon_highest_value(Thingp *out)
       continue;
     }
 
-    auto v = value(t);
+    auto v = value_offensive(t) + value_defensive(t);
     dbg("Carried weapon: %s: value %d", t->to_short_string().c_str(), v);
 
     if (! *out) {

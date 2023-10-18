@@ -105,7 +105,7 @@ int Thing::carried_ranged_weapon_least_value(Thingp *out)
   }
 
   for (const auto t : ranged_weapon_list()) {
-    auto v = value(t);
+    auto v = value_offensive(t);
     if (! *out) {
       *out        = t;
       least_value = v;
@@ -130,7 +130,7 @@ int Thing::carried_ranged_weapon_highest_value(Thingp *out)
   }
 
   for (const auto t : ranged_weapon_list()) {
-    auto v = value(t);
+    auto v = value_offensive(t);
     if (! *out) {
       *out          = t;
       highest_value = v;
@@ -172,7 +172,7 @@ int Thing::carried_ranged_weapon_highest_value_for_target(Thingp *out, Thingp ta
       }
     }
 
-    auto v = value(t);
+    auto v = value_offensive(t);
     if (! *out) {
       *out          = t;
       highest_value = v;

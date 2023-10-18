@@ -52,6 +52,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_treasure_class_C(self, True)
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
+    my.is_value_defensive(self, 1)
     my.is_very_hard(self, True)
     my.item_height(self, 6)
     my.item_width(self, 4)

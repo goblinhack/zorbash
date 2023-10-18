@@ -694,8 +694,6 @@ PyObject *thing_is_unused_flag61(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag62(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag63(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag64(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag65(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag66(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag8(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -703,6 +701,8 @@ PyObject *thing_is_unused_flag9(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *thing_is_usable_only_after_equipping(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_usable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_used_when_thrown(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_value_defensive(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_value_offensive(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_very_combustible(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_very_hard(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_very_heavy(PyObject *obj, PyObject *args, PyObject *keywds);

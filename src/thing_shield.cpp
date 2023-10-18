@@ -110,7 +110,7 @@ int Thing::carried_shield_least_value(Thingp *out)
       continue;
     }
 
-    auto v = value(t);
+    auto v = value_defensive(t);
     if (! *out) {
       *out        = t;
       least_value = v;
@@ -139,7 +139,7 @@ int Thing::carried_shield_highest_value(Thingp *out)
       continue;
     }
 
-    auto v = value(t);
+    auto v = value_defensive(t);
     if (! *out) {
       *out          = t;
       highest_value = v;
@@ -181,7 +181,7 @@ int Thing::carried_shield_highest_value_for_target(Thingp *out, Thingp target)
       }
     }
 
-    auto v = value(t);
+    auto v = value_defensive(t);
     if (! *out) {
       *out          = t;
       highest_value = v;

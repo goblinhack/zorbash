@@ -137,6 +137,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_treasure(self, True)
     my.is_treasure_type(self, True)
     my.is_usable(self, True)
+    my.is_value_defensive(self, 2)
     my.is_wooden(self, True)
     my.item_height(self, 4)
     my.item_width(self, 4)

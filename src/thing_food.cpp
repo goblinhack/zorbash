@@ -114,7 +114,7 @@ int Thing::carried_food_least_value(Thingp *out)
       continue;
     }
 
-    auto v = value(t);
+    auto v = value_offensive(t) + value_defensive(t);
     if (! *out) {
       *out        = t;
       least_value = v;
@@ -143,7 +143,7 @@ int Thing::carried_food_highest_value(Thingp *out)
       continue;
     }
 
-    auto v = value(t);
+    auto v = value_offensive(t) + value_defensive(t);
     if (! *out) {
       *out          = t;
       highest_value = v;

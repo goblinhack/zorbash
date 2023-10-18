@@ -532,15 +532,15 @@ int Thing::is_unused_flag64(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag64());
 }
-int Thing::is_unused_flag65(void)
+int Thing::is_value_offensive(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag65());
+  return (tp()->is_value_offensive());
 }
-int Thing::is_unused_flag66(void)
+int Thing::is_value_defensive(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag66());
+  return (tp()->is_value_defensive());
 }
 int Thing::is_able_to_be_reflected(void)
 {

@@ -559,8 +559,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag62() && (what == "is_unused_flag62")) { return true; }
   if (is_unused_flag63() && (what == "is_unused_flag63")) { return true; }
   if (is_unused_flag64() && (what == "is_unused_flag64")) { return true; }
-  if (is_unused_flag65() && (what == "is_unused_flag65")) { return true; }
-  if (is_unused_flag66() && (what == "is_unused_flag66")) { return true; }
   if (is_unused_flag6() && (what == "is_unused_flag6")) { return true; }
   if (is_unused_flag7() && (what == "is_unused_flag7")) { return true; }
   if (is_unused_flag8() && (what == "is_unused_flag8")) { return true; }
@@ -568,6 +566,8 @@ bool Tp::matches(const std::string &what)
   if (is_usable_only_after_equipping() && (what == "is_usable_only_after_equipping")) { return true; }
   if (is_usable() && (what == "is_usable")) { return true; }
   if (is_used_when_thrown() && (what == "is_used_when_thrown")) { return true; }
+  if (is_value_defensive() && (what == "is_value_defensive")) { return true; }
+  if (is_value_offensive() && (what == "is_value_offensive")) { return true; }
   if (is_very_combustible() && (what == "is_very_combustible")) { return true; }
   if (is_very_hard() && (what == "is_very_hard")) { return true; }
   if (is_very_heavy() && (what == "is_very_heavy")) { return true; }
@@ -1170,8 +1170,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag62() && (what == "is_unused_flag62")) { return true; }
   if (is_unused_flag63() && (what == "is_unused_flag63")) { return true; }
   if (is_unused_flag64() && (what == "is_unused_flag64")) { return true; }
-  if (is_unused_flag65() && (what == "is_unused_flag65")) { return true; }
-  if (is_unused_flag66() && (what == "is_unused_flag66")) { return true; }
   if (is_unused_flag6() && (what == "is_unused_flag6")) { return true; }
   if (is_unused_flag7() && (what == "is_unused_flag7")) { return true; }
   if (is_unused_flag8() && (what == "is_unused_flag8")) { return true; }
@@ -1179,6 +1177,8 @@ bool Thing::matches(const std::string &what)
   if (is_usable_only_after_equipping() && (what == "is_usable_only_after_equipping")) { return true; }
   if (is_usable() && (what == "is_usable")) { return true; }
   if (is_used_when_thrown() && (what == "is_used_when_thrown")) { return true; }
+  if (is_value_defensive() && (what == "is_value_defensive")) { return true; }
+  if (is_value_offensive() && (what == "is_value_offensive")) { return true; }
   if (is_very_combustible() && (what == "is_very_combustible")) { return true; }
   if (is_very_hard() && (what == "is_very_hard")) { return true; }
   if (is_very_heavy() && (what == "is_very_heavy")) { return true; }
@@ -1769,8 +1769,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag62") { return &Thing::is_unused_flag62; }
   if (what == "is_unused_flag63") { return &Thing::is_unused_flag63; }
   if (what == "is_unused_flag64") { return &Thing::is_unused_flag64; }
-  if (what == "is_unused_flag65") { return &Thing::is_unused_flag65; }
-  if (what == "is_unused_flag66") { return &Thing::is_unused_flag66; }
   if (what == "is_unused_flag6") { return &Thing::is_unused_flag6; }
   if (what == "is_unused_flag7") { return &Thing::is_unused_flag7; }
   if (what == "is_unused_flag8") { return &Thing::is_unused_flag8; }
@@ -1778,6 +1776,8 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_usable_only_after_equipping") { return &Thing::is_usable_only_after_equipping; }
   if (what == "is_usable") { return &Thing::is_usable; }
   if (what == "is_used_when_thrown") { return &Thing::is_used_when_thrown; }
+  if (what == "is_value_defensive") { return &Thing::is_value_defensive; }
+  if (what == "is_value_offensive") { return &Thing::is_value_offensive; }
   if (what == "is_very_combustible") { return &Thing::is_very_combustible; }
   if (what == "is_very_hard") { return &Thing::is_very_hard; }
   if (what == "is_very_heavy") { return &Thing::is_very_heavy; }
