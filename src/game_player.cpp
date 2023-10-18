@@ -1013,9 +1013,9 @@ void Game::place_player(void)
         auto m = level->thing_new("coffin_mob", point(x, y + 4));
         m->frozen_set();
       }
-      level->thing_new("zorb_wizard", point(x + 2, y));
-      level->thing_new("zorb_necro", point(x + 0, y - 4));
       if (0) {
+        level->thing_new("zorb_necro", point(x + 0, y - 4));
+        level->thing_new("zorb_wizard", point(x + 2, y));
         // level->thing_new("flameskull", point(x, y + 4));
         level->thing_new("zorb_soldier", point(x + 1, y + 1));
         level->thing_new("zorb_pirate", point(x + 0, y - 2));
