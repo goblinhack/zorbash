@@ -198,6 +198,7 @@ public:
   uint64_t has_seen_player_msg_shown                    : 1 {}; // Seen by player has been shown
   uint64_t is_activated                                 : 1 {}; // This skill is activated
   uint64_t is_attached                                  : 1 {}; // Is attached to the level
+  uint64_t is_auto_equip_done                           : 1 {}; // Has initially auto equipped itself
   uint64_t is_being_destroyed                           : 1 {}; // In the process of deleting the thing
   uint64_t is_bouncing                                  : 1 {}; // Is graphically bouncing
   uint64_t is_burnt                                     : 1 {}; // Burnt by ice and cannot move
@@ -2804,6 +2805,7 @@ public:
   void animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool *next_frame_please);
   void animate(void);
   void attackers_tick(void);
+  void auto_equip(void);
   void avoid_tick(void);
   void awake(void);
   void barrel_tick(void);

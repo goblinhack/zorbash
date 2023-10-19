@@ -422,6 +422,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   // begin sort marker2 {
              my.t->is_activated                                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_attached                                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->is_auto_equip_done                           = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_being_destroyed                           = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_bouncing                                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_burnt                                     = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;

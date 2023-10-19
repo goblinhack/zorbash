@@ -11,6 +11,318 @@
 #include "my_thing.hpp"
 #include "my_thing_attack_options.hpp"
 
+void Thing::auto_equip(void)
+{
+  TRACE_NO_INDENT();
+
+  if (is_auto_equip_done) {
+    return;
+  }
+  is_auto_equip_done = true;
+
+  auto tpp     = tp();
+  int  carried = 0;
+
+  CarryOptions carry_options;
+
+  //
+  // Auto carry of weapons?
+  //
+  if (is_able_to_use_weapons()) {
+    dbg("Is weapon equipper");
+    TRACE_AND_INDENT();
+
+    if (d1000() < chance_d1000_carrier_of_weapon_class_A()) {
+      dbg("New weapon class A");
+      auto W = level->thing_new(tp_random_weapon_class_A(), curr_at, this);
+      if (W) {
+        carried += carry(W, carry_options);
+      }
+    }
+    if (d1000() < chance_d1000_carrier_of_weapon_class_B()) {
+      dbg("New weapon class B");
+      auto W = level->thing_new(tp_random_weapon_class_B(), curr_at, this);
+      if (W) {
+        carried += carry(W, carry_options);
+      }
+    }
+    if (d1000() < chance_d1000_carrier_of_weapon_class_C()) {
+      dbg("New weapon class C");
+      auto W = level->thing_new(tp_random_weapon_class_C(), curr_at, this);
+      if (W) {
+        carried += carry(W, carry_options);
+      }
+    }
+  }
+
+  if (is_able_to_use_staffs()) {
+    dbg("Is staff equipper");
+    TRACE_AND_INDENT();
+
+    if (d1000() < chance_d1000_carrier_of_treasure_class_A()) {
+      dbg("New staff class A");
+      auto W = level->thing_new(tp_random_staff_class_A(), curr_at, this);
+      if (W) {
+        carried += carry(W, carry_options);
+      }
+    }
+    if (d1000() < chance_d1000_carrier_of_treasure_class_B()) {
+      dbg("New staff class B");
+      auto W = level->thing_new(tp_random_staff_class_B(), curr_at, this);
+      if (W) {
+        carried += carry(W, carry_options);
+      }
+    }
+    if (d1000() < chance_d1000_carrier_of_treasure_class_C()) {
+      dbg("New staff class C");
+      auto W = level->thing_new(tp_random_staff_class_C(), curr_at, this);
+      if (W) {
+        carried += carry(W, carry_options);
+      }
+    }
+  }
+
+  if (is_able_to_use_rings()) {
+    dbg("Is ring equipper");
+    TRACE_AND_INDENT();
+
+    if (d1000() < chance_d1000_carrier_of_treasure_class_A()) {
+      dbg("New ring class A");
+      auto W = level->thing_new(tp_random_ring_class_A(), curr_at, this);
+      if (W) {
+        carried += carry(W, carry_options);
+      }
+    }
+    if (d1000() < chance_d1000_carrier_of_treasure_class_B()) {
+      dbg("New ring class B");
+      auto W = level->thing_new(tp_random_ring_class_B(), curr_at, this);
+      if (W) {
+        carried += carry(W, carry_options);
+      }
+    }
+    if (d1000() < chance_d1000_carrier_of_treasure_class_C()) {
+      dbg("New ring class C");
+      auto W = level->thing_new(tp_random_ring_class_C(), curr_at, this);
+      if (W) {
+        carried += carry(W, carry_options);
+      }
+    }
+  }
+
+  if (is_bag_item_container()) {
+    dbg("Is bag item container");
+    TRACE_AND_INDENT();
+
+    if (d1000() < chance_d1000_carrier_of_treasure_class_A()) {
+      dbg("New item class A");
+      auto W = level->thing_new(tp_random_item_not_a_container_class_A(), curr_at, this);
+      if (W) {
+        carried += carry(W, carry_options);
+      }
+    }
+    if (d1000() < chance_d1000_carrier_of_treasure_class_B()) {
+      dbg("New item class B");
+      auto W = level->thing_new(tp_random_item_not_a_container_class_B(), curr_at, this);
+      if (W) {
+        carried += carry(W, carry_options);
+      }
+    }
+    if (d1000() < chance_d1000_carrier_of_treasure_class_C()) {
+      dbg("New item class C");
+      auto W = level->thing_new(tp_random_item_not_a_container_class_C(), curr_at, this);
+      if (W) {
+        carried += carry(W, carry_options);
+      }
+    }
+  } else if (is_item_carrier()) {
+    dbg("Is item carrier");
+    TRACE_AND_INDENT();
+
+    if (d1000() < chance_d1000_carrier_of_treasure_class_A()) {
+      dbg("New item class A");
+      auto W = level->thing_new(tp_random_item_class_A(), curr_at, this);
+      if (W) {
+        carried += carry(W, carry_options);
+      }
+    }
+    if (d1000() < chance_d1000_carrier_of_treasure_class_B()) {
+      dbg("New item class B");
+      auto W = level->thing_new(tp_random_item_class_B(), curr_at, this);
+      if (W) {
+        carried += carry(W, carry_options);
+      }
+    }
+    if (d1000() < chance_d1000_carrier_of_treasure_class_C()) {
+      dbg("New item class C");
+      auto W = level->thing_new(tp_random_item_class_C(), curr_at, this);
+      if (W) {
+        carried += carry(W, carry_options);
+      }
+    }
+  }
+
+  //
+  // Initial equip of weapons
+  //
+  if (is_able_to_use_weapons()) {
+    dbg("Weapon equip");
+    TRACE_AND_INDENT();
+
+    Thingp best_weapon = nullptr;
+    carried_weapon_highest_value(&best_weapon);
+    if (best_weapon) {
+      equip(best_weapon, MONST_EQUIP_WEAPON);
+    }
+  }
+
+  //
+  // Initial equip of armor
+  //
+  if (is_able_to_use_armor()) {
+    dbg("Armor equip");
+    TRACE_AND_INDENT();
+
+    Thingp best_armor = nullptr;
+    carried_armor_highest_value(&best_armor);
+    if (best_armor) {
+      equip(best_armor, MONST_EQUIP_ARMOR);
+    }
+  }
+
+  //
+  // Initial equip of wand
+  //
+  if (is_able_to_use_staffs()) {
+    dbg("Staff equip");
+    TRACE_AND_INDENT();
+
+    Thingp best_staff = nullptr;
+    carried_staff_highest_value(&best_staff);
+    if (best_staff) {
+      equip(best_staff, MONST_EQUIP_WEAPON);
+    }
+  }
+
+  //
+  // Initial equip of rings
+  //
+  if (is_able_to_use_rings()) {
+    dbg("Rings equip");
+    TRACE_AND_INDENT();
+
+    //
+    // Ring 1
+    //
+    {
+      Thingp best_ring = nullptr;
+      carried_ring_highest_value(&best_ring);
+      if (best_ring) {
+        equip(best_ring, MONST_EQUIP_RING1);
+      }
+    }
+    //
+    // Ring 2
+    //
+    {
+      Thingp best_ring = nullptr;
+      carried_ring_highest_value(&best_ring);
+      if (best_ring) {
+        equip(best_ring, MONST_EQUIP_RING2);
+      }
+    }
+  }
+
+  //
+  // Initial equip of helmet
+  //
+  if (is_able_to_use_helmet()) {
+    dbg("Helmet equip");
+    TRACE_AND_INDENT();
+
+    Thingp best_helmet = nullptr;
+    carried_helmet_highest_value(&best_helmet);
+    if (best_helmet) {
+      equip(best_helmet, MONST_EQUIP_HELMET);
+    }
+  }
+
+  //
+  // Initial equip of amulet
+  //
+  if (is_able_to_use_amulet()) {
+    dbg("Amulet equip");
+    TRACE_AND_INDENT();
+
+    Thingp best_amulet = nullptr;
+    carried_amulet_highest_value(&best_amulet);
+    if (best_amulet) {
+      equip(best_amulet, MONST_EQUIP_AMULET);
+    }
+  }
+
+  //
+  // Initial equip of boots
+  //
+  if (is_able_to_use_boots()) {
+    dbg("Boos equip");
+    TRACE_AND_INDENT();
+
+    Thingp best_boots = nullptr;
+    carried_boots_highest_value(&best_boots);
+    if (best_boots) {
+      equip(best_boots, MONST_EQUIP_BOOTS);
+    }
+  }
+
+  //
+  // Initial equip of gauntlet
+  //
+  if (is_able_to_use_gauntlet()) {
+    dbg("Gauntlet equip");
+    TRACE_AND_INDENT();
+
+    Thingp best_gauntlet = nullptr;
+    carried_gauntlet_highest_value(&best_gauntlet);
+    if (best_gauntlet) {
+      equip(best_gauntlet, MONST_EQUIP_GAUNTLET);
+    }
+  }
+
+  //
+  // Initial equip of cloak
+  //
+  if (is_able_to_use_cloak()) {
+    dbg("Cloak equip");
+    TRACE_AND_INDENT();
+
+    Thingp best_cloak = nullptr;
+    carried_cloak_highest_value(&best_cloak);
+    if (best_cloak) {
+      equip(best_cloak, MONST_EQUIP_CLOAK);
+    }
+  }
+
+  //
+  // Initial equip of shield
+  //
+  if (is_able_to_use_shield()) {
+    dbg("Shield equip");
+    TRACE_AND_INDENT();
+
+    Thingp best_shield = nullptr;
+    carried_shield_highest_value(&best_shield);
+    if (best_shield) {
+      equip(best_shield, MONST_EQUIP_SHIELD);
+    }
+  }
+
+  if (carried && (is_monst() || is_player())) {
+    dbg("Final item list:");
+    TRACE_AND_INDENT();
+    check_all_carried_items_are_owned();
+  }
+}
+
 void Thing::on_equip(Thingp what)
 {
   verify(MTYPE_THING, what);
