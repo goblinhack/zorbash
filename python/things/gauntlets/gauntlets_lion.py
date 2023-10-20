@@ -60,7 +60,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_VERY_RARE)
     my.stat_def_bonus(self, 3)
     my.stat_dex_bonus(self, 2)
-    my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 def, +1 dex")
     my.text_description_long(self, "Gauntlets of lion armor as once modelled by Henry II. With these gauntlets, your hide is as tough as a lion and you find you are able to better dodge attacks.")
     my.text_description_short(self, "Gauntlets of lion armor.")

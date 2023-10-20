@@ -69,7 +69,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_VERY_RARE)
     my.stat_def_bonus(self, 3)
     my.stat_str_bonus(self, 5)
-    my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 str, +1 def, +1 shove")
     my.text_description_long(self, "Provides a hefty strength and defense bonus, these gauntlets mean business.?")
     my.text_description_short(self, "Gauntlets of war.")

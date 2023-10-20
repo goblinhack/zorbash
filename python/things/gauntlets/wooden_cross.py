@@ -52,7 +52,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_UNCOMMON)
     my.stat_def_bonus(self, 1)
-    my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 DEF")
     my.text_description_long(self, "When carrying these two sticks that have been oddly combined, you somehow know that you will take only half damage from any undead attack. Necrosis and draining will also have no effect on you. Not bad for some twigs. Item is equipped in the gauntlet slot.")
     my.text_description_short(self, "A pair of sticks.")
