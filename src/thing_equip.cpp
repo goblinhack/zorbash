@@ -20,8 +20,7 @@ void Thing::auto_equip(void)
   }
   is_auto_equip_done = true;
 
-  auto tpp     = tp();
-  int  carried = 0;
+  int carried = 0;
 
   CarryOptions carry_options;
 
