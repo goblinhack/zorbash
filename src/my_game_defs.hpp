@@ -73,6 +73,12 @@ extern int DUNGEON_GRID_CHUNK_WIDTH;
 
 #define LIGHT_MAX_RAYS      180 // Max light rays cast
 #define LIGHT_FLICKER_SPEED 10  // Max light rays cast
-#define MAP_SLOTS           64  // Max things per map slot
+//
+// Max things per map slot. This also includes carried items, as they really do
+// exist in the same place as the player; and might catch fire for example. Hence
+// the slot count has to be large enough for all carried items and whatever is
+// at this tile.
+//
+#define MAP_SLOTS 256
 
 #endif
