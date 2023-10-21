@@ -245,8 +245,11 @@ void Game::place_player(void)
       }
       if (0) {
         auto w = level->thing_new("staff_domination", point(x, y));
+        t->enchant_without_stone(w);
+        t->enchant_without_stone(w);
         t->carry(w, carry_options);
         t->enchant_without_stone(w);
+        level->thing_new("dogman", point(x + 4, y - 1));
       }
       if (0) {
         auto w = level->thing_new("staff_beckoning", point(x, y));

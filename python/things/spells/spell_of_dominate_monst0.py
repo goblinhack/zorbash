@@ -10,6 +10,9 @@ def on_targeted(me, x, y, bonus):
     for f in my.thing_get_followers(me):
         existing_mental_load += my.thing_stat_int_bonus(f)
 
+    bonus -= existing_mental_load
+    bonus += my.thing_stat_psi_bonus(me)
+
     for it in my.level_get_all(me, x, y):
         if not my.thing_is_monst(it):
             continue
@@ -22,8 +25,9 @@ def on_targeted(me, x, y, bonus):
             my.thing_msg(me, f"The {my.thing_name_get(it)}'s mind evades your grasp.")
             continue
 
-        roll = my.py_pcg_random_range_inclusive(1, 20) + bonus
-        if my.thing_stat_psi_total(owner) > roll + my.thing_stat_int_bonus(it) + existing_mental_load:
+        roll = my.py_pcg_random_range_inclusive(1, 20)
+        # my.topcon("roll {} + {} vs {}".format(roll, bonus, my.thing_stat_int(it) + my.thing_stat_psi_bonus(it)))
+        if roll + bonus > my.thing_stat_int(it) + my.thing_stat_psi_bonus(it):
             if my.thing_set_leader(it, owner):
                 my.thing_msg(me, f"The {my.thing_name_get(it)}'s mind is beholden to you.")
             else:
