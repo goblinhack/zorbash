@@ -804,6 +804,8 @@ std::initializer_list< std::string > tps = {
     "spiderweb",
     "staff_beckoning",
     "staff_beckoning_carry",
+    "staff_domination",
+    "staff_domination_carry",
     "staff_repulsion",
     "staff_repulsion_carry",
     "staff_blinking",

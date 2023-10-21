@@ -22,12 +22,11 @@ def on_targeted(me, x, y, bonus):
             my.thing_msg(me, f"The {my.thing_name_get(it)}'s mind evades your grasp.")
             continue
 
-        if not my.thing_set_leader(it, owner):
-            my.thing_msg(me, f"The {my.thing_name_get(it)} cannot be possessed.")
-            continue
-
         roll = my.py_pcg_random_range_inclusive(1, 20) + bonus
         if my.thing_stat_psi_total(owner) > roll + my.thing_stat_int_bonus(it) + existing_mental_load:
-            my.thing_msg(me, f"The {my.thing_name_get(it)}'s mind is beholden to you.")
+            if my.thing_set_leader(it, owner):
+                my.thing_msg(me, f"The {my.thing_name_get(it)}'s mind is beholden to you.")
+            else:
+                my.thing_msg(me, f"The {my.thing_name_get(it)} cannot be possessed.")
         else:
             my.thing_msg(me, f"The {my.thing_name_get(it)} fends off your mental attack.")
