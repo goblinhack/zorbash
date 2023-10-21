@@ -193,6 +193,7 @@ PyObject *thing_is_able_to_eat_poisonous_food(PyObject *obj, PyObject *args, PyO
 PyObject *thing_is_able_to_eat_rotting_food(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_eat_unpleasant_food(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_enchant_items(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_able_to_fall_over(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_fall(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_follow(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_freeze(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -693,7 +694,6 @@ PyObject *thing_is_unused_flag60(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag61(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag62(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag63(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag64(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag8(PyObject *obj, PyObject *args, PyObject *keywds);

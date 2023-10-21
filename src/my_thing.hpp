@@ -1451,6 +1451,7 @@ public:
   int is_able_to_eat_rotting_food(void);
   int is_able_to_eat_unpleasant_food(void);
   int is_able_to_enchant_items(void);
+  int is_able_to_fall_over(void);
   int is_able_to_fall(void);
   int is_able_to_follow(void);
   int is_able_to_freeze(void);
@@ -1970,7 +1971,6 @@ public:
   int is_unused_flag61(void);
   int is_unused_flag62(void);
   int is_unused_flag63(void);
-  int is_unused_flag64(void);
   int is_unused_flag6(void);
   int is_unused_flag7(void);
   int is_unused_flag8(void);

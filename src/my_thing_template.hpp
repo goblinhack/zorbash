@@ -284,6 +284,7 @@ private:
   int _is_able_to_eat_unpleasant_food {};
   int _is_able_to_enchant_items {};
   int _is_able_to_fall {};
+  int _is_able_to_fall_over {};
   int _is_able_to_follow {};
   int _is_able_to_freeze {};
   int _is_able_to_grapple {};
@@ -777,7 +778,6 @@ private:
   int _is_unused_flag61 {};
   int _is_unused_flag62 {};
   int _is_unused_flag63 {};
-  int _is_unused_flag64 {};
   int _is_unused_flag7 {};
   int _is_unused_flag8 {};
   int _is_unused_flag9 {};
@@ -1658,6 +1658,7 @@ public:
   int is_able_to_eat_rotting_food(void) const;
   int is_able_to_eat_unpleasant_food(void) const;
   int is_able_to_enchant_items(void) const;
+  int is_able_to_fall_over(void) const;
   int is_able_to_fall(void) const;
   int is_able_to_follow(void) const;
   int is_able_to_freeze(void) const;
@@ -2150,7 +2151,6 @@ public:
   int is_unused_flag61(void) const;
   int is_unused_flag62(void) const;
   int is_unused_flag63(void) const;
-  int is_unused_flag64(void) const;
   int is_unused_flag6(void) const;
   int is_unused_flag7(void) const;
   int is_unused_flag8(void) const;
@@ -2435,6 +2435,7 @@ public:
   void is_able_to_eat_rotting_food_set(int v);
   void is_able_to_eat_unpleasant_food_set(int v);
   void is_able_to_enchant_items_set(int v);
+  void is_able_to_fall_over_set(int v);
   void is_able_to_fall_set(int v);
   void is_able_to_follow_set(int v);
   void is_able_to_freeze_set(int v);
@@ -2928,7 +2929,6 @@ public:
   void is_unused_flag61_set(int v);
   void is_unused_flag62_set(int v);
   void is_unused_flag63_set(int v);
-  void is_unused_flag64_set(int v);
   void is_unused_flag6_set(int v);
   void is_unused_flag7_set(int v);
   void is_unused_flag8_set(int v);

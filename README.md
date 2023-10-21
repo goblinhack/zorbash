@@ -658,7 +658,7 @@ Other content
 - 25 x items
 - 24 x treasure
 - 24 x spells
-- 19 x staffs
+- 21 x staffs
 - 17 x weapons
 - 17 x buffs
 - 14 x potions

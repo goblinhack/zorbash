@@ -34,7 +34,7 @@ bool Thing::beckon(Thingp target)
 
   auto dest = points[ points.size() - 2 ];
 
-  if (target->is_brazier()) {
+  if (target->is_able_to_fall_over()) {
     TRACE_AND_INDENT();
     target->log("knocked over");
     target->dead("falls over");

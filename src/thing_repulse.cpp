@@ -32,7 +32,7 @@ bool Thing::repulse(Thingp target)
   dbg("Repulse: %s to %s", target->to_string().c_str(), dest.to_string().c_str());
   TRACE_AND_INDENT();
 
-  if (target->is_brazier()) {
+  if (target->is_able_to_fall_over()) {
     TRACE_AND_INDENT();
     target->log("knocked over");
     target->dead("falls over");

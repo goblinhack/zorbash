@@ -527,10 +527,10 @@ int Thing::is_unused_flag63(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag63());
 }
-int Thing::is_unused_flag64(void)
+int Thing::is_able_to_fall_over(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag64());
+  return (tp()->is_able_to_fall_over());
 }
 int Thing::is_value_offensive(void)
 {
