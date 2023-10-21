@@ -2,9 +2,7 @@
 <!-- ------                                                                                                                                       -->
 <!-- TODO Staves and Wands fire blasts of magical energy but have a finite number of charges. Staves recharge over time, but wands do not.        -->
 <!-- TODO Wand of Empowerment                                                                                                                     -->
-<!-- TODO Wand of Negation                                                                                                                        -->
 <!-- TODO Wand of Plenty                                                                                                                          -->
-<!-- TODO Wand of Polymorphism                                                                                                                    -->
 <!-- TODO Wand of Slowness                                                                                                                        -->
 <!-- TODO Runics on weapons, like vampirism, force, quietus, lightning                                                                            -->
 <!-- ------                                                                                                                                       -->
