@@ -9,12 +9,18 @@
 
 Thingp Thing::most_dangerous_adjacent_thing(void)
 {
+  TRACE_NO_INDENT();
+
   std::vector< std::pair< Thingp, int > > possible;
 
   static const std::vector< point > all_deltas = {
       point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1),
       point(-1, 0),  point(1, 0),  point(0, 1),  point(0, 0), // For spiderwebs
   };
+
+  if (! maybe_aip()) {
+    return nullptr;
+  }
 
   for (const auto &d : all_deltas) {
     auto x = curr_at.x + d.x;
@@ -87,6 +93,10 @@ Thingp Thing::most_dangerous_adjacent_thing(void)
 Thingp Thing::most_dangerous_visible_thing(void)
 {
   std::vector< std::pair< Thingp, int > > possible;
+
+  if (! maybe_aip()) {
+    return nullptr;
+  }
 
   float d = distance_vision_get();
 
@@ -168,6 +178,10 @@ Thingp Thing::most_dangerous_visible_thing(void)
 
 bool Thing::any_unfriendly_monst_visible(void)
 {
+  if (! maybe_aip()) {
+    return false;
+  }
+
   float d = distance_vision_get();
 
   for (auto dx = -d; dx <= d; dx++) {
@@ -217,6 +231,10 @@ bool Thing::any_unfriendly_monst_visible(void)
 
 bool Thing::any_adjacent_monst(void)
 {
+  if (! maybe_aip()) {
+    return false;
+  }
+
   static const std::vector< point > all_deltas = {
       point(-1, -1), point(1, -1), point(-1, 1), point(1, 1), point(0, -1),
       point(-1, 0),  point(1, 0),  point(0, 1),  point(0, 0), // (0,0) for spiderwebs
@@ -263,6 +281,10 @@ bool Thing::any_adjacent_monst(void)
 
 Thingp Thing::best_visible_target_get(void)
 {
+  if (! maybe_aip()) {
+    return nullptr;
+  }
+
   std::vector< std::pair< Thingp, int > > possible;
 
   float d = distance_vision_get();

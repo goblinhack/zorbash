@@ -268,10 +268,6 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
       return false;
     }
   }
-  if (is_dead) {
-    dbg2("Cannot move; dead");
-    return false;
-  }
   if (is_hidden) {
     dbg2("Move; no, is hidden");
     return false;
@@ -292,6 +288,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   //
   // We need to update the minimap even if they player just waits
   //
+  TRACE_NO_INDENT();
   if (is_player()) {
     game->set_request_to_update_same_level();
   }
@@ -301,6 +298,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   //
   auto ai  = maybe_aip();
   auto mob = top_mob();
+  TRACE_NO_INDENT();
   if (mob) {
     if (distance_minion_from_mob_max_float()) {
       auto new_distance  = distance(future_pos, mob->curr_at);
@@ -342,6 +340,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   //
   // Check for being stuck in webs or something else sticky
   //
+  TRACE_NO_INDENT();
   if (up || down || left || right) {
     //
     // Too tired to move?
@@ -385,6 +384,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   //
   // No rest for the undead.
   //
+  TRACE_NO_INDENT();
   if (is_monst() || is_player()) {
     if (! must_attack) {
       if (! is_lifeless() && ! is_undead() && ! is_ethereal()) {
@@ -406,6 +406,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   //
   // Set this so that we can pick up items again at the last location.
   //
+  TRACE_NO_INDENT();
   where_i_dropped_an_item_last_set(point(-1, -1));
 
   if (is_player() && wait_or_collect) {
@@ -477,6 +478,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   //
   // Do this after wait checks, so the player can bump the tick if stuck.
   //
+  TRACE_NO_INDENT();
   if (is_waiting_to_ascend_dungeon) {
     dbg2("Move; no, is waiting to ascend dungeon");
     if (is_player()) {
@@ -510,6 +512,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   auto y     = future_pos.y;
   auto delta = point(x, y) - curr_at;
 
+  TRACE_NO_INDENT();
   move_set_dir_from_dest_or_delta(delta);
 
   //
@@ -521,6 +524,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     }
   }
 
+  TRACE_NO_INDENT();
   if (must_attack) {
     dbg2("Must attack at %s", future_pos.to_string().c_str());
     TRACE_AND_INDENT();
@@ -529,18 +533,17 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     return false;
   }
 
+  TRACE_NO_INDENT();
   if ((x == curr_at.x) && (y == curr_at.y)) {
     return false;
   }
 
+  TRACE_NO_INDENT();
   if (curr_at != future_pos) {
     //
     // Trail of blood?
     //
     place_blood();
-    if (is_dead) {
-      return false;
-    }
 
     if (up) {
       dbg2("Try to move up; collision check");
@@ -598,6 +601,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     }
   }
 
+  TRACE_NO_INDENT();
   if (is_player()) {
     where_i_failed_to_collect_last_set(point(-1, -1));
 
@@ -610,13 +614,17 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
   // If we allow the player here to get a free attack, then it looks nuts
   // as we end up attacking without actually attacking
   //
+  TRACE_NO_INDENT();
   auto t = most_dangerous_adjacent_thing();
   if (is_monst() && t && ! t->is_player()) {
+    TRACE_NO_INDENT();
+
     auto free_attack = (((t->curr_at.x >= curr_at.x) && left) || ((t->curr_at.x <= curr_at.x) && right)
                         || ((t->curr_at.y >= curr_at.y) && up) || ((t->curr_at.y <= curr_at.y) && down));
 
     if (free_attack) {
       TRACE_NO_INDENT();
+
       dbg2("Free attack by %s", t->to_short_string().c_str());
       ThingAttackOptions attack_options {};
       if (t->attack(this, &attack_options)) {
@@ -636,6 +644,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     }
   }
 
+  TRACE_NO_INDENT();
   if (g_opt_ascii || ! is_visible_to_player) {
     //
     // No need to flip
@@ -669,6 +678,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     }
   }
 
+  TRACE_NO_INDENT();
   if (up || down || left || right) {
     //
     // This check is for things that can lunge attack but cannot move; like vampire roses.

@@ -11,11 +11,6 @@ bool Thing::repulse(Thingp target)
 
   auto points = ::line(curr_at, target->curr_at, 0 /* max_elems*/);
 
-  if (points.size() < 2) {
-    dbg("Repulse: %s too close", target->to_short_string().c_str());
-    return false;
-  }
-
   target->wake("repulsed");
 
   if (level->is_spell_of_holding_barrier(target->curr_at)) {
@@ -32,7 +27,16 @@ bool Thing::repulse(Thingp target)
     return false;
   }
 
-  auto dest = points[ points.size() - 2 ];
+  auto dest = target->curr_at + (target->curr_at - points[ points.size() - 2 ]);
+
+  dbg("Repulse: %s to %s", target->to_string().c_str(), dest.to_string().c_str());
+  TRACE_AND_INDENT();
+
+  if (target->is_brazier()) {
+    TRACE_AND_INDENT();
+    target->log("knocked over");
+    target->dead("falls over");
+  }
 
   if (level->is_obs_shoving(dest)) {
     if (level->is_wall(dest)) {
@@ -71,8 +75,8 @@ bool Thing::repulse(Thingp target)
     return false;
   }
 
-  dbg("Repulse: %s", target->to_short_string().c_str());
-  target->move_delta(target->curr_at - dest);
+  dbg("Repulse: %s", dest.to_string().c_str());
+  target->move(dest);
 
   return true;
 }

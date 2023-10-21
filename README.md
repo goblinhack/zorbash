@@ -9,7 +9,6 @@
 <!-- TODO Wand of Plenty                                                                                                                          -->
 <!-- TODO Wand of Polymorphism                                                                                                                    -->
 <!-- TODO Wand of Slowness                                                                                                                        -->
-<!-- TODO Wand of Teleportation                                                                                                                   -->
 <!-- TODO Runics on weapons, like vampirism, force, quietus, lightning                                                                            -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->

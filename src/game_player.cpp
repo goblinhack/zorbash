@@ -244,6 +244,19 @@ void Game::place_player(void)
         t->carry(w, carry_options);
       }
       if (0) {
+        auto w = level->thing_new("staff_beckoning", point(x, y));
+        t->carry(w, carry_options);
+        t->enchant_without_stone(w);
+        level->thing_new("barrel", point(x + 4, y));
+      }
+      if (0) {
+        auto w = level->thing_new("staff_repulsion", point(x, y));
+        t->carry(w, carry_options);
+        t->enchant_without_stone(w);
+        level->thing_new("barrel", point(x + 4, y));
+        level->thing_new("dogman", point(x + 4, y - 1));
+      }
+      if (0) {
         auto w = level->thing_new("staff_healing", point(x, y));
         t->carry(w, carry_options);
         level->thing_new("dogman", point(x + 1, y));

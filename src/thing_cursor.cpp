@@ -35,6 +35,7 @@ Thingp Level::cursor_thing_new(point p)
       return thing_new("cursor", p);
     }
   }
+
   return thing_new("cursor", p);
 }
 

@@ -349,7 +349,7 @@ void Thing::level_push(void)
       i_set_is_obs_when_dead = true;
       level->is_obs_when_dead_set(x, y);
     }
-    if (is_obs_shoving() && is_dead) {
+    if (is_obs_shoving()) {
       i_set_is_obs_shoving = true;
       level->is_obs_shoving_set(x, y);
     }

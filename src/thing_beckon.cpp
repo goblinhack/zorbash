@@ -34,6 +34,12 @@ bool Thing::beckon(Thingp target)
 
   auto dest = points[ points.size() - 2 ];
 
+  if (target->is_brazier()) {
+    TRACE_AND_INDENT();
+    target->log("knocked over");
+    target->dead("falls over");
+  }
+
   dbg("Beckon: %s", target->to_short_string().c_str());
   target->move_to_immediately(dest);
 

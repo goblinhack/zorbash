@@ -354,11 +354,11 @@ void Thing::level_pop(void)
       level->gfx_ooze_unset(x, y);
       level->is_ooze_unset(x, y);
     }
-    if (is_obs_when_dead() && is_dead) {
+    if (i_set_is_obs_when_dead) {
       i_set_is_obs_when_dead = false;
       level->is_obs_when_dead_unset(x, y);
     }
-    if (is_obs_shoving() && is_dead) {
+    if (i_set_is_obs_shoving) {
       i_set_is_obs_shoving = false;
       level->is_obs_shoving_unset(x, y);
     }
