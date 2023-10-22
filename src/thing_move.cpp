@@ -558,11 +558,11 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
     }
 
     if (collision_check_only(future_pos)) {
-      dbg2("Collided with something");
+      dbg("Collided with something");
       TRACE_AND_INDENT();
 
       if (attack_options->shove_allowed) {
-        dbg2("Try to shove");
+        dbg("Try to shove");
         if (is_player()) {
           game->tick_begin("player tried to shove");
         }

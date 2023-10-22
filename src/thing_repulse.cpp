@@ -76,7 +76,10 @@ bool Thing::repulse(Thingp target)
   }
 
   dbg("Repulse: %s", dest.to_string().c_str());
-  target->move(dest);
+  TRACE_AND_INDENT();
+  ShoveOptions shove_options;
+  shove_options.force = true;
+  try_to_shove(target, dest - target->curr_at, shove_options);
 
   return true;
 }
