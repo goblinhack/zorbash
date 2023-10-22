@@ -9,6 +9,7 @@ def on_use(owner, item, target, x, y):
     for it in my.level_get_all(item, x, y):
         if my.thing_is_alive_monst(it) or my.thing_is_player(it):
             my.thing_buff_add(it, "buff_temporary_hasted")
+    my.place_at(target, "magical_effect", x, y)
 
 
 def tp_init(name, text_long_name, text_short_name):

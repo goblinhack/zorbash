@@ -12,6 +12,7 @@ def on_use(owner, item, target, x, y):
             my.thing_set_leader(spell, owner)
         else:
             my.thing_set_leader(spell, target)
+    my.place_at(target, "magical_effect", x, y)
 
 
 def tp_init(name, text_long_name, text_short_name):
