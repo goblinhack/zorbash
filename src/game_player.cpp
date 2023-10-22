@@ -258,7 +258,7 @@ void Game::place_player(void)
         level->thing_new("dogman", point(x + 4, y - 1));
         level->thing_new("barrel", point(x + 4, y));
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("staff_slowness", point(x, y));
         t->carry(w, carry_options);
         t->enchant_without_stone(w);
@@ -665,7 +665,7 @@ void Game::place_player(void)
           }
         }
       }
-      if (1) {
+      if (0) {
         level->thing_new("spellbook1", point(x + 1, y));
       }
       if (0) {

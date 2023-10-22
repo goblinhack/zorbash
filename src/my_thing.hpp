@@ -1573,6 +1573,7 @@ public:
   int is_brazier(void);
   int is_bridge(void);
   int is_brittle(void);
+  int is_buffable(void);
   int is_buff(void);
   int is_burnable(void);
   int is_burnt_check(void);
@@ -1970,7 +1971,6 @@ public:
   int is_unused_flag60(void);
   int is_unused_flag61(void);
   int is_unused_flag62(void);
-  int is_unused_flag63(void);
   int is_unused_flag6(void);
   int is_unused_flag7(void);
   int is_unused_flag8(void);

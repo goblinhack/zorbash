@@ -522,10 +522,10 @@ int Thing::is_unused_flag62(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag62());
 }
-int Thing::is_unused_flag63(void)
+int Thing::is_buffable(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag63());
+  return (tp()->is_buffable());
 }
 int Thing::is_able_to_fall_over(void)
 {

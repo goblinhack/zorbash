@@ -476,6 +476,7 @@ int Tp::is_boots(void) const { return _is_boots; }
 int Tp::is_brazier(void) const { return _is_brazier; }
 int Tp::is_bridge(void) const { return _is_bridge; }
 int Tp::is_brittle(void) const { return _is_brittle; }
+int Tp::is_buffable(void) const { return _is_buffable; }
 int Tp::is_buff(void) const { return _is_buff; }
 int Tp::is_burnable(void) const { return _is_burnable; }
 int Tp::is_carnivorous_plant(void) const { return _is_carnivorous_plant; }
@@ -868,7 +869,6 @@ int Tp::is_unused_flag5(void) const { return _is_unused_flag5; }
 int Tp::is_unused_flag60(void) const { return _is_unused_flag60; }
 int Tp::is_unused_flag61(void) const { return _is_unused_flag61; }
 int Tp::is_unused_flag62(void) const { return _is_unused_flag62; }
-int Tp::is_unused_flag63(void) const { return _is_unused_flag63; }
 int Tp::is_unused_flag6(void) const { return _is_unused_flag6; }
 int Tp::is_unused_flag7(void) const { return _is_unused_flag7; }
 int Tp::is_unused_flag8(void) const { return _is_unused_flag8; }
@@ -1253,6 +1253,7 @@ void Tp::is_boots_set(int v) { _is_boots = v; }
 void Tp::is_brazier_set(int v) { _is_brazier = v; }
 void Tp::is_bridge_set(int v) { _is_bridge = v; }
 void Tp::is_brittle_set(int v) { _is_brittle = v; }
+void Tp::is_buffable_set(int v) { _is_buffable = v; }
 void Tp::is_buff_set(int v) { _is_buff = v; }
 void Tp::is_burnable_set(int v) { _is_burnable = v; }
 void Tp::is_carnivorous_plant_set(int v) { _is_carnivorous_plant = v; }
@@ -1645,7 +1646,6 @@ void Tp::is_unused_flag5_set(int v) { _is_unused_flag5 = v; }
 void Tp::is_unused_flag60_set(int v) { _is_unused_flag60 = v; }
 void Tp::is_unused_flag61_set(int v) { _is_unused_flag61 = v; }
 void Tp::is_unused_flag62_set(int v) { _is_unused_flag62 = v; }
-void Tp::is_unused_flag63_set(int v) { _is_unused_flag63 = v; }
 void Tp::is_unused_flag6_set(int v) { _is_unused_flag6 = v; }
 void Tp::is_unused_flag7_set(int v) { _is_unused_flag7 = v; }
 void Tp::is_unused_flag8_set(int v) { _is_unused_flag8 = v; }

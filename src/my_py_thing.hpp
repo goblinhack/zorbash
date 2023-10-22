@@ -290,6 +290,7 @@ PyObject *thing_is_boots(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_brazier(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bridge(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_brittle(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_buffable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_buff(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_burnable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_burnt(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -693,7 +694,6 @@ PyObject *thing_is_unused_flag5(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *thing_is_unused_flag60(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag61(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag62(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag63(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag8(PyObject *obj, PyObject *args, PyObject *keywds);

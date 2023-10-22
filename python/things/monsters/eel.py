@@ -74,6 +74,7 @@ def tp_init(name, text_long_name):
     my.is_biome_sewer(self, True)
     my.is_biome_swamp(self, True)
     my.is_bleeder(self, True)
+    my.is_buffable(self, True)
     my.is_burnable(self, True)
     my.is_corpse_on_death(self, True)
     my.is_corpse_with_bones(self, True)

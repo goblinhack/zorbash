@@ -383,6 +383,7 @@ private:
   int _is_bridge {};
   int _is_brittle {};
   int _is_buff {};
+  int _is_buffable {};
   int _is_burnable {};
   int _is_carnivorous_plant {};
   int _is_cautious {};
@@ -777,7 +778,6 @@ private:
   int _is_unused_flag60 {};
   int _is_unused_flag61 {};
   int _is_unused_flag62 {};
-  int _is_unused_flag63 {};
   int _is_unused_flag7 {};
   int _is_unused_flag8 {};
   int _is_unused_flag9 {};
@@ -1757,6 +1757,7 @@ public:
   int is_brazier(void) const;
   int is_bridge(void) const;
   int is_brittle(void) const;
+  int is_buffable(void) const;
   int is_buff(void) const;
   int is_burnable(void) const;
   int is_carnivorous_plant(void) const;
@@ -2150,7 +2151,6 @@ public:
   int is_unused_flag60(void) const;
   int is_unused_flag61(void) const;
   int is_unused_flag62(void) const;
-  int is_unused_flag63(void) const;
   int is_unused_flag6(void) const;
   int is_unused_flag7(void) const;
   int is_unused_flag8(void) const;
@@ -2535,6 +2535,7 @@ public:
   void is_brazier_set(int v);
   void is_bridge_set(int v);
   void is_brittle_set(int v);
+  void is_buffable_set(int v);
   void is_buff_set(int v);
   void is_burnable_set(int v);
   void is_carnivorous_plant_set(int v);
@@ -2928,7 +2929,6 @@ public:
   void is_unused_flag60_set(int v);
   void is_unused_flag61_set(int v);
   void is_unused_flag62_set(int v);
-  void is_unused_flag63_set(int v);
   void is_unused_flag6_set(int v);
   void is_unused_flag7_set(int v);
   void is_unused_flag8_set(int v);

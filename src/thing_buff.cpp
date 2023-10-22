@@ -9,6 +9,11 @@
 
 bool Thing::buff_add(Thingp buff)
 {
+  if (! is_buffable()) {
+    dbg("No; not buffable");
+    return false;
+  }
+
   dbg("Try to add buff %s", buff->to_short_string().c_str());
   TRACE_AND_INDENT();
 
@@ -52,6 +57,10 @@ bool Thing::buff_add(Thingp buff)
 
 bool Thing::buff_remove(Thingp buff)
 {
+  if (! is_buffable()) {
+    return false;
+  }
+
   if (! buff) {
     return false;
   }
@@ -94,6 +103,10 @@ Thingp Thing::buff_find(const std::string &buff)
 {
   TRACE_NO_INDENT();
 
+  if (! is_buffable()) {
+    return nullptr;
+  }
+
   if (! maybe_itemsp()) {
     return nullptr;
   }
@@ -112,6 +125,10 @@ Thingp Thing::buff_find(const std::string &buff)
 
 void Thing::buff_remove_all(void)
 {
+  if (! is_buffable()) {
+    return;
+  }
+
   TRACE_NO_INDENT();
 
   if (! maybe_itemsp()) {
@@ -166,6 +183,11 @@ bool Thing::buff_add(Tpp buff)
 
 bool Thing::buff_add_if_not_found(Tpp buff)
 {
+  if (! is_buffable()) {
+    dbg("No; not buffable");
+    return false;
+  }
+
   if (! maybe_itemsp()) {
     return false;
   }
@@ -196,6 +218,10 @@ bool Thing::buff_add_if_not_found(Tpp buff)
 
 bool Thing::buff_remove(Tpp buff)
 {
+  if (! is_buffable()) {
+    return false;
+  }
+
   if (! maybe_itemsp()) {
     return false;
   }

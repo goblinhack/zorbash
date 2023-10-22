@@ -78,6 +78,7 @@ def tp_init(name, text_long_name):
     my.is_biome_chasms(self, True)
     my.is_biome_dungeon(self, True)
     my.is_biome_ice(self, True)
+    my.is_buffable(self, True)
     my.is_burnable(self, True)
     my.is_corpse_on_death(self, True)
     my.is_crushable(self, True)

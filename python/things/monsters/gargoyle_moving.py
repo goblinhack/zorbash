@@ -61,6 +61,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_see_in_the_dark(self, True)
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
+    my.is_buffable(self, True)
     my.is_corpse_on_death(self, True)
     my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
