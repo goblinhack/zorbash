@@ -852,6 +852,11 @@ int Thing::spell_cost(void)
   TRACE_NO_INDENT();
   return (tp()->spell_cost());
 }
+int Thing::is_the_grid(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_the_grid());
+}
 int Thing::is_player_bodypart(void)
 {
   TRACE_NO_INDENT();

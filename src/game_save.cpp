@@ -404,7 +404,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->is_seen_by_player_msg_shown                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_sleeping                                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_teleporting                               ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->is_the_grid                                  ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->is_the_grid_                                 ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_the_player                                ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_visible_to_player                         ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->is_waiting                                   ? 1LLU : 0LLU) << shift; shift++;

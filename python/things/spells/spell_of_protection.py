@@ -8,7 +8,10 @@ def on_use(owner, item, target, x, y):
     # my.topcon("target {} {}".format(my.thing_name_get(target), my.thing_health(target)))
     spell = my.place_at(target, "spell_of_protection_barrier", x, y)
     if spell:
-        my.thing_set_leader(spell, target)
+        if my.thing_is_the_grid(target):
+            my.thing_set_leader(spell, owner)
+        else:
+            my.thing_set_leader(spell, target)
 
 
 def tp_init(name, text_long_name, text_short_name):

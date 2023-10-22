@@ -587,7 +587,7 @@ public:
 
 #define FOR_ALL_GRID_THINGS(level, t, x, y)                                                                          \
   FOR_ALL_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                       \
-  if (! t->is_the_grid) {                                                                                            \
+  if (! t->is_the_grid_) {                                                                                           \
     continue;                                                                                                        \
   }
 

@@ -121,12 +121,7 @@ Thingp Thing::item_targeted_use_at(Thingp item, point at)
   }
 
   TRACE_NO_INDENT();
-  FOR_ALL_GRID_THINGS(level, t, at.x, at.y)
-  {
-    if (t->is_the_grid) {
-      return item_targeted_use_at(item, t);
-    }
-  }
+  FOR_ALL_GRID_THINGS(level, t, at.x, at.y) { return item_targeted_use_at(item, t); }
   TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 

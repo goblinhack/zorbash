@@ -115,10 +115,7 @@ Thingp Thing::laser_reflect(Thingp item, const std::string &effect_name, Thingp 
   TRACE_NO_INDENT();
   FOR_ALL_GRID_THINGS(level, grid_thing, new_target_at.x, new_target_at.y)
   {
-    if (grid_thing->is_the_grid) {
-      return target->laser_shoot_at(item, effect_name, grid_thing, use_options);
-    }
-    break;
+    return target->laser_shoot_at(item, effect_name, grid_thing, use_options);
   }
   FOR_ALL_THINGS_END()
 
@@ -302,9 +299,7 @@ Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, Thingp
               TRACE_NO_INDENT();
               FOR_ALL_GRID_THINGS(level, grid_thing, second_portal_target.x, second_portal_target.y)
               {
-                if (grid_thing->is_the_grid) {
-                  second_portal->laser_shoot_at(item, effect_name, grid_thing, use_options);
-                }
+                second_portal->laser_shoot_at(item, effect_name, grid_thing, use_options);
                 break;
               }
               TRACE_NO_INDENT();
@@ -500,12 +495,7 @@ Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, point 
   }
 
   TRACE_NO_INDENT();
-  FOR_ALL_GRID_THINGS(level, t, at.x, at.y)
-  {
-    if (t->is_the_grid) {
-      return laser_shoot_at(item, effect_name, t, use_options);
-    }
-  }
+  FOR_ALL_GRID_THINGS(level, t, at.x, at.y) { return laser_shoot_at(item, effect_name, t, use_options); }
   TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 

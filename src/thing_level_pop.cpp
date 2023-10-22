@@ -24,7 +24,7 @@ void Thing::level_pop(void)
   auto x = last_attached.x;
   auto y = last_attached.y;
 
-  if (! is_the_grid) {
+  if (! is_the_grid_) {
     if (i_set_is_able_to_amplify_footsteps) {
       i_set_is_able_to_amplify_footsteps = false;
       level->is_able_to_amplify_footsteps_unset(x, y);

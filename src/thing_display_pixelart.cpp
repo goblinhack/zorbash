@@ -482,7 +482,7 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
     if (is_dead) {
       blit = false;
     }
-  } else if (is_cursor() || is_cursor_path() || is_the_grid) {
+  } else if (is_cursor() || is_cursor_path() || is_the_grid()) {
     blit = true;
   }
 

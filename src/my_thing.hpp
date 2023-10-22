@@ -235,7 +235,7 @@ public:
   uint64_t is_seen_by_player_msg_shown                  : 1 {}; // Seen by player message
   uint64_t is_sleeping                                  : 1 {}; // Zzz
   uint64_t is_teleporting                               : 1 {}; // Mid teleport
-  uint64_t is_the_grid                                  : 1 {}; // Is the backbone of the level
+  uint64_t is_the_grid_                                 : 1 {}; // The backbone of the game. cached for speed
   uint64_t is_the_player                                : 1 {}; // Brave player
   uint64_t is_visible_to_player                         : 1 {}; // Can be seen by the player
   uint64_t is_waiting                                   : 1 {}; // Is waiting on this tick
@@ -1891,6 +1891,7 @@ public:
   int is_target_select(void);
   int is_tentacle(void);
   int is_tentacleye(void);
+  int is_the_grid(void);
   int is_thief(void);
   int is_throwable(void);
   int is_thrown_as_a_weapon(void);

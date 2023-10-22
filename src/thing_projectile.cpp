@@ -183,9 +183,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &effect_name, T
         TRACE_NO_INDENT();
         FOR_ALL_GRID_THINGS(level, grid_thing, second_portal_target.x, second_portal_target.y)
         {
-          if (grid_thing->is_the_grid) {
-            second_portal->projectile_shoot_at(item, effect_name, grid_thing);
-          }
+          second_portal->projectile_shoot_at(item, effect_name, grid_thing);
           break;
         }
         TRACE_NO_INDENT();
@@ -280,12 +278,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &effect_name, p
   }
 
   TRACE_NO_INDENT();
-  FOR_ALL_GRID_THINGS(level, t, at.x, at.y)
-  {
-    if (t->is_the_grid) {
-      return projectile_shoot_at(item, effect_name, t);
-    }
-  }
+  FOR_ALL_GRID_THINGS(level, t, at.x, at.y) { return projectile_shoot_at(item, effect_name, t); }
   TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 

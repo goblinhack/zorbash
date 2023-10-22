@@ -184,10 +184,17 @@ void Thing::leader_set(Thingp new_leader)
     return;
   }
 
+  if (! new_leader->maybe_infop()) {
+    leader_unset();
+    return;
+  }
+
   verify(MTYPE_THING, new_leader);
 
   auto old_leader = leader();
+  TRACE_NO_INDENT();
   if (old_leader) {
+    TRACE_NO_INDENT();
     if (old_leader == new_leader) {
       return;
     }
@@ -196,13 +203,16 @@ void Thing::leader_set(Thingp new_leader)
     old_leader->infop()->followers.erase(id);
     leader_id_set(NoThingId);
   } else {
+    TRACE_NO_INDENT();
     dbg("Will set leader to %s", new_leader->to_string().c_str());
   }
 
+  TRACE_NO_INDENT();
   if (new_leader == this) {
     //
     // I am the leader
     //
+    TRACE_NO_INDENT();
     leader_id_set(NoThingId);
     dbg("I am the leader, follower count %d", new_leader->follower_count());
     new_leader->on_you_are_declared_leader();
@@ -210,6 +220,7 @@ void Thing::leader_set(Thingp new_leader)
     //
     // You are being led
     //
+    TRACE_NO_INDENT();
     leader_id_set(new_leader->id);
     new_leader->infop()->followers.insert(id);
     dbg("I am a follower");
@@ -219,6 +230,7 @@ void Thing::leader_set(Thingp new_leader)
   //
   // If the leader is awake, so are we
   //
+  TRACE_NO_INDENT();
   if (new_leader->is_sleeping) {
     sleep();
   } else {

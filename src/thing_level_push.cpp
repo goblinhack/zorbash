@@ -27,7 +27,7 @@ void Thing::level_push(void)
   }
 #endif
 
-  if (is_the_grid) {
+  if (is_the_grid_) {
     return;
   }
 

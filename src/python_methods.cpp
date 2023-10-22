@@ -930,6 +930,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(thing_is_target_select),
     MY_ADD_PYTHON_FUNCTION(thing_is_tentacle),
     MY_ADD_PYTHON_FUNCTION(thing_is_tentacleye),
+    MY_ADD_PYTHON_FUNCTION(thing_is_the_grid),
     MY_ADD_PYTHON_FUNCTION(thing_is_thief),
     MY_ADD_PYTHON_FUNCTION(thing_is_throwable),
     MY_ADD_PYTHON_FUNCTION(thing_is_thrown_as_a_weapon),

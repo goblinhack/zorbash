@@ -459,7 +459,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->is_seen_by_player_msg_shown                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_sleeping                                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_teleporting                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->is_the_grid                                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->is_the_grid_                                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_the_player                                = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_visible_to_player                         = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_waiting                                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;

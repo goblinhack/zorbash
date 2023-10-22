@@ -291,8 +291,8 @@ void Thing::init(Levelp level, const std::string &name_in, const point born, Thi
   // The grid is the perma background matrix like substrate that is the ether of
   // this universe!
   //
-  is_the_grid = tp()->is_the_grid();
-  if (is_the_grid) {
+  is_the_grid_ = tp()->is_the_grid();
+  if (is_the_grid_) {
     return;
   }
 

@@ -617,6 +617,7 @@ PyObject *thing_is_target_radial(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_target_select(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_tentacle(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_tentacleye(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_the_grid(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_thief(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_throwable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_thrown_as_a_weapon(PyObject *obj, PyObject *args, PyObject *keywds);

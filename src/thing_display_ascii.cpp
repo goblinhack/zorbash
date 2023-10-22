@@ -553,7 +553,7 @@ void Thing::blit_ascii(point tl, point br, point p, bool left_bar)
     if (is_dead) {
       blit = false;
     }
-  } else if (is_cursor() || is_cursor_path() || is_the_grid) {
+  } else if (is_cursor() || is_cursor_path() || is_the_grid()) {
     blit = true;
   }
 
