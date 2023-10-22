@@ -1,9 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- TODO Staves and Wands fire blasts of magical energy but have a finite number of charges. Staves recharge over time, but wands do not.        -->
 <!-- TODO Wand of Empowerment                                                                                                                     -->
 <!-- TODO Wand of Plenty                                                                                                                          -->
-<!-- TODO Wand of Slowness                                                                                                                        -->
 <!-- TODO Runics on weapons, like vampirism, force, quietus, lightning                                                                            -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
@@ -653,7 +651,7 @@ Other content
 - 25 x items
 - 24 x treasure
 - 24 x spells
-- 21 x staffs
+- 23 x staffs
 - 17 x weapons
 - 17 x buffs
 - 14 x potions

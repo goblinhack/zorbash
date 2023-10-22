@@ -737,15 +737,15 @@ int Thing::is_spell_of_sanctuary(void)
   TRACE_NO_INDENT();
   return (tp()->is_spell_of_sanctuary());
 }
-int Thing::is_spell_of_slowing(void)
+int Thing::is_spell_of_slowness(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_spell_of_slowing());
+  return (tp()->is_spell_of_slowness());
 }
-int Thing::is_immune_to_spell_of_slowing(void)
+int Thing::is_immune_to_spell_of_slowness(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_immune_to_spell_of_slowing());
+  return (tp()->is_immune_to_spell_of_slowness());
 }
 int Thing::is_immune_to_spell_of_holding(void)
 {

@@ -390,7 +390,7 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
     duration = 0;
   } else {
     //
-    // Check the number of things jumping is not slowing the game too much
+    // Check the number of things jumping is not slowness the game too much
     //
     if (game->tick_current_is_too_slow || game->prev_tick_was_too_slow) {
       duration /= 4;

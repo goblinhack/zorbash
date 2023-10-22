@@ -456,7 +456,7 @@ PyObject *thing_is_immune_to_spell_of_beckoning(PyObject *obj, PyObject *args, P
 PyObject *thing_is_immune_to_spell_of_holding(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_spell_of_repulsion(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_spell_of_sanctuary(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_immune_to_spell_of_slowing(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_immune_to_spell_of_slowness(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_spiderwebs(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_stamina_drain(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_teleport_attack(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -600,7 +600,7 @@ PyObject *thing_is_spell_of_protection(PyObject *obj, PyObject *args, PyObject *
 PyObject *thing_is_spell_of_repulsion(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spell_of_sanctuary_barrier(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spell_of_sanctuary(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_spell_of_slowing(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_spell_of_slowness(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spell(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spider(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_spiderweb(PyObject *obj, PyObject *args, PyObject *keywds);

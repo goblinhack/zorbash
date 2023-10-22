@@ -1729,7 +1729,7 @@ public:
   int is_immune_to_spell_of_holding(void);
   int is_immune_to_spell_of_repulsion(void);
   int is_immune_to_spell_of_sanctuary(void);
-  int is_immune_to_spell_of_slowing(void);
+  int is_immune_to_spell_of_slowness(void);
   int is_immune_to_spiderwebs(void);
   int is_immune_to_stamina_drain(void);
   int is_immune_to_teleport_attack(void);
@@ -1874,7 +1874,7 @@ public:
   int is_spell_of_repulsion(void);
   int is_spell_of_sanctuary_barrier(void);
   int is_spell_of_sanctuary(void);
-  int is_spell_of_slowing(void);
+  int is_spell_of_slowness(void);
   int is_spell(void);
   int is_spider(void);
   int is_spiderweb(void);

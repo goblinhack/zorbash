@@ -16,7 +16,7 @@ my.map_load_spell_tree(
         "dD", "spell_of_dominate_monst4",
         "dE", "spell_of_dominate_monst5",
         "hh", "spell_of_hasted",
-        "ss", "spell_of_slowing",
+        "ss", "spell_of_slowness",
         "bk", "is_spell_of_beckoning",
         "rp", "is_spell_of_repulsion",
         "HH", "spell_of_holding",

@@ -532,7 +532,7 @@ private:
   int _is_immune_to_spell_of_holding {};
   int _is_immune_to_spell_of_repulsion {};
   int _is_immune_to_spell_of_sanctuary {};
-  int _is_immune_to_spell_of_slowing {};
+  int _is_immune_to_spell_of_slowness {};
   int _is_immune_to_spiderwebs {};
   int _is_immune_to_stamina_drain {};
   int _is_immune_to_teleport_attack {};
@@ -679,7 +679,7 @@ private:
   int _is_spell_of_repulsion {};
   int _is_spell_of_sanctuary {};
   int _is_spell_of_sanctuary_barrier {};
-  int _is_spell_of_slowing {};
+  int _is_spell_of_slowness {};
   int _is_spider {};
   int _is_spiderweb {};
   int _is_splatter {};
@@ -1907,7 +1907,7 @@ public:
   int is_immune_to_spell_of_holding(void) const;
   int is_immune_to_spell_of_repulsion(void) const;
   int is_immune_to_spell_of_sanctuary(void) const;
-  int is_immune_to_spell_of_slowing(void) const;
+  int is_immune_to_spell_of_slowness(void) const;
   int is_immune_to_spiderwebs(void) const;
   int is_immune_to_stamina_drain(void) const;
   int is_immune_to_teleport_attack(void) const;
@@ -2052,7 +2052,7 @@ public:
   int is_spell_of_repulsion(void) const;
   int is_spell_of_sanctuary_barrier(void) const;
   int is_spell_of_sanctuary(void) const;
-  int is_spell_of_slowing(void) const;
+  int is_spell_of_slowness(void) const;
   int is_spell(void) const;
   int is_spider(void) const;
   int is_spiderweb(void) const;
@@ -2685,7 +2685,7 @@ public:
   void is_immune_to_spell_of_holding_set(int v);
   void is_immune_to_spell_of_repulsion_set(int v);
   void is_immune_to_spell_of_sanctuary_set(int v);
-  void is_immune_to_spell_of_slowing_set(int v);
+  void is_immune_to_spell_of_slowness_set(int v);
   void is_immune_to_spiderwebs_set(int v);
   void is_immune_to_stamina_drain_set(int v);
   void is_immune_to_teleport_attack_set(int v);
@@ -2830,7 +2830,7 @@ public:
   void is_spell_of_repulsion_set(int v);
   void is_spell_of_sanctuary_barrier_set(int v);
   void is_spell_of_sanctuary_set(int v);
-  void is_spell_of_slowing_set(int v);
+  void is_spell_of_slowness_set(int v);
   void is_spell_set(int v);
   void is_spider_set(int v);
   void is_spiderweb_set(int v);

@@ -618,7 +618,7 @@ void tp_dump_monsters(void)
     if (tp->is_immune_to_spell_of_repulsion()) {
       imm_str += "Repulsion<newline>";
     }
-    if (tp->is_immune_to_spell_of_slowing()) {
+    if (tp->is_immune_to_spell_of_slowness()) {
       imm_str += "Slowing<newline>";
     }
     if (tp->is_immune_to_spiderwebs()) {
@@ -821,7 +821,7 @@ void tp_dump_weapons(void)
     if (tp->is_immune_to_spell_of_repulsion()) {
       imm_str += "Immunity-Repulsion<newline>";
     }
-    if (tp->is_immune_to_spell_of_slowing()) {
+    if (tp->is_immune_to_spell_of_slowness()) {
       imm_str += "Immunity-Slowing<newline>";
     }
     if (tp->is_immune_to_spiderwebs()) {

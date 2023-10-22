@@ -141,7 +141,7 @@ bool Thing::is_stuck_check(void)
         // Body shutdown due to being too slow
         //
         msg("You became so slow, you're body just stopped...");
-        dead("by extreme slowing");
+        dead("by extreme slowness");
         dbg("Stuck, yes: too slow");
         return true;
       } else if (is_magical() || is_undead() || is_ethereal()) {
@@ -160,8 +160,8 @@ bool Thing::is_stuck_check(void)
         //
         // Body shutdown due to being too slow
         //
-        dbg("Stuck, yes: extreme slowing");
-        dead("by extreme slowing");
+        dbg("Stuck, yes: extreme slowness");
+        dead("by extreme slowness");
         return true;
       } else {
         //

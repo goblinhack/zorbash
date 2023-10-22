@@ -329,7 +329,7 @@ bool Tp::matches(const std::string &what)
   if (is_immune_to_spell_of_holding() && (what == "is_immune_to_spell_of_holding")) { return true; }
   if (is_immune_to_spell_of_repulsion() && (what == "is_immune_to_spell_of_repulsion")) { return true; }
   if (is_immune_to_spell_of_sanctuary() && (what == "is_immune_to_spell_of_sanctuary")) { return true; }
-  if (is_immune_to_spell_of_slowing() && (what == "is_immune_to_spell_of_slowing")) { return true; }
+  if (is_immune_to_spell_of_slowness() && (what == "is_immune_to_spell_of_slowness")) { return true; }
   if (is_immune_to_spiderwebs() && (what == "is_immune_to_spiderwebs")) { return true; }
   if (is_immune_to_stamina_drain() && (what == "is_immune_to_stamina_drain")) { return true; }
   if (is_immune_to_teleport_attack() && (what == "is_immune_to_teleport_attack")) { return true; }
@@ -465,7 +465,7 @@ bool Tp::matches(const std::string &what)
   if (is_spell_of_repulsion() && (what == "is_spell_of_repulsion")) { return true; }
   if (is_spell_of_sanctuary_barrier() && (what == "is_spell_of_sanctuary_barrier")) { return true; }
   if (is_spell_of_sanctuary() && (what == "is_spell_of_sanctuary")) { return true; }
-  if (is_spell_of_slowing() && (what == "is_spell_of_slowing")) { return true; }
+  if (is_spell_of_slowness() && (what == "is_spell_of_slowness")) { return true; }
   if (is_spell() && (what == "is_spell")) { return true; }
   if (is_spiderweb() && (what == "is_spiderweb")) { return true; }
   if (is_spider() && (what == "is_spider")) { return true; }
@@ -939,7 +939,7 @@ bool Thing::matches(const std::string &what)
   if (is_immune_to_spell_of_holding() && (what == "is_immune_to_spell_of_holding")) { return true; }
   if (is_immune_to_spell_of_repulsion() && (what == "is_immune_to_spell_of_repulsion")) { return true; }
   if (is_immune_to_spell_of_sanctuary() && (what == "is_immune_to_spell_of_sanctuary")) { return true; }
-  if (is_immune_to_spell_of_slowing() && (what == "is_immune_to_spell_of_slowing")) { return true; }
+  if (is_immune_to_spell_of_slowness() && (what == "is_immune_to_spell_of_slowness")) { return true; }
   if (is_immune_to_spiderwebs() && (what == "is_immune_to_spiderwebs")) { return true; }
   if (is_immune_to_stamina_drain() && (what == "is_immune_to_stamina_drain")) { return true; }
   if (is_immune_to_teleport_attack() && (what == "is_immune_to_teleport_attack")) { return true; }
@@ -1076,7 +1076,7 @@ bool Thing::matches(const std::string &what)
   if (is_spell_of_repulsion() && (what == "is_spell_of_repulsion")) { return true; }
   if (is_spell_of_sanctuary_barrier() && (what == "is_spell_of_sanctuary_barrier")) { return true; }
   if (is_spell_of_sanctuary() && (what == "is_spell_of_sanctuary")) { return true; }
-  if (is_spell_of_slowing() && (what == "is_spell_of_slowing")) { return true; }
+  if (is_spell_of_slowness() && (what == "is_spell_of_slowness")) { return true; }
   if (is_spell() && (what == "is_spell")) { return true; }
   if (is_spiderweb() && (what == "is_spiderweb")) { return true; }
   if (is_spider() && (what == "is_spider")) { return true; }
@@ -1543,7 +1543,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_immune_to_spell_of_holding") { return &Thing::is_immune_to_spell_of_holding; }
   if (what == "is_immune_to_spell_of_repulsion") { return &Thing::is_immune_to_spell_of_repulsion; }
   if (what == "is_immune_to_spell_of_sanctuary") { return &Thing::is_immune_to_spell_of_sanctuary; }
-  if (what == "is_immune_to_spell_of_slowing") { return &Thing::is_immune_to_spell_of_slowing; }
+  if (what == "is_immune_to_spell_of_slowness") { return &Thing::is_immune_to_spell_of_slowness; }
   if (what == "is_immune_to_spiderwebs") { return &Thing::is_immune_to_spiderwebs; }
   if (what == "is_immune_to_stamina_drain") { return &Thing::is_immune_to_stamina_drain; }
   if (what == "is_immune_to_teleport_attack") { return &Thing::is_immune_to_teleport_attack; }
@@ -1676,7 +1676,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_spell_of_repulsion") { return &Thing::is_spell_of_repulsion; }
   if (what == "is_spell_of_sanctuary_barrier") { return &Thing::is_spell_of_sanctuary_barrier; }
   if (what == "is_spell_of_sanctuary") { return &Thing::is_spell_of_sanctuary; }
-  if (what == "is_spell_of_slowing") { return &Thing::is_spell_of_slowing; }
+  if (what == "is_spell_of_slowness") { return &Thing::is_spell_of_slowness; }
   if (what == "is_spell") { return &Thing::is_spell; }
   if (what == "is_spider") { return &Thing::is_spider; }
   if (what == "is_spiderweb") { return &Thing::is_spiderweb; }

@@ -258,6 +258,12 @@ void Game::place_player(void)
         level->thing_new("dogman", point(x + 4, y - 1));
         level->thing_new("barrel", point(x + 4, y));
       }
+      if (1) {
+        auto w = level->thing_new("staff_slowness", point(x, y));
+        t->carry(w, carry_options);
+        t->enchant_without_stone(w);
+        level->thing_new("dogman", point(x + 4, y - 1));
+      }
       if (0) {
         auto w = level->thing_new("staff_repulsion", point(x, y));
         t->carry(w, carry_options);
@@ -388,7 +394,7 @@ void Game::place_player(void)
         t->spell_add(w);
       }
       if (0) {
-        auto w = level->thing_new("spell_of_slowing", point(x, y));
+        auto w = level->thing_new("spell_of_slowness", point(x, y));
         t->spell_add(w);
       }
       if (0) {
@@ -659,7 +665,7 @@ void Game::place_player(void)
           }
         }
       }
-      if (0) {
+      if (1) {
         level->thing_new("spellbook1", point(x + 1, y));
       }
       if (0) {
