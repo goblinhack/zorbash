@@ -40,8 +40,13 @@ bool Thing::beckon(Thingp target)
     target->dead("falls over");
   }
 
+  //
+  // Shove in reverse!
+  //
   dbg("Beckon: %s", target->to_short_string().c_str());
-  target->move_to_immediately(dest);
+  ShoveOptions shove_options;
+  shove_options.force = true;
+  try_to_shove(target, dest - target->curr_at, shove_options);
 
   return true;
 }

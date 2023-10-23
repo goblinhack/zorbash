@@ -37,7 +37,6 @@ const std::string &Tp::equip_carry_anim(void) const { return _equip_carry_anim; 
 const std::string &Tp::gfx_anim_use(void) const { return _gfx_anim_use; }
 const std::string &Tp::gfx_targeted_laser(void) const { return _gfx_targeted_laser; }
 const std::string &Tp::gfx_targeted_projectile(void) const { return _gfx_targeted_projectile; }
-const std::string &Tp::gfx_targeted_radial(void) const { return _gfx_targeted_radial; }
 const std::string &Tp::is_allied_with(void) const { return _is_allied_with; }
 const std::string &Tp::light_color(void) const { return _light_color; }
 const std::string &Tp::name(void) const { return _name; }
@@ -1122,7 +1121,6 @@ void Tp::gfx_pixelart_submergible_set(int v) { _gfx_pixelart_submergible = v; }
 void Tp::gfx_pixelart_wobbles_when_hit_set(int v) { _gfx_pixelart_wobbles_when_hit = v; }
 void Tp::gfx_targeted_laser_set(const std::string &v) { _gfx_targeted_laser = v; }
 void Tp::gfx_targeted_projectile_set(const std::string &v) { _gfx_targeted_projectile = v; }
-void Tp::gfx_targeted_radial_set(const std::string &v) { _gfx_targeted_radial = v; }
 void Tp::gfx_water_set(int v) { _gfx_water = v; }
 void Tp::has_tentacles_set(int v) { _has_tentacles = v; }
 void Tp::hunger_clock_tick_freq_set(int v) { _hunger_clock_tick_freq = v; }

@@ -1,5 +1,7 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- bridge should collapse if the floor is removed next to it                                                                                    -->
+<!-- fire radius followed by ice radius should not burn the player                                                                                -->
 <!-- TODO Wand of Empowerment                                                                                                                     -->
 <!-- TODO Wand of Plenty                                                                                                                          -->
 <!-- TODO Runics on weapons, like vampirism, force, quietus, lightning                                                                            -->
@@ -650,8 +652,8 @@ Other content
 - 52 x food
 - 25 x items
 - 24 x treasure
+- 24 x staffs
 - 24 x spells
-- 23 x staffs
 - 17 x weapons
 - 17 x buffs
 - 14 x potions

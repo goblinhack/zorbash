@@ -885,7 +885,6 @@ public:
   const std::string &gfx_anim_use(void);
   const std::string &gfx_targeted_laser(void);
   const std::string &gfx_targeted_projectile(void);
-  const std::string &gfx_targeted_radial(void);
   const std::string &gold_value_dice_str(void);
   const std::string &health_initial_dice_str(void);
   const std::string &health_regenerate_amount_dice_str(void);

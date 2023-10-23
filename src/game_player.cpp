@@ -243,7 +243,7 @@ void Game::place_player(void)
         auto w = level->thing_new("sword_plutonium", point(x, y));
         t->carry(w, carry_options);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_domination", point(x, y));
         t->enchant_without_stone(w);
         t->enchant_without_stone(w);
@@ -251,63 +251,61 @@ void Game::place_player(void)
         t->enchant_without_stone(w);
         level->thing_new("dogman", point(x + 4, y - 1));
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_beckoning", point(x, y));
         t->carry(w, carry_options);
-        t->enchant_without_stone(w);
         level->thing_new("dogman", point(x + 4, y - 1));
         level->thing_new("barrel", point(x + 4, y));
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_slowness", point(x, y));
         t->carry(w, carry_options);
         t->enchant_without_stone(w);
         level->thing_new("dogman", point(x + 4, y - 1));
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_repulsion", point(x, y));
         t->carry(w, carry_options);
-        t->enchant_without_stone(w);
         level->thing_new("barrel", point(x + 4, y));
         level->thing_new("dogman", point(x + 4, y - 1));
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_healing", point(x, y));
         t->carry(w, carry_options);
         level->thing_new("dogman", point(x + 1, y));
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_haste", point(x, y));
         t->carry(w, carry_options);
         level->thing_new("dogman", point(x + 1, y));
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_holding", point(x, y));
         t->carry(w, carry_options);
         level->thing_new("dogman", point(x + 2, y));
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_sanctuary", point(x, y));
         t->carry(w, carry_options);
         level->thing_new("dogman", point(x + 2, y));
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_protection", point(x, y));
         t->carry(w, carry_options);
         level->thing_new("dogman", point(x + 2, y));
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_poison", point(x, y));
         t->carry(w, carry_options);
         level->thing_new("dogman", point(x + 2, y));
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_discord", point(x, y));
         t->carry(w, carry_options);
         // level->thing_new("spectral_mob", point(x + 2, y + 1));
         level->thing_new("zob_mob", point(x + 2, y - 1));
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_entrancement", point(x, y));
         t->carry(w, carry_options);
         level->thing_new("dogman", point(x - 6, y - 2));
@@ -524,8 +522,6 @@ void Game::place_player(void)
       }
       if (0) {
         auto w = level->thing_new("staff_fire", point(x, y));
-        w->enchant_randomly();
-        w->enchant_randomly();
         t->carry(w, carry_options);
       }
       if (0) {
@@ -554,6 +550,10 @@ void Game::place_player(void)
       }
       if (0) {
         auto w = level->thing_new("staff_descent", point(x, y));
+        t->carry(w, carry_options);
+      }
+      if (0) {
+        auto w = level->thing_new("staff_plenty", point(x, y));
         t->carry(w, carry_options);
       }
       if (0) {

@@ -917,7 +917,6 @@ private:
   std::string _gfx_anim_use;
   std::string _gfx_targeted_laser;
   std::string _gfx_targeted_projectile;
-  std::string _gfx_targeted_radial;
   std::string _gold_value_dice_str;
   std::string _health_initial_dice_str;
   std::string _health_regenerate_amount_dice_str;
@@ -1288,7 +1287,6 @@ public:
   const std::string &gfx_anim_use(void) const;
   const std::string &gfx_targeted_laser(void) const;
   const std::string &gfx_targeted_projectile(void) const;
-  const std::string &gfx_targeted_radial(void) const;
   const std::string &gold_value_dice_str(void) const;
   const std::string &health_initial_dice_str(void) const;
   const std::string &health_regenerate_amount_dice_str(void) const;
@@ -2404,7 +2402,6 @@ public:
   void gfx_pixelart_wobbles_when_hit_set(int v);
   void gfx_targeted_laser_set(const std::string &v);
   void gfx_targeted_projectile_set(const std::string &v);
-  void gfx_targeted_radial_set(const std::string &v);
   void gfx_water_set(int v);
   void has_tentacles_set(int v);
   void hunger_clock_tick_freq_set(int v);

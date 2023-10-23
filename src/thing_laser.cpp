@@ -39,7 +39,6 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
           //
           use_options.radial_effect = true;
           victim                    = this;
-          laser_shoot_at(item, item->gfx_targeted_radial(), victim, &use_options);
         } else {
           laser_shoot_at(item, item->gfx_targeted_laser(), victim, &use_options);
         }

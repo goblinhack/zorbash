@@ -1408,7 +1408,6 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(gfx_pixelart_wobbles_when_hit),
     MY_ADD_PYTHON_TP_FUNCTION(gfx_targeted_laser),
     MY_ADD_PYTHON_TP_FUNCTION(gfx_targeted_projectile),
-    MY_ADD_PYTHON_TP_FUNCTION(gfx_targeted_radial),
     MY_ADD_PYTHON_TP_FUNCTION(gfx_water),
     MY_ADD_PYTHON_TP_FUNCTION(gold_value_dice),
     MY_ADD_PYTHON_TP_FUNCTION(has_tentacles),

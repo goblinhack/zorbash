@@ -1031,9 +1031,3 @@ const std::string &Thing::gfx_targeted_laser(void)
   TRACE_NO_INDENT();
   return (tp()->gfx_targeted_laser());
 }
-
-const std::string &Thing::gfx_targeted_radial(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->gfx_targeted_radial());
-}
