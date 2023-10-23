@@ -35,7 +35,7 @@ def on_idle(me, x, y):
         my.thing_charge_count_incr(me, 1)
         owner = my.thing_top_owner_id_get(me)
         if owner and my.thing_is_player(owner):
-            my.thing_msg(owner, f"%%fg=blue$The {my.thing_name_get(me)} pulses.%%fg=reset$")
+            my.thing_msg(owner, f"%%fg=green$The {my.thing_name_get(me)} pulses.%%fg=reset$")
 
 
 def explode(me, x, y):

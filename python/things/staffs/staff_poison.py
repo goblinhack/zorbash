@@ -16,10 +16,19 @@ def on_targeted(me, x, y):
             if distance > radius + 0.5:
                 continue
 
+            got_one = False
             for it in my.level_get_all(me, x1, y1):
                 if my.thing_possible_to_attack(me, it):
                     my.spawn_gas_poison_around_thing(it, 1)
                     my.thing_hit_dmg_poison(owner, me, it, roll)
+                    got_one = True
+                    break
+
+            if not got_one:
+                for it in my.level_get_all(me, x1, y1):
+                    my.spawn_gas_poison_around_thing(it, 1)
+                    my.thing_hit_dmg_poison(owner, me, it, roll)
+                    break
 
     my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
 
@@ -171,22 +180,22 @@ def tp_init(name, text_long_name, text_short_name):
     # end sort marker
 
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="green",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="limegreen",
             tile=name + ".1", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="green",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="limegreen",
             tile=name + ".2", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="green",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="limegreen",
             tile=name + ".3", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="green",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="limegreen",
             tile=name + ".4", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="green",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="limegreen",
             tile=name + ".5", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="green",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="limegreen",
             tile=name + ".6", delay_ms=100)
 
     my.tp_update(self)

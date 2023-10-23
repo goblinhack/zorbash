@@ -38,7 +38,7 @@ def on_idle(me, x, y):
         my.thing_charge_count_incr(me, 1)
         owner = my.thing_top_owner_id_get(me)
         if owner and my.thing_is_player(owner):
-            my.thing_msg(owner, f"%%fg=blue$The {my.thing_name_get(me)} pulses.%%fg=reset$")
+            my.thing_msg(owner, f"%%fg=green$The {my.thing_name_get(me)} pulses.%%fg=reset$")
 
 
 def explode(me, x, y):
@@ -164,22 +164,22 @@ def tp_init(name, text_long_name, text_short_name):
     # end sort marker
 
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="blue",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="darkblue",
             tile=name + ".1", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="blue",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="darkblue",
             tile=name + ".2", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="blue",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="darkblue",
             tile=name + ".3", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="blue",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="darkblue",
             tile=name + ".4", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="blue",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="darkblue",
             tile=name + ".5", delay_ms=100)
     my.tile(self,
-            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="blue",
+            ascii_fg_char="/", ascii_bg_col_name="", ascii_fg_col_name="darkblue",
             tile=name + ".6", delay_ms=100)
 
     my.tp_update(self)
