@@ -1,7 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!-- bridge should collapse if the floor is removed next to it                                                                                    -->
-<!-- fire radius followed by ice radius should not burn the player                                                                                -->
 <!-- TODO Wand of Empowerment                                                                                                                     -->
 <!-- TODO Runics on weapons, like vampirism, force, quietus, lightning                                                                            -->
 <!-- ------                                                                                                                                       -->

@@ -762,12 +762,12 @@ void Game::place_player(void)
         level->thing_new("zorb_eldster", point(x + 3, y + 4));
         // auto w = level->thing_new("staff_lightning", point(x, y));
         // auto w = level->thing_new("staff_descent", point(x, y));
-        auto w1 = level->thing_new("staff_cold", point(x, y));
-        t->carry(w1, carry_options);
-        auto w2 = level->thing_new("staff_fire", point(x, y));
-        t->carry(w2, carry_options);
         // t->enchant_without_stone(w);
       }
+      auto w1 = level->thing_new("staff_cold", point(x, y));
+      t->carry(w1, carry_options);
+      auto w2 = level->thing_new("staff_fire", point(x, y));
+      t->carry(w2, carry_options);
       if (0) {
         auto w = level->thing_new("rock", point(x, y));
         t->carry(w, carry_options);
