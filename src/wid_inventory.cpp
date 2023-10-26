@@ -125,7 +125,7 @@ uint8_t wid_inventory_close(Widp w, int x, int y, uint32_t button)
 
 void wid_inventory_mouse_over_tab_bag1(Widp w, int x, int y, int wheelx, int wheely)
 {
-  DBG2("Inventory: bag1");
+  DBG2("Inventory: mouse over tab bag1");
   TRACE_AND_INDENT();
 
   //
@@ -139,14 +139,14 @@ void wid_inventory_mouse_over_tab_bag1(Widp w, int x, int y, int wheelx, int whe
     }
   }
 
-  wid_inventory_fini();
+  wid_inventory_fini(true /* remake */);
   wid_inventory_tab = WID_INVENTORY_TAB_BAG1;
   wid_inventory_init();
 }
 
 void wid_inventory_mouse_over_tab_bag2(Widp w, int x, int y, int wheelx, int wheely)
 {
-  DBG2("Inventory: bag2");
+  DBG2("Inventory: mouse over tab bag2");
   TRACE_AND_INDENT();
 
   //
@@ -160,7 +160,7 @@ void wid_inventory_mouse_over_tab_bag2(Widp w, int x, int y, int wheelx, int whe
     }
   }
 
-  wid_inventory_fini();
+  wid_inventory_fini(true /* remake */);
   wid_inventory_tab = WID_INVENTORY_TAB_BAG2;
   wid_inventory_init();
 }

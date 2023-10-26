@@ -90,8 +90,8 @@ bool HiScores::is_new_highest_hiscore(Thingp player)
 const char *HiScores::place_str(Thingp player)
 {
   const char *which[ HiScore::max_displayed ] = {
-      "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "nineth", "tenth",
-      "11th",  "12th",   "13th",  "14th",   "15th",  "16th",  "17th",    "18th",   "19th",   "20th",
+      "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth",
+      "11th",  "12th",   "13th",  "14th",   "15th",  "16th",  "17th",    "18th",   "19th",  "20th",
   };
 
   if (! player->score()) {
