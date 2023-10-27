@@ -6,7 +6,7 @@ self = None
 
 def on_owner_add(me, owner, x, y):
     if owner and my.thing_is_player(owner):
-        my.thing_msg(me, "You are blinded and unable to move!")
+        my.thing_msg(me, "You are blinded!")
 
 
 def tp_init(name, text_long_name, text_short_name):
