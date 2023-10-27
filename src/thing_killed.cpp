@@ -297,7 +297,7 @@ void Thing::killed(Thingp defeater, const char *reason)
             msg("%%fg=red$RIP: Robo player is defeated %s.%%fg=reset$", reason);
           }
         } else if (defeater && defeater->is_acid()) {
-          msg("%%fg=red$RIP: Robo player is dissolved to death %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: Robo player is dissolved %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_fire()) {
           msg("%%fg=red$RIP: Robo player is burnt to death %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_water()) {
@@ -326,7 +326,7 @@ void Thing::killed(Thingp defeater, const char *reason)
             msg("%%fg=red$RIP: You are defeated %s.%%fg=reset$", reason);
           }
         } else if (defeater && defeater->is_acid()) {
-          msg("%%fg=red$RIP: You are dissolved to death %s.%%fg=reset$", reason);
+          msg("%%fg=red$RIP: You are dissolved %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_fire()) {
           msg("%%fg=red$RIP: You are burnt to death %s.%%fg=reset$", reason);
         } else if (defeater && defeater->is_water()) {
