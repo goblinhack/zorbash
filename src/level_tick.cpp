@@ -354,12 +354,6 @@ void Level::tick_(void)
         }
       }
 
-      //
-      // We need to check this per move in case something is stuck now and is unable to
-      // tick (excessive slow spells)
-      //
-      t->is_stuck_update();
-
       int remaining = t->movement_remaining();
       if (t->tp()->move_speed()) {
         //
@@ -389,6 +383,13 @@ void Level::tick_(void)
       if (t->is_waiting) {
         continue;
       }
+
+      //
+      // We need to check this per move in case something is stuck now and is unable to
+      // tick (excessive slow spells). But only check once per tick to avoid rapid stuck
+      // and unstuck messages.
+      //
+      t->is_stuck_update();
 
       //
       // While moves remain, things are still moving
