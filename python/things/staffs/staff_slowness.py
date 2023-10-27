@@ -90,7 +90,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.collision_hit_priority(self, 6)
     my.dmg_num_of_attacks(self, 0)
     my.effect_has_blast_radius(self, True)
-    my.equip_carry_anim(self, "staff_slow_carry")
+    my.equip_carry_anim(self, "staff_slowness_carry")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
