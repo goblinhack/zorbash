@@ -258,6 +258,7 @@ std::initializer_list< std::string > tps = {
     "bridge_lr",
     "bridge_ud",
     "bridge_x",
+    "buff_permanent_double_damage",
     "buff_permanent_immune_to_cold",
     "buff_permanent_immune_to_fire",
     "buff_permanent_immune_to_negation",
