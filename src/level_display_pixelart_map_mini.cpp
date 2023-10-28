@@ -68,7 +68,7 @@ void Level::display_pixelart_map_mini(void)
         if (cursor_at != cursor_old) {
           cursor_old = to;
           cursor->move(game->map_mini_over);
-          cursor_recreate();
+          game->request_recreate_cursor_path = true;
         }
       }
     }
