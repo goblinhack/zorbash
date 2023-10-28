@@ -37,6 +37,10 @@ float Thing::floating_curr(void)
     return 0.0;
   }
 
+  if (is_dead_or_dying()) {
+    return 0.0;
+  }
+
   auto t = time_ms_cached();
 
   float time_step = (float) (t);

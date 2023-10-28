@@ -308,7 +308,8 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
       auto rune = tp_find(runic);
       if (rune) {
         wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
-        wid_popup_window->log("This weapon is inscribed with a magical " + rune->text_long_name() + " rune");
+        wid_popup_window->log("%%fg=yellow$This weapon is inscribed with");
+        wid_popup_window->log("%%fg=yellow$a magical " + rune->text_long_name() + " rune!");
       }
     }
   }
