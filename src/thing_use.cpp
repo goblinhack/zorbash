@@ -793,6 +793,14 @@ int Thing::thing_use_distance(Thingp what)
     }
   }
 
+  //
+  // Sword of duck summoning.
+  //
+  auto on_use = what->tp()->on_use_do();
+  if (! std::empty(on_use)) {
+    return distance_throw_get();
+  }
+
   return what->range_max();
 }
 

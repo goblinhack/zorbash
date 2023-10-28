@@ -8,9 +8,11 @@ def on_owner_attack_dmg_melee(me, owner, victim, x, y, damage):
     # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
     # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
     # my.con("victim  {} {:X}".format(my.thing_name_get(victim), victim))
-    # my.con("damage  {}".format(damage))
+    my.con("damage  {}".format(damage))
     my.thing_sound_play_channel(owner, my.CHANNEL_WEAPON, f"sword_impact{my.py_non_pcg_random_range_inclusive(1, 4)}")
-    return (damage * 2) + my.thing_enchant_count_get(me)
+    damage = (damage * 2) + my.thing_enchant_count_get(me)
+    my.con("damage  {}".format(damage))
+    return damage
 
 
 def tp_init(name, text_long_name, text_short_name):
