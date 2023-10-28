@@ -2224,9 +2224,9 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (distance(real_hitter->curr_at, curr_at) > second_message_distance) {
         popup(string_sprintf("%%fg=orange$-%d", damage));
       }
-    } else if (hitter->is_monst() || real_hitter->is_monst()) {
+    } else if (hitter->is_laser()) {
       TRACE_NO_INDENT();
-      real_hitter->popup(string_sprintf("%%fg=orange$It %s you -%d", real_hitter->text_hits().c_str(), damage));
+      real_hitter->popup(string_sprintf("%%fg=orange$Zaps you -%d", damage));
       if (distance(real_hitter->curr_at, curr_at) > second_message_distance) {
         popup(string_sprintf("%%fg=orange$-%d", damage));
       }
@@ -2235,6 +2235,12 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       real_hitter->popup(string_sprintf("%%fg=red$Burns you for -%d", damage));
       if (distance(real_hitter->curr_at, curr_at) > second_message_distance) {
         popup(string_sprintf("%%fg=red$-%d", damage));
+      }
+    } else if (hitter->is_monst() || real_hitter->is_monst()) {
+      TRACE_NO_INDENT();
+      real_hitter->popup(string_sprintf("%%fg=orange$It %s you -%d", real_hitter->text_hits().c_str(), damage));
+      if (distance(real_hitter->curr_at, curr_at) > second_message_distance) {
+        popup(string_sprintf("%%fg=orange$-%d", damage));
       }
     } else if (attack_options->attack[ THING_ATTACK_FIRE ]) {
       TRACE_NO_INDENT();
