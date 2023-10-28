@@ -2,6 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_color_defs.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_thing.hpp"
@@ -409,6 +410,30 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
           wid_set_on_mouse_up(w, wid_inventory_item_option_use);
           wid_set_pos(w, tl, br);
           wid_set_text(w, "Use");
+          y_at += 3;
+        }
+
+      } else if (item->is_weapon()) {
+        auto on_use = item->tp()->on_use_do();
+        if (! std::empty(on_use)) {
+          //
+          // For example sword of duck summoning
+          //
+          TRACE_AND_INDENT();
+          auto p = wid_inventory_window;
+          auto w = wid_new_square_button(p, "use");
+
+          point tl = make_point(x_off, y_at);
+          point br = make_point(x_off + width, y_at + 2);
+          wid_set_style(w, UI_WID_STYLE_NORMAL);
+          wid_set_pos(w, tl, br);
+          if (player->is_equipped(item)) {
+            wid_set_on_mouse_up(w, wid_inventory_item_option_use);
+            wid_set_text(w, "Use ability");
+          } else {
+            wid_set_color(w, WID_COLOR_TEXT_FG, GRAY50);
+            wid_set_text(w, "Use (when equipped)");
+          }
           y_at += 3;
         }
 

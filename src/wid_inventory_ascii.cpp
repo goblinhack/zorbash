@@ -403,6 +403,33 @@ bool wid_inventory_create_ascii(Thingp selected, Thingp over)
         wid_set_text(w, "Use (drink)");
         y_at += 2;
 
+      } else if (item->is_weapon()) {
+        auto on_use = item->tp()->on_use_do();
+        if (! std::empty(on_use)) {
+          //
+          // For example sword of duck summoning
+          //
+          TRACE_AND_INDENT();
+          auto p = wid_inventory_window;
+          auto w = wid_new_square_button(p, "Use (drink)");
+
+          point tl = make_point(x_off, y_at);
+          point br = make_point(x_off + width, y_at);
+          wid_set_mode(w, WID_MODE_OVER);
+          wid_set_style(w, box_highlight_style);
+          wid_set_mode(w, WID_MODE_NORMAL);
+          wid_set_style(w, box_style);
+          wid_set_pos(w, tl, br);
+          if (player->is_equipped(item)) {
+            wid_set_on_mouse_up(w, wid_inventory_item_option_use);
+            wid_set_text(w, "Use ability");
+          } else {
+            wid_set_color(w, WID_COLOR_TEXT_FG, GRAY50);
+            wid_set_text(w, "Use (when equipped)");
+          }
+          y_at += 2;
+        }
+
       } else if (item->is_usable_only_after_equipping()) {
         if (player->is_equipped(item)) {
           //
