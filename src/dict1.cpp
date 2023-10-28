@@ -198,4 +198,4 @@ static const char *dict1_names[] = {"alchemy",
                                     "zar",
                                     "dungeon"};
 
-const char *dict1_name(void) { return dict1_names[ pcg_random_range(0, ARRAY_SIZE(dict1_names)) ]; }
+const char *dict1_name(void) { return dict1_names[ non_pcg_random_range(0, ARRAY_SIZE(dict1_names)) ]; }

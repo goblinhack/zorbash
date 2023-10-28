@@ -1361,6 +1361,7 @@ std::istream &operator>>(std::istream &in, Bits< class Game & > my)
 
   in >> bits(my.t.map_mini_over);
   in >> bits(my.t.seed);
+  in >> bits(my.t.seed_manually_set);
   in >> bits(my.t.seed_name);
   in >> bits(my.t.tick_requested);
   in >> bits(my.t.current_level);

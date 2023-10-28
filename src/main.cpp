@@ -4,6 +4,7 @@
 
 #define __MAIN__
 
+#include <ctime>     // do not remove
 #include <libgen.h>  // dirname
 #include <random>    // std::default_random_engine
 #include <signal.h>  // dirname
@@ -11,7 +12,6 @@
 #include <strings.h> // do not remove
 #include <time.h>    // do not remove
 #include <unistd.h>  // do not remove
-std::default_random_engine rng;
 
 #include "my_audio.hpp"
 #include "my_backtrace.hpp"
@@ -38,6 +38,7 @@ std::default_random_engine rng;
 static char **ARGV;
 
 static std::string original_program_name;
+static bool        seed_manually_set {};
 
 void quit(void)
 {
@@ -636,7 +637,8 @@ static void parse_args(int argc, char *argv[])
     }
 
     if (! strcasecmp(argv[ i ], "--seed") || ! strcasecmp(argv[ i ], "-seed")) {
-      g_opt_seed_name = argv[ i + 1 ];
+      g_opt_seed_name   = argv[ i + 1 ];
+      seed_manually_set = true;
       i++;
       continue;
     }
@@ -842,6 +844,13 @@ int main(int argc, char *argv[])
     game              = new Game(std::string(appdata));
     auto config_error = game->load_config();
 
+    //
+    // If the seed is set on the command line, make it stick
+    //
+    if (seed_manually_set) {
+      game->seed_manually_set = true;
+    }
+
     std::string version = "" MYVER "";
 
     if (game->config.version != version) {
@@ -881,10 +890,8 @@ int main(int argc, char *argv[])
   //
   // Check for overrides.
   //
-  if (game) {
-    if (g_opt_ascii_override) {
-      parse_args(argc, argv);
-    }
+  if (g_opt_ascii_override) {
+    parse_args(argc, argv);
   }
 
   if (! g_opt_tests && ! g_opt_dump_monsters && ! g_opt_dump_weapons) {
@@ -923,11 +930,7 @@ int main(int argc, char *argv[])
   // Random number
   //
   LOG("INI: Init random seed");
-  double                             mean = 1.0;
-  double                             std  = 0.5;
-  std::normal_distribution< double > distribution;
-  distribution.param(std::normal_distribution< double >(mean, std).param());
-  rng.seed(std::random_device {}());
+  non_pcg_srand((unsigned int) std::time(nullptr));
 
   color_init();
 

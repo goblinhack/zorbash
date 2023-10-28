@@ -303,6 +303,11 @@ public:
   std::string seed_name {};
 
   //
+  // Seed has been manually set, so stick with it
+  //
+  bool seed_manually_set {};
+
+  //
   // Something has requested a game tick.
   //
   std::string tick_requested {};

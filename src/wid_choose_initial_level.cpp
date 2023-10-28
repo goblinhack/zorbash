@@ -776,7 +776,9 @@ static uint8_t wid_choose_initial_dungeons_random(Widp w, int x, int y, uint32_t
 
   wid_choose_initial_dungeons_destroy(wid_get_top_parent(w));
   game->fini();
-  g_opt_seed_name = "";
+  g_opt_seed_name         = "";
+  game->seed_manually_set = false;
+  game->save_config();
   game->init();
   game->wid_choose_initial_dungeons();
 

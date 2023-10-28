@@ -1045,6 +1045,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const class Game & > const my)
 
   out << bits(my.t.map_mini_over);
   out << bits(my.t.seed);
+  out << bits(my.t.seed_manually_set);
   out << bits(my.t.seed_name);
   out << bits(my.t.tick_requested);
   out << bits(my.t.current_level);
