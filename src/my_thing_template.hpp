@@ -335,6 +335,7 @@ private:
   int _is_able_to_use_weapons {};
   int _is_able_to_walk_through_walls {};
   int _is_acid {};
+  int _is_acid_blob {};
   int _is_aerodynamic {};
   int _is_air_breather {};
   int _is_alive_on_end_of_anim {};
@@ -776,7 +777,6 @@ private:
   int _is_unused_flag52 {};
   int _is_unused_flag53 {};
   int _is_unused_flag54 {};
-  int _is_unused_flag55 {};
   int _is_unused_flag6 {};
   int _is_unused_flag7 {};
   int _is_unused_flag8 {};
@@ -1707,6 +1707,7 @@ public:
   int is_able_to_use_staffs(void) const;
   int is_able_to_use_weapons(void) const;
   int is_able_to_walk_through_walls(void) const;
+  int is_acid_blob(void) const;
   int is_acid(void) const;
   int is_aerodynamic(void) const;
   int is_air_breather(void) const;
@@ -2147,7 +2148,6 @@ public:
   int is_unused_flag52(void) const;
   int is_unused_flag53(void) const;
   int is_unused_flag54(void) const;
-  int is_unused_flag55(void) const;
   int is_unused_flag5(void) const;
   int is_unused_flag6(void) const;
   int is_unused_flag7(void) const;
@@ -2483,6 +2483,7 @@ public:
   void is_able_to_use_staffs_set(int v);
   void is_able_to_use_weapons_set(int v);
   void is_able_to_walk_through_walls_set(int v);
+  void is_acid_blob_set(int v);
   void is_acid_set(int v);
   void is_aerodynamic_set(int v);
   void is_air_breather_set(int v);
@@ -2924,7 +2925,6 @@ public:
   void is_unused_flag52_set(int v);
   void is_unused_flag53_set(int v);
   void is_unused_flag54_set(int v);
-  void is_unused_flag55_set(int v);
   void is_unused_flag5_set(int v);
   void is_unused_flag6_set(int v);
   void is_unused_flag7_set(int v);

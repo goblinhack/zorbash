@@ -482,10 +482,10 @@ int Thing::is_unused_flag54(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag54());
 }
-int Thing::is_unused_flag55(void)
+int Thing::is_acid_blob(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag55());
+  return (tp()->is_acid_blob());
 }
 int Thing::is_tentacle_horror(void)
 {

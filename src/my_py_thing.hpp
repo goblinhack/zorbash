@@ -240,6 +240,7 @@ PyObject *thing_is_able_to_use_shield(PyObject *obj, PyObject *args, PyObject *k
 PyObject *thing_is_able_to_use_staffs(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_use_weapons(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_able_to_walk_through_walls(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_acid_blob(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_acid(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_aerodynamic(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_air_breather(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -693,7 +694,6 @@ PyObject *thing_is_unused_flag51(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag52(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag53(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag54(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag55(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag5(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);

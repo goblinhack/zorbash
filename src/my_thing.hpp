@@ -1501,6 +1501,7 @@ public:
   int is_able_to_use_staffs(void);
   int is_able_to_use_weapons(void);
   int is_able_to_walk_through_walls(void);
+  int is_acid_blob(void);
   int is_acid(void);
   int is_aerodynamic(void);
   int is_air_breather(void);
@@ -1969,7 +1970,6 @@ public:
   int is_unused_flag52(void);
   int is_unused_flag53(void);
   int is_unused_flag54(void);
-  int is_unused_flag55(void);
   int is_unused_flag5(void);
   int is_unused_flag6(void);
   int is_unused_flag7(void);

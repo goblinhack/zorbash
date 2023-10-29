@@ -123,6 +123,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_heavy(self, True)
     my.is_hittable(self, True)
     my.is_immune_to_acid(self, True)
+    my.is_immune_to_necrosis(self, True)
     my.is_interesting(self, True)
     my.is_item_collector(self, True)
     my.is_loggable(self, True)

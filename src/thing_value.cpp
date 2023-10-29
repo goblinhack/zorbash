@@ -51,7 +51,7 @@ int Thing::value(Thingp it)
   value += it->gold_value();
   //
   // Enchant is included in damage, but enchanting also has other benefits like
-  // less corrosive. So give a boost in relation to the enchangt level.
+  // less corrosive. So give a boost in relation to the enchant level.
   //
   value += it->enchant_count_get();
 

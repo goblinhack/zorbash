@@ -60,8 +60,17 @@ void Thing::weapon_check_for_dmg(Thingp weapon, Thingp victim)
   // Enchantment is already factored in here
   //
   auto damaged_chance = weapon->chance_d10000_damaged();
+
+  //
+  // Less chance of damage of hitting something soft.
+  //
   if (victim->is_soft()) {
-    damaged_chance /= 4;
+    //
+    // Unless it is a pile of acid!
+    //
+    if (! victim->is_acid()) {
+      damaged_chance /= 4;
+    }
   }
 
   //
@@ -72,6 +81,13 @@ void Thing::weapon_check_for_dmg(Thingp weapon, Thingp victim)
       if (! weapon->is_immune_to_acid()) {
         damaged_chance *= 2;
         if (weapon->dmg_rcv_doubled_from_acid()) {
+          damaged_chance *= 2;
+        }
+
+        //
+        // Wooden items corrode faster
+        //
+        if (weapon->is_wooden()) {
           damaged_chance *= 2;
         }
       }

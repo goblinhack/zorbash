@@ -80,6 +80,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_engulfer(self, True)
     my.is_gelatinous(self, True)
     my.is_hittable(self, True)
+    my.is_immune_to_necrosis(self, True)
     my.is_interesting(self, True)
     my.is_loggable(self, True)
     my.is_monst_class_B(self, True)
