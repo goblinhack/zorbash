@@ -243,8 +243,12 @@ void Game::place_player(void)
         auto w = level->thing_new("horseshoe", point(x, y));
         t->carry(w, carry_options);
       }
+      if (1) {
+        auto w = level->thing_new("armor_obsidian", point(x, y));
+        t->carry(w, carry_options);
+      }
       if (0) {
-        auto w = level->thing_new("armor_lather", point(x, y));
+        auto w = level->thing_new("armor_golden", point(x, y));
         t->carry(w, carry_options);
       }
       if (0) {

@@ -1,7 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- TODO Wand of Empowerment                                                                                                                     -->
-<!-- TODO Runics on weapons, like vampirism, force, quietus, lightning                                                                            -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Performance                                                                                                                                  -->
