@@ -4,7 +4,21 @@ import tp
 
 def on_born(me, x, y):
     my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_e")
+
+    if my.level_is_floor_at(me, x, y) or\
+       my.level_is_dirt_at(me, x, y) or\
+       my.level_is_corridor_at(me, x, y):
+        if my.level_is_bridge_at(me, x + 1, y):
+            my.place_at(me, "explosion_destroy_floor", x + 1, y)
+        if my.level_is_bridge_at(me, x - 1, y):
+            my.place_at(me, "explosion_destroy_floor", x - 1, y)
+        if my.level_is_bridge_at(me, x, y + 1):
+            my.place_at(me, "explosion_destroy_floor", x, y + 1)
+        if my.level_is_bridge_at(me, x, y - 1):
+            my.place_at(me, "explosion_destroy_floor", x, y - 1)
+
     my.if_matches_then_dead(me, "is_floor", x, y)
+    my.if_matches_then_dead(me, "is_bridge", x, y)
     my.if_matches_then_dead(me, "is_corridor", x, y)
     my.if_matches_then_dead(me, "is_dirt", x, y)
     my.place_at(me, "chasm1", x, y)
