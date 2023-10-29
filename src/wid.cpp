@@ -6703,8 +6703,12 @@ static void wid_handle_requests(void)
       if (game->request_recreate_cursor_path) {
         game->request_recreate_cursor_path = false;
         if (game->level && game->level->player) {
+          //
+          // cursor_recreate seems to cause a flicker here where the cursor briefly
+          // appears back over the player.
+          //
           pcg_random_allowed++;
-          game->level->cursor_recreate(game->level->player->curr_at);
+          game->level->cursor_path_create(game->level->player);
           pcg_random_allowed--;
         }
       }
