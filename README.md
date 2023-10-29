@@ -657,6 +657,7 @@ Other content
 - 12 x debuffs
 - 11 x skills
 - 8 x traps
+- 8 x armor
 - 6 x shield
 - 6 x boots
 - 5 x rings
@@ -665,7 +666,6 @@ Other content
 - 5 x amulets
 - 4 x gauntlets
 - 4 x cloaks
-- 4 x armor
 - 3 x doors
 - 1 x player
 <!-- end type marker -->

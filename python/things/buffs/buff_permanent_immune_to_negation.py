@@ -30,7 +30,7 @@ def tp_init(name, text_long_name):
     my.is_buff(self, True)
     my.is_immune_to_negation(self, True)
     my.is_loggable(self, True)
-    my.is_runic(self, True)
+    my.is_runic_defensive(self, True)
     my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_rcv_dmg_negation_do(self, "me.on_owner_rcv_dmg_negation()")
     my.on_owner_unset_do(self, "me.on_owner_unset()")

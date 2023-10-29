@@ -104,7 +104,7 @@ def tp_init(name, text_long_name):
     my.is_immune_to_necrosis(self, True)
     my.is_immune_to_stamina_drain(self, True)
     my.is_loggable(self, True)
-    my.is_runic(self, True)
+    my.is_runic_defensive(self, True)
     my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_rcv_dmg_acid_do(self, "me.on_owner_rcv_dmg_acid()")
     my.on_owner_rcv_dmg_bite_do(self, "me.on_owner_rcv_dmg_bite()")

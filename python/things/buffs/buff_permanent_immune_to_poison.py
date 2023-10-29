@@ -45,7 +45,7 @@ def tp_init(name, text_long_name):
     my.is_immune_to_poison(self, True)
     my.is_interesting(self, True)
     my.is_loggable(self, True)
-    my.is_runic(self, True)
+    my.is_runic_defensive(self, True)
     my.is_tickable(self, True)
     my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_rcv_dmg_poison_do(self, "me.on_owner_rcv_dmg_poison()")

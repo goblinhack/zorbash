@@ -193,9 +193,16 @@ void Thing::init(Levelp level, const std::string &name_in, const point born, Thi
       //
       // Success
       //
-      auto tp = tp_random_runic();
-      if (tp) {
-        runic_name_set(tp->name());
+      if (is_weapon()) {
+        auto tp = tp_random_runic_offensive();
+        if (tp) {
+          runic_name_set(tp->name());
+        }
+      } else {
+        auto tp = tp_random_runic_defensive();
+        if (tp) {
+          runic_name_set(tp->name());
+        }
       }
     }
   }

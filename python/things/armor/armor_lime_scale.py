@@ -8,7 +8,7 @@ def on_enchant(me, x, y):
     owner = my.thing_top_owner_id_get(me)
     if owner and my.thing_is_player(owner):
         my.thing_msg_if_not_dead_or_dying(me, "The scale armor glows.")
-    my.thing_stat_def_bonus_incr(me, 2)
+    my.thing_stat_def_bonus_incr(me, 1)
 
 
 def tp_init(name, text_long_name, text_short_name):
@@ -16,6 +16,7 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.chance_d10000_damaged(self, 100)
+    my.chance_d10000_runic(self, 10)
     my.collision_hit_priority(self, 6)
     my.enchant_max(self, 10)
     my.equip_carry_anim(self, "armor_lime_scale_carry")
@@ -55,9 +56,9 @@ def tp_init(name, text_long_name, text_short_name):
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
     my.rarity(self, my.RARITY_RARE)
-    my.stat_def_bonus(self, 5)
+    my.stat_def_bonus(self, 3)
     my.text_a_or_an(self, "a")
-    my.text_description_enchant(self, "+2 DEF")
+    my.text_description_enchant(self, "+1 DEF")
     my.text_description_long2(self, "Good short term armor")
     my.text_description_long(self, "Lime scale armor. This armor is covered with a fine chalky deposit, giving a very tough exterior. However, once that layer flakes off, you're left with little protection.")
     my.text_description_short(self, "Lime scale mail armor.")

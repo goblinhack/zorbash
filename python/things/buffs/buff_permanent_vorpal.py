@@ -31,7 +31,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_ascii_shown(self, True)
     my.is_buff(self, True)
     my.is_loggable(self, True)
-    my.is_runic(self, True)
+    my.is_runic_offensive(self, True)
     my.on_owner_attack_dmg_melee_do(self, "me.on_owner_attack_dmg_melee()")
     my.text_description_long2(self, "Not all monsters are vulnerable to this kind of attack. It is a matter of scholarly debate as to whether goldfish are immune to vorpal weapons.")
     my.text_description_long3(self, "Every enchant of the weapon will add 5 percent chance")

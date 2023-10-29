@@ -45,8 +45,12 @@ std::vector< Tpp > tp_find_wildcard(const std::string &name)
     out.push_back(tp_random_food());
     return out;
   }
-  if (name == "random_runic") {
-    out.push_back(tp_random_runic());
+  if (name == "random_runic_offensive") {
+    out.push_back(tp_random_runic_offensive());
+    return out;
+  }
+  if (name == "random_runic_defensive") {
+    out.push_back(tp_random_runic_defensive());
     return out;
   }
   if (name == "random_gold") {

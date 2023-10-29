@@ -494,6 +494,7 @@ private:
   int _is_gnome {};
   int _is_goat {};
   int _is_gold {};
+  int _is_golden {};
   int _is_golem {};
   int _is_grass {};
   int _is_grass_dead {};
@@ -651,7 +652,8 @@ private:
   int _is_rock {};
   int _is_rock_ice {};
   int _is_rock_lava {};
-  int _is_runic {};
+  int _is_runic_defensive {};
+  int _is_runic_offensive {};
   int _is_rusty {};
   int _is_scorpion {};
   int _is_secret_door {};
@@ -688,6 +690,7 @@ private:
   int _is_splatter {};
   int _is_staff {};
   int _is_steam {};
+  int _is_steel {};
   int _is_sticky {};
   int _is_stone {};
   int _is_swimmer {};
@@ -717,6 +720,7 @@ private:
   int _is_troll {};
   int _is_turret {};
   int _is_undead {};
+  int _is_unobtanium {};
   int _is_unused_flag1 {};
   int _is_unused_flag10 {};
   int _is_unused_flag11 {};
@@ -773,11 +777,7 @@ private:
   int _is_unused_flag54 {};
   int _is_unused_flag55 {};
   int _is_unused_flag56 {};
-  int _is_unused_flag57 {};
-  int _is_unused_flag58 {};
-  int _is_unused_flag59 {};
   int _is_unused_flag6 {};
-  int _is_unused_flag60 {};
   int _is_unused_flag7 {};
   int _is_unused_flag8 {};
   int _is_unused_flag9 {};
@@ -1866,6 +1866,7 @@ public:
   int is_glass(void) const;
   int is_gnome(void) const;
   int is_goat(void) const;
+  int is_golden(void) const;
   int is_gold(void) const;
   int is_golem(void) const;
   int is_grass_dead(void) const;
@@ -2023,7 +2024,8 @@ public:
   int is_rock_ice(void) const;
   int is_rock_lava(void) const;
   int is_rock(void) const;
-  int is_runic(void) const;
+  int is_runic_defensive(void) const;
+  int is_runic_offensive(void) const;
   int is_rusty(void) const;
   int is_scorpion(void) const;
   int is_secret_door(void) const;
@@ -2060,6 +2062,7 @@ public:
   int is_splatter(void) const;
   int is_staff(void) const;
   int is_steam(void) const;
+  int is_steel(void) const;
   int is_sticky(void) const;
   int is_stone(void) const;
   int is_swimmer(void) const;
@@ -2089,6 +2092,7 @@ public:
   int is_troll(void) const;
   int is_turret(void) const;
   int is_undead(void) const;
+  int is_unobtanium(void) const;
   int is_unused_flag10(void) const;
   int is_unused_flag11(void) const;
   int is_unused_flag124(void) const;
@@ -2144,11 +2148,7 @@ public:
   int is_unused_flag54(void) const;
   int is_unused_flag55(void) const;
   int is_unused_flag56(void) const;
-  int is_unused_flag57(void) const;
-  int is_unused_flag58(void) const;
-  int is_unused_flag59(void) const;
   int is_unused_flag5(void) const;
-  int is_unused_flag60(void) const;
   int is_unused_flag6(void) const;
   int is_unused_flag7(void) const;
   int is_unused_flag8(void) const;
@@ -2643,6 +2643,7 @@ public:
   void is_glass_set(int v);
   void is_gnome_set(int v);
   void is_goat_set(int v);
+  void is_golden_set(int v);
   void is_gold_set(int v);
   void is_golem_set(int v);
   void is_grass_dead_set(int v);
@@ -2800,7 +2801,8 @@ public:
   void is_rock_ice_set(int v);
   void is_rock_lava_set(int v);
   void is_rock_set(int v);
-  void is_runic_set(int v);
+  void is_runic_defensive_set(int v);
+  void is_runic_offensive_set(int v);
   void is_rusty_set(int v);
   void is_scorpion_set(int v);
   void is_secret_door_set(int v);
@@ -2837,6 +2839,7 @@ public:
   void is_splatter_set(int v);
   void is_staff_set(int v);
   void is_steam_set(int v);
+  void is_steel_set(int v);
   void is_sticky_set(int v);
   void is_stone_set(int v);
   void is_swimmer_set(int v);
@@ -2866,6 +2869,7 @@ public:
   void is_troll_set(int v);
   void is_turret_set(int v);
   void is_undead_set(int v);
+  void is_unobtanium_set(int v);
   void is_unused_flag10_set(int v);
   void is_unused_flag11_set(int v);
   void is_unused_flag124_set(int v);
@@ -2921,11 +2925,7 @@ public:
   void is_unused_flag54_set(int v);
   void is_unused_flag55_set(int v);
   void is_unused_flag56_set(int v);
-  void is_unused_flag57_set(int v);
-  void is_unused_flag58_set(int v);
-  void is_unused_flag59_set(int v);
   void is_unused_flag5_set(int v);
-  void is_unused_flag60_set(int v);
   void is_unused_flag6_set(int v);
   void is_unused_flag7_set(int v);
   void is_unused_flag8_set(int v);
@@ -3269,7 +3269,8 @@ class Tp *tp_random_ethereal_mob(void);
 class Tp *tp_random_floor(void);
 class Tp *tp_random_foliage(void);
 class Tp *tp_random_food(void);
-class Tp *tp_random_runic(void);
+class Tp *tp_random_runic_offensive(void);
+class Tp *tp_random_runic_defensive(void);
 class Tp *tp_random_gold(void);
 class Tp *tp_random_green_blood(void);
 class Tp *tp_random_green_splatter(void);

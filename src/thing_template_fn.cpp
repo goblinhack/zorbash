@@ -586,6 +586,7 @@ int Tp::is_gelatinous(void) const { return _is_gelatinous; }
 int Tp::is_glass(void) const { return _is_glass; }
 int Tp::is_gnome(void) const { return _is_gnome; }
 int Tp::is_goat(void) const { return _is_goat; }
+int Tp::is_golden(void) const { return _is_golden; }
 int Tp::is_gold(void) const { return _is_gold; }
 int Tp::is_golem(void) const { return _is_golem; }
 int Tp::is_grass_dead(void) const { return _is_grass_dead; }
@@ -743,7 +744,8 @@ int Tp::is_ripple(void) const { return _is_ripple; }
 int Tp::is_rock_ice(void) const { return _is_rock_ice; }
 int Tp::is_rock_lava(void) const { return _is_rock_lava; }
 int Tp::is_rock(void) const { return _is_rock; }
-int Tp::is_runic(void) const { return _is_runic; }
+int Tp::is_runic_defensive(void) const { return _is_runic_defensive; }
+int Tp::is_runic_offensive(void) const { return _is_runic_offensive; }
 int Tp::is_rusty(void) const { return _is_rusty; }
 int Tp::is_scorpion(void) const { return _is_scorpion; }
 int Tp::is_secret_door(void) const { return _is_secret_door; }
@@ -780,6 +782,7 @@ int Tp::is_spiderweb(void) const { return _is_spiderweb; }
 int Tp::is_splatter(void) const { return _is_splatter; }
 int Tp::is_staff(void) const { return _is_staff; }
 int Tp::is_steam(void) const { return _is_steam; }
+int Tp::is_steel(void) const { return _is_steel; }
 int Tp::is_sticky(void) const { return _is_sticky; }
 int Tp::is_stone(void) const { return _is_stone; }
 int Tp::is_swimmer(void) const { return _is_swimmer; }
@@ -809,6 +812,7 @@ int Tp::is_treasure(void) const { return _is_treasure; }
 int Tp::is_troll(void) const { return _is_troll; }
 int Tp::is_turret(void) const { return _is_turret; }
 int Tp::is_undead(void) const { return _is_undead; }
+int Tp::is_unobtanium(void) const { return _is_unobtanium; }
 int Tp::is_unused_flag10(void) const { return _is_unused_flag10; }
 int Tp::is_unused_flag11(void) const { return _is_unused_flag11; }
 int Tp::is_unused_flag12(void) const { return _is_unused_flag12; }
@@ -863,11 +867,7 @@ int Tp::is_unused_flag53(void) const { return _is_unused_flag53; }
 int Tp::is_unused_flag54(void) const { return _is_unused_flag54; }
 int Tp::is_unused_flag55(void) const { return _is_unused_flag55; }
 int Tp::is_unused_flag56(void) const { return _is_unused_flag56; }
-int Tp::is_unused_flag57(void) const { return _is_unused_flag57; }
-int Tp::is_unused_flag58(void) const { return _is_unused_flag58; }
-int Tp::is_unused_flag59(void) const { return _is_unused_flag59; }
 int Tp::is_unused_flag5(void) const { return _is_unused_flag5; }
-int Tp::is_unused_flag60(void) const { return _is_unused_flag60; }
 int Tp::is_unused_flag6(void) const { return _is_unused_flag6; }
 int Tp::is_unused_flag7(void) const { return _is_unused_flag7; }
 int Tp::is_unused_flag8(void) const { return _is_unused_flag8; }
@@ -1362,6 +1362,7 @@ void Tp::is_gelatinous_set(int v) { _is_gelatinous = v; }
 void Tp::is_glass_set(int v) { _is_glass = v; }
 void Tp::is_gnome_set(int v) { _is_gnome = v; }
 void Tp::is_goat_set(int v) { _is_goat = v; }
+void Tp::is_golden_set(int v) { _is_golden = v; }
 void Tp::is_gold_set(int v) { _is_gold = v; }
 void Tp::is_golem_set(int v) { _is_golem = v; }
 void Tp::is_grass_dead_set(int v) { _is_grass_dead = v; }
@@ -1519,7 +1520,8 @@ void Tp::is_ripple_set(int v) { _is_ripple = v; }
 void Tp::is_rock_ice_set(int v) { _is_rock_ice = v; }
 void Tp::is_rock_lava_set(int v) { _is_rock_lava = v; }
 void Tp::is_rock_set(int v) { _is_rock = v; }
-void Tp::is_runic_set(int v) { _is_runic = v; }
+void Tp::is_runic_defensive_set(int v) { _is_runic_defensive = v; }
+void Tp::is_runic_offensive_set(int v) { _is_runic_offensive = v; }
 void Tp::is_rusty_set(int v) { _is_rusty = v; }
 void Tp::is_scorpion_set(int v) { _is_scorpion = v; }
 void Tp::is_secret_door_set(int v) { _is_secret_door = v; }
@@ -1556,6 +1558,7 @@ void Tp::is_spiderweb_set(int v) { _is_spiderweb = v; }
 void Tp::is_splatter_set(int v) { _is_splatter = v; }
 void Tp::is_staff_set(int v) { _is_staff = v; }
 void Tp::is_steam_set(int v) { _is_steam = v; }
+void Tp::is_steel_set(int v) { _is_steel = v; }
 void Tp::is_sticky_set(int v) { _is_sticky = v; }
 void Tp::is_stone_set(int v) { _is_stone = v; }
 void Tp::is_swimmer_set(int v) { _is_swimmer = v; }
@@ -1585,6 +1588,7 @@ void Tp::is_treasure_type_set(int v) { _is_treasure_type = v; }
 void Tp::is_troll_set(int v) { _is_troll = v; }
 void Tp::is_turret_set(int v) { _is_turret = v; }
 void Tp::is_undead_set(int v) { _is_undead = v; }
+void Tp::is_unobtanium_set(int v) { _is_unobtanium = v; }
 void Tp::is_unused_flag10_set(int v) { _is_unused_flag10 = v; }
 void Tp::is_unused_flag11_set(int v) { _is_unused_flag11 = v; }
 void Tp::is_unused_flag12_set(int v) { _is_unused_flag12 = v; }
@@ -1639,11 +1643,7 @@ void Tp::is_unused_flag53_set(int v) { _is_unused_flag53 = v; }
 void Tp::is_unused_flag54_set(int v) { _is_unused_flag54 = v; }
 void Tp::is_unused_flag55_set(int v) { _is_unused_flag55 = v; }
 void Tp::is_unused_flag56_set(int v) { _is_unused_flag56 = v; }
-void Tp::is_unused_flag57_set(int v) { _is_unused_flag57 = v; }
-void Tp::is_unused_flag58_set(int v) { _is_unused_flag58 = v; }
-void Tp::is_unused_flag59_set(int v) { _is_unused_flag59 = v; }
 void Tp::is_unused_flag5_set(int v) { _is_unused_flag5 = v; }
-void Tp::is_unused_flag60_set(int v) { _is_unused_flag60 = v; }
 void Tp::is_unused_flag6_set(int v) { _is_unused_flag6 = v; }
 void Tp::is_unused_flag7_set(int v) { _is_unused_flag7 = v; }
 void Tp::is_unused_flag8_set(int v) { _is_unused_flag8 = v; }

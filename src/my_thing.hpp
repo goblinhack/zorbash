@@ -1688,6 +1688,7 @@ public:
   int is_glass(void);
   int is_gnome(void);
   int is_goat(void);
+  int is_golden(void);
   int is_gold(void);
   int is_golem(void);
   int is_grass_dead(void);
@@ -1846,7 +1847,8 @@ public:
   int is_rock_ice(void);
   int is_rock_lava(void);
   int is_rock(void);
-  int is_runic(void);
+  int is_runic_defensive(void);
+  int is_runic_offensive(void);
   int is_rusty(void);
   int is_scorpion(void);
   int is_secret_door(void);
@@ -1883,6 +1885,7 @@ public:
   int is_splatter(void);
   int is_staff(void);
   int is_steam(void);
+  int is_steel(void);
   int is_sticky(void);
   int is_stone(void);
   int is_swimmer(void);
@@ -1912,6 +1915,7 @@ public:
   int is_troll(void);
   int is_turret(void);
   int is_undead(void);
+  int is_unobtanium(void);
   int is_unused_flag10(void);
   int is_unused_flag11(void);
   int is_unused_flag12(void);
@@ -1966,11 +1970,7 @@ public:
   int is_unused_flag54(void);
   int is_unused_flag55(void);
   int is_unused_flag56(void);
-  int is_unused_flag57(void);
-  int is_unused_flag58(void);
-  int is_unused_flag59(void);
   int is_unused_flag5(void);
-  int is_unused_flag60(void);
   int is_unused_flag6(void);
   int is_unused_flag7(void);
   int is_unused_flag8(void);

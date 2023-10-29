@@ -492,25 +492,25 @@ int Thing::is_unused_flag56(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag56());
 }
-int Thing::is_unused_flag57(void)
+int Thing::is_unobtanium(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag57());
+  return (tp()->is_unobtanium());
 }
-int Thing::is_unused_flag58(void)
+int Thing::is_steel(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag58());
+  return (tp()->is_steel());
 }
-int Thing::is_unused_flag59(void)
+int Thing::is_golden(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag59());
+  return (tp()->is_golden());
 }
-int Thing::is_unused_flag60(void)
+int Thing::is_runic_defensive(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag60());
+  return (tp()->is_runic_defensive());
 }
 int Thing::has_a_head(void)
 {
@@ -637,10 +637,10 @@ int Thing::is_able_to_have_a_runic_inscribed(void)
   TRACE_NO_INDENT();
   return (tp()->is_able_to_have_a_runic_inscribed());
 }
-int Thing::is_runic(void)
+int Thing::is_runic_offensive(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_runic());
+  return (tp()->is_runic_offensive());
 }
 int Thing::is_tentacleye(void)
 {
