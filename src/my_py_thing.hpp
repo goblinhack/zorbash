@@ -133,6 +133,7 @@ PyObject *thing_gfx_pixelart_submergible(PyObject *obj, PyObject *args, PyObject
 PyObject *thing_gold_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gold_incr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gold(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_has_a_head(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_has_tentacles(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_health_decr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_health_incr(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -461,6 +462,7 @@ PyObject *thing_is_immune_to_spell_of_slowness(PyObject *obj, PyObject *args, Py
 PyObject *thing_is_immune_to_spiderwebs(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_stamina_drain(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_teleport_attack(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_immune_to_vorpal_weapon(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_intelligent(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_interesting(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -693,8 +695,6 @@ PyObject *thing_is_unused_flag58(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag59(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag5(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag60(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag61(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag62(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag8(PyObject *obj, PyObject *args, PyObject *keywds);

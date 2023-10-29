@@ -87,8 +87,14 @@ void Game::place_player(void)
       if (0) {
         auto w = level->thing_new("warhammer", point(x, y));
         t->carry(w, carry_options);
-        auto r = tp_find("buff_permanent_double_damage");
-        w->runic_name_set(r->name());
+        if (0) {
+          auto r = tp_find("buff_permanent_double_damage");
+          w->runic_name_set(r->name());
+        }
+        if (1) {
+          auto r = tp_find("buff_permanent_vorpal");
+          w->runic_name_set(r->name());
+        }
         level->thing_new("tentacleye", point(x + 1, y));
       }
       if (0) {

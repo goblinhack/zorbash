@@ -599,7 +599,7 @@ def init_tiles_16x16_main():
         "buff_slime_protection",
         "buff_telepathy",
         "buff_double_damage",
-        "",
+        "buff_vorpal",
         "",
         "",
         "",

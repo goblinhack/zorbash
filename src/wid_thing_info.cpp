@@ -287,10 +287,13 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     if (t->is_alive_monst() || t->is_totem() || t->is_mob()) {
       wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
     }
-    wid_thing_info_add_immunity(wid_popup_window, t);
-    wid_thing_info_add_charge_count(wid_popup_window, t);
-    wid_thing_info_add_danger_level(wid_popup_window, t);
-    wid_thing_info_add_leader_info(wid_popup_window, t);
+
+    if (! t->is_dead) {
+      wid_thing_info_add_immunity(wid_popup_window, t);
+      wid_thing_info_add_charge_count(wid_popup_window, t);
+      wid_thing_info_add_danger_level(wid_popup_window, t);
+      wid_thing_info_add_leader_info(wid_popup_window, t);
+    }
   }
 
   //
@@ -856,6 +859,10 @@ void Game::wid_thing_info_add_immunity(WidPopup *w, Thingp t)
   }
   if (t->is_immune_to_spell_of_repulsion()) {
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Repulsion");
+    w->log(tmp);
+  }
+  if (t->is_immune_to_vorpal_weapon()) {
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Vorpal Weapons");
     w->log(tmp);
   }
 }

@@ -1390,6 +1390,7 @@ public:
   int gold_set(int);
   int gold_value(void);
   int gold(void);
+  int has_a_head(void);
   int has_tentacles(void);
   int health_boost(Thingp victim, int v);
   int health_decr(int);
@@ -1733,6 +1734,7 @@ public:
   int is_immune_to_spiderwebs(void);
   int is_immune_to_stamina_drain(void);
   int is_immune_to_teleport_attack(void);
+  int is_immune_to_vorpal_weapon(void);
   int is_immune_to_water(void);
   int is_intelligent(void);
   int is_interesting(void);
@@ -1969,8 +1971,6 @@ public:
   int is_unused_flag59(void);
   int is_unused_flag5(void);
   int is_unused_flag60(void);
-  int is_unused_flag61(void);
-  int is_unused_flag62(void);
   int is_unused_flag6(void);
   int is_unused_flag7(void);
   int is_unused_flag8(void);

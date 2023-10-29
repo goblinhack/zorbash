@@ -346,6 +346,7 @@ int Tp::gfx_pixelart_show_square_outlined(void) const { return _gfx_pixelart_sho
 int Tp::gfx_pixelart_submergible(void) const { return _gfx_pixelart_submergible; }
 int Tp::gfx_pixelart_wobbles_when_hit(void) const { return _gfx_pixelart_wobbles_when_hit; }
 int Tp::gfx_water(void) const { return _gfx_water; }
+int Tp::has_a_head(void) const { return _has_a_head; }
 int Tp::has_tentacles(void) const { return _has_tentacles; }
 int Tp::hunger_clock_tick_freq(void) const { return _hunger_clock_tick_freq; }
 int Tp::hunger_is_hunger_level_hungry_at_pct(void) const { return _hunger_is_hunger_level_hungry_at_pct; }
@@ -630,6 +631,7 @@ int Tp::is_immune_to_spell_of_slowness(void) const { return _is_immune_to_spell_
 int Tp::is_immune_to_spiderwebs(void) const { return _is_immune_to_spiderwebs; }
 int Tp::is_immune_to_stamina_drain(void) const { return _is_immune_to_stamina_drain; }
 int Tp::is_immune_to_teleport_attack(void) const { return _is_immune_to_teleport_attack; }
+int Tp::is_immune_to_vorpal_weapon(void) const { return _is_immune_to_vorpal_weapon; }
 int Tp::is_immune_to_water(void) const { return _is_immune_to_water; }
 int Tp::is_intelligent(void) const { return _is_intelligent; }
 int Tp::is_interesting(void) const { return _is_interesting; }
@@ -866,8 +868,6 @@ int Tp::is_unused_flag58(void) const { return _is_unused_flag58; }
 int Tp::is_unused_flag59(void) const { return _is_unused_flag59; }
 int Tp::is_unused_flag5(void) const { return _is_unused_flag5; }
 int Tp::is_unused_flag60(void) const { return _is_unused_flag60; }
-int Tp::is_unused_flag61(void) const { return _is_unused_flag61; }
-int Tp::is_unused_flag62(void) const { return _is_unused_flag62; }
 int Tp::is_unused_flag6(void) const { return _is_unused_flag6; }
 int Tp::is_unused_flag7(void) const { return _is_unused_flag7; }
 int Tp::is_unused_flag8(void) const { return _is_unused_flag8; }
@@ -1122,6 +1122,7 @@ void Tp::gfx_pixelart_wobbles_when_hit_set(int v) { _gfx_pixelart_wobbles_when_h
 void Tp::gfx_targeted_laser_set(const std::string &v) { _gfx_targeted_laser = v; }
 void Tp::gfx_targeted_projectile_set(const std::string &v) { _gfx_targeted_projectile = v; }
 void Tp::gfx_water_set(int v) { _gfx_water = v; }
+void Tp::has_a_head_set(int v) { _has_a_head = v; }
 void Tp::has_tentacles_set(int v) { _has_tentacles = v; }
 void Tp::hunger_clock_tick_freq_set(int v) { _hunger_clock_tick_freq = v; }
 void Tp::hunger_is_hunger_level_hungry_at_pct_set(int v) { _hunger_is_hunger_level_hungry_at_pct = v; }
@@ -1406,6 +1407,7 @@ void Tp::is_immune_to_spell_of_slowness_set(int v) { _is_immune_to_spell_of_slow
 void Tp::is_immune_to_spiderwebs_set(int v) { _is_immune_to_spiderwebs = v; }
 void Tp::is_immune_to_stamina_drain_set(int v) { _is_immune_to_stamina_drain = v; }
 void Tp::is_immune_to_teleport_attack_set(int v) { _is_immune_to_teleport_attack = v; }
+void Tp::is_immune_to_vorpal_weapon_set(int v) { _is_immune_to_vorpal_weapon = v; }
 void Tp::is_immune_to_water_set(int v) { _is_immune_to_water = v; }
 void Tp::is_intelligent_set(int v) { _is_intelligent = v; }
 void Tp::is_interesting_set(int v) { _is_interesting = v; }
@@ -1642,8 +1644,6 @@ void Tp::is_unused_flag58_set(int v) { _is_unused_flag58 = v; }
 void Tp::is_unused_flag59_set(int v) { _is_unused_flag59 = v; }
 void Tp::is_unused_flag5_set(int v) { _is_unused_flag5 = v; }
 void Tp::is_unused_flag60_set(int v) { _is_unused_flag60 = v; }
-void Tp::is_unused_flag61_set(int v) { _is_unused_flag61 = v; }
-void Tp::is_unused_flag62_set(int v) { _is_unused_flag62 = v; }
 void Tp::is_unused_flag6_set(int v) { _is_unused_flag6 = v; }
 void Tp::is_unused_flag7_set(int v) { _is_unused_flag7 = v; }
 void Tp::is_unused_flag8_set(int v) { _is_unused_flag8 = v; }

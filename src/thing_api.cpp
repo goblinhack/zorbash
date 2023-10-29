@@ -512,15 +512,10 @@ int Thing::is_unused_flag60(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag60());
 }
-int Thing::is_unused_flag61(void)
+int Thing::has_a_head(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag61());
-}
-int Thing::is_unused_flag62(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_unused_flag62());
+  return (tp()->has_a_head());
 }
 int Thing::is_buffable(void)
 {

@@ -252,6 +252,7 @@ private:
   int _gfx_pixelart_submergible {};
   int _gfx_pixelart_wobbles_when_hit {};
   int _gfx_water {};
+  int _has_a_head {};
   int _has_temperature {};
   int _has_tentacles {};
   int _hunger_clock_tick_freq {};
@@ -537,6 +538,7 @@ private:
   int _is_immune_to_spiderwebs {};
   int _is_immune_to_stamina_drain {};
   int _is_immune_to_teleport_attack {};
+  int _is_immune_to_vorpal_weapon {};
   int _is_immune_to_water {};
   int _is_intelligent {};
   int _is_interesting {}; // e.g. something edible or a monst or lava
@@ -776,8 +778,6 @@ private:
   int _is_unused_flag59 {};
   int _is_unused_flag6 {};
   int _is_unused_flag60 {};
-  int _is_unused_flag61 {};
-  int _is_unused_flag62 {};
   int _is_unused_flag7 {};
   int _is_unused_flag8 {};
   int _is_unused_flag9 {};
@@ -1626,6 +1626,7 @@ public:
   int gfx_pixelart_submergible(void) const;
   int gfx_pixelart_wobbles_when_hit(void) const;
   int gfx_water(void) const;
+  int has_a_head(void) const;
   int has_tentacles(void) const;
   int hunger_clock_tick_freq(void) const;
   int hunger_is_hunger_level_hungry_at_pct(void) const;
@@ -1910,6 +1911,7 @@ public:
   int is_immune_to_spiderwebs(void) const;
   int is_immune_to_stamina_drain(void) const;
   int is_immune_to_teleport_attack(void) const;
+  int is_immune_to_vorpal_weapon(void) const;
   int is_immune_to_water(void) const;
   int is_intelligent(void) const;
   int is_interesting(void) const;
@@ -2147,8 +2149,6 @@ public:
   int is_unused_flag59(void) const;
   int is_unused_flag5(void) const;
   int is_unused_flag60(void) const;
-  int is_unused_flag61(void) const;
-  int is_unused_flag62(void) const;
   int is_unused_flag6(void) const;
   int is_unused_flag7(void) const;
   int is_unused_flag8(void) const;
@@ -2403,6 +2403,7 @@ public:
   void gfx_targeted_laser_set(const std::string &v);
   void gfx_targeted_projectile_set(const std::string &v);
   void gfx_water_set(int v);
+  void has_a_head_set(int v);
   void has_tentacles_set(int v);
   void hunger_clock_tick_freq_set(int v);
   void hunger_is_hunger_level_hungry_at_pct_set(int v);
@@ -2687,6 +2688,7 @@ public:
   void is_immune_to_spiderwebs_set(int v);
   void is_immune_to_stamina_drain_set(int v);
   void is_immune_to_teleport_attack_set(int v);
+  void is_immune_to_vorpal_weapon_set(int v);
   void is_immune_to_water_set(int v);
   void is_intelligent_set(int v);
   void is_interesting_set(int v);
@@ -2924,8 +2926,6 @@ public:
   void is_unused_flag59_set(int v);
   void is_unused_flag5_set(int v);
   void is_unused_flag60_set(int v);
-  void is_unused_flag61_set(int v);
-  void is_unused_flag62_set(int v);
   void is_unused_flag6_set(int v);
   void is_unused_flag7_set(int v);
   void is_unused_flag8_set(int v);

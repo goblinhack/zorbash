@@ -58,6 +58,7 @@ bool Tp::matches(const std::string &what)
   if (gfx_ooze() && (what == "gfx_ooze")) { return true; }
   if (gfx_pixelart_show_highlighted() && (what == "gfx_pixelart_show_highlighted")) { return true; }
   if (gfx_pixelart_show_square_outlined() && (what == "gfx_pixelart_show_square_outlined")) { return true; }
+  if (has_a_head() && (what == "has_a_head")) { return true; }
   if (has_tentacles() && (what == "has_tentacles")) { return true; }
   if (hunger_is_insatiable() && (what == "hunger_is_insatiable")) { return true; }
   if (is_able_to_amplify_footsteps() && (what == "is_able_to_amplify_footsteps")) { return true; }
@@ -334,6 +335,7 @@ bool Tp::matches(const std::string &what)
   if (is_immune_to_spiderwebs() && (what == "is_immune_to_spiderwebs")) { return true; }
   if (is_immune_to_stamina_drain() && (what == "is_immune_to_stamina_drain")) { return true; }
   if (is_immune_to_teleport_attack() && (what == "is_immune_to_teleport_attack")) { return true; }
+  if (is_immune_to_vorpal_weapon() && (what == "is_immune_to_vorpal_weapon")) { return true; }
   if (is_immune_to_water() && (what == "is_immune_to_water")) { return true; }
   if (is_intelligent() && (what == "is_intelligent")) { return true; }
   if (is_interesting() && (what == "is_interesting")) { return true; }
@@ -557,8 +559,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag59() && (what == "is_unused_flag59")) { return true; }
   if (is_unused_flag5() && (what == "is_unused_flag5")) { return true; }
   if (is_unused_flag60() && (what == "is_unused_flag60")) { return true; }
-  if (is_unused_flag61() && (what == "is_unused_flag61")) { return true; }
-  if (is_unused_flag62() && (what == "is_unused_flag62")) { return true; }
   if (is_unused_flag6() && (what == "is_unused_flag6")) { return true; }
   if (is_unused_flag7() && (what == "is_unused_flag7")) { return true; }
   if (is_unused_flag8() && (what == "is_unused_flag8")) { return true; }
@@ -667,6 +667,7 @@ bool Thing::matches(const std::string &what)
   if (gfx_ooze() && (what == "gfx_ooze")) { return true; }
   if (gfx_pixelart_show_highlighted() && (what == "gfx_pixelart_show_highlighted")) { return true; }
   if (gfx_pixelart_show_square_outlined() && (what == "gfx_pixelart_show_square_outlined")) { return true; }
+  if (has_a_head() && (what == "has_a_head")) { return true; }
   if (has_tentacles() && (what == "has_tentacles")) { return true; }
   if (hunger_is_insatiable() && (what == "hunger_is_insatiable")) { return true; }
   if (is_able_to_amplify_footsteps() && (what == "is_able_to_amplify_footsteps")) { return true; }
@@ -944,6 +945,7 @@ bool Thing::matches(const std::string &what)
   if (is_immune_to_spiderwebs() && (what == "is_immune_to_spiderwebs")) { return true; }
   if (is_immune_to_stamina_drain() && (what == "is_immune_to_stamina_drain")) { return true; }
   if (is_immune_to_teleport_attack() && (what == "is_immune_to_teleport_attack")) { return true; }
+  if (is_immune_to_vorpal_weapon() && (what == "is_immune_to_vorpal_weapon")) { return true; }
   if (is_immune_to_water() && (what == "is_immune_to_water")) { return true; }
   if (is_intelligent() && (what == "is_intelligent")) { return true; }
   if (is_interesting() && (what == "is_interesting")) { return true; }
@@ -1168,8 +1170,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag59() && (what == "is_unused_flag59")) { return true; }
   if (is_unused_flag5() && (what == "is_unused_flag5")) { return true; }
   if (is_unused_flag60() && (what == "is_unused_flag60")) { return true; }
-  if (is_unused_flag61() && (what == "is_unused_flag61")) { return true; }
-  if (is_unused_flag62() && (what == "is_unused_flag62")) { return true; }
   if (is_unused_flag6() && (what == "is_unused_flag6")) { return true; }
   if (is_unused_flag7() && (what == "is_unused_flag7")) { return true; }
   if (is_unused_flag8() && (what == "is_unused_flag8")) { return true; }
@@ -1274,6 +1274,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "gfx_pixelart_show_square_outlined") { return &Thing::gfx_pixelart_show_square_outlined; }
   if (what == "grass_dry") { return &Thing::is_grass_dry; }
   if (what == "grass_dry_trampled") { return &Thing::is_grass_dry_trampled; }
+  if (what == "has_a_head") { return &Thing::has_a_head; }
   if (what == "has_tentacles") { return &Thing::has_tentacles; }
   if (what == "hunger_is_insatiable") { return &Thing::hunger_is_insatiable; }
   if (what == "internal") { return &Thing::is_internal; }
@@ -1548,6 +1549,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_immune_to_spiderwebs") { return &Thing::is_immune_to_spiderwebs; }
   if (what == "is_immune_to_stamina_drain") { return &Thing::is_immune_to_stamina_drain; }
   if (what == "is_immune_to_teleport_attack") { return &Thing::is_immune_to_teleport_attack; }
+  if (what == "is_immune_to_vorpal_weapon") { return &Thing::is_immune_to_vorpal_weapon; }
   if (what == "is_immune_to_water") { return &Thing::is_immune_to_water; }
   if (what == "is_intelligent") { return &Thing::is_intelligent; }
   if (what == "is_interesting") { return &Thing::is_interesting; }
@@ -1767,8 +1769,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag59") { return &Thing::is_unused_flag59; }
   if (what == "is_unused_flag5") { return &Thing::is_unused_flag5; }
   if (what == "is_unused_flag60") { return &Thing::is_unused_flag60; }
-  if (what == "is_unused_flag61") { return &Thing::is_unused_flag61; }
-  if (what == "is_unused_flag62") { return &Thing::is_unused_flag62; }
   if (what == "is_unused_flag6") { return &Thing::is_unused_flag6; }
   if (what == "is_unused_flag7") { return &Thing::is_unused_flag7; }
   if (what == "is_unused_flag8") { return &Thing::is_unused_flag8; }

@@ -14,8 +14,8 @@ static Widp wid_choose_seed;
 static void selected(Widp w, const std::wstring &text)
 {
   wid_destroy(&wid_choose_seed);
-  g_opt_seed_name = wstring_to_string(text);
-  game->seed_manually_set  = true;
+  g_opt_seed_name         = wstring_to_string(text);
+  game->seed_manually_set = true;
   game->save_config();
   game->wid_choose_initial_dungeons();
 }

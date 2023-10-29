@@ -107,6 +107,12 @@ int Thing::is_immune_to_electricity(void)
   return (tp()->is_immune_to_electricity());
 }
 
+int Thing::is_immune_to_vorpal_weapon(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_immune_to_vorpal_weapon());
+}
+
 int Thing::is_immune_to_paralysis(void)
 {
   TRACE_NO_INDENT();

@@ -63,6 +63,7 @@ def tp_init(name, text_long_name):
     my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_show_outlined(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
+    my.has_a_head(self, True)
     my.has_tentacles(self, True)
     my.health_initial_dice(self, "10d8")
     my.hunger_clock_tick_freq(self, 50)
@@ -169,6 +170,7 @@ def tp_init(name, text_long_name):
             ascii_fg_char="T", ascii_bg_col_name="", ascii_fg_col_name="green",
             tile=name + ".sleeping.2", is_sleeping=True, delay_ms=delay)
 
+    delay = 50
     my.tile(self,
             ascii_fg_char="T", ascii_bg_col_name="", ascii_fg_col_name="gray30",
             tile=name + ".dead.1", is_dead=True, delay_ms=delay)

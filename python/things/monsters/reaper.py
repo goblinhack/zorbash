@@ -74,6 +74,7 @@ def tp_init(name, text_long_name):
     my.is_immune_to_spell_of_sanctuary(self, True)
     my.is_immune_to_spell_of_slowness(self, True)
     my.is_immune_to_stamina_drain(self, True)
+    my.is_immune_to_vorpal_weapon(self, True)
     my.is_interesting(self, True)
     my.is_loggable(self, True)
     my.is_monst_class_E(self, True)

@@ -633,6 +633,9 @@ void tp_dump_monsters(void)
     if (tp->is_immune_to_water()) {
       imm_str += "Water<newline>";
     }
+    if (tp->is_immune_to_vorpal_weapon()) {
+      imm_str += "Vorpal-Weapons<newline>";
+    }
 
     printf("DUMP: | %s | %s%s%s%s%s%s%s%s%s%s | %u | %s | %u | %s | %s |\n", capitalise(tp->text_long_name()).c_str(),
            tp->is_monst_class_A() ? "A" : "", tp->is_monst_class_B() ? "B" : "", tp->is_monst_class_C() ? "C" : "",
@@ -835,6 +838,9 @@ void tp_dump_weapons(void)
     }
     if (tp->is_immune_to_water()) {
       imm_str += "Immunity-Water<newline>";
+    }
+    if (tp->is_immune_to_vorpal_weapon()) {
+      imm_str += "Immunity-Vorpal-Weapons<newline>";
     }
 
     std::string special = dmg_str + " " + imm_str;
