@@ -699,6 +699,7 @@ private:
   int _is_target_radial {};
   int _is_target_select {};
   int _is_tentacle {};
+  int _is_tentacle_horror {};
   int _is_tentacleye {};
   int _is_the_grid {};
   int _is_thief {};
@@ -776,7 +777,6 @@ private:
   int _is_unused_flag53 {};
   int _is_unused_flag54 {};
   int _is_unused_flag55 {};
-  int _is_unused_flag56 {};
   int _is_unused_flag6 {};
   int _is_unused_flag7 {};
   int _is_unused_flag8 {};
@@ -2070,6 +2070,7 @@ public:
   int is_tameable(void) const;
   int is_target_radial(void) const;
   int is_target_select(void) const;
+  int is_tentacle_horror(void) const;
   int is_tentacle(void) const;
   int is_tentacleye(void) const;
   int is_the_grid(void) const;
@@ -2147,7 +2148,6 @@ public:
   int is_unused_flag53(void) const;
   int is_unused_flag54(void) const;
   int is_unused_flag55(void) const;
-  int is_unused_flag56(void) const;
   int is_unused_flag5(void) const;
   int is_unused_flag6(void) const;
   int is_unused_flag7(void) const;
@@ -2847,6 +2847,7 @@ public:
   void is_tameable_set(int v);
   void is_target_radial_set(int v);
   void is_target_select_set(int v);
+  void is_tentacle_horror_set(int v);
   void is_tentacle_set(int v);
   void is_tentacleye_set(int v);
   void is_the_grid_set(int v);
@@ -2924,7 +2925,6 @@ public:
   void is_unused_flag53_set(int v);
   void is_unused_flag54_set(int v);
   void is_unused_flag55_set(int v);
-  void is_unused_flag56_set(int v);
   void is_unused_flag5_set(int v);
   void is_unused_flag6_set(int v);
   void is_unused_flag7_set(int v);

@@ -1893,6 +1893,7 @@ public:
   int is_tameable(void);
   int is_target_radial(void);
   int is_target_select(void);
+  int is_tentacle_horror(void);
   int is_tentacle(void);
   int is_tentacleye(void);
   int is_the_grid(void);
@@ -1969,7 +1970,6 @@ public:
   int is_unused_flag53(void);
   int is_unused_flag54(void);
   int is_unused_flag55(void);
-  int is_unused_flag56(void);
   int is_unused_flag5(void);
   int is_unused_flag6(void);
   int is_unused_flag7(void);

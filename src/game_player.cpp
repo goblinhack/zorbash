@@ -143,6 +143,9 @@ void Game::place_player(void)
         level->thing_new("water", point(x + 4, y + 2));
       }
       if (0) {
+        level->thing_new("tentacle_horror", point(x + 2, y));
+      }
+      if (0) {
         auto w = level->thing_new("potion_ooze", point(x, y));
         t->carry(w, carry_options);
         level->thing_new("dogman", point(x + 2, y));

@@ -487,10 +487,10 @@ int Thing::is_unused_flag55(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag55());
 }
-int Thing::is_unused_flag56(void)
+int Thing::is_tentacle_horror(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag56());
+  return (tp()->is_tentacle_horror());
 }
 int Thing::is_unobtanium(void)
 {

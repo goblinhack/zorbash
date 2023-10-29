@@ -620,6 +620,7 @@ PyObject *thing_is_sword(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_tameable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_target_radial(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_target_select(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_tentacle_horror(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_tentacle(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_tentacleye(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_the_grid(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -693,7 +694,6 @@ PyObject *thing_is_unused_flag52(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag53(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag54(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag55(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag56(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag5(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);

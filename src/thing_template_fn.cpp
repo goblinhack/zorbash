@@ -790,6 +790,7 @@ int Tp::is_sword(void) const { return _is_sword; }
 int Tp::is_tameable(void) const { return _is_tameable; }
 int Tp::is_target_radial(void) const { return _is_target_radial; }
 int Tp::is_target_select(void) const { return _is_target_select; }
+int Tp::is_tentacle_horror(void) const { return _is_tentacle_horror; }
 int Tp::is_tentacle(void) const { return _is_tentacle; }
 int Tp::is_tentacleye(void) const { return _is_tentacleye; }
 int Tp::is_the_grid(void) const { return _is_the_grid; }
@@ -866,7 +867,6 @@ int Tp::is_unused_flag52(void) const { return _is_unused_flag52; }
 int Tp::is_unused_flag53(void) const { return _is_unused_flag53; }
 int Tp::is_unused_flag54(void) const { return _is_unused_flag54; }
 int Tp::is_unused_flag55(void) const { return _is_unused_flag55; }
-int Tp::is_unused_flag56(void) const { return _is_unused_flag56; }
 int Tp::is_unused_flag5(void) const { return _is_unused_flag5; }
 int Tp::is_unused_flag6(void) const { return _is_unused_flag6; }
 int Tp::is_unused_flag7(void) const { return _is_unused_flag7; }
@@ -1566,6 +1566,7 @@ void Tp::is_sword_set(int v) { _is_sword = v; }
 void Tp::is_tameable_set(int v) { _is_tameable = v; }
 void Tp::is_target_radial_set(int v) { _is_target_radial = v; }
 void Tp::is_target_select_set(int v) { _is_target_select = v; }
+void Tp::is_tentacle_horror_set(int v) { _is_tentacle_horror = v; }
 void Tp::is_tentacle_set(int v) { _is_tentacle = v; }
 void Tp::is_tentacleye_set(int v) { _is_tentacleye = v; }
 void Tp::is_the_grid_set(int v) { _is_the_grid = v; }
@@ -1642,7 +1643,6 @@ void Tp::is_unused_flag52_set(int v) { _is_unused_flag52 = v; }
 void Tp::is_unused_flag53_set(int v) { _is_unused_flag53 = v; }
 void Tp::is_unused_flag54_set(int v) { _is_unused_flag54 = v; }
 void Tp::is_unused_flag55_set(int v) { _is_unused_flag55 = v; }
-void Tp::is_unused_flag56_set(int v) { _is_unused_flag56 = v; }
 void Tp::is_unused_flag5_set(int v) { _is_unused_flag5 = v; }
 void Tp::is_unused_flag6_set(int v) { _is_unused_flag6 = v; }
 void Tp::is_unused_flag7_set(int v) { _is_unused_flag7 = v; }
