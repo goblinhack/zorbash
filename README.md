@@ -98,7 +98,6 @@
 <!--                                                                                                                                              -->
 <!-- Potions                                                                                                                                      -->
 <!-- ------                                                                                                                                       -->
-<!-- - have a monster use a potion?                                                                                                               -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Armor                                                                                                                                        -->
@@ -109,7 +108,6 @@
 <!-- Weapons                                                                                                                                      -->
 <!-- ------                                                                                                                                       -->
 <!-- - holy water cures poison                                                                                                                    -->
-<!-- - strength penalties                                                                                                                         -->
 <!-- - blessed items resist explosion                                                                                                             -->
 <!-- - warhammer should kill parent slime in one go                                                                                               -->
 <!-- - warhammer smash skeletton                                                                                                                  -->

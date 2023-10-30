@@ -121,7 +121,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_tick_do(self, "me.on_tick()")
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_VERY_RARE)
-    my.stat_att_bonus(self, 2)  # means +2 per enchant
+    my.stat_att_bonus(self, 4)
+    my.stat_str_min(self, 16)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 DMG, +2 ATT")
     my.text_description_long(self, "This glowing and very heavy sword offers supreme damage potential and durability. Crafted from the core of a long gone power source of the ancients, you must take care as prolonged exposure to this sword will make you weak and sick. But maybe it is worth it?")

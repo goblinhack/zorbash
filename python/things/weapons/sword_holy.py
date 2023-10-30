@@ -98,7 +98,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_swing_do(self, "me.on_swing()")
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_VERY_RARE)
-    my.stat_att_bonus(self, 2)  # means +2 per enchant
+    my.stat_att_bonus(self, 2)
+    my.stat_str_min(self, 14)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 DMG, +2 ATT")
     my.text_description_long2(self, "Class two relic. Deals double damage to the undead.")
