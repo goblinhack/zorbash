@@ -56,7 +56,7 @@ def gold_init(name, text_long_name, text_short_name):
 
 
 def init():
-    gold_init(name="gold6", text_long_name="a pile of gold coins", text_short_name="gold coins")
+    gold_init(name="gold6", text_long_name="pile of gold coins", text_short_name="gold coins")
 
 
 init()
