@@ -14,7 +14,9 @@ def on_targeted(me, x, y):
             if distance > radius + 0.5:
                 continue
 
-            my.place_at(me, "block_of_ice", x1, y1)
+            if not my.level_is_block_of_ice_at(me, x1, y1):
+                my.place_at(me, "block_of_ice", x1, y1)
+
             for it in my.level_get_all(me, x1, y1):
                 if my.thing_possible_to_attack(me, it):
                     my.thing_hit(0, me, it)
@@ -37,7 +39,9 @@ def on_targeted_radially(me, x, y):
             if distance > radius + 0.5:
                 continue
 
-            my.place_at(me, "block_of_ice", x1, y1)
+            if not my.level_is_block_of_ice_at(me, x1, y1):
+                my.place_at(me, "block_of_ice", x1, y1)
+
             for it in my.level_get_all(me, x1, y1):
                 if my.thing_possible_to_attack(me, it):
                     my.thing_hit(0, me, it)

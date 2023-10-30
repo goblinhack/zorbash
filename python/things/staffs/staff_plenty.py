@@ -15,7 +15,8 @@ def on_targeted(me, x, y):
             if distance > radius + 0.5:
                 continue
 
-            my.place_at(me, "random_food", x1, y1)
+            if not my.level_is_food_at(me, x1, y1):
+                my.place_at(me, "random_food", x1, y1)
 
     my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
 

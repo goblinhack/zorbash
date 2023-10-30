@@ -18,7 +18,8 @@ def on_targeted(me, x, y):
             if distance > radius + 0.5:
                 continue
 
-            my.place_at(me, "block_of_crystal", x1, y1)
+            if not my.level_is_block_of_crystal_at(me, x1, y1):
+                my.place_at(me, "block_of_crystal", x1, y1)
 
     my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
 
@@ -38,7 +39,8 @@ def on_targeted_radially(me, x, y):
             if distance > radius + 0.5:
                 continue
 
-            my.place_at(me, "block_of_crystal", x1, y1)
+            if not my.level_is_block_of_crystal_at(me, x1, y1):
+                my.place_at(me, "block_of_crystal", x1, y1)
 
     my.thing_sound_play_channel(me, my.CHANNEL_EXPLOSION, "explosion_b")
 
