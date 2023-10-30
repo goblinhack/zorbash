@@ -109,9 +109,6 @@
 <!-- ------                                                                                                                                       -->
 <!-- - holy water cures poison                                                                                                                    -->
 <!-- - blessed items resist explosion                                                                                                             -->
-<!-- - warhammer should kill parent slime in one go                                                                                               -->
-<!-- - warhammer smash skeletton                                                                                                                  -->
-<!-- - (blunt/warhamma?) slime specific weapon does not cause slimes to split                                                                     -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Monsts                                                                                                                                       -->

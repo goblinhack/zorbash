@@ -477,10 +477,10 @@ int Thing::is_unused_flag53(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag53());
 }
-int Thing::is_unused_flag54(void)
+int Thing::is_blunt(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag54());
+  return (tp()->is_blunt());
 }
 int Thing::is_acid_blob(void)
 {

@@ -379,6 +379,7 @@ private:
   int _is_block_of_crystal {};
   int _is_block_of_ice {};
   int _is_bloodbug {};
+  int _is_blunt {};
   int _is_bones {};
   int _is_boots {};
   int _is_brazier {};
@@ -776,7 +777,6 @@ private:
   int _is_unused_flag51 {};
   int _is_unused_flag52 {};
   int _is_unused_flag53 {};
-  int _is_unused_flag54 {};
   int _is_unused_flag6 {};
   int _is_unused_flag7 {};
   int _is_unused_flag8 {};
@@ -1752,6 +1752,7 @@ public:
   int is_block_of_crystal(void) const;
   int is_block_of_ice(void) const;
   int is_bloodbug(void) const;
+  int is_blunt(void) const;
   int is_bones(void) const;
   int is_boots(void) const;
   int is_brazier(void) const;
@@ -2147,7 +2148,6 @@ public:
   int is_unused_flag51(void) const;
   int is_unused_flag52(void) const;
   int is_unused_flag53(void) const;
-  int is_unused_flag54(void) const;
   int is_unused_flag5(void) const;
   int is_unused_flag6(void) const;
   int is_unused_flag7(void) const;
@@ -2529,6 +2529,7 @@ public:
   void is_block_of_crystal_set(int v);
   void is_block_of_ice_set(int v);
   void is_bloodbug_set(int v);
+  void is_blunt_set(int v);
   void is_bones_set(int v);
   void is_boots_set(int v);
   void is_brazier_set(int v);
@@ -2924,7 +2925,6 @@ public:
   void is_unused_flag51_set(int v);
   void is_unused_flag52_set(int v);
   void is_unused_flag53_set(int v);
-  void is_unused_flag54_set(int v);
   void is_unused_flag5_set(int v);
   void is_unused_flag6_set(int v);
   void is_unused_flag7_set(int v);

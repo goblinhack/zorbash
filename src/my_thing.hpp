@@ -1569,6 +1569,7 @@ public:
   int is_block_of_ice(void);
   int is_bloodbug(void);
   int is_blood(void);
+  int is_blunt(void);
   int is_bones(void);
   int is_boots(void);
   int is_brazier(void);
@@ -1969,7 +1970,6 @@ public:
   int is_unused_flag51(void);
   int is_unused_flag52(void);
   int is_unused_flag53(void);
-  int is_unused_flag54(void);
   int is_unused_flag5(void);
   int is_unused_flag6(void);
   int is_unused_flag7(void);

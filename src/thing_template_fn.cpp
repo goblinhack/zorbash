@@ -472,6 +472,7 @@ int Tp::is_bleeder(void) const { return _is_bleeder; }
 int Tp::is_block_of_crystal(void) const { return _is_block_of_crystal; }
 int Tp::is_block_of_ice(void) const { return _is_block_of_ice; }
 int Tp::is_bloodbug(void) const { return _is_bloodbug; }
+int Tp::is_blunt(void) const { return _is_blunt; }
 int Tp::is_bones(void) const { return _is_bones; }
 int Tp::is_boots(void) const { return _is_boots; }
 int Tp::is_brazier(void) const { return _is_brazier; }
@@ -866,7 +867,6 @@ int Tp::is_unused_flag50(void) const { return _is_unused_flag50; }
 int Tp::is_unused_flag51(void) const { return _is_unused_flag51; }
 int Tp::is_unused_flag52(void) const { return _is_unused_flag52; }
 int Tp::is_unused_flag53(void) const { return _is_unused_flag53; }
-int Tp::is_unused_flag54(void) const { return _is_unused_flag54; }
 int Tp::is_unused_flag5(void) const { return _is_unused_flag5; }
 int Tp::is_unused_flag6(void) const { return _is_unused_flag6; }
 int Tp::is_unused_flag7(void) const { return _is_unused_flag7; }
@@ -1248,6 +1248,7 @@ void Tp::is_bleeder_set(int v) { _is_bleeder = v; }
 void Tp::is_block_of_crystal_set(int v) { _is_block_of_crystal = v; }
 void Tp::is_block_of_ice_set(int v) { _is_block_of_ice = v; }
 void Tp::is_bloodbug_set(int v) { _is_bloodbug = v; }
+void Tp::is_blunt_set(int v) { _is_blunt = v; }
 void Tp::is_bones_set(int v) { _is_bones = v; }
 void Tp::is_boots_set(int v) { _is_boots = v; }
 void Tp::is_brazier_set(int v) { _is_brazier = v; }
@@ -1642,7 +1643,6 @@ void Tp::is_unused_flag50_set(int v) { _is_unused_flag50 = v; }
 void Tp::is_unused_flag51_set(int v) { _is_unused_flag51 = v; }
 void Tp::is_unused_flag52_set(int v) { _is_unused_flag52 = v; }
 void Tp::is_unused_flag53_set(int v) { _is_unused_flag53 = v; }
-void Tp::is_unused_flag54_set(int v) { _is_unused_flag54 = v; }
 void Tp::is_unused_flag5_set(int v) { _is_unused_flag5 = v; }
 void Tp::is_unused_flag6_set(int v) { _is_unused_flag6 = v; }
 void Tp::is_unused_flag7_set(int v) { _is_unused_flag7 = v; }

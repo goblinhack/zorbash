@@ -31,6 +31,13 @@ int Thing::weapon_dmg_modify(int damage, Thingp victim)
   // Allow already damaged weapons to hit soft victims
   //
   if (victim && victim->is_soft()) {
+    //
+    // War-hammer versus soft slimes!
+    //
+    if (is_blunt()) {
+      return damage * 2;
+    }
+
     return damage;
   }
 

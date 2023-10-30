@@ -287,6 +287,7 @@ PyObject *thing_is_block_of_crystal(PyObject *obj, PyObject *args, PyObject *key
 PyObject *thing_is_block_of_ice(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bloodbug(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bloodied(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_blunt(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_bones(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_boots(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_brazier(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -693,7 +694,6 @@ PyObject *thing_is_unused_flag50(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag51(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag52(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag53(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag54(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag5(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);
