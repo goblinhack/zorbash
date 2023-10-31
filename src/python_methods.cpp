@@ -90,6 +90,7 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_FUNCTION(level_is_biome_swamp_at),
     MY_ADD_PYTHON_FUNCTION(level_is_bleeder_at),
     MY_ADD_PYTHON_FUNCTION(level_is_block_of_ice_at),
+    MY_ADD_PYTHON_FUNCTION(level_is_block_of_crystal_at),
     MY_ADD_PYTHON_FUNCTION(level_is_bloodied_at),
     MY_ADD_PYTHON_FUNCTION(level_is_bones_at),
     MY_ADD_PYTHON_FUNCTION(level_is_boots_at),
