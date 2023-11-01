@@ -357,6 +357,7 @@ PyObject *thing_is_dir_tr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dir_up(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dog(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_door(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_dragon_scales(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_drinkable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_droppable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_duck(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -693,7 +694,6 @@ PyObject *thing_is_unused_flag4(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *thing_is_unused_flag50(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag51(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag52(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag53(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag5(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);

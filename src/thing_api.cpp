@@ -479,10 +479,10 @@ int Thing::is_unused_flag52(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag52());
 }
-int Thing::is_unused_flag53(void)
+int Thing::is_dragon_scales(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag53());
+  return (tp()->is_dragon_scales());
 }
 int Thing::is_blunt(void)
 {

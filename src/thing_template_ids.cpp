@@ -43,6 +43,8 @@ std::initializer_list< std::string > tps = {
     "armor_lime_scale_carry",
     "armor_obsidian",
     "armor_obsidian_carry",
+    "armor_dragon",
+    "armor_dragon_carry",
     "armor_plate",
     "armor_plate_carry",
     "armor_unobtanium",

@@ -435,6 +435,7 @@ private:
   int _is_dirt {};
   int _is_dog {};
   int _is_door {};
+  int _is_dragon_scales {};
   int _is_drinkable {};
   int _is_droppable {};
   int _is_duck {};
@@ -777,7 +778,6 @@ private:
   int _is_unused_flag50 {};
   int _is_unused_flag51 {};
   int _is_unused_flag52 {};
-  int _is_unused_flag53 {};
   int _is_unused_flag6 {};
   int _is_unused_flag7 {};
   int _is_unused_flag8 {};
@@ -1813,6 +1813,7 @@ public:
   int is_dirt(void) const;
   int is_dog(void) const;
   int is_door(void) const;
+  int is_dragon_scales(void) const;
   int is_drinkable(void) const;
   int is_droppable(void) const;
   int is_duck(void) const;
@@ -2153,7 +2154,6 @@ public:
   int is_unused_flag50(void) const;
   int is_unused_flag51(void) const;
   int is_unused_flag52(void) const;
-  int is_unused_flag53(void) const;
   int is_unused_flag5(void) const;
   int is_unused_flag6(void) const;
   int is_unused_flag7(void) const;
@@ -2591,6 +2591,7 @@ public:
   void is_dirt_set(int v);
   void is_dog_set(int v);
   void is_door_set(int v);
+  void is_dragon_scales_set(int v);
   void is_drinkable_set(int v);
   void is_droppable_set(int v);
   void is_duck_set(int v);
@@ -2931,7 +2932,6 @@ public:
   void is_unused_flag50_set(int v);
   void is_unused_flag51_set(int v);
   void is_unused_flag52_set(int v);
-  void is_unused_flag53_set(int v);
   void is_unused_flag5_set(int v);
   void is_unused_flag6_set(int v);
   void is_unused_flag7_set(int v);

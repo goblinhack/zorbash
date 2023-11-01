@@ -530,6 +530,7 @@ int Tp::is_destroyed_on_hitting(void) const { return _is_destroyed_on_hitting; }
 int Tp::is_dirt(void) const { return _is_dirt; }
 int Tp::is_dog(void) const { return _is_dog; }
 int Tp::is_door(void) const { return _is_door; }
+int Tp::is_dragon_scales(void) const { return _is_dragon_scales; }
 int Tp::is_drinkable(void) const { return _is_drinkable; }
 int Tp::is_droppable(void) const { return _is_droppable; }
 int Tp::is_duck(void) const { return _is_duck; }
@@ -869,7 +870,6 @@ int Tp::is_unused_flag4(void) const { return _is_unused_flag4; }
 int Tp::is_unused_flag50(void) const { return _is_unused_flag50; }
 int Tp::is_unused_flag51(void) const { return _is_unused_flag51; }
 int Tp::is_unused_flag52(void) const { return _is_unused_flag52; }
-int Tp::is_unused_flag53(void) const { return _is_unused_flag53; }
 int Tp::is_unused_flag5(void) const { return _is_unused_flag5; }
 int Tp::is_unused_flag6(void) const { return _is_unused_flag6; }
 int Tp::is_unused_flag7(void) const { return _is_unused_flag7; }
@@ -1307,6 +1307,7 @@ void Tp::is_destroyed_on_hitting_set(int v) { _is_destroyed_on_hitting = v; }
 void Tp::is_dirt_set(int v) { _is_dirt = v; }
 void Tp::is_dog_set(int v) { _is_dog = v; }
 void Tp::is_door_set(int v) { _is_door = v; }
+void Tp::is_dragon_scales_set(int v) { _is_dragon_scales = v; }
 void Tp::is_drinkable_set(int v) { _is_drinkable = v; }
 void Tp::is_droppable_set(int v) { _is_droppable = v; }
 void Tp::is_duck_set(int v) { _is_duck = v; }
@@ -1646,7 +1647,6 @@ void Tp::is_unused_flag4_set(int v) { _is_unused_flag4 = v; }
 void Tp::is_unused_flag50_set(int v) { _is_unused_flag50 = v; }
 void Tp::is_unused_flag51_set(int v) { _is_unused_flag51 = v; }
 void Tp::is_unused_flag52_set(int v) { _is_unused_flag52 = v; }
-void Tp::is_unused_flag53_set(int v) { _is_unused_flag53 = v; }
 void Tp::is_unused_flag5_set(int v) { _is_unused_flag5 = v; }
 void Tp::is_unused_flag6_set(int v) { _is_unused_flag6 = v; }
 void Tp::is_unused_flag7_set(int v) { _is_unused_flag7 = v; }

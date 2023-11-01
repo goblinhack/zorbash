@@ -10,7 +10,6 @@
 <!-- - chocolate golem fires chocolate                                                                                                            -->
 <!-- - cracked walls                                                                                                                              -->
 <!-- - cursed weapon with bad luck                                                                                                                -->
-<!-- - dragon scale mail for fire proofing                                                                                                        -->
 <!-- - eat corpses, like a bat corpse?                                                                                                            -->
 <!-- - hub shop levels                                                                                                                            -->
 <!-- - invisible phantoms that leave puddles of ectoplasm ?                                                                                       -->
@@ -568,8 +567,8 @@ Other content
 - 14 x potions
 - 12 x debuffs
 - 11 x skills
+- 9 x armor
 - 8 x traps
-- 8 x armor
 - 6 x shield
 - 6 x boots
 - 5 x rings

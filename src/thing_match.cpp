@@ -232,6 +232,7 @@ bool Tp::matches(const std::string &what)
   if (is_dirt() && (what == "is_dirt")) { return true; }
   if (is_dog() && (what == "is_dog")) { return true; }
   if (is_door() && (what == "is_door")) { return true; }
+  if (is_dragon_scales() && (what == "is_dragon_scales")) { return true; }
   if (is_drinkable() && (what == "is_drinkable")) { return true; }
   if (is_droppable() && (what == "is_droppable")) { return true; }
   if (is_duck() && (what == "is_duck")) { return true; }
@@ -557,7 +558,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag50() && (what == "is_unused_flag50")) { return true; }
   if (is_unused_flag51() && (what == "is_unused_flag51")) { return true; }
   if (is_unused_flag52() && (what == "is_unused_flag52")) { return true; }
-  if (is_unused_flag53() && (what == "is_unused_flag53")) { return true; }
   if (is_unused_flag5() && (what == "is_unused_flag5")) { return true; }
   if (is_unused_flag6() && (what == "is_unused_flag6")) { return true; }
   if (is_unused_flag7() && (what == "is_unused_flag7")) { return true; }
@@ -842,6 +842,7 @@ bool Thing::matches(const std::string &what)
   if (is_dirt() && (what == "is_dirt")) { return true; }
   if (is_dog() && (what == "is_dog")) { return true; }
   if (is_door() && (what == "is_door")) { return true; }
+  if (is_dragon_scales() && (what == "is_dragon_scales")) { return true; }
   if (is_drinkable() && (what == "is_drinkable")) { return true; }
   if (is_droppable() && (what == "is_droppable")) { return true; }
   if (is_duck() && (what == "is_duck")) { return true; }
@@ -1168,7 +1169,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag50() && (what == "is_unused_flag50")) { return true; }
   if (is_unused_flag51() && (what == "is_unused_flag51")) { return true; }
   if (is_unused_flag52() && (what == "is_unused_flag52")) { return true; }
-  if (is_unused_flag53() && (what == "is_unused_flag53")) { return true; }
   if (is_unused_flag5() && (what == "is_unused_flag5")) { return true; }
   if (is_unused_flag6() && (what == "is_unused_flag6")) { return true; }
   if (is_unused_flag7() && (what == "is_unused_flag7")) { return true; }
@@ -1448,6 +1448,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_dirt") { return &Thing::is_dirt; }
   if (what == "is_dog") { return &Thing::is_dog; }
   if (what == "is_door") { return &Thing::is_door; }
+  if (what == "is_dragon_scales") { return &Thing::is_dragon_scales; }
   if (what == "is_drinkable") { return &Thing::is_drinkable; }
   if (what == "is_droppable") { return &Thing::is_droppable; }
   if (what == "is_duck") { return &Thing::is_duck; }
@@ -1767,7 +1768,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag50") { return &Thing::is_unused_flag50; }
   if (what == "is_unused_flag51") { return &Thing::is_unused_flag51; }
   if (what == "is_unused_flag52") { return &Thing::is_unused_flag52; }
-  if (what == "is_unused_flag53") { return &Thing::is_unused_flag53; }
   if (what == "is_unused_flag5") { return &Thing::is_unused_flag5; }
   if (what == "is_unused_flag6") { return &Thing::is_unused_flag6; }
   if (what == "is_unused_flag7") { return &Thing::is_unused_flag7; }

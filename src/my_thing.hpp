@@ -1632,6 +1632,7 @@ public:
   int is_dirt(void);
   int is_dog(void);
   int is_door(void);
+  int is_dragon_scales(void);
   int is_drinkable(void);
   int is_droppable(void);
   int is_duck(void);
@@ -1972,7 +1973,6 @@ public:
   int is_unused_flag50(void);
   int is_unused_flag51(void);
   int is_unused_flag52(void);
-  int is_unused_flag53(void);
   int is_unused_flag5(void);
   int is_unused_flag6(void);
   int is_unused_flag7(void);
