@@ -218,6 +218,7 @@ private:
   int _gfx_ascii_fg_color_spread_green {};
   int _gfx_ascii_fg_color_spread_hue {};
   int _gfx_ascii_fg_color_spread_red {};
+  int _gfx_ascii_show_light_once_seen {};
   int _gfx_ascii_shown {};
   int _gfx_ascii_shown_as_gray_in_shadow {};
   int _gfx_ascii_shown_in_bg {};
@@ -777,7 +778,6 @@ private:
   int _is_unused_flag5 {};
   int _is_unused_flag50 {};
   int _is_unused_flag51 {};
-  int _is_unused_flag52 {};
   int _is_unused_flag6 {};
   int _is_unused_flag7 {};
   int _is_unused_flag8 {};
@@ -1598,6 +1598,7 @@ public:
   int gfx_ascii_fg_color_spread_green(void) const;
   int gfx_ascii_fg_color_spread_hue(void) const;
   int gfx_ascii_fg_color_spread_red(void) const;
+  int gfx_ascii_show_light_once_seen(void) const;
   int gfx_ascii_shown_as_gray_in_shadow(void) const;
   int gfx_ascii_shown_in_bg(void) const;
   int gfx_ascii_shown(void) const;
@@ -2153,7 +2154,6 @@ public:
   int is_unused_flag4(void) const;
   int is_unused_flag50(void) const;
   int is_unused_flag51(void) const;
-  int is_unused_flag52(void) const;
   int is_unused_flag5(void) const;
   int is_unused_flag6(void) const;
   int is_unused_flag7(void) const;
@@ -2373,6 +2373,7 @@ public:
   void gfx_ascii_fg_color_spread_green_set(int v);
   void gfx_ascii_fg_color_spread_hue_set(int v);
   void gfx_ascii_fg_color_spread_red_set(int v);
+  void gfx_ascii_show_light_once_seen_set(int v);
   void gfx_ascii_shown_as_gray_in_shadow_set(int v);
   void gfx_ascii_shown_in_bg_set(int v);
   void gfx_ascii_shown_set(int v);
@@ -2931,7 +2932,6 @@ public:
   void is_unused_flag4_set(int v);
   void is_unused_flag50_set(int v);
   void is_unused_flag51_set(int v);
-  void is_unused_flag52_set(int v);
   void is_unused_flag5_set(int v);
   void is_unused_flag6_set(int v);
   void is_unused_flag7_set(int v);

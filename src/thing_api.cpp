@@ -474,10 +474,10 @@ int Thing::is_unused_flag51(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag51());
 }
-int Thing::is_unused_flag52(void)
+int Thing::gfx_ascii_show_light_once_seen(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag52());
+  return (tp()->gfx_ascii_show_light_once_seen());
 }
 int Thing::is_dragon_scales(void)
 {

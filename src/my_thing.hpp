@@ -1352,6 +1352,7 @@ public:
   int gfx_ascii_fg_color_spread_green(void);
   int gfx_ascii_fg_color_spread_hue(void);
   int gfx_ascii_fg_color_spread_red(void);
+  int gfx_ascii_show_light_once_seen(void);
   int gfx_ascii_shown_as_gray_in_shadow(void);
   int gfx_ascii_shown_in_bg(void);
   int gfx_ascii_shown(void);
@@ -1972,7 +1973,6 @@ public:
   int is_unused_flag4(void);
   int is_unused_flag50(void);
   int is_unused_flag51(void);
-  int is_unused_flag52(void);
   int is_unused_flag5(void);
   int is_unused_flag6(void);
   int is_unused_flag7(void);
@@ -3174,9 +3174,6 @@ public:
                                     std::vector< point > &all_deltas, ThingAttackOptionsp);
   bool victim_attack_choose_best(Thingp item, point at, Thingp *best, point *best_hit_at, ThingAttackOptionsp);
   bool victim_attack_found_best(int equip, Thingp item, Thingp best, point best_hit_at, ThingAttackOptionsp);
-
-  inline int is_gfx_pixelart_animated(void) { return gfx_pixelart_animated; }
-  inline int is_gfx_ascii_animated(void) { return gfx_ascii_animated; }
 
   int gfx_pixelart_attack_anim(void);
 } Thing;

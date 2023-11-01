@@ -599,8 +599,11 @@ void Thing::blit_ascii(point tl, point br, point p, bool left_bar)
     //
     // Not sure if we should show lights out of view
     //
-    // lit = get(level->can_see_ever.can_see, curr_at.x, curr_at.y);
-    lit = get(level->can_see_currently.can_see, curr_at.x, curr_at.y);
+    if (gfx_ascii_show_light_once_seen()) {
+      lit = get(level->can_see_ever.can_see, curr_at.x, curr_at.y);
+    } else {
+      lit = get(level->can_see_currently.can_see, curr_at.x, curr_at.y);
+    }
   } else {
     lit = get(level->can_see_currently.can_see, curr_at.x, curr_at.y);
   }

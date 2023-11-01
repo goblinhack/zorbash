@@ -26,6 +26,7 @@ def tp_init(name, text_long_name, text_short_name, tiles=[]):
     my.charge_count(self, 10)
     my.collision_hit_priority(self, 1)
     my.collision_hit_priority(self, 6)
+    my.gfx_ascii_show_light_once_seen(self, True)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown_in_bg(self, True)
     my.gfx_ascii_shown(self, True)

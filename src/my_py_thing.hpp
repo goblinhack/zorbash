@@ -125,6 +125,7 @@ PyObject *thing_get_paralysis_count(PyObject *obj, PyObject *args, PyObject *key
 PyObject *thing_get_stuck_count(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_ascii_color_bg_unchanged_by_lights(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_ascii_color_fg_unchanged_by_lights(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_gfx_ascii_show_light_once_seen(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_ooze(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_pixelart_oversized_and_centered(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_gfx_pixelart_show_highlighted(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -693,7 +694,6 @@ PyObject *thing_is_unused_flag49(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag4(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag50(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag51(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag52(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag5(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);

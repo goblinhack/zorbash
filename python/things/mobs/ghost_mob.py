@@ -27,6 +27,7 @@ def tp_init(name, text_long_name):
     my.environ_dislikes_acid(self, 100)
     my.environ_hates_water(self, 100)
     my.gfx_ascii_fade_with_dist(self, True)
+    my.gfx_ascii_show_light_once_seen(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_glows(self, True)
     my.gfx_pixelart_animated(self, True)

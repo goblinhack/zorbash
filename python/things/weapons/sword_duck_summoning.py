@@ -60,6 +60,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.equip_carry_anim(self, "sword_duck_summoning_carry")
     my.gfx_anim_use(self, "sword_duck_summoning_swing")
     my.gfx_ascii_fade_with_dist(self, True)
+    my.gfx_ascii_show_light_once_seen(self, True)
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated(self, True)
