@@ -2827,6 +2827,11 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
         }
         hitter->msg("You smash your fists against the door!");
         training = true;
+
+        //
+        // Make too much noise and you stir something...
+        //
+        level->create_wandering_monster();
       } else if (! hitter->is_explosion() && ! hitter->is_projectile() && ! hitter->is_laser()
                  && ! hitter->is_weapon() && ! hitter->is_magical() && ! hitter->is_fire() && ! hitter->is_lava()
                  && ! hitter->gfx_pixelart_attack_anim()) {

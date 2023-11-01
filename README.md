@@ -3,6 +3,7 @@
 <!--                                                                                                                                              -->
 <!-- Idea list                                                                                                                                    -->
 <!-- ---------                                                                                                                                    -->
+<!-- - hit door, summon monst chance                                                                                                              -->
 <!-- - auto explore                                                                                                                               -->
 <!-- - basecamp level?                                                                                                                            -->
 <!-- - carry eat slime mold and gain acid resist?                                                                                                 -->
@@ -13,17 +14,11 @@
 <!-- - cursed weapon with bad luck                                                                                                                -->
 <!-- - dragon scale mail for fire proofing                                                                                                        -->
 <!-- - eat corpses, like a bat corpse?                                                                                                            -->
-<!-- - explode bog tiles to kill boss                                                                                                             -->
-<!-- - hit door, summon monst chance                                                                                                              -->
-<!-- - holy water cures poison                                                                                                                    -->
 <!-- - hub shop levels                                                                                                                            -->
 <!-- - invisible phantoms that leave puddles of ectoplasm ?                                                                                       -->
 <!-- - level fall through to special level ?                                                                                                      -->
-<!-- - luck trap                                                                                                                                  -->
 <!-- - monsters with random buffs like vampirism would be interesting                                                                             -->
 <!-- - moving blocks?                                                                                                                             -->
-<!-- - moving floor                                                                                                                               -->
-<!-- - necro protection ring                                                                                                                      -->
 <!-- - portable hunger - teleports you to a room full of digestive juices                                                                         -->
 <!-- - rat pack and king rat / cranium rat                                                                                                        -->
 <!-- - rest until better                                                                                                                          -->
@@ -55,6 +50,7 @@
 <!-- - boss 1 Mummy mummy, ankh of life                                                                                                           -->
 <!-- - boss 2 slime boss, spawns slimes, tries to jump splat the player                                                                           -->
 <!-- - boss 3 rat king boss, sewer like level with rats coming out of the walls                                                                   -->
+<!-- - explode bog tiles to kill boss                                                                                                             -->
 <!-- - boss 4 goblin king boss, will be happy if the rat king crown is given                                                                      -->
 <!-- - boss 5 water level, kraken?                                                                                                                -->
 <!-- - boss 6 ...                                                                                                                                 -->
