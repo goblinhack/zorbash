@@ -5,6 +5,8 @@
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_ptrcheck.hpp"
+#include "my_python.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 
 bool Thing::is_edible(Thingp itp)
@@ -101,6 +103,85 @@ bool Tp::is_edible(Thingp itp)
   return false;
 }
 
+void Thing::on_eaten(Thingp what)
+{
+  TRACE_NO_INDENT();
+
+  verify(MTYPE_THING, what);
+  if (! what) {
+    err("Cannot use null thing");
+    return;
+  }
+
+  what->is_being_used = true;
+
+  auto on_eaten = what->tp()->on_eaten_do();
+  if (std::empty(on_eaten)) {
+    dbg("Has no on use");
+    return;
+  }
+
+  auto t = split_tokens(on_eaten, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    if (mod == "me") {
+      mod = what->name();
+    }
+
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
+
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+  } else {
+    ERR("Bad on_eaten call [%s] expected mod:function, got %d elems", on_eaten.c_str(), (int) on_eaten.size());
+  }
+}
+
+void Thing::on_eating(Thingp what, int bite)
+{
+  TRACE_NO_INDENT();
+
+  verify(MTYPE_THING, what);
+  if (! what) {
+    err("Cannot use null thing");
+    return;
+  }
+
+  what->is_being_used = true;
+
+  auto on_eating = what->tp()->on_eating_do();
+  if (std::empty(on_eating)) {
+    dbg("Has no on use");
+    return;
+  }
+
+  auto t = split_tokens(on_eating, '.');
+  if (t.size() == 2) {
+    auto        mod   = t[ 0 ];
+    auto        fn    = t[ 1 ];
+    std::size_t found = fn.find("()");
+    if (found != std::string::npos) {
+      fn = fn.replace(found, 2, "");
+    }
+
+    if (mod == "me") {
+      mod = what->name();
+    }
+
+    dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
+
+    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) bite, (unsigned int) curr_at.x,
+                    (unsigned int) curr_at.y);
+  } else {
+    ERR("Bad on_eating call [%s] expected mod:function, got %d elems", on_eating.c_str(), (int) on_eating.size());
+  }
+}
+
 bool Thing::worth_eating(Thingp victim)
 {
   TRACE_NO_INDENT();
@@ -181,6 +262,7 @@ bool Thing::eat(Thingp victim)
       }
     }
 
+    on_eaten(victim);
     return true;
   }
 
@@ -271,9 +353,10 @@ bool Thing::eat(Thingp victim)
           }
         }
       }
+      on_eating(victim, bite);
     } else {
       //
-      // Here the monster cannot finish eating its meal in one go.
+      // Here the monster finishes eating its meal.
       //
 
       //
@@ -333,6 +416,7 @@ bool Thing::eat(Thingp victim)
           }
         }
       }
+      on_eaten(victim);
       victim->dead("by being eaten");
     }
 

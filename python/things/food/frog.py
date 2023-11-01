@@ -2,6 +2,16 @@ import my
 import tp
 
 
+def on_eaten(eater, item, x, y):
+    # my.con("eater {} {:X}".format(my.thing_name_get(eater), eater))
+    # my.con("item  {} {:X}".format(my.thing_name_get(item), item))
+    if my.thing_poisoned_amount_get(eater) != 0:
+        my.thing_sound_play_channel(eater, my.CHANNEL_WEAPON, "potion")
+        my.thing_poisoned_amount_set(eater, 0)
+        if eater and my.thing_is_player(eater):
+            my.thing_msg(eater, "%%fg=pink$That frog hit the spot! You feel much better!%%fg=reset$")
+
+
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
@@ -16,6 +26,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_submergible(self, True)
+    my.on_eaten_do(self, "me.on_eaten()")
     my.is_able_to_be_teleported(self, True)
     my.is_able_to_fall(self, True)
     my.is_able_to_freeze(self, True)

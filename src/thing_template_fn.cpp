@@ -72,6 +72,8 @@ const std::string &Tp::on_death_do(void) const { return _on_death_do; }
 const std::string &Tp::on_death_of_a_follower_do(void) const { return _on_death_of_a_follower_do; }
 const std::string &Tp::on_death_of_my_leader_do(void) const { return _on_death_of_my_leader_do; }
 const std::string &Tp::on_dropped_do(void) const { return _on_dropped_do; }
+const std::string &Tp::on_eaten_do(void) const { return _on_eaten_do; }
+const std::string &Tp::on_eating_do(void) const { return _on_eating_do; }
 const std::string &Tp::on_enchant_do(void) const { return _on_enchant_do; }
 const std::string &Tp::on_enter_do(void) const { return _on_enter_do; }
 const std::string &Tp::on_equip_do(void) const { return _on_equip_do; }
@@ -1727,6 +1729,8 @@ void Tp::on_death_is_stone_set(int v) { _on_death_is_stone = v; }
 void Tp::on_death_of_a_follower_do_set(const std::string &v) { _on_death_of_a_follower_do = v; }
 void Tp::on_death_of_my_leader_do_set(const std::string &v) { _on_death_of_my_leader_do = v; }
 void Tp::on_dropped_do_set(const std::string &v) { _on_dropped_do = v; }
+void Tp::on_eaten_do_set(const std::string &v) { _on_eaten_do = v; }
+void Tp::on_eating_do_set(const std::string &v) { _on_eating_do = v; }
 void Tp::on_enchant_do_set(const std::string &v) { _on_enchant_do = v; }
 void Tp::on_enter_do_set(const std::string &v) { _on_enter_do = v; }
 void Tp::on_equip_do_set(const std::string &v) { _on_equip_do = v; }

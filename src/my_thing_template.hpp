@@ -958,6 +958,8 @@ private:
   std::string _on_death_of_a_follower_do;
   std::string _on_death_of_my_leader_do;
   std::string _on_dropped_do;
+  std::string _on_eaten_do;
+  std::string _on_eating_do;
   std::string _on_enchant_do;
   std::string _on_enter_do;
   std::string _on_equip_do;
@@ -1328,6 +1330,8 @@ public:
   const std::string &on_death_of_a_follower_do(void) const;
   const std::string &on_death_of_my_leader_do(void) const;
   const std::string &on_dropped_do(void) const;
+  const std::string &on_eaten_do(void) const;
+  const std::string &on_eating_do(void) const;
   const std::string &on_enchant_do(void) const;
   const std::string &on_enter_do(void) const;
   const std::string &on_equip_do(void) const;
@@ -3010,6 +3014,8 @@ public:
   void on_death_of_a_follower_do_set(const std::string &v);
   void on_death_of_my_leader_do_set(const std::string &v);
   void on_dropped_do_set(const std::string &v);
+  void on_eaten_do_set(const std::string &v);
+  void on_eating_do_set(const std::string &v);
   void on_enchant_do_set(const std::string &v);
   void on_enter_do_set(const std::string &v);
   void on_equip_do_set(const std::string &v);

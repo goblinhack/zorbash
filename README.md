@@ -7,7 +7,6 @@
 <!-- - basecamp level?                                                                                                                            -->
 <!-- - carry eat slime mold and gain acid resist?                                                                                                 -->
 <!-- - chickens - battle chickens - lay eggs as food - and they get names                                                                         -->
-<!-- - chocolate frog cures poison?                                                                                                               -->
 <!-- - chocolate golem fires chocolate                                                                                                            -->
 <!-- - cracked walls                                                                                                                              -->
 <!-- - cursed weapon with bad luck                                                                                                                -->

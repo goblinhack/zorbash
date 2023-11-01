@@ -926,6 +926,8 @@ public:
   const std::string &on_death_of_a_follower_do(void);
   const std::string &on_death_of_my_leader_do(void);
   const std::string &on_dropped_do(void);
+  const std::string &on_eaten_do(void);
+  const std::string &on_eating_do(void);
   const std::string &on_enchant_do(void);
   const std::string &on_enter_do(void);
   const std::string &on_equip_do(void);
@@ -3005,6 +3007,8 @@ public:
   void on_death_of_a_follower(Thingp leader);
   void on_death_of_my_leader(void);
   void on_dropped(void);
+  void on_eaten(Thingp what);
+  void on_eating(Thingp what, int bite);
   void on_enchant(void);
   void on_enter(Thingp victim = nullptr);
   void on_equip(Thingp what);

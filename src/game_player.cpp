@@ -51,10 +51,6 @@ void Game::place_player(void)
       }
 
       if (0) {
-        level->thing_new("potion_poison", point(x + 1, y));
-        level->thing_new("fire", point(x + 1, y));
-      }
-      if (0) {
         auto w = level->thing_new("potion_levitation", point(x, y));
         t->carry(w, carry_options);
         level->thing_new("trap_blinded", point(x + 2, y));
@@ -955,7 +951,6 @@ void Game::place_player(void)
         // level->thing_new("rock1", point(x + 1, y));
         // level->thing_new("rock1", point(x + 3, y));
         // level->thing_new("gargoyle_static", point(x + 2, y - 2));
-        // level->thing_new("frog", point(x + 3, y - 1));
         // level->thing_new("fire", point(x + 1, y - 1));
         // level->thing_new("enchantstone", point(x + 1, y - 1));
         // level->thing_new("skillstone", point(x + 1, y - 1));

@@ -2019,6 +2019,8 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_PYTHON_TP_FUNCTION(on_death_of_a_follower_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_death_of_my_leader_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_dropped_do),
+    MY_ADD_PYTHON_TP_FUNCTION(on_eaten_do),
+    MY_ADD_PYTHON_TP_FUNCTION(on_eating_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_enchant_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_enter_do),
     MY_ADD_PYTHON_TP_FUNCTION(on_equip_do),

@@ -4473,6 +4473,18 @@ const std::string &Thing::on_use_skill_do(void)
   return (tp()->on_use_skill_do());
 }
 
+const std::string &Thing::on_eaten_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_eaten_do());
+}
+
+const std::string &Thing::on_eating_do(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->on_eating_do());
+}
+
 const std::string &Thing::on_swing_do(void)
 {
   TRACE_NO_INDENT();
