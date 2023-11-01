@@ -3,7 +3,6 @@
 <!--                                                                                                                                              -->
 <!-- Idea list                                                                                                                                    -->
 <!-- ---------                                                                                                                                    -->
-<!-- - hit door, summon monst chance                                                                                                              -->
 <!-- - auto explore                                                                                                                               -->
 <!-- - basecamp level?                                                                                                                            -->
 <!-- - carry eat slime mold and gain acid resist?                                                                                                 -->
@@ -24,7 +23,6 @@
 <!-- - rest until better                                                                                                                          -->
 <!-- - runes lean more towards old gods                                                                                                           -->
 <!-- - shove chocolate frog statue, get frog?                                                                                                     -->
-<!-- - shove/lure monsters into webs?                                                                                                             -->
 <!-- - skill, blind strike, attack the eyes                                                                                                       -->
 <!-- - skill, guaranteed hit, but you have no defense in the next move                                                                            -->
 <!-- - skill, heroic charge, rush enemy                                                                                                           -->
@@ -35,7 +33,6 @@
 <!-- - skill, spring attack, give up a round for 2.5 times damage                                                                                 -->
 <!-- - skill, whirl attack, attack 2 or 3 enemies                                                                                                 -->
 <!-- - spell capacitor                                                                                                                            -->
-<!-- - spell chaining                                                                                                                             -->
 <!-- - spider web spawn small spiders?                                                                                                            -->
 <!-- - staff of death should stop regenerating monst                                                                                              -->
 <!-- - stealth                                                                                                                                    -->
