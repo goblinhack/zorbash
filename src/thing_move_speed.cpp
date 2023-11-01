@@ -121,6 +121,31 @@ int Thing::move_speed_total(void)
     }
   }
 
+  //
+  // Slow the thing down if it's not native to deep water.
+  //
+  if (is_monst() || is_player()) {
+    if (! is_swimmer() && ! is_floating_currently() && ! is_flying() && ! is_ethereal()) {
+      if (! environ_likes_deep_water()) {
+        if (level->is_deep_water(curr_at)) {
+          stat /= 4;
+          if (stat != prev) {
+            prev = stat;
+            dbg2("Move speed: with deep water penalty: %d", stat);
+          }
+        }
+      } else if (! environ_likes_shallow_water()) {
+        if (level->is_water(curr_at)) {
+          stat /= 2;
+          if (stat != prev) {
+            prev = stat;
+            dbg2("Move speed: with water penalty: %d", stat);
+          }
+        }
+      }
+    }
+  }
+
   return stat;
 }
 

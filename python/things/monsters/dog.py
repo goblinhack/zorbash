@@ -70,6 +70,7 @@ def tp_init(name, text_long_name):
     my.is_able_to_freeze(self, True)
     my.is_able_to_jump(self, True)
     my.is_able_to_lunge(self, True)
+    my.is_swimmer(self, True)
     my.is_able_to_rest(self, True)
     my.is_able_to_see_in_the_dark(self, True)
     my.is_able_to_sleep(self, True)

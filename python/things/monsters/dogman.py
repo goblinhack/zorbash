@@ -46,6 +46,7 @@ def tp_init(name, text_long_name):
     my.chance_d1000_shooting(self, 500)
     my.chance_d1000_tameable(self, 50)
     my.collision_check(self, True)
+    my.is_swimmer(self, True)
     my.collision_hit_priority(self, 20)
     my.consume_per_bite_amount(self, 10)
     my.distance_avoid(self, 4)

@@ -1,38 +1,60 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
-<!-- Performance                                                                                                                                  -->
-<!-- ------                                                                                                                                       -->
-<!-- sudo operf ./zorbash --playername discobob --seed victimlake --nodebug --test-start                                                          -->
-<!-- opreport  --demangle=smart --symbols| less                                                                                                   -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
-<!-- Skills                                                                                                                                       -->
-<!-- ------                                                                                                                                       -->
-<!-- - skill, instakill, once per level                                                                                                           -->
-<!-- - skill, heroic charge, rush enemy                                                                                                           -->
-<!-- - skill, guaranteed hit, but you have no defense in the next move                                                                            -->
-<!-- - skill, whirl attack, attack 2 or 3 enemies                                                                                                 -->
-<!-- - skill, kneecap, hobble enemy                                                                                                               -->
+<!-- Idea list                                                                                                                                    -->
+<!-- ---------                                                                                                                                    -->
+<!-- - auto explore                                                                                                                               -->
+<!-- - basecamp level?                                                                                                                            -->
+<!-- - blessed items resist explosion                                                                                                             -->
+<!-- - carry eat slime mold and gain acid resist?                                                                                                 -->
+<!-- - chickens - battle chickens - lay eggs as food - and they get names                                                                         -->
+<!-- - chocolate frog cures poison?                                                                                                               -->
+<!-- - chocolate golem fires chocolate                                                                                                            -->
+<!-- - cracked walls                                                                                                                              -->
+<!-- - cursed weapon with bad luck                                                                                                                -->
+<!-- - dragon scale mail for fire proofing                                                                                                        -->
+<!-- - eat corpses, like a bat corpse?                                                                                                            -->
+<!-- - explode bog tiles to kill boss                                                                                                             -->
+<!-- - hit door, summon monst chance                                                                                                              -->
+<!-- - holy water cures poison                                                                                                                    -->
+<!-- - hub shop levels                                                                                                                            -->
+<!-- - invisible phantoms that leave puddles of ectoplasm ?                                                                                       -->
+<!-- - level fall through to special level ?                                                                                                      -->
+<!-- - luck trap                                                                                                                                  -->
+<!-- - monsters with random buffs like vampirism would be interesting                                                                             -->
+<!-- - moving blocks?                                                                                                                             -->
+<!-- - moving floor                                                                                                                               -->
+<!-- - necro protection ring                                                                                                                      -->
+<!-- - portable hunger - teleports you to a room full of digestive juices                                                                         -->
+<!-- - rat pack and king rat / cranium rat                                                                                                        -->
+<!-- - rest until better                                                                                                                          -->
+<!-- - runes lean more towards old gods                                                                                                           -->
+<!-- - shove chocolate frog statue, get frog?                                                                                                     -->
+<!-- - shove/lure monsters into webs?                                                                                                             -->
 <!-- - skill, blind strike, attack the eyes                                                                                                       -->
-<!-- - skill, slash and roll                                                                                                                      -->
+<!-- - skill, guaranteed hit, but you have no defense in the next move                                                                            -->
+<!-- - skill, heroic charge, rush enemy                                                                                                           -->
+<!-- - skill, instakill, once per level                                                                                                           -->
+<!-- - skill, kneecap, hobble enemy                                                                                                               -->
 <!-- - skill, slash and jump                                                                                                                      -->
+<!-- - skill, slash and roll                                                                                                                      -->
 <!-- - skill, spring attack, give up a round for 2.5 times damage                                                                                 -->
-<!-- ------                                                                                                                                       -->
+<!-- - skill, whirl attack, attack 2 or 3 enemies                                                                                                 -->
+<!-- - spell capacitor                                                                                                                            -->
+<!-- - spell chaining                                                                                                                             -->
+<!-- - spider web spawn small spiders?                                                                                                            -->
+<!-- - staff of death should stop regenerating monst                                                                                              -->
+<!-- - stealth                                                                                                                                    -->
+<!-- - tentacles out of the ground that try to surround you                                                                                       -->
+<!-- - tiny pixel effects that bounce?                                                                                                            -->
+<!-- - tomb of past player ? or random player ? leads to random small room?                                                                       -->
+<!-- - vaults                                                                                                                                     -->
+<!-- - weight factors into jumping                                                                                                                -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
-<!-- - stealth                                                                                                                                    -->
-<!-- - cracked walls                                                                                                                              -->
-<!-- - spider web spawn small spiders?                                                                                                            -->
-<!-- - monsters with random buffs like vampirism would be interesting                                                                             -->
-<!-- - cursed weapon with bad luck                                                                                                                -->
-<!-- - luck trap                                                                                                                                  -->
 <!-- - boss 1 Mummy mummy, ankh of life                                                                                                           -->
 <!-- - boss 2 slime boss, spawns slimes, tries to jump splat the player                                                                           -->
-<!--          swamp tiles that allow 50% movement                                                                                                 -->
-<!--          explode bog tiles to kill boss                                                                                                      -->
 <!-- - boss 3 rat king boss, sewer like level with rats coming out of the walls                                                                   -->
 <!-- - boss 4 goblin king boss, will be happy if the rat king crown is given                                                                      -->
 <!-- - boss 5 water level, kraken?                                                                                                                -->
@@ -46,101 +68,12 @@
 <!-- -        The only way to break the curse is to destroy the crystals. Zorbash will then be freed from servitude.                              -->
 <!-- - different sound for bosses                                                                                                                 -->
 <!-- - 4 bosses and final zorb boss                                                                                                               -->
-<!-- - level fall through to special level ?                                                                                                      -->
-<!-- - hub shop levels                                                                                                                            -->
-<!-- - basecamp level?                                                                                                                            -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
-<!-- UI                                                                                                                                           -->
+<!-- NOTES                                                                                                                                        -->
 <!-- ------                                                                                                                                       -->
-<!-- - rest until better                                                                                                                          -->
-<!-- - auto explore                                                                                                                               -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
-<!-- Level                                                                                                                                        -->
-<!-- ------                                                                                                                                       -->
-<!-- - tomb of past player ? or random player ? leads to random small room?                                                                       -->
-<!-- - vaults                                                                                                                                     -->
-<!-- - portable hunger - teleports you to a room full of digestive juices                                                                         -->
-<!-- - moving floor                                                                                                                               -->
-<!-- - shove chocolate frog statue, get frog?                                                                                                     -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
-<!-- Traps                                                                                                                                        -->
-<!-- ------                                                                                                                                       -->
-<!-- - moving blocks?                                                                                                                             -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
-<!-- Poison                                                                                                                                       -->
-<!-- ------                                                                                                                                       -->
-<!-- - chocolate frog cures poison?                                                                                                               -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
-<!-- Doors                                                                                                                                        -->
-<!-- ------                                                                                                                                       -->
-<!-- - hit door, summon monst chance                                                                                                              -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
-<!-- AI                                                                                                                                           -->
-<!-- ------                                                                                                                                       -->
-<!-- - eat corpses, like a bat corpse?                                                                                                            -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
-<!-- Rings                                                                                                                                        -->
-<!-- ------                                                                                                                                       -->
-<!-- - necro protection ring                                                                                                                      -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
-<!-- Staffs                                                                                                                                       -->
-<!-- ------                                                                                                                                       -->
-<!-- - staff of death should stop regenerating monst                                                                                              -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
-<!-- Potions                                                                                                                                      -->
-<!-- ------                                                                                                                                       -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
-<!-- Armor                                                                                                                                        -->
-<!-- ------                                                                                                                                       -->
-<!-- - dragon scale mail for fire proofing                                                                                                        -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
-<!-- Weapons                                                                                                                                      -->
-<!-- ------                                                                                                                                       -->
-<!-- - holy water cures poison                                                                                                                    -->
-<!-- - blessed items resist explosion                                                                                                             -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
-<!-- Monsts                                                                                                                                       -->
-<!-- ------                                                                                                                                       -->
-<!-- - invisible phantoms that leave puddles of ectoplasm ?                                                                                       -->
-<!-- - chocolate golem fires chocolate                                                                                                            -->
-<!-- - chickens - battle chickens - lay eggs as food - and they get names                                                                         -->
-<!-- - shove/lure monsters into webs?                                                                                                             -->
-<!-- - rat pack and king rat / cranium rat                                                                                                        -->
-<!-- - tentacles out of the ground that try to surround you                                                                                       -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
-<!-- Gods                                                                                                                                         -->
-<!-- ------                                                                                                                                       -->
-<!-- - runes lean more towards old gods                                                                                                           -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
-<!-- Gfx                                                                                                                                          -->
-<!-- ------                                                                                                                                       -->
-<!-- - tiny pixel effects that bounce?                                                                                                            -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
-<!-- Player                                                                                                                                       -->
-<!-- ------                                                                                                                                       -->
-<!-- - weight factors into jumping                                                                                                                -->
-<!-- - carry eat slime mold and gain acid resist?                                                                                                 -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
-<!-- Spells                                                                                                                                       -->
-<!-- ------                                                                                                                                       -->
-<!-- - spell capacitor                                                                                                                            -->
-<!-- - spell chaining                                                                                                                             -->
+<!-- sudo operf ./zorbash --playername discobob --seed victimlake --nodebug --test-start                                                          -->
+<!-- opreport  --demangle=smart --symbols| less                                                                                                   -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 
