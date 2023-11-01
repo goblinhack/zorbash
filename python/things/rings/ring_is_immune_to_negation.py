@@ -13,6 +13,7 @@ def on_unequip(owner, me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
+    my.chance_d10000_enchanted(self, 20)
     my.collision_hit_priority(self, 5)
     my.collision_hit_priority(self, 6)
     my.equip_carry_anim(self, "ring_is_immune_to_negation_carry")

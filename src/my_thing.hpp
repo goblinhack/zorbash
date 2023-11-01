@@ -1170,6 +1170,7 @@ public:
   int carried_weapon_least_value(Thingp *out);
   int chance_d10000_crit(void);
   int chance_d10000_damaged(void);
+  int chance_d10000_enchanted(void);
   int chance_d10000_runic(void);
   int chance_d10000_set_on_fire(void);
   int chance_d1000_appearing(void);

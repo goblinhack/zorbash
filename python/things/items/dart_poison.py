@@ -14,6 +14,7 @@ def on_thrown(owner, me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
+    my.chance_d10000_enchanted(self, 200)
     my.chance_d1000_appearing(self, 10)
     my.dmg_chance_d1000_missile(self, 0, 1000)
     my.dmg_chance_d1000_poison(self, 0, 1000)

@@ -135,6 +135,7 @@ private:
   int _capacity_width {};
   int _chance_d10000_crit {};
   int _chance_d10000_damaged {};
+  int _chance_d10000_enchanted {};
   int _chance_d10000_runic {};
   int _chance_d10000_set_on_fire {};
   int _chance_d1000_appearing {};
@@ -1490,6 +1491,7 @@ public:
   int capacity_width(void) const;
   int chance_d10000_crit(void) const;
   int chance_d10000_damaged(void) const;
+  int chance_d10000_enchanted(void) const;
   int chance_d10000_runic(void) const;
   int chance_d10000_set_on_fire(void) const;
   int chance_d1000_appearing(void) const;
@@ -2282,6 +2284,7 @@ public:
   void capacity_width_set(int v);
   void chance_d10000_crit_set(int v);
   void chance_d10000_damaged_set(int v);
+  void chance_d10000_enchanted_set(int v);
   void chance_d10000_runic_set(int v);
   void chance_d10000_set_on_fire_set(int v);
   void chance_d1000_appearing_set(int v);

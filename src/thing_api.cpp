@@ -128,6 +128,13 @@ int Thing::chance_d10000_damaged(void)
   return chance;
 }
 
+int Thing::chance_d10000_enchanted(void)
+{
+  TRACE_NO_INDENT();
+
+  return tp()->chance_d10000_enchanted();
+}
+
 int Thing::chance_d10000_crit(void)
 {
   TRACE_NO_INDENT();

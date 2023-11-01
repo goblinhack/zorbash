@@ -13,6 +13,7 @@ def on_unequip(owner, me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
+    my.chance_d10000_enchanted(self, 20)
     my.equip_carry_anim(self, "wooden_cross_carry")
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_show_highlighted(self, True)

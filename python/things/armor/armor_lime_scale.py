@@ -16,6 +16,7 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.chance_d10000_damaged(self, 100)
+    my.chance_d10000_enchanted(self, 20)
     my.chance_d10000_runic(self, 10)
     my.collision_hit_priority(self, 6)
     my.enchant_max(self, 10)

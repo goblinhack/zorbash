@@ -12,6 +12,7 @@
 std::initializer_list< std::string > tps = {
     "", // ID 0 means unused
     "acid1",
+    "acid_blob",
     "ai_path1",
     "ai_path2",
     "amulet_endurance",
@@ -898,6 +899,7 @@ std::initializer_list< std::string > tps = {
     "teleport_in",
     "teleport_out",
     "teletoad",
+    "tentacle_horror",
     "tentacleye",
     "the_grid",
     "thunderstone",

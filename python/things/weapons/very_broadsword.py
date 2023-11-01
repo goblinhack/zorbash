@@ -35,6 +35,7 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.chance_d10000_crit(self, 500)
     my.chance_d10000_damaged(self, 1)
+    my.chance_d10000_enchanted(self, 50)
     my.chance_d10000_runic(self, 1000)
     my.collision_hit_adj(self, True)
     my.dmg_chance_d1000_melee(self, 0, 1000)

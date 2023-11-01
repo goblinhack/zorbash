@@ -232,6 +232,7 @@ int Tp::capacity_height(void) const { return _capacity_height; }
 int Tp::capacity_width(void) const { return _capacity_width; }
 int Tp::chance_d10000_crit(void) const { return _chance_d10000_crit; }
 int Tp::chance_d10000_damaged(void) const { return _chance_d10000_damaged; }
+int Tp::chance_d10000_enchanted(void) const { return _chance_d10000_enchanted; }
 int Tp::chance_d10000_runic(void) const { return _chance_d10000_runic; }
 int Tp::chance_d10000_set_on_fire(void) const { return _chance_d10000_set_on_fire; }
 int Tp::chance_d1000_appearing(void) const { return _chance_d1000_appearing; }
@@ -1001,6 +1002,7 @@ void Tp::capacity_height_set(int v) { _capacity_height = v; }
 void Tp::capacity_width_set(int v) { _capacity_width = v; }
 void Tp::chance_d10000_crit_set(int v) { _chance_d10000_crit = v; }
 void Tp::chance_d10000_damaged_set(int v) { _chance_d10000_damaged = v; }
+void Tp::chance_d10000_enchanted_set(int v) { _chance_d10000_enchanted = v; }
 void Tp::chance_d10000_runic_set(int v) { _chance_d10000_runic = v; }
 void Tp::chance_d10000_set_on_fire_set(int v) { _chance_d10000_set_on_fire = v; }
 void Tp::chance_d1000_appearing_set(int v) { _chance_d1000_appearing = v; }

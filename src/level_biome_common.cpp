@@ -378,12 +378,16 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
           }
         } else if (t->is_weapon()) {
           if (r && r->is_secret) {
-            t->enchant_randomly();
+            if (d10000() < t->chance_d10000_enchanted() * 2) {
+              t->enchant_randomly();
+            }
           }
           dbg("INF: Placed weapon '%s'", t->text_short_capitalised().c_str());
         } else if (t->is_treasure_type()) {
           if (r && r->is_secret) {
-            t->enchant_randomly();
+            if (d10000() < t->chance_d10000_enchanted() * 2) {
+              t->enchant_randomly();
+            }
           }
           dbg("INF: Placed treasure '%s'", t->text_short_capitalised().c_str());
         } else if (t->is_bag()) {
@@ -572,26 +576,28 @@ void Level::place_random_treasure(Dungeonp d)
         continue;
       }
 
-      if (pcg_random_range(0, 100) < 20) {
+      if (d10000() < t->chance_d10000_enchanted()) {
         t->enchant_randomly();
       }
 
       if (t->is_sword()) {
-        //
-        // Double enchant swords in lakes :)
-        //
-        if (d->is_shallow_water(x, y)) {
-          t->enchant_randomly();
-        }
+        if (d10000() < t->chance_d10000_enchanted()) {
+          //
+          // Double enchant swords in lakes :)
+          //
+          if (d->is_shallow_water(x, y)) {
+            t->enchant_randomly();
+          }
 
-        if (d->is_deep_water(x, y)) {
-          t->enchant_randomly();
+          if (d->is_deep_water(x, y)) {
+            t->enchant_randomly();
+          }
         }
       } else {
         //
         // Further enchant deep water items?
         //
-        if (pcg_random_range(0, 100) < 20) {
+        if (d10000() < t->chance_d10000_enchanted()) {
           if (d->is_deep_water(x, y)) {
             t->enchant_randomly();
           }
@@ -642,7 +648,7 @@ bool Level::place_random_named(Dungeonp d, const std::string &what)
         continue;
       }
 
-      if (pcg_random_range(0, 100) < 20) {
+      if (d10000() < t->chance_d10000_enchanted()) {
         t->enchant_randomly();
       }
 
@@ -650,18 +656,20 @@ bool Level::place_random_named(Dungeonp d, const std::string &what)
         //
         // Double enchant swords in lakes :)
         //
-        if (d->is_shallow_water(x, y)) {
-          t->enchant_randomly();
-        }
+        if (d10000() < t->chance_d10000_enchanted()) {
+          if (d->is_shallow_water(x, y)) {
+            t->enchant_randomly();
+          }
 
-        if (d->is_deep_water(x, y)) {
-          t->enchant_randomly();
+          if (d->is_deep_water(x, y)) {
+            t->enchant_randomly();
+          }
         }
       } else {
         //
         // Further enchant deep water items?
         //
-        if (pcg_random_range(0, 100) < 20) {
+        if (d10000() < t->chance_d10000_enchanted()) {
           if (d->is_deep_water(x, y)) {
             t->enchant_randomly();
           }
