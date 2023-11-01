@@ -5,7 +5,6 @@
 <!-- ---------                                                                                                                                    -->
 <!-- - auto explore                                                                                                                               -->
 <!-- - basecamp level?                                                                                                                            -->
-<!-- - blessed items resist explosion                                                                                                             -->
 <!-- - carry eat slime mold and gain acid resist?                                                                                                 -->
 <!-- - chickens - battle chickens - lay eggs as food - and they get names                                                                         -->
 <!-- - chocolate frog cures poison?                                                                                                               -->

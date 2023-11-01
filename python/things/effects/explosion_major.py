@@ -3,6 +3,12 @@ import tp
 
 
 def attack(me, it):
+    #
+    # Allow enchanted items to survive a blast.
+    #
+    if my.thing_enchant_count_get(it):
+        return
+
     if my.thing_possible_to_attack(me, it):
         if it != me:
             my.thing_hit_dmg_fire(0, me, it)
