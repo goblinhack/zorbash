@@ -116,16 +116,9 @@
 <!-- - invisible phantoms that leave puddles of ectoplasm ?                                                                                       -->
 <!-- - chocolate golem fires chocolate                                                                                                            -->
 <!-- - chickens - battle chickens - lay eggs as food - and they get names                                                                         -->
-<!-- - acid jellies should damage weapons                                                                                                         -->
-<!-- - mold growth / floor puddings                                                                                                               -->
-<!-- - bloodgrass, grows near corpses                                                                                                             -->
 <!-- - shove/lure monsters into webs?                                                                                                             -->
 <!-- - rat pack and king rat / cranium rat                                                                                                        -->
-<!-- - zombie camel?                                                                                                                              -->
-<!-- - sewer wolf?                                                                                                                                -->
-<!-- - monster that runs from light ?                                                                                                             -->
 <!-- - tentacles out of the ground that try to surround you                                                                                       -->
-<!-- - dungeon walrus; long headed walrus with many tusks                                                                                         -->
 <!-- ------                                                                                                                                       -->
 <!--                                                                                                                                              -->
 <!-- Gods                                                                                                                                         -->
