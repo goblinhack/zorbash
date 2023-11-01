@@ -72,7 +72,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_def_bonus(self, 6)
     my.text_a_or_an(self, "a")
     my.text_description_enchant(self, "+1 DEF")
-    my.text_description_long(self, "Better hope the dragon doesn't want those scales back.")
+    my.text_description_long2(self, "Better hope the dragon doesn't want those scales back.")
     my.text_description_long(self, "Dragon armor. Flexible, fire proof and crafted from fine dragon scales.")
     my.text_description_short(self, "Dragon armor.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)

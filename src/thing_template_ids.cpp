@@ -10,7 +10,6 @@
 // to be in this list
 //
 std::initializer_list< std::string > tps = {
-    "", // ID 0 means unused
     "acid1",
     "acid_blob",
     "ai_path1",
@@ -29,6 +28,8 @@ std::initializer_list< std::string > tps = {
     "apple2",
     "apple_cider",
     "applepie",
+    "armor_dragon",
+    "armor_dragon_carry",
     "armor_fish_scale",
     "armor_fish_scale_carry",
     "armor_golden",
@@ -43,10 +44,10 @@ std::initializer_list< std::string > tps = {
     "armor_lime_scale_carry",
     "armor_obsidian",
     "armor_obsidian_carry",
-    "armor_dragon",
-    "armor_dragon_carry",
     "armor_plate",
     "armor_plate_carry",
+    "armor_slime",
+    "armor_slime_carry",
     "armor_unobtanium",
     "armor_unobtanium_carry",
     "ascend_dungeon",
@@ -550,6 +551,7 @@ std::initializer_list< std::string > tps = {
     "horseshoe",
     "hotsauce",
     "iceman",
+    "", // ID 0 means unused
     "jackalope",
     "key",
     "key_crystal",

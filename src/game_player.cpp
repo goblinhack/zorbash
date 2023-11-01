@@ -246,8 +246,12 @@ void Game::place_player(void)
         t->carry(w, carry_options);
       }
       if (0) {
+        auto w = level->thing_new("armor_slime", point(x + 3, y));
+        t->carry(w, carry_options);
+      }
+      if (0) {
         auto w = level->thing_new("armor_dragon", point(x + 3, y));
-        // t->carry(w, carry_options);
+        t->carry(w, carry_options);
       }
       if (0) {
         auto w = level->thing_new("armor_unobtanium", point(x, y));
