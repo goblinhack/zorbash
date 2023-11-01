@@ -312,7 +312,7 @@ Weapons
 | Short Sword | A/common | 1 - 8 | 1d8 |   | 0.10 % | 0.10% | 100 |
 | Shovel | B/uncommon | 1 - 8 | 1d8 |   | 0.50 % | 5.00% | 5 |
 | Rusty Short Sword | A/common | 2 - 7 | 1d6+1 | Damage-Poison:1d2+1<br />  | 2.00 % | 0.05% | 50 |
-| Short Axe | B/uncommon | 1 - 6 | 1d6 |  Hits all surrounding<br /> | 0.10 % | 5.00% | 150 |
+| Short Axe | B/uncommon | 1 - 6 | 1d6 |  Hits all surrounding<br /> | 0.05 % | 5.00% | 150 |
 | Wooden Short Sword | A/common | 1 - 4 | 1d4 |   | 1.00 % | 0.01% | 25 |
 | Dagger | A/common | 1 - 4 | 1d4 |   | 0.05 % | 5.00% | 15 |
 <!-- end weapons type marker -->
