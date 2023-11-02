@@ -121,7 +121,8 @@ Thingp Thing::laser_reflect(Thingp item, const std::string &effect_name, Thingp 
   return target;
 }
 
-Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, Thingp target, UseOptions *use_options)
+Thingp Thing::laser_shoot_at(Thingp item_maybe_null, const std::string &effect_name, Thingp target,
+                             UseOptions *use_options)
 {
   //
   // NOTE: the item can be null here if this is monster firing with its
@@ -131,7 +132,7 @@ Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, Thingp
   //
   // Set the owner. If fork lightning in water, don't set water as the owner!
   //
-  auto owner = item ? item : this;
+  auto owner = item_maybe_null ? item_maybe_null : this;
   if (! owner->maybe_infop()) {
     owner = nullptr;
   }
@@ -175,19 +176,19 @@ Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, Thingp
   if (use_options && use_options->radial_effect) {
     if (is_player()) {
       if (use_options && use_options->radial_effect) {
-        msg("You zap %s.", item->text_the().c_str());
+        msg("You zap %s.", item_maybe_null->text_the().c_str());
       } else {
-        msg("You zap %s at %s.", item->text_the().c_str(), target->text_the().c_str());
+        msg("You zap %s at %s.", item_maybe_null->text_the().c_str(), target->text_the().c_str());
       }
     } else if (use_options && use_options->radial_effect) {
-      if (item) {
-        msg("%s zaps at %s.", text_The().c_str(), item->text_the().c_str());
+      if (item_maybe_null) {
+        msg("%s zaps at %s.", text_The().c_str(), item_maybe_null->text_the().c_str());
       } else {
         msg("%s zaps.", text_The().c_str());
       }
     } else {
-      if (item) {
-        msg("%s zaps %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
+      if (item_maybe_null) {
+        msg("%s zaps %s at %s.", text_The().c_str(), item_maybe_null->text_the().c_str(), target->text_the().c_str());
       } else if (is_water()) {
         msg("%s electrifies around %s.", text_The().c_str(), target->text_the().c_str());
       } else {
@@ -217,7 +218,9 @@ Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, Thingp
       dbg("Firing laser");
     }
 
-    item->on_targeted_radially();
+    if (item_maybe_null) {
+      item_maybe_null->on_targeted_radially();
+    }
   } else {
     dbg("Firing laser effect");
     TRACE_AND_INDENT();
@@ -233,19 +236,24 @@ Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, Thingp
 
         if (is_player()) {
           if (use_options && use_options->radial_effect) {
-            msg("You zap %s.", item->text_the().c_str());
+            if (item_maybe_null) {
+              msg("You zap %s.", item_maybe_null->text_the().c_str());
+            } else {
+              err("Unexpected code path");
+            }
           } else {
-            msg("You zap %s at %s.", item->text_the().c_str(), other_target->text_the().c_str());
+            msg("You zap %s at %s.", item_maybe_null->text_the().c_str(), other_target->text_the().c_str());
           }
         } else if (use_options && use_options->radial_effect) {
-          if (item) {
-            msg("%s zaps at %s.", text_The().c_str(), item->text_the().c_str());
+          if (item_maybe_null) {
+            msg("%s zaps at %s.", text_The().c_str(), item_maybe_null->text_the().c_str());
           } else {
             msg("%s zaps.", text_The().c_str());
           }
         } else {
-          if (item) {
-            msg("%s zaps %s at %s.", text_The().c_str(), item->text_the().c_str(), other_target->text_the().c_str());
+          if (item_maybe_null) {
+            msg("%s zaps %s at %s.", text_The().c_str(), item_maybe_null->text_the().c_str(),
+                other_target->text_the().c_str());
           } else if (is_water()) {
             msg("%s electrifies around %s.", text_The().c_str(), other_target->text_the().c_str());
           } else {
@@ -298,7 +306,7 @@ Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, Thingp
               TRACE_NO_INDENT();
               FOR_ALL_GRID_THINGS(level, grid_thing, second_portal_target.x, second_portal_target.y)
               {
-                second_portal->laser_shoot_at(item, effect_name, grid_thing, use_options);
+                second_portal->laser_shoot_at(item_maybe_null, effect_name, grid_thing, use_options);
                 break;
               }
               TRACE_NO_INDENT();
@@ -314,7 +322,7 @@ Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, Thingp
         // Reflection ? create another beam
         //
         if (other_target && other_target->is_reflective()) {
-          laser_reflect(item, effect_name, other_target, use_options);
+          laser_reflect(item_maybe_null, effect_name, other_target, use_options);
         }
 
         if (laser) {
@@ -356,8 +364,8 @@ Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, Thingp
           }
         }
 
-        if (item) {
-          item->on_targeted(other_target->curr_at);
+        if (item_maybe_null) {
+          item_maybe_null->on_targeted(other_target->curr_at);
         }
       }
     } else {
@@ -368,23 +376,39 @@ Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, Thingp
       TRACE_AND_INDENT();
 
       if (is_player()) {
+        TRACE_NO_INDENT();
         if (use_options && use_options->radial_effect) {
-          msg("You zap %s.", item->text_the().c_str());
+          if (item_maybe_null) {
+            msg("You zap %s.", item_maybe_null->text_the().c_str());
+          } else {
+            err("Unexpected code path");
+          }
         } else {
-          msg("You zap %s at %s.", item->text_the().c_str(), target->text_the().c_str());
+          TRACE_NO_INDENT();
+          if (item_maybe_null) {
+            msg("You zap %s at %s.", item_maybe_null->text_the().c_str(), target->text_the().c_str());
+          } else {
+            msg("You zap at %s.", target->text_the().c_str());
+          }
         }
       } else if (use_options && use_options->radial_effect) {
-        if (item) {
-          msg("%s zaps at %s.", text_The().c_str(), item->text_the().c_str());
+        TRACE_NO_INDENT();
+        if (item_maybe_null) {
+          msg("%s zaps at %s.", text_The().c_str(), item_maybe_null->text_the().c_str());
         } else {
           msg("%s zaps.", text_The().c_str());
         }
       } else {
-        if (item) {
-          msg("%s zaps at %s %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
+        TRACE_NO_INDENT();
+        if (item_maybe_null) {
+          TRACE_NO_INDENT();
+          msg("%s zaps at %s %s.", text_The().c_str(), item_maybe_null->text_the().c_str(),
+              target->text_the().c_str());
         } else if (is_water()) {
+          TRACE_NO_INDENT();
           msg("%s electrifies around %s.", text_The().c_str(), target->text_the().c_str());
         } else {
+          TRACE_NO_INDENT();
           msg("%s zaps at %s.", text_The().c_str(), target->text_the().c_str());
         }
       }
@@ -392,10 +416,12 @@ Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, Thingp
       //
       // Reflection ? create another beam
       //
+      TRACE_NO_INDENT();
       if (target->is_reflective()) {
-        laser_reflect(item, effect_name, target, use_options);
+        laser_reflect(item_maybe_null, effect_name, target, use_options);
       }
 
+      TRACE_NO_INDENT();
       auto laser = level->thing_new(effect_name, target->curr_at, owner);
       if (! laser) {
         err("No laser to shoot");
@@ -405,6 +431,7 @@ Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, Thingp
         return nullptr;
       }
 
+      TRACE_NO_INDENT();
       if (laser) {
         dbg("Firing named laser with: %s at %s dist %f", laser->to_string().c_str(),
             target->to_short_string().c_str(), distance(curr_at, target->curr_at));
@@ -421,7 +448,9 @@ Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, Thingp
       info.follow_moving_target = true;
       info.pixel_map_at         = level->pixel_map_at;
 
+      TRACE_NO_INDENT();
       if (laser) {
+        TRACE_NO_INDENT();
         level->new_laser(laser->id, target->id, info, game->current_move_speed);
 
         //
@@ -435,16 +464,18 @@ Thingp Thing::laser_shoot_at(Thingp item, const std::string &effect_name, Thingp
         // Set everything in the way on fire.
         //
         if (laser->is_fire()) {
+          TRACE_NO_INDENT();
           level->line_set_all_on_fire(curr_at, target->curr_at, 0, "laser");
         }
 
         if (laser->is_holy()) {
+          TRACE_NO_INDENT();
           level->line_set_all_undead_on_fire(curr_at, target->curr_at, 0, "laser");
         }
       }
 
-      if (item) {
-        item->on_targeted(target->curr_at);
+      if (item_maybe_null) {
+        item_maybe_null->on_targeted(target->curr_at);
       }
     }
   }

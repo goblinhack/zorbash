@@ -30,6 +30,8 @@ std::initializer_list< std::string > tps = {
     "applepie",
     "armor_dragon",
     "armor_dragon_carry",
+    "armor_crystal",
+    "armor_crystal_carry",
     "armor_fish_scale",
     "armor_fish_scale_carry",
     "armor_golden",

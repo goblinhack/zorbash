@@ -549,11 +549,6 @@ int Thing::is_able_to_be_reflected(void)
   TRACE_NO_INDENT();
   return (tp()->is_able_to_be_reflected());
 }
-int Thing::is_reflective(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_reflective());
-}
 int Thing::is_magic_crystal(void)
 {
   TRACE_NO_INDENT();

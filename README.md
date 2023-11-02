@@ -5,7 +5,6 @@
 <!-- ---------                                                                                                                                    -->
 <!-- - auto explore                                                                                                                               -->
 <!-- - basecamp level?                                                                                                                            -->
-<!-- - carry eat slime mold and gain acid resist?                                                                                                 -->
 <!-- - chickens - battle chickens - lay eggs as food - and they get names                                                                         -->
 <!-- - chocolate golem fires chocolate                                                                                                            -->
 <!-- - cracked walls                                                                                                                              -->
@@ -567,7 +566,7 @@ Other content
 - 14 x potions
 - 12 x debuffs
 - 11 x skills
-- 9 x armor
+- 11 x armor
 - 8 x traps
 - 6 x shield
 - 6 x boots

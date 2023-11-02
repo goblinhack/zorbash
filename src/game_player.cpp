@@ -98,6 +98,11 @@ void Game::place_player(void)
         auto w = level->thing_new("sword_holy", point(x, y));
         t->carry(w, carry_options);
       }
+      if (1) {
+        auto s = level->thing_new("skeleton", point(x + 2, y + 2));
+        auto w = level->thing_new("staff_lightning", point(x, y));
+        s->carry(w, carry_options);
+      }
       if (0) {
         auto w = level->thing_new("sword_duck_summoning", point(x, y));
         t->carry(w, carry_options);
@@ -243,6 +248,10 @@ void Game::place_player(void)
       }
       if (0) {
         auto w = level->thing_new("horseshoe", point(x, y));
+        t->carry(w, carry_options);
+      }
+      if (1) {
+        auto w = level->thing_new("armor_crystal", point(x + 3, y));
         t->carry(w, carry_options);
       }
       if (0) {
