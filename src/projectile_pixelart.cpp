@@ -61,7 +61,7 @@ void Level::display_pixelart_projectiles(point tl, point br)
     auto stop  = p.info.pixel_stop - p.info.pixel_map_at;
 
     auto   dist  = distance(start, stop);
-    float  steps = (int) ceil(dist) / TILE_WIDTH;
+    float  steps = (int) (ceil(dist) / (float) TILE_WIDTH);
     fpoint diff(stop.x - start.x, stop.y - start.y);
     fpoint step       = diff / steps;
     float  ninety_deg = RAD_360 / 4;

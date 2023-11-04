@@ -245,13 +245,13 @@ void Thing::remove_all_references()
     while (owned_count()) {
       ThingId id = *infop->owned.begin();
       auto    t  = level->thing_find(id);
-      if (t == last) {
-        err("Infinite loop when removing owned items");
-        t->err("Infinite loop for this thing when removing owned items");
-        break;
-      }
-      last = t;
       if (t) {
+        if (t == last) {
+          err("Infinite loop when removing owned items");
+          t->err("Infinite loop for this thing when removing owned items");
+          break;
+        }
+        last = t;
         dbg2("Remove child %s", t->to_string().c_str());
         t->owner_unset();
       } else {
@@ -314,14 +314,13 @@ void Thing::remove_all_references()
     while (spawned_count()) {
       ThingId id = *infop->spawned.begin();
       auto    t  = level->thing_find(id);
-      if (t == last) {
-        err("Infinite loop when removing spawned things");
-        t->err("Infinite loop for this thing when removing spawned things");
-        break;
-      }
-      last = t;
       if (t) {
-        dbg2("Remove spawned %s", t->to_string().c_str());
+        if (t == last) {
+          err("Infinite loop when removing spawned things");
+          t->err("Infinite loop for this thing when removing spawned things");
+          break;
+        }
+        last = t;
         t->spawner_unset();
       } else {
         err("Cannot remove spawned %" PRIX32, id.id);

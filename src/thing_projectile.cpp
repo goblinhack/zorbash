@@ -93,6 +93,11 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &effect_name, T
     }
   }
 
+  if (! target) {
+    err("No target");
+    return nullptr;
+  }
+
   if (is_player()) {
     if (target->curr_at == curr_at) {
       if (item && item->is_spell()) {

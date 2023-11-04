@@ -195,12 +195,24 @@ static void load_images(SDL_Surface **surf1_out, SDL_Surface **surf2_out, std::s
 
   if (comp == 4) {
     surf1 = SDL_CreateRGBSurface(0, x, y, 32, rmask, gmask, bmask, amask);
+    if (! surf1) {
+      ERR("Could not create surface");
+      return;
+    }
     newptr(MTYPE_SDL, surf1, "SDL_CreateRGBSurface5");
   } else if (comp == 3) {
     surf1 = SDL_CreateRGBSurface(0, x, y, 24, rmask, gmask, bmask, 0);
+    if (! surf1) {
+      ERR("Could not create surface");
+      return;
+    }
     newptr(MTYPE_SDL, surf1, "SDL_CreateRGBSurface6");
   } else if (comp == 2) {
     surf1 = SDL_CreateRGBSurface(0, x, y, 32, 0, 0, 0, 0);
+    if (! surf1) {
+      ERR("Could not create surface");
+      return;
+    }
     newptr(MTYPE_SDL, surf1, "SDL_CreateRGBSurface7");
   } else {
     ERR("Could not handle image with %d components", comp);
@@ -208,12 +220,24 @@ static void load_images(SDL_Surface **surf1_out, SDL_Surface **surf2_out, std::s
 
   if (comp == 4) {
     surf2 = SDL_CreateRGBSurface(0, x, y, 32, rmask, gmask, bmask, amask);
+    if (! surf2) {
+      ERR("Could not create surface");
+      return;
+    }
     newptr(MTYPE_SDL, surf2, "SDL_CreateRGBSurface8");
   } else if (comp == 3) {
     surf2 = SDL_CreateRGBSurface(0, x, y, 24, rmask, gmask, bmask, 0);
+    if (! surf2) {
+      ERR("Could not create surface");
+      return;
+    }
     newptr(MTYPE_SDL, surf2, "SDL_CreateRGBSurface9");
   } else if (comp == 2) {
     surf2 = SDL_CreateRGBSurface(0, x, y, 32, 0, 0, 0, 0);
+    if (! surf2) {
+      ERR("Could not create surface");
+      return;
+    }
     newptr(MTYPE_SDL, surf2, "SDL_CreateRGBSurface10");
   } else {
     ERR("Could not handle image with %d components", comp);
@@ -226,6 +250,10 @@ static void load_images(SDL_Surface **surf1_out, SDL_Surface **surf2_out, std::s
     SDL_Surface *old_surf = surf1;
     DBG2("- SDL_ConvertSurfaceFormat");
     surf1 = SDL_ConvertSurfaceFormat(old_surf, SDL_PIXELFORMAT_RGBA8888, 0);
+    if (! surf1) {
+      ERR("Could not convert surface");
+      return;
+    }
     newptr(MTYPE_SDL, surf1, "SDL_CreateRGBSurface14");
     oldptr(MTYPE_SDL, old_surf);
     SDL_FreeSurface(old_surf);
@@ -236,6 +264,10 @@ static void load_images(SDL_Surface **surf1_out, SDL_Surface **surf2_out, std::s
     SDL_Surface *old_surf = surf2;
     DBG2("- SDL_ConvertSurfaceFormat");
     surf2 = SDL_ConvertSurfaceFormat(old_surf, SDL_PIXELFORMAT_RGBA8888, 0);
+    if (! surf2) {
+      ERR("Could not convert surface");
+      return;
+    }
     newptr(MTYPE_SDL, surf2, "SDL_CreateRGBSurface15");
     oldptr(MTYPE_SDL, old_surf);
     SDL_FreeSurface(old_surf);

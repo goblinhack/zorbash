@@ -148,8 +148,10 @@ bool Thing::throw_at(Thingp what, Thingp target)
       need_to_choose_a_new_target = true;
     }
 
-    target_at = target->curr_at;
-    dbg("Throw %s at new in-the-way thing at: %s", what->to_short_string().c_str(), target_at.to_string().c_str());
+    if (target) {
+      target_at = target->curr_at;
+      dbg("Throw %s at new in-the-way thing at: %s", what->to_short_string().c_str(), target_at.to_string().c_str());
+    }
   }
 
   //

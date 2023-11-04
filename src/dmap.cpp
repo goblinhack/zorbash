@@ -11,8 +11,8 @@
 
 void dmap_print(const Dmap *D, point at, point tl, point br)
 {
-  uint8_t x;
-  uint8_t y;
+  int x;
+  int y;
 
   int minx, miny, maxx, maxy;
   if (tl.x < br.x) {
@@ -119,8 +119,8 @@ void dmap_print(const Dmap *D, point at, point tl, point br)
 
 void dmap_print(const Dmap *D)
 {
-  uint8_t x;
-  uint8_t y;
+  int x;
+  int y;
 
   LOG("DMAP:");
 

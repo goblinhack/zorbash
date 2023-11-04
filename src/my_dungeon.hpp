@@ -161,7 +161,7 @@ public:
   bool is_weapon_class_B(const int x, const int y);
   bool is_weapon_class_C(const int x, const int y);
   bool room_is_a_candidate_any_depth(const DungeonNode *n, Roomp r);
-  bool room_is_a_candidate(int x, int y, const DungeonNode *n, Roomp r);
+  bool room_is_a_candidate(const DungeonNode *n, Roomp r);
   bool room_is_a_candidate_less_restrictive(const DungeonNode *n, Roomp r);
   bool rooms_move_closer_together(void);
   bool solve(int x, int y, Grid *g);

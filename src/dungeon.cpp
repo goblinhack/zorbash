@@ -452,7 +452,7 @@ Dungeon::Dungeon(biome_t biome, int level)
 {
   TRACE_NO_INDENT();
   if (level >= (int) LevelStatic::all_static_levels.size()) {
-    ERR("Out of range level %d", level);
+    DIE("Out of range level %d", level);
     return;
   }
 
@@ -489,7 +489,7 @@ int Dungeon::offset(const int x, const int y)
 void Dungeon::putc(const int x, const int y, const int z, const char c)
 {
   if (! c) {
-    ERR("Putting nul char at %d,%d,%d", x, y, z);
+    DIE("Putting nul char at %d,%d,%d", x, y, z);
   }
   if (unlikely(is_oob(x, y))) {
     DIE("Out of bounds %s at map (%d,%d)", __FUNCTION__, x, y);
@@ -1754,11 +1754,11 @@ bool Dungeon::is_deep_water_no_check(const int x, const int y)
 void Dungeon::create_node_map(void)
 {
   if (grid_width > DUNGEON_GRID_CHUNK_WIDTH) {
-    ERR("Nodes width overflow. got %d, max %d", grid_width, DUNGEON_GRID_CHUNK_WIDTH);
+    DIE("Nodes width overflow. got %d, max %d", grid_width, DUNGEON_GRID_CHUNK_WIDTH);
   }
 
   if (grid_height > DUNGEON_GRID_CHUNK_HEIGHT) {
-    ERR("Nodes height overflow. got %d, max %d", grid_height, DUNGEON_GRID_CHUNK_HEIGHT);
+    DIE("Nodes height overflow. got %d, max %d", grid_height, DUNGEON_GRID_CHUNK_HEIGHT);
   }
 
   nodes = new Nodes(biome, grid_width, grid_height, true);
@@ -1784,7 +1784,7 @@ void Dungeon::dump(void)
           auto c  = cr.c;
 
           if (! c) {
-            ERR("Unknown map char 0x%X/%c at x %d, y %d, depth %d", m, m, x, y, d);
+            DIE("Unknown map char 0x%X/%c at x %d, y %d, depth %d", m, m, x, y, d);
           }
 
           if (is_wall(x, y)) {
@@ -1825,7 +1825,7 @@ void Dungeon::dump(void)
         auto c  = cr.c;
 
         if (! c) {
-          ERR("Unknown map char %c at x %d, y %d, depth %d", m, x, y, d);
+          DIE("Unknown map char %c at x %d, y %d, depth %d", m, x, y, d);
         }
 
         s += c;
@@ -2053,7 +2053,7 @@ bool Dungeon::rooms_print_all_with_jiggle(Grid *g)
   return false;
 }
 
-bool Dungeon::room_is_a_candidate(int x, int y, const DungeonNode *n, Roomp r)
+bool Dungeon::room_is_a_candidate(const DungeonNode *n, Roomp r)
 {
   if (n->biome == BIOME_UNKNOWN) {
     DIE("No biome set for DungeonNode");
@@ -2253,7 +2253,7 @@ bool Dungeon::solve(int x, int y, Grid *g)
   }
 
   for (auto r : Room::all_rooms) {
-    if (! room_is_a_candidate(x, y, n, r)) {
+    if (! room_is_a_candidate(n, r)) {
       continue;
     }
 
@@ -2495,19 +2495,19 @@ void Dungeon::choose_room_doors(void)
         if (! o) {
           TRACE_NO_INDENT();
           debug("bug");
-          ERR("Had exit down at %d,%d, but no node exists", x, y);
+          DIE("Had exit down at %d,%d, but no node exists", x, y);
         }
         auto rdoori = pcg_random_range(0, r->doors_down.size());
         auto odoori = pcg_random_range(0, o->doors_up.size());
         if (rdoori >= r->doors_down.size()) {
           TRACE_NO_INDENT();
           debug("bug");
-          ERR("Bug");
+          DIE("Bug");
         }
         if (odoori >= o->doors_up.size()) {
           TRACE_NO_INDENT();
           debug("bug");
-          ERR("Bug");
+          DIE("Bug");
         }
 
         r->which_door_down = rdoori;
@@ -2522,19 +2522,19 @@ void Dungeon::choose_room_doors(void)
         if (! o) {
           TRACE_NO_INDENT();
           debug("bug");
-          ERR("Had exit right at %d,%d, but no node exists", x, y);
+          DIE("Had exit right at %d,%d, but no node exists", x, y);
         }
         auto rdoori = pcg_random_range(0, r->doors_right.size());
         auto odoori = pcg_random_range(0, o->doors_left.size());
         if (rdoori >= r->doors_right.size()) {
           TRACE_NO_INDENT();
           debug("bug");
-          ERR("Bug");
+          DIE("Bug");
         }
         if (odoori >= o->doors_left.size()) {
           TRACE_NO_INDENT();
           debug("bug");
-          ERR("Bug");
+          DIE("Bug");
         }
 
         r->which_door_right = rdoori;
@@ -2549,19 +2549,19 @@ void Dungeon::choose_room_doors(void)
         if (! o) {
           TRACE_NO_INDENT();
           debug("bug");
-          ERR("Had secret exit down at %d,%d, but no node exists", x, y);
+          DIE("Had secret exit down at %d,%d, but no node exists", x, y);
         }
         auto rdoori = pcg_random_range(0, r->doors_down.size());
         auto odoori = pcg_random_range(0, o->doors_up.size());
         if (rdoori >= r->doors_down.size()) {
           TRACE_NO_INDENT();
           debug("bug");
-          ERR("Bug, room %d, down door index %d size %d", r->roomno, (int) rdoori, (int) r->doors_down.size());
+          DIE("Bug, room %d, down door index %d size %d", r->roomno, (int) rdoori, (int) r->doors_down.size());
         }
         if (odoori >= o->doors_up.size()) {
           TRACE_NO_INDENT();
           debug("bug");
-          ERR("Bug, room %d, up door index %d size %d", r->roomno, (int) odoori, (int) r->doors_up.size());
+          DIE("Bug, room %d, up door index %d size %d", r->roomno, (int) odoori, (int) r->doors_up.size());
         }
 
         r->which_secret_door_down = rdoori;
@@ -2576,19 +2576,19 @@ void Dungeon::choose_room_doors(void)
         if (! o) {
           TRACE_NO_INDENT();
           debug("bug");
-          ERR("Had secret exit right at %d,%d, but no node exists", x, y);
+          DIE("Had secret exit right at %d,%d, but no node exists", x, y);
         }
         auto rdoori = pcg_random_range(0, r->doors_right.size());
         auto odoori = pcg_random_range(0, o->doors_left.size());
         if (rdoori >= r->doors_right.size()) {
           TRACE_NO_INDENT();
           debug("bug");
-          ERR("Bug, room %d, right door index %d size %d", r->roomno, (int) rdoori, (int) r->doors_right.size());
+          DIE("Bug, room %d, right door index %d size %d", r->roomno, (int) rdoori, (int) r->doors_right.size());
         }
         if (odoori >= o->doors_left.size()) {
           TRACE_NO_INDENT();
           debug("bug");
-          ERR("Bug, room %d, left door index %d size %d", r->roomno, (int) odoori, (int) r->doors_left.size());
+          DIE("Bug, room %d, left door index %d size %d", r->roomno, (int) odoori, (int) r->doors_left.size());
         }
 
         r->which_secret_door_right = rdoori;
@@ -3216,7 +3216,7 @@ void Dungeon::place_room(Roomp r, int x, int y)
 void Dungeon::place_level(LevelStaticp l)
 {
   if ((l->width > MAP_WIDTH) || (l->height > MAP_HEIGHT)) {
-    ERR("Level has bad size %d,%d", l->width, l->height);
+    DIE("Level has bad size %d,%d", l->width, l->height);
   }
 
   for (auto z = 0; z < MAP_DEPTH; z++) {
@@ -3238,7 +3238,7 @@ void Dungeon::place_level(LevelStaticp l)
 void Dungeon::map_place_room_ptr(Roomp r, int x, int y)
 {
   if (! r) {
-    ERR("No room to place");
+    DIE("No room to place");
   }
 
   for (auto dz = 0; dz < MAP_DEPTH; dz++) {
@@ -3534,7 +3534,7 @@ bool Dungeon::rooms_move_closer_together(void)
                 break;
               }
               break;
-            case 4 : ERR("could not move rooms closer");
+            case 4 : DIE("could not move rooms closer");
           }
 
           if (moved_one) {
@@ -3562,7 +3562,7 @@ bool Dungeon::rooms_move_closer_together(void)
       if (new_total_corridor_len >= corridor_count) {
         restore_level();
         if (! draw_corridors()) {
-          ERR("Rolled back level was not solvable");
+          DIE("Rolled back level was not solvable");
         }
 
         if (failed_to_make_shorter_corridors++ > 1000) {
@@ -3575,7 +3575,7 @@ bool Dungeon::rooms_move_closer_together(void)
       } else if (! new_total_corridor_len) {
         restore_level();
         if (! draw_corridors()) {
-          ERR("Rolled back level was not solvable");
+          DIE("Rolled back level was not solvable");
         }
 
         if (failed_to_place_all_corridors++ > 1000) {
@@ -3667,7 +3667,7 @@ void Dungeon::place_doors_between_depth_changes(void)
       if (r->down_room) {
         auto o = r->down_room;
         if (! o) {
-          ERR("Room linkage bug");
+          DIE("Room linkage bug");
         }
 
         if (o->depth && (r->depth > o->depth)) {
@@ -3678,7 +3678,7 @@ void Dungeon::place_doors_between_depth_changes(void)
       if (r->up_room) {
         auto o = r->up_room;
         if (! o) {
-          ERR("Room linkage bug");
+          DIE("Room linkage bug");
         }
 
         if (o->depth && (r->depth > o->depth)) {
@@ -3689,7 +3689,7 @@ void Dungeon::place_doors_between_depth_changes(void)
       if (r->right_room) {
         auto o = r->right_room;
         if (! o) {
-          ERR("Room linkage bug");
+          DIE("Room linkage bug");
         }
 
         if (o->depth && (r->depth > o->depth)) {
@@ -3700,7 +3700,7 @@ void Dungeon::place_doors_between_depth_changes(void)
       if (r->left_room) {
         auto o = r->left_room;
         if (! o) {
-          ERR("Room linkage bug");
+          DIE("Room linkage bug");
         }
 
         if (o->depth && (r->depth > o->depth)) {
@@ -3711,7 +3711,7 @@ void Dungeon::place_doors_between_depth_changes(void)
       if (r->secret_down_room) {
         auto o = r->secret_down_room;
         if (! o) {
-          ERR("Room linkage bug");
+          DIE("Room linkage bug");
         }
 
         putc(r->down_secret_door_at.x, r->down_secret_door_at.y, MAP_DEPTH_OBJ, Charmap::CHAR_SECRET_DOOR);
@@ -3721,7 +3721,7 @@ void Dungeon::place_doors_between_depth_changes(void)
       if (r->secret_up_room) {
         auto o = r->secret_up_room;
         if (! o) {
-          ERR("Room linkage bug");
+          DIE("Room linkage bug");
         }
 
         putc(r->up_secret_door_at.x, r->up_secret_door_at.y, MAP_DEPTH_OBJ, Charmap::CHAR_SECRET_DOOR);
@@ -3731,7 +3731,7 @@ void Dungeon::place_doors_between_depth_changes(void)
       if (r->secret_right_room) {
         auto o = r->secret_right_room;
         if (! o) {
-          ERR("Room linkage bug");
+          DIE("Room linkage bug");
         }
 
         putc(r->right_secret_door_at.x, r->right_secret_door_at.y, MAP_DEPTH_OBJ, Charmap::CHAR_SECRET_DOOR);
@@ -3741,7 +3741,7 @@ void Dungeon::place_doors_between_depth_changes(void)
       if (r->secret_left_room) {
         auto o = r->secret_left_room;
         if (! o) {
-          ERR("Room linkage bug");
+          DIE("Room linkage bug");
         }
 
         putc(r->left_secret_door_at.x, r->left_secret_door_at.y, MAP_DEPTH_OBJ, Charmap::CHAR_SECRET_DOOR);

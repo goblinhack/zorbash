@@ -2672,6 +2672,15 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
       }
     }
   }
+  if (! hitter) {
+    IF_DEBUG { log("No hitter"); }
+    return false;
+  }
+
+  if (! real_hitter) {
+    IF_DEBUG { hitter->log("No real hitter"); }
+    return false;
+  }
 
   //
   // If we are pushed into lava and then catch fire, the spawn of fire causes another location check.

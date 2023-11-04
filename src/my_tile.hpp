@@ -245,9 +245,9 @@ void tile_blit_outline_section_colored(uint16_t index, const fpoint &tile_tl, co
 void tile_blit_section(const Tilep &tile, const point tile_tl, const point tile_br, const point tl, const point br);
 void tile_blit_section(uint16_t index, const point tile_tl, const point tile_br, const point tl, const point br);
 void tile_blit_section_colored(const Tilep &tile, const fpoint &tile_tl, const fpoint &tile_br, const point tl,
-                               const point br, color color_bl, color color_br, color color_tl, color color_tr);
+                               const point br, color color_tl, color color_tr, color color_bl, color color_br);
 void tile_blit_section_colored(uint16_t index, const fpoint &tile_tl, const fpoint &tile_br, const point tl,
-                               const point br, color color_bl, color color_br, color color_tl, color color_tr);
+                               const point br, color color_tl, color color_tr, color color_bl, color color_br);
 void tile_blit_shadow(const class Tp *&tp, const Tilep &tile, const point tl, const point br);
 void tile_blit_shadow(const class Tp *&tp, uint16_t index, const point tl, const point br);
 void tile_blit_shadow_section(const class Tp *&tp, const Tilep &tile, const point tile_tl, const point tile_br,

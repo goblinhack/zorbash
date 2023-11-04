@@ -61,6 +61,9 @@ bool Thing::collision_find_best_target(ThingAttackOptionsp attack_options)
 
   for (auto &cand : thing_colls) {
     auto t = cand.target;
+    if (! t) {
+      continue;
+    }
 
     //
     // Don't be silly and hit yourself.

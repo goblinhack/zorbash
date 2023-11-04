@@ -25,10 +25,9 @@ PyObject *text_size_(PyObject *obj, PyObject *args, PyObject *keywds)
     Py_RETURN_NONE;
   }
 
-  std::wstring col = L"none";
-  auto         b   = std::wstring(text);
-  double       w   = ascii_strlen(b, &col);
-  double       h   = 1;
+  auto   b = std::wstring(text);
+  double w = ascii_strlen(b);
+  double h = 1;
 
-  return (Py_BuildValue("ddu", w, h, col.c_str()));
+  return Py_BuildValue("dd", w, h);
 }

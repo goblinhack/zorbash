@@ -852,6 +852,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
             in >> bits(t);
 
             if (! game_load_error.empty()) {
+              delete t;
               return in;
             }
 

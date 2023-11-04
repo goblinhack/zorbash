@@ -55,9 +55,9 @@ bool Level::screen_shake_begin(void)
   auto wobble = update_wobble();
   if (wobble != 0.0) {
     glPushMatrix();
-    glTranslatef(-game->config.game_pix_width / 2, -game->config.game_pix_height / 2, 0);
+    glTranslatef(-game->config.game_pix_width / 2.0, -game->config.game_pix_height / 2.0, 0);
     glRotatef(wobble * 5, 0.0f, 0.0f, 1.0f);
-    glTranslatef(game->config.game_pix_width / 2, game->config.game_pix_height / 2, 0);
+    glTranslatef(game->config.game_pix_width / 2.0, game->config.game_pix_height / 2.0, 0);
     return true;
   }
   return false;

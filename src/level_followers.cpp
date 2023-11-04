@@ -87,15 +87,19 @@ void Level::assign_leaders_and_followers(void)
     }
 
     for (const auto &m : g.second) {
-      if (m == leader) {
-        dbg("- Leader %s", m->to_short_string().c_str());
-      } else {
-        dbg("- Member %s", m->to_short_string().c_str());
+      if (m) {
+        if (m == leader) {
+          dbg("- Leader %s", m->to_short_string().c_str());
+        } else {
+          dbg("- Member %s", m->to_short_string().c_str());
+        }
       }
     }
 
     for (const auto &m : g.second) {
-      m->leader_set(leader);
+      if (m) {
+        m->leader_set(leader);
+      }
     }
   }
 }

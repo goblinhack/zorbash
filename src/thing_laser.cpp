@@ -196,9 +196,17 @@ Thingp Thing::laser_shoot_at(Thingp item_maybe_null, const std::string &effect_n
   if (use_options && use_options->radial_effect) {
     if (is_player()) {
       if (use_options && use_options->radial_effect) {
-        msg("You zap %s.", item_maybe_null->text_the().c_str());
+        if (item_maybe_null) {
+          msg("You zap %s.", item_maybe_null->text_the().c_str());
+        } else {
+          err("Unexpected code path (1)");
+        }
       } else {
-        msg("You zap %s at %s.", item_maybe_null->text_the().c_str(), target->text_the().c_str());
+        if (item_maybe_null) {
+          msg("You zap %s at %s.", item_maybe_null->text_the().c_str(), target->text_the().c_str());
+        } else {
+          msg("You shoot at %s.", target->text_the().c_str());
+        }
       }
     } else if (use_options && use_options->radial_effect) {
       if (item_maybe_null) {

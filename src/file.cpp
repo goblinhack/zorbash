@@ -268,6 +268,10 @@ uint8_t file_exists(const char *filename)
   TRACE_AND_INDENT();
   struct stat buf;
 
+  if (! filename) {
+    return 0;
+  }
+
   if (stat(filename, &buf) >= 0) {
     if (S_ISDIR(buf.st_mode)) {
       return 0;
