@@ -699,6 +699,7 @@ private:
   int _is_sticky {};
   int _is_stone {};
   int _is_swimmer {};
+  int _is_swimmer_but_land_dweller {};
   int _is_sword {};
   int _is_tameable {};
   int _is_target_radial {};
@@ -777,7 +778,6 @@ private:
   int _is_unused_flag49 {};
   int _is_unused_flag5 {};
   int _is_unused_flag50 {};
-  int _is_unused_flag51 {};
   int _is_unused_flag6 {};
   int _is_unused_flag7 {};
   int _is_unused_flag8 {};
@@ -2075,6 +2075,7 @@ public:
   int is_steel(void) const;
   int is_sticky(void) const;
   int is_stone(void) const;
+  int is_swimmer_but_land_dweller(void) const;
   int is_swimmer(void) const;
   int is_sword(void) const;
   int is_tameable(void) const;
@@ -2153,7 +2154,6 @@ public:
   int is_unused_flag49(void) const;
   int is_unused_flag4(void) const;
   int is_unused_flag50(void) const;
-  int is_unused_flag51(void) const;
   int is_unused_flag5(void) const;
   int is_unused_flag6(void) const;
   int is_unused_flag7(void) const;
@@ -2853,6 +2853,7 @@ public:
   void is_steel_set(int v);
   void is_sticky_set(int v);
   void is_stone_set(int v);
+  void is_swimmer_but_land_dweller_set(int v);
   void is_swimmer_set(int v);
   void is_sword_set(int v);
   void is_tameable_set(int v);
@@ -2931,7 +2932,6 @@ public:
   void is_unused_flag49_set(int v);
   void is_unused_flag4_set(int v);
   void is_unused_flag50_set(int v);
-  void is_unused_flag51_set(int v);
   void is_unused_flag5_set(int v);
   void is_unused_flag6_set(int v);
   void is_unused_flag7_set(int v);

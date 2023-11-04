@@ -114,6 +114,7 @@ def tp_init(name, text_long_name):
     my.is_red_blooded(self, True)
     my.is_shootable(self, True)
     my.is_shovable(self, True)
+    my.is_swimmer_but_land_dweller(self, True)
     my.is_swimmer(self, True)
     my.is_thylacine(self, True)
     my.is_tickable(self, True)

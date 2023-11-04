@@ -619,6 +619,7 @@ PyObject *thing_is_steam(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_steel(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_sticky(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_stone(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_swimmer_but_land_dweller(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_swimmer(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_sword(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_tameable(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -693,7 +694,6 @@ PyObject *thing_is_unused_flag48(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag49(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag4(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag50(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag51(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag5(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag7(PyObject *obj, PyObject *args, PyObject *keywds);

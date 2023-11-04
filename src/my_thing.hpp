@@ -1895,6 +1895,7 @@ public:
   int is_steel(void);
   int is_sticky(void);
   int is_stone(void);
+  int is_swimmer_but_land_dweller(void);
   int is_swimmer(void);
   int is_sword(void);
   int is_tameable(void);
@@ -1972,7 +1973,6 @@ public:
   int is_unused_flag49(void);
   int is_unused_flag4(void);
   int is_unused_flag50(void);
-  int is_unused_flag51(void);
   int is_unused_flag5(void);
   int is_unused_flag6(void);
   int is_unused_flag7(void);

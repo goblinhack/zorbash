@@ -337,8 +337,13 @@ void tp_monst_add(Tpp tp)
 
   if (tp->is_swimmer()) {
     if (! tp->environ_likes_shallow_water() && ! tp->environ_likes_deep_water()) {
-      CON("INF: Swimming monster '%s' needs to set shallow and or deep water preferences",
-          tp->text_short_capitalised().c_str());
+      //
+      // For dogs etc...
+      //
+      if (! tp->is_swimmer_but_land_dweller()) {
+        CON("INF: Swimming monster '%s' needs to set shallow and or deep water preferences",
+            tp->text_short_capitalised().c_str());
+      }
     }
   }
 

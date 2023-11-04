@@ -469,10 +469,10 @@ int Thing::is_unused_flag50(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag50());
 }
-int Thing::is_unused_flag51(void)
+int Thing::is_swimmer_but_land_dweller(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag51());
+  return (tp()->is_swimmer_but_land_dweller());
 }
 int Thing::gfx_ascii_show_light_once_seen(void)
 {

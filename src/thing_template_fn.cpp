@@ -792,6 +792,7 @@ int Tp::is_steam(void) const { return _is_steam; }
 int Tp::is_steel(void) const { return _is_steel; }
 int Tp::is_sticky(void) const { return _is_sticky; }
 int Tp::is_stone(void) const { return _is_stone; }
+int Tp::is_swimmer_but_land_dweller(void) const { return _is_swimmer_but_land_dweller; }
 int Tp::is_swimmer(void) const { return _is_swimmer; }
 int Tp::is_sword(void) const { return _is_sword; }
 int Tp::is_tameable(void) const { return _is_tameable; }
@@ -869,7 +870,6 @@ int Tp::is_unused_flag48(void) const { return _is_unused_flag48; }
 int Tp::is_unused_flag49(void) const { return _is_unused_flag49; }
 int Tp::is_unused_flag4(void) const { return _is_unused_flag4; }
 int Tp::is_unused_flag50(void) const { return _is_unused_flag50; }
-int Tp::is_unused_flag51(void) const { return _is_unused_flag51; }
 int Tp::is_unused_flag5(void) const { return _is_unused_flag5; }
 int Tp::is_unused_flag6(void) const { return _is_unused_flag6; }
 int Tp::is_unused_flag7(void) const { return _is_unused_flag7; }
@@ -1569,6 +1569,7 @@ void Tp::is_steam_set(int v) { _is_steam = v; }
 void Tp::is_steel_set(int v) { _is_steel = v; }
 void Tp::is_sticky_set(int v) { _is_sticky = v; }
 void Tp::is_stone_set(int v) { _is_stone = v; }
+void Tp::is_swimmer_but_land_dweller_set(int v) { _is_swimmer_but_land_dweller = v; }
 void Tp::is_swimmer_set(int v) { _is_swimmer = v; }
 void Tp::is_sword_set(int v) { _is_sword = v; }
 void Tp::is_tameable_set(int v) { _is_tameable = v; }
@@ -1646,7 +1647,6 @@ void Tp::is_unused_flag48_set(int v) { _is_unused_flag48 = v; }
 void Tp::is_unused_flag49_set(int v) { _is_unused_flag49 = v; }
 void Tp::is_unused_flag4_set(int v) { _is_unused_flag4 = v; }
 void Tp::is_unused_flag50_set(int v) { _is_unused_flag50 = v; }
-void Tp::is_unused_flag51_set(int v) { _is_unused_flag51 = v; }
 void Tp::is_unused_flag5_set(int v) { _is_unused_flag5 = v; }
 void Tp::is_unused_flag6_set(int v) { _is_unused_flag6 = v; }
 void Tp::is_unused_flag7_set(int v) { _is_unused_flag7 = v; }
