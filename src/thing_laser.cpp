@@ -75,7 +75,8 @@ bool Thing::laser_choose_target(Thingp item, Thingp victim)
   return is_target_select(item);
 }
 
-Thingp Thing::laser_reflect(Thingp item, const std::string &effect_name, Thingp target, UseOptions *use_options)
+Thingp Thing::laser_reflect(Thingp item_maybe_null, const std::string &effect_name, Thingp target,
+                            UseOptions *use_options)
 {
   point old_target = target->curr_at;
   point delta      = curr_at - old_target;
@@ -109,15 +110,34 @@ Thingp Thing::laser_reflect(Thingp item, const std::string &effect_name, Thingp 
     new_angle = RAD_360 - angle;
   }
 
-  fpoint new_target_at((float) old_target.x + (cos(new_angle) * len), (float) old_target.y - (sin(new_angle) * len));
+  point new_target_at((int) ((float) old_target.x + (cos(new_angle) * len)),
+                      (int) ((float) old_target.y - (sin(new_angle) * len)));
 
-  TRACE_NO_INDENT();
+  dbg("Try to reflect laser beam at a target from %s to %s", target->curr_at.to_string().c_str(),
+      new_target_at.to_string().c_str());
+  TRACE_AND_INDENT();
+
+  Thingp             best;
+  point              best_hit_at;
+  ThingAttackOptions attack_options = {};
+  if (target->victim_attack_choose_best(item_maybe_null, new_target_at, &best, &best_hit_at, &attack_options)) {
+    return target->laser_shoot_at(item_maybe_null, effect_name, best, use_options);
+  }
+
+  //
+  // Fallback to hit anything
+  //
   FOR_ALL_GRID_THINGS(level, grid_thing, new_target_at.x, new_target_at.y)
   {
-    return target->laser_shoot_at(item, effect_name, grid_thing, use_options);
+    TRACE_AND_INDENT();
+    if (is_player()) {
+      msg("The laser beam bounces off of you!");
+    }
+    return target->laser_shoot_at(item_maybe_null, effect_name, grid_thing, use_options);
   }
   FOR_ALL_THINGS_END()
 
+  dbg("Failed to reflect laser");
   return target;
 }
 
@@ -182,17 +202,18 @@ Thingp Thing::laser_shoot_at(Thingp item_maybe_null, const std::string &effect_n
       }
     } else if (use_options && use_options->radial_effect) {
       if (item_maybe_null) {
-        msg("%s zaps at %s.", text_The().c_str(), item_maybe_null->text_the().c_str());
+        msg("%s shoots at %s.", text_The().c_str(), item_maybe_null->text_the().c_str());
       } else {
-        msg("%s zaps.", text_The().c_str());
+        msg("%s blasts.", text_The().c_str());
       }
     } else {
       if (item_maybe_null) {
-        msg("%s zaps %s at %s.", text_The().c_str(), item_maybe_null->text_the().c_str(), target->text_the().c_str());
+        msg("%s shoots %s at %s.", text_The().c_str(), item_maybe_null->text_the().c_str(),
+            target->text_the().c_str());
       } else if (is_water()) {
         msg("%s electrifies around %s.", text_The().c_str(), target->text_the().c_str());
       } else {
-        msg("%s zaps at %s.", text_The().c_str(), target->text_the().c_str());
+        msg("%s shoots at %s.", text_The().c_str(), target->text_the().c_str());
       }
     }
 
@@ -235,29 +256,41 @@ Thingp Thing::laser_shoot_at(Thingp item_maybe_null, const std::string &effect_n
         TRACE_AND_INDENT();
 
         if (is_player()) {
+          TRACE_NO_INDENT();
           if (use_options && use_options->radial_effect) {
+            TRACE_NO_INDENT();
             if (item_maybe_null) {
               msg("You zap %s.", item_maybe_null->text_the().c_str());
             } else {
               err("Unexpected code path");
             }
           } else {
-            msg("You zap %s at %s.", item_maybe_null->text_the().c_str(), other_target->text_the().c_str());
+            TRACE_NO_INDENT();
+            if (item_maybe_null) {
+              msg("You zap %s at %s.", item_maybe_null->text_the().c_str(), other_target->text_the().c_str());
+            } else {
+              //
+              // Could be a reflected beam
+              //
+              msg("The beam blasts %s.", other_target->text_the().c_str());
+            }
           }
         } else if (use_options && use_options->radial_effect) {
+          TRACE_NO_INDENT();
           if (item_maybe_null) {
-            msg("%s zaps at %s.", text_The().c_str(), item_maybe_null->text_the().c_str());
+            msg("%s shoots at %s.", text_The().c_str(), item_maybe_null->text_the().c_str());
           } else {
-            msg("%s zaps.", text_The().c_str());
+            msg("%s blasts.", text_The().c_str());
           }
         } else {
+          TRACE_NO_INDENT();
           if (item_maybe_null) {
-            msg("%s zaps %s at %s.", text_The().c_str(), item_maybe_null->text_the().c_str(),
+            msg("%s shoots %s at %s.", text_The().c_str(), item_maybe_null->text_the().c_str(),
                 other_target->text_the().c_str());
           } else if (is_water()) {
             msg("%s electrifies around %s.", text_The().c_str(), other_target->text_the().c_str());
           } else {
-            msg("%s zaps at %s.", text_The().c_str(), other_target->text_the().c_str());
+            msg("%s shoots at %s.", text_The().c_str(), other_target->text_the().c_str());
           }
         }
 
@@ -322,6 +355,8 @@ Thingp Thing::laser_shoot_at(Thingp item_maybe_null, const std::string &effect_n
         // Reflection ? create another beam
         //
         if (other_target && other_target->is_reflective()) {
+          dbg("Reflect laser");
+          TRACE_AND_INDENT();
           laser_reflect(item_maybe_null, effect_name, other_target, use_options);
         }
 
@@ -388,28 +423,31 @@ Thingp Thing::laser_shoot_at(Thingp item_maybe_null, const std::string &effect_n
           if (item_maybe_null) {
             msg("You zap %s at %s.", item_maybe_null->text_the().c_str(), target->text_the().c_str());
           } else {
-            msg("You zap at %s.", target->text_the().c_str());
+            //
+            // Could be a reflected beam
+            //
+            msg("The beam blasts %s.", target->text_the().c_str());
           }
         }
       } else if (use_options && use_options->radial_effect) {
         TRACE_NO_INDENT();
         if (item_maybe_null) {
-          msg("%s zaps at %s.", text_The().c_str(), item_maybe_null->text_the().c_str());
+          msg("%s shoots at %s.", text_The().c_str(), item_maybe_null->text_the().c_str());
         } else {
-          msg("%s zaps.", text_The().c_str());
+          msg("%s blasts.", text_The().c_str());
         }
       } else {
         TRACE_NO_INDENT();
         if (item_maybe_null) {
           TRACE_NO_INDENT();
-          msg("%s zaps at %s %s.", text_The().c_str(), item_maybe_null->text_the().c_str(),
+          msg("%s shoots at %s %s.", text_The().c_str(), item_maybe_null->text_the().c_str(),
               target->text_the().c_str());
         } else if (is_water()) {
           TRACE_NO_INDENT();
           msg("%s electrifies around %s.", text_The().c_str(), target->text_the().c_str());
         } else {
           TRACE_NO_INDENT();
-          msg("%s zaps at %s.", text_The().c_str(), target->text_the().c_str());
+          msg("%s shoots at %s.", text_The().c_str(), target->text_the().c_str());
         }
       }
 
@@ -418,6 +456,8 @@ Thingp Thing::laser_shoot_at(Thingp item_maybe_null, const std::string &effect_n
       //
       TRACE_NO_INDENT();
       if (target->is_reflective()) {
+        dbg("Reflect laser");
+        TRACE_AND_INDENT();
         laser_reflect(item_maybe_null, effect_name, target, use_options);
       }
 

@@ -218,7 +218,6 @@ bool Thing::has_skill(Tpp skill)
   }
 
   TRACE_NO_INDENT();
-  TRACE_NO_INDENT();
   FOR_ALL_SKILLS(oid)
   {
     auto learned_skill_iter = game->level->thing_find(oid);

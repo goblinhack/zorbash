@@ -151,7 +151,7 @@ int Thing::total_dmg_for_on_rcv_dmg_digest(Thingp hitter, Thingp real_hitter, in
   FOR_ALL_SKILLS(item)
   {
     auto iter = level->thing_find(item.id);
-    if (iter) {
+    if (iter && iter->is_activated) {
       damage = iter->on_owner_rcv_dmg_digest(this, hitter, real_hitter, damage);
     }
   }
@@ -160,7 +160,7 @@ int Thing::total_dmg_for_on_rcv_dmg_digest(Thingp hitter, Thingp real_hitter, in
   FOR_ALL_SPELLS(item)
   {
     auto iter = level->thing_find(item.id);
-    if (iter) {
+    if (iter && iter->is_activated) {
       damage = iter->on_owner_rcv_dmg_digest(this, hitter, real_hitter, damage);
     }
   }
@@ -294,7 +294,7 @@ int Thing::total_dmg_for_on_attacking_dmg_digest(Thingp victim, int damage)
   FOR_ALL_SKILLS(item)
   {
     auto iter = level->thing_find(item.id);
-    if (iter) {
+    if (iter && iter->is_activated) {
       damage = iter->on_owner_attack_dmg_digest(this, victim, damage);
     }
   }
@@ -303,7 +303,7 @@ int Thing::total_dmg_for_on_attacking_dmg_digest(Thingp victim, int damage)
   FOR_ALL_SPELLS(item)
   {
     auto iter = level->thing_find(item.id);
-    if (iter) {
+    if (iter && iter->is_activated) {
       damage = iter->on_owner_attack_dmg_digest(this, victim, damage);
     }
   }

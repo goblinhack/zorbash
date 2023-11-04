@@ -276,7 +276,7 @@ int Thing::total_dmg_for_on_attacking_dmg_negation(Thingp victim, int damage)
   FOR_ALL_SKILLS(item)
   {
     auto iter = level->thing_find(item.id);
-    if (iter) {
+    if (iter && iter->is_activated) {
       damage = iter->on_owner_attack_dmg_negation(this, victim, damage);
     }
   }
@@ -285,7 +285,7 @@ int Thing::total_dmg_for_on_attacking_dmg_negation(Thingp victim, int damage)
   FOR_ALL_SPELLS(item)
   {
     auto iter = level->thing_find(item.id);
-    if (iter) {
+    if (iter && iter->is_activated) {
       damage = iter->on_owner_attack_dmg_negation(this, victim, damage);
     }
   }
