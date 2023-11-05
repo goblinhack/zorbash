@@ -829,6 +829,8 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
       dbg("Attack type already set: attack[THING_ATTACK_STAMINA_DRAIN]");
     } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
       dbg("Attack type already set: attack[THING_ATTACK_MAGIC_DRAIN]");
+    } else if (attack_options->attack[ THING_ATTACK_HOLY ]) {
+      dbg("Attack type already set: attack[THING_ATTACK_HOLY]");
     }
 
     //
@@ -1083,6 +1085,15 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
           attack_options->damage  = dmg_magic_drain_val;
           attack_options->dmg_set = true;
           dbg("Set magical drain damage %d", attack_options->damage);
+        }
+      }
+
+      if (attack_options->attack[ THING_ATTACK_HOLY ] && ! attack_options->dmg_set) {
+        int dmg_holy_val = dmg_holy(victim);
+        if (dmg_holy_val > 0) {
+          attack_options->damage  = dmg_holy_val;
+          attack_options->dmg_set = true;
+          dbg("Set holy damage %d", attack_options->damage);
         }
       }
 
@@ -1656,6 +1667,34 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
           attack_options->dmg_set                            = true;
           attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ] = true;
           dbg("Set magical drain damage %d", attack_options->damage);
+        }
+      }
+
+      //
+      // Chance of holy damage?
+      //
+      if (! attack_options->attack[ THING_ATTACK_HOLY ]) {
+        if (! attack_options->dmg_set) {
+          if (d1000() < dmg_chance_d1000_holy(attack_options->attack_num)) {
+            int dmg_holy_val = dmg_holy(victim);
+            if (dmg_holy_val > 0) {
+              attack_options->damage                      = dmg_holy_val;
+              attack_options->dmg_set                     = true;
+              attack_options->attack[ THING_ATTACK_HOLY ] = true;
+              dbg("Set holy damage %d", attack_options->damage);
+            }
+          }
+        }
+      } else if (! attack_options->dmg_set) {
+        //
+        // Here we've indicated the attack type is mandatory, but not set the damage
+        //
+        int dmg_holy_val = dmg_holy(victim);
+        if (dmg_holy_val > 0) {
+          attack_options->damage                      = dmg_holy_val;
+          attack_options->dmg_set                     = true;
+          attack_options->attack[ THING_ATTACK_HOLY ] = true;
+          dbg("Set holy damage %d", attack_options->damage);
         }
       }
 
@@ -2244,6 +2283,20 @@ int Thing::is_attacked_with_dmg_magic_drain(Thingp hitter, Thingp real_hitter, i
   {
     hitter->log("Magical draining attack %s, real hitter %s", to_short_string().c_str(),
                 real_hitter->to_short_string().c_str());
+  }
+  TRACE_AND_INDENT();
+  return is_hit(hitter, &attack_options, damage);
+}
+
+int Thing::is_attacked_with_dmg_holy(Thingp hitter, Thingp real_hitter, int damage)
+{
+  TRACE_NO_INDENT();
+  ThingAttackOptions attack_options {};
+  attack_options.attack[ THING_ATTACK_HOLY ] = true;
+  attack_options.real_hitter                 = real_hitter;
+  IF_DEBUG
+  {
+    hitter->log("Holy attack %s, real hitter %s", to_short_string().c_str(), real_hitter->to_short_string().c_str());
   }
   TRACE_AND_INDENT();
   return is_hit(hitter, &attack_options, damage);

@@ -223,6 +223,15 @@ void               Tp::dmg_magic_drain_dice_set(const std::string &v)
   _dmg_magic_drain_dice_str = v;
 }
 
+const Dice        &Tp::dmg_holy_dice(void) const { return _dmg_holy_dice; }
+const int          Tp::dmg_holy(void) const { return _dmg_holy_dice.roll(); }
+const std::string &Tp::dmg_holy_dice_str(void) const { return _dmg_holy_dice_str; }
+void               Tp::dmg_holy_dice_set(const std::string &v)
+{
+  _dmg_holy_dice     = v;
+  _dmg_holy_dice_str = v;
+}
+
 const Dice        &Tp::dmg_nat_att_dice(void) const { return _dmg_nat_att_dice; }
 const int          Tp::dmg_nat_att(void) const { return _dmg_nat_att_dice.roll(); }
 const std::string &Tp::dmg_nat_att_dice_str(void) const { return _dmg_nat_att_dice_str; }

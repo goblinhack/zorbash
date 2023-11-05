@@ -537,6 +537,11 @@ void tp_dump_monsters(void)
       dmg_str += tp->dmg_magic_drain_dice_str();
       dmg_str += "<newline>";
     }
+    if (! tp->dmg_holy_dice_str().empty()) {
+      dmg_str += "Holy:";
+      dmg_str += tp->dmg_holy_dice_str();
+      dmg_str += "<newline>";
+    }
     if (! tp->dmg_melee_dice_str().empty()) {
       dmg_str += "Melee:";
       dmg_str += tp->dmg_melee_dice_str();
@@ -592,6 +597,9 @@ void tp_dump_monsters(void)
     }
     if (tp->is_immune_to_magic_drain()) {
       imm_str += "Magic-drain<newline>";
+    }
+    if (tp->is_immune_to_holy_damage()) {
+      imm_str += "Holy-damage<newline>";
     }
     if (tp->is_immune_to_necrosis()) {
       imm_str += "Necrosis<newline>";
@@ -748,6 +756,11 @@ void tp_dump_weapons(void)
       dmg_str += tp->dmg_magic_drain_dice_str();
       dmg_str += "<newline>";
     }
+    if (! tp->dmg_holy_dice_str().empty()) {
+      dmg_str += "Damage-Holy:";
+      dmg_str += tp->dmg_holy_dice_str();
+      dmg_str += "<newline>";
+    }
     if (! tp->dmg_missile_dice_str().empty()) {
       dmg_str += "Damage-Missile:";
       dmg_str += tp->dmg_missile_dice_str();
@@ -798,6 +811,9 @@ void tp_dump_weapons(void)
     }
     if (tp->is_immune_to_magic_drain()) {
       imm_str += "Immunity-Psi<newline>";
+    }
+    if (tp->is_immune_to_holy_damage()) {
+      imm_str += "Immunity-Holy-Damage<newline>";
     }
     if (tp->is_immune_to_necrosis()) {
       imm_str += "Immunity-Necrosis<newline>";

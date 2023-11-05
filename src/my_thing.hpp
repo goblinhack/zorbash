@@ -517,6 +517,7 @@ public:
   bool buff_floating(void);
   bool buff_immune_to_cold(void);
   bool buff_immune_to_fire(void);
+  bool buff_immune_to_holy_damage(void);
   bool buff_immune_to_lightning(void);
   bool buff_immune_to_magic_drain(void);
   bool buff_immune_to_necrosis(void);
@@ -796,6 +797,7 @@ public:
   const Dice &dmg_digest_dice(void);
   const Dice &dmg_stamina_dice(void);
   const Dice &dmg_magic_drain_dice(void);
+  const Dice &dmg_holy_dice(void);
   const Dice &dmg_energy_dice(void);
   const Dice &dmg_negation_dice(void);
   const Dice &dmg_fire_dice(void);
@@ -858,6 +860,7 @@ public:
   const std::string dmg_energy_dice_str(void);
   const std::string dmg_fire_dice_str(void);
   const std::string dmg_heat_dice_str(void);
+  const std::string dmg_holy_dice_str(void);
   const std::string dmg_impact_dice_str(void);
   const std::string dmg_lightning_dice_str(void);
   const std::string dmg_magic_drain_dice_str(void);
@@ -905,6 +908,7 @@ public:
   const std::string &on_attacking_dmg_energy_do(void);
   const std::string &on_attacking_dmg_fire_do(void);
   const std::string &on_attacking_dmg_heat_do(void);
+  const std::string &on_attacking_dmg_holy_do(void);
   const std::string &on_attacking_dmg_impact_do(void);
   const std::string &on_attacking_dmg_lightning_do(void);
   const std::string &on_attacking_dmg_magic_drain_do(void);
@@ -954,6 +958,7 @@ public:
   const std::string &on_owner_attack_dmg_energy_do(void);
   const std::string &on_owner_attack_dmg_fire_do(void);
   const std::string &on_owner_attack_dmg_heat_do(void);
+  const std::string &on_owner_attack_dmg_holy_do(void);
   const std::string &on_owner_attack_dmg_impact_do(void);
   const std::string &on_owner_attack_dmg_lightning_do(void);
   const std::string &on_owner_attack_dmg_magic_drain_do(void);
@@ -978,6 +983,7 @@ public:
   const std::string &on_owner_rcv_dmg_energy_do(void);
   const std::string &on_owner_rcv_dmg_fire_do(void);
   const std::string &on_owner_rcv_dmg_heat_do(void);
+  const std::string &on_owner_rcv_dmg_holy_do(void);
   const std::string &on_owner_rcv_dmg_impact_do(void);
   const std::string &on_owner_rcv_dmg_lightning_do(void);
   const std::string &on_owner_rcv_dmg_magic_drain_do(void);
@@ -1005,6 +1011,7 @@ public:
   const std::string &on_rcv_dmg_energy_do(void);
   const std::string &on_rcv_dmg_fire_do(void);
   const std::string &on_rcv_dmg_heat_do(void);
+  const std::string &on_rcv_dmg_holy_do(void);
   const std::string &on_rcv_dmg_impact_do(void);
   const std::string &on_rcv_dmg_lightning_do(void);
   const std::string &on_rcv_dmg_magic_drain_do(void);
@@ -1255,6 +1262,7 @@ public:
   int dmg_chance_d1000_energy(int);
   int dmg_chance_d1000_fire(int);
   int dmg_chance_d1000_heat(int);
+  int dmg_chance_d1000_holy(int);
   int dmg_chance_d1000_impact(int);
   int dmg_chance_d1000_lightning(int);
   int dmg_chance_d1000_magic_drain(int);
@@ -1280,6 +1288,7 @@ public:
   int dmg_energy(Thingp victim = nullptr);
   int dmg_fire(Thingp victim = nullptr);
   int dmg_heat(Thingp victim = nullptr);
+  int dmg_holy(Thingp victim = nullptr);
   int dmg_impact(Thingp victim = nullptr);
   int dmg_lightning(Thingp victim = nullptr);
   int dmg_magic_drain(Thingp victim = nullptr);
@@ -1536,6 +1545,7 @@ public:
   int is_attacked_with_dmg_energy(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_dmg_fire(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_dmg_heat(Thingp hitter, Thingp real_hitter, int damage);
+  int is_attacked_with_dmg_holy(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_dmg_impact(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_dmg_lightning(Thingp hitter, Thingp real_hitter, int damage);
   int is_attacked_with_dmg_magic_drain(Thingp hitter, Thingp real_hitter, int damage);
@@ -1728,6 +1738,7 @@ public:
   int is_immune_to_electricity(void);
   int is_immune_to_entrancement(void);
   int is_immune_to_fire(void);
+  int is_immune_to_holy_damage(void);
   int is_immune_to_lightning(void);
   int is_immune_to_magic_drain(void);
   int is_immune_to_necrosis(void);
@@ -2114,6 +2125,7 @@ public:
   int on_attacking_dmg_energy(Thingp victim, int damage);
   int on_attacking_dmg_fire(Thingp victim, int damage);
   int on_attacking_dmg_heat(Thingp victim, int damage);
+  int on_attacking_dmg_holy(Thingp victim, int damage);
   int on_attacking_dmg_impact(Thingp victim, int damage);
   int on_attacking_dmg_lightning(Thingp victim, int damage);
   int on_attacking_dmg_magic_drain(Thingp victim, int damage);
@@ -2142,6 +2154,7 @@ public:
   int on_owner_attack_dmg_energy(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_fire(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_heat(Thingp owner, Thingp victim, int damage);
+  int on_owner_attack_dmg_holy(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_impact(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_lightning(Thingp owner, Thingp victim, int damage);
   int on_owner_attack_dmg_magic_drain(Thingp owner, Thingp victim, int damage);
@@ -2166,6 +2179,7 @@ public:
   int on_owner_rcv_dmg_energy(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_rcv_dmg_fire(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_rcv_dmg_heat(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
+  int on_owner_rcv_dmg_holy(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_rcv_dmg_impact(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_rcv_dmg_lightning(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
   int on_owner_rcv_dmg_magic_drain(Thingp owner, Thingp hitter, Thingp real_hitter, int damage);
@@ -2190,6 +2204,7 @@ public:
   int on_rcv_dmg_energy(Thingp hitter, Thingp real_hitter, int damage);
   int on_rcv_dmg_fire(Thingp hitter, Thingp real_hitter, int damage);
   int on_rcv_dmg_heat(Thingp hitter, Thingp real_hitter, int damage);
+  int on_rcv_dmg_holy(Thingp hitter, Thingp real_hitter, int damage);
   int on_rcv_dmg_impact(Thingp hitter, Thingp real_hitter, int damage);
   int on_rcv_dmg_lightning(Thingp hitter, Thingp real_hitter, int damage);
   int on_rcv_dmg_magic_drain(Thingp hitter, Thingp real_hitter, int damage);
@@ -2470,6 +2485,7 @@ public:
   int total_dmg_for_on_attacking_dmg_energy(Thingp victim, int damage);
   int total_dmg_for_on_attacking_dmg_fire(Thingp victim, int damage);
   int total_dmg_for_on_attacking_dmg_heat(Thingp victim, int damage);
+  int total_dmg_for_on_attacking_dmg_holy(Thingp victim, int damage);
   int total_dmg_for_on_attacking_dmg_impact(Thingp victim, int damage);
   int total_dmg_for_on_attacking_dmg_lightning(Thingp victim, int damage);
   int total_dmg_for_on_attacking_dmg_magic_drain(Thingp victim, int damage);
@@ -2494,6 +2510,7 @@ public:
   int total_dmg_for_on_rcv_dmg_energy(Thingp hitter, Thingp real_hitter, int damage);
   int total_dmg_for_on_rcv_dmg_fire(Thingp hitter, Thingp real_hitter, int damage);
   int total_dmg_for_on_rcv_dmg_heat(Thingp hitter, Thingp real_hitter, int damage);
+  int total_dmg_for_on_rcv_dmg_holy(Thingp hitter, Thingp real_hitter, int damage);
   int total_dmg_for_on_rcv_dmg_impact(Thingp hitter, Thingp real_hitter, int damage);
   int total_dmg_for_on_rcv_dmg_lightning(Thingp hitter, Thingp real_hitter, int damage);
   int total_dmg_for_on_rcv_dmg_magic_drain(Thingp hitter, Thingp real_hitter, int damage);

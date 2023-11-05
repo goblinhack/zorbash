@@ -806,7 +806,11 @@ void Game::wid_thing_info_add_immunity(WidPopup *w, Thingp t)
     w->log(tmp);
   }
   if (t->is_immune_to_magic_drain()) {
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Draining");
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Holy-damage");
+    w->log(tmp);
+  }
+  if (t->is_immune_to_holy_damage()) {
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Blessing");
     w->log(tmp);
   }
   if (t->is_immune_to_necrosis()) {

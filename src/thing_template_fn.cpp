@@ -51,6 +51,7 @@ const std::string &Tp::on_attacking_dmg_drown_do(void) const { return _on_attack
 const std::string &Tp::on_attacking_dmg_energy_do(void) const { return _on_attacking_dmg_energy_do; }
 const std::string &Tp::on_attacking_dmg_fire_do(void) const { return _on_attacking_dmg_fire_do; }
 const std::string &Tp::on_attacking_dmg_heat_do(void) const { return _on_attacking_dmg_heat_do; }
+const std::string &Tp::on_attacking_dmg_holy_do(void) const { return _on_attacking_dmg_holy_do; }
 const std::string &Tp::on_attacking_dmg_impact_do(void) const { return _on_attacking_dmg_impact_do; }
 const std::string &Tp::on_attacking_dmg_lightning_do(void) const { return _on_attacking_dmg_lightning_do; }
 const std::string &Tp::on_attacking_dmg_magic_drain_do(void) const { return _on_attacking_dmg_magic_drain_do; }
@@ -99,6 +100,7 @@ const std::string &Tp::on_owner_attack_dmg_drown_do(void) const { return _on_own
 const std::string &Tp::on_owner_attack_dmg_energy_do(void) const { return _on_owner_attack_dmg_energy_do; }
 const std::string &Tp::on_owner_attack_dmg_fire_do(void) const { return _on_owner_attack_dmg_fire_do; }
 const std::string &Tp::on_owner_attack_dmg_heat_do(void) const { return _on_owner_attack_dmg_heat_do; }
+const std::string &Tp::on_owner_attack_dmg_holy_do(void) const { return _on_owner_attack_dmg_holy_do; }
 const std::string &Tp::on_owner_attack_dmg_impact_do(void) const { return _on_owner_attack_dmg_impact_do; }
 const std::string &Tp::on_owner_attack_dmg_lightning_do(void) const { return _on_owner_attack_dmg_lightning_do; }
 const std::string &Tp::on_owner_attack_dmg_magic_drain_do(void) const { return _on_owner_attack_dmg_magic_drain_do; }
@@ -123,6 +125,7 @@ const std::string &Tp::on_owner_rcv_dmg_drown_do(void) const { return _on_owner_
 const std::string &Tp::on_owner_rcv_dmg_energy_do(void) const { return _on_owner_rcv_dmg_energy_do; }
 const std::string &Tp::on_owner_rcv_dmg_fire_do(void) const { return _on_owner_rcv_dmg_fire_do; }
 const std::string &Tp::on_owner_rcv_dmg_heat_do(void) const { return _on_owner_rcv_dmg_heat_do; }
+const std::string &Tp::on_owner_rcv_dmg_holy_do(void) const { return _on_owner_rcv_dmg_holy_do; }
 const std::string &Tp::on_owner_rcv_dmg_impact_do(void) const { return _on_owner_rcv_dmg_impact_do; }
 const std::string &Tp::on_owner_rcv_dmg_lightning_do(void) const { return _on_owner_rcv_dmg_lightning_do; }
 const std::string &Tp::on_owner_rcv_dmg_magic_drain_do(void) const { return _on_owner_rcv_dmg_magic_drain_do; }
@@ -150,6 +153,7 @@ const std::string &Tp::on_rcv_dmg_drown_do(void) const { return _on_rcv_dmg_drow
 const std::string &Tp::on_rcv_dmg_energy_do(void) const { return _on_rcv_dmg_energy_do; }
 const std::string &Tp::on_rcv_dmg_fire_do(void) const { return _on_rcv_dmg_fire_do; }
 const std::string &Tp::on_rcv_dmg_heat_do(void) const { return _on_rcv_dmg_heat_do; }
+const std::string &Tp::on_rcv_dmg_holy_do(void) const { return _on_rcv_dmg_holy_do; }
 const std::string &Tp::on_rcv_dmg_impact_do(void) const { return _on_rcv_dmg_impact_do; }
 const std::string &Tp::on_rcv_dmg_lightning_do(void) const { return _on_rcv_dmg_lightning_do; }
 const std::string &Tp::on_rcv_dmg_magic_drain_do(void) const { return _on_rcv_dmg_magic_drain_do; }
@@ -625,6 +629,7 @@ int Tp::is_immune_to_confusion(void) const { return _is_immune_to_confusion; }
 int Tp::is_immune_to_electricity(void) const { return _is_immune_to_electricity; }
 int Tp::is_immune_to_entrancement(void) const { return _is_immune_to_entrancement; }
 int Tp::is_immune_to_fire(void) const { return _is_immune_to_fire; }
+int Tp::is_immune_to_holy_damage(void) const { return _is_immune_to_holy_damage; }
 int Tp::is_immune_to_lightning(void) const { return _is_immune_to_lightning; }
 int Tp::is_immune_to_magic_drain(void) const { return _is_immune_to_magic_drain; }
 int Tp::is_immune_to_necrosis(void) const { return _is_immune_to_necrosis; }
@@ -1402,6 +1407,7 @@ void Tp::is_immune_to_confusion_set(int v) { _is_immune_to_confusion = v; }
 void Tp::is_immune_to_electricity_set(int v) { _is_immune_to_electricity = v; }
 void Tp::is_immune_to_entrancement_set(int v) { _is_immune_to_entrancement = v; }
 void Tp::is_immune_to_fire_set(int v) { _is_immune_to_fire = v; }
+void Tp::is_immune_to_holy_damage_set(int v) { _is_immune_to_holy_damage = v; }
 void Tp::is_immune_to_lightning_set(int v) { _is_immune_to_lightning = v; }
 void Tp::is_immune_to_magic_drain_set(int v) { _is_immune_to_magic_drain = v; }
 void Tp::is_immune_to_necrosis_set(int v) { _is_immune_to_necrosis = v; }
@@ -1705,6 +1711,7 @@ void Tp::on_attacking_dmg_drown_do_set(const std::string &v) { _on_attacking_dmg
 void Tp::on_attacking_dmg_energy_do_set(const std::string &v) { _on_attacking_dmg_energy_do = v; }
 void Tp::on_attacking_dmg_fire_do_set(const std::string &v) { _on_attacking_dmg_fire_do = v; }
 void Tp::on_attacking_dmg_heat_do_set(const std::string &v) { _on_attacking_dmg_heat_do = v; }
+void Tp::on_attacking_dmg_holy_do_set(const std::string &v) { _on_attacking_dmg_holy_do = v; }
 void Tp::on_attacking_dmg_impact_do_set(const std::string &v) { _on_attacking_dmg_impact_do = v; }
 void Tp::on_attacking_dmg_lightning_do_set(const std::string &v) { _on_attacking_dmg_lightning_do = v; }
 void Tp::on_attacking_dmg_magic_drain_do_set(const std::string &v) { _on_attacking_dmg_magic_drain_do = v; }
@@ -1756,6 +1763,7 @@ void Tp::on_owner_attack_dmg_drown_do_set(const std::string &v) { _on_owner_atta
 void Tp::on_owner_attack_dmg_energy_do_set(const std::string &v) { _on_owner_attack_dmg_energy_do = v; }
 void Tp::on_owner_attack_dmg_fire_do_set(const std::string &v) { _on_owner_attack_dmg_fire_do = v; }
 void Tp::on_owner_attack_dmg_heat_do_set(const std::string &v) { _on_owner_attack_dmg_heat_do = v; }
+void Tp::on_owner_attack_dmg_holy_do_set(const std::string &v) { _on_owner_attack_dmg_holy_do = v; }
 void Tp::on_owner_attack_dmg_impact_do_set(const std::string &v) { _on_owner_attack_dmg_impact_do = v; }
 void Tp::on_owner_attack_dmg_lightning_do_set(const std::string &v) { _on_owner_attack_dmg_lightning_do = v; }
 void Tp::on_owner_attack_dmg_magic_drain_do_set(const std::string &v) { _on_owner_attack_dmg_magic_drain_do = v; }
@@ -1780,6 +1788,7 @@ void Tp::on_owner_rcv_dmg_drown_do_set(const std::string &v) { _on_owner_rcv_dmg
 void Tp::on_owner_rcv_dmg_energy_do_set(const std::string &v) { _on_owner_rcv_dmg_energy_do = v; }
 void Tp::on_owner_rcv_dmg_fire_do_set(const std::string &v) { _on_owner_rcv_dmg_fire_do = v; }
 void Tp::on_owner_rcv_dmg_heat_do_set(const std::string &v) { _on_owner_rcv_dmg_heat_do = v; }
+void Tp::on_owner_rcv_dmg_holy_do_set(const std::string &v) { _on_owner_rcv_dmg_holy_do = v; }
 void Tp::on_owner_rcv_dmg_impact_do_set(const std::string &v) { _on_owner_rcv_dmg_impact_do = v; }
 void Tp::on_owner_rcv_dmg_lightning_do_set(const std::string &v) { _on_owner_rcv_dmg_lightning_do = v; }
 void Tp::on_owner_rcv_dmg_magic_drain_do_set(const std::string &v) { _on_owner_rcv_dmg_magic_drain_do = v; }
@@ -1807,6 +1816,7 @@ void Tp::on_rcv_dmg_drown_do_set(const std::string &v) { _on_rcv_dmg_drown_do = 
 void Tp::on_rcv_dmg_energy_do_set(const std::string &v) { _on_rcv_dmg_energy_do = v; }
 void Tp::on_rcv_dmg_fire_do_set(const std::string &v) { _on_rcv_dmg_fire_do = v; }
 void Tp::on_rcv_dmg_heat_do_set(const std::string &v) { _on_rcv_dmg_heat_do = v; }
+void Tp::on_rcv_dmg_holy_do_set(const std::string &v) { _on_rcv_dmg_holy_do = v; }
 void Tp::on_rcv_dmg_impact_do_set(const std::string &v) { _on_rcv_dmg_impact_do = v; }
 void Tp::on_rcv_dmg_lightning_do_set(const std::string &v) { _on_rcv_dmg_lightning_do = v; }
 void Tp::on_rcv_dmg_magic_drain_do_set(const std::string &v) { _on_rcv_dmg_magic_drain_do = v; }

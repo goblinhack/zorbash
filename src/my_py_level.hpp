@@ -163,6 +163,7 @@ PyObject *level_is_hittable_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_humanoid_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_immune_to_acid_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_immune_to_cold_at(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *level_is_immune_to_holy_damage_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_immune_to_magic_drain_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_immune_to_necrosis_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_immune_to_poison_at(PyObject *obj, PyObject *args, PyObject *keywds);

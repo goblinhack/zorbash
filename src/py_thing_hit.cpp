@@ -111,6 +111,12 @@ PyObject *thing_hit_dmg_magic_drain(PyObject *obj, PyObject *args, PyObject *key
   return thing_hit_common(obj, args, keywds, THING_ATTACK_MAGIC_DRAIN);
 }
 
+PyObject *thing_hit_dmg_holy(PyObject *obj, PyObject *args, PyObject *keywds)
+{
+  TRACE_NO_INDENT();
+  return thing_hit_common(obj, args, keywds, THING_ATTACK_HOLY);
+}
+
 PyObject *thing_hit_dmg_acid(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();

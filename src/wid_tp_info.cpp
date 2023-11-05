@@ -229,6 +229,7 @@ WidPopup *Game::wid_tp_info_create_popup(Tpp t, point tl, point br)
   wid_tp_info_add_dmg_necrosis(wid_popup_window, t, attack_index);
   wid_tp_info_add_dmg_stamina(wid_popup_window, t, attack_index);
   wid_tp_info_add_dmg_magic_drain(wid_popup_window, t, attack_index);
+  wid_tp_info_add_dmg_holy(wid_popup_window, t, attack_index);
   wid_tp_info_add_dmgd_chance(wid_popup_window, t);
   wid_tp_info_add_crit_chance(wid_popup_window, t);
   wid_tp_info_add_stat_att(wid_popup_window, t);
@@ -1210,9 +1211,9 @@ void Game::wid_tp_info_add_dmg_digest(WidPopup *w, Tpp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_ranged_weapon() || t->is_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
-    auto attack_swallow_dice = t->dmg_digest_dice();
-    auto min_value           = attack_swallow_dice.min_roll();
-    auto max_value           = attack_swallow_dice.max_roll();
+    auto attack_dice = t->dmg_digest_dice();
+    auto min_value   = attack_dice.min_roll();
+    auto max_value   = attack_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_digest_dice_str().c_str());
@@ -1240,9 +1241,9 @@ void Game::wid_tp_info_add_dmg_necrosis(WidPopup *w, Tpp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_ranged_weapon() || t->is_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
-    auto attack_swallow_dice = t->dmg_necrosis_dice();
-    auto min_value           = attack_swallow_dice.min_roll();
-    auto max_value           = attack_swallow_dice.max_roll();
+    auto attack_dice = t->dmg_necrosis_dice();
+    auto min_value   = attack_dice.min_roll();
+    auto max_value   = attack_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_necrosis_dice_str().c_str());
@@ -1270,9 +1271,9 @@ void Game::wid_tp_info_add_dmg_stamina(WidPopup *w, Tpp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_ranged_weapon() || t->is_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
-    auto attack_swallow_dice = t->dmg_stamina_dice();
-    auto min_value           = attack_swallow_dice.min_roll();
-    auto max_value           = attack_swallow_dice.max_roll();
+    auto attack_dice = t->dmg_stamina_dice();
+    auto min_value   = attack_dice.min_roll();
+    auto max_value   = attack_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_stamina_dice_str().c_str());
@@ -1300,9 +1301,9 @@ void Game::wid_tp_info_add_dmg_magic_drain(WidPopup *w, Tpp t, int index)
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_ranged_weapon() || t->is_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
-    auto attack_swallow_dice = t->dmg_magic_drain_dice();
-    auto min_value           = attack_swallow_dice.min_roll();
-    auto max_value           = attack_swallow_dice.max_roll();
+    auto attack_dice = t->dmg_magic_drain_dice();
+    auto min_value   = attack_dice.min_roll();
+    auto max_value   = attack_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_magic_drain_dice_str().c_str());
@@ -1314,6 +1315,36 @@ void Game::wid_tp_info_add_dmg_magic_drain(WidPopup *w, Tpp t, int index)
       w->log(tmp);
 
       int chance = (int) (((((float) t->dmg_chance_d1000_magic_drain(index))) / 1000.0) * 100.0);
+      if (chance < 100) {
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+        w->log(tmp);
+      }
+    }
+  }
+}
+
+void Game::wid_tp_info_add_dmg_holy(WidPopup *w, Tpp t, int index)
+{
+  TRACE_AND_INDENT();
+  char tmp[ MAXSHORTSTR ];
+  char tmp2[ MAXSHORTSTR ];
+
+  if (t->is_ranged_weapon() || t->is_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
+    auto attack_dice = t->dmg_holy_dice();
+    auto min_value   = attack_dice.min_roll();
+    auto max_value   = attack_dice.max_roll();
+    if (min_value > 0) {
+      if (min_value == max_value) {
+        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_holy_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Holy dmg  %12s", tmp2);
+      } else {
+        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_holy_dice_str().c_str());
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Holy dmg  %12s", tmp2);
+      }
+      w->log(tmp);
+
+      int chance = (int) (((((float) t->dmg_chance_d1000_holy(index))) / 1000.0) * 100.0);
       if (chance < 100) {
         snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);

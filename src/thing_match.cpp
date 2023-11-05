@@ -326,6 +326,7 @@ bool Tp::matches(const std::string &what)
   if (is_immune_to_electricity() && (what == "is_immune_to_electricity")) { return true; }
   if (is_immune_to_entrancement() && (what == "is_immune_to_entrancement")) { return true; }
   if (is_immune_to_fire() && (what == "is_immune_to_fire")) { return true; }
+  if (is_immune_to_holy_damage() && (what == "is_immune_to_holy_damage")) { return true; }
   if (is_immune_to_lightning() && (what == "is_immune_to_lightning")) { return true; }
   if (is_immune_to_magic_drain() && (what == "is_immune_to_magic_drain")) { return true; }
   if (is_immune_to_necrosis() && (what == "is_immune_to_necrosis")) { return true; }
@@ -936,6 +937,7 @@ bool Thing::matches(const std::string &what)
   if (is_immune_to_electricity() && (what == "is_immune_to_electricity")) { return true; }
   if (is_immune_to_entrancement() && (what == "is_immune_to_entrancement")) { return true; }
   if (is_immune_to_fire() && (what == "is_immune_to_fire")) { return true; }
+  if (is_immune_to_holy_damage() && (what == "is_immune_to_holy_damage")) { return true; }
   if (is_immune_to_lightning() && (what == "is_immune_to_lightning")) { return true; }
   if (is_immune_to_magic_drain() && (what == "is_immune_to_magic_drain")) { return true; }
   if (is_immune_to_necrosis() && (what == "is_immune_to_necrosis")) { return true; }
@@ -1540,6 +1542,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_immune_to_electricity") { return &Thing::is_immune_to_electricity; }
   if (what == "is_immune_to_entrancement") { return &Thing::is_immune_to_entrancement; }
   if (what == "is_immune_to_fire") { return &Thing::is_immune_to_fire; }
+  if (what == "is_immune_to_holy_damage") { return &Thing::is_immune_to_holy_damage; }
   if (what == "is_immune_to_lightning") { return &Thing::is_immune_to_lightning; }
   if (what == "is_immune_to_magic_drain") { return &Thing::is_immune_to_magic_drain; }
   if (what == "is_immune_to_necrosis") { return &Thing::is_immune_to_necrosis; }

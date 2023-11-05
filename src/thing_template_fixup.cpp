@@ -440,6 +440,7 @@ void tp_fixup(void)
     num_attack_types += tp->dmg_necrosis() ? 1 : 0;
     num_attack_types += tp->dmg_stamina() ? 1 : 0;
     num_attack_types += tp->dmg_magic_drain() ? 1 : 0;
+    num_attack_types += tp->dmg_holy() ? 1 : 0;
 
     //
     // If only a single attack type then make sure it is 1000%
@@ -508,6 +509,9 @@ void tp_fixup(void)
         if (tp->dmg_magic_drain() > 0) {
           tp->dmg_chance_d1000_magic_drain_set(attack_index, 1000);
         }
+        if (tp->dmg_holy() > 0) {
+          tp->dmg_chance_d1000_holy_set(attack_index, 1000);
+        }
         if (tp->dmg_poison() > 0) {
           tp->dmg_chance_d1000_poison_set(attack_index, 1000);
         }
@@ -527,7 +531,7 @@ void tp_fixup(void)
             + tp->dmg_chance_d1000_bite(i) + tp->dmg_chance_d1000_claw(i) + tp->dmg_chance_d1000_lightning(i)
             + tp->dmg_chance_d1000_melee(i) + tp->dmg_chance_d1000_nat_att(i) + tp->dmg_chance_d1000_necrosis(i)
             + tp->dmg_chance_d1000_stamina_drain(i) + tp->dmg_chance_d1000_magic_drain(i)
-            + tp->dmg_chance_d1000_poison(i);
+            + tp->dmg_chance_d1000_holy(i) + tp->dmg_chance_d1000_poison(i);
 
         if (! total_damange_for_this_attack_round) {
           DIE("Thing template [%s] has no damage set for att # %d", tp->name().c_str(), i);

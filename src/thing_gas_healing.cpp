@@ -10,7 +10,10 @@ void Thing::gas_healing_tick(void)
 {
   TRACE_NO_INDENT();
 
-  if (! is_air_breather()) {
+  //
+  // Allow the unbreathing undead to burn in healing gas
+  //
+  if (! is_air_breather() && ! is_undead()) {
     return;
   }
 
@@ -35,13 +38,22 @@ void Thing::gas_healing_tick(void)
   tick_last_gas_healing_exposure_set(game->tick_current);
 
   if (is_alive_monst() || is_player()) {
-    if (is_player()) {
-      msg("%%fg=pink$You breath in the healing gas!%%fg=reset$");
+    if (is_undead()) {
+      if (is_player()) {
+        msg("%%fg=pink$Your wretched body burns in the healing gas!%%fg=reset$");
+      } else {
+        msg("%s burns in the healing gas!", text_The().c_str());
+      }
+      is_attacked_with_dmg_holy(this, this, d12());
     } else {
-      msg("%s breathes in the healing gas!", text_The().c_str());
+      if (is_player()) {
+        msg("%%fg=pink$You breath in the healing gas!%%fg=reset$");
+      } else {
+        msg("%s breathes in the healing gas!", text_The().c_str());
+      }
+      health_incr(d6());
+      stamina_incr(d6());
     }
-    health_incr(d6());
-    stamina_incr(d6());
   }
 }
 

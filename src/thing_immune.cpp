@@ -95,6 +95,15 @@ int Thing::is_immune_to_magic_drain(void)
   return (tp()->is_immune_to_magic_drain());
 }
 
+int Thing::is_immune_to_holy_damage(void)
+{
+  TRACE_NO_INDENT();
+  if (buff_immune_to_holy_damage()) {
+    return true;
+  }
+  return (tp()->is_immune_to_holy_damage());
+}
+
 int Thing::is_immune_to_spiderwebs(void)
 {
   TRACE_NO_INDENT();

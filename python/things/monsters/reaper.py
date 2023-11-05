@@ -66,6 +66,7 @@ def tp_init(name, text_long_name):
     my.is_immune_to_confusion(self, True)
     my.is_immune_to_entrancement(self, True)
     my.is_immune_to_fire(self, True)
+    my.is_immune_to_holy_damage(self, True)
     my.is_immune_to_necrosis(self, True)
     my.is_immune_to_negation(self, True)
     my.is_immune_to_paralysis(self, True)

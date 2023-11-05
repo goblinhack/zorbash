@@ -72,6 +72,7 @@ private:
   Dice _dmg_heat_dice {};
   Dice _dmg_lightning_dice {};
   Dice _dmg_magic_drain_dice {};
+  Dice _dmg_holy_dice {};
   Dice _dmg_melee_dice {};
   Dice _dmg_missile_dice {};
   Dice _dmg_nat_att_dice {};
@@ -111,6 +112,7 @@ private:
   std::vector< int > _dmg_chance_d1000_necrosis {};
   std::vector< int > _dmg_chance_d1000_stamina_drain {};
   std::vector< int > _dmg_chance_d1000_magic_drain {};
+  std::vector< int > _dmg_chance_d1000_holy {};
   std::vector< int > _dmg_chance_d1000_poison {};
 
   // begin sort marker1 {
@@ -530,6 +532,7 @@ private:
   int _is_immune_to_electricity {};
   int _is_immune_to_entrancement {};
   int _is_immune_to_fire {};
+  int _is_immune_to_holy_damage {};
   int _is_immune_to_lightning {};
   int _is_immune_to_magic_drain {};
   int _is_immune_to_necrosis {};
@@ -902,6 +905,7 @@ private:
   std::string _dmg_energy_dice_str;
   std::string _dmg_fire_dice_str;
   std::string _dmg_heat_dice_str;
+  std::string _dmg_holy_dice_str;
   std::string _dmg_impact_dice_str;
   std::string _dmg_lightning_dice_str;
   std::string _dmg_magic_drain_dice_str;
@@ -937,6 +941,7 @@ private:
   std::string _on_attacking_dmg_energy_do;
   std::string _on_attacking_dmg_fire_do;
   std::string _on_attacking_dmg_heat_do;
+  std::string _on_attacking_dmg_holy_do;
   std::string _on_attacking_dmg_impact_do;
   std::string _on_attacking_dmg_lightning_do;
   std::string _on_attacking_dmg_magic_drain_do;
@@ -986,6 +991,7 @@ private:
   std::string _on_owner_attack_dmg_energy_do;
   std::string _on_owner_attack_dmg_fire_do;
   std::string _on_owner_attack_dmg_heat_do;
+  std::string _on_owner_attack_dmg_holy_do;
   std::string _on_owner_attack_dmg_impact_do;
   std::string _on_owner_attack_dmg_lightning_do;
   std::string _on_owner_attack_dmg_magic_drain_do;
@@ -1010,6 +1016,7 @@ private:
   std::string _on_owner_rcv_dmg_energy_do;
   std::string _on_owner_rcv_dmg_fire_do;
   std::string _on_owner_rcv_dmg_heat_do;
+  std::string _on_owner_rcv_dmg_holy_do;
   std::string _on_owner_rcv_dmg_impact_do;
   std::string _on_owner_rcv_dmg_lightning_do;
   std::string _on_owner_rcv_dmg_magic_drain_do;
@@ -1037,6 +1044,7 @@ private:
   std::string _on_rcv_dmg_energy_do;
   std::string _on_rcv_dmg_fire_do;
   std::string _on_rcv_dmg_heat_do;
+  std::string _on_rcv_dmg_holy_do;
   std::string _on_rcv_dmg_impact_do;
   std::string _on_rcv_dmg_lightning_do;
   std::string _on_rcv_dmg_magic_drain_do;
@@ -1151,6 +1159,7 @@ public:
   const Dice &dmg_necrosis_dice(void) const;
   const Dice &dmg_stamina_dice(void) const;
   const Dice &dmg_magic_drain_dice(void) const;
+  const Dice &dmg_holy_dice(void) const;
   const Dice &dmg_poison_dice(void) const;
   const Dice &health_initial_dice(void) const;
   const Dice &health_regenerate_amount_dice(void) const;
@@ -1182,6 +1191,7 @@ public:
   const int dmg_necrosis(void) const;
   const int dmg_stamina(void) const;
   const int dmg_magic_drain(void) const;
+  const int dmg_holy(void) const;
   const int dmg_poison(void) const;
   const int health_initial(void) const;
   const int health_initial_max_roll(void) const;
@@ -1234,6 +1244,7 @@ public:
   void dmg_digest_dice_set(const std::string &);
   void dmg_stamina_dice_set(const std::string &);
   void dmg_magic_drain_dice_set(const std::string &);
+  void dmg_holy_dice_set(const std::string &);
   void dmg_energy_dice_set(const std::string &);
   void dmg_negation_dice_set(const std::string &);
   void dmg_fire_dice_set(const std::string &);
@@ -1274,6 +1285,7 @@ public:
   const std::string &dmg_energy_dice_str(void) const;
   const std::string &dmg_fire_dice_str(void) const;
   const std::string &dmg_heat_dice_str(void) const;
+  const std::string &dmg_holy_dice_str(void) const;
   const std::string &dmg_impact_dice_str(void) const;
   const std::string &dmg_lightning_dice_str(void) const;
   const std::string &dmg_magic_drain_dice_str(void) const;
@@ -1309,6 +1321,7 @@ public:
   const std::string &on_attacking_dmg_energy_do(void) const;
   const std::string &on_attacking_dmg_fire_do(void) const;
   const std::string &on_attacking_dmg_heat_do(void) const;
+  const std::string &on_attacking_dmg_holy_do(void) const;
   const std::string &on_attacking_dmg_impact_do(void) const;
   const std::string &on_attacking_dmg_lightning_do(void) const;
   const std::string &on_attacking_dmg_magic_drain_do(void) const;
@@ -1358,6 +1371,7 @@ public:
   const std::string &on_owner_attack_dmg_energy_do(void) const;
   const std::string &on_owner_attack_dmg_fire_do(void) const;
   const std::string &on_owner_attack_dmg_heat_do(void) const;
+  const std::string &on_owner_attack_dmg_holy_do(void) const;
   const std::string &on_owner_attack_dmg_impact_do(void) const;
   const std::string &on_owner_attack_dmg_lightning_do(void) const;
   const std::string &on_owner_attack_dmg_magic_drain_do(void) const;
@@ -1382,6 +1396,7 @@ public:
   const std::string &on_owner_rcv_dmg_energy_do(void) const;
   const std::string &on_owner_rcv_dmg_fire_do(void) const;
   const std::string &on_owner_rcv_dmg_heat_do(void) const;
+  const std::string &on_owner_rcv_dmg_holy_do(void) const;
   const std::string &on_owner_rcv_dmg_impact_do(void) const;
   const std::string &on_owner_rcv_dmg_lightning_do(void) const;
   const std::string &on_owner_rcv_dmg_magic_drain_do(void) const;
@@ -1409,6 +1424,7 @@ public:
   const std::string &on_rcv_dmg_energy_do(void) const;
   const std::string &on_rcv_dmg_fire_do(void) const;
   const std::string &on_rcv_dmg_heat_do(void) const;
+  const std::string &on_rcv_dmg_holy_do(void) const;
   const std::string &on_rcv_dmg_impact_do(void) const;
   const std::string &on_rcv_dmg_lightning_do(void) const;
   const std::string &on_rcv_dmg_magic_drain_do(void) const;
@@ -1546,6 +1562,7 @@ public:
   int dmg_chance_d1000_energy(int index) const;
   int dmg_chance_d1000_fire(int index) const;
   int dmg_chance_d1000_heat(int index) const;
+  int dmg_chance_d1000_holy(int index) const;
   int dmg_chance_d1000_impact(int index) const;
   int dmg_chance_d1000_lightning(int index) const;
   int dmg_chance_d1000_magic_drain(int index) const;
@@ -1908,6 +1925,7 @@ public:
   int is_immune_to_electricity(void) const;
   int is_immune_to_entrancement(void) const;
   int is_immune_to_fire(void) const;
+  int is_immune_to_holy_damage(void) const;
   int is_immune_to_lightning(void) const;
   int is_immune_to_magic_drain(void) const;
   int is_immune_to_necrosis(void) const;
@@ -2686,6 +2704,7 @@ public:
   void is_immune_to_electricity_set(int v);
   void is_immune_to_entrancement_set(int v);
   void is_immune_to_fire_set(int v);
+  void is_immune_to_holy_damage_set(int v);
   void is_immune_to_lightning_set(int v);
   void is_immune_to_magic_drain_set(int v);
   void is_immune_to_necrosis_set(int v);
@@ -2990,6 +3009,7 @@ public:
   void on_attacking_dmg_energy_do_set(const std::string &v);
   void on_attacking_dmg_fire_do_set(const std::string &v);
   void on_attacking_dmg_heat_do_set(const std::string &v);
+  void on_attacking_dmg_holy_do_set(const std::string &v);
   void on_attacking_dmg_impact_do_set(const std::string &v);
   void on_attacking_dmg_lightning_do_set(const std::string &v);
   void on_attacking_dmg_magic_drain_do_set(const std::string &v);
@@ -3041,6 +3061,7 @@ public:
   void on_owner_attack_dmg_energy_do_set(const std::string &v);
   void on_owner_attack_dmg_fire_do_set(const std::string &v);
   void on_owner_attack_dmg_heat_do_set(const std::string &v);
+  void on_owner_attack_dmg_holy_do_set(const std::string &v);
   void on_owner_attack_dmg_impact_do_set(const std::string &v);
   void on_owner_attack_dmg_lightning_do_set(const std::string &v);
   void on_owner_attack_dmg_magic_drain_do_set(const std::string &v);
@@ -3065,6 +3086,7 @@ public:
   void on_owner_rcv_dmg_energy_do_set(const std::string &v);
   void on_owner_rcv_dmg_fire_do_set(const std::string &v);
   void on_owner_rcv_dmg_heat_do_set(const std::string &v);
+  void on_owner_rcv_dmg_holy_do_set(const std::string &v);
   void on_owner_rcv_dmg_impact_do_set(const std::string &v);
   void on_owner_rcv_dmg_lightning_do_set(const std::string &v);
   void on_owner_rcv_dmg_magic_drain_do_set(const std::string &v);
@@ -3092,6 +3114,7 @@ public:
   void on_rcv_dmg_energy_do_set(const std::string &v);
   void on_rcv_dmg_fire_do_set(const std::string &v);
   void on_rcv_dmg_heat_do_set(const std::string &v);
+  void on_rcv_dmg_holy_do_set(const std::string &v);
   void on_rcv_dmg_impact_do_set(const std::string &v);
   void on_rcv_dmg_lightning_do_set(const std::string &v);
   void on_rcv_dmg_magic_drain_do_set(const std::string &v);
@@ -3242,6 +3265,7 @@ public:
   void dmg_chance_d1000_necrosis_set(int index, int v);
   void dmg_chance_d1000_stamina_drain_set(int index, int v);
   void dmg_chance_d1000_magic_drain_set(int index, int v);
+  void dmg_chance_d1000_holy_set(int index, int v);
   void dmg_chance_d1000_poison_set(int index, int v);
 
   inline int gfx_pixelart_animated(void) const { return _gfx_pixelart_animated; }
