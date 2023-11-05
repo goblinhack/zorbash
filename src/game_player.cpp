@@ -127,7 +127,8 @@ void Game::place_player(void)
         level->player->on_fire_set("");
       }
       if (0) {
-        auto w = level->thing_new("potion_levitation", point(x, y));
+        // auto w = level->thing_new("potion_levitation", point(x, y));
+        auto w = level->thing_new("armor_crystal", point(x + 3, y));
         t->carry(w, carry_options);
         level->thing_new("electric_eel", point(x + 2, y + 1));
         level->thing_new("water", point(x + 1, y));
@@ -251,7 +252,8 @@ void Game::place_player(void)
         t->carry(w, carry_options);
       }
       if (0) {
-        auto w = level->thing_new("armor_crystal", point(x + 3, y));
+        level->thing_new("block_of_crystal", point(x + 2, y));
+        auto w = level->thing_new("armor_crystal", point(x, y));
         t->carry(w, carry_options);
       }
       if (0) {

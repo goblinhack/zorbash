@@ -153,7 +153,8 @@ bool Thing::debuff_use(Thingp debuff)
   dbg("Try to use debuff %s", debuff->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  used(debuff, this, false /* remove after use */);
+  UseOptions use_options;
+  used(debuff, this, use_options);
   return true;
 }
 

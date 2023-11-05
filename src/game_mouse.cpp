@@ -107,13 +107,16 @@ static uint8_t game_mouse_down_(int x, int y, uint32_t button)
       } else {
         IF_DEBUG { player->log("Player used an item"); }
         TRACE_AND_INDENT();
-        player->used(item, level->cursor, true);
+
+        UseOptions use_options;
+        use_options.remove_after_use = true;
+        player->used(item, level->cursor, use_options);
 
         //
         // The laser name is provided by the likes of wand
         //
         if (! item->gfx_targeted_laser().empty()) {
-          player->laser_shoot_at(item, item->gfx_targeted_laser(), level->cursor->curr_at);
+          player->laser_shoot_at(item, item->gfx_targeted_laser(), level->cursor->curr_at, use_options);
         } else if (! item->gfx_targeted_projectile().empty()) {
           player->projectile_shoot_at(item, item->gfx_targeted_projectile(), level->cursor->curr_at);
         } else if (item->is_item_targeted()) {

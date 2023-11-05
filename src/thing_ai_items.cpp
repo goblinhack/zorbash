@@ -92,7 +92,7 @@ bool Thing::try_to_use_weapon(void)
     use_options.preferred_equip_set = true;
 
     if (! curr_weapon) {
-      if (use(best_weapon, &use_options)) {
+      if (use(best_weapon, use_options)) {
         AI_LOG("Change weapon", best_weapon);
         if (is_player()) {
           game->tick_begin("Robot, has equipped weapon");
@@ -100,7 +100,7 @@ bool Thing::try_to_use_weapon(void)
         return true;
       }
     } else if (best_weapon_val > curr_weapon_val) {
-      if (use(best_weapon, &use_options)) {
+      if (use(best_weapon, use_options)) {
         AI_LOG("Change weapon", best_weapon);
         if (is_player()) {
           game->tick_begin("Robot, has changed weapon");
@@ -133,7 +133,7 @@ bool Thing::try_to_use_armor(void)
     use_options.preferred_equip_set = true;
 
     if (! curr_armor) {
-      if (use(best_armor, &use_options)) {
+      if (use(best_armor, use_options)) {
         AI_LOG("Change armor", best_armor);
         if (is_player()) {
           game->tick_begin("Robot, has equipped armor");
@@ -141,7 +141,7 @@ bool Thing::try_to_use_armor(void)
         return true;
       }
     } else if (best_armor_val > curr_armor_val) {
-      if (use(best_armor, &use_options)) {
+      if (use(best_armor, use_options)) {
         AI_LOG("Change armor", best_armor);
         if (is_player()) {
           game->tick_begin("Robot, has changed armor");
@@ -174,7 +174,7 @@ bool Thing::try_to_use_helmet(void)
     use_options.preferred_equip_set = true;
 
     if (! curr_helmet) {
-      if (use(best_helmet, &use_options)) {
+      if (use(best_helmet, use_options)) {
         AI_LOG("Change helmet", best_helmet);
         if (is_player()) {
           game->tick_begin("Robot, has equipped helmet");
@@ -182,7 +182,7 @@ bool Thing::try_to_use_helmet(void)
         return true;
       }
     } else if (best_helmet_val > curr_helmet_val) {
-      if (use(best_helmet, &use_options)) {
+      if (use(best_helmet, use_options)) {
         AI_LOG("Change helmet", best_helmet);
         if (is_player()) {
           game->tick_begin("Robot, has changed helmet");
@@ -215,7 +215,7 @@ bool Thing::try_to_use_amulet(void)
     use_options.preferred_equip_set = true;
 
     if (! curr_amulet) {
-      if (use(best_amulet, &use_options)) {
+      if (use(best_amulet, use_options)) {
         AI_LOG("Change amulet", best_amulet);
         if (is_player()) {
           game->tick_begin("Robot, has equipped amulet");
@@ -223,7 +223,7 @@ bool Thing::try_to_use_amulet(void)
         return true;
       }
     } else if (best_amulet_val > curr_amulet_val) {
-      if (use(best_amulet, &use_options)) {
+      if (use(best_amulet, use_options)) {
         AI_LOG("Change amulet", best_amulet);
         if (is_player()) {
           game->tick_begin("Robot, has changed amulet");
@@ -256,7 +256,7 @@ bool Thing::try_to_use_boots(void)
     use_options.preferred_equip_set = true;
 
     if (! curr_boots) {
-      if (use(best_boots, &use_options)) {
+      if (use(best_boots, use_options)) {
         AI_LOG("Change boots", best_boots);
         if (is_player()) {
           game->tick_begin("Robot, has equipped boots");
@@ -264,7 +264,7 @@ bool Thing::try_to_use_boots(void)
         return true;
       }
     } else if (best_boots_val > curr_boots_val) {
-      if (use(best_boots, &use_options)) {
+      if (use(best_boots, use_options)) {
         AI_LOG("Change boots", best_boots);
         if (is_player()) {
           game->tick_begin("Robot, has changed boots");
@@ -297,7 +297,7 @@ bool Thing::try_to_use_gauntlet(void)
     use_options.preferred_equip_set = true;
 
     if (! curr_gauntlet) {
-      if (use(best_gauntlet, &use_options)) {
+      if (use(best_gauntlet, use_options)) {
         AI_LOG("Change gauntlet", best_gauntlet);
         if (is_player()) {
           game->tick_begin("Robot, has equipped gauntlet");
@@ -305,7 +305,7 @@ bool Thing::try_to_use_gauntlet(void)
         return true;
       }
     } else if (best_gauntlet_val > curr_gauntlet_val) {
-      if (use(best_gauntlet, &use_options)) {
+      if (use(best_gauntlet, use_options)) {
         AI_LOG("Change gauntlet", best_gauntlet);
         if (is_player()) {
           game->tick_begin("Robot, has changed gauntlet");
@@ -339,7 +339,7 @@ bool Thing::try_to_use_shield(void)
     use_options.preferred_equip_set = true;
 
     if (! curr_shield) {
-      if (use(best_shield, &use_options)) {
+      if (use(best_shield, use_options)) {
         AI_LOG("Change shield", best_shield);
         if (is_player()) {
           game->tick_begin("Robot, has equipped shield");
@@ -347,7 +347,7 @@ bool Thing::try_to_use_shield(void)
         return true;
       }
     } else if (best_shield_val > curr_shield_val) {
-      if (use(best_shield, &use_options)) {
+      if (use(best_shield, use_options)) {
         AI_LOG("Change shield", best_shield);
         if (is_player()) {
           game->tick_begin("Robot, has changed shield");
@@ -380,7 +380,7 @@ bool Thing::try_to_use_cloak(void)
     use_options.preferred_equip_set = true;
 
     if (! curr_cloak) {
-      if (use(best_cloak, &use_options)) {
+      if (use(best_cloak, use_options)) {
         AI_LOG("Change cloak", best_cloak);
         if (is_player()) {
           game->tick_begin("Robot, has equipped cloak");
@@ -388,7 +388,7 @@ bool Thing::try_to_use_cloak(void)
         return true;
       }
     } else if (best_cloak_val > curr_cloak_val) {
-      if (use(best_cloak, &use_options)) {
+      if (use(best_cloak, use_options)) {
         AI_LOG("Change cloak", best_cloak);
         if (is_player()) {
           game->tick_begin("Robot, has changed cloak");
@@ -426,7 +426,7 @@ bool Thing::try_to_use_rings(void)
       UseOptions use_options          = {};
       use_options.preferred_equip     = MONST_EQUIP_RING1;
       use_options.preferred_equip_set = true;
-      if (use(best_ring, &use_options)) {
+      if (use(best_ring, use_options)) {
         AI_LOG("Change ring", best_ring);
         if (is_player()) {
           game->tick_begin("Robot, has equipped ring1");
@@ -437,7 +437,7 @@ bool Thing::try_to_use_rings(void)
       UseOptions use_options          = {};
       use_options.preferred_equip     = MONST_EQUIP_RING2;
       use_options.preferred_equip_set = true;
-      if (use(best_ring, &use_options)) {
+      if (use(best_ring, use_options)) {
         AI_LOG("Change ring", best_ring);
         if (is_player()) {
           game->tick_begin("Robot, has equipped ring2");
@@ -448,7 +448,7 @@ bool Thing::try_to_use_rings(void)
       UseOptions use_options          = {};
       use_options.preferred_equip     = MONST_EQUIP_RING1;
       use_options.preferred_equip_set = true;
-      if (use(best_ring, &use_options)) {
+      if (use(best_ring, use_options)) {
         AI_LOG("Change ring", best_ring);
         if (is_player()) {
           game->tick_begin("Robot, has changed ring1");
@@ -459,7 +459,7 @@ bool Thing::try_to_use_rings(void)
       UseOptions use_options          = {};
       use_options.preferred_equip     = MONST_EQUIP_RING2;
       use_options.preferred_equip_set = true;
-      if (use(best_ring, &use_options)) {
+      if (use(best_ring, use_options)) {
         AI_LOG("Change ring", best_ring);
         if (is_player()) {
           game->tick_begin("Robot, has changed ring2");

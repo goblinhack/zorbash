@@ -164,7 +164,8 @@ PyObject *thing_shoot_projectile_or_laser_at(PyObject *obj, PyObject *args, PyOb
     Py_RETURN_FALSE;
   }
   if (itemp->is_laser()) {
-    if (owner->laser_shoot_at(nullptr /* staff */, std::string(item), target)) {
+    UseOptions use_options;
+    if (owner->laser_shoot_at(nullptr /* staff */, std::string(item), target, use_options)) {
       Py_RETURN_TRUE;
     }
     Py_RETURN_FALSE;

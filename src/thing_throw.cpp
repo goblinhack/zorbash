@@ -390,7 +390,10 @@ bool Thing::throw_at(Thingp what, Thingp target)
     if (what->is_used_when_thrown()) {
       dbg("Use thrown item");
       TRACE_AND_INDENT();
-      used(what, target, true /* remove_after_use */);
+
+      UseOptions use_options;
+      use_options.remove_after_use = true;
+      used(what, target, use_options);
     } else {
       DropOptions drop_options;
       drop_options.is_being_thrown = true;

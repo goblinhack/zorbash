@@ -23,7 +23,8 @@ bool Thing::item_choose_target(Thingp item, Thingp victim /* can be null */)
     dbg("Chosen item target: %s", victim->to_short_string().c_str());
     TRACE_AND_INDENT();
 
-    used(item, victim, false /* remove_after_use */);
+    UseOptions use_options;
+    used(item, victim, use_options);
 
     item_targeted_use_at(item, victim);
 

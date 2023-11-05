@@ -234,7 +234,9 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
       // Equip the new item
       //
       player->log("Use %s", what->to_short_string().c_str());
-      player->use(what);
+
+      UseOptions use_options;
+      player->use(what, use_options);
 
       wid_destroy(&game->in_transit_item);
       wid_inventory_init();
@@ -255,7 +257,9 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
       // Equip the new item
       //
       player->log("Use %s", what->to_short_string().c_str());
-      player->use(what);
+
+      UseOptions use_options;
+      player->use(what, use_options);
 
       wid_destroy(&game->in_transit_item);
       wid_inventory_init();
@@ -276,7 +280,9 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
       // Equip the new item
       //
       player->log("Use %s", what->to_short_string().c_str());
-      player->use(what);
+
+      UseOptions use_options;
+      player->use(what, use_options);
 
       wid_destroy(&game->in_transit_item);
       wid_inventory_init();
@@ -297,7 +303,9 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
       // Equip the new item
       //
       player->log("Use %s", what->to_short_string().c_str());
-      player->use(what);
+
+      UseOptions use_options;
+      player->use(what, use_options);
 
       wid_destroy(&game->in_transit_item);
       wid_inventory_init();
@@ -318,7 +326,9 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
       // Equip the new item
       //
       player->log("Use %s", what->to_short_string().c_str());
-      player->use(what);
+
+      UseOptions use_options;
+      player->use(what, use_options);
 
       wid_destroy(&game->in_transit_item);
       wid_inventory_init();
@@ -339,7 +349,9 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
       // Equip the new item
       //
       player->log("Use %s", what->to_short_string().c_str());
-      player->use(what);
+
+      UseOptions use_options;
+      player->use(what, use_options);
 
       wid_destroy(&game->in_transit_item);
       wid_inventory_init();
@@ -360,7 +372,8 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
       // Equip the new item
       //
       player->log("Use %s", what->to_short_string().c_str());
-      player->use(what);
+      UseOptions use_options;
+      player->use(what, use_options);
 
       wid_destroy(&game->in_transit_item);
       wid_inventory_init();
@@ -381,7 +394,9 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
       // Equip the new item
       //
       player->log("Use %s", what->to_short_string().c_str());
-      player->use(what);
+
+      UseOptions use_options;
+      player->use(what, use_options);
 
       wid_destroy(&game->in_transit_item);
       wid_inventory_init();
@@ -405,7 +420,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
       UseOptions use_options          = {};
       use_options.preferred_equip     = MONST_EQUIP_RING1;
       use_options.preferred_equip_set = true;
-      player->use(what, &use_options);
+      player->use(what, use_options);
 
       wid_destroy(&game->in_transit_item);
       wid_inventory_init();
@@ -429,7 +444,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
       UseOptions use_options          = {};
       use_options.preferred_equip     = MONST_EQUIP_RING1;
       use_options.preferred_equip_set = true;
-      player->use(what, &use_options);
+      player->use(what, use_options);
 
       wid_destroy(&game->in_transit_item);
       wid_inventory_init();
@@ -918,7 +933,10 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
   if (sdlk_eq(*key, game->config.key_eat)) {
     DBG3("Pressed eat key");
     TRACE_AND_INDENT();
-    player->use(what);
+
+    UseOptions use_options;
+    player->use(what, use_options);
+
     if (game->state == Game::STATE_INVENTORY) {
       wid_inventory_init();
       game->set_request_to_remake_rightbar();
@@ -928,7 +946,10 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
 
   if (sdlk_eq(*key, game->config.key_use)) {
     DBG3("Pressed use key");
-    player->use(what);
+
+    UseOptions use_options;
+    player->use(what, use_options);
+
     if (game->state == Game::STATE_INVENTORY) {
       wid_inventory_init();
       game->set_request_to_remake_rightbar();

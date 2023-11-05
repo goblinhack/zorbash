@@ -297,7 +297,7 @@ void Thing::on_final_use(Thingp what, Thingp target)
   }
 }
 
-void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *use_options)
+void Thing::used(Thingp what, Thingp target, UseOptions &use_options)
 {
   TRACE_NO_INDENT();
 
@@ -307,7 +307,7 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
     return;
   }
 
-  if (remove_after_use) {
+  if (use_options.remove_after_use) {
     dbg("Attempt and then remove after use %s", what->to_short_string().c_str());
   } else {
     dbg("Attempt to use %s", what->to_short_string().c_str());
@@ -483,7 +483,7 @@ void Thing::used(Thingp what, Thingp target, bool remove_after_use, UseOptions *
   }
 
 remove_after_use_check:
-  if (remove_after_use) {
+  if (use_options.remove_after_use) {
     auto immediate_owner = what->immediate_owner();
     if (immediate_owner) {
       immediate_owner->bag_remove(what);
@@ -505,7 +505,7 @@ remove_after_use_check:
   }
 }
 
-bool Thing::use(Thingp what, UseOptions *use_options)
+bool Thing::use(Thingp what, UseOptions &use_options)
 {
   TRACE_NO_INDENT();
 
@@ -516,8 +516,8 @@ bool Thing::use(Thingp what, UseOptions *use_options)
   }
 
   int preferred_equip = -1;
-  if (use_options && use_options->preferred_equip_set) {
-    preferred_equip = use_options->preferred_equip;
+  if (use_options.preferred_equip_set) {
+    preferred_equip = use_options.preferred_equip;
   }
 
   dbg("Trying to use: %s", what->to_short_string().c_str());
@@ -629,7 +629,7 @@ bool Thing::use(Thingp what, UseOptions *use_options)
     }
 
     if (what->is_usable() && is_equipped(what)) {
-      used(what, this, false /* remove after use */, use_options);
+      used(what, this, use_options);
       if (is_player()) {
         game->tick_begin("player used a special ability");
       }
@@ -707,7 +707,8 @@ bool Thing::use(Thingp what, UseOptions *use_options)
   } else if (what->is_auto_use()) {
     dbg("Trying to auto use: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
-    use(what);
+    UseOptions use_options;
+    use(what, use_options);
     if (is_player()) {
       level->describe(what);
     }
@@ -715,7 +716,9 @@ bool Thing::use(Thingp what, UseOptions *use_options)
     dbg("Trying to eat: %s", what->to_short_string().c_str());
     TRACE_NO_INDENT();
     eat(what);
-    used(what, this, true /* remove after use */);
+    UseOptions use_options;
+    use_options.remove_after_use = true;
+    used(what, this, use_options);
     if (is_player()) {
       game->tick_begin("player ate an item");
     }
@@ -725,7 +728,9 @@ bool Thing::use(Thingp what, UseOptions *use_options)
     if (is_player()) {
       msg("You drink %s.", what->text_the().c_str());
     }
-    used(what, this, true /* remove after use */);
+    UseOptions use_options;
+    use_options.remove_after_use = true;
+    used(what, this, use_options);
     if (is_player()) {
       game->tick_begin("player drunk an item");
     }
@@ -735,7 +740,8 @@ bool Thing::use(Thingp what, UseOptions *use_options)
     if (is_player()) {
       msg("You use %s.", what->text_the().c_str());
     }
-    used(what, this, false /* remove after use */, use_options);
+    UseOptions use_options;
+    used(what, this, use_options);
     if (is_player()) {
       game->tick_begin("player used a staff");
     }

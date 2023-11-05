@@ -382,7 +382,8 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     auto what = level->inventory_get();
     if (what) {
       if (player && player->can_eat(what)) {
-        player->use(what);
+        UseOptions use_options;
+        player->use(what, use_options);
       } else {
         TOPCON("Nothing to eat.");
         wid_inventory_init();
@@ -444,7 +445,8 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
       }
       auto what = level->inventory_get();
       if (what && player) {
-        player->use(what);
+        UseOptions use_options;
+        player->use(what, use_options);
       } else {
         TOPCON("Nothing to use.");
         wid_inventory_init();

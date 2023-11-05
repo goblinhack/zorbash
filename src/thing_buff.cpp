@@ -150,7 +150,8 @@ bool Thing::buff_use(Thingp buff)
   dbg("Try to use buff %s", buff->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  used(buff, this, false /* remove after use */);
+  UseOptions use_options;
+  used(buff, this, use_options);
   return true;
 }
 

@@ -257,12 +257,12 @@ bool Thing::shoot_at_target(void)
   return on_want_to_shoot_at(target);
 }
 
-bool Thing::shoot_at_and_choose_target(Thingp item, UseOptions *use_options)
+bool Thing::shoot_at_and_choose_target(Thingp item, UseOptions &use_options)
 {
   dbg("Shoot at and choose target: %s", item->to_short_string().c_str());
   TRACE_AND_INDENT();
 
-  if (use_options && use_options->radial_effect) {
+  if (use_options.radial_effect) {
     return laser_shoot_at(item, "", this, use_options);
   }
   if (! item->gfx_targeted_laser().empty()) {

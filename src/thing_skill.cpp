@@ -175,7 +175,9 @@ bool Thing::skill_use(Thingp what)
 {
   TRACE_NO_INDENT();
   msg("You use %s.", what->text_the().c_str());
-  used(what, this, false /* remove after use */);
+
+  UseOptions use_options;
+  used(what, this, use_options);
 
   if (what->is_target_select()) {
     return item_choose_target(what);

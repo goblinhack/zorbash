@@ -229,7 +229,10 @@ uint8_t wid_inventory_item_option_use(Widp w, int x, int y, uint32_t button)
   if (what) {
     wid_inventory_fini();
     player->log("Use %s", what->to_short_string().c_str());
-    player->use(what);
+
+    UseOptions use_options;
+    player->use(what, use_options);
+
     //
     // Don't do this. It closes up popups for skills
     //
@@ -331,7 +334,7 @@ uint8_t wid_inventory_item_option_use_radial(Widp w, int x, int y, uint32_t butt
     use_options.radial_effect = true;
     wid_inventory_fini();
     player->log("Use (radial) %s", what->to_short_string().c_str());
-    player->use(what, &use_options);
+    player->use(what, use_options);
     //
     // Don't do this. It closes up popups for skills
     //
@@ -380,7 +383,10 @@ uint8_t wid_inventory_item_option_eat(Widp w, int x, int y, uint32_t button)
     }
     wid_inventory_fini();
     player->log("Eat %s", what->to_short_string().c_str());
-    player->use(what);
+
+    UseOptions use_options;
+    player->use(what, use_options);
+
     wid_inventory_init();
   }
 

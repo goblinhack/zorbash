@@ -460,7 +460,8 @@ bool Thing::eat_something(void)
   }
 
   if (best) {
-    if (use(best)) {
+    UseOptions use_options;
+    if (use(best, use_options)) {
       return true;
     }
   }
@@ -476,7 +477,8 @@ bool Thing::eat_something(void)
       continue;
     }
     if (t->is_health_booster()) {
-      if (use(t)) {
+      UseOptions use_options;
+      if (use(t, use_options)) {
         return true;
       }
     }

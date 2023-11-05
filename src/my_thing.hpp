@@ -68,10 +68,14 @@ typedef struct {
   uint16_t tr2_tile;
 } ThingTiles;
 
-typedef struct {
-  int  preferred_equip;
-  bool preferred_equip_set;
-  bool radial_effect;
+typedef class UseOptions_
+{
+public:
+  int  preferred_equip {};
+  bool preferred_equip_set {};
+  bool radial_effect {};
+  bool is_reflected {};
+  bool remove_after_use {};
 } UseOptions;
 
 typedef class DropOptions_
@@ -449,9 +453,9 @@ public:
   Thingp most_dangerous_visible_thing(void);
   Thingp projectile_shoot_at(Thingp item, const std::string &proj_name, point at);
   Thingp projectile_shoot_at(Thingp item, const std::string &proj_name, Thingp target);
-  Thingp laser_shoot_at(Thingp item, const std::string &laser_name, point at, UseOptions *use_options = nullptr);
-  Thingp laser_shoot_at(Thingp item, const std::string &laser_name, Thingp target, UseOptions *use_options = nullptr);
-  Thingp laser_reflect(Thingp item, const std::string &laser_name, Thingp target, UseOptions *use_options);
+  Thingp laser_shoot_at(Thingp item, const std::string &laser_name, point at, UseOptions &);
+  Thingp laser_shoot_at(Thingp item, const std::string &laser_name, Thingp target, UseOptions &);
+  Thingp laser_reflect(Thingp item, const std::string &laser_name, Thingp target, UseOptions &);
   Thingp spawn_at(const std::string &what);
   Thingp spawn_at(const std::string &what, point p);
   Thingp spawn_minion_at_my_position(const std::string &what);
@@ -681,7 +685,7 @@ public:
   bool resurrect(void);
   bool same_leader_or_owner(Thingp it);
   bool same_mob(Thingp it);
-  bool shoot_at_and_choose_target(Thingp, UseOptions *options = nullptr);
+  bool shoot_at_and_choose_target(Thingp, UseOptions &);
   bool shoot_at_target(void);
   bool shoot_at(Thingp item, Thingp target);
   bool shoot_at(Thingp target);
@@ -774,7 +778,7 @@ public:
   bool try_to_use_weapon(void);
   bool unequip(const char *why, int equip, bool allowed_to_recarry);
   bool unequip_me_from_owner(const char *why, bool allowed_to_recarry);
-  bool use(Thingp w, UseOptions *options = nullptr);
+  bool use(Thingp w, UseOptions &);
   bool victim_attack_best_at(int equip, ThingAttackOptionsp);
   bool victim_attack_best(int equip, ThingAttackOptionsp);
   bool victim_attack_best_(int equip, ThingAttackOptionsp);
@@ -3135,7 +3139,7 @@ public:
   void update_pos(point, bool immediately);
   void update_tick(void);
   void update(void);
-  void used(Thingp w, Thingp target, bool remove_after_use, UseOptions *options = nullptr);
+  void used(Thingp w, Thingp target, UseOptions &);
   void visible_callback(void);
   void visible(const std::string &);
   void waiting(void);

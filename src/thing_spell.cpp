@@ -204,7 +204,9 @@ bool Thing::spell_cast(Thingp what)
   }
 
   msg("You cast %s spell.", what->text_the().c_str());
-  used(what, this, false /* remove after use */);
+
+  UseOptions use_options;
+  used(what, this, use_options);
 
   return true;
 }
@@ -304,7 +306,8 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
   if (what->gfx_targeted_laser().empty()) {
     target = projectile_shoot_at(what, what->gfx_targeted_projectile(), target_at);
   } else {
-    target = laser_shoot_at(what, what->gfx_targeted_laser(), target_at);
+    UseOptions use_options;
+    target = laser_shoot_at(what, what->gfx_targeted_laser(), target_at, use_options);
   }
 
   dbg("Spell is used");
@@ -362,7 +365,8 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
         msg("%%fg=green$Your spell succeeds.%%fg=reset$");
       }
 
-      used(what, target, false /* remove after use */);
+      UseOptions use_options;
+      used(what, target, use_options);
 
       //
       // Prevent the thing from moving due to shock
@@ -387,7 +391,8 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
     //
     // Could be the grid, the cursor, a door etc.. etc...
     //
-    used(what, target, false /* remove after use */);
+    UseOptions use_options;
+    used(what, target, use_options);
   }
 
   if (is_player()) {
