@@ -186,7 +186,6 @@ void Level::tick_(void)
   TRACE_NO_INDENT();
   {
     TRACE_NO_INDENT();
-    TRACE_NO_INDENT();
     FOR_ALL_ANIMATED_THINGS_LEVEL(this, t)
     {
       t->animate();
@@ -196,7 +195,6 @@ void Level::tick_(void)
     TRACE_NO_INDENT();
     FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
 
-    TRACE_NO_INDENT();
     TRACE_NO_INDENT();
     FOR_ALL_ANIMATED_THINGS_LEVEL(this, t)
     {
@@ -317,7 +315,6 @@ void Level::tick_(void)
   //
   TRACE_NO_INDENT();
   for (uint8_t tick_prio = MAP_TICK_PRIO_VERY_HIGH; tick_prio < MAP_TICK_PRIO; tick_prio++) {
-    TRACE_NO_INDENT();
     TRACE_NO_INDENT();
     FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
     {
@@ -450,7 +447,6 @@ void Level::tick_(void)
   }
 
   TRACE_NO_INDENT();
-  TRACE_NO_INDENT();
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
     if (t->is_scheduled_for_jump_end) {
@@ -469,7 +465,6 @@ void Level::tick_(void)
   static int       wait_count;
   wait_count++;
 
-  TRACE_NO_INDENT();
   TRACE_NO_INDENT();
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
@@ -536,7 +531,6 @@ void Level::tick_(void)
       // t->con("WAIT %d", __LINE__);
     }
 
-    TRACE_NO_INDENT();
     TRACE_NO_INDENT();
     FOR_ALL_EQUIP(e)
     {
@@ -634,12 +628,12 @@ void Level::tick_(void)
   //
   bool work_to_do = game->things_are_moving;
   TRACE_NO_INDENT();
-  TRACE_NO_INDENT();
   FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
   {
     if (t->movement_remaining() > 0) {
       work_to_do              = true;
       game->things_are_moving = true;
+      t->con("remaining %d", t->movement_remaining());
     }
     t->is_waiting = false;
   }
@@ -736,7 +730,6 @@ void Level::tick_(void)
     // also handle things that do not move, like a staff that is now on fire.
     //
     TRACE_NO_INDENT();
-    TRACE_NO_INDENT();
     FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
     {
       //
@@ -763,15 +756,12 @@ void Level::tick_(void)
     // For debugging consistent randomness
     //
     float h = 0;
-    TRACE_NO_INDENT();
-TRACE_NO_INDENT();
     FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
     {
       h += t->curr_at.x;
       h += t->curr_at.y;
       t->con("at %d,%d", t->curr_at.x, t->curr_at.y);
     }
-TRACE_NO_INDENT();
     FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
     CON("TICK %d hash %f random %d", game->tick_current, h, pcg_rand());
 #endif
@@ -848,9 +838,16 @@ void Level::tick_begin_now(void)
 
   dbg("Tick add movement to all things");
   TRACE_NO_INDENT();
-  TRACE_NO_INDENT();
   FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
   {
+    //
+    // I think only monsters and players need to move. Some things like boots
+    // do have a move speed bonus, but we don't want that to be added per tick.
+    //
+    if (! t->is_player() && ! t->is_monst()) {
+      continue;
+    }
+
     //
     // Give things a bit of time to move
     //
@@ -878,8 +875,6 @@ void Level::tick_begin_now(void)
 
 void Level::update_all_ticks(void)
 {
-  TRACE_NO_INDENT();
-
   TRACE_NO_INDENT();
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t) { t->update_tick(); }
   TRACE_NO_INDENT();

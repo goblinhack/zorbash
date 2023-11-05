@@ -167,7 +167,7 @@ Bestiary
 <!-- begin monsters type marker -->
 | Monster | Class/Rarity | Dngr | Attack | # Attcks | Other attacks | Immunity |
 | :--- | --- | --- | --- | --- | --- | --- |
-| Reaper | E/common | 712 | 1d6+6 | 2 |  | Acid<br />Cold<br />Fire<br />Necrosis<br />Negation<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Holding<br />Sanctuary-tiles<br />Slowing<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
+| Reaper | E/common | 712 | 1d6+6 | 2 |  | Acid<br />Cold<br />Fire<br />Holy-damage<br />Necrosis<br />Negation<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Holding<br />Sanctuary-tiles<br />Slowing<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
 | Fire Demon | D/uncommon | 546 | 1d14+4 | 2 | Fire:1d6+6<br /> | Cold<br />Fire<br />Necrosis<br />Poison<br />Vorpal-Weapons<br /> |
 | Cthulite | D/rare | 424 | 1d14+4 | 2 | Acid:2d6<br />Poison:2d12<br /> | Acid<br />Cold<br />Necrosis<br />Confusion<br />Confusion<br />Poison<br />Draining<br />Vorpal-Weapons<br /> |
 | Ettin, Two Headed Giant | D/rare | 382 | 1d10+4 | 2 |  |  |
