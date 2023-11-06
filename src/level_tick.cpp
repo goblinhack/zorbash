@@ -633,7 +633,6 @@ void Level::tick_(void)
     if (t->movement_remaining() > 0) {
       work_to_do              = true;
       game->things_are_moving = true;
-      t->con("remaining %d", t->movement_remaining());
     }
     t->is_waiting = false;
   }
