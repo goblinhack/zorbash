@@ -639,7 +639,7 @@ void Game::place_player(void)
       }
       if (0) {
         auto w = level->thing_new("very_broadsword", point(x + 3, y));
-        w->enchant_randomly();
+        w->add_random_enchants();
         // t->carry(w,carry_options);
         // t->enchant_without_stone(w);
       }

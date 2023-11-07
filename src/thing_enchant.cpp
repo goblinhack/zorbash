@@ -142,7 +142,7 @@ bool Thing::enchant_without_stone(Thingp what)
   return true;
 }
 
-void Thing::enchant_randomly(void)
+void Thing::add_random_enchants(void)
 {
   TRACE_NO_INDENT();
 
@@ -158,6 +158,11 @@ void Thing::enchant_randomly(void)
     enchant_count_incr(1);
   }
   damaged_count_set(0);
+
+  //
+  // If enchanted, it can have a runic
+  //
+  add_random_runic();
 }
 
 int Thing::enchantstone_count(void)

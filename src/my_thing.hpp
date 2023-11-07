@@ -2930,7 +2930,8 @@ public:
   void dump_equip(void);
   void dump(std::string prefix, std::ostream &out);
   void enchant_common(Thingp);
-  void enchant_randomly(void);
+  void add_random_enchants(void);
+  void add_random_runic(void);
   void enemies_tick(void);
   void entranced_tick(void);
   void entranced_update(void);

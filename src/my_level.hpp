@@ -781,8 +781,8 @@ public:
   bool create_biome_sewer(point3d at, uint32_t seed);
   bool create_biome_sewer_pools(void);
   bool create_biome_swamp(point3d at, uint32_t seed);
-  bool create_wandering_monster_now(void);
   bool create_wandering_monster_if_unlucky(void);
+  bool create_wandering_monster_now(void);
   bool create_wandering_monster_periodically(void);
   bool cursor_path_draw_line(Thingp, const std::vector< point > &move_path);
   bool cursor_path_draw_line(Thingp, point start, point end);

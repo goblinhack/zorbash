@@ -185,29 +185,6 @@ void Thing::init(Levelp level, const std::string &name_in, const point born, Thi
   }
 
   //
-  // Weapon runic?
-  //
-  if (is_able_to_have_a_runic_inscribed()) {
-    new_infop();
-    if (d10000() < chance_d10000_runic()) {
-      //
-      // Success
-      //
-      if (is_weapon()) {
-        auto tp = tp_random_runic_offensive();
-        if (tp) {
-          runic_name_set(tp->name());
-        }
-      } else {
-        auto tp = tp_random_runic_defensive();
-        if (tp) {
-          runic_name_set(tp->name());
-        }
-      }
-    }
-  }
-
-  //
   // Init the z depth
   //
   z_depth = tp()->z_depth;

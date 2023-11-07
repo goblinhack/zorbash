@@ -83,7 +83,7 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description_long(self, "A deadly kraken tentacle. Beware its grapple attack.")
+    my.text_description_long(self, "A deadly kraken tentacle. Beware its grapple attack and watch out for it's poisonous ink.")
     my.text_description_short(self, "A slimy tentacle.")
     my.text_hits(self, "bites")
     my.thing_size(self, my.THING_SIZE_NORMAL)
