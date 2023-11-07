@@ -748,7 +748,7 @@ void Level::tick_(void)
 
     handle_all_pending_things();
     things_gc_if_possible();
-    create_wandering_monster();
+    create_wandering_monster_periodically();
 
 #if 0
     //

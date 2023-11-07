@@ -4,34 +4,35 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
+#include "my_thing.hpp"
 
-bool Level::create_wandering_monster(void)
+bool Level::create_wandering_monster_periodically(void)
 {
-  if (g_opt_test_dungeon) {
-    if (d100() < 10) {
-      return false;
-    }
-  } else {
-    switch (biome) {
-      case BIOME_DUNGEON :
-      case BIOME_FLOODED :
-        if (game->tick_current % 100) {
-          return false;
-        }
-        break;
-      case BIOME_SWAMP :
-      case BIOME_LAVA :
-      case BIOME_ICE :
-      case BIOME_CHASMS :
-      case BIOME_SEWER :
-        if (game->tick_current % 50) {
-          return false;
-        }
-        break;
-      default : return false;
-    }
+  if (game->tick_current % 100) {
+    return create_wandering_monster_if_unlucky();
   }
 
+  return false;
+}
+
+bool Level::create_wandering_monster_if_unlucky(void)
+{
+  if (! player) {
+    return false;
+  }
+
+  if (d20_ge(player->stat_luck_total(), SAVING_ROLL_MODERATE)) {
+    //
+    // Passed the saving throw
+    //
+    return false;
+  }
+
+  return create_wandering_monster_now();
+}
+
+bool Level::create_wandering_monster_now(void)
+{
   if (monst_count >= LEVEL_MONST_COUNT_ABS_MAX) {
     return false;
   }

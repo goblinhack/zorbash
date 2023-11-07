@@ -2892,6 +2892,11 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
     bool training = false;
 
     if (is_door()) {
+      //
+      // Make too much noise and you stir something...
+      //
+      level->create_wandering_monster_if_unlucky();
+
       if (hitter->is_player() && attack_options->attack[ THING_ATTACK_NATURAL ]) {
         auto h = hitter->health_decr(pcg_random_range(1, 2));
         if (h <= 0) {
@@ -2902,10 +2907,6 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
         hitter->msg("You smash your fists against the door!");
         training = true;
 
-        //
-        // Make too much noise and you stir something...
-        //
-        level->create_wandering_monster();
       } else if (! hitter->is_explosion() && ! hitter->is_projectile() && ! hitter->is_laser()
                  && ! hitter->is_weapon() && ! hitter->is_magical() && ! hitter->is_fire() && ! hitter->is_lava()
                  && ! hitter->gfx_pixelart_attack_anim()) {
