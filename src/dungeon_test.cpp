@@ -117,21 +117,27 @@ void dungeon_test(void)
 
       if (player->is_waiting_to_descend_dungeon) {
         player->log("Waiting to descend dungeon");
+        pcg_random_allowed++;
         player->descend_dungeon(true, game->level->world_at + point3d(0, 0, 2));
+        pcg_random_allowed--;
       }
 
       if (player->is_waiting_to_descend_sewer) {
         player->log("Waiting to descend sewer");
+        pcg_random_allowed++;
         if (! player->descend_sewer()) {
           player->err("Failed to descend sewer");
         }
+        pcg_random_allowed--;
       }
 
       if (player->is_waiting_to_ascend_sewer) {
         player->log("Waiting to ascend sewer");
+        pcg_random_allowed++;
         if (! player->ascend_sewer()) {
           player->err("Failed to ascend sewer");
         }
+        pcg_random_allowed--;
       }
 
       //

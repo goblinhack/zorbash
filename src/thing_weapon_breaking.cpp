@@ -43,10 +43,17 @@ int Thing::weapon_dmg_modify(int damage, Thingp victim)
 
   int dmg_in = damage;
   damage -= (int) ceil(((((float) damage)) / 100.0) * ((float) weapon_dmgd_pct()));
-  dbg("Weapon is damaged, hits for %d -> %d", dmg_in, damage);
-  if (damage < 0) {
-    damage = 0;
+
+  //
+  // If this is zero then we can get into endless robot loops trying to escape and
+  // hitting a web and making no progress.
+  //
+  if (damage < 1) {
+    damage = 1;
   }
+
+  dbg("Weapon is damaged, hits for %d -> %d", dmg_in, damage);
+
   return damage;
 }
 

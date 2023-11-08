@@ -458,12 +458,16 @@ uint8_t wid_choose_next_dungeons_enter(Widp w, int x, int y, uint32_t button)
 
     if (ctx->is_ascending) {
       LOG("Ascend to %s", next_level->world_at.to_string().c_str());
+      pcg_random_allowed++;
       player->ascend_dungeon(true, next_level->world_at);
+      pcg_random_allowed--;
     }
 
     if (ctx->is_descending) {
       LOG("Descend to %s", next_level->world_at.to_string().c_str());
+      pcg_random_allowed++;
       player->descend_dungeon(true, next_level->world_at);
+      pcg_random_allowed--;
     }
 
     wid_choose_next_dungeons_destroy(wid_get_top_parent(w));

@@ -2821,6 +2821,8 @@ public:
   void add_friend(Thingp attacker);
   void add_friend(Tpp attacker);
   void add_goal_penalty(Thingp attacker);
+  void add_random_enchants(void);
+  void add_random_runic(void);
   void ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int miny, int maxx, int maxy);
   void ai_choose_search_goals(std::multiset< Goal > &goals, int search_type);
   void ai_get_next_hop(void);
@@ -2930,8 +2932,6 @@ public:
   void dump_equip(void);
   void dump(std::string prefix, std::ostream &out);
   void enchant_common(Thingp);
-  void add_random_enchants(void);
-  void add_random_runic(void);
   void enemies_tick(void);
   void entranced_tick(void);
   void entranced_update(void);
