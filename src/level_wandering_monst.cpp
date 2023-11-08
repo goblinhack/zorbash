@@ -33,6 +33,10 @@ bool Level::create_wandering_monster_if_unlucky(void)
 
 bool Level::create_wandering_monster_now(void)
 {
+  if (is_being_destroyed) {
+    return false;
+  }
+
   if (monst_count >= LEVEL_MONST_COUNT_ABS_MAX) {
     return false;
   }

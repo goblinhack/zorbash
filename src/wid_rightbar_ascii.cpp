@@ -199,18 +199,6 @@ bool wid_rightbar_ascii_create(void)
     if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
     }
-  } else if (player->stuck_count() > 1) {
-    y_at++;
-    TRACE_NO_INDENT();
-    auto  w  = wid_new_square_button(wid_rightbar, "(Stuck)");
-    point tl = make_point(0, y_at);
-    point br = make_point(width - 1, y_at);
-    wid_set_pos(w, tl, br);
-    wid_set_text(w, "(Stuck)");
-    wid_set_style(w, UI_WID_STYLE_RED);
-    if (g_opt_test_dungeon) {
-      wid_set_shape_none(w);
-    }
   }
   if (player->confused_count()) {
     y_at++;

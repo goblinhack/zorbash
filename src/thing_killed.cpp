@@ -211,15 +211,25 @@ void Thing::killed(Thingp defeater, const char *reason)
 
         int distance = distance_to_player();
         if (is_secret_door()) {
+          //
+          // Spawn some random monsters?
+          //
+          level->create_wandering_monster_if_unlucky();
+          level->create_wandering_monster_if_unlucky();
+          level->create_wandering_monster_if_unlucky();
+
           if (distance <= 1) {
             msg("An ancient door creaks open.");
           } else {
             msg("You hear an ancient rumbling noise.");
           }
-          if (player) {
-            player->update_light();
-          }
+          player->update_light();
         } else if (is_door()) {
+          //
+          // Spawn a random monster?
+          //
+          level->create_wandering_monster_if_unlucky();
+
           if (defeater && defeater->is_fire()) {
             TRACE_NO_INDENT();
             if (distance < 5) {
