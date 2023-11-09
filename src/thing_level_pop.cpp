@@ -101,6 +101,10 @@ void Thing::level_pop(void)
       i_set_is_carnivorous_plant = false;
       level->is_carnivorous_plant_unset(x, y);
     }
+    if (i_set_is_spectral_blade) {
+      i_set_is_spectral_blade = false;
+      level->is_spectral_blade_unset(x, y);
+    }
     if (i_set_is_chasm) {
       i_set_is_chasm = false;
       level->is_chasm_unset(x, y);

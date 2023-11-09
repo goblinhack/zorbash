@@ -37,7 +37,6 @@
 <!-- - tiny pixel effects that bounce?                                                                                                            -->
 <!-- - tomb of past player ? or random player ? leads to random small room?                                                                       -->
 <!-- - vaults                                                                                                                                     -->
-<!-- - weight factors into jumping                                                                                                                -->
 <!--                                                                                                                                              -->
 <!-- MVP plan                                                                                                                                     -->
 <!-- ------                                                                                                                                       -->
@@ -561,7 +560,7 @@ Other content
 - 24 x treasure
 - 24 x staffs
 - 24 x spells
-- 19 x buffs
+- 20 x buffs
 - 17 x weapons
 - 14 x potions
 - 12 x debuffs

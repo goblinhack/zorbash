@@ -107,7 +107,7 @@ def tp_init(name, text_long_name):
     my.gfx_ascii_shown(self, True)
     my.is_buff(self, True)
     my.is_loggable(self, True)
-    my.is_runic_defensive(self, True)
+    my.is_runic_defensive_class_A(self, True)
     my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_rcv_dmg_acid_do(self, "me.on_owner_rcv_dmg_acid()")
     my.on_owner_rcv_dmg_bite_do(self, "me.on_owner_rcv_dmg_bite()")

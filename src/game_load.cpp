@@ -721,6 +721,7 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_shovable);
   in >> bits(my.t->_is_skillstone);
   in >> bits(my.t->_is_smoke);
+  in >> bits(my.t->_is_spectral_blade);
   in >> bits(my.t->_is_spellbook);
   in >> bits(my.t->_is_spell_of_holding_barrier);
   in >> bits(my.t->_is_spell_of_protection_barrier);

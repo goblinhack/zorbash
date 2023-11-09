@@ -25,7 +25,7 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     my.chance_d10000_damaged(self, 5)
     my.chance_d10000_enchanted(self, 20)
-    my.chance_d10000_runic(self, 1)
+    my.chance_d10000_runic_class_A(self, 1)
     my.collision_hit_priority(self, 6)
     my.enchant_max(self, 5)
     my.equip_carry_anim(self, "armor_lather_carry")

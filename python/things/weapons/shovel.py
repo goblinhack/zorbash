@@ -36,7 +36,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.chance_d10000_crit(self, 200)
     my.chance_d10000_damaged(self, 50)
     my.chance_d10000_enchanted(self, 100)
-    my.chance_d10000_runic(self, 500)
+    my.chance_d10000_runic_class_A(self, 500)
     my.dmg_chance_d1000_melee(self, 0, 1000)
     my.dmg_melee_dice(self, "1d8")
     my.equip_carry_anim(self, "shovel_carry")

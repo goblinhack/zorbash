@@ -25,7 +25,7 @@ def tp_init(name, text_long_name):
     my.is_buff(self, True)
     my.is_immune_to_water(self, True)
     my.is_loggable(self, True)
-    my.is_runic_defensive(self, True)
+    my.is_runic_defensive_class_A(self, True)
     my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_unset_do(self, "me.on_owner_unset()")
     my.text_description_long(self, "You feel at home in the water and will suffer no more water penalties for either attack or defence when in shallow or deep water. Always beware of puddles though.")

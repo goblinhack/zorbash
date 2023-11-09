@@ -57,8 +57,10 @@ static Tpidmap tp_ring_class_A;
 static Tpidmap tp_ring_class_B;
 static Tpidmap tp_ring_class_C;
 static Tpidmap tp_rock;
-static Tpidmap tp_runic_defensive;
-static Tpidmap tp_runic_offensive;
+static Tpidmap tp_runic_defensive_class_A;
+static Tpidmap tp_runic_defensive_class_B;
+static Tpidmap tp_runic_offensive_class_A;
+static Tpidmap tp_runic_offensive_class_B;
 static Tpidmap tp_secret_door;
 static Tpidmap tp_sewer_wall;
 static Tpidmap tp_skills;
@@ -131,11 +133,11 @@ void tp_random_init(void)
     if (tp->is_food()) {
       tp_food.push_back(tp);
     }
-    if (tp->is_runic_offensive()) {
-      tp_runic_offensive.push_back(tp);
+    if (tp->is_runic_offensive_class_A()) {
+      tp_runic_offensive_class_A.push_back(tp);
     }
-    if (tp->is_runic_defensive()) {
-      tp_runic_defensive.push_back(tp);
+    if (tp->is_runic_defensive_class_A()) {
+      tp_runic_defensive_class_A.push_back(tp);
     }
     if (tp->is_fungus_edible()) {
       tp_fungus_edible.push_back(tp);
@@ -682,24 +684,44 @@ Tpp tp_random_food(void)
   return tp_get_with_rarity_filter(tp_food);
 }
 
-Tpp tp_random_runic_offensive(void)
+Tpp tp_random_runic_offensive_class_A(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_runic_offensive.size())) {
+  if (unlikely(! tp_runic_offensive_class_A.size())) {
     ERR("No runics found");
     return nullptr;
   }
-  return tp_get_with_rarity_filter(tp_runic_offensive);
+  return tp_get_with_rarity_filter(tp_runic_offensive_class_A);
 }
 
-Tpp tp_random_runic_defensive(void)
+Tpp tp_random_runic_defensive_class_A(void)
 {
   TRACE_NO_INDENT();
-  if (unlikely(! tp_runic_defensive.size())) {
+  if (unlikely(! tp_runic_defensive_class_A.size())) {
     ERR("No runics found");
     return nullptr;
   }
-  return tp_get_with_rarity_filter(tp_runic_defensive);
+  return tp_get_with_rarity_filter(tp_runic_defensive_class_A);
+}
+
+Tpp tp_random_runic_offensive_class_B(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_runic_offensive_class_B.size())) {
+    ERR("No runics found");
+    return nullptr;
+  }
+  return tp_get_with_rarity_filter(tp_runic_offensive_class_B);
+}
+
+Tpp tp_random_runic_defensive_class_B(void)
+{
+  TRACE_NO_INDENT();
+  if (unlikely(! tp_runic_defensive_class_B.size())) {
+    ERR("No runics found");
+    return nullptr;
+  }
+  return tp_get_with_rarity_filter(tp_runic_defensive_class_B);
 }
 
 Tpp tp_random_gold(void)

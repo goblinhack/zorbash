@@ -26,7 +26,7 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.chance_d10000_enchanted(self, 20)
-    my.chance_d10000_runic(self, 10)
+    my.chance_d10000_runic_class_A(self, 10)
     my.equip_carry_anim(self, "gauntlets_war_carry")
     my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_reflection(self, True)

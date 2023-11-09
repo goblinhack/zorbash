@@ -52,7 +52,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.attack_no_msg(self, True)
     my.chance_d10000_damaged(self, 1)
     my.chance_d10000_enchanted(self, 200)
-    my.chance_d10000_runic(self, 1000)
+    my.chance_d10000_runic_class_A(self, 1000)
     my.charge_count(self, 5)
     my.dmg_chance_d1000_melee(self, 0, 1000)
     my.dmg_melee_dice(self, "1d10+2")

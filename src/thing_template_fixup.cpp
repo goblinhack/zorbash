@@ -272,7 +272,11 @@ void tp_fixup(void)
       tp->is_tameable_set(true);
     }
 
-    if (tp->chance_d10000_runic()) {
+    if (tp->chance_d10000_runic_class_A()) {
+      tp->is_able_to_have_a_runic_inscribed_set(true);
+    }
+
+    if (tp->chance_d10000_runic_class_B()) {
       tp->is_able_to_have_a_runic_inscribed_set(true);
     }
 

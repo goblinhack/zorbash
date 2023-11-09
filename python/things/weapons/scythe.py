@@ -36,7 +36,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.chance_d10000_crit(self, 1000)
     my.chance_d10000_damaged(self, 5)
     my.chance_d10000_enchanted(self, 50)
-    my.chance_d10000_runic(self, 200)
+    my.chance_d10000_runic_class_A(self, 200)
     my.collision_hit_360(self, True)
     my.dmg_chance_d1000_melee(self, 0, 1000)
     my.dmg_melee_dice(self, "3d6")

@@ -61,12 +61,6 @@ int Thing::chance_d1000_tameable(void)
   return (tp()->chance_d1000_tameable());
 }
 
-int Thing::chance_d10000_runic(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->chance_d10000_runic());
-}
-
 int Thing::chance_d1000_grapple(void)
 {
   TRACE_NO_INDENT();
@@ -459,16 +453,6 @@ int Thing::is_unused_flag48(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag48());
 }
-int Thing::is_unused_flag49(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_unused_flag49());
-}
-int Thing::is_unused_flag50(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_unused_flag50());
-}
 int Thing::is_swimmer_but_land_dweller(void)
 {
   TRACE_NO_INDENT();
@@ -513,11 +497,6 @@ int Thing::is_golden(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_golden());
-}
-int Thing::is_runic_defensive(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_runic_defensive());
 }
 int Thing::has_a_head(void)
 {
@@ -574,11 +553,6 @@ int Thing::is_not_shown_as_a_pet(void)
   TRACE_NO_INDENT();
   return (tp()->is_not_shown_as_a_pet());
 }
-int Thing::is_spectral_blade(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_spectral_blade());
-}
 int Thing::has_tentacles(void)
 {
   TRACE_NO_INDENT();
@@ -633,16 +607,6 @@ int Thing::is_shootable(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_shootable());
-}
-int Thing::is_able_to_have_a_runic_inscribed(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_able_to_have_a_runic_inscribed());
-}
-int Thing::is_runic_offensive(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_runic_offensive());
 }
 int Thing::is_tentacleye(void)
 {

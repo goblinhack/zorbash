@@ -45,12 +45,20 @@ std::vector< Tpp > tp_find_wildcard(const std::string &name)
     out.push_back(tp_random_food());
     return out;
   }
-  if (name == "random_runic_offensive") {
-    out.push_back(tp_random_runic_offensive());
+  if (name == "random_runic_offensive_class_A") {
+    out.push_back(tp_random_runic_offensive_class_A());
     return out;
   }
-  if (name == "random_runic_defensive") {
-    out.push_back(tp_random_runic_defensive());
+  if (name == "random_runic_defensive_class_A") {
+    out.push_back(tp_random_runic_defensive_class_A());
+    return out;
+  }
+  if (name == "random_runic_offensive_class_B") {
+    out.push_back(tp_random_runic_offensive_class_B());
+    return out;
+  }
+  if (name == "random_runic_defensive_class_B") {
+    out.push_back(tp_random_runic_defensive_class_B());
     return out;
   }
   if (name == "random_gold") {
@@ -891,15 +899,22 @@ void tp_dump_weapons(void)
       special += "Hits two ahead<newline>";
     }
 
-    printf("DUMP: | %s | %s%s%s%s%s%s%s%s | %u - %u | %s | %s | %.2f %% | %.2f%% | %u |\n",
-           capitalise(tp->text_long_name()).c_str(), tp->is_weapon_class_A() ? "A" : "",
-           tp->is_weapon_class_B() ? "B" : "", tp->is_weapon_class_C() ? "C" : "",
-           tp->rarity() == THING_RARITY_COMMON ? "/common" : "",
-           tp->rarity() == THING_RARITY_UNCOMMON ? "/uncommon" : "", tp->rarity() == THING_RARITY_RARE ? "/rare" : "",
-           tp->rarity() == THING_RARITY_VERY_RARE ? "/v-rare" : "",
-           tp->rarity() == THING_RARITY_UNIQUE ? "/unique" : "", tp->dmg_melee_dice().min_roll(),
-           tp->dmg_melee_dice().max_roll(), tp->dmg_melee_dice_str().c_str(), special.c_str(),
-           (float) tp->chance_d10000_damaged() / (float) 100.0, (float) tp->chance_d10000_runic() / (float) 100.0,
-           tp->gold_value_dice().max_roll());
+    printf("DUMP: | %s | %s%s%s%s%s%s%s%s | %u - %u | %s | %s | %.2f %% | %c | %u |\n",
+           /* %s | */ capitalise(tp->text_long_name()).c_str(),
+           /* %s */ tp->is_weapon_class_A() ? "A" : "",
+           /* %s */ tp->is_weapon_class_B() ? "B" : "",
+           /* %s */ tp->is_weapon_class_C() ? "C" : "",
+           /* %s */ tp->rarity() == THING_RARITY_COMMON ? "/common" : "",
+           /* %s */ tp->rarity() == THING_RARITY_UNCOMMON ? "/uncommon" : "",
+           /* %s */ tp->rarity() == THING_RARITY_RARE ? "/rare" : "",
+           /* %s */ tp->rarity() == THING_RARITY_VERY_RARE ? "/v-rare" : "",
+           /* %s */ tp->rarity() == THING_RARITY_UNIQUE ? "/unique" : "",
+           /* %u - */ tp->dmg_melee_dice().min_roll(),
+           /* %u */ tp->dmg_melee_dice().max_roll(),
+           /* %s */ tp->dmg_melee_dice_str().c_str(),
+           /* %s */ special.c_str(),
+           /* %.2f %% */ (float) tp->chance_d10000_damaged() / (float) 100.0,
+           /* %c */ tp->is_able_to_have_a_runic_inscribed() ? 'Y' : 'N',
+           /* %u */ tp->gold_value_dice().max_roll());
   }
 }

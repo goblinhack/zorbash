@@ -444,8 +444,10 @@ bool Tp::matches(const std::string &what)
   if (is_rock_ice() && (what == "is_rock_ice")) { return true; }
   if (is_rock_lava() && (what == "is_rock_lava")) { return true; }
   if (is_rock() && (what == "is_rock")) { return true; }
-  if (is_runic_defensive() && (what == "is_runic_defensive")) { return true; }
-  if (is_runic_offensive() && (what == "is_runic_offensive")) { return true; }
+  if (is_runic_defensive_class_A() && (what == "is_runic_defensive_class_A")) { return true; }
+  if (is_runic_defensive_class_B() && (what == "is_runic_defensive_class_B")) { return true; }
+  if (is_runic_offensive_class_A() && (what == "is_runic_offensive_class_A")) { return true; }
+  if (is_runic_offensive_class_B() && (what == "is_runic_offensive_class_B")) { return true; }
   if (is_rusty() && (what == "is_rusty")) { return true; }
   if (is_scorpion() && (what == "is_scorpion")) { return true; }
   if (is_secret_door() && (what == "is_secret_door")) { return true; }
@@ -556,9 +558,7 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag46() && (what == "is_unused_flag46")) { return true; }
   if (is_unused_flag47() && (what == "is_unused_flag47")) { return true; }
   if (is_unused_flag48() && (what == "is_unused_flag48")) { return true; }
-  if (is_unused_flag49() && (what == "is_unused_flag49")) { return true; }
   if (is_unused_flag4() && (what == "is_unused_flag4")) { return true; }
-  if (is_unused_flag50() && (what == "is_unused_flag50")) { return true; }
   if (is_unused_flag5() && (what == "is_unused_flag5")) { return true; }
   if (is_unused_flag6() && (what == "is_unused_flag6")) { return true; }
   if (is_unused_flag7() && (what == "is_unused_flag7")) { return true; }
@@ -1056,8 +1056,10 @@ bool Thing::matches(const std::string &what)
   if (is_rock_ice() && (what == "is_rock_ice")) { return true; }
   if (is_rock_lava() && (what == "is_rock_lava")) { return true; }
   if (is_rock() && (what == "is_rock")) { return true; }
-  if (is_runic_defensive() && (what == "is_runic_defensive")) { return true; }
-  if (is_runic_offensive() && (what == "is_runic_offensive")) { return true; }
+  if (is_runic_defensive_class_A() && (what == "is_runic_defensive_class_A")) { return true; }
+  if (is_runic_defensive_class_B() && (what == "is_runic_defensive_class_B")) { return true; }
+  if (is_runic_offensive_class_A() && (what == "is_runic_offensive_class_A")) { return true; }
+  if (is_runic_offensive_class_B() && (what == "is_runic_offensive_class_B")) { return true; }
   if (is_rusty() && (what == "is_rusty")) { return true; }
   if (is_scorpion() && (what == "is_scorpion")) { return true; }
   if (is_secret_door() && (what == "is_secret_door")) { return true; }
@@ -1168,9 +1170,7 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag46() && (what == "is_unused_flag46")) { return true; }
   if (is_unused_flag47() && (what == "is_unused_flag47")) { return true; }
   if (is_unused_flag48() && (what == "is_unused_flag48")) { return true; }
-  if (is_unused_flag49() && (what == "is_unused_flag49")) { return true; }
   if (is_unused_flag4() && (what == "is_unused_flag4")) { return true; }
-  if (is_unused_flag50() && (what == "is_unused_flag50")) { return true; }
   if (is_unused_flag5() && (what == "is_unused_flag5")) { return true; }
   if (is_unused_flag6() && (what == "is_unused_flag6")) { return true; }
   if (is_unused_flag7() && (what == "is_unused_flag7")) { return true; }
@@ -1657,8 +1657,10 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_rock_ice") { return &Thing::is_rock_ice; }
   if (what == "is_rock_lava") { return &Thing::is_rock_lava; }
   if (what == "is_rock") { return &Thing::is_rock; }
-  if (what == "is_runic_defensive") { return &Thing::is_runic_defensive; }
-  if (what == "is_runic_offensive") { return &Thing::is_runic_offensive; }
+  if (what == "is_runic_defensive_class_A") { return &Thing::is_runic_defensive_class_A; }
+  if (what == "is_runic_defensive_class_B") { return &Thing::is_runic_defensive_class_B; }
+  if (what == "is_runic_offensive_class_A") { return &Thing::is_runic_offensive_class_A; }
+  if (what == "is_runic_offensive_class_B") { return &Thing::is_runic_offensive_class_B; }
   if (what == "is_rusty") { return &Thing::is_rusty; }
   if (what == "is_scorpion") { return &Thing::is_scorpion; }
   if (what == "is_secret_door") { return &Thing::is_secret_door; }
@@ -1768,9 +1770,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag46") { return &Thing::is_unused_flag46; }
   if (what == "is_unused_flag47") { return &Thing::is_unused_flag47; }
   if (what == "is_unused_flag48") { return &Thing::is_unused_flag48; }
-  if (what == "is_unused_flag49") { return &Thing::is_unused_flag49; }
   if (what == "is_unused_flag4") { return &Thing::is_unused_flag4; }
-  if (what == "is_unused_flag50") { return &Thing::is_unused_flag50; }
   if (what == "is_unused_flag5") { return &Thing::is_unused_flag5; }
   if (what == "is_unused_flag6") { return &Thing::is_unused_flag6; }
   if (what == "is_unused_flag7") { return &Thing::is_unused_flag7; }

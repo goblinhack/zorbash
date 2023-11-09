@@ -51,22 +51,83 @@ void Thing::add_random_runic(void)
   //
   // Make it more likely, the more enchants
   //
-  if (d10000() + (500 * enchant_count_get()) < chance_d10000_runic()) {
+  if (d10000() + (500 * enchant_count_get()) < chance_d10000_runic_class_A()) {
     //
     // Success
     //
     if (is_weapon()) {
-      auto tp = tp_random_runic_offensive();
+      auto tp = tp_random_runic_offensive_class_A();
       if (tp) {
         new_infop();
         runic_name_set(tp->name());
       }
     } else {
-      auto tp = tp_random_runic_defensive();
+      auto tp = tp_random_runic_defensive_class_A();
       if (tp) {
         new_infop();
         runic_name_set(tp->name());
       }
     }
   }
+
+  if (d10000() + (500 * enchant_count_get()) < chance_d10000_runic_class_B()) {
+    //
+    // Success
+    //
+    if (is_weapon()) {
+      auto tp = tp_random_runic_offensive_class_B();
+      if (tp) {
+        new_infop();
+        runic_name_set(tp->name());
+      }
+    } else {
+      auto tp = tp_random_runic_defensive_class_B();
+      if (tp) {
+        new_infop();
+        runic_name_set(tp->name());
+      }
+    }
+  }
+}
+
+int Thing::chance_d10000_runic_class_A(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->chance_d10000_runic_class_A());
+}
+
+int Thing::chance_d10000_runic_class_B(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->chance_d10000_runic_class_B());
+}
+
+int Thing::is_able_to_have_a_runic_inscribed(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_able_to_have_a_runic_inscribed());
+}
+
+int Thing::is_runic_offensive_class_A(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_runic_offensive_class_A());
+}
+
+int Thing::is_runic_offensive_class_B(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_runic_offensive_class_B());
+}
+
+int Thing::is_runic_defensive_class_A(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_runic_defensive_class_A());
+}
+
+int Thing::is_runic_defensive_class_B(void)
+{
+  TRACE_NO_INDENT();
+  return (tp()->is_runic_defensive_class_B());
 }

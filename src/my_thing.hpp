@@ -329,6 +329,7 @@ public:
   uint64_t i_set_is_shovable                    : 1 {};
   uint64_t i_set_is_skillstone                  : 1 {};
   uint64_t i_set_is_smoke                       : 1 {};
+  uint64_t i_set_is_spectral_blade              : 1 {};
   uint64_t i_set_is_spellbook                   : 1 {};
   uint64_t i_set_is_spell_of_holding_barrier    : 1 {};
   uint64_t i_set_is_spell_of_protection_barrier : 1 {};
@@ -1184,7 +1185,8 @@ public:
   int chance_d10000_crit(void);
   int chance_d10000_damaged(void);
   int chance_d10000_enchanted(void);
-  int chance_d10000_runic(void);
+  int chance_d10000_runic_class_A(void);
+  int chance_d10000_runic_class_B(void);
   int chance_d10000_set_on_fire(void);
   int chance_d1000_appearing(void);
   int chance_d1000_attack_engulf(void);
@@ -1869,8 +1871,10 @@ public:
   int is_rock_ice(void);
   int is_rock_lava(void);
   int is_rock(void);
-  int is_runic_defensive(void);
-  int is_runic_offensive(void);
+  int is_runic_defensive_class_A(void);
+  int is_runic_defensive_class_B(void);
+  int is_runic_offensive_class_A(void);
+  int is_runic_offensive_class_B(void);
   int is_rusty(void);
   int is_scorpion(void);
   int is_secret_door(void);
@@ -1985,9 +1989,7 @@ public:
   int is_unused_flag46(void);
   int is_unused_flag47(void);
   int is_unused_flag48(void);
-  int is_unused_flag49(void);
   int is_unused_flag4(void);
-  int is_unused_flag50(void);
   int is_unused_flag5(void);
   int is_unused_flag6(void);
   int is_unused_flag7(void);

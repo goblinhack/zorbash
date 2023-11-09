@@ -435,7 +435,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_attackable_by_player          ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_barrel                        ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_basalt                        ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->i_set_is_block_of_crystal                  ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->i_set_is_block_of_crystal              ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_block_of_ice                  ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_brazier                       ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->i_set_is_bridge                        ? 1LLU : 0LLU) << shift; shift++;
@@ -681,6 +681,7 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_shovable);
   out << bits(my.t->_is_skillstone);
   out << bits(my.t->_is_smoke);
+  out << bits(my.t->_is_spectral_blade);
   out << bits(my.t->_is_spellbook);
   out << bits(my.t->_is_spell_of_holding_barrier);
   out << bits(my.t->_is_spell_of_protection_barrier);

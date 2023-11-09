@@ -281,6 +281,10 @@ void Thing::level_push(void)
       i_set_is_carnivorous_plant = true;
       level->is_carnivorous_plant_set(x, y);
     }
+    if (is_spectral_blade()) {
+      i_set_is_spectral_blade = true;
+      level->is_spectral_blade_set(x, y);
+    }
     if (is_heavy()) {
       i_set_is_heavy = true;
       level->is_heavy_set(x, y);

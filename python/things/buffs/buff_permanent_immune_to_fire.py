@@ -44,7 +44,7 @@ def tp_init(name, text_long_name):
     my.is_buff(self, True)
     my.is_immune_to_fire(self, True)
     my.is_loggable(self, True)
-    my.is_runic_defensive(self, True)
+    my.is_runic_defensive_class_A(self, True)
     my.on_owner_add_do(self, "me.on_owner_add()")
     my.on_owner_rcv_dmg_fire_do(self, "me.on_owner_rcv_dmg_fire()")
     my.on_owner_rcv_dmg_heat_do(self, "me.on_owner_rcv_dmg_heat()")

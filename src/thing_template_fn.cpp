@@ -239,7 +239,8 @@ int Tp::capacity_width(void) const { return _capacity_width; }
 int Tp::chance_d10000_crit(void) const { return _chance_d10000_crit; }
 int Tp::chance_d10000_damaged(void) const { return _chance_d10000_damaged; }
 int Tp::chance_d10000_enchanted(void) const { return _chance_d10000_enchanted; }
-int Tp::chance_d10000_runic(void) const { return _chance_d10000_runic; }
+int Tp::chance_d10000_runic_class_A(void) const { return _chance_d10000_runic_class_A; }
+int Tp::chance_d10000_runic_class_B(void) const { return _chance_d10000_runic_class_B; }
 int Tp::chance_d10000_set_on_fire(void) const { return _chance_d10000_set_on_fire; }
 int Tp::chance_d1000_appearing(void) const { return _chance_d1000_appearing; }
 int Tp::chance_d1000_attack_engulf(void) const { return _chance_d1000_attack_engulf; }
@@ -756,8 +757,10 @@ int Tp::is_ripple(void) const { return _is_ripple; }
 int Tp::is_rock_ice(void) const { return _is_rock_ice; }
 int Tp::is_rock_lava(void) const { return _is_rock_lava; }
 int Tp::is_rock(void) const { return _is_rock; }
-int Tp::is_runic_defensive(void) const { return _is_runic_defensive; }
-int Tp::is_runic_offensive(void) const { return _is_runic_offensive; }
+int Tp::is_runic_defensive_class_A(void) const { return _is_runic_defensive_class_A; }
+int Tp::is_runic_defensive_class_B(void) const { return _is_runic_defensive_class_B; }
+int Tp::is_runic_offensive_class_A(void) const { return _is_runic_offensive_class_A; }
+int Tp::is_runic_offensive_class_B(void) const { return _is_runic_offensive_class_B; }
 int Tp::is_rusty(void) const { return _is_rusty; }
 int Tp::is_scorpion(void) const { return _is_scorpion; }
 int Tp::is_secret_door(void) const { return _is_secret_door; }
@@ -872,9 +875,7 @@ int Tp::is_unused_flag45(void) const { return _is_unused_flag45; }
 int Tp::is_unused_flag46(void) const { return _is_unused_flag46; }
 int Tp::is_unused_flag47(void) const { return _is_unused_flag47; }
 int Tp::is_unused_flag48(void) const { return _is_unused_flag48; }
-int Tp::is_unused_flag49(void) const { return _is_unused_flag49; }
 int Tp::is_unused_flag4(void) const { return _is_unused_flag4; }
-int Tp::is_unused_flag50(void) const { return _is_unused_flag50; }
 int Tp::is_unused_flag5(void) const { return _is_unused_flag5; }
 int Tp::is_unused_flag6(void) const { return _is_unused_flag6; }
 int Tp::is_unused_flag7(void) const { return _is_unused_flag7; }
@@ -1010,7 +1011,8 @@ void Tp::capacity_width_set(int v) { _capacity_width = v; }
 void Tp::chance_d10000_crit_set(int v) { _chance_d10000_crit = v; }
 void Tp::chance_d10000_damaged_set(int v) { _chance_d10000_damaged = v; }
 void Tp::chance_d10000_enchanted_set(int v) { _chance_d10000_enchanted = v; }
-void Tp::chance_d10000_runic_set(int v) { _chance_d10000_runic = v; }
+void Tp::chance_d10000_runic_class_A_set(int v) { _chance_d10000_runic_class_A = v; }
+void Tp::chance_d10000_runic_class_B_set(int v) { _chance_d10000_runic_class_B = v; }
 void Tp::chance_d10000_set_on_fire_set(int v) { _chance_d10000_set_on_fire = v; }
 void Tp::chance_d1000_appearing_set(int v) { _chance_d1000_appearing = v; }
 void Tp::chance_d1000_attack_engulf_set(int v) { _chance_d1000_attack_engulf = v; }
@@ -1534,8 +1536,10 @@ void Tp::is_ripple_set(int v) { _is_ripple = v; }
 void Tp::is_rock_ice_set(int v) { _is_rock_ice = v; }
 void Tp::is_rock_lava_set(int v) { _is_rock_lava = v; }
 void Tp::is_rock_set(int v) { _is_rock = v; }
-void Tp::is_runic_defensive_set(int v) { _is_runic_defensive = v; }
-void Tp::is_runic_offensive_set(int v) { _is_runic_offensive = v; }
+void Tp::is_runic_defensive_class_A_set(int v) { _is_runic_defensive_class_A = v; }
+void Tp::is_runic_defensive_class_B_set(int v) { _is_runic_defensive_class_B = v; }
+void Tp::is_runic_offensive_class_A_set(int v) { _is_runic_offensive_class_A = v; }
+void Tp::is_runic_offensive_class_B_set(int v) { _is_runic_offensive_class_B = v; }
 void Tp::is_rusty_set(int v) { _is_rusty = v; }
 void Tp::is_scorpion_set(int v) { _is_scorpion = v; }
 void Tp::is_secret_door_set(int v) { _is_secret_door = v; }
@@ -1650,9 +1654,7 @@ void Tp::is_unused_flag45_set(int v) { _is_unused_flag45 = v; }
 void Tp::is_unused_flag46_set(int v) { _is_unused_flag46 = v; }
 void Tp::is_unused_flag47_set(int v) { _is_unused_flag47 = v; }
 void Tp::is_unused_flag48_set(int v) { _is_unused_flag48 = v; }
-void Tp::is_unused_flag49_set(int v) { _is_unused_flag49 = v; }
 void Tp::is_unused_flag4_set(int v) { _is_unused_flag4 = v; }
-void Tp::is_unused_flag50_set(int v) { _is_unused_flag50 = v; }
 void Tp::is_unused_flag5_set(int v) { _is_unused_flag5 = v; }
 void Tp::is_unused_flag6_set(int v) { _is_unused_flag6 = v; }
 void Tp::is_unused_flag7_set(int v) { _is_unused_flag7 = v; }
