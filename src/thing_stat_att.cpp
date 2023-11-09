@@ -187,7 +187,7 @@ int Thing::stat_att_penalties_total(void)
           penalty += p;
           if (penalty != prev) {
             prev = penalty;
-            dbg("Att penalty: weapon min str not reached %d", p);
+            dbg("Att penalty: weapon min str not reached, penalty %d", p);
           }
         }
       }

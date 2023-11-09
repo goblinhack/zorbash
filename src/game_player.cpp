@@ -93,6 +93,15 @@ void Game::place_player(void)
         }
         level->thing_new("tentacleye", point(x + 1, y));
       }
+      if (1) {
+        auto w = level->thing_new("mace", point(x, y));
+        t->carry(w, carry_options);
+        if (1) {
+          auto r = tp_find("buff_permanent_multiplicity");
+          w->runic_name_set(r->name());
+        }
+        level->thing_new("dogman", point(x + 1, y));
+      }
       if (0) {
         level->thing_new("skeleton", point(x, y + 3));
         auto w = level->thing_new("sword_holy", point(x, y));

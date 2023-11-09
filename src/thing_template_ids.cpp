@@ -785,6 +785,7 @@ std::initializer_list< std::string > tps = {
     "somekindofmeat",
     "spectral_blade",
     "spectral_blade_minion",
+    "spectral_blade_companion",
     "spectral_mob",
     "spellbook1",
     "spellbook2",

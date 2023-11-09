@@ -312,7 +312,8 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
       if (rune) {
         wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
         wid_popup_window->log("%%fg=yellow$This weapon is inscribed with");
-        wid_popup_window->log("%%fg=yellow$a magical " + rune->text_long_name() + " rune!");
+        wid_popup_window->log("%%fg=yellow$a magical rune:");
+        wid_popup_window->log("%%fg=gold$" + rune->text_long_name());
       }
     }
   }
@@ -2459,6 +2460,11 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
   TRACE_AND_INDENT();
   char tmp[ MAXSHORTSTR ];
 
+  auto player = game->level->player;
+  if (! player) {
+    return;
+  }
+
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->stat_str_total();
     char tmp2[ MAXSHORTSTR ];
@@ -2598,9 +2604,15 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
   }
 
   if (t->stat_str_min()) {
-    auto stat = t->stat_str_min();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength min needed      %4u", stat);
-    w->log(tmp);
+    if (player->stat_str_total() > t->stat_str_min()) {
+      auto stat = t->stat_str_min();
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength requirement     %4u", stat);
+      w->log(tmp);
+    } else {
+      auto stat = t->stat_str_min();
+      snprintf(tmp, sizeof(tmp) - 1, "%%fg=red$Strength min needed      %4u", stat);
+      w->log(tmp);
+    }
   }
 }
 

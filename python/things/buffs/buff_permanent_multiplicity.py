@@ -5,15 +5,19 @@ self = None
 
 
 def on_owner_attack_dmg_melee(me, owner, victim, x, y, damage):
+    # my.con("x,y     {},{}".format(x, y))
     # my.con("me      {} {:X}".format(my.thing_name_get(me), me))
     # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
     # my.con("victim  {} {:X}".format(my.thing_name_get(victim), victim))
     # my.con("damage  {}".format(damage))
-    if not my.level_is_spectral_blade_at(me, x, y):
-        if my.level_is_alive_monst_at(me, x, y) or my.level_is_monst_at(me, x, y):
+    vx, vy = my.thing_coords_get(victim)
+    if not my.level_is_spectral_blade_at(me, vx, vy):
+        if my.level_is_alive_monst_at(me, vx, vy) or my.level_is_monst_at(me, vx, vy):
             roll = my.py_d100()
-            if roll < 10 + my.thing_enchant_count_get(me) * 5:
-                my.place_at(me, "spectral_blade", x, y)
+            if roll < 100 + my.thing_enchant_count_get(me) * 5:
+                it = my.spawn_at_my_position(victim, "spectral_blade_companion")
+                if it != 0:
+                    my.thing_set_mob(it, owner)
     return damage
 
 
@@ -37,7 +41,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="buff_permanent_multiplicity", text_long_name="multiplicity weapon", text_short_name="multiplicity weapon")
+    tp_init(name="buff_permanent_multiplicity", text_long_name="multiplicity", text_short_name="multiplicity")
 
 
 init()

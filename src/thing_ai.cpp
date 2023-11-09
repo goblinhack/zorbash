@@ -967,6 +967,17 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
     }
   }
 
+  //
+  // If a spectral blade is too far from its multiplicity owner, move toward it
+  //
+  auto m = top_mob();
+  if (m) {
+    if (too_far_from_mob()) {
+      point p = m->curr_at;
+      GOAL_ADD(GOAL_PRIO_HIGH, 100, "follow-mob", l);
+    }
+  }
+
   dbg2("Choose can see goals between %d,%d and %d,%d", minx, miny, maxx, maxy);
   TRACE_NO_INDENT();
 
