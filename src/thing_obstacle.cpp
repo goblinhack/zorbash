@@ -328,6 +328,10 @@ bool Thing::is_obs_ai(Thingp it)
     return false;
   }
 
+  if (debug && is_debug_type()) {
+    con("check collision with %s", it->to_string().c_str());
+  }
+
   //
   // Skip things we cannot collide with
   //
@@ -522,10 +526,22 @@ bool Thing::is_obs_ai(Thingp it)
     return false;
   }
 
-  if (is_ethereal()) {
+  auto m = it->top_mob();
+  if ((is_monst() || is_player()) && it->is_ethereal() && m && (m == this)) {
+    //
+    // This is to allow the player to walk through their own spectral blades when spawned
+    // due to multiplicity.
+    //
+    if (debug && is_debug_type()) {
+      con("check collision with %s, no at line %d", it->to_string().c_str(), __LINE__);
+    }
+  } else if (is_ethereal()) {
     //
     // This lets you skip around mobs to avoid ghosts
     //
+    if (debug && is_debug_type()) {
+      con("check collision with %s, no at line %d", it->to_string().c_str(), __LINE__);
+    }
   } else {
     //
     // No walking through your fellow minions

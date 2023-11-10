@@ -101,6 +101,8 @@ void Game::place_player(void)
           w->runic_name_set(r->name());
         }
         level->thing_new("dogman", point(x + 1, y));
+        // level->thing_new("dogman", point(x + 1, y + 1));
+        // level->thing_new("dogman", point(x + 1, y - 1));
       }
       if (0) {
         level->thing_new("skeleton", point(x, y + 3));

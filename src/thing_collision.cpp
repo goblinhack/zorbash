@@ -782,11 +782,18 @@ bool Thing::collision_check_only(Thingp it, point future_pos)
     }
   }
 
-  //
-  // Important to have this check before can_eat or krakens will try to eat their
-  // own tentacles.
-  //
-  if (is_friend(it) || same_mob(it)) {
+  auto m = it->top_mob();
+  if ((is_monst() || is_player()) && it->is_ethereal() && m && (m == this)) {
+    //
+    // This is to allow the player to walk through their own spectral blades when spawned
+    // due to multiplicity.
+    //
+    IF_DEBUG2 { dbg("Collision; pass through blade"); }
+  } else if (is_friend(it) || same_mob(it)) {
+    //
+    // Important to have this check before can_eat or krakens will try to eat their
+    // own tentacles.
+    //
     if (things_overlap(me, future_pos, it)) {
       IF_DEBUG2 { dbg("Collision; cannot pass through my friend"); }
       return true;

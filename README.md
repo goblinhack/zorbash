@@ -251,17 +251,18 @@ Bestiary
 | Narhornet | A/uncommon | 44 | 1d4+1 | 1 | Bite:1d4<br />Poison:1d8<br /> |  |
 | Giant Rat | B/common | 44 | 1d6+2 | 1 |  | Water<br /> |
 | Centipede | A/common | 43 | 1d4+2 | 1 | Bite:1d8<br />Claw:1d4<br />Poison:1d4<br /> | Poison<br /> |
-| Cuddly Eel | A/common | 43 | 1d3+1 | 1 | Bite:1d4<br /> | Water<br /> |
 | Asp | A/common | 43 | 1d3+1 | 1 | Poison:1d3+1<br /> | Webs<br />Water<br /> |
+| Cuddly Eel | A/common | 43 | 1d3+1 | 1 | Bite:1d4<br /> | Water<br /> |
 | Orb Of Fire | B/uncommon | 40 |  | 0 |  | Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br /> |
-| Para Spider | B/uncommon | 39 | 1d3 | 1 | Poison:1d4<br /> | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
-| Orb Of Energy | B/uncommon | 39 |  | 0 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br /> |
 | Rabid Bat Minion | A/common | 39 | 1 | 1 | Bite:1d3<br />Claw:1d2<br /> | Water<br /> |
+| Orb Of Energy | B/uncommon | 39 |  | 0 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br /> |
+| Para Spider | B/uncommon | 39 | 1d3 | 1 | Poison:1d4<br /> | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
 | Spectral Blade | B/unique | 38 | 1d4 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
-| Spectral Blade | B/unique | 37 | 1d3 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
-| Rat | A/common | 37 | 1d3+2 | 1 |  | Water<br /> |
-| Giant Dungeon Duck | A/rare | 37 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d3<br /> | Water<br /> |
 | Fluffy Bat | A/common | 37 | 1 | 1 | Bite:1d3<br />Claw:1d2<br /> | Water<br /> |
+| Giant Dungeon Duck | A/rare | 37 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d3<br /> | Water<br /> |
+| Rat | A/common | 37 | 1d3+2 | 1 |  | Water<br /> |
+| Spectral Blade | B/unique | 37 | 1d3 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
+| Spectral Blade | B/unique | 37 | 1d3 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
 | Baby Black Pudding | B/common | 36 | 1 | 1 | Acid:1d5<br /> | Acid<br />Cold<br />Electricity<br />Lightning<br />Necrosis<br /> |
 | Jackalope | A/rare | 36 | 1d4 | 1 |  |  |
 | Clingy Leech | A/common | 35 | 1d3+1 | 1 | Bite:1d4<br />Drain:1d4<br /> | Water<br /> |
@@ -286,23 +287,23 @@ Weapons
 <!-- begin weapons type marker -->
 | Name | Class/Rarity | Damage | Damage Roll | Special | Weapon Damaged Chance | Runic Chance | Gold Value |
 | :--- | --- | --- | --- | --- | --- | --- | --- |
-| Warhammer | C/common | 4 - 32 | 4d8 |  Swing-penalty<br />Hits all surrounding<br /> | 0.01 % | 10.00% | 450 |
-| Very Broadsword | C/uncommon | 2 - 24 | 2d12 |  Hits adjacent<br /> | 0.01 % | 10.00% | 350 |
-| Mace | C/common | 3 - 24 | 3d8 |  Swing-penalty<br /> | 0.01 % | 5.00% | 350 |
-| Double Shovel | C/uncommon | 2 - 20 | 2d10 |  Hits in-front and behind<br /> | 1.00 % | 7.50% | 50 |
-| Holy Sword Of Clonrichet | C/v-rare | 5 - 20 | 1d16+4 |  Immunity-Acid<br />Immunity-Cold<br />Immunity-Poison<br />x2 undead<br />Hits all surrounding<br /> | 0.01 % | 10.00% | 2500 |
-| Scythe | C/uncommon | 3 - 18 | 3d6 |  Hits all surrounding<br /> | 0.05 % | 2.00% | 250 |
-| Sword Of Plutonium | C/v-rare | 5 - 16 | 1d12+4 |  Immunity-Acid<br /> | 0.01 % | 5.00% | 1000 |
-| Sword Of Duck Summoning | C/v-rare | 3 - 12 | 1d10+2 |  Immunity-Acid<br /> | 0.01 % | 10.00% | 1500 |
-| Sword Of Draining | C/v-rare | 1 - 12 | 1d12 | Damage-Drain:1d20<br /> Immunity-Drain<br /> Additional-attack<br /> | 0.05 % | 5.00% | 1000 |
-| Cutlass | B/rare | 1 - 10 | 1d10 |   | 0.20 % | 0.50% | 100 |
-| Pike | B/uncommon | 1 - 10 | 1d10 |  Hits two ahead<br /> | 0.50 % | 1.00% | 10 |
-| Short Sword | A/common | 1 - 8 | 1d8 |   | 0.10 % | 0.10% | 100 |
-| Shovel | B/uncommon | 1 - 8 | 1d8 |   | 0.50 % | 5.00% | 5 |
-| Rusty Short Sword | A/common | 2 - 7 | 1d6+1 | Damage-Poison:1d2+1<br />  | 2.00 % | 0.05% | 50 |
-| Short Axe | B/uncommon | 1 - 6 | 1d6 |  Hits all surrounding<br /> | 0.05 % | 5.00% | 150 |
-| Wooden Short Sword | A/common | 1 - 4 | 1d4 |   | 1.00 % | 0.01% | 25 |
-| Dagger | A/common | 1 - 4 | 1d4 |   | 0.05 % | 5.00% | 15 |
+| Warhammer | C/common | 4 - 32 | 4d8 |  Swing-penalty<br />Hits all surrounding<br /> | 0.01 % | Y | 450 |
+| Very Broadsword | C/uncommon | 2 - 24 | 2d12 |  Hits adjacent<br /> | 0.01 % | Y | 350 |
+| Mace | C/common | 3 - 24 | 3d8 |  Swing-penalty<br /> | 0.01 % | Y | 350 |
+| Double Shovel | C/uncommon | 2 - 20 | 2d10 |  Hits in-front and behind<br /> | 1.00 % | Y | 50 |
+| Holy Sword Of Clonrichet | C/v-rare | 5 - 20 | 1d16+4 |  Immunity-Acid<br />Immunity-Cold<br />Immunity-Poison<br />x2 undead<br />Hits all surrounding<br /> | 0.01 % | Y | 2500 |
+| Scythe | C/uncommon | 3 - 18 | 3d6 |  Hits all surrounding<br /> | 0.05 % | Y | 250 |
+| Sword Of Plutonium | C/v-rare | 5 - 16 | 1d12+4 |  Immunity-Acid<br /> | 0.01 % | Y | 1000 |
+| Sword Of Duck Summoning | C/v-rare | 3 - 12 | 1d10+2 |  Immunity-Acid<br /> | 0.01 % | Y | 1500 |
+| Sword Of Draining | C/v-rare | 1 - 12 | 1d12 | Damage-Drain:1d20<br /> Immunity-Drain<br /> Additional-attack<br /> | 0.05 % | Y | 1000 |
+| Cutlass | B/rare | 1 - 10 | 1d10 |   | 0.20 % | Y | 100 |
+| Pike | B/uncommon | 1 - 10 | 1d10 |  Hits two ahead<br /> | 0.50 % | Y | 10 |
+| Short Sword | A/common | 1 - 8 | 1d8 |   | 0.10 % | Y | 100 |
+| Shovel | B/uncommon | 1 - 8 | 1d8 |   | 0.50 % | Y | 5 |
+| Rusty Short Sword | A/common | 2 - 7 | 1d6+1 | Damage-Poison:1d2+1<br />  | 2.00 % | Y | 50 |
+| Short Axe | B/uncommon | 1 - 6 | 1d6 |  Hits all surrounding<br /> | 0.05 % | Y | 150 |
+| Wooden Short Sword | A/common | 1 - 4 | 1d4 |   | 1.00 % | Y | 25 |
+| Dagger | A/common | 1 - 4 | 1d4 |   | 0.05 % | Y | 15 |
 <!-- end weapons type marker -->
 
 Pixelart Screenshots
@@ -554,7 +555,7 @@ Content
 Other content
 -------------
 <!-- begin type marker -->
-- 119 x monsters
+- 120 x monsters
 - 52 x food
 - 25 x items
 - 24 x treasure

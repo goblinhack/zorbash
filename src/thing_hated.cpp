@@ -17,23 +17,25 @@ bool Thing::is_hated_by_me(const point p)
   // Limit krakens to the depths, but allow eels and piranha_giants free roam.
   //
   if (is_swimmer()) {
-    if (environ_likes_deep_water() && environ_likes_shallow_water()) {
-      if (! level->is_water(p)) {
-        return true;
-      }
-    } else if (environ_likes_deep_water()) {
-      if (! level->is_deep_water(p)) {
-        return true;
-      }
-    } else if (environ_likes_shallow_water()) {
-      if (! level->is_shallow_water(p)) {
-        if (! is_able_to_live_out_of_water()) {
+    if (! is_swimmer_but_land_dweller()) {
+      if (environ_likes_deep_water() && environ_likes_shallow_water()) {
+        if (! level->is_water(p)) {
           return true;
         }
-      }
-    } else {
-      if (! level->is_water(p)) {
-        return true;
+      } else if (environ_likes_deep_water()) {
+        if (! level->is_deep_water(p)) {
+          return true;
+        }
+      } else if (environ_likes_shallow_water()) {
+        if (! level->is_shallow_water(p)) {
+          if (! is_able_to_live_out_of_water()) {
+            return true;
+          }
+        }
+      } else {
+        if (! level->is_water(p)) {
+          return true;
+        }
       }
     }
   }
@@ -85,23 +87,25 @@ bool Tp::is_hated_by_me(Levelp level, point p) const
   // Limit krakens to the depths, but allow eels and piranha_giants free roam.
   //
   if (is_swimmer()) {
-    if (environ_likes_deep_water() && environ_likes_shallow_water()) {
-      if (! level->is_water(p)) {
-        return true;
-      }
-    } else if (environ_likes_deep_water()) {
-      if (! level->is_deep_water(p)) {
-        return true;
-      }
-    } else if (environ_likes_shallow_water()) {
-      if (! level->is_shallow_water(p)) {
-        if (! is_able_to_live_out_of_water()) {
+    if (! is_swimmer_but_land_dweller()) {
+      if (environ_likes_deep_water() && environ_likes_shallow_water()) {
+        if (! level->is_water(p)) {
           return true;
         }
-      }
-    } else {
-      if (! level->is_water(p)) {
-        return true;
+      } else if (environ_likes_deep_water()) {
+        if (! level->is_deep_water(p)) {
+          return true;
+        }
+      } else if (environ_likes_shallow_water()) {
+        if (! level->is_shallow_water(p)) {
+          if (! is_able_to_live_out_of_water()) {
+            return true;
+          }
+        }
+      } else {
+        if (! level->is_water(p)) {
+          return true;
+        }
       }
     }
   }

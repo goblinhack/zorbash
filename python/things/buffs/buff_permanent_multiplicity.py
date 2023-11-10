@@ -17,7 +17,7 @@ def on_owner_attack_dmg_melee(me, owner, victim, x, y, damage):
             if roll < 100 + my.thing_enchant_count_get(me) * 5:
                 it = my.spawn_at_my_position(victim, "spectral_blade_companion")
                 if it != 0:
-                    my.thing_set_mob(it, owner)
+                    my.thing_set_leader(it, owner)
     return damage
 
 

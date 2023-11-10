@@ -308,8 +308,10 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
 
       if (tp->is_swimmer()) {
         if (! is_water(x, y)) {
-          log("INF: Dropping %s for deep water", tp->name().c_str());
-          continue;
+          if (! tp->is_swimmer_but_land_dweller()) {
+            log("INF: Dropping %s for deep water", tp->name().c_str());
+            continue;
+          }
         }
       }
 
