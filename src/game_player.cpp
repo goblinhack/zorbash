@@ -56,7 +56,6 @@ void Game::place_player(void)
         level->thing_new("trap_blinded", point(x + 2, y));
       }
       if (0) {
-        level->thing_new("spectral_blade", point(x + 1, y));
         level->thing_new("trap_blinded", point(x + 2, y + 2));
         level->thing_new("spell_of_holding_barrier", point(x, y));
         level->thing_new("spell_of_protection_barrier", point(x, y));
@@ -93,7 +92,7 @@ void Game::place_player(void)
         }
         level->thing_new("tentacleye", point(x + 1, y));
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("mace", point(x, y));
         t->carry(w, carry_options);
         if (1) {
