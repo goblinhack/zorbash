@@ -93,7 +93,7 @@ void Game::place_player(void)
         }
         level->thing_new("tentacleye", point(x + 1, y));
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("mace", point(x, y));
         t->carry(w, carry_options);
         if (1) {
