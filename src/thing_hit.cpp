@@ -221,6 +221,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     return false;
   }
 
+  auto l = hitter->leader();
+
   dbg("Hit actual, damage %d", damage);
   TRACE_NO_INDENT();
 
@@ -1423,7 +1425,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       TRACE_NO_INDENT();
 
       if (o_top && o_top->is_player()) {
-        dbg("Player is onwer of dead or dying thing");
+        dbg("Player is owner of dead or dying thing");
         if (! o_top->is_dead && ! o_top->is_dying) {
           if (is_drained) {
             msg("Your %s is drained.", text_long_name().c_str());
@@ -2178,6 +2180,8 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       real_hitter->msg("%s hits %s with %s.", real_hitter->text_The().c_str(), text_the().c_str(),
                        hitter->text_the().c_str());
     }
+  } else if (l && l->is_player()) {
+    msg("Your %s hits %s.%%fg=reset$", hitter->text_long_name().c_str(), text_the().c_str());
   } else if (real_hitter != this) {
     TRACE_NO_INDENT();
     //

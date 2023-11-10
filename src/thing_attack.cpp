@@ -632,6 +632,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
   idle_count_set(0);
 
   auto owner = top_owner();
+  auto l     = leader();
 
   if (d1000() < chance_d1000_teleport_attack()) {
     TeleportOptions teleport_options;
@@ -2031,7 +2032,9 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         }
 
         if (! hit) {
-          if (is_player() || (owner && owner->is_player())) {
+          if (is_player() || (l && l->is_player())) {
+            msg("Your %s misses %s.%%fg=reset$", text_long_name().c_str(), victim->text_the().c_str());
+          } else if (is_player() || (owner && owner->is_player())) {
             if (fumble) {
               msg("%%fg=orange$You fumble and miss %s.%%fg=reset$", victim->text_the().c_str());
               popup("You fumble");
