@@ -28,9 +28,15 @@ def on_use(owner, item, target, x, y):
         if duck:
             # my.con("duck    {} {:X}".format(my.thing_name_get(duck), duck))
             my.thing_friend_add(duck, owner)
-    roll = my.py_d6()
-    my.thing_hit_dmg_stamina(owner, owner, owner, roll)
+
+    hitter = item
+    target = owner
+    damage = my.py_d6() * nducks
+    my.thing_hit_dmg_stamina(owner, hitter, target, damage)
     my.spawn_at_my_position(target, "magical_effect")
+
+    if my.thing_is_player(owner):
+        my.topcon("Your sword drains your stamina!")
 
 
 def on_equip(owner, me, x, y):
@@ -68,12 +74,12 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
+    my.is_able_to_attack_owner(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_submergible(self, True)
     my.gold_value_dice(self, "1500")
     my.health_initial_dice(self, "1d1000+500")
-    my.is_able_to_attack_owner(self, True)
     my.is_able_to_be_equipped(self, True)
     my.is_able_to_be_teleported(self, True)
     my.is_able_to_fall(self, True)

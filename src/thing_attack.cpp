@@ -15,6 +15,9 @@ bool Thing::possible_to_attack(const Thingp victim)
   auto me = tp();
 
   if (victim == this) {
+    if (is_debug_type()) {
+      dbg("Cannot attack %s, self", victim->to_short_string().c_str());
+    }
     return false;
   }
 
@@ -357,6 +360,16 @@ bool Thing::possible_to_attack(const Thingp victim)
   if (is_weapon()) {
     auto o = immediate_owner();
     if (o) {
+      //
+      // Sword of plutonium
+      //
+      if (is_able_to_attack_owner()) {
+        if (is_debug_type()) {
+          dbg("Can attack owner %s", victim->to_short_string().c_str());
+        }
+        return true;
+      }
+
       if (o->is_monst()) {
         if (! victim->is_attackable_by_monst()) {
           // Too noisy
@@ -643,6 +656,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
       if (victim->is_player()) {
         msg("Your stomach lurches!");
       }
+      dbg("Teleport attack");
       return true;
     }
   }
@@ -683,17 +697,13 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
     // Check this thing can attack
     //
     if (! possible_to_attack(victim)) {
-      if (is_debug_type()) {
-        dbg("Attack failed, not possible to attack %s", victim->to_short_string().c_str());
-      }
+      dbg("Attack failed, not possible to attack %s", victim->to_short_string().c_str());
       return false;
     }
   }
 
   if (victim->is_falling) {
-    if (is_debug_type()) {
-      dbg("Attack failed, victim is falling %s", victim->to_short_string().c_str());
-    }
+    dbg("Attack failed, victim is falling %s", victim->to_short_string().c_str());
     return false;
   }
 

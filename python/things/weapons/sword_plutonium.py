@@ -30,10 +30,12 @@ def on_tick(owner, me, x, y):
             target = owner
             if my.py_pcg_random_range_inclusive(1, 100) > 10:
                 roll = my.py_d4()
-                my.thing_hit_dmg_stamina(owner, me, target, roll)
+                hitter = me
+                my.thing_hit_dmg_stamina(owner, hitter, target, roll)
             else:
                 roll = my.py_d20()
-                my.thing_hit_dmg_poison(owner, me, target, roll)
+                hitter = me
+                my.thing_hit_dmg_poison(owner, hitter, target, roll)
 
             if owner and my.thing_is_player(owner):
                 my.topcon("You feel sick from radiation poisoning.")

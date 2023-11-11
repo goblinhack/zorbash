@@ -33,15 +33,15 @@ def on_enchant(me, x, y):
 def on_use(owner, item, target, x, y):
     # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
     # my.con("item    {} {:X}".format(my.thing_name_get(item), item))
-    if not target:
-        return
-    # my.con("target  {} {:X}".format(my.thing_name_get(target), target))
 
     for it in my.level_flood_fill_gas_get_all_grid_things(item, x, y, 3):
         my.spawn_darkness_around_thing(it, 1)
 
     roll = my.py_d6()
     my.thing_hit_dmg_stamina(owner, owner, owner, roll)
+
+    if my.thing_is_player(owner):
+        my.topcon("Your dark blade drains your stamina!")
 
 
 def tp_init(name, text_long_name, text_short_name):
@@ -107,6 +107,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.noise_on_dropping(self, 5)
     my.on_enchant_do(self, "me.on_enchant()")
     my.on_equip_do(self, "me.on_equip()")
+    my.is_able_to_attack_owner(self, True)
     my.on_owner_attack_dmg_melee_do(self, "me.on_owner_attack_dmg_melee()")
     my.on_swing_do(self, "me.on_swing()")
     my.on_unequip_do(self, "me.on_unequip()")

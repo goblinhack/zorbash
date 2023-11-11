@@ -10,6 +10,7 @@
 // to be in this list
 //
 std::initializer_list< std::string > tps = {
+    "", // ID 0 means unused
     "acid1",
     "acid_blob",
     "ai_path1",
@@ -432,7 +433,6 @@ std::initializer_list< std::string > tps = {
     "foliage_large",
     "foliage_sickly",
     "foliage_sickly_large",
-    "found sword_duck_summoning_carry",
     "four_leaf_clover",
     "frog",
     "fungus_edible_1",
@@ -554,7 +554,6 @@ std::initializer_list< std::string > tps = {
     "horseshoe",
     "hotsauce",
     "iceman",
-    "", // ID 0 means unused
     "jackalope",
     "key",
     "key_crystal",
@@ -784,8 +783,8 @@ std::initializer_list< std::string > tps = {
     "snake_viper",
     "somekindofmeat",
     "spectral_blade",
-    "spectral_blade_minion",
     "spectral_blade_companion",
+    "spectral_blade_minion",
     "spectral_mob",
     "spellbook1",
     "spellbook2",
@@ -885,6 +884,9 @@ std::initializer_list< std::string > tps = {
     "sushi2",
     "sword",
     "sword_carry",
+    "sword_darkness",
+    "sword_darkness_carry",
+    "sword_darkness_swing",
     "sword_draining",
     "sword_draining_carry",
     "sword_draining_swing",
