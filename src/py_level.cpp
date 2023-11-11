@@ -595,7 +595,6 @@ LEVEL_BODY_GET_BOOL_AT(level_is_attackable_by_player_at, is_attackable_by_player
 LEVEL_BODY_GET_BOOL_AT(level_is_auto_collect_item_at, is_auto_collect_item)
 LEVEL_BODY_GET_BOOL_AT(level_is_auto_equipped_at, is_auto_equipped)
 LEVEL_BODY_GET_BOOL_AT(level_is_auto_throw_at, is_auto_throw)
-LEVEL_BODY_GET_BOOL_AT(level_is_auto_use_at, is_auto_use)
 LEVEL_BODY_GET_BOOL_AT(level_is_bag_at, is_bag)
 LEVEL_BODY_GET_BOOL_AT(level_is_bag_item_at, is_bag_item)
 LEVEL_BODY_GET_BOOL_AT(level_is_bag_item_container_at, is_bag_item_container)

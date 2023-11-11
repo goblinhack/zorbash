@@ -1874,14 +1874,6 @@ int Thing::is_light_blocker_for_monst(void)
 int Thing::is_gas_blocker(void)
 {
   TRACE_NO_INDENT();
-
-  //
-  // Allow darkness to stop poison spreading.
-  //
-  if (level->is_darkness(curr_at)) {
-    return true;
-  }
-
   return (tp()->is_gas_blocker());
 }
 
@@ -3383,12 +3375,6 @@ int Thing::is_usable(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_usable());
-}
-
-int Thing::is_auto_use(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_auto_use());
 }
 
 int Thing::is_used_when_thrown(void)

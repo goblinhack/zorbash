@@ -364,7 +364,6 @@ private:
   int _is_auto_collect_item {};
   int _is_auto_equipped {};
   int _is_auto_throw {};
-  int _is_auto_use {};
   int _is_bag {};
   int _is_bag_item {};
   int _is_bag_item_container {};
@@ -1758,7 +1757,6 @@ public:
   int is_auto_collect_item(void) const;
   int is_auto_equipped(void) const;
   int is_auto_throw(void) const;
-  int is_auto_use(void) const;
   int is_bag_item_container(void) const;
   int is_bag_item_not_stackable(void) const;
   int is_bag_item(void) const;
@@ -2538,7 +2536,6 @@ public:
   void is_auto_collect_item_set(int v);
   void is_auto_equipped_set(int v);
   void is_auto_throw_set(int v);
-  void is_auto_use_set(int v);
   void is_bag_item_container_set(int v);
   void is_bag_item_not_stackable_set(int v);
   void is_bag_item_set(int v);

@@ -159,7 +159,6 @@ bool Tp::matches(const std::string &what)
   if (is_auto_collect_item() && (what == "is_auto_collect_item")) { return true; }
   if (is_auto_equipped() && (what == "is_auto_equipped")) { return true; }
   if (is_auto_throw() && (what == "is_auto_throw")) { return true; }
-  if (is_auto_use() && (what == "is_auto_use")) { return true; }
   if (is_bag_item_container() && (what == "is_bag_item_container")) { return true; }
   if (is_bag_item_not_stackable() && (what == "is_bag_item_not_stackable")) { return true; }
   if (is_bag_item() && (what == "is_bag_item")) { return true; }
@@ -769,7 +768,6 @@ bool Thing::matches(const std::string &what)
   if (is_auto_collect_item() && (what == "is_auto_collect_item")) { return true; }
   if (is_auto_equipped() && (what == "is_auto_equipped")) { return true; }
   if (is_auto_throw() && (what == "is_auto_throw")) { return true; }
-  if (is_auto_use() && (what == "is_auto_use")) { return true; }
   if (is_bag_item_container() && (what == "is_bag_item_container")) { return true; }
   if (is_bag_item_not_stackable() && (what == "is_bag_item_not_stackable")) { return true; }
   if (is_bag_item() && (what == "is_bag_item")) { return true; }
@@ -1378,7 +1376,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_auto_collect_item") { return &Thing::is_auto_collect_item; }
   if (what == "is_auto_equipped") { return &Thing::is_auto_equipped; }
   if (what == "is_auto_throw") { return &Thing::is_auto_throw; }
-  if (what == "is_auto_use") { return &Thing::is_auto_use; }
   if (what == "is_bag_item_container") { return &Thing::is_bag_item_container; }
   if (what == "is_bag_item_not_stackable") { return &Thing::is_bag_item_not_stackable; }
   if (what == "is_bag_item") { return &Thing::is_bag_item; }

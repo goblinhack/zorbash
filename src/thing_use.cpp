@@ -565,18 +565,24 @@ bool Thing::use(Thingp what, UseOptions &use_options)
     if (preferred_equip == -1) {
       preferred_equip = MONST_EQUIP_WEAPON;
     }
-    if (equip(what, preferred_equip)) {
-      if (is_player()) {
-        game->tick_begin("player changed weapon");
-      }
-    }
 
-    //
-    // For duck summoning
-    //
     if (is_equipped(what)) {
       if (what->is_target_select()) {
+        //
+        // For duck summoning
+        //
         return item_choose_target(what);
+      }
+
+      if (what->is_usable()) {
+        used(what, this, use_options);
+        if (is_player()) {
+          game->tick_begin("player used a special ability");
+        }
+      }
+    } else if (equip(what, preferred_equip)) {
+      if (is_player()) {
+        game->tick_begin("player changed weapon");
       }
     }
   } else if (what->is_armor()) {
@@ -701,14 +707,6 @@ bool Thing::use(Thingp what, UseOptions &use_options)
       }
     }
     ret = shoot_at_and_choose_target(what, use_options);
-    if (is_player()) {
-      level->describe(what);
-    }
-  } else if (what->is_auto_use()) {
-    dbg("Trying to auto use: %s", what->to_short_string().c_str());
-    TRACE_NO_INDENT();
-    UseOptions use_options;
-    use(what, use_options);
     if (is_player()) {
       level->describe(what);
     }

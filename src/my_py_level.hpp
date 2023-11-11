@@ -46,7 +46,6 @@ PyObject *level_is_attackable_by_player_at(PyObject *obj, PyObject *args, PyObje
 PyObject *level_is_auto_collect_item_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_auto_equipped_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_auto_throw_at(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *level_is_auto_use_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_bag_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_bag_item_at(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *level_is_bag_item_container_at(PyObject *obj, PyObject *args, PyObject *keywds);

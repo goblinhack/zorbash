@@ -461,7 +461,6 @@ int Tp::is_auto_activated(void) const { return _is_auto_activated; }
 int Tp::is_auto_collect_item(void) const { return _is_auto_collect_item; }
 int Tp::is_auto_equipped(void) const { return _is_auto_equipped; }
 int Tp::is_auto_throw(void) const { return _is_auto_throw; }
-int Tp::is_auto_use(void) const { return _is_auto_use; }
 int Tp::is_bag_item_container(void) const { return _is_bag_item_container; }
 int Tp::is_bag_item_not_stackable(void) const { return _is_bag_item_not_stackable; }
 int Tp::is_bag_item(void) const { return _is_bag_item; }
@@ -1240,7 +1239,6 @@ void Tp::is_auto_activated_set(int v) { _is_auto_activated = v; }
 void Tp::is_auto_collect_item_set(int v) { _is_auto_collect_item = v; }
 void Tp::is_auto_equipped_set(int v) { _is_auto_equipped = v; }
 void Tp::is_auto_throw_set(int v) { _is_auto_throw = v; }
-void Tp::is_auto_use_set(int v) { _is_auto_use = v; }
 void Tp::is_bag_item_container_set(int v) { _is_bag_item_container = v; }
 void Tp::is_bag_item_not_stackable_set(int v) { _is_bag_item_not_stackable = v; }
 void Tp::is_bag_item_set(int v) { _is_bag_item = v; }

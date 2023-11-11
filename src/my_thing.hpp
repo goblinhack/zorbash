@@ -1568,7 +1568,6 @@ public:
   int is_auto_collect_item(void);
   int is_auto_equipped(void);
   int is_auto_throw(void);
-  int is_auto_use(void);
   int is_bag_item_container(void);
   int is_bag_item_not_stackable(void);
   int is_bag_item(void);
