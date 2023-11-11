@@ -117,7 +117,7 @@ void Game::place_player(void)
         auto w = level->thing_new("sword_duck_summoning", point(x, y));
         t->carry(w, carry_options);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("sword_darkness", point(x, y));
         t->carry(w, carry_options);
       }
