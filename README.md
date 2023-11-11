@@ -17,7 +17,6 @@
 <!-- - portable hunger - teleports you to a room full of digestive juices                                                                         -->
 <!-- - rat pack and king rat / cranium rat                                                                                                        -->
 <!-- - rest until better                                                                                                                          -->
-<!-- - runes lean more towards old gods                                                                                                           -->
 <!-- - shove chocolate frog statue, get frog?                                                                                                     -->
 <!-- - skill, blind strike, attack the eyes                                                                                                       -->
 <!-- - skill, guaranteed hit, but you have no defense in the next move                                                                            -->

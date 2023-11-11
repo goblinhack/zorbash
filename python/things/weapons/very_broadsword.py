@@ -39,7 +39,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.chance_d10000_runic_class_A(self, 1000)
     my.collision_hit_adj(self, True)
     my.dmg_chance_d1000_melee(self, 0, 1000)
-    my.dmg_melee_dice(self, "2d12")
+    my.dmg_melee_dice(self, "1d12")
     my.equip_carry_anim(self, "very_broadsword_carry")
     my.gfx_anim_use(self, "very_broadsword_swing")
     my.gfx_ascii_fade_with_dist(self, True)
