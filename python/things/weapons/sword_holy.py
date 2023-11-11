@@ -104,7 +104,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_att_bonus(self, 2)
     my.stat_str_min(self, 14)
     my.text_a_or_an(self, "a")
-    my.text_description_enchant(self, "+1 DMG, +2 ATT")
+    my.text_description_enchant(self, "+1 DMG, +1 ATT")
     my.text_description_long2(self, "Class two relic. Deals double damage to the undead.")
     my.text_description_long(self, "The origins of this holy sword are unknown, but rumored to have been forged from the craggy clifftops of a far away isle. Imbued with the essence of Saint Ted, this sword will serve you well.")
     my.text_description_short(self, "Thy holy means of justice.")

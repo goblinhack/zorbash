@@ -8,7 +8,6 @@
 <!-- - chickens - battle chickens - lay eggs as food - and they get names                                                                         -->
 <!-- - chocolate golem fires chocolate                                                                                                            -->
 <!-- - cracked walls                                                                                                                              -->
-<!-- - cursed weapon with bad luck                                                                                                                -->
 <!-- - eat corpses, like a bat corpse?                                                                                                            -->
 <!-- - hub shop levels                                                                                                                            -->
 <!-- - invisible phantoms that leave puddles of ectoplasm ?                                                                                       -->

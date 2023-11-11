@@ -100,8 +100,8 @@ void Game::place_player(void)
           w->runic_name_set(r->name());
         }
         level->thing_new("dogman", point(x + 1, y));
-        // level->thing_new("dogman", point(x + 1, y + 1));
-        // level->thing_new("dogman", point(x + 1, y - 1));
+        level->thing_new("dogman", point(x + 1, y + 1));
+        level->thing_new("dogman", point(x + 1, y - 1));
       }
       if (0) {
         level->thing_new("skeleton", point(x, y + 3));
@@ -115,6 +115,10 @@ void Game::place_player(void)
       }
       if (0) {
         auto w = level->thing_new("sword_duck_summoning", point(x, y));
+        t->carry(w, carry_options);
+      }
+      if (1) {
+        auto w = level->thing_new("sword_darkblade", point(x, y));
         t->carry(w, carry_options);
       }
       if (0) {

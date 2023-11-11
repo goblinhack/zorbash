@@ -120,7 +120,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_VERY_RARE)
     my.stat_att_bonus(self, 2)  # means +2 per enchant
     my.text_a_or_an(self, "a")
-    my.text_description_enchant(self, "+1 DMG, +2 ATT")
+    my.text_description_enchant(self, "+1 DMG, +1 ATT")
     my.text_description_long(self, "This powerful sword additionally grants you the ability to summon a duck at any given location within range. Said duck will be friendly towards you and may or may not be an assist in battle.")
     my.text_description_short(self, "Thy ducky powered means of justice.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
