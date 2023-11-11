@@ -448,10 +448,10 @@ int Thing::is_unused_flag47(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag47());
 }
-int Thing::is_unused_flag48(void)
+int Thing::dmg_limited_per_tick(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag48());
+  return (tp()->dmg_limited_per_tick());
 }
 int Thing::is_swimmer_but_land_dweller(void)
 {

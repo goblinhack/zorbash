@@ -180,6 +180,7 @@ private:
   int _distance_spell_cast {};
   int _distance_throw {};
   int _distance_vision {};
+  int _dmg_limited_per_tick {};
   int _dmg_num_of_attacks {};
   int _dmg_rcv_doubled_from_acid {};
   int _dmg_rcv_doubled_from_cold {};
@@ -780,7 +781,6 @@ private:
   int _is_unused_flag45 {};
   int _is_unused_flag46 {};
   int _is_unused_flag47 {};
-  int _is_unused_flag48 {};
   int _is_unused_flag5 {};
   int _is_unused_flag6 {};
   int _is_unused_flag7 {};
@@ -1576,6 +1576,7 @@ public:
   int dmg_chance_d1000_poison(int index) const;
   int dmg_chance_d1000_stamina_drain(int index) const;
   int dmg_chance_d1000_water(int index) const;
+  int dmg_limited_per_tick(void) const;
   int dmg_num_of_attacks(void) const;
   int dmg_rcv_doubled_from_acid(void) const;
   int dmg_rcv_doubled_from_cold(void) const;
@@ -2172,7 +2173,6 @@ public:
   int is_unused_flag45(void) const;
   int is_unused_flag46(void) const;
   int is_unused_flag47(void) const;
-  int is_unused_flag48(void) const;
   int is_unused_flag4(void) const;
   int is_unused_flag5(void) const;
   int is_unused_flag6(void) const;
@@ -2351,6 +2351,7 @@ public:
   void distance_spell_cast_set(int v);
   void distance_throw_set(int v);
   void distance_vision_set(int v);
+  void dmg_limited_per_tick_set(int v);
   void dmg_num_of_attacks_set(int v);
   void dmg_rcv_doubled_from_acid_set(int v);
   void dmg_rcv_doubled_from_cold_set(int v);
@@ -2952,7 +2953,6 @@ public:
   void is_unused_flag45_set(int v);
   void is_unused_flag46_set(int v);
   void is_unused_flag47_set(int v);
-  void is_unused_flag48_set(int v);
   void is_unused_flag4_set(int v);
   void is_unused_flag5_set(int v);
   void is_unused_flag6_set(int v);

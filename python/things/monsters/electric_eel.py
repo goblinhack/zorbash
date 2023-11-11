@@ -53,6 +53,7 @@ def tp_init(name, text_long_name):
     my.dmg_bite_dice(self, "1d4")
     my.dmg_chance_d1000_bite(self, 0, 500)
     my.dmg_chance_d1000_nat_att(self, 0, 900)
+    my.dmg_limited_per_tick(self, True)
     my.dmg_nat_att_dice(self, "1d3+1")
     my.dmg_nat_att_type(self, "bite")
     my.environ_dislikes_fire(self, 100)

@@ -47,6 +47,7 @@ def tp_init(name, text_long_name):
     my.dmg_bite_dice(self, "1d1+1")
     my.dmg_chance_d1000_bite(self, 0, 50)
     my.dmg_chance_d1000_nat_att(self, 0, 100)
+    my.dmg_limited_per_tick(self, True)
     my.dmg_nat_att_dice(self, "1")
     my.dmg_nat_att_type(self, "nibble")
     my.environ_likes_shallow_water(self, True)

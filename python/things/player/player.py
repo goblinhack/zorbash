@@ -195,6 +195,7 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.distance_spell_cast(self, 7)
     my.distance_throw(self, 5)
     my.distance_vision(self, 10)
+    my.dmg_limited_per_tick(self, True)
     my.dmg_nat_att_dice(self, "1d3")
     my.dmg_nat_att_type(self, "punch")
     my.environ_dislikes_acid(self, 100)

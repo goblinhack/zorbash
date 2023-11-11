@@ -28,6 +28,8 @@ def on_use(owner, item, target, x, y):
         if duck:
             # my.con("duck    {} {:X}".format(my.thing_name_get(duck), duck))
             my.thing_friend_add(duck, owner)
+    roll = my.py_d6()
+    my.thing_hit_dmg_stamina(owner, owner, owner, roll)
     my.spawn_at_my_position(target, "magical_effect")
 
 

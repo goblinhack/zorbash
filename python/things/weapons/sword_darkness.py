@@ -30,6 +30,20 @@ def on_enchant(me, x, y):
         my.thing_msg_if_not_dead_or_dying(me, "The sword glows a ghastly extra black.")
 
 
+def on_use(owner, item, target, x, y):
+    # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
+    # my.con("item    {} {:X}".format(my.thing_name_get(item), item))
+    if not target:
+        return
+    # my.con("target  {} {:X}".format(my.thing_name_get(target), target))
+
+    for it in my.level_flood_fill_gas_get_all_grid_things(item, x, y, 3):
+        my.spawn_darkness_around_thing(it, 1)
+
+    roll = my.py_d6()
+    my.thing_hit_dmg_stamina(owner, owner, owner, roll)
+
+
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
@@ -39,8 +53,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.chance_d10000_runic_class_A(self, 500)
     my.dmg_chance_d1000_melee(self, 0, 1000)
     my.dmg_melee_dice(self, "6d6+6")
-    my.equip_carry_anim(self, "sword_darkblade_carry")
-    my.gfx_anim_use(self, "sword_darkblade_swing")
+    my.equip_carry_anim(self, "sword_darkness_carry")
+    my.gfx_anim_use(self, "sword_darkness_swing")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_show_light_once_seen(self, True)
     my.gfx_ascii_shown(self, True)
@@ -49,6 +63,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
+    my.on_use_do(self, "me.on_use()")
     my.gfx_pixelart_show_highlighted(self, True)
     my.gfx_pixelart_submergible(self, True)
     my.gold_value_dice(self, "1000")
@@ -97,8 +112,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_VERY_RARE)
     my.stat_att_bonus(self, 6)
-    my.stat_luck_bonus(self, -6)
     my.stat_con_bonus(self, -6)
+    my.stat_luck_bonus(self, -6)
     my.stat_psi_bonus(self, 6)
     my.stat_str_min(self, 16)
     my.text_a_or_an(self, "a")
@@ -118,7 +133,7 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="sword_darkblade", text_long_name="sword of darkblade", text_short_name="sword, darkblade")
+    tp_init(name="sword_darkness", text_long_name="sword of darkness", text_short_name="sword, darkness")
 
 
 init()

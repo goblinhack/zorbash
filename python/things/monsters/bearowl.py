@@ -42,6 +42,7 @@ def tp_init(name, text_long_name):
     my.distance_vision(self, 10)
     my.dmg_chance_d1000_nat_att(self, 0, 1000)
     my.dmg_chance_d1000_nat_att(self, 1, 200)
+    my.dmg_limited_per_tick(self, True)
     my.dmg_nat_att_dice(self, "2d8+5")
     my.dmg_nat_att_type(self, "beak")
     my.dmg_num_of_attacks(self, 2)

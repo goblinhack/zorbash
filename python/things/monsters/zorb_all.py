@@ -61,6 +61,7 @@ def tp_init(name, text_long_name):
     my.distance_leader_max(self, 5)
     my.distance_throw(self, 6)
     my.distance_vision(self, 7)
+    my.dmg_limited_per_tick(self, True)
     my.dmg_nat_att_dice(self, "1d4+2")
     my.dmg_nat_att_type(self, "gore")
     my.environ_dislikes_acid(self, 100)

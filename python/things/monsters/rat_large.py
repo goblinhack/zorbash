@@ -41,6 +41,7 @@ def tp_init(name, text_long_name):
     my.consume_per_bite_amount(self, 3)
     my.distance_avoid(self, 5)
     my.distance_vision(self, 5)
+    my.dmg_limited_per_tick(self, True)
     my.dmg_nat_att_dice(self, "1d3+2")
     my.dmg_nat_att_type(self, "bite")
     my.dmg_rcv_doubled_from_fire(self, True)

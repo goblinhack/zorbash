@@ -44,6 +44,7 @@ def tp_init(name, text_long_name):
     my.distance_avoid(self, 8)
     my.distance_throw(self, 6)
     my.distance_vision(self, 3)
+    my.dmg_limited_per_tick(self, True)
     my.dmg_nat_att_dice(self, "1d12+8")
     my.dmg_nat_att_type(self, "claw")
     my.dmg_rcv_doubled_from_fire(self, True)

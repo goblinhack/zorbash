@@ -1297,6 +1297,7 @@ public:
   int dmg_holy(Thingp victim = nullptr);
   int dmg_impact(Thingp victim = nullptr);
   int dmg_lightning(Thingp victim = nullptr);
+  int dmg_limited_per_tick(void);
   int dmg_magic_drain(Thingp victim = nullptr);
   int dmg_max(Thingp victim = nullptr);
   int dmg_melee(Thingp victim = nullptr);
@@ -1988,7 +1989,6 @@ public:
   int is_unused_flag45(void);
   int is_unused_flag46(void);
   int is_unused_flag47(void);
-  int is_unused_flag48(void);
   int is_unused_flag4(void);
   int is_unused_flag5(void);
   int is_unused_flag6(void);

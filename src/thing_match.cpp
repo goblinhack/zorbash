@@ -37,6 +37,7 @@ bool Tp::matches(const std::string &what)
   if (collision_hit_adj() && (what == "collision_hit_adj")) { return true; }
   if (collision_hit_two_tiles_ahead() && (what == "collision_hit_two_tiles_ahead")) { return true; }
   if (consume_per_bite_amount() && (what == "consume_per_bite_amount")) { return true; }
+  if (dmg_limited_per_tick() && (what == "dmg_limited_per_tick")) { return true; }
   if (dmg_num_of_attacks() && (what == "dmg_num_of_attacks")) { return true; }
   if (dmg_rcv_doubled_from_cold() && (what == "dmg_rcv_doubled_from_cold")) { return true; }
   if (enchant_max() && (what == "enchant_max")) { return true; }
@@ -557,7 +558,6 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag45() && (what == "is_unused_flag45")) { return true; }
   if (is_unused_flag46() && (what == "is_unused_flag46")) { return true; }
   if (is_unused_flag47() && (what == "is_unused_flag47")) { return true; }
-  if (is_unused_flag48() && (what == "is_unused_flag48")) { return true; }
   if (is_unused_flag4() && (what == "is_unused_flag4")) { return true; }
   if (is_unused_flag5() && (what == "is_unused_flag5")) { return true; }
   if (is_unused_flag6() && (what == "is_unused_flag6")) { return true; }
@@ -647,6 +647,7 @@ bool Thing::matches(const std::string &what)
   if (collision_hit_adj() && (what == "collision_hit_adj")) { return true; }
   if (collision_hit_two_tiles_ahead() && (what == "collision_hit_two_tiles_ahead")) { return true; }
   if (consume_per_bite_amount() && (what == "consume_per_bite_amount")) { return true; }
+  if (dmg_limited_per_tick() && (what == "dmg_limited_per_tick")) { return true; }
   if (dmg_num_of_attacks() && (what == "dmg_num_of_attacks")) { return true; }
   if (dmg_rcv_doubled_from_cold() && (what == "dmg_rcv_doubled_from_cold")) { return true; }
   if (enchant_max() && (what == "enchant_max")) { return true; }
@@ -1169,7 +1170,6 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag45() && (what == "is_unused_flag45")) { return true; }
   if (is_unused_flag46() && (what == "is_unused_flag46")) { return true; }
   if (is_unused_flag47() && (what == "is_unused_flag47")) { return true; }
-  if (is_unused_flag48() && (what == "is_unused_flag48")) { return true; }
   if (is_unused_flag4() && (what == "is_unused_flag4")) { return true; }
   if (is_unused_flag5() && (what == "is_unused_flag5")) { return true; }
   if (is_unused_flag6() && (what == "is_unused_flag6")) { return true; }
@@ -1253,6 +1253,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "collision_hit_adj") { return &Thing::collision_hit_adj; }
   if (what == "collision_hit_two_tiles_ahead") { return &Thing::collision_hit_two_tiles_ahead; }
   if (what == "consume_per_bite_amount") { return &Thing::consume_per_bite_amount; }
+  if (what == "dmg_limited_per_tick") { return &Thing::dmg_limited_per_tick; }
   if (what == "dmg_num_of_attacks") { return &Thing::dmg_num_of_attacks; }
   if (what == "dmg_rcv_doubled_from_cold") { return &Thing::dmg_rcv_doubled_from_cold; }
   if (what == "enchant_max") { return &Thing::enchant_max; }
@@ -1769,7 +1770,6 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag45") { return &Thing::is_unused_flag45; }
   if (what == "is_unused_flag46") { return &Thing::is_unused_flag46; }
   if (what == "is_unused_flag47") { return &Thing::is_unused_flag47; }
-  if (what == "is_unused_flag48") { return &Thing::is_unused_flag48; }
   if (what == "is_unused_flag4") { return &Thing::is_unused_flag4; }
   if (what == "is_unused_flag5") { return &Thing::is_unused_flag5; }
   if (what == "is_unused_flag6") { return &Thing::is_unused_flag6; }

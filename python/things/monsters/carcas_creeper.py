@@ -42,6 +42,7 @@ def tp_init(name, text_long_name):
     my.dmg_chance_d1000_nat_att(self, 0, 500)
     my.dmg_chance_d1000_poison(self, 0, 200)
     my.dmg_claw_dice(self, "1d6")
+    my.dmg_limited_per_tick(self, True)
     my.dmg_nat_att_dice(self, "1d6+2")
     my.dmg_nat_att_type(self, "gore")
     my.dmg_poison_dice(self, "1d10")

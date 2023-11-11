@@ -45,6 +45,7 @@ def tp_init(name, text_long_name):
     my.dmg_chance_d1000_claw(self, 1, 1000)
     my.dmg_chance_d1000_nat_att(self, 0, 900)
     my.dmg_claw_dice(self, "1d4")
+    my.dmg_limited_per_tick(self, True)
     my.dmg_nat_att_dice(self, "1d8")
     my.dmg_nat_att_type(self, "demon stare")
     my.dmg_num_of_attacks(self, 2)

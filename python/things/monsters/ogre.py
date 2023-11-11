@@ -48,6 +48,7 @@ def tp_init(name, text_long_name):
     my.consume_per_bite_amount(self, 10)
     my.distance_vision(self, 3)
     my.dmg_chance_d1000_nat_att(self, 0, 1000)
+    my.dmg_limited_per_tick(self, True)
     my.dmg_nat_att_dice(self, "1d10+4")
     my.dmg_nat_att_type(self, "bludgeon")
     my.dmg_rcv_doubled_from_fire(self, True)

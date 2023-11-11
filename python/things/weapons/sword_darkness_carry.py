@@ -45,7 +45,7 @@ def tp_init(name):
 
 
 def init():
-    tp_init(name="sword_darkblade_carry")
+    tp_init(name="sword_darkness_carry")
 
 
 init()

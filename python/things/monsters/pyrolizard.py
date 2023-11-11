@@ -53,6 +53,7 @@ def tp_init(name, text_long_name):
     my.distance_avoid(self, 4)
     my.distance_vision(self, 10)
     my.dmg_chance_d1000_nat_att(self, 0, 100)
+    my.dmg_limited_per_tick(self, True)
     my.dmg_nat_att_dice(self, "1d6+1")
     my.dmg_nat_att_type(self, "bite")
     my.environ_hates_cold(self, 100)

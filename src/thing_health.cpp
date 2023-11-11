@@ -149,8 +149,12 @@ int Thing::health_decr(int v)
     }
   }
 
-  auto max_damage_per_tick = health_max() / 2;
-  if (is_monst() || is_player()) {
+  //
+  // Some monsters always take a few hits to die regardless of the damage.
+  // This includes you. It avoids lava being an instant kill.
+  //
+  if (dmg_limited_per_tick()) {
+    auto max_damage_per_tick = health_max() / 2;
     if (health_max() > 1) {
       //
       // If we've already applied too much damage, nothing to do

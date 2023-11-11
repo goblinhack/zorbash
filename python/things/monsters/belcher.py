@@ -30,6 +30,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.dmg_chance_d1000_digest(self, 0, 1000)
     my.dmg_chance_d1000_nat_att(self, 0, 1000)
     my.dmg_digest_dice(self, "1d10")
+    my.dmg_limited_per_tick(self, True)
     my.dmg_nat_att_dice(self, "1d20")
     my.dmg_nat_att_type(self, "burn")
     my.dmg_rcv_doubled_from_fire(self, True)
