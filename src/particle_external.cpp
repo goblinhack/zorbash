@@ -78,8 +78,7 @@ void Level::handle_external_particles(void)
         auto t = thing_find(p.id);
         if (t) {
           p.callback();
-          IF_DEBUG3
-          t->log("Particle end");
+          IF_DEBUG3 { t->log("Particle end"); }
           t->is_scheduled_for_jump_end = true;
           t->has_external_particle     = false;
         }

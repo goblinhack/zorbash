@@ -16,7 +16,7 @@ void Thing::visible(const std::string &reason)
     return;
   }
 
-  if (is_loggable()) {
+  if (is_debug_type()) {
     dbg("Visible: %s", reason.c_str());
   }
 

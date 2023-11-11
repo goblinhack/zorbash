@@ -448,6 +448,16 @@ void Thing::used(Thingp what, Thingp target, UseOptions &use_options)
     return;
   }
 
+  //
+  // Special weapon with a use ability, like sword of darkness
+  //
+  if (what->is_weapon()) {
+    if (! what->initial_charge_count()) {
+      dbg("Used weapon %s", what->to_short_string().c_str());
+      return;
+    }
+  }
+
   if (target) {
     dbg("Used %s on %s", what->to_short_string().c_str(), target->to_short_string().c_str());
   } else {
