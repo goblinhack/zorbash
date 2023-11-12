@@ -64,7 +64,7 @@ void glcolor_restore(void)
   glColor4ub(s.r, s.g, s.b, s.a);
 }
 
-color gl_color_current(void) { return (gl_last_color); }
+color gl_color_current(void) { return gl_last_color; }
 
 color string2color(const char **s)
 {

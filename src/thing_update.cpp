@@ -313,6 +313,31 @@ void Thing::update(void)
     }
   }
 
+  //
+  // Start out with immunities from the template. This can change with negation.
+  //
+  _is_immune_to_electricity         = tpp->is_immune_to_electricity();
+  _is_immune_to_entrancement        = tpp->is_immune_to_entrancement();
+  _is_immune_to_fire                = tpp->is_immune_to_fire();
+  _is_immune_to_holy_damage         = tpp->is_immune_to_holy_damage();
+  _is_immune_to_lightning           = tpp->is_immune_to_lightning();
+  _is_immune_to_magic_drain         = tpp->is_immune_to_magic_drain();
+  _is_immune_to_necrosis            = tpp->is_immune_to_necrosis();
+  _is_immune_to_negation            = tpp->is_immune_to_negation();
+  _is_immune_to_paralysis           = tpp->is_immune_to_paralysis();
+  _is_immune_to_poison              = tpp->is_immune_to_poison();
+  _is_immune_to_spell_of_beckoning  = tpp->is_immune_to_spell_of_beckoning();
+  _is_immune_to_spell_of_holding    = tpp->is_immune_to_spell_of_holding();
+  _is_immune_to_spell_of_repulsion  = tpp->is_immune_to_spell_of_repulsion();
+  _is_immune_to_spell_of_sanctuary  = tpp->is_immune_to_spell_of_sanctuary();
+  _is_immune_to_spell_of_slowness   = tpp->is_immune_to_spell_of_slowness();
+  _is_immune_to_spiderwebs          = tpp->is_immune_to_spiderwebs();
+  _is_immune_to_stamina_drain       = tpp->is_immune_to_stamina_drain();
+  _is_immune_to_teleport_attack     = tpp->is_immune_to_teleport_attack();
+  _is_immune_to_vorpal_weapons      = tpp->is_immune_to_vorpal_weapons();
+  _is_immune_to_non_magical_weapons = tpp->is_immune_to_non_magical_weapons();
+  _is_immune_to_water               = tpp->is_immune_to_water();
+
   if (unlikely(tpp->charge_count())) {
     charge_count_set(tpp->charge_count());
   }

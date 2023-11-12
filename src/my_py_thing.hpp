@@ -460,6 +460,7 @@ PyObject *thing_is_immune_to_lightning(PyObject *obj, PyObject *args, PyObject *
 PyObject *thing_is_immune_to_magic_drain(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_necrosis(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_negation(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_immune_to_non_magical_weapons(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_paralysis(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_poison(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_spell_of_beckoning(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -470,7 +471,7 @@ PyObject *thing_is_immune_to_spell_of_slowness(PyObject *obj, PyObject *args, Py
 PyObject *thing_is_immune_to_spiderwebs(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_stamina_drain(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_teleport_attack(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_immune_to_vorpal_weapon(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_immune_to_vorpal_weapons(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_intelligent(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_interesting(PyObject *obj, PyObject *args, PyObject *keywds);

@@ -866,8 +866,12 @@ void Game::wid_thing_info_add_immunity(WidPopup *w, Thingp t)
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Repulsion");
     w->log(tmp);
   }
-  if (t->is_immune_to_vorpal_weapon()) {
+  if (t->is_immune_to_vorpal_weapons()) {
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Vorpal Weapons");
+    w->log(tmp);
+  }
+  if (t->is_immune_to_non_magical_weapons()) {
+    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Non magical");
     w->log(tmp);
   }
 }

@@ -619,7 +619,7 @@ Thingp Thing::equip_use_anim(int equip)
     gfx_anim_use = level->thing_find(id);
   }
 
-  return (gfx_anim_use);
+  return gfx_anim_use;
 }
 
 bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)

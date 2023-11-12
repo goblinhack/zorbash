@@ -16,6 +16,81 @@ int Tp::get_danger_level(void)
   int danger_level = 0;
   danger_level     = health_initial_max_roll();
 
+  if (is_immune_to_acid()) {
+    danger_level++;
+  }
+  if (is_immune_to_blinding()) {
+    danger_level++;
+  }
+  if (is_immune_to_cold()) {
+    danger_level++;
+  }
+  if (is_immune_to_confusion()) {
+    danger_level++;
+  }
+  if (is_immune_to_electricity()) {
+    danger_level++;
+  }
+  if (is_immune_to_entrancement()) {
+    danger_level++;
+  }
+  if (is_immune_to_fire()) {
+    danger_level++;
+  }
+  if (is_immune_to_holy_damage()) {
+    danger_level++;
+  }
+  if (is_immune_to_lightning()) {
+    danger_level++;
+  }
+  if (is_immune_to_magic_drain()) {
+    danger_level++;
+  }
+  if (is_immune_to_necrosis()) {
+    danger_level++;
+  }
+  if (is_immune_to_negation()) {
+    danger_level++;
+  }
+  if (is_immune_to_non_magical_weapons()) {
+    danger_level += 10;
+  }
+  if (is_immune_to_paralysis()) {
+    danger_level++;
+  }
+  if (is_immune_to_poison()) {
+    danger_level++;
+  }
+  if (is_immune_to_spell_of_beckoning()) {
+    danger_level++;
+  }
+  if (is_immune_to_spell_of_holding()) {
+    danger_level++;
+  }
+  if (is_immune_to_spell_of_repulsion()) {
+    danger_level++;
+  }
+  if (is_immune_to_spell_of_sanctuary()) {
+    danger_level++;
+  }
+  if (is_immune_to_spell_of_slowness()) {
+    danger_level++;
+  }
+  if (is_immune_to_spiderwebs()) {
+    danger_level++;
+  }
+  if (is_immune_to_stamina_drain()) {
+    danger_level++;
+  }
+  if (is_immune_to_teleport_attack()) {
+    danger_level++;
+  }
+  if (is_immune_to_vorpal_weapons()) {
+    danger_level++;
+  }
+  if (is_immune_to_water()) {
+    danger_level++;
+  }
   if (is_undead()) {
     danger_level++;
   }
@@ -143,6 +218,81 @@ int Thing::danger_initial_level(void)
   int danger_level = 0;
   danger_level     = tp()->health_initial_max_roll();
 
+  if (is_immune_to_acid()) {
+    danger_level++;
+  }
+  if (is_immune_to_blinding()) {
+    danger_level++;
+  }
+  if (is_immune_to_cold()) {
+    danger_level++;
+  }
+  if (is_immune_to_confusion()) {
+    danger_level++;
+  }
+  if (is_immune_to_electricity()) {
+    danger_level++;
+  }
+  if (is_immune_to_entrancement()) {
+    danger_level++;
+  }
+  if (is_immune_to_fire()) {
+    danger_level++;
+  }
+  if (is_immune_to_holy_damage()) {
+    danger_level++;
+  }
+  if (is_immune_to_lightning()) {
+    danger_level++;
+  }
+  if (is_immune_to_magic_drain()) {
+    danger_level++;
+  }
+  if (is_immune_to_necrosis()) {
+    danger_level++;
+  }
+  if (is_immune_to_negation()) {
+    danger_level++;
+  }
+  if (is_immune_to_non_magical_weapons()) {
+    danger_level += 10;
+  }
+  if (is_immune_to_paralysis()) {
+    danger_level++;
+  }
+  if (is_immune_to_poison()) {
+    danger_level++;
+  }
+  if (is_immune_to_spell_of_beckoning()) {
+    danger_level++;
+  }
+  if (is_immune_to_spell_of_holding()) {
+    danger_level++;
+  }
+  if (is_immune_to_spell_of_repulsion()) {
+    danger_level++;
+  }
+  if (is_immune_to_spell_of_sanctuary()) {
+    danger_level++;
+  }
+  if (is_immune_to_spell_of_slowness()) {
+    danger_level++;
+  }
+  if (is_immune_to_spiderwebs()) {
+    danger_level++;
+  }
+  if (is_immune_to_stamina_drain()) {
+    danger_level++;
+  }
+  if (is_immune_to_teleport_attack()) {
+    danger_level++;
+  }
+  if (is_immune_to_vorpal_weapons()) {
+    danger_level++;
+  }
+  if (is_immune_to_water()) {
+    danger_level++;
+  }
   if (is_undead()) {
     danger_level++;
   }
@@ -301,6 +451,81 @@ int Thing::danger_current_level(void)
   danger_level = health_max();
   danger_level += health() / 10;
 
+  if (is_immune_to_acid()) {
+    danger_level++;
+  }
+  if (is_immune_to_blinding()) {
+    danger_level++;
+  }
+  if (is_immune_to_cold()) {
+    danger_level++;
+  }
+  if (is_immune_to_confusion()) {
+    danger_level++;
+  }
+  if (is_immune_to_electricity()) {
+    danger_level++;
+  }
+  if (is_immune_to_entrancement()) {
+    danger_level++;
+  }
+  if (is_immune_to_fire()) {
+    danger_level++;
+  }
+  if (is_immune_to_holy_damage()) {
+    danger_level++;
+  }
+  if (is_immune_to_lightning()) {
+    danger_level++;
+  }
+  if (is_immune_to_magic_drain()) {
+    danger_level++;
+  }
+  if (is_immune_to_necrosis()) {
+    danger_level++;
+  }
+  if (is_immune_to_negation()) {
+    danger_level++;
+  }
+  if (is_immune_to_non_magical_weapons()) {
+    danger_level += 10;
+  }
+  if (is_immune_to_paralysis()) {
+    danger_level++;
+  }
+  if (is_immune_to_poison()) {
+    danger_level++;
+  }
+  if (is_immune_to_spell_of_beckoning()) {
+    danger_level++;
+  }
+  if (is_immune_to_spell_of_holding()) {
+    danger_level++;
+  }
+  if (is_immune_to_spell_of_repulsion()) {
+    danger_level++;
+  }
+  if (is_immune_to_spell_of_sanctuary()) {
+    danger_level++;
+  }
+  if (is_immune_to_spell_of_slowness()) {
+    danger_level++;
+  }
+  if (is_immune_to_spiderwebs()) {
+    danger_level++;
+  }
+  if (is_immune_to_stamina_drain()) {
+    danger_level++;
+  }
+  if (is_immune_to_teleport_attack()) {
+    danger_level++;
+  }
+  if (is_immune_to_vorpal_weapons()) {
+    danger_level++;
+  }
+  if (is_immune_to_water()) {
+    danger_level++;
+  }
   if (is_undead()) {
     danger_level++;
   }

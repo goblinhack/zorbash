@@ -331,6 +331,7 @@ bool Tp::matches(const std::string &what)
   if (is_immune_to_magic_drain() && (what == "is_immune_to_magic_drain")) { return true; }
   if (is_immune_to_necrosis() && (what == "is_immune_to_necrosis")) { return true; }
   if (is_immune_to_negation() && (what == "is_immune_to_negation")) { return true; }
+  if (is_immune_to_non_magical_weapons() && (what == "is_immune_to_non_magical_weapons")) { return true; }
   if (is_immune_to_paralysis() && (what == "is_immune_to_paralysis")) { return true; }
   if (is_immune_to_poison() && (what == "is_immune_to_poison")) { return true; }
   if (is_immune_to_spell_of_beckoning() && (what == "is_immune_to_spell_of_beckoning")) { return true; }
@@ -341,7 +342,7 @@ bool Tp::matches(const std::string &what)
   if (is_immune_to_spiderwebs() && (what == "is_immune_to_spiderwebs")) { return true; }
   if (is_immune_to_stamina_drain() && (what == "is_immune_to_stamina_drain")) { return true; }
   if (is_immune_to_teleport_attack() && (what == "is_immune_to_teleport_attack")) { return true; }
-  if (is_immune_to_vorpal_weapon() && (what == "is_immune_to_vorpal_weapon")) { return true; }
+  if (is_immune_to_vorpal_weapons() && (what == "is_immune_to_vorpal_weapons")) { return true; }
   if (is_immune_to_water() && (what == "is_immune_to_water")) { return true; }
   if (is_intelligent() && (what == "is_intelligent")) { return true; }
   if (is_interesting() && (what == "is_interesting")) { return true; }
@@ -941,6 +942,7 @@ bool Thing::matches(const std::string &what)
   if (is_immune_to_magic_drain() && (what == "is_immune_to_magic_drain")) { return true; }
   if (is_immune_to_necrosis() && (what == "is_immune_to_necrosis")) { return true; }
   if (is_immune_to_negation() && (what == "is_immune_to_negation")) { return true; }
+  if (is_immune_to_non_magical_weapons() && (what == "is_immune_to_non_magical_weapons")) { return true; }
   if (is_immune_to_paralysis() && (what == "is_immune_to_paralysis")) { return true; }
   if (is_immune_to_poison() && (what == "is_immune_to_poison")) { return true; }
   if (is_immune_to_spell_of_beckoning() && (what == "is_immune_to_spell_of_beckoning")) { return true; }
@@ -951,7 +953,7 @@ bool Thing::matches(const std::string &what)
   if (is_immune_to_spiderwebs() && (what == "is_immune_to_spiderwebs")) { return true; }
   if (is_immune_to_stamina_drain() && (what == "is_immune_to_stamina_drain")) { return true; }
   if (is_immune_to_teleport_attack() && (what == "is_immune_to_teleport_attack")) { return true; }
-  if (is_immune_to_vorpal_weapon() && (what == "is_immune_to_vorpal_weapon")) { return true; }
+  if (is_immune_to_vorpal_weapons() && (what == "is_immune_to_vorpal_weapons")) { return true; }
   if (is_immune_to_water() && (what == "is_immune_to_water")) { return true; }
   if (is_intelligent() && (what == "is_intelligent")) { return true; }
   if (is_interesting() && (what == "is_interesting")) { return true; }
@@ -1545,6 +1547,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_immune_to_magic_drain") { return &Thing::is_immune_to_magic_drain; }
   if (what == "is_immune_to_necrosis") { return &Thing::is_immune_to_necrosis; }
   if (what == "is_immune_to_negation") { return &Thing::is_immune_to_negation; }
+  if (what == "is_immune_to_non_magical_weapons") { return &Thing::is_immune_to_non_magical_weapons; }
   if (what == "is_immune_to_paralysis") { return &Thing::is_immune_to_paralysis; }
   if (what == "is_immune_to_poison") { return &Thing::is_immune_to_poison; }
   if (what == "is_immune_to_spell_of_beckoning") { return &Thing::is_immune_to_spell_of_beckoning; }
@@ -1555,7 +1558,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_immune_to_spiderwebs") { return &Thing::is_immune_to_spiderwebs; }
   if (what == "is_immune_to_stamina_drain") { return &Thing::is_immune_to_stamina_drain; }
   if (what == "is_immune_to_teleport_attack") { return &Thing::is_immune_to_teleport_attack; }
-  if (what == "is_immune_to_vorpal_weapon") { return &Thing::is_immune_to_vorpal_weapon; }
+  if (what == "is_immune_to_vorpal_weapons") { return &Thing::is_immune_to_vorpal_weapons; }
   if (what == "is_immune_to_water") { return &Thing::is_immune_to_water; }
   if (what == "is_intelligent") { return &Thing::is_intelligent; }
   if (what == "is_interesting") { return &Thing::is_interesting; }

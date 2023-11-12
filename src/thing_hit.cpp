@@ -355,6 +355,25 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   bool        attack_set = false;
 
   /////////////////////////////////////////////////////////////////////////
+  // Immune to non magical weapons?
+  /////////////////////////////////////////////////////////////////////////
+  TRACE_NO_INDENT();
+  if (is_immune_to_non_magical_weapons()) {
+    if (hitter->is_weapon()) {
+      if (! hitter->is_magical() && ! hitter->enchant_count_get()) {
+        if (real_hitter->is_player()) {
+          if (is_player()) {
+            msg("You are immune to non magical weapons!");
+          } else if (is_mob() || is_item() || is_alive_monst()) {
+            msg("%s is immune to non magical weapons!", text_The().c_str());
+          }
+        }
+        return false;
+      }
+    }
+  }
+
+  /////////////////////////////////////////////////////////////////////////
   // Poison damage
   /////////////////////////////////////////////////////////////////////////
   TRACE_NO_INDENT();
@@ -2961,5 +2980,5 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
     IF_DEBUG { hitter->log("Hit and destroyed victim"); }
   }
 
-  return (hit_and_destroyed);
+  return hit_and_destroyed;
 }

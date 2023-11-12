@@ -91,7 +91,7 @@ def tp_init(name, text_long_name):
     my.is_fairy(self, True)
     my.is_flying(self, True)
     my.is_hittable(self, True)
-    my.is_immune_to_vorpal_weapon(self, True)
+    my.is_immune_to_vorpal_weapons(self, True)
     my.is_interesting(self, True)
     my.is_loggable(self, True)
     my.is_magical(self, True)

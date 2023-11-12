@@ -635,6 +635,7 @@ int Tp::is_immune_to_lightning(void) const { return _is_immune_to_lightning; }
 int Tp::is_immune_to_magic_drain(void) const { return _is_immune_to_magic_drain; }
 int Tp::is_immune_to_necrosis(void) const { return _is_immune_to_necrosis; }
 int Tp::is_immune_to_negation(void) const { return _is_immune_to_negation; }
+int Tp::is_immune_to_non_magical_weapons(void) const { return _is_immune_to_non_magical_weapons; }
 int Tp::is_immune_to_paralysis(void) const { return _is_immune_to_paralysis; }
 int Tp::is_immune_to_poison(void) const { return _is_immune_to_poison; }
 int Tp::is_immune_to_spell_of_beckoning(void) const { return _is_immune_to_spell_of_beckoning; }
@@ -645,7 +646,7 @@ int Tp::is_immune_to_spell_of_slowness(void) const { return _is_immune_to_spell_
 int Tp::is_immune_to_spiderwebs(void) const { return _is_immune_to_spiderwebs; }
 int Tp::is_immune_to_stamina_drain(void) const { return _is_immune_to_stamina_drain; }
 int Tp::is_immune_to_teleport_attack(void) const { return _is_immune_to_teleport_attack; }
-int Tp::is_immune_to_vorpal_weapon(void) const { return _is_immune_to_vorpal_weapon; }
+int Tp::is_immune_to_vorpal_weapons(void) const { return _is_immune_to_vorpal_weapons; }
 int Tp::is_immune_to_water(void) const { return _is_immune_to_water; }
 int Tp::is_intelligent(void) const { return _is_intelligent; }
 int Tp::is_interesting(void) const { return _is_interesting; }
@@ -1413,6 +1414,7 @@ void Tp::is_immune_to_lightning_set(int v) { _is_immune_to_lightning = v; }
 void Tp::is_immune_to_magic_drain_set(int v) { _is_immune_to_magic_drain = v; }
 void Tp::is_immune_to_necrosis_set(int v) { _is_immune_to_necrosis = v; }
 void Tp::is_immune_to_negation_set(int v) { _is_immune_to_negation = v; }
+void Tp::is_immune_to_non_magical_weapons_set(int v) { _is_immune_to_non_magical_weapons = v; }
 void Tp::is_immune_to_paralysis_set(int v) { _is_immune_to_paralysis = v; }
 void Tp::is_immune_to_poison_set(int v) { _is_immune_to_poison = v; }
 void Tp::is_immune_to_spell_of_beckoning_set(int v) { _is_immune_to_spell_of_beckoning = v; }
@@ -1423,7 +1425,7 @@ void Tp::is_immune_to_spell_of_slowness_set(int v) { _is_immune_to_spell_of_slow
 void Tp::is_immune_to_spiderwebs_set(int v) { _is_immune_to_spiderwebs = v; }
 void Tp::is_immune_to_stamina_drain_set(int v) { _is_immune_to_stamina_drain = v; }
 void Tp::is_immune_to_teleport_attack_set(int v) { _is_immune_to_teleport_attack = v; }
-void Tp::is_immune_to_vorpal_weapon_set(int v) { _is_immune_to_vorpal_weapon = v; }
+void Tp::is_immune_to_vorpal_weapons_set(int v) { _is_immune_to_vorpal_weapons = v; }
 void Tp::is_immune_to_water_set(int v) { _is_immune_to_water = v; }
 void Tp::is_intelligent_set(int v) { _is_intelligent = v; }
 void Tp::is_interesting_set(int v) { _is_interesting = v; }

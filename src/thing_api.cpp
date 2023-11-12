@@ -1946,7 +1946,7 @@ int Thing::is_openable(void)
 int Thing::is_player(void)
 {
   TRACE_NO_INDENT();
-  return (is_the_player);
+  return is_the_player;
 }
 
 int Thing::is_poisonous_danger_level(void)

@@ -88,7 +88,7 @@ const ThingId &Thing::leader_id_set(const ThingId &v)
 const fpoint &Thing::interpolated_at_get(void)
 {
   TRACE_NO_INDENT();
-  return (interpolated_at);
+  return interpolated_at;
 }
 
 void Thing::interpolated_at_set(fpoint v)

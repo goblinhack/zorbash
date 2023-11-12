@@ -235,20 +235,20 @@ int Tile::gl_binding(void) const
   if (g_render_monochrome) {
     if (_gl_binding_monochrome) {
     } else {
-      return (_gl_binding);
+      return _gl_binding;
     }
-    return (_gl_binding_monochrome);
+    return _gl_binding_monochrome;
   }
-  return (_gl_binding);
+  return _gl_binding;
 }
 
 void Tile::set_gl_binding(int v) { _gl_binding = v; }
 
-int Tile::gl_binding_monochrome(void) const { return (_gl_binding_monochrome); }
+int Tile::gl_binding_monochrome(void) const { return _gl_binding_monochrome; }
 
 void Tile::set_gl_binding_monochrome(int v) { _gl_binding_monochrome = v; }
 
-int Tile::gl_binding_mask(void) const { return (_gl_binding_mask); }
+int Tile::gl_binding_mask(void) const { return _gl_binding_mask; }
 
 void Tile::set_gl_binding_mask(int v) { _gl_binding_mask = v; }
 

@@ -90,7 +90,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_green_blooded(self, True)
     my.is_hittable(self, True)
     my.is_immune_to_spiderwebs(self, True)
-    my.is_immune_to_vorpal_weapon(self, True)
+    my.is_immune_to_vorpal_weapons(self, True)
     my.is_interesting(self, True)
     my.is_lifeless(self, True)
     my.is_loggable(self, True)

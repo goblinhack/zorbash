@@ -538,6 +538,7 @@ private:
   int _is_immune_to_magic_drain {};
   int _is_immune_to_necrosis {};
   int _is_immune_to_negation {};
+  int _is_immune_to_non_magical_weapons {};
   int _is_immune_to_paralysis {};
   int _is_immune_to_poison {};
   int _is_immune_to_spell_of_beckoning {};
@@ -548,7 +549,7 @@ private:
   int _is_immune_to_spiderwebs {};
   int _is_immune_to_stamina_drain {};
   int _is_immune_to_teleport_attack {};
-  int _is_immune_to_vorpal_weapon {};
+  int _is_immune_to_vorpal_weapons {};
   int _is_immune_to_water {};
   int _is_intelligent {};
   int _is_interesting {}; // e.g. something edible or a monst or lava
@@ -1931,6 +1932,7 @@ public:
   int is_immune_to_magic_drain(void) const;
   int is_immune_to_necrosis(void) const;
   int is_immune_to_negation(void) const;
+  int is_immune_to_non_magical_weapons(void) const;
   int is_immune_to_paralysis(void) const;
   int is_immune_to_poison(void) const;
   int is_immune_to_spell_of_beckoning(void) const;
@@ -1941,7 +1943,7 @@ public:
   int is_immune_to_spiderwebs(void) const;
   int is_immune_to_stamina_drain(void) const;
   int is_immune_to_teleport_attack(void) const;
-  int is_immune_to_vorpal_weapon(void) const;
+  int is_immune_to_vorpal_weapons(void) const;
   int is_immune_to_water(void) const;
   int is_intelligent(void) const;
   int is_interesting(void) const;
@@ -2710,6 +2712,7 @@ public:
   void is_immune_to_magic_drain_set(int v);
   void is_immune_to_necrosis_set(int v);
   void is_immune_to_negation_set(int v);
+  void is_immune_to_non_magical_weapons_set(int v);
   void is_immune_to_paralysis_set(int v);
   void is_immune_to_poison_set(int v);
   void is_immune_to_spell_of_beckoning_set(int v);
@@ -2720,7 +2723,7 @@ public:
   void is_immune_to_spiderwebs_set(int v);
   void is_immune_to_stamina_drain_set(int v);
   void is_immune_to_teleport_attack_set(int v);
-  void is_immune_to_vorpal_weapon_set(int v);
+  void is_immune_to_vorpal_weapons_set(int v);
   void is_immune_to_water_set(int v);
   void is_intelligent_set(int v);
   void is_interesting_set(int v);

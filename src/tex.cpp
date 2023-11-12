@@ -101,7 +101,7 @@ static unsigned char *load_raw_image(std::string filename, int *x, int *y, int *
 
   myfree(file_data);
 
-  return (image_data);
+  return image_data;
 }
 
 static void free_raw_image(unsigned char *image_data)

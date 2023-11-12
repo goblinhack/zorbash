@@ -87,7 +87,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_eater_of_red_blood(self, True)
     my.is_hittable(self, True)
     my.is_humanoid(self, True)
-    my.is_immune_to_vorpal_weapon(self, True)
+    my.is_immune_to_vorpal_weapons(self, True)
     my.is_immune_to_water(self, True)
     my.is_interesting(self, True)
     my.is_item_collector(self, True)

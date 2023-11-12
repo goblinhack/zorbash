@@ -354,6 +354,31 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->has_light                                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->has_projectile                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->has_seen_player_msg_shown                    ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_acid                           ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_blinding                       ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_cold                           ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_confusion                      ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_electricity                    ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_entrancement                   ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_fire                           ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_holy_damage                    ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_lightning                      ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_magic_drain                    ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_necrosis                       ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_negation                       ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_non_magical_weapons            ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_paralysis                      ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_poison                         ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_spell_of_beckoning             ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_spell_of_holding               ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_spell_of_repulsion             ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_spell_of_sanctuary             ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_spell_of_slowness              ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_spiderwebs                     ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_stamina_drain                  ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_teleport_attack                ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_vorpal_weapons                 ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_immune_to_water                          ? 1LLU : 0LLU) << shift; shift++;
   // end sort marker1 }
   // clang-format on
   if (shift >= (int) (sizeof(bits64) * 8)) {

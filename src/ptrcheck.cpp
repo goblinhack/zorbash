@@ -204,7 +204,7 @@ static hash_t *hash_init(int hash_size)
 
   hash_table->elements = (__typeof__(hash_table->elements)) local_zalloc(hash_size * sizeof(hash_elem_t *));
 
-  return (hash_table);
+  return hash_table;
 }
 
 //

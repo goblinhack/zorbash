@@ -804,7 +804,6 @@ void Game::place_player(void)
         level->thing_new("shield_eagle", point(x, y - 2));
         level->thing_new("zorb_priest", point(x + 1, y + 3));
         level->thing_new("mummy_necro", point(x + 1, y));
-        level->thing_new("reaper", point(x + 3, y));
         level->thing_new("zorb_eldster", point(x + 1, y + 3));
         level->thing_new("flameskull", point(x + 1, y + 4));
         level->thing_new("pyrolizard", point(x + 2, y + 3));
@@ -819,6 +818,11 @@ void Game::place_player(void)
         t->carry(w1, carry_options);
         auto w2 = level->thing_new("staff_fire", point(x, y));
         t->carry(w2, carry_options);
+      }
+      if (0) {
+        auto w = level->thing_new("staff_negation", point(x, y));
+        t->carry(w, carry_options);
+        level->thing_new("spider_flux", point(x + 3, y));
       }
       if (0) {
         auto w = level->thing_new("rock", point(x, y));

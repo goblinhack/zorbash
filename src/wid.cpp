@@ -816,7 +816,7 @@ static void wid_mfocus_end(void)
 Widp wid_get_current_focus(void)
 {
   TRACE_NO_INDENT();
-  return (wid_focus);
+  return wid_focus;
 }
 
 static void wid_mfocus_begin(Widp w)
@@ -3150,7 +3150,7 @@ Widp wid_get_focus(Widp w)
 
   if (wid_focus) {
     if (wid_get_top_parent(wid_focus) == wid_get_top_parent(w)) {
-      return (wid_focus);
+      return wid_focus;
     }
   }
 
@@ -4341,7 +4341,7 @@ static Widp wid_key_down_handler_at(Widp w, int x, int y, uint8_t strict)
 
     Widp closer_match = wid_key_down_handler_at(child, x, y, true /* strict */);
     if (closer_match) {
-      return (closer_match);
+      return closer_match;
     }
   }
 
@@ -4354,7 +4354,7 @@ static Widp wid_key_down_handler_at(Widp w, int x, int y, uint8_t strict)
 
     Widp closer_match = wid_key_down_handler_at(child, x, y, false /* strict */);
     if (closer_match) {
-      return (closer_match);
+      return closer_match;
     }
   }
 
@@ -4417,7 +4417,7 @@ static Widp wid_key_up_handler_at(Widp w, int x, int y, uint8_t strict)
 
     Widp closer_match = wid_key_up_handler_at(child, x, y, true /* strict */);
     if (closer_match) {
-      return (closer_match);
+      return closer_match;
     }
   }
 
@@ -4430,7 +4430,7 @@ static Widp wid_key_up_handler_at(Widp w, int x, int y, uint8_t strict)
 
     Widp closer_match = wid_key_up_handler_at(child, x, y, false /* strict */);
     if (closer_match) {
-      return (closer_match);
+      return closer_match;
     }
   }
 
@@ -4484,7 +4484,7 @@ static Widp wid_joy_button_handler_at(Widp w, int x, int y, uint8_t strict)
 
     Widp closer_match = wid_joy_button_handler_at(child, x, y, true /* strict */);
     if (closer_match) {
-      return (closer_match);
+      return closer_match;
     }
   }
 
@@ -4542,7 +4542,7 @@ static Widp wid_mouse_down_handler_at(Widp w, int x, int y, uint8_t strict)
 
     Widp closer_match = wid_mouse_down_handler_at(child, x, y, true /* strict */);
     if (closer_match) {
-      return (closer_match);
+      return closer_match;
     }
   }
 
@@ -4616,7 +4616,7 @@ static Widp wid_mouse_held_handler_at(Widp w, int x, int y, uint8_t strict)
 
     Widp closer_match = wid_mouse_held_handler_at(child, x, y, true /* strict */);
     if (closer_match) {
-      return (closer_match);
+      return closer_match;
     }
   }
 
@@ -4690,7 +4690,7 @@ static Widp wid_mouse_up_handler_at(Widp w, int x, int y, uint8_t strict)
 
     Widp closer_match = wid_mouse_up_handler_at(child, x, y, true /* strict */);
     if (closer_match) {
-      return (closer_match);
+      return closer_match;
     }
   }
 

@@ -285,7 +285,7 @@ PyObject *py_obj_attr(const PyObject *py_obj, const char *attr)
     goto err_out;
   }
 
-  return (py_encstr);
+  return py_encstr;
 
 err_out:
   if (py_encstr) {

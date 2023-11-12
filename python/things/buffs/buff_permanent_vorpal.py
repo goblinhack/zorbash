@@ -9,7 +9,7 @@ def on_owner_attack_dmg_melee(me, owner, victim, x, y, damage):
     # my.con("owner   {} {:X}".format(my.thing_name_get(owner), owner))
     # my.con("victim  {} {:X}".format(my.thing_name_get(victim), victim))
     # my.con("damage  {}".format(damage))
-    if not my.thing_is_immune_to_vorpal_weapon(victim):
+    if not my.thing_is_immune_to_vorpal_weapons(victim):
         roll = my.py_d100()
         if roll < 10 + my.thing_enchant_count_get(me) * 5:
             if owner:
