@@ -780,7 +780,7 @@ private:
   int _is_unused_flag44 {};
   int _is_unused_flag45 {};
   int _is_unused_flag46 {};
-  int _is_unused_flag47 {};
+  int _is_vanquished_on_negation {};
   int _is_unused_flag5 {};
   int _is_unused_flag6 {};
   int _is_unused_flag7 {};
@@ -2172,7 +2172,7 @@ public:
   int is_unused_flag44(void) const;
   int is_unused_flag45(void) const;
   int is_unused_flag46(void) const;
-  int is_unused_flag47(void) const;
+  int is_vanquished_on_negation(void) const;
   int is_unused_flag4(void) const;
   int is_unused_flag5(void) const;
   int is_unused_flag6(void) const;
@@ -2952,7 +2952,7 @@ public:
   void is_unused_flag44_set(int v);
   void is_unused_flag45_set(int v);
   void is_unused_flag46_set(int v);
-  void is_unused_flag47_set(int v);
+  void is_vanquished_on_negation_set(int v);
   void is_unused_flag4_set(int v);
   void is_unused_flag5_set(int v);
   void is_unused_flag6_set(int v);

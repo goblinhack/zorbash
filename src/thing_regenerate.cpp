@@ -49,5 +49,5 @@ int Thing::chance_d1000_regenerate(void)
 int Thing::is_able_to_regenerate(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_able_to_regenerate());
+  return _is_able_to_regenerate;
 }

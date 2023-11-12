@@ -557,7 +557,7 @@ bool Tp::matches(const std::string &what)
   if (is_unused_flag44() && (what == "is_unused_flag44")) { return true; }
   if (is_unused_flag45() && (what == "is_unused_flag45")) { return true; }
   if (is_unused_flag46() && (what == "is_unused_flag46")) { return true; }
-  if (is_unused_flag47() && (what == "is_unused_flag47")) { return true; }
+  if (is_vanquished_on_negation() && (what == "is_vanquished_on_negation")) { return true; }
   if (is_unused_flag4() && (what == "is_unused_flag4")) { return true; }
   if (is_unused_flag5() && (what == "is_unused_flag5")) { return true; }
   if (is_unused_flag6() && (what == "is_unused_flag6")) { return true; }
@@ -1169,7 +1169,7 @@ bool Thing::matches(const std::string &what)
   if (is_unused_flag44() && (what == "is_unused_flag44")) { return true; }
   if (is_unused_flag45() && (what == "is_unused_flag45")) { return true; }
   if (is_unused_flag46() && (what == "is_unused_flag46")) { return true; }
-  if (is_unused_flag47() && (what == "is_unused_flag47")) { return true; }
+  if (is_vanquished_on_negation() && (what == "is_vanquished_on_negation")) { return true; }
   if (is_unused_flag4() && (what == "is_unused_flag4")) { return true; }
   if (is_unused_flag5() && (what == "is_unused_flag5")) { return true; }
   if (is_unused_flag6() && (what == "is_unused_flag6")) { return true; }
@@ -1769,7 +1769,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_unused_flag44") { return &Thing::is_unused_flag44; }
   if (what == "is_unused_flag45") { return &Thing::is_unused_flag45; }
   if (what == "is_unused_flag46") { return &Thing::is_unused_flag46; }
-  if (what == "is_unused_flag47") { return &Thing::is_unused_flag47; }
+  if (what == "is_vanquished_on_negation") { return &Thing::is_vanquished_on_negation; }
   if (what == "is_unused_flag4") { return &Thing::is_unused_flag4; }
   if (what == "is_unused_flag5") { return &Thing::is_unused_flag5; }
   if (what == "is_unused_flag6") { return &Thing::is_unused_flag6; }

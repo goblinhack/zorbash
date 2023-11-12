@@ -200,6 +200,7 @@ public:
   uint64_t has_light                                    : 1 {}; // Has it a light source?
   uint64_t has_projectile                               : 1 {}; // Current projectile being fired
   uint64_t has_seen_player_msg_shown                    : 1 {}; // Seen by player has been shown
+  uint64_t _is_able_to_regenerate                       : 1 {}; // Can be removed by negation
   uint64_t is_activated                                 : 1 {}; // This skill is activated
   uint64_t is_attached                                  : 1 {}; // Is attached to the level
   uint64_t is_auto_equip_done                           : 1 {}; // Has initially auto equipped itself
@@ -222,31 +223,31 @@ public:
   uint64_t is_hunger_level_hungry                       : 1 {}; // Hunger levels
   uint64_t is_hunger_level_satiated                     : 1 {}; // Hunger levels
   uint64_t is_hunger_level_starving                     : 1 {}; // Hunger levels
-  uint64_t _is_immune_to_acid                           : 1 {};
-  uint64_t _is_immune_to_blinding                       : 1 {};
-  uint64_t _is_immune_to_cold                           : 1 {};
-  uint64_t _is_immune_to_confusion                      : 1 {};
-  uint64_t _is_immune_to_electricity                    : 1 {};
-  uint64_t _is_immune_to_entrancement                   : 1 {};
-  uint64_t _is_immune_to_fire                           : 1 {};
-  uint64_t _is_immune_to_holy_damage                    : 1 {};
-  uint64_t _is_immune_to_lightning                      : 1 {};
-  uint64_t _is_immune_to_magic_drain                    : 1 {};
-  uint64_t _is_immune_to_necrosis                       : 1 {};
-  uint64_t _is_immune_to_negation                       : 1 {};
-  uint64_t _is_immune_to_non_magical_weapons            : 1 {};
-  uint64_t _is_immune_to_paralysis                      : 1 {};
-  uint64_t _is_immune_to_poison                         : 1 {};
-  uint64_t _is_immune_to_spell_of_beckoning             : 1 {};
-  uint64_t _is_immune_to_spell_of_holding               : 1 {};
-  uint64_t _is_immune_to_spell_of_repulsion             : 1 {};
-  uint64_t _is_immune_to_spell_of_sanctuary             : 1 {};
-  uint64_t _is_immune_to_spell_of_slowness              : 1 {};
-  uint64_t _is_immune_to_spiderwebs                     : 1 {};
-  uint64_t _is_immune_to_stamina_drain                  : 1 {};
-  uint64_t _is_immune_to_teleport_attack                : 1 {};
-  uint64_t _is_immune_to_vorpal_weapons                 : 1 {};
-  uint64_t _is_immune_to_water                          : 1 {};
+  uint64_t _is_immune_to_acid                           : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_blinding                       : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_cold                           : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_confusion                      : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_electricity                    : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_entrancement                   : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_fire                           : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_holy_damage                    : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_lightning                      : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_magic_drain                    : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_necrosis                       : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_negation                       : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_non_magical_weapons            : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_paralysis                      : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_poison                         : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_spell_of_beckoning             : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_spell_of_holding               : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_spell_of_repulsion             : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_spell_of_sanctuary             : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_spell_of_slowness              : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_spiderwebs                     : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_stamina_drain                  : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_teleport_attack                : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_vorpal_weapons                 : 1 {}; // Can be removed by negation
+  uint64_t _is_immune_to_water                          : 1 {}; // Can be removed by negation
   uint64_t is_invisible_                                : 1 {}; // Updated per tick
   uint64_t is_jumping                                   : 1 {}; // Is mid jump
   uint64_t is_key_in_lock                               : 1 {}; // Key stuck in rusty lock?
@@ -2013,7 +2014,7 @@ public:
   int is_unused_flag44(void);
   int is_unused_flag45(void);
   int is_unused_flag46(void);
-  int is_unused_flag47(void);
+  int is_vanquished_on_negation(void);
   int is_unused_flag4(void);
   int is_unused_flag5(void);
   int is_unused_flag6(void);

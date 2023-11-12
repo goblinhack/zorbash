@@ -874,7 +874,7 @@ int Tp::is_unused_flag43(void) const { return _is_unused_flag43; }
 int Tp::is_unused_flag44(void) const { return _is_unused_flag44; }
 int Tp::is_unused_flag45(void) const { return _is_unused_flag45; }
 int Tp::is_unused_flag46(void) const { return _is_unused_flag46; }
-int Tp::is_unused_flag47(void) const { return _is_unused_flag47; }
+int Tp::is_vanquished_on_negation(void) const { return _is_vanquished_on_negation; }
 int Tp::is_unused_flag4(void) const { return _is_unused_flag4; }
 int Tp::is_unused_flag5(void) const { return _is_unused_flag5; }
 int Tp::is_unused_flag6(void) const { return _is_unused_flag6; }
@@ -1653,7 +1653,7 @@ void Tp::is_unused_flag43_set(int v) { _is_unused_flag43 = v; }
 void Tp::is_unused_flag44_set(int v) { _is_unused_flag44 = v; }
 void Tp::is_unused_flag45_set(int v) { _is_unused_flag45 = v; }
 void Tp::is_unused_flag46_set(int v) { _is_unused_flag46 = v; }
-void Tp::is_unused_flag47_set(int v) { _is_unused_flag47 = v; }
+void Tp::is_vanquished_on_negation_set(int v) { _is_vanquished_on_negation = v; }
 void Tp::is_unused_flag4_set(int v) { _is_unused_flag4 = v; }
 void Tp::is_unused_flag5_set(int v) { _is_unused_flag5 = v; }
 void Tp::is_unused_flag6_set(int v) { _is_unused_flag6 = v; }

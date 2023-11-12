@@ -443,10 +443,10 @@ int Thing::is_unused_flag46(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag46());
 }
-int Thing::is_unused_flag47(void)
+int Thing::is_vanquished_on_negation(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag47());
+  return (tp()->is_vanquished_on_negation());
 }
 int Thing::dmg_limited_per_tick(void)
 {

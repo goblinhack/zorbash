@@ -29,7 +29,6 @@
 <!-- - skill, whirl attack, attack 2 or 3 enemies                                                                                                 -->
 <!-- - spell capacitor                                                                                                                            -->
 <!-- - spider web spawn small spiders?                                                                                                            -->
-<!-- - staff of death should stop regenerating monst                                                                                              -->
 <!-- - stealth                                                                                                                                    -->
 <!-- - tentacles out of the ground that try to surround you                                                                                       -->
 <!-- - tiny pixel effects that bounce?                                                                                                            -->
