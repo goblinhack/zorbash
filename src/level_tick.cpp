@@ -837,29 +837,12 @@ void Level::tick_begin_now(void)
 
   dbg("Tick add movement to all things");
   TRACE_NO_INDENT();
-  FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
+
+  //
+  // Ensure we can hit things again now that this is a new tic
+  //
+  FOR_ALL_INTERESTING_THINGS_ON_LEVEL(this, t)
   {
-    //
-    // I think only monsters and players need to move. Some things like boots
-    // do have a move speed bonus, but we don't want that to be added per tick.
-    //
-    if (! t->is_player() && ! t->is_monst()) {
-      continue;
-    }
-
-    //
-    // Give things a bit of time to move
-    //
-    auto speed = t->move_speed_curr();
-    if (speed) {
-      t->movement_remaining_incr(speed);
-    } else {
-      //
-      // Things that do not move need to tick too.
-      //
-      t->movement_remaining_incr(1);
-    }
-
     //
     // Allow the same thing to hit us again
     //
@@ -868,7 +851,29 @@ void Level::tick_begin_now(void)
       aip->recently_hit_by.clear();
     }
   }
-  TRACE_NO_INDENT();
+  FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
+
+  FOR_ALL_TICKABLE_THINGS_ON_LEVEL(this, t)
+  {
+    //
+    // I think only monsters and players need to move. Some things like boots
+    // do have a move speed bonus, but we don't want that to be added per tick.
+    //
+    if (t->is_player() || t->is_monst()) {
+      //
+      // Give things a bit of time to move
+      //
+      auto speed = t->move_speed_curr();
+      if (speed) {
+        t->movement_remaining_incr(speed);
+      } else {
+        //
+        // Things that do not move need to tick too.
+        //
+        t->movement_remaining_incr(1);
+      }
+    }
+  }
   FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(this)
 }
 
