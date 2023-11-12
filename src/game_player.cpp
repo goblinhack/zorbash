@@ -819,7 +819,7 @@ void Game::place_player(void)
         auto w2 = level->thing_new("staff_fire", point(x, y));
         t->carry(w2, carry_options);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("staff_negation", point(x, y));
         t->carry(w, carry_options);
         level->thing_new("troll_stone", point(x + 3, y));
