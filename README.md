@@ -164,120 +164,120 @@ Bestiary
 <!-- begin monsters type marker -->
 | Monster | Class/Rarity | Dngr | Attack | # Attcks | Other attacks | Immunity |
 | :--- | --- | --- | --- | --- | --- | --- |
-| Reaper | E/common | 712 | 1d6+6 | 2 |  | Acid<br />Cold<br />Fire<br />Holy-damage<br />Necrosis<br />Negation<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Holding<br />Sanctuary-tiles<br />Slowing<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
-| Fire Demon | D/uncommon | 546 | 1d14+4 | 2 | Fire:1d6+6<br /> | Cold<br />Fire<br />Necrosis<br />Poison<br />Vorpal-Weapons<br /> |
-| Cthulite | D/rare | 424 | 1d14+4 | 2 | Acid:2d6<br />Poison:2d12<br /> | Acid<br />Cold<br />Necrosis<br />Confusion<br />Confusion<br />Poison<br />Draining<br />Vorpal-Weapons<br /> |
+| Reaper | E/common | 820 | 1d6+6 | 2 |  | Acid<br />Cold<br />Fire<br />Holy-damage<br />Necrosis<br />Negation<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Holding<br />Sanctuary-tiles<br />Slowing<br />Webs<br />Draining<br />Vorpal-Weapons<br />Non-Magical-Weapons<br /> |
+| Fire Demon | D/uncommon | 566 | 1d14+4 | 2 | Fire:1d6+6<br /> | Cold<br />Fire<br />Necrosis<br />Poison<br />Vorpal-Weapons<br /> |
+| Cthulite | D/rare | 440 | 1d14+4 | 2 | Acid:2d6<br />Poison:2d12<br /> | Acid<br />Cold<br />Necrosis<br />Confusion<br />Confusion<br />Poison<br />Draining<br />Vorpal-Weapons<br /> |
 | Ettin, Two Headed Giant | D/rare | 382 | 1d10+4 | 2 |  |  |
-| Flesh Golem | C/rare | 336 | 2d8+4 | 2 |  | Cold<br />Confusion<br />Confusion<br />Poison<br />Draining<br /> |
-| Tentacle Horror | B/common | 325 | 2d6+2 | 1 | Acid:1d6<br /> | Acid<br />Necrosis<br /> |
-| Undead Bear | C/common | 320 | 2d8+5 | 2 | Necrotic:1<br /> | Cold<br />Necrosis<br />Poison<br />Draining<br /> |
+| Flesh Golem | C/rare | 346 | 2d8+4 | 2 |  | Cold<br />Confusion<br />Confusion<br />Poison<br />Draining<br /> |
+| Tentacle Horror | B/common | 329 | 2d6+2 | 1 | Acid:1d6<br /> | Acid<br />Necrosis<br /> |
+| Undead Bear | C/common | 328 | 2d8+5 | 2 | Necrotic:1<br /> | Cold<br />Necrosis<br />Poison<br />Draining<br /> |
 | Bearowl | C/common | 290 | 2d8+5 | 2 |  |  |
-| Baby Kraken | D/rare | 249 |  | 1 | Bite:3d8+10<br />Digest:1d20<br />Drown:1d20<br /> | Water<br /> |
+| Baby Kraken | D/rare | 251 |  | 1 | Bite:3d8+10<br />Digest:1d20<br />Drown:1d20<br /> | Water<br /> |
 | Colossal Scorpion | E/v-rare | 243 |  | 1 | Bite:2d8+6<br />Digest:1d40<br />Poison:1d20+10<br /> |  |
-| Fire Troll | B/uncommon | 214 | 1d12+4 | 1 |  | Fire<br />Poison<br /> |
-| Yeti | C/rare | 208 | 1d12+8 | 1 |  | Cold<br /> |
-| Stone Troll | B/common | 193 | 1d12+4 | 1 |  | Poison<br /> |
-| Dungeon Cleaner | B/common | 187 | 1d10 | 1 | Digest:1d40<br /> | Acid<br />Necrosis<br /> |
-| Mummy | B/common | 184 | 1d10+10 | 2 | Drain:1d10<br /> | Cold<br />Fire<br />Necrosis<br />Poison<br />Draining<br /> |
-| Giant Skeleton | C/common | 184 | 1d6 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
-| Black Pudding | B/common | 183 | 3d6+2 | 1 | Acid:2d6<br /> | Acid<br />Cold<br />Electricity<br />Lightning<br />Necrosis<br /> |
-| Cement Man | C/common | 178 | 3d8+6 | 1 |  | Cold<br />Fire<br />Confusion<br />Confusion<br />Poison<br />Draining<br /> |
-| Giant Spider | B/common | 139 | 1d8+3 | 1 | Poison:2d8<br /> | Webs<br /> |
-| Lesser Tentacleye | C/common | 136 | 2d6 | 1 |  | Cold<br />Necrosis<br />Poison<br />Draining<br />Water<br /> |
+| Fire Troll | B/uncommon | 218 | 1d12+4 | 1 |  | Fire<br />Poison<br /> |
+| Yeti | C/rare | 209 | 1d12+8 | 1 |  | Cold<br /> |
+| Mummy | B/common | 204 | 1d10+10 | 2 | Drain:1d10<br /> | Cold<br />Fire<br />Necrosis<br />Poison<br />Draining<br /> |
+| Giant Skeleton | C/common | 196 | 1d6 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
+| Stone Troll | B/common | 195 | 1d12+4 | 1 |  | Poison<br /> |
+| Dungeon Cleaner | B/common | 189 | 1d10 | 1 | Digest:1d40<br /> | Acid<br />Necrosis<br /> |
+| Black Pudding | B/common | 188 | 3d6+2 | 1 | Acid:2d6<br /> | Acid<br />Cold<br />Electricity<br />Lightning<br />Necrosis<br /> |
+| Cement Man | C/common | 184 | 3d8+6 | 1 |  | Cold<br />Fire<br />Confusion<br />Confusion<br />Poison<br />Draining<br /> |
+| Bone Spider | C/common | 144 | 1d8+3 | 1 | Poison:2d8<br /> | Cold<br />Necrosis<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
+| Lesser Tentacleye | C/common | 141 | 2d6 | 1 |  | Cold<br />Necrosis<br />Poison<br />Draining<br />Water<br /> |
+| Giant Spider | B/common | 140 | 1d8+3 | 1 | Poison:2d8<br /> | Webs<br /> |
+| Flameskull | C/uncommon | 140 | 2d6 | 1 |  | Acid<br />Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br />Vorpal-Weapons<br />Non-Magical-Weapons<br /> |
+| Gargoyle | C/common | 134 | 2d6 | 1 |  | Cold<br />Necrosis<br />Poison<br />Draining<br />Water<br />Vorpal-Weapons<br /> |
 | Murder Bunny | B/rare | 132 | 1d8 | 2 | Bite:1d6<br />Claw:1d4<br /> |  |
-| Bone Spider | C/common | 132 | 1d8+3 | 1 | Poison:2d8<br /> | Cold<br />Necrosis<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
-| Gargoyle | C/common | 128 | 2d6 | 1 |  | Cold<br />Necrosis<br />Poison<br />Draining<br />Water<br />Vorpal-Weapons<br /> |
 | Hill Ogre | B/common | 127 | 1d10+4 | 1 |  |  |
-| Iceman | B/common | 125 |  | 1 | Cold:1d8<br /> | Cold<br /> |
-| Flameskull | C/uncommon | 121 | 2d6 | 1 |  | Acid<br />Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br />Vorpal-Weapons<br /> |
-| Unleashed Gargoyle | C/common | 119 | 1d6+2 | 1 |  | Necrosis<br />Poison<br />Draining<br />Water<br />Vorpal-Weapons<br /> |
-| Portable Hole | B/uncommon | 117 |  | 0 |  | Acid<br />Cold<br />Fire<br />Poison<br />Vorpal-Weapons<br /> |
-| Mummy Necromancer | C/uncommon | 104 | 1d6+2 | 1 | Necrotic:1<br /> | Cold<br />Necrosis<br />Poison<br />Draining<br /> |
-| Demon Goat | B/rare | 103 | 2d6+2 | 1 |  | Fire<br />Necrosis<br />Poison<br /> |
-| Giant Piranha | B/v-rare | 101 | 1d10+3 | 1 | Bite:1d8<br /> | Water<br /> |
-| Giant Battle Duck | C/v-rare | 96 | 1d8+4 | 1 | Bite:1d10<br />Claw:1d6<br /> | Water<br /> |
-| Treasure Chest Mimic | B/common | 91 | 1d8+4 | 1 |  | Water<br />Vorpal-Weapons<br /> |
-| Treasure Chest | B/common | 91 | 1d8+4 | 1 |  | Water<br />Vorpal-Weapons<br /> |
-| Acid Blob | A/common | 88 | 1d10 | 1 |  | Acid<br />Necrosis<br /> |
+| Iceman | B/common | 126 |  | 1 | Cold:1d8<br /> | Cold<br /> |
+| Unleashed Gargoyle | C/common | 124 | 1d6+2 | 1 |  | Necrosis<br />Poison<br />Draining<br />Water<br />Vorpal-Weapons<br /> |
+| Portable Hole | B/uncommon | 122 |  | 0 |  | Acid<br />Cold<br />Fire<br />Poison<br />Vorpal-Weapons<br /> |
+| Mummy Necromancer | C/uncommon | 112 | 1d6+2 | 1 | Necrotic:1<br /> | Cold<br />Necrosis<br />Poison<br />Draining<br /> |
+| Demon Goat | B/rare | 106 | 2d6+2 | 1 |  | Fire<br />Necrosis<br />Poison<br /> |
+| Giant Piranha | B/v-rare | 103 | 1d10+3 | 1 | Bite:1d8<br /> | Water<br /> |
+| Giant Battle Duck | C/v-rare | 98 | 1d8+4 | 1 | Bite:1d10<br />Claw:1d6<br /> | Water<br /> |
+| Treasure Chest | B/common | 93 | 1d8+4 | 1 |  | Water<br />Vorpal-Weapons<br /> |
+| Treasure Chest Mimic | B/common | 93 | 1d8+4 | 1 |  | Water<br />Vorpal-Weapons<br /> |
+| Acid Blob | A/common | 90 | 1d10 | 1 |  | Acid<br />Necrosis<br /> |
+| Electric Eel | B/rare | 87 | 1d3+1 | 1 | Bite:1d4<br /> | Electricity<br />Water<br /> |
 | Mantisman | B/uncommon | 85 | 1d12+8 | 1 |  |  |
-| Electric Eel | B/rare | 83 | 1d3+1 | 1 | Bite:1d4<br /> | Electricity<br />Water<br /> |
-| Dreadfire Snake | C/rare | 81 | 1d3+1 | 1 | Poison:1d4<br /> | Webs<br />Water<br /> |
+| Dreadfire Snake | C/rare | 83 | 1d3+1 | 1 | Poison:1d4<br /> | Webs<br />Water<br /> |
+| Flux Spider | B/uncommon | 82 | 1d3 | 1 | Necrotic:1<br />Poison:1d4<br /> | Cold<br />Necrosis<br />Poison<br />Webs<br />Vorpal-Weapons<br /> |
+| Gargoyle Baby | C/common | 80 | 1d6 | 1 |  | Cold<br />Necrosis<br />Poison<br />Draining<br />Water<br />Vorpal-Weapons<br /> |
+| Hellpup | B/rare | 78 | 1d6+2 | 1 |  | Cold<br />Fire<br />Necrosis<br />Poison<br />Draining<br /> |
 | Zorblin Priest | B/common | 78 | 1d6+2 | 1 |  |  |
-| Flux Spider | B/uncommon | 77 | 1d3 | 1 | Necrotic:1<br />Poison:1d4<br /> | Cold<br />Necrosis<br />Poison<br />Webs<br />Vorpal-Weapons<br /> |
-| Zorblin Leader | B/common | 76 | 1d4+2 | 1 |  |  |
+| Assassin Duck | B/v-rare | 77 | 1d6+1 | 1 | Bite:1d8<br />Claw:1d6<br /> | Water<br /> |
 | Zorblin Pirate | B/common | 76 | 1d4+2 | 1 |  |  |
-| Assassin Duck | B/v-rare | 75 | 1d6+1 | 1 | Bite:1d8<br />Claw:1d6<br /> | Water<br /> |
-| Gaseous Gloat | B/common | 74 | 1d20 | 1 | Digest:1d40<br /> | Necrosis<br /> |
-| Gargoyle Baby | C/common | 74 | 1d6 | 1 |  | Cold<br />Necrosis<br />Poison<br />Draining<br />Water<br />Vorpal-Weapons<br /> |
-| Hellpup | B/rare | 73 | 1d6+2 | 1 |  | Cold<br />Fire<br />Necrosis<br />Poison<br />Draining<br /> |
-| Firefox | B/rare | 72 | 1d6+2 | 1 |  | Fire<br />Water<br /> |
+| Zorblin Leader | B/common | 76 | 1d4+2 | 1 |  |  |
+| Gaseous Gloat | B/common | 75 | 1d20 | 1 | Digest:1d40<br /> | Necrosis<br /> |
+| Firefox | B/rare | 74 | 1d6+2 | 1 |  | Fire<br />Water<br /> |
+| Dungeon Belcher | B/common | 74 | 1d20 | 1 | Digest:1d10<br /> | Confusion<br />Confusion<br /> |
+| Teletoad | B/common | 73 | 1d3+1 | 1 | Poison:1d10<br /> | Cold<br />Water<br /> |
 | Death Hornet | A/uncommon | 72 | 1d4+1 | 1 | Bite:1d10<br />Poison:1d10<br /> |  |
-| Dungeon Belcher | B/common | 72 | 1d20 | 1 | Digest:1d10<br /> | Confusion<br />Confusion<br /> |
-| Teletoad | B/common | 71 | 1d3+1 | 1 | Poison:1d10<br /> | Cold<br />Water<br /> |
+| Flaming Skeleton | B/common | 70 | 1d4 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
 | Zorblin Soldier | A/common | 70 | 1d4+2 | 1 |  |  |
+| Zoblin | A/common | 68 | 1d6 | 1 |  | Cold<br />Necrosis<br />Poison<br />Draining<br /> |
+| Zoblin | A/common | 68 | 1d6 | 1 |  | Cold<br />Necrosis<br />Poison<br />Draining<br /> |
+| Huge Fluffy Bat | B/common | 67 | 1d4+2 | 1 | Bite:1d4<br />Claw:1d6<br />Poison:1d4+1<br /> | Water<br /> |
+| Burning Skeleton | B/common | 66 | 1d3 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
 | Deathstalker Scorpion | B/rare | 66 | 1d6+1 | 1 | Poison:1d30<br /> |  |
-| Huge Fluffy Bat | B/common | 66 | 1d4+2 | 1 | Bite:1d4<br />Claw:1d6<br />Poison:1d4+1<br /> | Water<br /> |
-| Dogman | A/common | 64 | 1d4+1 | 1 |  | Water<br /> |
+| Dogman | A/common | 65 | 1d4+1 | 1 |  | Water<br /> |
+| Molekin | A/uncommon | 64 | 1d4+2 | 1 |  | Water<br /> |
 | Zorblin Wizard | C/common | 64 | 1d4+2 | 1 |  |  |
 | Lesser Zorblin | A/common | 64 | 1d4+2 | 1 |  |  |
-| Molekin | A/uncommon | 63 | 1d4+2 | 1 |  | Water<br /> |
-| Pyrolizard | B/common | 63 | 1d6+1 | 1 |  | Fire<br /> |
-| Gnome Knight | B/common | 62 | 1d6+1 | 1 |  | Poison<br /> |
+| Pyrolizard | B/common | 64 | 1d6+1 | 1 |  | Fire<br /> |
+| Gnome Knight | B/common | 63 | 1d6+1 | 1 |  | Poison<br /> |
 | Zorblomancer | B/common | 62 | 1d4+2 | 1 |  |  |
 | Zorblin Eldster | B/common | 62 | 1d4+2 | 1 |  |  |
-| Zoblin | A/common | 60 | 1d6 | 1 |  | Cold<br />Necrosis<br />Poison<br />Draining<br /> |
-| Rock Gnome | B/common | 60 | 1d6+1 | 1 |  | Poison<br /> |
-| Carcass Creeper | A/common | 60 | 1d6+2 | 1 | Bite:1d8<br />Claw:1d6<br />Poison:1d10<br /> | Poison<br /> |
-| Zoblin | A/common | 60 | 1d6 | 1 |  | Cold<br />Necrosis<br />Poison<br />Draining<br /> |
-| Piranha | A/rare | 59 | 1d4+3 | 1 | Bite:1d4<br /> | Water<br /> |
-| Gnorf | A/common | 58 | 1d4+1 | 1 |  | Cold<br />Poison<br /> |
-| Brown Extrovert Spider | A/uncommon | 57 | 1d3 | 1 | Necrotic:1<br />Poison:1d3<br /> | Necrosis<br />Webs<br /> |
-| Battle Goat | B/uncommon | 56 | 1d6+2 | 1 |  | Poison<br />Water<br /> |
-| Flaming Skeleton | B/common | 56 | 1d4 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
-| Gnome Thief | A/common | 52 | 1d2+1 | 1 |  | Cold<br />Poison<br /> |
-| Burning Skeleton | B/common | 52 | 1d3 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
-| Slime Jumper | A/common | 52 | 2d6+2 | 1 | Acid:1d6<br /> | Acid<br />Necrosis<br /> |
-| Thylacine | B/v-rare | 51 | 1d6+2 | 1 |  | Water<br /> |
-| Onyx Widow | A/common | 51 | 1d3 | 1 | Poison:1d4<br /> | Webs<br /> |
-| Kraken Tentacle | A/common | 50 | 1d3+1 | 1 | Poison:1d8+1<br /> | Water<br /> |
+| Carcass Creeper | A/common | 61 | 1d6+2 | 1 | Bite:1d8<br />Claw:1d6<br />Poison:1d10<br /> | Poison<br /> |
+| Rock Gnome | B/common | 61 | 1d6+1 | 1 |  | Poison<br /> |
+| Piranha | A/rare | 61 | 1d4+3 | 1 | Bite:1d4<br /> | Water<br /> |
+| Gnorf | A/common | 60 | 1d4+1 | 1 |  | Cold<br />Poison<br /> |
+| Brown Extrovert Spider | A/uncommon | 59 | 1d3 | 1 | Necrotic:1<br />Poison:1d3<br /> | Necrosis<br />Webs<br /> |
+| Battle Goat | B/uncommon | 58 | 1d6+2 | 1 |  | Poison<br />Water<br /> |
+| Slime Jumper | A/common | 54 | 2d6+2 | 1 | Acid:1d6<br /> | Acid<br />Necrosis<br /> |
+| Gnome Thief | A/common | 54 | 1d2+1 | 1 |  | Cold<br />Poison<br /> |
+| Kraken Tentacle | A/common | 52 | 1d3+1 | 1 | Poison:1d8+1<br /> | Water<br /> |
+| Thylacine | B/v-rare | 52 | 1d6+2 | 1 |  | Water<br /> |
+| Onyx Widow | A/common | 52 | 1d3 | 1 | Poison:1d4<br /> | Webs<br /> |
+| Meatfairy | A/common | 51 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d2<br /> | Vorpal-Weapons<br /> |
 | Noble Warrior | /common | 50 | 1d3 | 1 |  | Sanctuary-tiles<br /> |
-| Meatfairy | A/common | 50 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d2<br /> | Vorpal-Weapons<br /> |
+| Blinkcat | B/common | 50 | 1d3+1 | 1 |  | Cold<br />Water<br />Vorpal-Weapons<br /> |
+| Spectral Blade | B/unique | 49 | 1d4 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
+| Spectral Blade | B/unique | 48 | 1d3 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
 | Moresquito | A/common | 48 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d3<br />Poison:1d4<br />Drain:1d4<br /> |  |
-| Blinkcat | B/common | 47 | 1d3+1 | 1 |  | Cold<br />Water<br />Vorpal-Weapons<br /> |
+| Spectral Blade | B/unique | 48 | 1d3 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
+| Para Spider | B/uncommon | 48 | 1d3 | 1 | Poison:1d4<br /> | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
+| Orb Of Energy | B/uncommon | 47 |  | 0 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br /> |
+| Dog | A/uncommon | 46 | 1d4+2 | 1 |  | Water<br /> |
+| Asp | A/common | 45 | 1d3+1 | 1 | Poison:1d3+1<br /> | Webs<br />Water<br /> |
 | Scorpion | A/common | 45 | 1d3+1 | 1 | Poison:1d12<br /> |  |
-| Dog | A/uncommon | 45 | 1d4+2 | 1 |  | Water<br /> |
+| Cuddly Eel | A/common | 45 | 1d3+1 | 1 | Bite:1d4<br /> | Water<br /> |
+| Orb Of Fire | B/uncommon | 45 |  | 0 |  | Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br /> |
+| Ghost | A/common | 45 |  | 1 | Cold:1<br /> | Acid<br />Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br />Water<br /> |
+| Ghost Minion | A/common | 45 |  | 1 | Cold:1<br /> | Acid<br />Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br />Water<br /> |
+| Giant Rat | B/common | 45 | 1d6+2 | 1 |  | Water<br /> |
+| Skeleton | A/common | 44 | 1d3 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
 | Narhornet | A/uncommon | 44 | 1d4+1 | 1 | Bite:1d4<br />Poison:1d8<br /> |  |
-| Giant Rat | B/common | 44 | 1d6+2 | 1 |  | Water<br /> |
-| Centipede | A/common | 43 | 1d4+2 | 1 | Bite:1d8<br />Claw:1d4<br />Poison:1d4<br /> | Poison<br /> |
-| Asp | A/common | 43 | 1d3+1 | 1 | Poison:1d3+1<br /> | Webs<br />Water<br /> |
-| Cuddly Eel | A/common | 43 | 1d3+1 | 1 | Bite:1d4<br /> | Water<br /> |
-| Orb Of Fire | B/uncommon | 40 |  | 0 |  | Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br /> |
-| Rabid Bat Minion | A/common | 39 | 1 | 1 | Bite:1d3<br />Claw:1d2<br /> | Water<br /> |
-| Orb Of Energy | B/uncommon | 39 |  | 0 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br /> |
-| Para Spider | B/uncommon | 39 | 1d3 | 1 | Poison:1d4<br /> | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
-| Spectral Blade | B/unique | 38 | 1d4 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
-| Fluffy Bat | A/common | 37 | 1 | 1 | Bite:1d3<br />Claw:1d2<br /> | Water<br /> |
-| Giant Dungeon Duck | A/rare | 37 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d3<br /> | Water<br /> |
-| Rat | A/common | 37 | 1d3+2 | 1 |  | Water<br /> |
-| Spectral Blade | B/unique | 37 | 1d3 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
-| Spectral Blade | B/unique | 37 | 1d3 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
-| Baby Black Pudding | B/common | 36 | 1 | 1 | Acid:1d5<br /> | Acid<br />Cold<br />Electricity<br />Lightning<br />Necrosis<br /> |
+| Centipede | A/common | 44 | 1d4+2 | 1 | Bite:1d8<br />Claw:1d4<br />Poison:1d4<br /> | Poison<br /> |
+| Skeleton | A/common | 42 | 1d3 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
+| Skeleton Minion | A/common | 41 | 1d2 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
+| Baby Black Pudding | B/common | 41 | 1 | 1 | Acid:1d5<br /> | Acid<br />Cold<br />Electricity<br />Lightning<br />Necrosis<br /> |
+| Rabid Bat Minion | A/common | 40 | 1 | 1 | Bite:1d3<br />Claw:1d2<br /> | Water<br /> |
+| Giant Dungeon Duck | A/rare | 39 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d3<br /> | Water<br /> |
+| Fluffy Bat | A/common | 38 | 1 | 1 | Bite:1d3<br />Claw:1d2<br /> | Water<br /> |
+| Rat | A/common | 38 | 1d3+2 | 1 |  | Water<br /> |
+| Jade Viper | B/common | 37 | 1d3+1 | 1 | Poison:1d2<br /> | Webs<br />Water<br /> |
+| Clingy Leech | A/common | 37 | 1d3+1 | 1 | Bite:1d4<br />Drain:1d4<br /> | Water<br /> |
 | Jackalope | A/rare | 36 | 1d4 | 1 |  |  |
-| Clingy Leech | A/common | 35 | 1d3+1 | 1 | Bite:1d4<br />Drain:1d4<br /> | Water<br /> |
-| Ghost | A/common | 35 |  | 1 | Cold:1<br /> | Acid<br />Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br />Water<br /> |
-| Jade Viper | B/common | 35 | 1d3+1 | 1 | Poison:1d2<br /> | Webs<br />Water<br /> |
-| Ghost Minion | A/common | 35 |  | 1 | Cold:1<br /> | Acid<br />Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br />Water<br /> |
+| Sewer Crab | A/common | 32 | 1d3+1 | 1 |  | Water<br /> |
 | Fleshbee | A/common | 32 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d3<br /> |  |
-| Skeleton | A/common | 32 | 1d3 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
-| Sewer Crab | A/common | 31 | 1d3+1 | 1 |  | Water<br /> |
-| Skeleton | A/common | 30 | 1d3 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
-| Skeleton Minion | A/common | 29 | 1d2 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
-| Goldfish | A/common | 27 | 1 | 1 | Bite:1d1+1<br /> | Water<br />Vorpal-Weapons<br /> |
-| Baby Slime Jumper | A/common | 27 | 1 | 1 | Acid:1d3<br /> | Acid<br />Necrosis<br /> |
-| Sheep | B/common | 26 | 1d3+2 | 1 |  | Water<br /> |
-| Lava Ant | A/common | 25 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d3<br />Fire:1d3+1<br /> | Fire<br /> |
+| Goldfish | A/common | 31 | 1 | 1 | Bite:1d1+1<br /> | Water<br />Vorpal-Weapons<br /> |
+| Baby Slime Jumper | A/common | 29 | 1 | 1 | Acid:1d3<br /> | Acid<br />Necrosis<br /> |
+| Lava Ant | A/common | 27 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d3<br />Fire:1d3+1<br /> | Fire<br /> |
+| Sheep | B/common | 27 | 1d3+2 | 1 |  | Water<br /> |
 | Bloated Bloodbug | A/common | 24 | 1d2+1 | 1 | Bite:1d2<br />Drain:1d1<br /> |  |
-| Vampire Rose | A/common | 22 | 1d3 | 1 | Digest:1d5<br /> | Confusion<br />Confusion<br /> |
+| Vampire Rose | A/common | 24 | 1d3 | 1 | Digest:1d5<br /> | Confusion<br />Confusion<br /> |
 <!-- end monsters type marker -->
 
 Weapons
@@ -288,13 +288,13 @@ Weapons
 | Sword Of Darkness | C/v-rare | 12 - 42 | 6d6+6 |  Immunity-Acid<br /> | 0.01 % | Y | 1000 |
 | Warhammer | C/common | 4 - 32 | 4d8 |  Swing-penalty<br />Hits all surrounding<br /> | 0.01 % | Y | 450 |
 | Mace | C/common | 3 - 24 | 3d8 |  Swing-penalty<br /> | 0.01 % | Y | 350 |
-| Very Broadsword | C/uncommon | 2 - 24 | 2d12 |  Hits adjacent<br /> | 0.01 % | Y | 350 |
 | Double Shovel | C/uncommon | 2 - 20 | 2d10 |  Hits in-front and behind<br /> | 1.00 % | Y | 50 |
 | Holy Sword Of Clonrichet | C/v-rare | 5 - 20 | 1d16+4 |  Immunity-Acid<br />Immunity-Cold<br />Immunity-Poison<br />x2 undead<br />Hits all surrounding<br /> | 0.01 % | Y | 2500 |
 | Scythe | C/uncommon | 3 - 18 | 3d6 |  Hits all surrounding<br /> | 0.05 % | Y | 250 |
 | Sword Of Plutonium | C/v-rare | 5 - 16 | 1d12+4 |  Immunity-Acid<br /> | 0.01 % | Y | 1000 |
 | Sword Of Draining | C/v-rare | 1 - 12 | 1d12 | Damage-Drain:1d20<br /> Immunity-Drain<br /> Additional-attack<br /> | 0.05 % | Y | 1000 |
 | Sword Of Duck Summoning | C/v-rare | 3 - 12 | 1d10+2 |  Immunity-Acid<br /> | 0.01 % | Y | 1500 |
+| Very Broadsword | C/uncommon | 1 - 12 | 1d12 |  Hits adjacent<br /> | 0.01 % | Y | 350 |
 | Pike | B/uncommon | 1 - 10 | 1d10 |  Hits two ahead<br /> | 0.50 % | Y | 10 |
 | Cutlass | B/rare | 1 - 10 | 1d10 |   | 0.20 % | Y | 100 |
 | Shovel | B/uncommon | 1 - 8 | 1d8 |   | 0.50 % | Y | 5 |
