@@ -355,7 +355,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->has_projectile                               ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->has_seen_player_msg_shown                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->_is_able_to_regenerate                       ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->_is_able_to_resurrect                        ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->_is_able_to_be_resurrected                   ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->_is_immune_to_acid                           ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->_is_immune_to_blinding                       ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->_is_immune_to_cold                           ? 1LLU : 0LLU) << shift; shift++;

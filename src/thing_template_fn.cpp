@@ -874,7 +874,6 @@ int Tp::is_unused_flag43(void) const { return _is_unused_flag43; }
 int Tp::is_unused_flag44(void) const { return _is_unused_flag44; }
 int Tp::is_unused_flag45(void) const { return _is_unused_flag45; }
 int Tp::is_unused_flag46(void) const { return _is_unused_flag46; }
-int Tp::is_vanquished_on_negation(void) const { return _is_vanquished_on_negation; }
 int Tp::is_unused_flag4(void) const { return _is_unused_flag4; }
 int Tp::is_unused_flag5(void) const { return _is_unused_flag5; }
 int Tp::is_unused_flag6(void) const { return _is_unused_flag6; }
@@ -886,6 +885,7 @@ int Tp::is_usable(void) const { return _is_usable; }
 int Tp::is_used_when_thrown(void) const { return _is_used_when_thrown; }
 int Tp::is_value_defensive(void) const { return _is_value_defensive; }
 int Tp::is_value_offensive(void) const { return _is_value_offensive; }
+int Tp::is_vanquished_on_negation(void) const { return _is_vanquished_on_negation; }
 int Tp::is_very_combustible(void) const { return _is_very_combustible; }
 int Tp::is_very_hard(void) const { return _is_very_hard; }
 int Tp::is_very_heavy(void) const { return _is_very_heavy; }
@@ -1653,7 +1653,6 @@ void Tp::is_unused_flag43_set(int v) { _is_unused_flag43 = v; }
 void Tp::is_unused_flag44_set(int v) { _is_unused_flag44 = v; }
 void Tp::is_unused_flag45_set(int v) { _is_unused_flag45 = v; }
 void Tp::is_unused_flag46_set(int v) { _is_unused_flag46 = v; }
-void Tp::is_vanquished_on_negation_set(int v) { _is_vanquished_on_negation = v; }
 void Tp::is_unused_flag4_set(int v) { _is_unused_flag4 = v; }
 void Tp::is_unused_flag5_set(int v) { _is_unused_flag5 = v; }
 void Tp::is_unused_flag6_set(int v) { _is_unused_flag6 = v; }
@@ -1665,6 +1664,7 @@ void Tp::is_usable_set(int v) { _is_usable = v; }
 void Tp::is_used_when_thrown_set(int v) { _is_used_when_thrown = v; }
 void Tp::is_value_defensive_set(int v) { _is_value_defensive = v; }
 void Tp::is_value_offensive_set(int v) { _is_value_offensive = v; }
+void Tp::is_vanquished_on_negation_set(int v) { _is_vanquished_on_negation = v; }
 void Tp::is_very_combustible_set(int v) { _is_very_combustible = v; }
 void Tp::is_very_hard_set(int v) { _is_very_hard = v; }
 void Tp::is_very_heavy_set(int v) { _is_very_heavy = v; }

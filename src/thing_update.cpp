@@ -338,7 +338,7 @@ void Thing::update(void)
   _is_immune_to_non_magical_weapons = tpp->is_immune_to_non_magical_weapons();
   _is_immune_to_water               = tpp->is_immune_to_water();
   _is_able_to_regenerate            = tpp->is_able_to_regenerate();
-  _is_able_to_resurrect             = tpp->is_able_to_resurrect();
+  _is_able_to_be_resurrected        = tpp->is_able_to_be_resurrected();
 
   if (unlikely(tpp->charge_count())) {
     charge_count_set(tpp->charge_count());

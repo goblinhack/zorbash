@@ -103,12 +103,6 @@ int Tp::get_danger_level(void)
   if (is_spiderweb()) {
     danger_level += 5;
   }
-  if (is_able_to_be_resurrected()) {
-    danger_level *= 2;
-  }
-  if (is_able_to_regenerate()) {
-    danger_level *= 2;
-  }
   if (is_able_to_shove()) {
     danger_level++;
   }
@@ -157,14 +151,20 @@ int Tp::get_danger_level(void)
   if (is_able_to_shoot_at()) {
     danger_level += 20;
   }
+  if (is_able_to_teleport_attack()) {
+    danger_level += 100;
+  }
   if (is_always_submerged_in_water()) {
     danger_level *= 2;
   }
   if (is_always_submerged_in_lava()) {
     danger_level *= 2;
   }
-  if (is_able_to_teleport_attack()) {
-    danger_level += 100;
+  if (is_able_to_be_resurrected()) {
+    danger_level *= 2;
+  }
+  if (is_able_to_regenerate()) {
+    danger_level *= 2;
   }
 
   danger_level += dmg_melee_dice().max_roll();
@@ -305,12 +305,6 @@ int Thing::danger_initial_level(void)
   if (is_spiderweb()) {
     danger_level += 5;
   }
-  if (is_able_to_be_resurrected()) {
-    danger_level *= 2;
-  }
-  if (is_able_to_regenerate()) {
-    danger_level *= 2;
-  }
   if (is_able_to_shove()) {
     danger_level++;
   }
@@ -374,14 +368,20 @@ int Thing::danger_initial_level(void)
   if (blinded_count()) {
     danger_level /= 10;
   }
+  if (is_able_to_teleport_attack()) {
+    danger_level += 100;
+  }
   if (is_always_submerged_in_water()) {
     danger_level *= 2;
   }
   if (is_always_submerged_in_lava()) {
     danger_level *= 2;
   }
-  if (is_able_to_teleport_attack()) {
-    danger_level += 100;
+  if (is_able_to_be_resurrected()) {
+    danger_level *= 2;
+  }
+  if (is_able_to_regenerate()) {
+    danger_level *= 2;
   }
 
   danger_level += dmg_melee_dice().max_roll();
@@ -538,12 +538,6 @@ int Thing::danger_current_level(void)
   if (is_spiderweb()) {
     danger_level += 5;
   }
-  if (is_able_to_be_resurrected()) {
-    danger_level *= 2;
-  }
-  if (is_able_to_regenerate()) {
-    danger_level *= 2;
-  }
   if (is_able_to_shove()) {
     danger_level++;
   }
@@ -607,14 +601,20 @@ int Thing::danger_current_level(void)
   if (blinded_count()) {
     danger_level /= 10;
   }
+  if (is_able_to_teleport_attack()) {
+    danger_level += 100;
+  }
   if (is_always_submerged_in_water()) {
     danger_level *= 2;
   }
   if (is_always_submerged_in_lava()) {
     danger_level *= 2;
   }
-  if (is_able_to_teleport_attack()) {
-    danger_level += 100;
+  if (is_able_to_be_resurrected()) {
+    danger_level *= 2;
+  }
+  if (is_able_to_regenerate()) {
+    danger_level *= 2;
   }
 
   danger_level += dmg_melee_dice().max_roll();
