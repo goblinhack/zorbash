@@ -414,6 +414,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->has_projectile                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->has_seen_player_msg_shown                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->_is_able_to_regenerate                       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->_is_able_to_resurrect                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->_is_immune_to_electricity                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->_is_immune_to_entrancement                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->_is_immune_to_fire                           = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;

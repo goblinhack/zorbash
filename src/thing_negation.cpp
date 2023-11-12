@@ -74,9 +74,9 @@ void Thing::negation_dmg(int dmg, bool &is_killed)
 
   if (is_monst()) {
     //
-    // If a magical monster, kill them
+    // If a delicate magical monster, kill them
     //
-    if (is_magical()) {
+    if (is_vanquished_on_negation()) {
       is_killed = true;
       return;
     }
@@ -88,6 +88,9 @@ void Thing::negation_dmg(int dmg, bool &is_killed)
       if (_is_able_to_regenerate) {
         msg("%s loses the ability to regenerate!", text_The().c_str());
         _is_able_to_regenerate = false;
+      } else if (_is_able_to_be_resurrected) {
+        msg("%s loses the ability to resurrect!", text_The().c_str());
+        _is_able_to_be_resurrected = false;
       } else if (_is_immune_to_cold) {
         msg("%s loses natural immunity to cold!", text_The().c_str());
         _is_immune_to_cold = false;

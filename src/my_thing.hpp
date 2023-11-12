@@ -201,6 +201,7 @@ public:
   uint64_t has_projectile                               : 1 {}; // Current projectile being fired
   uint64_t has_seen_player_msg_shown                    : 1 {}; // Seen by player has been shown
   uint64_t _is_able_to_regenerate                       : 1 {}; // Can be removed by negation
+  uint64_t _is_able_to_resurrect                        : 1 {}; // Can be removed by negation
   uint64_t is_activated                                 : 1 {}; // This skill is activated
   uint64_t is_attached                                  : 1 {}; // Is attached to the level
   uint64_t is_auto_equip_done                           : 1 {}; // Has initially auto equipped itself
@@ -2014,7 +2015,6 @@ public:
   int is_unused_flag44(void);
   int is_unused_flag45(void);
   int is_unused_flag46(void);
-  int is_vanquished_on_negation(void);
   int is_unused_flag4(void);
   int is_unused_flag5(void);
   int is_unused_flag6(void);
@@ -2026,6 +2026,7 @@ public:
   int is_used_when_thrown(void);
   int is_value_defensive(void);
   int is_value_offensive(void);
+  int is_vanquished_on_negation(void);
   int is_very_combustible(void);
   int is_very_hard(void);
   int is_very_heavy(void);

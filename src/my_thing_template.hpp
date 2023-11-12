@@ -780,7 +780,6 @@ private:
   int _is_unused_flag44 {};
   int _is_unused_flag45 {};
   int _is_unused_flag46 {};
-  int _is_vanquished_on_negation {};
   int _is_unused_flag5 {};
   int _is_unused_flag6 {};
   int _is_unused_flag7 {};
@@ -791,6 +790,7 @@ private:
   int _is_used_when_thrown {};
   int _is_value_defensive {};
   int _is_value_offensive {};
+  int _is_vanquished_on_negation {};
   int _is_very_combustible {};
   int _is_very_hard {};
   int _is_very_heavy {};
@@ -2172,7 +2172,6 @@ public:
   int is_unused_flag44(void) const;
   int is_unused_flag45(void) const;
   int is_unused_flag46(void) const;
-  int is_vanquished_on_negation(void) const;
   int is_unused_flag4(void) const;
   int is_unused_flag5(void) const;
   int is_unused_flag6(void) const;
@@ -2184,6 +2183,7 @@ public:
   int is_used_when_thrown(void) const;
   int is_value_defensive(void) const;
   int is_value_offensive(void) const;
+  int is_vanquished_on_negation(void) const;
   int is_very_combustible(void) const;
   int is_very_hard(void) const;
   int is_very_heavy(void) const;
@@ -2952,7 +2952,6 @@ public:
   void is_unused_flag44_set(int v);
   void is_unused_flag45_set(int v);
   void is_unused_flag46_set(int v);
-  void is_vanquished_on_negation_set(int v);
   void is_unused_flag4_set(int v);
   void is_unused_flag5_set(int v);
   void is_unused_flag6_set(int v);
@@ -2964,6 +2963,7 @@ public:
   void is_used_when_thrown_set(int v);
   void is_value_defensive_set(int v);
   void is_value_offensive_set(int v);
+  void is_vanquished_on_negation_set(int v);
   void is_very_combustible_set(int v);
   void is_very_hard_set(int v);
   void is_very_heavy_set(int v);

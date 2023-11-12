@@ -109,6 +109,7 @@ def tp_init(name, text_long_name):
     my.is_shootable(self, True)
     my.is_soft(self, True)
     my.is_tickable(self, True)
+    my.is_vanquished_on_negation(self, True)
     my.move_speed(self, 250)
     my.noise_decibels_hearing(self, 0)
     my.noise_on_moving(self, 5)

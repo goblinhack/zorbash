@@ -111,6 +111,7 @@ def tp_init(name, text_long_name):
     my.is_shovable(self, True)
     my.is_tickable(self, True)
     my.is_tireless(self, True)
+    my.is_vanquished_on_negation(self, True)
     my.move_speed(self, 30)
     my.noise_decibels_hearing(self, 100)
     my.noise_on_moving(self, 20)

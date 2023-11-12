@@ -132,6 +132,7 @@ def tp_init(name, text_long_name):
     my.is_skeleton(self, True)
     my.is_tickable(self, True)
     my.is_undead(self, True)
+    my.is_vanquished_on_negation(self, True)
     my.light_color(self, "yellow")
     my.light_dist(self, 2)
     my.move_speed(self, 100)

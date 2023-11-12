@@ -230,7 +230,7 @@ int Thing::resurrect_when(void)
 int Thing::is_able_to_be_resurrected(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_able_to_be_resurrected());
+  return _is_able_to_be_resurrected;
 }
 
 int Thing::is_resurrected_or_resurrecting(void)

@@ -77,6 +77,7 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_msg_allowed_senses_danger(self, True)
     my.is_shootable(self, True)
     my.is_tickable(self, True)
+    my.is_vanquished_on_negation(self, True)
     my.light_color(self, "orange")
     my.light_dist(self, 1)
     my.move_speed(self, 50)
