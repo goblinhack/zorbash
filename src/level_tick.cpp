@@ -479,7 +479,11 @@ void Level::tick_(void)
     //
     if (t->is_moving) {
       if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-        t->con("Waiting on moving thing longer than expected: %s", t->to_dbg_string().c_str());
+        if (g_opt_test_dungeon) {
+          t->err("Waiting on moving thing longer than expected: %s", t->to_dbg_string().c_str());
+        } else {
+          t->con("Waiting on moving thing longer than expected: %s", t->to_dbg_string().c_str());
+        }
       }
       game->things_are_moving = true;
       t->is_waiting           = true;
@@ -491,7 +495,11 @@ void Level::tick_(void)
     //
     if (t->is_jumping) {
       if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-        t->con("Waiting on jumping thing longer than expected: %s", t->to_dbg_string().c_str());
+        if (g_opt_test_dungeon) {
+          t->err("Waiting on jumping thing longer than expected: %s", t->to_dbg_string().c_str());
+        } else {
+          t->con("Waiting on jumping thing longer than expected: %s", t->to_dbg_string().c_str());
+        }
       }
       game->things_are_moving = true;
       t->is_waiting           = true;
@@ -512,7 +520,11 @@ void Level::tick_(void)
     //
     if (t->is_dead_on_end_of_anim() && ! (t->is_dead || t->is_scheduled_for_death || ! t->is_visible_to_player)) {
       if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-        t->con("Waiting on dying thing longer than expected: %s", t->to_dbg_string().c_str());
+        if (g_opt_test_dungeon) {
+          t->err("Waiting on dying thing longer than expected: %s", t->to_dbg_string().c_str());
+        } else {
+          t->con("Waiting on dying thing longer than expected: %s", t->to_dbg_string().c_str());
+        }
       }
       game->things_are_moving = true;
       t->is_waiting           = true;
@@ -524,7 +536,11 @@ void Level::tick_(void)
     //
     if (t->is_alive_on_end_of_anim() && t->is_resurrecting) {
       if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-        t->con("Waiting on resurrecting thing longer than expected: %s", t->to_dbg_string().c_str());
+        if (g_opt_test_dungeon) {
+          t->err("Waiting on resurrecting thing longer than expected: %s", t->to_dbg_string().c_str());
+        } else {
+          t->con("Waiting on resurrecting thing longer than expected: %s", t->to_dbg_string().c_str());
+        }
       }
       game->things_are_moving = true;
       t->is_waiting           = true;
@@ -542,8 +558,13 @@ void Level::tick_(void)
         auto w = thing_find(equip_id);
         if (w && ! (w->is_dead || w->is_scheduled_for_death || ! w->is_visible_to_player)) {
           if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-            w->con("Waiting on this");
-            t->con("This is the owner");
+            if (g_opt_test_dungeon) {
+              w->err("Waiting on this");
+              t->con("This is the owner");
+            } else {
+              w->con("Waiting on this");
+              t->con("This is the owner");
+            }
           }
           game->things_are_moving = true;
           t->is_waiting           = true;
@@ -557,7 +578,11 @@ void Level::tick_(void)
       t->log("Waiting to fall");
       t->fall_to_next_level();
       if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-        t->con("Waiting on waiting to fall thing longer than expected: %s", t->to_dbg_string().c_str());
+        if (g_opt_test_dungeon) {
+          t->err("Waiting on falling thing longer than expected: %s", t->to_dbg_string().c_str());
+        } else {
+          t->con("Waiting on falling thing longer than expected: %s", t->to_dbg_string().c_str());
+        }
       }
       game->things_are_moving = true;
       t->is_waiting           = true;
@@ -566,7 +591,11 @@ void Level::tick_(void)
 
     if (t->is_scheduled_for_death) {
       if ((wait_count > wait_count_max) && ! game->things_are_moving) {
-        t->con("Waiting on scheduled for death thing longer than expected: %s", t->to_dbg_string().c_str());
+        if (g_opt_test_dungeon) {
+          t->err("Waiting on scheduled for death thing longer than expected: %s", t->to_dbg_string().c_str());
+        } else {
+          t->con("Waiting on scheduled for death thing longer than expected: %s", t->to_dbg_string().c_str());
+        }
       }
       game->things_are_moving = true;
       t->is_waiting           = true;
