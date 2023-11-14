@@ -161,6 +161,10 @@ void Level::noisemap_print(void)
         debug += ("XX");
         continue;
       }
+      if (player && (player->curr_at == p)) {
+        debug += (" @");
+        continue;
+      }
       if (noisemap(x, y) > 0) {
         debug += string_sprintf("%2X", noisemap(x, y));
         continue;
@@ -179,10 +183,6 @@ void Level::noisemap_print(void)
       }
       if (is_mob(x, y)) {
         debug += (" g");
-        continue;
-      }
-      if (player && (player->curr_at == p)) {
-        debug += (" @");
         continue;
       }
       if (is_floor(x, y)) {

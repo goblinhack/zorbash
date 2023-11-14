@@ -97,13 +97,65 @@ int Thing::noise_total(void)
 
   if (is_player() || is_monst()) {
     decibels -= stat_dex_bonus() * 10;
-  }
 
-  if (level->is_able_to_dampen_footsteps(curr_at)) {
-    decibels /= 2;
-  }
-  if (level->is_able_to_amplify_footsteps(curr_at)) {
-    decibels *= 2;
+    if (level->is_able_to_dampen_footsteps(curr_at)) {
+      decibels /= 2;
+    }
+
+    if (level->is_able_to_amplify_footsteps(curr_at)) {
+      decibels += 10;
+    }
+
+    //
+    // If creeping along wall edges then dampen noise. Any of the following
+    // will dampen.
+    //
+    uint64_t which = (level->is_obs_wall_or_door(curr_at.x - 1, curr_at.y - 1) ? 0xf00000000LLU : 0)
+                   | (level->is_obs_wall_or_door(curr_at.x - 0, curr_at.y - 1) ? 0x0f0000000LLU : 0)
+                   | (level->is_obs_wall_or_door(curr_at.x + 1, curr_at.y - 1) ? 0x00f000000LLU : 0)
+                   | (level->is_obs_wall_or_door(curr_at.x - 1, curr_at.y - 0) ? 0x000f00000LLU : 0)
+                   | (level->is_obs_wall_or_door(curr_at.x - 0, curr_at.y - 0) ? 0x0000f0000LLU : 0)
+                   | (level->is_obs_wall_or_door(curr_at.x + 1, curr_at.y - 0) ? 0x00000f000LLU : 0)
+                   | (level->is_obs_wall_or_door(curr_at.x - 1, curr_at.y + 1) ? 0x000000f00LLU : 0)
+                   | (level->is_obs_wall_or_door(curr_at.x - 0, curr_at.y + 1) ? 0x0000000f0LLU : 0)
+                   | (level->is_obs_wall_or_door(curr_at.x + 1, curr_at.y + 1) ? 0x00000000fLLU : 0);
+    switch (which) {
+        // x.. ..x xxx ...
+        // x@. .@x .@. .@.
+        // x.. ..x ... xxx
+      case 0xf00f00f00LLU :
+      case 0x00f00f00fLLU :
+      case 0xfff000000LLU :
+      case 0x000000fffLLU :
+        // xxx xxx x.. ..x
+        // x@. .@x x@. .@x
+        // x.. ..x xxx xxx
+      case 0xffff00f00LLU :
+      case 0xfff00f00fLLU :
+      case 0xf00f00fffLLU :
+      case 0x00f00ffffLLU :
+        // xxx xxx x.x x.x
+        // x@. .@x x@. .@x
+        // x.x x.x xxx xxx
+      case 0xffff00f0fLLU :
+      case 0xfff00ff0fLLU :
+      case 0xf0ff00fffLLU :
+      case 0xf0f00ffffLLU :
+        // xxx xxx x.x xxx
+        // x@. .@x x@x x@x
+        // xxx xxx xxx x.x
+      case 0xffff00fffLLU :
+      case 0xfff00ffffLLU :
+      case 0xf0ff0ffffLLU :
+      case 0xffff0ff0fLLU :
+        // xx. .xx ... ...
+        // x@. .@x x@. .@x
+        // ... ... xx. .xx
+      case 0xff0f00000LLU :
+      case 0x0ff00f000LLU :
+      case 0x000f00ff0LLU :
+      case 0x00000f0ffLLU : decibels /= 2; break;
+    }
   }
 
   // con("NOISE %d", decibels);
