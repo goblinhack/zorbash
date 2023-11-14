@@ -1337,7 +1337,7 @@ void Level::create_biome_dungeon_place_random_floor_deco(Dungeonp d)
       // No pillars next to the entrance which obscures the player.
       //
       bool skip              = false;
-      int  entrance_distance = MAP_BORDER_ROCK - 1;
+      int  entrance_distance = MAP_BORDER_AROUND_STAIRS_WIDE - 1;
       for (auto dx = -entrance_distance; dx <= entrance_distance; dx++) {
         for (auto dy = -entrance_distance; dy <= entrance_distance; dy++) {
           if (d->is_ascend_dungeon(x + dx, y + dy)) {
@@ -1700,7 +1700,7 @@ void Level::create_biome_dungeon_place_foliage(Dungeonp d)
       // No foliage next to the entrance which obscures the player.
       //
       bool skip              = false;
-      int  entrance_distance = MAP_BORDER_ROCK - 1;
+      int  entrance_distance = MAP_BORDER_AROUND_STAIRS_WIDE - 1;
       for (auto dx = -entrance_distance; dx <= entrance_distance; dx++) {
         for (auto dy = -entrance_distance; dy <= entrance_distance; dy++) {
           if (d->is_ascend_dungeon(x + dx, y + dy)) {
@@ -1749,6 +1749,31 @@ void Level::create_biome_dungeon_place_grass_dry(Dungeonp d)
           continue;
         }
 
+        //
+        // No grass next to the entrance which causes noise as soon as they move
+        //
+        bool skip              = false;
+        int  entrance_distance = MAP_BORDER_AROUND_STAIRS_SMALL - 1;
+        for (auto dx = -entrance_distance; dx <= entrance_distance; dx++) {
+          for (auto dy = -entrance_distance; dy <= entrance_distance; dy++) {
+            if (d->is_ascend_dungeon(x + dx, y + dy)) {
+              skip = true;
+              break;
+            }
+            if (d->is_descend_dungeon(x + dx, y + dy)) {
+              skip = true;
+              break;
+            }
+          }
+          if (skip) {
+            break;
+          }
+        }
+
+        if (skip) {
+          continue;
+        }
+
         (void) thing_new(tp->name(), point(x, y));
       }
     }
@@ -1774,6 +1799,31 @@ void Level::create_biome_dungeon_place_grass_wet(Dungeonp d)
         }
 
         if (heatmap(x, y)) {
+          continue;
+        }
+
+        //
+        // No grass next to the entrance which causes noise as soon as they move
+        //
+        bool skip              = false;
+        int  entrance_distance = MAP_BORDER_AROUND_STAIRS_SMALL - 1;
+        for (auto dx = -entrance_distance; dx <= entrance_distance; dx++) {
+          for (auto dy = -entrance_distance; dy <= entrance_distance; dy++) {
+            if (d->is_ascend_dungeon(x + dx, y + dy)) {
+              skip = true;
+              break;
+            }
+            if (d->is_descend_dungeon(x + dx, y + dy)) {
+              skip = true;
+              break;
+            }
+          }
+          if (skip) {
+            break;
+          }
+        }
+
+        if (skip) {
           continue;
         }
 

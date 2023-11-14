@@ -3478,8 +3478,16 @@ void Game::wid_thing_info_add_noise(WidPopup *w, Thingp t)
       if (t->noise() != n) {
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Noise level base        %5d", t->noise());
         w->log(tmp);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Noise level with items  %5d", n);
+        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Noise level current     %5d", n);
         w->log(tmp);
+        if (level->is_able_to_dampen_footsteps(t->curr_at)) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$  (You are on a quiet tile)");
+          w->log(tmp);
+        }
+        if (level->is_able_to_amplify_footsteps(t->curr_at)) {
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$  (You are on a noisy tile)");
+          w->log(tmp);
+        }
       } else {
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Noise level             %5d", n);
         w->log(tmp);

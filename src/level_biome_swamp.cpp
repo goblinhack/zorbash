@@ -528,10 +528,10 @@ void Level::create_biome_swamp_place_remaining_rocks(Dungeonp d)
         //
         // If any doors are nearby, then we need some rock surrounding the door.
         //
-        bool needed            = false;
-        int  entrance_distance = MAP_BORDER_ROCK - 1;
-        for (auto dx = -entrance_distance; dx <= entrance_distance; dx++) {
-          for (auto dy = -entrance_distance; dy <= entrance_distance; dy++) {
+        bool needed        = false;
+        int  door_distance = MAP_BORDER_ROCK;
+        for (auto dx = -door_distance; dx <= door_distance; dx++) {
+          for (auto dy = -door_distance; dy <= door_distance; dy++) {
             if (d->is_oob(x + dx, y + dy)) {
               continue;
             }
@@ -617,10 +617,10 @@ void Level::create_biome_swamp_place_foliage(Dungeonp d)
       }
 
       //
-      // No pillars next to the entrance which obscures the player.
+      // No foliage next to the entrance which obscures the player.
       //
       bool skip              = false;
-      int  entrance_distance = MAP_BORDER_ROCK - 1;
+      int  entrance_distance = MAP_BORDER_AROUND_STAIRS_SMALL - 1;
       for (auto dx = -entrance_distance; dx <= entrance_distance; dx++) {
         for (auto dy = -entrance_distance; dy <= entrance_distance; dy++) {
           if (d->is_ascend_dungeon(x + dx, y + dy)) {

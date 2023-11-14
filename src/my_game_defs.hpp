@@ -35,10 +35,12 @@
 // The border needs to be big enough so that the player is not
 // obscured by the left bar. This is about this many tiles:
 //
-#define MAP_BORDER_ROCK 6  // Map rock border
-#define MAP_BORDER_ROOM 1  // Room border padding
-#define MAP_ROOM_HEIGHT 11 // Max room dimensions
-#define MAP_ROOM_WIDTH  11 // Max room dimensions
+#define MAP_BORDER_ROCK                6               // Map rock border
+#define MAP_BORDER_AROUND_STAIRS_WIDE  MAP_BORDER_ROCK // Avoid placing big things too close to the entrance
+#define MAP_BORDER_AROUND_STAIRS_SMALL 3               // Avoid placing small things too close to the entrance
+#define MAP_BORDER_ROOM                1               // Room border padding
+#define MAP_ROOM_HEIGHT                11              // Max room dimensions
+#define MAP_ROOM_WIDTH                 11              // Max room dimensions
 
 #define MAP_BORDER_ASCII_AUTO_SCROLL 8 // Ascii map scroll threshold
 

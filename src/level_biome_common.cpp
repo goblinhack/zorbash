@@ -494,7 +494,7 @@ void Level::place_portals(Dungeonp d)
     // No portals next to the entrance which obscures the player.
     //
     bool skip              = false;
-    int  entrance_distance = MAP_BORDER_ROCK - 1;
+    int  entrance_distance = MAP_BORDER_AROUND_STAIRS_WIDE - 1;
     for (auto dx = -entrance_distance; dx <= entrance_distance; dx++) {
       for (auto dy = -entrance_distance; dy <= entrance_distance; dy++) {
         if (d->is_ascend_dungeon(x + dx, y + dy)) {
