@@ -4,7 +4,7 @@ import fungus_common
 
 
 def tp_init(name, tiles=[]):
-    self = tp.Tp(name, "lime stalker fungus", "lime stlkr fungus")
+    self = tp.Tp(name, "lime stalker fungus", "lime stalk fungus")
     fungus_common.tp_init(self)
     # begin sort marker
     my.dmg_chance_d1000_poison(self, 0, 1000)
