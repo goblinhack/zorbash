@@ -27,9 +27,7 @@
 <!-- - skill, slash and roll                                                                                                                      -->
 <!-- - skill, spring attack, give up a round for 2.5 times damage                                                                                 -->
 <!-- - skill, whirl attack, attack 2 or 3 enemies                                                                                                 -->
-<!-- - spell capacitor                                                                                                                            -->
 <!-- - spider web spawn small spiders?                                                                                                            -->
-<!-- - stealth                                                                                                                                    -->
 <!-- - tentacles out of the ground that try to surround you                                                                                       -->
 <!-- - tiny pixel effects that bounce?                                                                                                            -->
 <!-- - tomb of past player ? or random player ? leads to random small room?                                                                       -->

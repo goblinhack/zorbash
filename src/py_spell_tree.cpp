@@ -90,7 +90,7 @@ PyObject *map_load_spell_tree_(PyObject *obj, PyObject *args, PyObject *keywds)
         if (spell_alias != "  ") {
           auto spell         = new Spell();
           spell->spell_alias = spell_alias;
-          LOG("New skil %s", spell_alias.c_str());
+          LOG("New spell %s", spell_alias.c_str());
           TRACE_NO_INDENT();
           set(game->spell_tree[ tree_name ], x, y, spell);
         }
