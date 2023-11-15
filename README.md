@@ -1,5 +1,6 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- burning bridge should collapse                                                                                                               -->
 <!-- teleport loops for dead or frozen                                                                                                            -->
 <!-- dead on water, sword floats                                                                                                                  -->
 <!--                                                                                                                                              -->
