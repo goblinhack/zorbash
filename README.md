@@ -177,8 +177,8 @@ Bestiary
 | Fire Troll | B/uncommon | 241 | 1d12+4 | 1 |  | Fire<br />Poison<br /> |
 | Yeti | C/rare | 209 | 1d12+8 | 1 |  | Cold<br /> |
 | Mummy | B/common | 208 | 1d10+10 | 2 | Drain:1d10<br /> | Cold<br />Fire<br />Necrosis<br />Poison<br />Draining<br /> |
-| Stone Troll | B/common | 197 | 1d12+4 | 1 |  | Poison<br /> |
 | Giant Skeleton | C/common | 197 | 1d6 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
+| Stone Troll | B/common | 197 | 1d12+4 | 1 |  | Poison<br /> |
 | Dungeon Cleaner | B/common | 189 | 1d10 | 1 | Digest:1d40<br /> | Acid<br />Necrosis<br /> |
 | Black Pudding | B/common | 188 | 3d6+2 | 1 | Acid:2d6<br /> | Acid<br />Cold<br />Electricity<br />Lightning<br />Necrosis<br /> |
 | Cement Man | C/common | 184 | 3d8+6 | 1 |  | Cold<br />Fire<br />Confusion<br />Confusion<br />Poison<br />Draining<br /> |
@@ -189,10 +189,10 @@ Bestiary
 | Giant Spider | B/common | 140 | 1d8+3 | 1 | Poison:2d8<br /> | Webs<br /> |
 | Gargoyle | C/common | 134 | 2d6 | 1 |  | Cold<br />Necrosis<br />Poison<br />Draining<br />Water<br />Vorpal-Weapons<br /> |
 | Murder Bunny | B/rare | 132 | 1d8 | 2 | Bite:1d6<br />Claw:1d4<br /> |  |
+| Portable Hole | B/uncommon | 127 |  | 0 |  | Acid<br />Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
 | Hill Ogre | B/common | 127 | 1d10+4 | 1 |  |  |
 | Iceman | B/common | 126 |  | 1 | Cold:1d8<br /> | Cold<br /> |
 | Unleashed Gargoyle | C/common | 124 | 1d6+2 | 1 |  | Necrosis<br />Poison<br />Draining<br />Water<br />Vorpal-Weapons<br /> |
-| Portable Hole | B/uncommon | 122 |  | 0 |  | Acid<br />Cold<br />Fire<br />Poison<br />Vorpal-Weapons<br /> |
 | Demon Goat | B/rare | 106 | 2d6+2 | 1 |  | Fire<br />Necrosis<br />Poison<br /> |
 | Giant Piranha | B/v-rare | 103 | 1d10+3 | 1 | Bite:1d8<br /> | Water<br /> |
 | Giant Battle Duck | C/v-rare | 98 | 1d8+4 | 1 | Bite:1d10<br />Claw:1d6<br /> | Water<br /> |
