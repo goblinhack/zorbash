@@ -6,7 +6,6 @@
 <!-- 00:00:26.183: You are literally ON FIRE!                  -->
 <!-- seed 3                                                                           -->
 <!-- laser effects do not scroll with the map                                                                                                     -->
-<!-- dead on water, sword floats                                                                                                                  -->
 <!--                                                                                                                                              -->
 <!-- Idea list                                                                                                                                    -->
 <!-- ---------                                                                                                                                    -->
