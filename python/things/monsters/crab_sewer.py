@@ -152,41 +152,41 @@ def tp_init(name, text_long_name):
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
     # end sort marker
 
-    delay = 5000
+    delay = 500
     my.tile(self,
-            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile="crab_sewer.1", is_sleeping=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="C", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            ascii_fg_char="C", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile="crab_sewer.2", is_sleeping=True, delay_ms=delay)
     delay = 100
     my.tile(self,
-            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile="crab_sewer.1", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile="crab_sewer.2", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile="crab_sewer.3", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile="crab_sewer.4", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile="crab_sewer.5", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile="crab_sewer.6", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile="crab_sewer.7", delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="pink",
+            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="red",
             tile="crab_sewer.8", delay_ms=delay)
 
     my.tile(self,
-            ascii_fg_char="t", ascii_bg_col_name="", ascii_fg_col_name="gray30",
+            ascii_fg_char="c", ascii_bg_col_name="", ascii_fg_col_name="gray30",
             tile="crab_sewer.dead", is_dead=True, is_end_of_anim=True)
 
     my.tp_update(self)

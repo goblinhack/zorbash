@@ -1,5 +1,11 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
+<!-- seed 33                                                                          -->
+<!-- 00:00:26.183: The flaming skeleton shoots at the noble warrior.                  -->
+<!-- 00:00:26.183: The flaming skeleton fails to attack you with the fireball.                  -->
+<!-- 00:00:26.183: You are literally ON FIRE!                  -->
+<!-- seed 3                                                                           -->
+<!-- laser effects do not scroll with the map                                                                                                     -->
 <!-- burning bridge should collapse                                                                                                               -->
 <!-- teleport loops for dead or frozen                                                                                                            -->
 <!-- dead on water, sword floats                                                                                                                  -->
