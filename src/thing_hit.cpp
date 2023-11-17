@@ -1770,7 +1770,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_COLD ]) {
         msg("%%fg=yellow$Your %s is freezing.%%fg=reset$", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_FIRE ]) {
-        msg("%%fg=yellow$Your %s is burning.%%fg=reset$", text_long_name().c_str());
+        msg("%%fg=yellow$Your %s is on fire.%%fg=reset$", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_CRUSH ]) {
         msg("%%fg=yellow$Your %s is being crushed.%%fg=reset$", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_IMPACT ]) {
@@ -2073,7 +2073,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_COLD ]) {
         msg("Your %s is freezing.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_FIRE ]) {
-        msg("Your %s is burning.", text_long_name().c_str());
+        msg("Your %s is on fire.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_CRUSH ]) {
         msg("Your %s is being crushed.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_IMPACT ]) {
@@ -2115,7 +2115,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_COLD ]) {
         msg("Your %s is freezing.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_FIRE ]) {
-        msg("Your %s is burning.", text_long_name().c_str());
+        msg("Your %s is on fire.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_CRUSH ]) {
         msg("Your %s is being crushed.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_IMPACT ]) {
@@ -2157,7 +2157,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       } else if (attack_options->attack[ THING_ATTACK_COLD ]) {
         real_hitter->msg("%s is freezing.", text_The().c_str());
       } else if (attack_options->attack[ THING_ATTACK_FIRE ]) {
-        real_hitter->msg("%s is burning.", text_The().c_str());
+        real_hitter->msg("%s is on fire.", text_The().c_str());
       } else if (attack_options->attack[ THING_ATTACK_CRUSH ]) {
         real_hitter->msg("%s is being crushed.", text_The().c_str());
       } else if (attack_options->attack[ THING_ATTACK_IMPACT ]) {
