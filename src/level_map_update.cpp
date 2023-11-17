@@ -216,7 +216,11 @@ void Level::update_deep_water(bool &changed)
           }
         }
 
-        if (nebs < 9) {
+        //
+        // Allow placement of intentional deep water in the dungeon
+        //
+        auto min_nebs = is_floor(x, y) ? 3 : 9;
+        if (nebs < min_nebs) {
           bool removed_deep_water = false;
           FOR_ALL_NON_INTERNAL_THINGS(this, t, x, y)
           {
