@@ -14,6 +14,21 @@ void Thing::portal_tick(void)
   }
 
   //
+  // Things can freeze due to teleporting. This stops their frozen bodies
+  // looping endlessly.
+  //
+  if (is_frozen_check()) {
+    return;
+  }
+
+  //
+  // Again, stop teleport loops
+  //
+  if (is_dead_or_dying()) {
+    return;
+  }
+
+  //
   // No teleport infinite loops
   //
   if (tick_last_teleported() != -1) {
