@@ -2966,7 +2966,7 @@ int Dungeon::draw_corridor(point start, point end, char w)
 int Dungeon::draw_corridors(void)
 {
   TRACE_NO_INDENT();
-#if 1
+#if 0
   LOG("Draw corridors");
   dump();
 #endif
