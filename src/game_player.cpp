@@ -842,7 +842,7 @@ void Game::place_player(void)
         t->carry(w, carry_options);
         t->enchant_without_stone(w);
       }
-      if (1) {
+      if (0) {
         auto w = level->thing_new("staff_negation", point(x, y));
         level->thing_new("skel_fire", point(x + 1, y - 3));
         t->carry(w, carry_options);
@@ -960,6 +960,7 @@ void Game::place_player(void)
       }
       IF_DEBUG2
       {
+        level->thing_new("mummy_necro", point(x + 5, y + 1));
         if (0) {
           level->thing_new("staff_blinking", point(x, y + 1));
           level->thing_new("boots_teleport", point(x, y - 1));
@@ -995,7 +996,6 @@ void Game::place_player(void)
         // level->thing_new("armor_lather", point(x, y));
         // level->thing_new("boots_fluffy", point(x, y - 2));
         // level->thing_new("boots_silence", point(x, y - 2));
-        // level->thing_new("mummy_necro", point(x + 5, y + 1));
         // level->thing_new("shield_woodon", point(x, y - 2));
         // level->thing_new("fire", point(x, y - 2));
         // level->thing_new("frog", point(x, y - 2));
