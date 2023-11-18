@@ -779,6 +779,7 @@ int Tp::is_skillstone(void) const { return _is_skillstone; }
 int Tp::is_skill(void) const { return _is_skill; }
 int Tp::is_slime(void) const { return _is_slime; }
 int Tp::is_slippery(void) const { return _is_slippery; }
+int Tp::is_sluud(void) const { return _is_sluud; }
 int Tp::is_smoke(void) const { return _is_smoke; }
 int Tp::is_snake(void) const { return _is_snake; }
 int Tp::is_soft(void) const { return _is_soft; }
@@ -873,7 +874,6 @@ int Tp::is_unused_flag40(void) const { return _is_unused_flag40; }
 int Tp::is_unused_flag41(void) const { return _is_unused_flag41; }
 int Tp::is_unused_flag42(void) const { return _is_unused_flag42; }
 int Tp::is_unused_flag43(void) const { return _is_unused_flag43; }
-int Tp::is_unused_flag44(void) const { return _is_unused_flag44; }
 int Tp::is_unused_flag4(void) const { return _is_unused_flag4; }
 int Tp::is_unused_flag5(void) const { return _is_unused_flag5; }
 int Tp::is_unused_flag6(void) const { return _is_unused_flag6; }
@@ -1558,6 +1558,7 @@ void Tp::is_skill_set(int v) { _is_skill = v; }
 void Tp::is_skillstone_set(int v) { _is_skillstone = v; }
 void Tp::is_slime_set(int v) { _is_slime = v; }
 void Tp::is_slippery_set(int v) { _is_slippery = v; }
+void Tp::is_sluud_set(int v) { _is_sluud = v; }
 void Tp::is_smoke_set(int v) { _is_smoke = v; }
 void Tp::is_snake_set(int v) { _is_snake = v; }
 void Tp::is_soft_set(int v) { _is_soft = v; }
@@ -1652,7 +1653,6 @@ void Tp::is_unused_flag40_set(int v) { _is_unused_flag40 = v; }
 void Tp::is_unused_flag41_set(int v) { _is_unused_flag41 = v; }
 void Tp::is_unused_flag42_set(int v) { _is_unused_flag42 = v; }
 void Tp::is_unused_flag43_set(int v) { _is_unused_flag43 = v; }
-void Tp::is_unused_flag44_set(int v) { _is_unused_flag44 = v; }
 void Tp::is_unused_flag4_set(int v) { _is_unused_flag4 = v; }
 void Tp::is_unused_flag5_set(int v) { _is_unused_flag5 = v; }
 void Tp::is_unused_flag6_set(int v) { _is_unused_flag6 = v; }

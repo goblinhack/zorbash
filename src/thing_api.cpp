@@ -428,10 +428,10 @@ int Thing::is_unused_flag43(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag43());
 }
-int Thing::is_unused_flag44(void)
+int Thing::is_sluud(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag44());
+  return (tp()->is_sluud());
 }
 int Thing::is_gnoll(void)
 {

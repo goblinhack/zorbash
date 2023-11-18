@@ -603,6 +603,7 @@ PyObject *thing_is_skillstone(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_sleeping(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_slime(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_slippery(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_sluud(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_smoke(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_snake(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_soft(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -694,7 +695,6 @@ PyObject *thing_is_unused_flag40(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag41(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag42(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag43(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag44(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag4(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag5(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);

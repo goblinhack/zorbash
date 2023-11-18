@@ -1019,8 +1019,9 @@ void Game::place_player(void)
         // level->thing_new("teleport", point(x + 2, y + 2));
         // level->thing_new("scorpion", point(x + 2, y + 2));
         // level->thing_new("zorb_pack", point(x + 2, y));
-        // level->assign_leaders_and_followers();
       }
+      level->thing_new("sluud_pack", point(x + 2, y));
+      level->assign_leaders_and_followers();
       // level->thing_new("sentry_orb_energy", point(x - 3, y));
       if (0) {
         level->thing_new("portable_hole", point(x - 3, y));

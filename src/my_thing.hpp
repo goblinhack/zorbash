@@ -1920,6 +1920,7 @@ public:
   int is_skill(void);
   int is_slime(void);
   int is_slippery(void);
+  int is_sluud(void);
   int is_smoke(void);
   int is_snake(void);
   int is_soft(void);
@@ -2014,7 +2015,6 @@ public:
   int is_unused_flag41(void);
   int is_unused_flag42(void);
   int is_unused_flag43(void);
-  int is_unused_flag44(void);
   int is_unused_flag4(void);
   int is_unused_flag5(void);
   int is_unused_flag6(void);

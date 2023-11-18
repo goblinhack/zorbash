@@ -359,7 +359,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   /////////////////////////////////////////////////////////////////////////
   TRACE_NO_INDENT();
   if (is_immune_to_non_magical_weapons()) {
-    if (hitter->is_weapon()) {
+    if (hitter->is_weapon() || hitter->is_ranged_weapon()) {
       if (! hitter->is_magical() && ! hitter->enchant_count_get()) {
         if (real_hitter->is_player()) {
           if (is_player()) {
@@ -1091,7 +1091,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (real_hitter->is_player()) {
         msg("%s is indestructable!", text_The().c_str());
       }
-      if (hitter->is_weapon()) {
+      if (hitter->is_weapon() || hitter->is_ranged_weapon()) {
         weapon_check_for_dmg(hitter, this);
       }
       wobble(20);
@@ -1141,7 +1141,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     //
     // If hitting with a weapon, tire the wielder
     //
-    if (hitter->is_weapon()) {
+    if (hitter->is_weapon() || hitter->is_ranged_weapon()) {
       //
       // Different weapons have different drain on stamina.
       //
@@ -1497,7 +1497,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           real_hitter->msg("%%fg=yellow$Poison circulates through your veins for %d %sdamage!%%fg=reset$", damage,
                            dmg_type.c_str());
         }
-      } else if (hitter->is_weapon()) {
+      } else if (hitter->is_weapon() || hitter->is_ranged_weapon()) {
         real_hitter->msg("%%fg=orange$You attack yourself for %d %sdamage with %s!%%fg=reset$", damage,
                          dmg_type.c_str(), hitter->text_the().c_str());
       } else if (hitter->is_laser()) {
@@ -1549,7 +1549,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           } else {
             msg("%%fg=red$You are killed by a barrel!%%fg=reset$");
           }
-        } else if (hitter->is_weapon()) {
+        } else if (hitter->is_weapon() || hitter->is_ranged_weapon()) {
           if (hitter == real_hitter) {
             msg("%%fg=red$%s cuts you down!%%fg=reset$", real_hitter->text_The().c_str());
           } else {
@@ -1627,9 +1627,6 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           if (real_hitter->is_fungus()) {
             msg("%%fg=yellow$%s's toxins injure you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(),
                 damage, dmg_type.c_str());
-          } else if (real_hitter->is_monst()) {
-            msg("%%fg=yellow$%s's fangs injure you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(),
-                damage, dmg_type.c_str());
           } else {
             msg("%%fg=yellow$%s injures you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
                 dmg_type.c_str());
@@ -1648,7 +1645,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           } else if (is_crushable()) {
             msg("%%fg=orange$You are being crushed by a barrel!%%fg=reset$");
           }
-        } else if (hitter->is_weapon()) {
+        } else if (hitter->is_weapon() || hitter->is_ranged_weapon()) {
           if (hitter == real_hitter) {
             msg("%%fg=orange$%s hits you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
                 dmg_type.c_str());
@@ -1829,7 +1826,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           } else if (hitter->is_sword()) {
             real_hitter->msg("%%fg=yellow$You slash %s for %d %sdamage with %s.%%fg=reset$", text_the().c_str(),
                              damage, dmg_type.c_str(), hitter->text_the().c_str());
-          } else if (hitter->is_weapon()) {
+          } else if (hitter->is_weapon() || hitter->is_ranged_weapon()) {
             real_hitter->msg("%%fg=yellow$You hit %s for %d %sdamage with %s.%%fg=reset$", text_the().c_str(), damage,
                              dmg_type.c_str(), hitter->text_the().c_str());
           } else if (hitter->is_laser()) {
@@ -1904,7 +1901,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
             real_hitter->msg("%%fg=yellow$You burn down %s for %d %sdamage.%%fg=reset$", text_the().c_str(), damage,
                              dmg_type.c_str());
-          } else if (hitter->is_weapon()) {
+          } else if (hitter->is_weapon() || hitter->is_ranged_weapon()) {
             real_hitter->msg("%%fg=yellow$You hit %s for %d %sdamage.%%fg=reset$", text_the().c_str(), damage,
                              dmg_type.c_str());
           } else if (hitter->is_laser()) {
@@ -1927,7 +1924,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       //
       // Player hitting items.
       //
-      if (hitter->is_weapon()) {
+      if (hitter->is_weapon() || hitter->is_ranged_weapon()) {
         real_hitter->msg("You hit %s.", text_the().c_str());
       } else if (hitter->is_laser()) {
         real_hitter->msg("You zap %s.", text_the().c_str());
@@ -2004,7 +2001,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       //
       // Provide some more interesting messages for when hitting rocks...
       //
-      if (hitter->is_weapon()) {
+      if (hitter->is_weapon() || hitter->is_ranged_weapon()) {
         if (hitter->is_weapon() && (hitter->weapon_dmgd_pct() > 50)) {
           hitter->msg("%%fg=yellow$You pointlessly hit %s with your very damaged weapon.%%fg=reset$",
                       text_the().c_str());
@@ -2032,7 +2029,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       //
       // Player hitting something.
       //
-      if (hitter->is_weapon()) {
+      if (hitter->is_weapon() || hitter->is_ranged_weapon()) {
         real_hitter->msg("%%fg=yellow$You hit %s for %d %sdamage.%%fg=reset$", text_the().c_str(), damage,
                          dmg_type.c_str());
       } else if (hitter->is_laser()) {
@@ -2931,8 +2928,8 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
         training = true;
 
       } else if (! hitter->is_explosion() && ! hitter->is_projectile() && ! hitter->is_laser()
-                 && ! hitter->is_weapon() && ! hitter->is_magical() && ! hitter->is_fire() && ! hitter->is_lava()
-                 && ! hitter->gfx_pixelart_attack_anim()) {
+                 && ! hitter->is_weapon() && ! hitter->is_ranged_weapon() && ! hitter->is_magical()
+                 && ! hitter->is_fire() && ! hitter->is_lava() && ! hitter->gfx_pixelart_attack_anim()) {
         //
         // Not something that typically damages walls.
         //
@@ -2952,8 +2949,8 @@ int Thing::is_hit(Thingp hitter, ThingAttackOptionsp attack_options, int damage)
         hitter->msg("You smash your fists against the rock!");
         training = true;
       } else if (! hitter->is_explosion() && ! hitter->is_projectile() && ! hitter->is_laser()
-                 && ! hitter->is_weapon() && ! hitter->is_magical() && ! hitter->is_fire() && ! hitter->is_lava()
-                 && ! hitter->gfx_pixelart_attack_anim()) {
+                 && ! hitter->is_weapon() && ! hitter->is_ranged_weapon() && ! hitter->is_magical()
+                 && ! hitter->is_fire() && ! hitter->is_lava() && ! hitter->gfx_pixelart_attack_anim()) {
         //
         // Not something that typically damages walls.
         //

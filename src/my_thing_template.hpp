@@ -683,6 +683,7 @@ private:
   int _is_skillstone {};
   int _is_slime {};
   int _is_slippery {};
+  int _is_sluud {};
   int _is_smoke {};
   int _is_snake {};
   int _is_soft {};
@@ -779,7 +780,6 @@ private:
   int _is_unused_flag41 {};
   int _is_unused_flag42 {};
   int _is_unused_flag43 {};
-  int _is_unused_flag44 {};
   int _is_unused_flag5 {};
   int _is_unused_flag6 {};
   int _is_unused_flag7 {};
@@ -2076,6 +2076,7 @@ public:
   int is_skill(void) const;
   int is_slime(void) const;
   int is_slippery(void) const;
+  int is_sluud(void) const;
   int is_smoke(void) const;
   int is_snake(void) const;
   int is_soft(void) const;
@@ -2171,7 +2172,6 @@ public:
   int is_unused_flag41(void) const;
   int is_unused_flag42(void) const;
   int is_unused_flag43(void) const;
-  int is_unused_flag44(void) const;
   int is_unused_flag4(void) const;
   int is_unused_flag5(void) const;
   int is_unused_flag6(void) const;
@@ -2856,6 +2856,7 @@ public:
   void is_skillstone_set(int v);
   void is_slime_set(int v);
   void is_slippery_set(int v);
+  void is_sluud_set(int v);
   void is_smoke_set(int v);
   void is_snake_set(int v);
   void is_soft_set(int v);
@@ -2951,7 +2952,6 @@ public:
   void is_unused_flag41_set(int v);
   void is_unused_flag42_set(int v);
   void is_unused_flag43_set(int v);
-  void is_unused_flag44_set(int v);
   void is_unused_flag4_set(int v);
   void is_unused_flag5_set(int v);
   void is_unused_flag6_set(int v);
