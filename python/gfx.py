@@ -2785,14 +2785,14 @@ def init_tiles_16x16_main():
         "",
         "",
         ############################################################
-        "mummy.1",
-        "mummy.2",
-        "mummy.3",
-        "mummy.dead.1",
-        "mummy.dead.2",
-        "mummy.dead.3",
-        "mummy.dead.4",
-        "mummy.dead.5",
+        ""
+        ""
+        ""
+        ""
+        ""
+        ""
+        ""
+        ""
         "flameskull.1",
         "flameskull.2",
         "flameskull.3",
@@ -12145,6 +12145,23 @@ def init_tiles_24x24():
         "golem_flesh.dead.1",
         "golem_flesh.dead.2",
         "golem_flesh.dead.3",
+        ################################################
+        "mummy.1",
+        "mummy.2",
+        "mummy.3",
+        "mummy.4",
+        "mummy.dead.1",
+        "mummy.dead.2",
+        "mummy.dead.3",
+        "mummy.dead.4",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
         ################################################
         "iceman.1",
         "iceman.2",

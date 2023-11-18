@@ -960,7 +960,8 @@ void Game::place_player(void)
       }
       IF_DEBUG2
       {
-        level->thing_new("mummy_necro", point(x + 5, y + 1));
+        level->thing_new("mummy_necro", point(x + 2, y - 2));
+        level->thing_new("mummy", point(x + 2, y - 1));
         if (0) {
           level->thing_new("staff_blinking", point(x, y + 1));
           level->thing_new("boots_teleport", point(x, y - 1));
