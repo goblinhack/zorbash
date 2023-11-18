@@ -867,7 +867,7 @@ bool Thing::equip(Thingp item, int equip)
     if (! runic.empty()) {
       auto a_runic = tp_find(runic);
       if (a_runic->is_buff()) {
-        buff_add(a_runic);
+        buff_add_if_not_found(a_runic);
       } else if (a_runic->is_debuff()) {
         debuff_add(a_runic);
       } else {
