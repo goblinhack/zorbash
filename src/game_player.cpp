@@ -842,8 +842,9 @@ void Game::place_player(void)
         t->carry(w, carry_options);
         t->enchant_without_stone(w);
       }
-      if (0) {
+      if (1) {
         auto w = level->thing_new("staff_negation", point(x, y));
+        level->thing_new("skel_fire", point(x + 1, y - 3));
         t->carry(w, carry_options);
         level->thing_new("skeleton", point(x + 1, y + 2));
         level->thing_new("skeleton", point(x + 1, y + 1));
