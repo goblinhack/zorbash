@@ -438,6 +438,7 @@ private:
   int _is_destroyed_on_hitting {};
   int _is_dirt {};
   int _is_dog {};
+  int _is_dogman {};
   int _is_door {};
   int _is_dragon_scales {};
   int _is_drinkable {};
@@ -499,6 +500,7 @@ private:
   int _is_gauntlet {};
   int _is_gelatinous {};
   int _is_glass {};
+  int _is_gnoll {};
   int _is_gnome {};
   int _is_goat {};
   int _is_gold {};
@@ -778,8 +780,6 @@ private:
   int _is_unused_flag42 {};
   int _is_unused_flag43 {};
   int _is_unused_flag44 {};
-  int _is_unused_flag45 {};
-  int _is_unused_flag46 {};
   int _is_unused_flag5 {};
   int _is_unused_flag6 {};
   int _is_unused_flag7 {};
@@ -1831,6 +1831,7 @@ public:
   int is_destroyed_on_hit_or_miss(void) const;
   int is_destroyed_on_hitting(void) const;
   int is_dirt(void) const;
+  int is_dogman(void) const;
   int is_dog(void) const;
   int is_door(void) const;
   int is_dragon_scales(void) const;
@@ -1893,6 +1894,7 @@ public:
   int is_gauntlet(void) const;
   int is_gelatinous(void) const;
   int is_glass(void) const;
+  int is_gnoll(void) const;
   int is_gnome(void) const;
   int is_goat(void) const;
   int is_golden(void) const;
@@ -2170,8 +2172,6 @@ public:
   int is_unused_flag42(void) const;
   int is_unused_flag43(void) const;
   int is_unused_flag44(void) const;
-  int is_unused_flag45(void) const;
-  int is_unused_flag46(void) const;
   int is_unused_flag4(void) const;
   int is_unused_flag5(void) const;
   int is_unused_flag6(void) const;
@@ -2611,6 +2611,7 @@ public:
   void is_destroyed_on_hit_or_miss_set(int v);
   void is_destroyed_on_hitting_set(int v);
   void is_dirt_set(int v);
+  void is_dogman_set(int v);
   void is_dog_set(int v);
   void is_door_set(int v);
   void is_dragon_scales_set(int v);
@@ -2673,6 +2674,7 @@ public:
   void is_gauntlet_set(int v);
   void is_gelatinous_set(int v);
   void is_glass_set(int v);
+  void is_gnoll_set(int v);
   void is_gnome_set(int v);
   void is_goat_set(int v);
   void is_golden_set(int v);
@@ -2950,8 +2952,6 @@ public:
   void is_unused_flag42_set(int v);
   void is_unused_flag43_set(int v);
   void is_unused_flag44_set(int v);
-  void is_unused_flag45_set(int v);
-  void is_unused_flag46_set(int v);
   void is_unused_flag4_set(int v);
   void is_unused_flag5_set(int v);
   void is_unused_flag6_set(int v);

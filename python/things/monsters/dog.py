@@ -4,6 +4,8 @@ import tp
 
 def on_born(me, x, y):
     my.thing_friend(me, "is_dog")
+    my.thing_enemy(me, "dogman")
+    my.thing_enemy(me, "gnoll")
 
 
 def on_you_nat_attack_attempt(me, x, y):

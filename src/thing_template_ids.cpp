@@ -515,6 +515,8 @@ std::initializer_list< std::string > tps = {
     "ghost_mob",
     "ginger",
     "gloat",
+    "gnoll",
+    "gnoll_pack",
     "gnome_all",
     "gnome_dwarf",
     "gnome_knight",

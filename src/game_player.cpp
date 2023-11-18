@@ -103,6 +103,8 @@ void Game::place_player(void)
         level->thing_new("dogman", point(x + 1, y + 1));
         level->thing_new("dogman", point(x + 1, y - 1));
       }
+      level->thing_new("gnoll", point(x + 2, y + 1));
+      level->thing_new("dogman", point(x + 2, y - 3));
       if (0) {
         level->thing_new("skeleton", point(x, y + 3));
         auto w = level->thing_new("sword_holy", point(x, y));

@@ -1674,6 +1674,7 @@ public:
   int is_destroyed_on_hit_or_miss(void);
   int is_destroyed_on_hitting(void);
   int is_dirt(void);
+  int is_dogman(void);
   int is_dog(void);
   int is_door(void);
   int is_dragon_scales(void);
@@ -1736,6 +1737,7 @@ public:
   int is_gauntlet(void);
   int is_gelatinous(void);
   int is_glass(void);
+  int is_gnoll(void);
   int is_gnome(void);
   int is_goat(void);
   int is_golden(void);
@@ -2013,8 +2015,6 @@ public:
   int is_unused_flag42(void);
   int is_unused_flag43(void);
   int is_unused_flag44(void);
-  int is_unused_flag45(void);
-  int is_unused_flag46(void);
   int is_unused_flag4(void);
   int is_unused_flag5(void);
   int is_unused_flag6(void);

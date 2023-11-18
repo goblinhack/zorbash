@@ -2785,14 +2785,14 @@ def init_tiles_16x16_main():
         "",
         "",
         ############################################################
-        ""
-        ""
-        ""
-        ""
-        ""
-        ""
-        ""
-        ""
+        "gnoll.sleeping.1",
+        "gnoll.sleeping.2",
+        "gnoll.1",
+        "gnoll.2",
+        "gnoll.3",
+        "gnoll.4",
+        "gnoll.dead.1",
+        "",
         "flameskull.1",
         "flameskull.2",
         "flameskull.3",

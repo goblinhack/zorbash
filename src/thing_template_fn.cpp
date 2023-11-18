@@ -534,6 +534,7 @@ int Tp::is_described_when_hovering_over(void) const { return _is_described_when_
 int Tp::is_destroyed_on_hit_or_miss(void) const { return _is_destroyed_on_hit_or_miss; }
 int Tp::is_destroyed_on_hitting(void) const { return _is_destroyed_on_hitting; }
 int Tp::is_dirt(void) const { return _is_dirt; }
+int Tp::is_dogman(void) const { return _is_dogman; }
 int Tp::is_dog(void) const { return _is_dog; }
 int Tp::is_door(void) const { return _is_door; }
 int Tp::is_dragon_scales(void) const { return _is_dragon_scales; }
@@ -596,6 +597,7 @@ int Tp::is_gas_explosion_blocker(void) const { return _is_gas_explosion_blocker;
 int Tp::is_gauntlet(void) const { return _is_gauntlet; }
 int Tp::is_gelatinous(void) const { return _is_gelatinous; }
 int Tp::is_glass(void) const { return _is_glass; }
+int Tp::is_gnoll(void) const { return _is_gnoll; }
 int Tp::is_gnome(void) const { return _is_gnome; }
 int Tp::is_goat(void) const { return _is_goat; }
 int Tp::is_golden(void) const { return _is_golden; }
@@ -872,8 +874,6 @@ int Tp::is_unused_flag41(void) const { return _is_unused_flag41; }
 int Tp::is_unused_flag42(void) const { return _is_unused_flag42; }
 int Tp::is_unused_flag43(void) const { return _is_unused_flag43; }
 int Tp::is_unused_flag44(void) const { return _is_unused_flag44; }
-int Tp::is_unused_flag45(void) const { return _is_unused_flag45; }
-int Tp::is_unused_flag46(void) const { return _is_unused_flag46; }
 int Tp::is_unused_flag4(void) const { return _is_unused_flag4; }
 int Tp::is_unused_flag5(void) const { return _is_unused_flag5; }
 int Tp::is_unused_flag6(void) const { return _is_unused_flag6; }
@@ -1313,6 +1313,7 @@ void Tp::is_described_when_hovering_over_set(int v) { _is_described_when_hoverin
 void Tp::is_destroyed_on_hit_or_miss_set(int v) { _is_destroyed_on_hit_or_miss = v; }
 void Tp::is_destroyed_on_hitting_set(int v) { _is_destroyed_on_hitting = v; }
 void Tp::is_dirt_set(int v) { _is_dirt = v; }
+void Tp::is_dogman_set(int v) { _is_dogman = v; }
 void Tp::is_dog_set(int v) { _is_dog = v; }
 void Tp::is_door_set(int v) { _is_door = v; }
 void Tp::is_dragon_scales_set(int v) { _is_dragon_scales = v; }
@@ -1375,6 +1376,7 @@ void Tp::is_gas_explosion_blocker_set(int v) { _is_gas_explosion_blocker = v; }
 void Tp::is_gauntlet_set(int v) { _is_gauntlet = v; }
 void Tp::is_gelatinous_set(int v) { _is_gelatinous = v; }
 void Tp::is_glass_set(int v) { _is_glass = v; }
+void Tp::is_gnoll_set(int v) { _is_gnoll = v; }
 void Tp::is_gnome_set(int v) { _is_gnome = v; }
 void Tp::is_goat_set(int v) { _is_goat = v; }
 void Tp::is_golden_set(int v) { _is_golden = v; }
@@ -1651,8 +1653,6 @@ void Tp::is_unused_flag41_set(int v) { _is_unused_flag41 = v; }
 void Tp::is_unused_flag42_set(int v) { _is_unused_flag42 = v; }
 void Tp::is_unused_flag43_set(int v) { _is_unused_flag43 = v; }
 void Tp::is_unused_flag44_set(int v) { _is_unused_flag44 = v; }
-void Tp::is_unused_flag45_set(int v) { _is_unused_flag45 = v; }
-void Tp::is_unused_flag46_set(int v) { _is_unused_flag46 = v; }
 void Tp::is_unused_flag4_set(int v) { _is_unused_flag4 = v; }
 void Tp::is_unused_flag5_set(int v) { _is_unused_flag5 = v; }
 void Tp::is_unused_flag6_set(int v) { _is_unused_flag6 = v; }

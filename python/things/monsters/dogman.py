@@ -4,6 +4,7 @@ import tp
 
 def on_born(me, x, y):
     my.thing_friend(me, "dogman")
+    my.thing_enemy(me, "gnoll")
     my.thing_carry(me, "dagger")
     my.thing_carry(me, "dart")
 
@@ -111,9 +112,9 @@ def tp_init(name, text_long_name):
     my.is_daring(self, True)
     my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
+    my.is_dogman(self, True)
     my.is_eater_of_meat(self, True)
     my.is_eater_of_red_blood(self, True)
-    my.is_gnome(self, True)
     my.is_hittable(self, True)
     my.is_humanoid(self, True)
     my.is_immune_to_water(self, True)
@@ -163,7 +164,8 @@ def tp_init(name, text_long_name):
     my.text_a_or_an(self, "a")
     my.text_description_long2(self, "Dogmen have amazing hearing and are hard to creep up on.")
     my.text_description_long3(self, "Very skilled with throwing darts.")
-    my.text_description_long4(self, "Where the dogwomen live is a well kept secret.")
+    my.text_description_long4(self, "Dogmen detest gnolls. Dogmen are solitary and do not appear in packs, unlike gnolls.")
+    my.text_description_long5(self, "Where the dogwomen live is a well kept secret.")
     my.text_description_long(self, "A mildly odorous dogman. Half man, half mutt and blessed with the intellectual capabilities of a human, this poor creature is often very confused as to where it is.")
     my.text_description_short(self, "A perma-panting dogman.")
     my.text_hits(self, "gores")

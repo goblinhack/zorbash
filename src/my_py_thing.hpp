@@ -358,6 +358,7 @@ PyObject *thing_is_dir_tl(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dirt(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dir_tr(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dir_up(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_dogman(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dog(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_door(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_dragon_scales(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -421,6 +422,7 @@ PyObject *thing_is_gas_explosion_blocker(PyObject *obj, PyObject *args, PyObject
 PyObject *thing_is_gauntlet(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_gelatinous(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_glass(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_gnoll(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_gnome(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_goat(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_golden(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -693,8 +695,6 @@ PyObject *thing_is_unused_flag41(PyObject *obj, PyObject *args, PyObject *keywds
 PyObject *thing_is_unused_flag42(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag43(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag44(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag45(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_unused_flag46(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag4(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag5(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_unused_flag6(PyObject *obj, PyObject *args, PyObject *keywds);
