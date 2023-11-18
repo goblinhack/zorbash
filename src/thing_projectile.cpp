@@ -220,7 +220,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &effect_name, T
   info.map_stop             = target->curr_at;
   info.follow_moving_target = true;
   info.pixel_map_at         = level->pixel_map_at;
-  level->new_projectile(projectile->id, target->id, info, game->current_move_speed);
+  level->new_projectile(projectile->id, target->id, info, game->slow_move_speed);
 
   on_use(projectile, target);
 
@@ -229,11 +229,11 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &effect_name, T
   }
 
   if (projectile->is_fire()) {
-    level->line_set_all_on_fire(curr_at, target->curr_at, 0, "projectile");
+    level->line_set_all_on_fire(curr_at, target->curr_at, 0, "projectile, line of fire");
   }
 
   if (projectile->is_holy()) {
-    level->line_set_all_undead_on_fire(curr_at, target->curr_at, 0, "projectile");
+    level->line_set_all_undead_on_fire(curr_at, target->curr_at, 0, "projectile, line of fire");
   }
 
   return target;
