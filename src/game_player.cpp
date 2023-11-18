@@ -958,25 +958,26 @@ void Game::place_player(void)
         level->thing_new("lava", point(x + 3, y + 2));
         level->thing_new("lava", point(x + 4, y + 2));
       }
-      IF_DEBUG2
-      {
+      if (0) {
         level->thing_new("mummy_necro", point(x + 2, y - 2));
         level->thing_new("mummy", point(x + 2, y - 1));
-        if (0) {
-          level->thing_new("staff_blinking", point(x, y + 1));
-          level->thing_new("boots_teleport", point(x, y - 1));
-          level->thing_new("zob_mob", point(x + 2, y + 1));
-        }
-        if (0) {
-          level->thing_new("coffin_mob", point(x + 2, y + 1));
-        }
-        if (0) {
-          level->thing_new("barrel", point(x + 2, y + 1));
-          level->thing_new("rat_giant", point(x + 3, y + 1));
-        }
-        if (0) {
-          level->thing_new("staff_energy", point(x, y + 1));
-        }
+      }
+      if (0) {
+        level->thing_new("staff_blinking", point(x, y + 1));
+        level->thing_new("boots_teleport", point(x, y - 1));
+        level->thing_new("zob_mob", point(x + 2, y + 1));
+      }
+      if (0) {
+        level->thing_new("coffin_mob", point(x + 2, y + 1));
+      }
+      if (0) {
+        level->thing_new("barrel", point(x + 2, y + 1));
+        level->thing_new("rat_giant", point(x + 3, y + 1));
+      }
+      if (0) {
+        level->thing_new("staff_energy", point(x, y + 1));
+      }
+      if (1) {
         // level->thing_new("murder_bunny", point(x + 2, y + 2));
         // level->thing_new("jackalope", point(x + 3, y + 2));
         // level->thing_new("duck2", point(x + 3, y + 2));
@@ -1008,7 +1009,7 @@ void Game::place_player(void)
         // level->thing_new("key_golden", point(x - 1, y + 2));
         // level->thing_new("key_penta", point(x, y + 12));
         // level->thing_new("snake_viper", point(x, y + 2));
-        // level->thing_new("mummy_pack", point(x + 2, y + 12));
+        // level->thing_new("mummy_pack", point(x + 2, y + 1));
         // level->thing_new("barrel", point(x - 2, y));
         // level->thing_new("floor_red_blood1", point(x + 2, y + 1));
         // level->thing_new("teleport", point(x + 2, y + 2));
@@ -1093,8 +1094,7 @@ void Game::place_player(void)
       // level->thing_new("lava", point(x + 1, y + 7));
       //
       if (0) {
-        auto m = level->thing_new("coffin_mob", point(x, y + 4));
-        m->frozen_set();
+        level->thing_new("coffin_mob", point(x + 1, y + 1));
       }
       if (0) {
         level->thing_new("zorb_wizard", point(x + 2, y));

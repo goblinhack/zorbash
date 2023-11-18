@@ -76,10 +76,19 @@ def tp_init(name, text_long_name):
     my.z_prio(self, my.MAP_Z_PRIO_MOB)
     # end sort marker
 
-    delay = 200
+    delay = 2000
     my.tile(self,
             ascii_fg_char="cross", ascii_fg_col_name="purple",
-            tile=name + ".100", is_hp_100_percent=True, delay_ms=delay)
+            tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="cross", ascii_fg_col_name="purple",
+            tile=name + ".2.100", is_hp_100_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="cross", ascii_fg_col_name="purple",
+            tile=name + ".3.100", is_hp_100_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="cross", ascii_fg_col_name="purple",
+            tile=name + ".4.100", is_hp_100_percent=True, delay_ms=delay)
     my.tile(self,
             ascii_fg_char="cross", ascii_fg_col_name="purple",
             tile=name + ".75", is_hp_75_percent=True, delay_ms=delay)
