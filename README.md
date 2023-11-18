@@ -165,6 +165,7 @@ Bestiary
 | Fire Demon | D/uncommon | 566 | 1d14+4 | 2 | Fire:1d6+6<br /> | Cold<br />Fire<br />Necrosis<br />Poison<br />Vorpal-Weapons<br /> |
 | Cthulite | D/rare | 440 | 1d14+4 | 2 | Acid:2d6<br />Poison:2d12<br /> | Acid<br />Cold<br />Necrosis<br />Confusion<br />Confusion<br />Poison<br />Draining<br />Vorpal-Weapons<br /> |
 | Ettin, Two Headed Giant | D/rare | 382 | 1d10+4 | 2 |  |  |
+| Dark Sluud | C/common | 360 | 1d8+1 | 2 | Drain:1d10<br /> | Acid<br />Necrosis<br />Poison<br />Water<br /> |
 | Flesh Golem | C/rare | 346 | 2d8+4 | 2 |  | Cold<br />Confusion<br />Confusion<br />Poison<br />Draining<br /> |
 | Tentacle Horror | B/common | 332 | 2d6+2 | 1 | Acid:1d6<br /> | Acid<br />Necrosis<br /> |
 | Undead Bear | C/common | 328 | 2d8+5 | 2 | Necrotic:1<br /> | Cold<br />Necrosis<br />Poison<br />Draining<br /> |
@@ -179,16 +180,15 @@ Bestiary
 | Dungeon Cleaner | B/common | 189 | 1d10 | 1 | Digest:1d40<br /> | Acid<br />Necrosis<br /> |
 | Black Pudding | B/common | 188 | 3d6+2 | 1 | Acid:2d6<br /> | Acid<br />Cold<br />Electricity<br />Lightning<br />Necrosis<br /> |
 | Cement Man | C/common | 184 | 3d8+6 | 1 |  | Cold<br />Fire<br />Confusion<br />Confusion<br />Poison<br />Draining<br /> |
-| Dark Sluud | A/common | 176 | 1d8+1 | 1 |  | Poison<br />Water<br /> |
 | Mummy Necromancer | C/uncommon | 154 | 1d6+2 | 1 | Necrotic:1<br /> | Cold<br />Necrosis<br />Poison<br />Draining<br /> |
 | Bone Spider | C/common | 152 | 1d8+3 | 1 | Poison:2d8<br /> | Cold<br />Necrosis<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
 | Lesser Tentacleye | C/common | 141 | 2d6 | 1 |  | Cold<br />Necrosis<br />Poison<br />Draining<br />Water<br /> |
-| Giant Spider | B/common | 140 | 1d8+3 | 1 | Poison:2d8<br /> | Webs<br /> |
 | Flameskull | C/uncommon | 140 | 2d6 | 1 |  | Acid<br />Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br />Vorpal-Weapons<br />Non-Magical-Weapons<br /> |
+| Giant Spider | B/common | 140 | 1d8+3 | 1 | Poison:2d8<br /> | Webs<br /> |
 | Gargoyle | C/common | 134 | 2d6 | 1 |  | Cold<br />Necrosis<br />Poison<br />Draining<br />Water<br />Vorpal-Weapons<br /> |
 | Murder Bunny | B/rare | 132 | 1d8 | 2 | Bite:1d6<br />Claw:1d4<br /> |  |
-| Hill Ogre | B/common | 127 | 1d10+4 | 1 |  |  |
 | Portable Hole | B/uncommon | 127 |  | 0 |  | Acid<br />Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
+| Hill Ogre | B/common | 127 | 1d10+4 | 1 |  |  |
 | Iceman | B/common | 126 |  | 1 | Cold:1d8<br /> | Cold<br /> |
 | Unleashed Gargoyle | C/common | 124 | 1d6+2 | 1 |  | Necrosis<br />Poison<br />Draining<br />Water<br />Vorpal-Weapons<br /> |
 | Demon Goat | B/rare | 106 | 2d6+2 | 1 |  | Fire<br />Necrosis<br />Poison<br /> |
@@ -223,15 +223,15 @@ Bestiary
 | Molekin | A/uncommon | 64 | 1d4+2 | 1 |  | Water<br /> |
 | Zorblin Wizard | C/common | 64 | 1d4+2 | 1 |  |  |
 | Lesser Zorblin | A/common | 64 | 1d4+2 | 1 |  |  |
-| Pyrolizard | B/common | 64 | 1d6+1 | 1 |  | Fire<br /> |
+| Pyrolizard | A/common | 64 | 1d6+1 | 1 |  | Fire<br /> |
 | Gnome Knight | B/common | 63 | 1d6+1 | 1 |  | Poison<br /> |
 | Zorblomancer | B/common | 62 | 1d4+2 | 1 |  |  |
 | Zorblin Eldster | B/common | 62 | 1d4+2 | 1 |  |  |
 | Piranha | A/rare | 61 | 1d4+3 | 1 | Bite:1d4<br /> | Water<br /> |
 | Carcass Creeper | A/common | 61 | 1d6+2 | 1 | Bite:1d8<br />Claw:1d6<br />Poison:1d10<br /> | Poison<br /> |
+| Sluud | B/common | 61 | 1d4+1 | 1 |  | Acid<br />Poison<br />Water<br /> |
 | Rock Gnome | B/common | 61 | 1d6+1 | 1 |  | Poison<br /> |
 | Gnorf | A/common | 60 | 1d4+1 | 1 |  | Cold<br />Poison<br /> |
-| Sluud | A/common | 60 | 1d4+1 | 1 |  | Poison<br />Water<br /> |
 | Gnoll | A/common | 59 | 1d4+1 | 1 |  | Water<br /> |
 | Brown Extrovert Spider | A/uncommon | 59 | 1d3 | 1 | Necrotic:1<br />Poison:1d3<br /> | Necrosis<br />Webs<br /> |
 | Battle Goat | B/uncommon | 58 | 1d6+2 | 1 |  | Poison<br />Water<br /> |
