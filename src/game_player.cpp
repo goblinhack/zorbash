@@ -103,8 +103,11 @@ void Game::place_player(void)
         level->thing_new("dogman", point(x + 1, y + 1));
         level->thing_new("dogman", point(x + 1, y - 1));
       }
-      level->thing_new("gnoll", point(x + 2, y + 1));
-      level->thing_new("dogman", point(x + 2, y - 3));
+      if (0) {
+        level->thing_new("pyrolizard", point(x + 2, y + 1));
+        level->thing_new("gnoll", point(x + 2, y + 1));
+        level->thing_new("dogman", point(x + 2, y - 3));
+      }
       if (0) {
         level->thing_new("skeleton", point(x, y + 3));
         auto w = level->thing_new("sword_holy", point(x, y));
@@ -808,7 +811,6 @@ void Game::place_player(void)
         level->thing_new("mummy_necro", point(x + 1, y));
         level->thing_new("zorb_eldster", point(x + 1, y + 3));
         level->thing_new("flameskull", point(x + 1, y + 4));
-        level->thing_new("pyrolizard", point(x + 2, y + 3));
         level->thing_new("cleaner", point(x + 3, y + 1));
         level->thing_new("zorb_eldster", point(x + 3, y + 2));
         level->thing_new("snake_dreadfire", point(x + 3, y + 3));
