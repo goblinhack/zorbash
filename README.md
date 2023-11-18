@@ -1,7 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- seed 3                                                                           -->
-<!-- laser effects do not scroll with the map                                                                                                     -->
 <!-- mummy necro would not move and would kill own snakes                                                                                         -->
 <!--                                                                                                                                              -->
 <!-- Idea list                                                                                                                                    -->

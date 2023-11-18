@@ -61,8 +61,8 @@ void Level::display_pixelart_lasers(point tl, point br)
       }
     }
 
-    auto start = l.info.pixel_start - l.info.pixel_map_at;
-    auto stop  = l.info.pixel_stop - l.info.pixel_map_at;
+    auto start = l.info.pixel_start - pixel_map_at;
+    auto stop  = l.info.pixel_stop - pixel_map_at;
 
     auto   dist  = distance(start, stop);
     float  steps = (int) (ceil(dist) / (float) TILE_WIDTH);
