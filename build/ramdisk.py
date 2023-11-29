@@ -110,9 +110,7 @@ for record_number, (folder, filenames) in enumerate(sorted(files.items())):
         count += 1
 
         rec, orig_filename = filename
-        c_filename = orig_filename
-        c_filename = re.sub("-", "_", c_filename)
-        c_filename = re.sub("\.", "_", c_filename)
+        c_filename = re.sub(r'[\-\.]', "_", orig_filename)
         rel_path_filename = os.path.join(folder, orig_filename)
 
         with open("src/ramdisk_data_{}.S".format(ram_file), "a") as myfile:
@@ -151,9 +149,7 @@ with open("src/ramdisk_data.cpp", "w") as myfile:
             count += 1
 
             rec, orig_filename = filename
-            c_filename = orig_filename
-            c_filename = re.sub("-", "_", c_filename)
-            c_filename = re.sub("\.", "_", c_filename)
+            c_filename = re.sub(r'[\-\.]', "_", orig_filename)
             rel_path_filename = os.path.join(folder, orig_filename)
 
             myfile.write("    {\n")
