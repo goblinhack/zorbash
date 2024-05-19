@@ -10,6 +10,7 @@
 #include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_thing_attack_options.hpp"
+#include <algorithm>
 
 void Thing::auto_equip(void)
 {

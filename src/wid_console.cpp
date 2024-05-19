@@ -9,6 +9,7 @@
 #include "my_ui.hpp"
 #include "my_unicode.hpp"
 #include "my_wid_console.hpp"
+#include <algorithm>
 
 static int  wid_console_inited;
 static int  wid_console_commands_inited;

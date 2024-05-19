@@ -6,6 +6,7 @@
 #include "my_ptrcheck.hpp"
 #include "my_string.hpp"
 #include "my_vector_bounds_check.hpp"
+#include <algorithm>
 
 Tpnamemap tp_name_map;
 Tpidmap   tp_id_map;

@@ -4,6 +4,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
+#include <algorithm>
 
 //
 // This is used by the AI to work out if a monst can jump over an obstacle "*"

@@ -6,6 +6,7 @@
 #include "my_level.hpp"
 #include "my_monst.hpp"
 #include "my_thing.hpp"
+#include <algorithm>
 
 Thingp Thing::most_dangerous_adjacent_thing(void)
 {

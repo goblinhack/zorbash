@@ -6,6 +6,7 @@
 #include "my_game.hpp"
 #include "my_thing.hpp"
 #include "my_wid.hpp"
+#include <algorithm>
 
 void Level::display_ascii_lasers(point tl, point br)
 {

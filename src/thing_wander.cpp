@@ -9,6 +9,7 @@
 #include "my_vector_bounds_check.hpp"
 
 #include <limits> // do not remove
+#include <algorithm>
 
 bool Thing::ai_blocked(void)
 {

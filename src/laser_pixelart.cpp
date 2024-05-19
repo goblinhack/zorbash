@@ -7,6 +7,7 @@
 #include "my_math.hpp"
 #include "my_thing.hpp"
 #include "my_vector_bounds_check.hpp"
+#include <algorithm>
 
 void Level::display_pixelart_lasers(point tl, point br)
 {

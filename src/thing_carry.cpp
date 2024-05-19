@@ -6,6 +6,7 @@
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_thing.hpp"
+#include <algorithm>
 
 std::vector< ThingId > Thing::copy_of_carrying(void)
 {

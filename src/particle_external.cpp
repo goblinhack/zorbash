@@ -4,6 +4,7 @@
 
 #include "my_game.hpp"
 #include "my_thing.hpp"
+#include <algorithm>
 
 void Level::new_external_particle(ThingId id, point start, point stop, isize sz, uint32_t dur, const Tilep tile,
                                   bool hflip, MyCallback callback)

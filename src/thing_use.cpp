@@ -8,6 +8,7 @@
 #include "my_python.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
+#include <algorithm>
 
 void Thing::on_use(Thingp what)
 {

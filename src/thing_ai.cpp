@@ -10,6 +10,7 @@
 #include "my_sprintf.hpp"
 #include "my_thing.hpp"
 #include "my_thing_attack_options.hpp"
+#include <algorithm>
 
 #define GOAL_PRIO_VERY_HIGH 0
 #define GOAL_PRIO_HIGHER    1
