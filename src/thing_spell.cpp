@@ -12,6 +12,7 @@
 #include "my_ui.hpp"
 #include "my_vector_bounds_check.hpp"
 #include "my_wid_spellbox.hpp"
+#include <algorithm>
 
 //
 // Get the list of all other spells this spell replaces. This is done

@@ -9,6 +9,7 @@
 #include "my_wid_bag.hpp"
 #include "my_wid_inventory.hpp"
 #include "my_wid_thing_info.hpp"
+#include <algorithm>
 
 Thing::~Thing_(void)
 {

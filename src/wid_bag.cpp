@@ -15,6 +15,7 @@
 #include "my_wid_rightbar.hpp"
 #include "my_wid_thing_info.hpp"
 #include "my_wid_topcon.hpp"
+#include <algorithm>
 
 static void wid_bag_tick(Widp w);
 

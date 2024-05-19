@@ -7,6 +7,7 @@
 #include "my_thing.hpp"
 #include "my_vector_bounds_check.hpp"
 #include "my_wid.hpp"
+#include <algorithm>
 
 void Level::display_ascii_projectiles(point tl, point br)
 {

@@ -4,6 +4,7 @@
 
 #include "my_game.hpp"
 #include "my_thing.hpp"
+#include <algorithm>
 
 Laser_::Laser_(Levelp level, ThingId thing_id, ThingId victim_id, LaserInfo info)
     : id(thing_id), victim_id(victim_id), info(info)

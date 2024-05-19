@@ -11,6 +11,7 @@
 #include "my_ui.hpp"
 #include "my_wid_leftbar.hpp"
 #include "my_wid_thing_info.hpp"
+#include <algorithm>
 
 static point wid_leftbar_last_thing_position;
 

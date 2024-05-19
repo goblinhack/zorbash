@@ -5,6 +5,7 @@
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
 #include "my_thing.hpp"
+#include <algorithm>
 
 void Level::new_internal_particle(ThingId id, point start, point stop, isize sz, uint32_t dur, const Tilep tile,
                                   bool hflip, MyCallback callback)
