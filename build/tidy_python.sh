@@ -82,7 +82,6 @@ for IN in \
   weapons/*py
 do
     echo Tidying $IN...
-
     grep -q is_monst_pack $IN
     if [ $? -eq 0 ]; then
         continue
