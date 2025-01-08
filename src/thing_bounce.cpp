@@ -78,16 +78,16 @@ float Thing::bounce_curr(void)
       // Bounce forever
       //
       bounce(bounce_height_curr() * bounce_fade_curr(), bounce_fade_curr(),
-             ((float) (ts_bounce_end()) - ts_bounce_begin()) * bounce_fade_curr(), bounce_count());
+             ((float) (ts_bounce_end()) -ts_bounce_begin()) * bounce_fade_curr(), bounce_count());
     } else if (bounce_count()) {
       bounce(bounce_height_curr() * bounce_fade_curr(), bounce_fade_curr(),
-             ((float) (ts_bounce_end()) - ts_bounce_begin()) * bounce_fade_curr(), bounce_count() - 1);
+             ((float) (ts_bounce_end()) -ts_bounce_begin()) * bounce_fade_curr(), bounce_count() - 1);
     }
 
     return 0;
   }
 
-  float time_step = ((float) (t) -ts_bounce_begin()) / ((float) (ts_bounce_end()) - ts_bounce_begin());
+  float time_step = ((float) (t) -ts_bounce_begin()) / ((float) (ts_bounce_end()) -ts_bounce_begin());
 
   float height = 1.0;
 

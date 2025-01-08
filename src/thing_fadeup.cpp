@@ -33,7 +33,7 @@ float Thing::fadeup_curr(void)
     return (-1);
   }
 
-  float time_step = ((float) (t) -ts_fadeup_begin()) / ((float) (ts_fadeup_end()) - ts_fadeup_begin());
+  float time_step = ((float) (t) -ts_fadeup_begin()) / ((float) (ts_fadeup_end()) -ts_fadeup_begin());
 
   float height = last_blit_br.y - last_blit_tl.y;
 

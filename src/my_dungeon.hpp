@@ -101,8 +101,8 @@ public:
   bool is_deep_water_no_check(const int x, const int y);
   bool is_descend_dungeon(const int x, const int y);
   bool is_descend_dungeon_no_check(const int x, const int y);
-  bool is_descend_sewer_at(const int x, const int y);
   bool is_descend_sewer(const int x, const int y);
+  bool is_descend_sewer_at(const int x, const int y);
   bool is_descend_sewer_no_check(const int x, const int y);
   bool is_dirt(const int x, const int y);
   bool is_dirt_no_check(const int x, const int y);
@@ -160,8 +160,8 @@ public:
   bool is_weapon_class_A(const int x, const int y);
   bool is_weapon_class_B(const int x, const int y);
   bool is_weapon_class_C(const int x, const int y);
-  bool room_is_a_candidate_any_depth(const DungeonNode *n, Roomp r);
   bool room_is_a_candidate(const DungeonNode *n, Roomp r);
+  bool room_is_a_candidate_any_depth(const DungeonNode *n, Roomp r);
   bool room_is_a_candidate_less_restrictive(const DungeonNode *n, Roomp r);
   bool rooms_move_closer_together(void);
   bool solve(int x, int y, Grid *g);
@@ -188,8 +188,8 @@ public:
   void add_spiderweb(void);
   void assign_rooms_to_tiles(void);
   void block_secret_doors(void);
-  void cave_generation(void);
   void cave_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
+  void cave_generation(void);
   void center_room_layout(void);
   void choose_room_doors(void);
   void create_node_map(void);
@@ -218,11 +218,11 @@ public:
   void reset_possible_rooms(void);
   void restore_level(void);
   void room_print_at(Roomp r, int x, int y);
-  void room_print_only_doors_at(Roomp r, int x, int y);
   void room_print_only_doors(Grid *g);
+  void room_print_only_doors_at(Roomp r, int x, int y);
   void save_level(void);
-  void water_fixup_shallows(void);
   void water_fixup(void);
+  void water_fixup_shallows(void);
   void water_gen(unsigned int map_fill_prob, int map_r1, int map_r2, int map_generations);
   // end sort marker2 }
 

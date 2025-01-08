@@ -32,22 +32,15 @@ PyObject *tp_update_(PyObject *obj, PyObject *args, PyObject *keywds);
 #define TP_SET_PROTO(__field__) PyObject *__field__(PyObject *obj, PyObject *args, PyObject *keywds);
 
 #define MY_ADD_PYTHON_TP_FUNCTION(__field__)                                                                         \
-  {                                                                                                                  \
-#__field__, (PyCFunction) __field__, METH_VARARGS | METH_KEYWORDS, "set a " #__field__ " in a thing template"    \
-  }
+  {#__field__, (PyCFunction) __field__, METH_VARARGS | METH_KEYWORDS, "set a " #__field__ " in a thing template"}
 
 /*
  * The cast of the function is necessary since PyCFunction values
  * only take two PyObject *parameters, and some take three.
  */
-#define MY_ADD_PYTHON_FUNCTION(__func__)                                                                             \
-  {                                                                                                                  \
-#__func__, (PyCFunction) __func__, METH_VARARGS | METH_KEYWORDS, #__func__                                       \
-  }
+#define MY_ADD_PYTHON_FUNCTION(__func__) {#__func__, (PyCFunction) __func__, METH_VARARGS | METH_KEYWORDS, #__func__}
 #define MY_ADD_WRAPPED_PYTHON_FUNCTION(__func__)                                                                     \
-  {                                                                                                                  \
-#__func__, (PyCFunction) __func__##_, METH_VARARGS | METH_KEYWORDS, #__func__                                    \
-  }
+  {#__func__, (PyCFunction) __func__##_, METH_VARARGS | METH_KEYWORDS, #__func__}
 
 // begin sort marker1 {
 TP_SET_PROTO(aggression_pct)
@@ -214,11 +207,11 @@ TP_SET_PROTO(gfx_ascii_shown_in_bg)
 TP_SET_PROTO(gfx_glows)
 TP_SET_PROTO(gfx_on_fire_anim)
 TP_SET_PROTO(gfx_ooze)
+TP_SET_PROTO(gfx_pixelart_anim_synced_with_owner)
 TP_SET_PROTO(gfx_pixelart_animated)
 TP_SET_PROTO(gfx_pixelart_animated_can_hflip)
 TP_SET_PROTO(gfx_pixelart_animated_can_vflip)
 TP_SET_PROTO(gfx_pixelart_animated_no_dir)
-TP_SET_PROTO(gfx_pixelart_anim_synced_with_owner)
 TP_SET_PROTO(gfx_pixelart_attack_anim)
 TP_SET_PROTO(gfx_pixelart_bounce_always)
 TP_SET_PROTO(gfx_pixelart_bounce_on_move)
@@ -237,9 +230,9 @@ TP_SET_PROTO(gfx_pixelart_shadow_solid)
 TP_SET_PROTO(gfx_pixelart_shadow_very_short)
 TP_SET_PROTO(gfx_pixelart_show_asleep_anim)
 TP_SET_PROTO(gfx_pixelart_show_highlighted)
-TP_SET_PROTO(gfx_pixelart_shown_in_bg)
 TP_SET_PROTO(gfx_pixelart_show_outlined)
 TP_SET_PROTO(gfx_pixelart_show_square_outlined)
+TP_SET_PROTO(gfx_pixelart_shown_in_bg)
 TP_SET_PROTO(gfx_pixelart_submergible)
 TP_SET_PROTO(gfx_pixelart_wobbles_when_hit)
 TP_SET_PROTO(gfx_targeted_laser)
@@ -567,10 +560,10 @@ TP_SET_PROTO(is_living)
 TP_SET_PROTO(is_loggable)
 TP_SET_PROTO(is_mace)
 TP_SET_PROTO(is_made_of_rock)
-TP_SET_PROTO(is_magical)
-TP_SET_PROTO(is_magical_effect)
 TP_SET_PROTO(is_magic_crystal)
 TP_SET_PROTO(is_magic_stone)
+TP_SET_PROTO(is_magical)
+TP_SET_PROTO(is_magical_effect)
 TP_SET_PROTO(is_mantisman)
 TP_SET_PROTO(is_map_beast)
 TP_SET_PROTO(is_map_treasure)
@@ -607,7 +600,6 @@ TP_SET_PROTO(is_obj_spawning)
 TP_SET_PROTO(is_obj_spawning_monst)
 TP_SET_PROTO(is_obs_ai)
 TP_SET_PROTO(is_obs_destructable)
-TP_SET_PROTO(is_obsidian)
 TP_SET_PROTO(is_obs_jump_end)
 TP_SET_PROTO(is_obs_jumping)
 TP_SET_PROTO(is_obs_shooting)
@@ -618,6 +610,7 @@ TP_SET_PROTO(is_obs_spell_casting)
 TP_SET_PROTO(is_obs_throwing)
 TP_SET_PROTO(is_obs_wall_or_door)
 TP_SET_PROTO(is_obs_when_dead)
+TP_SET_PROTO(is_obsidian)
 TP_SET_PROTO(is_ogre)
 TP_SET_PROTO(is_one_per_tile)
 TP_SET_PROTO(is_ooze)
@@ -681,7 +674,6 @@ TP_SET_PROTO(is_soft)
 TP_SET_PROTO(is_spectral_blade)
 TP_SET_PROTO(is_spell)
 TP_SET_PROTO(is_spell_always_succeeds)
-TP_SET_PROTO(is_spellbook)
 TP_SET_PROTO(is_spell_of_beckoning)
 TP_SET_PROTO(is_spell_of_holding)
 TP_SET_PROTO(is_spell_of_holding_barrier)
@@ -691,6 +683,7 @@ TP_SET_PROTO(is_spell_of_repulsion)
 TP_SET_PROTO(is_spell_of_sanctuary)
 TP_SET_PROTO(is_spell_of_sanctuary_barrier)
 TP_SET_PROTO(is_spell_of_slowness)
+TP_SET_PROTO(is_spellbook)
 TP_SET_PROTO(is_spider)
 TP_SET_PROTO(is_spiderweb)
 TP_SET_PROTO(is_splatter)
@@ -1019,6 +1012,11 @@ TP_SET_PROTO(stat_luck)
 TP_SET_PROTO(stat_luck_bonus)
 TP_SET_PROTO(stat_psi)
 TP_SET_PROTO(stat_psi_bonus)
+TP_SET_PROTO(stat_str)
+TP_SET_PROTO(stat_str_bonus)
+TP_SET_PROTO(stat_str_min)
+TP_SET_PROTO(stat_thv)
+TP_SET_PROTO(stat_thv_bonus)
 TP_SET_PROTO(stats02)
 TP_SET_PROTO(stats03)
 TP_SET_PROTO(stats04)
@@ -1026,11 +1024,6 @@ TP_SET_PROTO(stats05)
 TP_SET_PROTO(stats06)
 TP_SET_PROTO(stats07)
 TP_SET_PROTO(stats09)
-TP_SET_PROTO(stat_str)
-TP_SET_PROTO(stat_str_bonus)
-TP_SET_PROTO(stat_str_min)
-TP_SET_PROTO(stat_thv)
-TP_SET_PROTO(stat_thv_bonus)
 TP_SET_PROTO(str1)
 TP_SET_PROTO(str2)
 TP_SET_PROTO(str4)

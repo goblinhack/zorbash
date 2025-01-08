@@ -8,8 +8,8 @@ def tp_init(name, text_long_name, text_short_name):
     # begin sort marker
     crystal0.tp_init(self)
     my.stat_att_bonus(self, 3)
-    my.text_description_long2(self, "It glows beautifully in the dark and will bestow you with much needed attack bonuses.")
     my.text_description_long(self, "This magical crystal is the first to collect on your long journey towards confronting Zorbash.")
+    my.text_description_long2(self, "It glows beautifully in the dark and will bestow you with much needed attack bonuses.")
     # end sort marker
 
     my.tile(self,

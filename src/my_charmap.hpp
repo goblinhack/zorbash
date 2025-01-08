@@ -90,12 +90,12 @@ public:
   bool is_descend_sewer {false};
   bool is_dirt {false};
   bool is_door {false};
-  bool is_floor_deco {false};
   bool is_floor {false};
+  bool is_floor_deco {false};
   bool is_foliage {false};
   bool is_food {false};
-  bool is_fungus_edible {false};
   bool is_fungus {false};
+  bool is_fungus_edible {false};
   bool is_fungus_healing {false};
   bool is_fungus_poison {false};
   bool is_fungus_withered {false};

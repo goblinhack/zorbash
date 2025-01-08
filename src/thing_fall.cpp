@@ -194,7 +194,7 @@ float Thing::fall_curr(void)
     return 0;
   }
 
-  float time_step = ((float) (ts) -ts_fall_begin()) / ((float) (ts_fall_end()) - ts_fall_begin());
+  float time_step = ((float) (ts) -ts_fall_begin()) / ((float) (ts_fall_end()) -ts_fall_begin());
   dbg("Is currently falling, dt %f", time_step);
 
   //

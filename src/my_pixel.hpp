@@ -65,7 +65,7 @@ static void inline putPixel(SDL_Surface *surface, uint16_t x, uint16_t y, const 
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
   rgb = ((col.r << 24) | (col.g << 16) | (col.b << 8) | col.a);
 #else
-  rgb   = (col.r | (col.g << 8) | (col.b << 16) | (col.a << 24));
+  rgb = (col.r | (col.g << 8) | (col.b << 16) | (col.a << 24));
 #endif
 
   putPixel_32bpp(surface, x, y, rgb);
