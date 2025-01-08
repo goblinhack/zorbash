@@ -13,7 +13,7 @@ fi
 
 sed -i 's/<newline>/<br \/>/g' $PAYLOAD
 sed "1,/begin monsters type marker/!d" $IN > $PRE
-sed "/end monsters type marker/,\$!d" $IN | tail -n +1 - > $POST
+sed "/end monsters type marker/,\$!d" $IN | tail -n +1 > $POST
 
 cat $PRE $PAYLOAD $POST > $OUT
 diff $IN $OUT

@@ -88,8 +88,8 @@ do
     fi
 
     sed '1,/begin sort marker/!d' $IN > $PRE
-    sed '/begin sort marker/,/end sort marker/!d' $IN | tail -n +1 - | grep -v "sort marker" | sort > $PAYLOAD
-    sed '/end sort marker/,$!d' $IN | tail -n +1 - > $POST
+    sed '/begin sort marker/,/end sort marker/!d' $IN | tail -n +1 | grep -v "sort marker" | sort > $PAYLOAD
+    sed '/end sort marker/,$!d' $IN | tail -n +1 > $POST
 
     sort $PAYLOAD | uniq > $PAYLOAD.tmp
     mv $PAYLOAD.tmp $PAYLOAD
