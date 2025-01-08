@@ -153,7 +153,6 @@ help_full()
         ${MINGW_PKG_TYPE}-x86_64-portaudio \
         ${MINGW_PKG_TYPE}-x86_64-python \
         ${MINGW_PKG_TYPE}-x86_64-python-pip \
-        ${MINGW_PKG_TYPE}-x86_64-python-py \
         ${MINGW_PKG_TYPE}-x86_64-readline \
         ${MINGW_PKG_TYPE}-x86_64-smpeg2 \
         ${MINGW_PKG_TYPE}-x86_64-speex \

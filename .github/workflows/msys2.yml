@@ -68,7 +68,6 @@ jobs:
             mingw-w64-ucrt-x86_64-portaudio
             mingw-w64-ucrt-x86_64-python
             mingw-w64-ucrt-x86_64-python-pip
-            mingw-w64-ucrt-x86_64-python-py
             mingw-w64-ucrt-x86_64-readline
             mingw-w64-ucrt-x86_64-smpeg2
             mingw-w64-ucrt-x86_64-speex
