@@ -112,13 +112,6 @@ tech_support()
         cat src/Makefile
         echo
 
-        log_info "DEBUG: Makefile output for debugging:"
-        echo =====================================================
-        set -x
-        make -e -n -d all
-        set +x
-        echo
-
     ) >> $LOG 2>&1
 }
 
