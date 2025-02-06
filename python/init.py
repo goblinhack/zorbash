@@ -2,7 +2,15 @@ import my
 import os
 import fnmatch
 from os.path import dirname, basename
-import imp
+import sys
+
+if sys.version_info[0] == 3:
+    if sys.version_info[1] >= 5:
+        import importlib.util
+    elif sys.version_info[1] < 5:
+        import importlib.machinery
+elif sys.version_info[0] == 2:
+    import imp
 
 # import sys
 import console
@@ -85,16 +93,22 @@ def load_one_plugin(filename):
     if basename(filename) == "tp.py":
         return
 
-    # my.log("PYC: - loading init plugin: " + filename)
+    my.log("PYC: - loading init plugin: " + filename)
 
     mod_name, file_ext = os.path.splitext(os.path.split(filename)[-1])
 
     if file_ext.lower() == ".py":
-        imp.load_source(mod_name, filename)
-        # py_mod = imp.load_source(mod_name, filename)
-        # for attr_name in dir(py_mod):
-        #    attr_value = getattr(py_mod, attr_name)
-        #    print(attr_name, attr_value, callable(attr_value))
+        if sys.version_info[0] == 3:
+            if sys.version_info[1] >= 5:
+                spec = importlib.util.spec_from_file_location(mod_name, filename)
+                module = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(module)
+            elif sys.version_info[1] < 5:
+                loader = importlib.machinery.SourceFileLoader(mod_name, filename)
+                loader.load_module()
+        elif sys.version_info[0] == 2:
+            imp.load_source(mod_name, filename)
+        # load_source(mod_name, filename)
 
     elif file_ext.lower() == ".pyc":
         imp.load_compiled(mod_name, filename)
@@ -102,7 +116,48 @@ def load_one_plugin(filename):
 
 @timeme
 def load_all_plugins():
+
+    paths = [
+        'things/keys',
+        'things/mobs',
+        'things/staffs',
+        'things/armor',
+        'things/monsters',
+        'things/amulets',
+        'things/traps',
+        'things/player',
+        'things/lasers',
+        'things/bodyparts',
+        'things/spells',
+        'things/skills',
+        'things/projectiles',
+        'things/weapons',
+        'things/debuffs',
+        'things/food',
+        'things/treasure',
+        'things/buffs',
+        'things/totem',
+        'things/shield',
+        'things/internal',
+        'things/gauntlets',
+        'things/effects',
+        'things/boots',
+        'things/items',
+        'things/dungeon',
+        'things/rings',
+        'things/containers',
+        'things/fungus',
+        'things/cloaks',
+        'things/potions',
+        'things/doors',
+    ]
+
     plug_path = os.path.normcase(os.path.join(dirname(__file__), ""))
+
+    for path in paths:
+        my.log("PYC: Add path " + os.path.join(plug_path, path))
+        sys.path.append(os.path.join(plug_path, path))
+
     my.log("PYC: Init module, load all plugins from " + plug_path)
     for filename in find_plugins(plug_path, "*.py"):
         load_one_plugin(filename)
