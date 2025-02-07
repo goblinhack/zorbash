@@ -283,7 +283,8 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
       if (unlikely(! tile)) {
         tile = tile_first(tmap);
         if (unlikely(! tile)) {
-          die("No tile");
+          log("No tile");
+          return;
         }
 
 #ifdef DEBUG_ANIM
@@ -513,7 +514,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
       // ignore
       //
     } else {
-      die("Could not find a good animation tile after %d tries; has %d tiles, have tile %s for "
+      log("Could not find a good animation tile after %d tries; has %d tiles, have tile %s for "
           "hp %d "
           "is_attached %d "
           "is_being_destroyed %d "
@@ -539,6 +540,7 @@ void Thing::animate_choose_tile(Tilemap *tmap, std::vector< Tilep > *tiles, bool
           (bool) is_falling, (bool) is_hidden, (bool) is_hunger_level_hungry, (bool) is_in_lava, (bool) is_in_water,
           (bool) is_jumping, (bool) is_moving, (bool) is_open, (bool) is_resurrected, (bool) is_resurrecting,
           (bool) is_sleeping, (bool) is_hunger_level_starving);
+      return;
     }
   }
 
@@ -703,7 +705,7 @@ void Thing::animate(void)
   if (unlikely(! tiles || tiles->empty())) {
 #ifdef DEBUG_ANIM
     if (debug || is_debug_type()) {
-      die("Has no tiles");
+      log("Has no tiles");
     }
 #endif
     return;

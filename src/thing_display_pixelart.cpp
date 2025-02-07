@@ -507,7 +507,7 @@ bool Thing::coords_get(point &blit_tl, point &blit_br, point &pre_effect_blit_tl
   if (likely(! is_no_tile())) {
     tile = tile_index_to_tile(tile_curr);
     if (unlikely(! tile)) {
-      die("Has no tile, index %d", tile_curr);
+      log("Has no tile, index %d", tile_curr);
       blit = false;
     } else {
       tile_pix_width  = tile->pix_width;
