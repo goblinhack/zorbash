@@ -125,7 +125,7 @@ def tp_init(name, text_long_name):
     my.temperature_min(self, 0)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description_long(self, "The narhornet is a mythical variant of the giant hornet and is easily spotted by its massive foor long horn that it uses to great effect upon its victims.")
+    my.text_description_long(self, "The narhornet is a mythical variant of the giant hornet and is easily spotted by its massive foot long horn that it uses to great effect upon its victims.")
     my.text_description_short(self, "A stabby narhornet.")
     my.text_hits(self, "pierces")
     my.thing_size(self, my.THING_SIZE_SMALL)
