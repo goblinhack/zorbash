@@ -56,8 +56,9 @@ void Thing::resting(void)
       stamina_boost(1);
     }
   } else {
-    if ((int) pcg_random_range(0, 200) < stat_str()) {
+    if ((int) pcg_random_range(0, 20) < stat_str()) {
       health_boost(nullptr, 1);
+      stamina_boost(1);
     }
 
     if (d20() < stat_con()) {
