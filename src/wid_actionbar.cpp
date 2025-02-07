@@ -951,10 +951,10 @@ void wid_actionbar_zoom_in_over_begin(Widp w, int relx, int rely, int wheelx, in
   point tl(tlx, tly);
   point br(brx, bry);
 
-  wid_over_zoom_in = new WidPopup("Zoom out", tl, br, nullptr, "", false, false);
+  wid_over_zoom_in = new WidPopup("Zoom in", tl, br, nullptr, "", false, false);
   wid_over_zoom_in->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Zoom out");
   wid_over_zoom_in->log(UI_LOGGING_EMPTY_LINE);
-  wid_over_zoom_in->log("Select this to zoom out of the map.");
+  wid_over_zoom_in->log("Select this to zoom into map.");
   wid_over_zoom_in->compress();
 }
 
@@ -985,10 +985,10 @@ void wid_actionbar_zoom_out_over_begin(Widp w, int relx, int rely, int wheelx, i
   point tl(tlx, tly);
   point br(brx, bry);
 
-  wid_over_zoom_out = new WidPopup("Zoom in", tl, br, nullptr, "", false, false);
+  wid_over_zoom_out = new WidPopup("Zoom out", tl, br, nullptr, "", false, false);
   wid_over_zoom_out->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Zoom in");
   wid_over_zoom_out->log(UI_LOGGING_EMPTY_LINE);
-  wid_over_zoom_out->log("Select this to zoom into the map.");
+  wid_over_zoom_out->log("Select this to zoom out of the map.");
   wid_over_zoom_out->compress();
 }
 
