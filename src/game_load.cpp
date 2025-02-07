@@ -405,14 +405,6 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   int shift = 0;
   // clang-format off
   // begin sort marker1 {
-             my.t->corpse_cleanup                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->gfx_ascii_animated                           = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->gfx_pixelart_animated                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->has_attacked_player                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->has_ever_moved                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->has_light                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->has_projectile                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
-             my.t->has_seen_player_msg_shown                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->_is_able_to_be_resurrected                   = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->_is_able_to_regenerate                       = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->_is_immune_to_electricity                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
@@ -436,6 +428,14 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
              my.t->_is_immune_to_teleport_attack                = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->_is_immune_to_vorpal_weapons                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->_is_immune_to_water                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->corpse_cleanup                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->gfx_ascii_animated                           = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->gfx_pixelart_animated                        = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->has_attacked_player                          = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->has_ever_moved                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->has_light                                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->has_projectile                               = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
+             my.t->has_seen_player_msg_shown                    = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
   // end sort marker1 }
   // clang-format on
 
@@ -745,10 +745,10 @@ std::istream &operator>>(std::istream &in, Bits< Level *& > my)
   in >> bits(my.t->_is_skillstone);
   in >> bits(my.t->_is_smoke);
   in >> bits(my.t->_is_spectral_blade);
-  in >> bits(my.t->_is_spellbook);
   in >> bits(my.t->_is_spell_of_holding_barrier);
   in >> bits(my.t->_is_spell_of_protection_barrier);
   in >> bits(my.t->_is_spell_of_sanctuary_barrier);
+  in >> bits(my.t->_is_spellbook);
   in >> bits(my.t->_is_spiderweb);
   in >> bits(my.t->_is_staff);
   in >> bits(my.t->_is_steam);

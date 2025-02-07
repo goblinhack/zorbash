@@ -6,8 +6,8 @@ def on_born(me, x, y):
     selection_x, selection_y = my.thing_coords_get(me)
     for it in my.level_get_all(me, selection_x, selection_y):
         if my.thing_possible_to_attack(me, it):
-            my.thing_hit(0, me, it)
-    my.spawn_at_my_position(me, "explosion_fire")
+            my.spawn_at_my_position(it, "explosion_fire")
+            return
 
 
 #
@@ -17,6 +17,8 @@ def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
     my.collision_check(self, True)
+    my.dmg_acid_dice(self, "1d6")  # This is the damage when the monst acids
+    my.dmg_chance_d1000_acid(self, 0, 1000)
     my.gfx_ascii_shown(self, True)
     my.is_able_to_be_teleported(self, True)
     my.is_dead_on_falling(self, True)

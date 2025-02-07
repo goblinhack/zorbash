@@ -16,6 +16,7 @@
 #include "my_wid_thing_info.hpp"
 #include "my_wid_topcon.hpp"
 #include "my_wid_tp_info.hpp"
+#include <algorithm>
 
 static void wid_topcon_wid_create(void);
 

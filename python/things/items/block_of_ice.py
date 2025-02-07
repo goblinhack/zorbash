@@ -43,9 +43,9 @@ def tp_init(name, text_long_name):
     my.dmg_rcv_doubled_from_fire(self, True)
     my.environ_dislikes_fire(self, 100)
     my.gfx_ascii_fade_with_dist(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown_in_bg(self, True)
-    my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_oversized_and_on_floor(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
@@ -78,8 +78,8 @@ def tp_init(name, text_long_name):
     my.is_immune_to_poison(self, True)
     my.is_immune_to_stamina_drain(self, True)
     my.is_interesting(self, True)  # so it can be shoved
-    my.is_light_blocker_for_monst(self, True)  # to give cover to the player
     my.is_light_blocker(self, True)
+    my.is_light_blocker_for_monst(self, True)  # to give cover to the player
     my.is_loggable(self, True)
     my.is_obs_ai(self, True)
     my.is_obs_jump_end(self, True)
@@ -92,8 +92,8 @@ def tp_init(name, text_long_name):
     my.is_one_per_tile(self, True)  # so wands of ice do not pile these up
     my.is_reflective(self, True)
     my.is_shootable(self, True)
-    my.is_shovable_and_sticky(self, True)  # so a dogman in ice is also shoved
     my.is_shovable(self, True)
+    my.is_shovable_and_sticky(self, True)  # so a dogman in ice is also shoved
     my.is_tickable(self, True)  # So it can interact with fire
     my.is_very_heavy(self, True)
     my.noise_blocker(self, True)
@@ -101,8 +101,8 @@ def tp_init(name, text_long_name):
     my.on_death_do(self, "me.on_death()")
     my.on_fall_do(self, "me.on_fall()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
-    my.temperature_max(self, 0)
     my.temperature(self, -100)
+    my.temperature_max(self, 0)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
     my.text_description_short(self, "A block of ice.")

@@ -2,22 +2,37 @@ import my
 import tp
 
 
+collapsing = False
+
+
 def on_death(me, x, y):
+    global collapsing
+
     my.spawn_using_items_radius_range(me, me, me, "explosion_destroy_floor")
+
+    #
+    # Avoid multiple collapsing messages
+    #
+    if collapsing:
+        return
+
     my.thing_msg(me, "The bridge collapses!")
+    collapsing = True
 
     for bridge in my.level_flood_fill_get_all_things(me, x, y, "is_bridge"):
         if bridge != me:
             if not my.thing_is_dead_or_dying(bridge):
                 my.thing_dead(bridge, "dead")
 
+    collapsing = False
+
 
 def tp_init(name, tiles=[], bot3_tiles=[]):
     self = tp.Tp(name, "bridge")
     # begin sort marker
     my.gfx_ascii_bg_color_spread_hue(self, 30)
-    my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown(self, True)
+    my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
@@ -30,6 +45,7 @@ def tp_init(name, tiles=[], bot3_tiles=[]):
     my.is_biome_lava(self, True)
     my.is_bridge(self, True)
     my.is_burnable(self, True)
+    my.is_combustible(self, True)
     my.is_cursor_can_hover_over(self, True)
     my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)

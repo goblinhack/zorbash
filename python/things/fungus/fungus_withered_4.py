@@ -9,8 +9,8 @@ def tp_init(name, tiles=[]):
     # begin sort marker
     my.is_fungus_withered(self, True)
     my.text_a_or_an(self, "the")
-    my.text_description_long2(self, "When even the mushrooms die, you know this is not the place to be...")
     my.text_description_long(self, "A dry husk of a mushroom.")
+    my.text_description_long2(self, "When even the mushrooms die, you know this is not the place to be...")
     my.text_description_short(self, "A withered mushroom.")
     # end sort marker
 

@@ -10,36 +10,36 @@ template < typename T > my_apoint< T > operator+(my_apoint< T > const &a, my_apo
 {
   return my_apoint< T >(a.x + b.x, a.y + b.y);
 }
-template my_apoint< short > operator+< short >(my_apoint< short > const &, my_apoint< short > const &);
-template my_apoint< float > operator+< float >(my_apoint< float > const &, my_apoint< float > const &);
+template my_apoint< short > operator+ < short >(my_apoint< short > const &, my_apoint< short > const &);
+template my_apoint< float > operator+ < float >(my_apoint< float > const &, my_apoint< float > const &);
 
 template < typename T > my_apoint< T > operator-(my_apoint< T > const &a, my_apoint< T > const &b)
 {
   return my_apoint< T >(a.x - b.x, a.y - b.y);
 }
-template my_apoint< short > operator-< short >(my_apoint< short > const &, my_apoint< short > const &);
-template my_apoint< float > operator-< float >(my_apoint< float > const &, my_apoint< float > const &);
+template my_apoint< short > operator- < short >(my_apoint< short > const &, my_apoint< short > const &);
+template my_apoint< float > operator- < float >(my_apoint< float > const &, my_apoint< float > const &);
 
 template < typename T > my_apoint< T > operator*(my_apoint< T > const &a, T b)
 {
   return my_apoint< T >(a.x * b, a.y * b);
 }
-template my_apoint< short > operator*< short >(my_apoint< short > const &, short);
-template my_apoint< float > operator*< float >(my_apoint< float > const &, float);
+template my_apoint< short > operator* < short >(my_apoint< short > const &, short);
+template my_apoint< float > operator* < float >(my_apoint< float > const &, float);
 
 template < typename T > my_apoint< T > operator/(my_apoint< T > const &a, T b)
 {
   return my_apoint< T >(a.x / b, a.y / b);
 }
-template my_apoint< short > operator/< short >(my_apoint< short > const &, short);
-template my_apoint< float > operator/< float >(my_apoint< float > const &, float);
+template my_apoint< short > operator/ < short >(my_apoint< short > const &, short);
+template my_apoint< float > operator/ < float >(my_apoint< float > const &, float);
 
 template < typename T > bool operator==(my_apoint< T > const &a, my_apoint< T > const &b)
 {
   return (a.x == b.x) && (a.y == b.y);
 }
-template bool operator==< short >(my_apoint< short > const &, my_apoint< short > const &);
-template bool operator==< float >(my_apoint< float > const &, my_apoint< float > const &);
+template bool operator== < short >(my_apoint< short > const &, my_apoint< short > const &);
+template bool operator== < float >(my_apoint< float > const &, my_apoint< float > const &);
 
 template < typename T > void my_apoint< T >::operator+=(my_apoint< T > const &b)
 {

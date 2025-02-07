@@ -78,15 +78,13 @@ typedef std::map< std::string, uint32_t > enum_map;
     auto result = enum_name##_tree.find(std::string(val));                                                           \
                                                                                                                      \
     if (result == enum_name##_tree.end()) {                                                                          \
-      return ((enum_name) -1);                                                                                       \
+      return ((enum_name) - 1);                                                                                      \
     }                                                                                                                \
                                                                                                                      \
     return ((__typeof__(enum_name)) result->second);                                                                 \
   }                                                                                                                  \
                                                                                                                      \
-  void enum_name##_destroy(void)                                                                                     \
-  {                                                                                                                  \
-  }
+  void enum_name##_destroy(void) {}
 
 #define _EXAMPLE(list_macro) list_macro(_RED = 0, "red"), list_macro(_GREEN, "green"),
 

@@ -17,7 +17,7 @@ double gaussrand(double mean, double stddev);
 #undef SQUARED
 #define SQUARED(x) ((x) * (x))
 
-#define ROUNDUP(x, r) ((r) *floor(((x) + (r)) / (r)))
+#define ROUNDUP(x, r) ((r) * floor(((x) + (r)) / (r)))
 
 #undef DISTANCE
 #define DISTANCE(xa, ya, xb, yb) sqrt((double) (SQUARED((xb) - (xa)) + SQUARED((yb) - (ya))))

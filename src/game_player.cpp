@@ -104,6 +104,11 @@ void Game::place_player(void)
         level->thing_new("dogman", point(x + 1, y - 1));
       }
       if (0) {
+        level->thing_new("pyrolizard", point(x + 2, y + 1));
+        level->thing_new("gnoll", point(x + 2, y + 1));
+        level->thing_new("dogman", point(x + 2, y - 3));
+      }
+      if (0) {
         level->thing_new("skeleton", point(x, y + 3));
         auto w = level->thing_new("sword_holy", point(x, y));
         t->carry(w, carry_options);
@@ -806,7 +811,6 @@ void Game::place_player(void)
         level->thing_new("mummy_necro", point(x + 1, y));
         level->thing_new("zorb_eldster", point(x + 1, y + 3));
         level->thing_new("flameskull", point(x + 1, y + 4));
-        level->thing_new("pyrolizard", point(x + 2, y + 3));
         level->thing_new("cleaner", point(x + 3, y + 1));
         level->thing_new("zorb_eldster", point(x + 3, y + 2));
         level->thing_new("snake_dreadfire", point(x + 3, y + 3));
@@ -832,7 +836,6 @@ void Game::place_player(void)
       if (0) {
         auto w = level->thing_new("staff_fire", point(x, y));
         t->carry(w, carry_options);
-        t->enchant_without_stone(w);
       }
       if (0) {
         auto w = level->thing_new("staff_descent", point(x, y));
@@ -845,6 +848,7 @@ void Game::place_player(void)
       }
       if (0) {
         auto w = level->thing_new("staff_negation", point(x, y));
+        level->thing_new("skel_fire", point(x + 1, y - 3));
         t->carry(w, carry_options);
         level->thing_new("skeleton", point(x + 1, y + 2));
         level->thing_new("skeleton", point(x + 1, y + 1));
@@ -958,23 +962,26 @@ void Game::place_player(void)
         level->thing_new("lava", point(x + 3, y + 2));
         level->thing_new("lava", point(x + 4, y + 2));
       }
-      IF_DEBUG2
-      {
-        if (0) {
-          level->thing_new("staff_blinking", point(x, y + 1));
-          level->thing_new("boots_teleport", point(x, y - 1));
-          level->thing_new("zob_mob", point(x + 2, y + 1));
-        }
-        if (0) {
-          level->thing_new("coffin_mob", point(x + 2, y + 1));
-        }
-        if (0) {
-          level->thing_new("barrel", point(x + 2, y + 1));
-          level->thing_new("rat_giant", point(x + 3, y + 1));
-        }
-        if (0) {
-          level->thing_new("staff_energy", point(x, y + 1));
-        }
+      if (0) {
+        level->thing_new("mummy_necro", point(x + 2, y - 2));
+        level->thing_new("mummy", point(x + 2, y - 1));
+      }
+      if (0) {
+        level->thing_new("staff_blinking", point(x, y + 1));
+        level->thing_new("boots_teleport", point(x, y - 1));
+        level->thing_new("zob_mob", point(x + 2, y + 1));
+      }
+      if (0) {
+        level->thing_new("coffin_mob", point(x + 2, y + 1));
+      }
+      if (0) {
+        level->thing_new("barrel", point(x + 2, y + 1));
+        level->thing_new("rat_giant", point(x + 3, y + 1));
+      }
+      if (0) {
+        level->thing_new("staff_energy", point(x, y + 1));
+      }
+      if (0) {
         // level->thing_new("murder_bunny", point(x + 2, y + 2));
         // level->thing_new("jackalope", point(x + 3, y + 2));
         // level->thing_new("duck2", point(x + 3, y + 2));
@@ -995,7 +1002,6 @@ void Game::place_player(void)
         // level->thing_new("armor_lather", point(x, y));
         // level->thing_new("boots_fluffy", point(x, y - 2));
         // level->thing_new("boots_silence", point(x, y - 2));
-        // level->thing_new("mummy_necro", point(x + 5, y + 1));
         // level->thing_new("shield_woodon", point(x, y - 2));
         // level->thing_new("fire", point(x, y - 2));
         // level->thing_new("frog", point(x, y - 2));
@@ -1007,13 +1013,14 @@ void Game::place_player(void)
         // level->thing_new("key_golden", point(x - 1, y + 2));
         // level->thing_new("key_penta", point(x, y + 12));
         // level->thing_new("snake_viper", point(x, y + 2));
-        // level->thing_new("mummy_pack", point(x + 2, y + 12));
+        // level->thing_new("mummy_pack", point(x + 2, y + 1));
         // level->thing_new("barrel", point(x - 2, y));
         // level->thing_new("floor_red_blood1", point(x + 2, y + 1));
         // level->thing_new("teleport", point(x + 2, y + 2));
         // level->thing_new("scorpion", point(x + 2, y + 2));
         // level->thing_new("zorb_pack", point(x + 2, y));
-        // level->assign_leaders_and_followers();
+        level->thing_new("sluud_pack", point(x + 2, y));
+        level->assign_leaders_and_followers();
       }
       // level->thing_new("sentry_orb_energy", point(x - 3, y));
       if (0) {
@@ -1092,8 +1099,7 @@ void Game::place_player(void)
       // level->thing_new("lava", point(x + 1, y + 7));
       //
       if (0) {
-        auto m = level->thing_new("coffin_mob", point(x, y + 4));
-        m->frozen_set();
+        level->thing_new("coffin_mob", point(x + 1, y + 1));
       }
       if (0) {
         level->thing_new("zorb_wizard", point(x + 2, y));

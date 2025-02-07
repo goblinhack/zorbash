@@ -54,15 +54,14 @@ def tp_init(name, text_long_name):
     my.gfx_anim_use(self, "attack_red")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
-    my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_bounce_on_move(self, True)
     my.gfx_pixelart_health_bar_shown(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_shadow_short(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
-    my.gfx_pixelart_show_outlined(self, True)
     my.gfx_pixelart_submergible(self, True)
     my.gfx_pixelart_wobbles_when_hit(self, True)
     my.has_a_head(self, True)
@@ -97,8 +96,8 @@ def tp_init(name, text_long_name):
     my.is_interesting(self, True)
     my.is_loggable(self, True)
     my.is_magical(self, True)
-    my.is_monst_class_B(self, True)
     my.is_monst(self, True)
+    my.is_monst_class_B(self, True)
     my.is_moveable(self, True)
     my.is_msg_allowed_hears_something(self, True)
     my.is_msg_allowed_is_dead(self, True)
@@ -131,8 +130,8 @@ def tp_init(name, text_long_name):
     my.stat_str(self, 16)
     my.temperature(self, 5)
     my.text_a_or_an(self, "a")
-    my.text_description_long2(self, "Death is no release for this poor creature. Watch out for its necrotic touch!")
     my.text_description_long(self, "Possibly the corpse of one who ventured into this dungeon before. All life is gone now, and what remains is a corpse wrapped in rags.")
+    my.text_description_long2(self, "Death is no release for this poor creature. Watch out for its necrotic touch!")
     my.text_description_short(self, "A staggering corpse, covered in tissue paper.")
     my.text_hits(self, "claws")
     my.thing_size(self, my.THING_SIZE_NORMAL)
@@ -141,7 +140,7 @@ def tp_init(name, text_long_name):
     my.z_prio(self, my.MAP_Z_PRIO_MONST)
     # end sort marker
 
-    delay = 200
+    delay = 300
     my.tile(self,
             ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="gray80",
             tile=name + ".1", delay_ms=delay)
@@ -151,8 +150,10 @@ def tp_init(name, text_long_name):
     my.tile(self,
             ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="gray80",
             tile=name + ".3", delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="gray80",
+            tile=name + ".4", delay_ms=delay)
 
-    delay = 50
     my.tile(self,
             ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="gray30",
             tile=name + ".dead.1", is_dead=True, delay_ms=delay)
@@ -164,26 +165,20 @@ def tp_init(name, text_long_name):
             tile=name + ".dead.3", is_dead=True, delay_ms=delay)
     my.tile(self,
             ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="gray30",
-            tile=name + ".dead.4", is_dead=True, delay_ms=delay)
-    my.tile(self,
-            ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="gray30",
-            tile=name + ".dead.5", is_dead=True, is_end_of_anim=True)
+            tile=name + ".dead.4", is_dead=True, is_end_of_anim=True)
 
     delay = 200
     my.tile(self,
-            ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="gray80",
-            tile=name + ".dead.5", is_resurrecting=True, delay_ms=delay)
-    my.tile(self,
-            ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="gray80",
+            ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="gray30",
             tile=name + ".dead.4", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="gray80",
+            ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="gray30",
             tile=name + ".dead.3", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="gray80",
+            ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="gray30",
             tile=name + ".dead.2", is_resurrecting=True, delay_ms=delay)
     my.tile(self,
-            ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="gray80",
+            ascii_fg_char="M", ascii_bg_col_name="", ascii_fg_col_name="gray30",
             tile=name + ".dead.1",
             is_resurrecting=True,
             is_end_of_anim=True,

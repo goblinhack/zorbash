@@ -151,9 +151,8 @@ help_full()
         ${MINGW_PKG_TYPE}-x86_64-ncurses \
         ${MINGW_PKG_TYPE}-x86_64-openssl \
         ${MINGW_PKG_TYPE}-x86_64-portaudio \
-        ${MINGW_PKG_TYPE}-x86_64-python3 \
-        ${MINGW_PKG_TYPE}-x86_64-python3-pip \
-        ${MINGW_PKG_TYPE}-x86_64-python3-py \
+        ${MINGW_PKG_TYPE}-x86_64-python \
+        ${MINGW_PKG_TYPE}-x86_64-python-pip \
         ${MINGW_PKG_TYPE}-x86_64-readline \
         ${MINGW_PKG_TYPE}-x86_64-smpeg2 \
         ${MINGW_PKG_TYPE}-x86_64-speex \
@@ -654,10 +653,10 @@ case "$MY_OS_NAME" in
       CORES=$(/usr/sbin/system_profiler -detailLevel full SPHardwareDataType  | grep Cores | sed 's/.*: //g' | awk '{print $1}')
     ;;
     *inux*)
-      CORES=$(egrep -c "cpu cores|processor" /proc/cpuinfo)
+      CORES=$(grep -E -c "cpu cores|processor" /proc/cpuinfo)
     ;;
     *MING*|*MSYS*)
-      CORES=$(egrep -c "cpu cores|processor" /proc/cpuinfo)
+      CORES=$(grep -E -c "cpu cores|processor" /proc/cpuinfo)
     ;;
 esac
 
@@ -703,7 +702,7 @@ sed -i "s/<version>.*/<version>$MYVER<\/version>/g" build/windows/windows.xml
 # All commits since last tag
 #
 echo \$0: all commits since last tag
-git log \$(git describe --tags --abbrev=0)..HEAD --oneline | egrep "feat:|bug:" | sort +1 -r
+git log \$(git describe --tags --abbrev=0)..HEAD --oneline | grep -E "feat:|bug:" | sort +1 -r
 
 #
 # Lay a tag

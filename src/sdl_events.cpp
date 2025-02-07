@@ -154,8 +154,8 @@ static void __attribute__((noinline)) sdl_event_keyup(SDL_Keysym *key, SDL_Event
   sdl.shift_held = (key->mod & KMOD_SHIFT) ? 1 : 0;
 }
 
-static void __attribute__((noinline))
-sdl_event_mousemotion(SDL_Keysym *key, SDL_Event *event, bool &processed_mouse_motion_event)
+static void __attribute__((noinline)) sdl_event_mousemotion(SDL_Keysym *key, SDL_Event *event,
+                                                            bool &processed_mouse_motion_event)
 {
   sdl.event_count++;
   sdl.mouse_down = sdl_get_mouse();

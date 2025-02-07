@@ -85,6 +85,7 @@ def on_fall(me, x, y):
 def tp_init(name, text_long_name, text_short_name):
     self = tp.Tp(name, text_long_name, text_short_name)
     # begin sort marker
+    # my.is_able_to_spawn_things(self, False) else we end up owning effects
     my.chance_d10000_enchanted(self, 20)
     my.chance_d10000_set_on_fire(self, 5000)
     my.charge_count(self, 5)
@@ -105,7 +106,6 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_able_to_be_reflected(self, True)
     my.is_able_to_be_teleported(self, True)
     my.is_able_to_fall(self, True)
-    # my.is_able_to_spawn_things(self, False) else we end up owning effects
     my.is_bag_item(self, True)
     my.is_biome_chasms(self, True)
     my.is_biome_dungeon(self, True)
@@ -129,8 +129,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_target_select(self, True)
     my.is_throwable(self, True)
     my.is_tickable(self, True)  # So it can interact with fire
-    my.is_treasure_class_B(self, True)
     my.is_treasure(self, True)
+    my.is_treasure_class_B(self, True)
     my.is_treasure_type(self, True)
     my.is_usable(self, True)
     my.is_wooden(self, True)

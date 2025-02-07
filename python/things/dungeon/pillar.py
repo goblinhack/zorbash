@@ -5,9 +5,9 @@ import tp
 def tp_init(name, text_long_name, tiles=[]):
     self = tp.Tp(name, text_long_name)
     # begin sort marker
+    my.gfx_ascii_shown(self, True)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown_in_bg(self, True)
-    my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_oversized_and_on_floor(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
@@ -25,8 +25,8 @@ def tp_init(name, text_long_name, tiles=[]):
     my.is_obs_jumping(self, True)
     my.is_obs_shooting(self, True)
     my.is_obs_shoving(self, True)
-    my.is_obs_spawn_monst(self, True)
     my.is_obs_spawn(self, True)
+    my.is_obs_spawn_monst(self, True)
     my.is_obs_spell_casting(self, True)
     my.is_obs_throwing(self, True)
     my.is_obs_wall_or_door(self, True)

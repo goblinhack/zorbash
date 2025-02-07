@@ -1,14 +1,5 @@
 <!-- Bugs                                                                                                                                         -->
 <!-- ------                                                                                                                                       -->
-<!-- seed 33                                                                          -->
-<!-- 00:00:26.183: The flaming skeleton shoots at the noble warrior.                  -->
-<!-- 00:00:26.183: The flaming skeleton fails to attack you with the fireball.                  -->
-<!-- 00:00:26.183: You are literally ON FIRE!                  -->
-<!-- seed 3                                                                           -->
-<!-- laser effects do not scroll with the map                                                                                                     -->
-<!-- burning bridge should collapse                                                                                                               -->
-<!-- teleport loops for dead or frozen                                                                                                            -->
-<!-- dead on water, sword floats                                                                                                                  -->
 <!--                                                                                                                                              -->
 <!-- Idea list                                                                                                                                    -->
 <!-- ---------                                                                                                                                    -->
@@ -174,6 +165,7 @@ Bestiary
 | Fire Demon | D/uncommon | 566 | 1d14+4 | 2 | Fire:1d6+6<br /> | Cold<br />Fire<br />Necrosis<br />Poison<br />Vorpal-Weapons<br /> |
 | Cthulite | D/rare | 440 | 1d14+4 | 2 | Acid:2d6<br />Poison:2d12<br /> | Acid<br />Cold<br />Necrosis<br />Confusion<br />Confusion<br />Poison<br />Draining<br />Vorpal-Weapons<br /> |
 | Ettin, Two Headed Giant | D/rare | 382 | 1d10+4 | 2 |  |  |
+| Dark Sluud | C/common | 360 | 1d8+1 | 2 | Drain:1d10<br /> | Acid<br />Necrosis<br />Poison<br />Water<br /> |
 | Flesh Golem | C/rare | 346 | 2d8+4 | 2 |  | Cold<br />Confusion<br />Confusion<br />Poison<br />Draining<br /> |
 | Tentacle Horror | B/common | 332 | 2d6+2 | 1 | Acid:1d6<br /> | Acid<br />Necrosis<br /> |
 | Undead Bear | C/common | 328 | 2d8+5 | 2 | Necrotic:1<br /> | Cold<br />Necrosis<br />Poison<br />Draining<br /> |
@@ -183,8 +175,8 @@ Bestiary
 | Fire Troll | B/uncommon | 241 | 1d12+4 | 1 |  | Fire<br />Poison<br /> |
 | Yeti | C/rare | 209 | 1d12+8 | 1 |  | Cold<br /> |
 | Mummy | B/common | 208 | 1d10+10 | 2 | Drain:1d10<br /> | Cold<br />Fire<br />Necrosis<br />Poison<br />Draining<br /> |
-| Giant Skeleton | C/common | 197 | 1d6 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
 | Stone Troll | B/common | 197 | 1d12+4 | 1 |  | Poison<br /> |
+| Giant Skeleton | C/common | 197 | 1d6 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
 | Dungeon Cleaner | B/common | 189 | 1d10 | 1 | Digest:1d40<br /> | Acid<br />Necrosis<br /> |
 | Black Pudding | B/common | 188 | 3d6+2 | 1 | Acid:2d6<br /> | Acid<br />Cold<br />Electricity<br />Lightning<br />Necrosis<br /> |
 | Cement Man | C/common | 184 | 3d8+6 | 1 |  | Cold<br />Fire<br />Confusion<br />Confusion<br />Poison<br />Draining<br /> |
@@ -231,14 +223,16 @@ Bestiary
 | Molekin | A/uncommon | 64 | 1d4+2 | 1 |  | Water<br /> |
 | Zorblin Wizard | C/common | 64 | 1d4+2 | 1 |  |  |
 | Lesser Zorblin | A/common | 64 | 1d4+2 | 1 |  |  |
-| Pyrolizard | B/common | 64 | 1d6+1 | 1 |  | Fire<br /> |
+| Pyrolizard | A/common | 64 | 1d6+1 | 1 |  | Fire<br /> |
 | Gnome Knight | B/common | 63 | 1d6+1 | 1 |  | Poison<br /> |
 | Zorblomancer | B/common | 62 | 1d4+2 | 1 |  |  |
 | Zorblin Eldster | B/common | 62 | 1d4+2 | 1 |  |  |
-| Rock Gnome | B/common | 61 | 1d6+1 | 1 |  | Poison<br /> |
-| Carcass Creeper | A/common | 61 | 1d6+2 | 1 | Bite:1d8<br />Claw:1d6<br />Poison:1d10<br /> | Poison<br /> |
 | Piranha | A/rare | 61 | 1d4+3 | 1 | Bite:1d4<br /> | Water<br /> |
+| Carcass Creeper | A/common | 61 | 1d6+2 | 1 | Bite:1d8<br />Claw:1d6<br />Poison:1d10<br /> | Poison<br /> |
+| Sluud | B/common | 61 | 1d4+1 | 1 |  | Acid<br />Poison<br />Water<br /> |
+| Rock Gnome | B/common | 61 | 1d6+1 | 1 |  | Poison<br /> |
 | Gnorf | A/common | 60 | 1d4+1 | 1 |  | Cold<br />Poison<br /> |
+| Gnoll | A/common | 59 | 1d4+1 | 1 |  | Water<br /> |
 | Brown Extrovert Spider | A/uncommon | 59 | 1d3 | 1 | Necrotic:1<br />Poison:1d3<br /> | Necrosis<br />Webs<br /> |
 | Battle Goat | B/uncommon | 58 | 1d6+2 | 1 |  | Poison<br />Water<br /> |
 | Gnome Thief | A/common | 54 | 1d2+1 | 1 |  | Cold<br />Poison<br /> |
@@ -247,23 +241,23 @@ Bestiary
 | Thylacine | B/v-rare | 52 | 1d6+2 | 1 |  | Water<br /> |
 | Onyx Widow | A/common | 52 | 1d3 | 1 | Poison:1d4<br /> | Webs<br /> |
 | Meatfairy | A/common | 51 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d2<br /> | Vorpal-Weapons<br /> |
-| Blinkcat | B/common | 50 | 1d3+1 | 1 |  | Cold<br />Water<br />Vorpal-Weapons<br /> |
 | Noble Warrior | /common | 50 | 1d3 | 1 |  | Sanctuary-tiles<br /> |
+| Blinkcat | B/common | 50 | 1d3+1 | 1 |  | Cold<br />Water<br />Vorpal-Weapons<br /> |
 | Spectral Blade | B/unique | 49 | 1d4 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
+| Spectral Blade | B/unique | 48 | 1d3 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
+| Spectral Blade | B/unique | 48 | 1d3 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
 | Moresquito | A/common | 48 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d3<br />Poison:1d4<br />Drain:1d4<br /> |  |
 | Para Spider | B/uncommon | 48 | 1d3 | 1 | Poison:1d4<br /> | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
-| Spectral Blade | B/unique | 48 | 1d3 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
-| Spectral Blade | B/unique | 48 | 1d3 | 1 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Confusion<br />Confusion<br />Blinding<br />Poison<br />Webs<br />Draining<br />Vorpal-Weapons<br /> |
 | Orb Of Energy | B/uncommon | 47 |  | 0 |  | Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br /> |
 | Dog | A/uncommon | 46 | 1d4+2 | 1 |  | Water<br /> |
-| Cuddly Eel | A/common | 45 | 1d3+1 | 1 | Bite:1d4<br /> | Water<br /> |
-| Giant Rat | B/common | 45 | 1d6+2 | 1 |  | Water<br /> |
-| Scorpion | A/common | 45 | 1d3+1 | 1 | Poison:1d12<br /> |  |
-| Skeleton | A/common | 45 | 1d3 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
 | Ghost | A/common | 45 |  | 1 | Cold:1<br /> | Acid<br />Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br />Water<br /> |
-| Orb Of Fire | B/uncommon | 45 |  | 0 |  | Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br /> |
+| Cuddly Eel | A/common | 45 | 1d3+1 | 1 | Bite:1d4<br /> | Water<br /> |
 | Ghost Minion | A/common | 45 |  | 1 | Cold:1<br /> | Acid<br />Cold<br />Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Webs<br />Draining<br />Water<br /> |
 | Asp | A/common | 45 | 1d3+1 | 1 | Poison:1d3+1<br /> | Webs<br />Water<br /> |
+| Scorpion | A/common | 45 | 1d3+1 | 1 | Poison:1d12<br /> |  |
+| Orb Of Fire | B/uncommon | 45 |  | 0 |  | Fire<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br /> |
+| Skeleton | A/common | 45 | 1d3 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
+| Giant Rat | B/common | 45 | 1d6+2 | 1 |  | Water<br /> |
 | Narhornet | A/uncommon | 44 | 1d4+1 | 1 | Bite:1d4<br />Poison:1d8<br /> |  |
 | Centipede | A/common | 44 | 1d4+2 | 1 | Bite:1d8<br />Claw:1d4<br />Poison:1d4<br /> | Poison<br /> |
 | Skeleton | A/common | 43 | 1d3 | 1 |  | Cold<br />Necrosis<br />Paralysis<br />Blinding<br />Poison<br />Draining<br /> |
@@ -280,8 +274,8 @@ Bestiary
 | Fleshbee | A/common | 32 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d3<br /> |  |
 | Goldfish | A/common | 31 | 1 | 1 | Bite:1d1+1<br /> | Water<br />Vorpal-Weapons<br /> |
 | Baby Slime Jumper | A/common | 29 | 1 | 1 | Acid:1d3<br /> | Acid<br />Necrosis<br /> |
-| Sheep | B/common | 27 | 1d3+2 | 1 |  | Water<br /> |
 | Lava Ant | A/common | 27 | 1d3+1 | 1 | Bite:1d4<br />Claw:1d3<br />Fire:1d3+1<br /> | Fire<br /> |
+| Sheep | B/common | 27 | 1d3+2 | 1 |  | Water<br /> |
 | Bloated Bloodbug | A/common | 24 | 1d2+1 | 1 | Bite:1d2<br />Drain:1d1<br /> |  |
 | Vampire Rose | A/common | 24 | 1d3 | 1 | Digest:1d5<br /> | Confusion<br />Confusion<br /> |
 <!-- end monsters type marker -->
@@ -560,28 +554,28 @@ Content
 Other content
 -------------
 <!-- begin type marker -->
-- 120 x monsters
-- 52 x food
-- 25 x items
-- 24 x treasure
-- 24 x staffs
-- 24 x spells
-- 20 x buffs
-- 18 x weapons
-- 14 x potions
-- 12 x debuffs
-- 11 x skills
-- 11 x armor
-- 8 x traps
-- 6 x shield
-- 6 x boots
-- 5 x rings
-- 5 x mobs
-- 5 x keys
-- 5 x amulets
-- 4 x gauntlets
-- 4 x cloaks
-- 3 x doors
-- 1 x player
+-      125 x monsters
+-       52 x food
+-       25 x items
+-       24 x treasure
+-       24 x staffs
+-       24 x spells
+-       20 x buffs
+-       18 x weapons
+-       14 x potions
+-       12 x debuffs
+-       11 x skills
+-       11 x armor
+-        8 x traps
+-        6 x shield
+-        6 x boots
+-        5 x rings
+-        5 x mobs
+-        5 x keys
+-        5 x amulets
+-        4 x gauntlets
+-        4 x cloaks
+-        3 x doors
+-        1 x player
 <!-- end type marker -->
 

@@ -88,7 +88,7 @@ float Thing::lunge_curr(void)
     return 0;
   }
 
-  float time_step = ((float) (t) -ts_lunge_begin()) / ((float) (ts_lunge_end()) - ts_lunge_begin());
+  float time_step = ((float) (t) -ts_lunge_begin()) / ((float) (ts_lunge_end()) -ts_lunge_begin());
 
   if (time_step > 0.5) {
     return (1.0 - time_step);

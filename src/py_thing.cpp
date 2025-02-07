@@ -1173,7 +1173,7 @@ PyObject *thing_buff_add(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   TRACE_NO_INDENT();
-  owner->buff_add(tp);
+  owner->buff_add_if_not_found(tp);
   Py_RETURN_TRUE;
 }
 

@@ -428,20 +428,20 @@ int Thing::is_unused_flag43(void)
   TRACE_NO_INDENT();
   return (tp()->is_unused_flag43());
 }
-int Thing::is_unused_flag44(void)
+int Thing::is_sluud(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag44());
+  return (tp()->is_sluud());
 }
-int Thing::is_unused_flag45(void)
+int Thing::is_gnoll(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag45());
+  return (tp()->is_gnoll());
 }
-int Thing::is_unused_flag46(void)
+int Thing::is_dogman(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_unused_flag46());
+  return (tp()->is_dogman());
 }
 int Thing::is_vanquished_on_negation(void)
 {

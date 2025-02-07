@@ -10,6 +10,7 @@
 #include "my_ui.hpp"
 #include "my_vector_bounds_check.hpp"
 #include "my_wid_skillbox.hpp"
+#include <algorithm>
 
 //
 // Get the list of all other skills this skill replaces. This is done

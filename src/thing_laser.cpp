@@ -241,7 +241,7 @@ Thingp Thing::laser_shoot_at(Thingp item_maybe_null, const std::string &effect_n
               target->text_the().c_str());
         }
       } else if (is_water()) {
-        msg("%s electrifies around %s.", text_The().c_str(), target->text_the().c_str());
+        msg("%s bubbles around %s.", text_The().c_str(), target->text_the().c_str());
       } else {
         msg("%s shoots at %s.", text_The().c_str(), target->text_the().c_str());
       }
@@ -335,7 +335,7 @@ Thingp Thing::laser_shoot_at(Thingp item_maybe_null, const std::string &effect_n
                   other_target->text_the().c_str());
             }
           } else if (is_water()) {
-            msg("%s electrifies around %s.", text_The().c_str(), other_target->text_the().c_str());
+            msg("%s bubbles around %s.", text_The().c_str(), other_target->text_the().c_str());
           } else {
             if (use_options.is_reflected) {
               msg("%s shoots at %s.", text_The().c_str(), other_target->text_the().c_str());
@@ -429,7 +429,7 @@ Thingp Thing::laser_shoot_at(Thingp item_maybe_null, const std::string &effect_n
         info.pixel_map_at         = level->pixel_map_at;
 
         if (laser) {
-          level->new_laser(laser->id, other_target->id, info, game->current_move_speed);
+          level->new_laser(laser->id, other_target->id, info, game->slow_move_speed);
 
           //
           // This is needed for secondary lasers
@@ -512,7 +512,7 @@ Thingp Thing::laser_shoot_at(Thingp item_maybe_null, const std::string &effect_n
           }
         } else if (is_water()) {
           TRACE_NO_INDENT();
-          msg("%s electrifies around %s.", text_The().c_str(), target->text_the().c_str());
+          msg("%s bubbles around %s.", text_The().c_str(), target->text_the().c_str());
         } else {
           TRACE_NO_INDENT();
           if (use_options.is_reflected) {
@@ -563,7 +563,7 @@ Thingp Thing::laser_shoot_at(Thingp item_maybe_null, const std::string &effect_n
       TRACE_NO_INDENT();
       if (laser) {
         TRACE_NO_INDENT();
-        level->new_laser(laser->id, target->id, info, game->current_move_speed);
+        level->new_laser(laser->id, target->id, info, game->slow_move_speed);
 
         //
         // This is needed for secondary lasers

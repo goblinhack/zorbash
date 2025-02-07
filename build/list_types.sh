@@ -17,7 +17,7 @@ sort -r -n +1 $PAYLOAD > $TMP
 mv $TMP $PAYLOAD
 
 sed "1,/begin type marker/!d" $IN > $PRE
-sed "/end type marker/,\$!d" $IN | tail -n +1 - > $POST
+sed "/end type marker/,\$!d" $IN | tail -n +1 > $POST
 
 cat $PRE $PAYLOAD $POST > $OUT
 diff $IN $OUT

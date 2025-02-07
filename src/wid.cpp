@@ -5883,7 +5883,6 @@ void wid_key_down(const struct SDL_Keysym *key, int x, int y)
   if (wid_focus && ! wid_is_hidden(wid_focus) && (wid_focus->on_key_down)) {
     if ((wid_focus->on_key_down)(wid_focus, key)) {
       DBG("WID: key grabbed by focused wid: %s at (%d,%d)", wid_focus->name.c_str(), ascii_mouse_x, ascii_mouse_y);
-      sound_play("keypress");
       //
       // Do not raise, gets in the way of popups the callback creates.
       //

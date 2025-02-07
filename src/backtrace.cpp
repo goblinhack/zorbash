@@ -40,7 +40,7 @@ void Backtrace::init(void)
 #endif
 #else
 #ifdef _WIN32
-  size                 = 0;
+  size = 0;
 #else
   size = backtrace(&bt[ 0 ], bt.size());
 #endif

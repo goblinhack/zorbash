@@ -4,6 +4,7 @@ import tp
 
 def on_born(me, x, y):
     my.thing_friend(me, "dogman")
+    my.thing_enemy(me, "gnoll")
     my.thing_carry(me, "dagger")
     my.thing_carry(me, "dart")
 
@@ -63,8 +64,8 @@ def tp_init(name, text_long_name):
     my.gfx_anim_use(self, "attack_red")
     my.gfx_ascii_fade_with_dist(self, True)
     my.gfx_ascii_shown(self, True)
-    my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_animated_can_hflip(self, True)
     my.gfx_pixelart_bounce_on_move(self, True)
     my.gfx_pixelart_health_bar_shown(self, True)
     my.gfx_pixelart_reflection(self, True)
@@ -100,7 +101,6 @@ def tp_init(name, text_long_name):
     my.is_attackable_by_monst(self, True)
     my.is_attackable_by_player(self, True)
     my.is_biome_dungeon(self, True)
-    my.is_biome_ice(self, True)
     my.is_biome_swamp(self, True)
     my.is_bleeder(self, True)
     my.is_buffable(self, True)
@@ -111,9 +111,9 @@ def tp_init(name, text_long_name):
     my.is_daring(self, True)
     my.is_described_in_leftbar(self, True)
     my.is_described_when_hovering_over(self, True)
+    my.is_dogman(self, True)
     my.is_eater_of_meat(self, True)
     my.is_eater_of_red_blood(self, True)
-    my.is_gnome(self, True)
     my.is_hittable(self, True)
     my.is_humanoid(self, True)
     my.is_immune_to_water(self, True)
@@ -122,8 +122,8 @@ def tp_init(name, text_long_name):
     my.is_living(self, True)
     my.is_loggable(self, True)
     my.is_meat(self, True)
-    my.is_monst_class_A(self, True)
     my.is_monst(self, True)
+    my.is_monst_class_A(self, True)
     my.is_moveable(self, True)
     my.is_msg_allowed_hears_something(self, True)
     my.is_msg_allowed_is_dead(self, True)
@@ -134,8 +134,8 @@ def tp_init(name, text_long_name):
     my.is_red_blooded(self, True)
     my.is_shootable(self, True)
     my.is_shovable(self, True)
-    my.is_swimmer_but_land_dweller(self, True)
     my.is_swimmer(self, True)
+    my.is_swimmer_but_land_dweller(self, True)
     my.is_tickable(self, True)
     my.move_speed(self, 100)
     my.noise_decibels_hearing(self, 10)
@@ -156,15 +156,16 @@ def tp_init(name, text_long_name):
     my.stat_luck(self, 8)
     my.stat_psi(self, 8)
     my.stat_str(self, 8)
+    my.temperature(self, 20)
     my.temperature_max(self, 50)
     my.temperature_min(self, 0)
-    my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_description_long(self, "A mildly odorous dogman. Half man, half mutt and blessed with the intellectual capabilities of a human, this poor creature is often very confused as to where it is.")
     my.text_description_long2(self, "Dogmen have amazing hearing and are hard to creep up on.")
     my.text_description_long3(self, "Very skilled with throwing darts.")
-    my.text_description_long4(self, "Where the dogwomen live is a well kept secret.")
-    my.text_description_long(self, "A mildly odorous dogman. Half man, half mutt and blessed with the intellectual capabilities of a human, this poor creature is often very confused as to where it is.")
+    my.text_description_long4(self, "Dogmen detest gnolls. Dogmen are solitary and do not appear in packs, unlike gnolls.")
+    my.text_description_long5(self, "Where the dogwomen live is a well kept secret.")
     my.text_description_short(self, "A perma-panting dogman.")
     my.text_hits(self, "gores")
     my.thing_size(self, my.THING_SIZE_NORMAL)
@@ -201,12 +202,6 @@ def tp_init(name, text_long_name):
     my.tile(self,
             ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="gray30",
             tile="dogman.dead.1", is_dead=True, delay_ms=delay)
-    my.tile(self,
-            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="gray30",
-            tile="dogman.dead.2", is_dead=True, delay_ms=delay)
-    my.tile(self,
-            ascii_fg_char="d", ascii_bg_col_name="", ascii_fg_col_name="gray30",
-            tile="dogman.dead.3", is_dead=True, delay_ms=delay, is_end_of_anim=True)
 
     my.tp_update(self)
 

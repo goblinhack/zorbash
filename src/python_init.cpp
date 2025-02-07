@@ -98,6 +98,7 @@ void py_init(char *argv[])
 
   my_mod = PyImport_ImportModule("init");
   if (! my_mod) {
+    PyErr_Print();
     py_err();
     PY_ERR("Module init import failed");
     return;

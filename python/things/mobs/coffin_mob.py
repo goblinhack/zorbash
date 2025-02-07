@@ -54,8 +54,8 @@ def tp_init(name, text_long_name):
     my.is_immune_to_cold(self, True)
     my.is_interesting(self, True)
     my.is_loggable(self, True)
-    my.is_mob_class_B(self, True)
     my.is_mob(self, True)
+    my.is_mob_class_B(self, True)
     my.is_obs_destructable(self, True)
     my.is_obs_spawn_monst(self, True)
     my.is_shootable(self, True)
@@ -76,10 +76,19 @@ def tp_init(name, text_long_name):
     my.z_prio(self, my.MAP_Z_PRIO_MOB)
     # end sort marker
 
-    delay = 200
+    delay = 2000
     my.tile(self,
             ascii_fg_char="cross", ascii_fg_col_name="purple",
-            tile=name + ".100", is_hp_100_percent=True, delay_ms=delay)
+            tile=name + ".1.100", is_hp_100_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="cross", ascii_fg_col_name="purple",
+            tile=name + ".2.100", is_hp_100_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="cross", ascii_fg_col_name="purple",
+            tile=name + ".3.100", is_hp_100_percent=True, delay_ms=delay)
+    my.tile(self,
+            ascii_fg_char="cross", ascii_fg_col_name="purple",
+            tile=name + ".4.100", is_hp_100_percent=True, delay_ms=delay)
     my.tile(self,
             ascii_fg_char="cross", ascii_fg_col_name="purple",
             tile=name + ".75", is_hp_75_percent=True, delay_ms=delay)

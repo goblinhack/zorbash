@@ -6,6 +6,7 @@
 #include "my_ptrcheck.hpp"
 #include "my_string.hpp"
 #include "my_vector_bounds_check.hpp"
+#include <algorithm>
 
 Tpnamemap tp_name_map;
 Tpidmap   tp_id_map;
@@ -416,11 +417,13 @@ void tp_fini(void)
 Tpp tp_load(int id, std::string const &name, const std::string &text_long_name, const std::string &text_short_name)
 {
   TRACE_NO_INDENT();
-  if (tp_find(name)) {
-    DIE("Thing template name [%s] already loaded", name.c_str());
+  Tpp tp = tp_find(name);
+  if (tp) {
+    LOG("Thing template name [%s] already loaded", name.c_str());
+    return tp;
   }
 
-  auto tp = new Tp();
+  tp = new Tp();
   tp->name_set(name);
   tp->text_long_name_set(text_long_name);
   tp->text_short_name_set(text_short_name);

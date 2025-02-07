@@ -5,6 +5,7 @@
 #include "my_array_bounds_check.hpp"
 #include "my_level.hpp"
 #include "my_thing.hpp"
+#include <algorithm>
 
 void Level::put_thing(int x, int y, ThingId id)
 {
