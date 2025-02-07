@@ -318,7 +318,7 @@ void Dungeon::make_dungeon(void)
   // Add a cave as the under-dungeon
   //
   if (biome == BIOME_SWAMP) {
-    foliage_gen(2000, // fill prob
+    foliage_gen(1000, // fill prob
                 10,   // R1
                 5,    // R2
                 2 /* generations */);
@@ -345,39 +345,39 @@ void Dungeon::make_dungeon(void)
                   2 /* generations */);
 
     DBG2("INF: Generate fungus");
-    fungus_withered_gen(100, // fill prob
-                        3,   // R1
-                        1,   // R2
+    fungus_withered_gen(10, // fill prob
+                        3,  // R1
+                        1,  // R2
                         2 /* generations */);
-    fungus_healing_gen(100, // fill prob
-                       3,   // R1
-                       1,   // R2
+    fungus_healing_gen(10, // fill prob
+                       3,  // R1
+                       1,  // R2
                        2 /* generations */);
-    fungus_poison_gen(100, // fill prob
-                      10,  // R1
-                      1,   // R2
+    fungus_poison_gen(10, // fill prob
+                      10, // R1
+                      1,  // R2
                       2 /* generations */);
-    fungus_edible_gen(100, // fill prob
-                      10,  // R1
-                      1,   // R2
+    fungus_edible_gen(10, // fill prob
+                      10, // R1
+                      1,  // R2
                       2 /* generations */);
   }
 
   if (biome == BIOME_DUNGEON) {
     DBG2("INF: Generate fungus");
-    fungus_withered_gen(50, // fill prob
+    fungus_withered_gen(10, // fill prob
                         3,  // R1
                         1,  // R2
                         2 /* generations */);
-    fungus_healing_gen(50, // fill prob
+    fungus_healing_gen(10, // fill prob
                        3,  // R1
                        1,  // R2
                        2 /* generations */);
-    fungus_poison_gen(30, // fill prob
+    fungus_poison_gen(10, // fill prob
                       10, // R1
                       1,  // R2
                       2 /* generations */);
-    fungus_edible_gen(20, // fill prob
+    fungus_edible_gen(10, // fill prob
                       10, // R1
                       1,  // R2
                       2 /* generations */);
@@ -4375,10 +4375,10 @@ void Dungeon::add_remaining(void)
 
       if (pcg_random_range(0, 100) < 20) {
         putc(x, y, MAP_DEPTH_FLOOR2, Charmap::CHAR_GRASS_DRY);
-      } else if (pcg_random_range(0, 100) < 20) {
+      } else if (pcg_random_range(0, 1000) < 20) {
         putc(x, y, MAP_DEPTH_FLOOR2, Charmap::CHAR_FOLIAGE);
       } else if (is_dirt(x, y)) {
-        if (pcg_random_range(0, 100) < 20) {
+        if (pcg_random_range(0, 100) < 200) {
           putc(x, y, MAP_DEPTH_FLOOR2, Charmap::CHAR_FOLIAGE);
         }
       } else if (is_corridor(x, y)) {
@@ -4442,7 +4442,7 @@ void Dungeon::add_foliage_around_water(void)
       if (foliage_ok == 1) {
         if (pcg_random_range(0, 100) > 80) {
           putc(x, y, MAP_DEPTH_FLOOR2, Charmap::CHAR_GRASS_WET);
-        } else if (pcg_random_range(0, 100) > 20) {
+        } else if (pcg_random_range(0, 1000) < 20) {
           putc(x, y, MAP_DEPTH_FLOOR2, Charmap::CHAR_FOLIAGE);
         }
       }
