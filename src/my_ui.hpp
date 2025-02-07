@@ -73,19 +73,19 @@
 //
 // Do faster processing of events, like reading the keyboard and updating widgets.
 //
-#define UI_EVENT_LOOP_FREQ_FAST_MS (g_opt_ascii ? 10 : 5)
+#define UI_EVENT_LOOP_FREQ_FAST_MS (5)
 
 //
 // Less frequent updates like updating the FPS.
 //
-#define UI_EVENT_LOOP_FREQ_SLOW_MS (g_opt_ascii ? 20 : 10)
+#define UI_EVENT_LOOP_FREQ_SLOW_MS (5)
 
 //
 // This is for either
 // a) level tick when in ascii mode.
 // b) waiting for level fade in when in pixel art mode.
 //
-#define UI_EVENT_LOOP_FREQ_VERY_SLOW_MS (g_opt_ascii ? 40 : 20)
+#define UI_EVENT_LOOP_FREQ_VERY_SLOW_MS (10)
 
 enum {
   UI_WID_STYLE_SPARSE_NONE = -1, // Used for widgets with their own backgrounds
