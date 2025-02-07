@@ -193,6 +193,7 @@ static uint8_t wid_config_gfx_resolution_incr(Widp w, int x, int y, uint32_t but
       local_g_need_restart           = true;
     }
   }
+  game->config.gfx_fullscreen_desktop = false;
   wid_config_gfx_save(nullptr, 0, 0, 0);
   sdl_config_update_all();
   game->wid_config_gfx_select();
@@ -227,6 +228,7 @@ static uint8_t wid_config_gfx_resolution_decr(Widp w, int x, int y, uint32_t but
       local_g_need_restart           = true;
     }
   }
+  game->config.gfx_fullscreen_desktop = false;
   wid_config_gfx_save(nullptr, 0, 0, 0);
   sdl_config_update_all();
   game->wid_config_gfx_select();
