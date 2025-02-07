@@ -1063,14 +1063,14 @@ void Thing::ai_choose_can_see_goals(std::multiset< Goal > &goals, int minx, int 
         auto  goal_penalty = goal_penalty_get(it);
 
         //
-        // Make the monster prefer closer targers.
+        // Make the monster prefer closer targets.
         //
         goal_penalty += (int) dist * dist * 10;
 
         //
-        // Worse terrain, less preferred. Higher score, morepreferred.
+        // Worse terrain, less preferred. Higher score, more preferred.
         //
-        auto my_health    = health() + aggression_pct() / 10;
+        auto my_health    = health() + aggression_pct();
         auto it_health    = it->health();
         auto it_nutrition = it->nutrition_get();
         auto health_diff  = my_health - it_health;
