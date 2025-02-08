@@ -84,10 +84,10 @@ void Level::clear(void)
   _is_skillstone                     = {};
   _is_smoke                          = {};
   _is_spectral_blade                 = {};
+  _is_spellbook                      = {};
   _is_spell_of_holding_barrier       = {};
   _is_spell_of_protection_barrier    = {};
   _is_spell_of_sanctuary_barrier     = {};
-  _is_spellbook                      = {};
   _is_spiderweb                      = {};
   _is_steam                          = {};
   _is_sticky                         = {};

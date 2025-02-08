@@ -866,10 +866,10 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
           // Fade the lights according to how recently seen.
           //
           auto scale = (((float) t->level->is_currently_pixelart_raycast_lit_no_check(x, y))) / 255.0;
-          c.r        = (((float) c.r)) *scale;
-          c.g        = (((float) c.g)) *scale;
-          c.b        = (((float) c.b)) *scale;
-          c.a        = (((float) c.a)) *scale;
+          c.r        = (((float) c.r)) * scale;
+          c.g        = (((float) c.g)) * scale;
+          c.b        = (((float) c.b)) * scale;
+          c.a        = (((float) c.a)) * scale;
 
           glcolor(c);
           blit(g_light_overlay_texid, 0, 0, 1, 1, tlx, tly, brx, bry);
@@ -954,10 +954,10 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
           // Fade the lights according to how recently seen.
           //
           auto scale = (((float) t->level->is_currently_pixelart_raycast_lit_no_check(x, y))) / 255.0;
-          c.r        = (((float) c.r)) *scale;
-          c.g        = (((float) c.g)) *scale;
-          c.b        = (((float) c.b)) *scale;
-          c.a        = (((float) c.a)) *scale;
+          c.r        = (((float) c.r)) * scale;
+          c.g        = (((float) c.g)) * scale;
+          c.b        = (((float) c.b)) * scale;
+          c.a        = (((float) c.a)) * scale;
 
           glcolor(c);
           blit(g_glow_overlay_texid, 0, 0, 1, 1, tlx, tly, brx, bry);

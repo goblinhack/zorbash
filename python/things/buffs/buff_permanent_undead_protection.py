@@ -123,8 +123,8 @@ def tp_init(name, text_long_name):
     my.on_owner_rcv_dmg_stat_con_do(self, "me.on_owner_rcv_dmg_stat_con()")
     my.on_owner_rcv_dmg_stat_str_do(self, "me.on_owner_rcv_dmg_stat_str()")
     my.on_owner_unset_do(self, "me.on_owner_unset()")
-    my.text_description_long(self, "Receive blessed protection from the undead (half damage) along with immunities against various corruptions of the body.")
     my.text_description_long2(self, "Self flagellation is optional.")
+    my.text_description_long(self, "Receive blessed protection from the undead (half damage) along with immunities against various corruptions of the body.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
     # end sort marker

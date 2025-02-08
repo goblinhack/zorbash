@@ -6,9 +6,9 @@ def tp_init(name, tiles=[]):
     self = tp.Tp(name, "wet grass")
     # begin sort marker
     my.collision_hit_priority(self, 1)
-    my.gfx_ascii_shown(self, True)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown_in_bg(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)

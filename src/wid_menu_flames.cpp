@@ -96,9 +96,9 @@ static void game_display_flames_tiles(int w, int h)
     for (auto y = 0; y < h; y++) {
       auto c = bg[ x ][ y ];
 
-      int r = (int) ((((float) ((int) c.r))) *bright);
-      int g = (int) ((((float) ((int) c.g))) *bright);
-      int b = (int) ((((float) ((int) c.b))) *bright);
+      int r = (int) ((((float) ((int) c.r))) * bright);
+      int g = (int) ((((float) ((int) c.g))) * bright);
+      int b = (int) ((((float) ((int) c.b))) * bright);
 
       if (r > 255) {
         r = 255;

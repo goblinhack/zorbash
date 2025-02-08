@@ -10,15 +10,15 @@ def tp_init(name, tiles=[], left1_tiles=[]):
     # my.is_mob(self, True) # don't set to avoid auto place
     self = tp.Tp(name, "sewer pipe", "sewer")
     # begin sort marker
-    my.gfx_ascii_shown(self, True)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown_in_bg(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_reflection(self, True)
     my.gfx_pixelart_shadow(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
-    my.gfx_pixelart_show_outlined(self, True)
     my.gfx_pixelart_shown_in_bg(self, True)
+    my.gfx_pixelart_show_outlined(self, True)
     my.is_biome_dungeon(self, True)
     my.is_descend_sewer(self, True)
     my.is_described_in_leftbar(self, True)

@@ -346,6 +346,14 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   int      shift  = 0;
   // clang-format off
   // begin sort marker1 {
+  bits64 |= (my.t->corpse_cleanup                               ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->gfx_ascii_animated                           ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->gfx_pixelart_animated                        ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->has_attacked_player                          ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->has_ever_moved                               ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->has_light                                    ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->has_projectile                               ? 1LLU : 0LLU) << shift; shift++;
+  bits64 |= (my.t->has_seen_player_msg_shown                    ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->_is_able_to_be_resurrected                   ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->_is_able_to_regenerate                       ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->_is_immune_to_acid                           ? 1LLU : 0LLU) << shift; shift++;
@@ -373,14 +381,6 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->_is_immune_to_teleport_attack                ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->_is_immune_to_vorpal_weapons                 ? 1LLU : 0LLU) << shift; shift++;
   bits64 |= (my.t->_is_immune_to_water                          ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->corpse_cleanup                               ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->gfx_ascii_animated                           ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->gfx_pixelart_animated                        ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->has_attacked_player                          ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->has_ever_moved                               ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->has_light                                    ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->has_projectile                               ? 1LLU : 0LLU) << shift; shift++;
-  bits64 |= (my.t->has_seen_player_msg_shown                    ? 1LLU : 0LLU) << shift; shift++;
   // end sort marker1 }
   // clang-format on
   if (shift >= (int) (sizeof(bits64) * 8)) {
@@ -709,10 +709,10 @@ std::ostream &operator<<(std::ostream &out, Bits< Levelp & > const my)
   out << bits(my.t->_is_skillstone);
   out << bits(my.t->_is_smoke);
   out << bits(my.t->_is_spectral_blade);
+  out << bits(my.t->_is_spellbook);
   out << bits(my.t->_is_spell_of_holding_barrier);
   out << bits(my.t->_is_spell_of_protection_barrier);
   out << bits(my.t->_is_spell_of_sanctuary_barrier);
-  out << bits(my.t->_is_spellbook);
   out << bits(my.t->_is_spiderweb);
   out << bits(my.t->_is_staff);
   out << bits(my.t->_is_steam);

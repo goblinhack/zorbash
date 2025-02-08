@@ -42,7 +42,10 @@ struct pcg_state_setseq_64 { // Internals are *Private*.
 };
 typedef struct pcg_state_setseq_64 pcg32_random_t;
 
-#define PCG32_INITIALIZER {0x853c49e6748fea9bULL, 0xda3e39cb94b95bdbULL}
+#define PCG32_INITIALIZER                                                                                            \
+  {                                                                                                                  \
+    0x853c49e6748fea9bULL, 0xda3e39cb94b95bdbULL                                                                     \
+  }
 pcg32_random_t pcg32_global = PCG32_INITIALIZER;
 
 uint32_t pcg32_random_r(pcg32_random_t *rng)

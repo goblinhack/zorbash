@@ -6,9 +6,9 @@ def tp_init(name):
     self = tp.Tp(name)
     # begin sort marker
     my.gfx_ascii_shown(self, True)
-    my.gfx_pixelart_anim_synced_with_owner(self, True)
-    my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_animated_can_hflip(self, True)
+    my.gfx_pixelart_animated(self, True)
+    my.gfx_pixelart_anim_synced_with_owner(self, True)
     my.gfx_pixelart_bounce_on_move(self, True)
     my.gfx_pixelart_equip_carry_anim(self, True)
     my.gfx_pixelart_reflection(self, True)

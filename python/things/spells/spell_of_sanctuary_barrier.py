@@ -19,9 +19,9 @@ def tp_init(name, text_long_name, text_short_name):
     my.dmg_negation_dice(self, "1")
     my.dmg_num_of_attacks(self, 2)
     my.gfx_ascii_fade_with_dist(self, True)
-    my.gfx_ascii_shown(self, True)
     my.gfx_ascii_shown_as_gray_in_shadow(self, True)
     my.gfx_ascii_shown_in_bg(self, True)
+    my.gfx_ascii_shown(self, True)
     my.gfx_pixelart_animated(self, True)
     my.gfx_pixelart_oversized_and_centered(self, True)
     my.gfx_pixelart_show_highlighted(self, True)
@@ -39,8 +39,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_interesting(self, True)  # so it can be shoved
     my.is_loggable(self, True)
     my.is_not_shown_as_a_pet(self, True)
-    my.is_obs_spawn(self, True)
     my.is_obs_spawn_monst(self, True)
+    my.is_obs_spawn(self, True)
     my.is_one_per_tile(self, True)  # so wands of ice do not pile these up
     my.is_spell_of_sanctuary_barrier(self, True)
     my.is_tickable(self, True)

@@ -120,10 +120,10 @@ public:
   int magic_max           = {};
   int monst_state         = {};
   int move_count          = {};
+  int movement_remaining  = {};
   int move_penalty        = {}; // Blocks you from moving until this is zero
   int move_speed_bonus    = {};
   int move_speed_curr     = {};
-  int movement_remaining  = {};
   int necrosis            = {};
   int noise               = {};
   int nutrition           = {};
@@ -148,10 +148,6 @@ public:
   int stat_luck_bonus     = {};
   int stat_psi            = {};
   int stat_psi_bonus      = {};
-  int stat_str            = {};
-  int stat_str_bonus      = {};
-  int stat_thv            = {};
-  int stat_thv_bonus      = {};
   int stats02             = {};
   int stats03             = {};
   int stats04             = {};
@@ -159,6 +155,10 @@ public:
   int stats06             = {};
   int stats07             = {};
   int stats09             = {};
+  int stat_str            = {};
+  int stat_str_bonus      = {};
+  int stat_thv            = {};
+  int stat_thv_bonus      = {};
   int submerged_offset    = {}; // Pixels
   // end sort marker1 }
 

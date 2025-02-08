@@ -199,11 +199,11 @@ const std::string &Tp::str2(void) const { return _str2; }
 const std::string &Tp::str4(void) const { return _str4; }
 const std::string &Tp::text_debuff(void) const { return _text_debuff; }
 const std::string &Tp::text_description_enchant(void) const { return _text_description_enchant; }
-const std::string &Tp::text_description_long(void) const { return _text_description_long; }
 const std::string &Tp::text_description_long2(void) const { return _text_description_long2; }
 const std::string &Tp::text_description_long3(void) const { return _text_description_long3; }
 const std::string &Tp::text_description_long4(void) const { return _text_description_long4; }
 const std::string &Tp::text_description_long5(void) const { return _text_description_long5; }
+const std::string &Tp::text_description_long(void) const { return _text_description_long; }
 const std::string &Tp::text_description_short(void) const { return _text_description_short; }
 const std::string &Tp::text_description_very_short(void) const { return _text_description_very_short; }
 const std::string &Tp::text_hits(void) const { return _text_hits; }
@@ -211,10 +211,10 @@ const std::string &Tp::text_long_name(void) const { return _text_long_name; }
 const std::string &Tp::text_real_name(void) const { return _text_real_name; }
 const std::string &Tp::text_short_name(void) const { return _text_short_name; }
 const std::string &Tp::text_title(void) const { return _text_title; }
-const std::string &Tp::text_unused(void) const { return _text_unused; }
 const std::string &Tp::text_unused1(void) const { return _text_unused1; }
 const std::string &Tp::text_unused2(void) const { return _text_unused2; }
 const std::string &Tp::text_unused3(void) const { return _text_unused3; }
+const std::string &Tp::text_unused(void) const { return _text_unused; }
 // end sort marker1 }
 
 // begin sort marker2 {
@@ -257,8 +257,8 @@ int Tp::chance_d1000_jump_onto(void) const { return _chance_d1000_jump_onto; }
 int Tp::chance_d1000_jump_randomly(void) const { return _chance_d1000_jump_randomly; }
 int Tp::chance_d1000_melting(void) const { return _chance_d1000_melting; }
 int Tp::chance_d1000_regenerate(void) const { return _chance_d1000_regenerate; }
-int Tp::chance_d1000_shooting(void) const { return _chance_d1000_shooting; }
 int Tp::chance_d1000_shooting_avoid_friends(void) const { return _chance_d1000_shooting_avoid_friends; }
+int Tp::chance_d1000_shooting(void) const { return _chance_d1000_shooting; }
 int Tp::chance_d1000_shove(void) const { return _chance_d1000_shove; }
 int Tp::chance_d1000_steal_item(void) const { return _chance_d1000_steal_item; }
 int Tp::chance_d1000_tameable(void) const { return _chance_d1000_tameable; }
@@ -322,16 +322,16 @@ int Tp::gfx_ascii_fg_color_spread_green(void) const { return _gfx_ascii_fg_color
 int Tp::gfx_ascii_fg_color_spread_hue(void) const { return _gfx_ascii_fg_color_spread_hue; }
 int Tp::gfx_ascii_fg_color_spread_red(void) const { return _gfx_ascii_fg_color_spread_red; }
 int Tp::gfx_ascii_show_light_once_seen(void) const { return _gfx_ascii_show_light_once_seen; }
-int Tp::gfx_ascii_shown(void) const { return _gfx_ascii_shown; }
 int Tp::gfx_ascii_shown_as_gray_in_shadow(void) const { return _gfx_ascii_shown_as_gray_in_shadow; }
 int Tp::gfx_ascii_shown_in_bg(void) const { return _gfx_ascii_shown_in_bg; }
+int Tp::gfx_ascii_shown(void) const { return _gfx_ascii_shown; }
 int Tp::gfx_glows(void) const { return _gfx_glows; }
 int Tp::gfx_on_fire_anim(void) const { return _gfx_on_fire_anim; }
 int Tp::gfx_ooze(void) const { return _gfx_ooze; }
-int Tp::gfx_pixelart_anim_synced_with_owner(void) const { return _gfx_pixelart_anim_synced_with_owner; }
 int Tp::gfx_pixelart_animated_can_hflip(void) const { return _gfx_pixelart_animated_can_hflip; }
 int Tp::gfx_pixelart_animated_can_vflip(void) const { return _gfx_pixelart_animated_can_vflip; }
 int Tp::gfx_pixelart_animated_no_dir(void) const { return _gfx_pixelart_animated_no_dir; }
+int Tp::gfx_pixelart_anim_synced_with_owner(void) const { return _gfx_pixelart_anim_synced_with_owner; }
 int Tp::gfx_pixelart_attack_anim(void) const { return _gfx_pixelart_attack_anim; }
 int Tp::gfx_pixelart_bounce_always(void) const { return _gfx_pixelart_bounce_always; }
 int Tp::gfx_pixelart_bounce_on_move(void) const { return _gfx_pixelart_bounce_on_move; }
@@ -343,16 +343,16 @@ int Tp::gfx_pixelart_health_bar_shown(void) const { return _gfx_pixelart_health_
 int Tp::gfx_pixelart_oversized_and_centered(void) const { return _gfx_pixelart_oversized_and_centered; }
 int Tp::gfx_pixelart_oversized_and_on_floor(void) const { return _gfx_pixelart_oversized_and_on_floor; }
 int Tp::gfx_pixelart_reflection(void) const { return _gfx_pixelart_reflection; }
-int Tp::gfx_pixelart_shadow(void) const { return _gfx_pixelart_shadow; }
 int Tp::gfx_pixelart_shadow_long(void) const { return _gfx_pixelart_shadow_long; }
 int Tp::gfx_pixelart_shadow_short(void) const { return _gfx_pixelart_shadow_short; }
 int Tp::gfx_pixelart_shadow_solid(void) const { return _gfx_pixelart_shadow_solid; }
 int Tp::gfx_pixelart_shadow_very_short(void) const { return _gfx_pixelart_shadow_very_short; }
+int Tp::gfx_pixelart_shadow(void) const { return _gfx_pixelart_shadow; }
 int Tp::gfx_pixelart_show_asleep_anim(void) const { return _gfx_pixelart_show_asleep_anim; }
 int Tp::gfx_pixelart_show_highlighted(void) const { return _gfx_pixelart_show_highlighted; }
+int Tp::gfx_pixelart_shown_in_bg(void) const { return _gfx_pixelart_shown_in_bg; }
 int Tp::gfx_pixelart_show_outlined(void) const { return _gfx_pixelart_show_outlined; }
 int Tp::gfx_pixelart_show_square_outlined(void) const { return _gfx_pixelart_show_square_outlined; }
-int Tp::gfx_pixelart_shown_in_bg(void) const { return _gfx_pixelart_shown_in_bg; }
 int Tp::gfx_pixelart_submergible(void) const { return _gfx_pixelart_submergible; }
 int Tp::gfx_pixelart_wobbles_when_hit(void) const { return _gfx_pixelart_wobbles_when_hit; }
 int Tp::gfx_water(void) const { return _gfx_water; }
@@ -387,16 +387,16 @@ int Tp::is_able_to_eat_poisonous_food(void) const { return _is_able_to_eat_poiso
 int Tp::is_able_to_eat_rotting_food(void) const { return _is_able_to_eat_rotting_food; }
 int Tp::is_able_to_eat_unpleasant_food(void) const { return _is_able_to_eat_unpleasant_food; }
 int Tp::is_able_to_enchant_items(void) const { return _is_able_to_enchant_items; }
-int Tp::is_able_to_fall(void) const { return _is_able_to_fall; }
 int Tp::is_able_to_fall_over(void) const { return _is_able_to_fall_over; }
+int Tp::is_able_to_fall(void) const { return _is_able_to_fall; }
 int Tp::is_able_to_follow(void) const { return _is_able_to_follow; }
 int Tp::is_able_to_freeze(void) const { return _is_able_to_freeze; }
 int Tp::is_able_to_grapple(void) const { return _is_able_to_grapple; }
 int Tp::is_able_to_have_a_runic_inscribed(void) const { return _is_able_to_have_a_runic_inscribed; }
-int Tp::is_able_to_jump(void) const { return _is_able_to_jump; }
 int Tp::is_able_to_jump_attack(void) const { return _is_able_to_jump_attack; }
 int Tp::is_able_to_jump_escape(void) const { return _is_able_to_jump_escape; }
 int Tp::is_able_to_jump_onto(void) const { return _is_able_to_jump_onto; }
+int Tp::is_able_to_jump(void) const { return _is_able_to_jump; }
 int Tp::is_able_to_jump_without_tiring(void) const { return _is_able_to_jump_without_tiring; }
 int Tp::is_able_to_learn_skills(void) const { return _is_able_to_learn_skills; }
 int Tp::is_able_to_learn_spells(void) const { return _is_able_to_learn_spells; }
@@ -413,8 +413,8 @@ int Tp::is_able_to_see_in_magical_darkness(void) const { return _is_able_to_see_
 int Tp::is_able_to_see_in_the_dark(void) const { return _is_able_to_see_in_the_dark; }
 int Tp::is_able_to_see_invisible(void) const { return _is_able_to_see_invisible; }
 int Tp::is_able_to_see_through_doors(void) const { return _is_able_to_see_through_doors; }
-int Tp::is_able_to_shoot_at(void) const { return _is_able_to_shoot_at; }
 int Tp::is_able_to_shoot_at_close_range(void) const { return _is_able_to_shoot_at_close_range; }
+int Tp::is_able_to_shoot_at(void) const { return _is_able_to_shoot_at; }
 int Tp::is_able_to_shove(void) const { return _is_able_to_shove; }
 int Tp::is_able_to_sleep(void) const { return _is_able_to_sleep; }
 int Tp::is_able_to_spawn_things(void) const { return _is_able_to_spawn_things; }
@@ -437,8 +437,8 @@ int Tp::is_able_to_use_shield(void) const { return _is_able_to_use_shield; }
 int Tp::is_able_to_use_staffs(void) const { return _is_able_to_use_staffs; }
 int Tp::is_able_to_use_weapons(void) const { return _is_able_to_use_weapons; }
 int Tp::is_able_to_walk_through_walls(void) const { return _is_able_to_walk_through_walls; }
-int Tp::is_acid(void) const { return _is_acid; }
 int Tp::is_acid_blob(void) const { return _is_acid_blob; }
+int Tp::is_acid(void) const { return _is_acid; }
 int Tp::is_aerodynamic(void) const { return _is_aerodynamic; }
 int Tp::is_air_breather(void) const { return _is_air_breather; }
 int Tp::is_alive_on_end_of_anim(void) const { return _is_alive_on_end_of_anim; }
@@ -461,10 +461,10 @@ int Tp::is_auto_activated(void) const { return _is_auto_activated; }
 int Tp::is_auto_collect_item(void) const { return _is_auto_collect_item; }
 int Tp::is_auto_equipped(void) const { return _is_auto_equipped; }
 int Tp::is_auto_throw(void) const { return _is_auto_throw; }
-int Tp::is_bag(void) const { return _is_bag; }
-int Tp::is_bag_item(void) const { return _is_bag_item; }
 int Tp::is_bag_item_container(void) const { return _is_bag_item_container; }
 int Tp::is_bag_item_not_stackable(void) const { return _is_bag_item_not_stackable; }
+int Tp::is_bag_item(void) const { return _is_bag_item; }
+int Tp::is_bag(void) const { return _is_bag; }
 int Tp::is_barrel(void) const { return _is_barrel; }
 int Tp::is_basalt(void) const { return _is_basalt; }
 int Tp::is_bearowl(void) const { return _is_bearowl; }
@@ -487,16 +487,16 @@ int Tp::is_boots(void) const { return _is_boots; }
 int Tp::is_brazier(void) const { return _is_brazier; }
 int Tp::is_bridge(void) const { return _is_bridge; }
 int Tp::is_brittle(void) const { return _is_brittle; }
-int Tp::is_buff(void) const { return _is_buff; }
 int Tp::is_buffable(void) const { return _is_buffable; }
+int Tp::is_buff(void) const { return _is_buff; }
 int Tp::is_burnable(void) const { return _is_burnable; }
 int Tp::is_carnivorous_plant(void) const { return _is_carnivorous_plant; }
 int Tp::is_cautious(void) const { return _is_cautious; }
 int Tp::is_centipede(void) const { return _is_centipede; }
 int Tp::is_chasm(void) const { return _is_chasm; }
 int Tp::is_cloak(void) const { return _is_cloak; }
-int Tp::is_cold(void) const { return _is_cold; }
 int Tp::is_cold_elemental(void) const { return _is_cold_elemental; }
+int Tp::is_cold(void) const { return _is_cold; }
 int Tp::is_collectable(void) const { return _is_collectable; }
 int Tp::is_collected_as_gold(void) const { return _is_collected_as_gold; }
 int Tp::is_collected_as_keys(void) const { return _is_collected_as_keys; }
@@ -508,14 +508,14 @@ int Tp::is_cowardly(void) const { return _is_cowardly; }
 int Tp::is_crab(void) const { return _is_crab; }
 int Tp::is_critical_to_level(void) const { return _is_critical_to_level; }
 int Tp::is_crushable(void) const { return _is_crushable; }
-int Tp::is_crystal(void) const { return _is_crystal; }
 int Tp::is_crystalline(void) const { return _is_crystalline; }
-int Tp::is_cursor(void) const { return _is_cursor; }
-int Tp::is_cursor_can_hover_over(void) const { return _is_cursor_can_hover_over; }
+int Tp::is_crystal(void) const { return _is_crystal; }
 int Tp::is_cursor_can_hover_over_needs_confirm(void) const { return _is_cursor_can_hover_over_needs_confirm; }
-int Tp::is_cursor_path(void) const { return _is_cursor_path; }
+int Tp::is_cursor_can_hover_over(void) const { return _is_cursor_can_hover_over; }
 int Tp::is_cursor_path_blocker(void) const { return _is_cursor_path_blocker; }
 int Tp::is_cursor_path_hazard(void) const { return _is_cursor_path_hazard; }
+int Tp::is_cursor_path(void) const { return _is_cursor_path; }
+int Tp::is_cursor(void) const { return _is_cursor; }
 int Tp::is_dagger(void) const { return _is_dagger; }
 int Tp::is_daring(void) const { return _is_daring; }
 int Tp::is_dead_on_end_of_anim(void) const { return _is_dead_on_end_of_anim; }
@@ -534,8 +534,8 @@ int Tp::is_described_when_hovering_over(void) const { return _is_described_when_
 int Tp::is_destroyed_on_hit_or_miss(void) const { return _is_destroyed_on_hit_or_miss; }
 int Tp::is_destroyed_on_hitting(void) const { return _is_destroyed_on_hitting; }
 int Tp::is_dirt(void) const { return _is_dirt; }
-int Tp::is_dog(void) const { return _is_dog; }
 int Tp::is_dogman(void) const { return _is_dogman; }
+int Tp::is_dog(void) const { return _is_dog; }
 int Tp::is_door(void) const { return _is_door; }
 int Tp::is_dragon_scales(void) const { return _is_dragon_scales; }
 int Tp::is_drinkable(void) const { return _is_drinkable; }
@@ -564,33 +564,33 @@ int Tp::is_eater_of_slime(void) const { return _is_eater_of_slime; }
 int Tp::is_eater_of_staffs(void) const { return _is_eater_of_staffs; }
 int Tp::is_eater_of_treasure(void) const { return _is_eater_of_treasure; }
 int Tp::is_eater_of_weapons(void) const { return _is_eater_of_weapons; }
-int Tp::is_enchantable(void) const { return _is_enchantable; }
 int Tp::is_enchantable_as_a_group(void) const { return _is_enchantable_as_a_group; }
+int Tp::is_enchantable(void) const { return _is_enchantable; }
 int Tp::is_enchantstone(void) const { return _is_enchantstone; }
 int Tp::is_engulfer(void) const { return _is_engulfer; }
-int Tp::is_ethereal(void) const { return _is_ethereal; }
 int Tp::is_ethereal_mob(void) const { return _is_ethereal_mob; }
+int Tp::is_ethereal(void) const { return _is_ethereal; }
 int Tp::is_ettin(void) const { return _is_ettin; }
 int Tp::is_exit_finder(void) const { return _is_exit_finder; }
 int Tp::is_explorer(void) const { return _is_explorer; }
 int Tp::is_explosion(void) const { return _is_explosion; }
 int Tp::is_fairy(void) const { return _is_fairy; }
 int Tp::is_fearless(void) const { return _is_fearless; }
-int Tp::is_fire(void) const { return _is_fire; }
 int Tp::is_fire_elemental(void) const { return _is_fire_elemental; }
 int Tp::is_firefox(void) const { return _is_firefox; }
+int Tp::is_fire(void) const { return _is_fire; }
 int Tp::is_flat(void) const { return _is_flat; }
 int Tp::is_floating(void) const { return _is_floating; }
-int Tp::is_floor(void) const { return _is_floor; }
 int Tp::is_floor_deco(void) const { return _is_floor_deco; }
+int Tp::is_floor(void) const { return _is_floor; }
 int Tp::is_flying(void) const { return _is_flying; }
 int Tp::is_foliage(void) const { return _is_foliage; }
 int Tp::is_food(void) const { return _is_food; }
 int Tp::is_four_leaf_clover(void) const { return _is_four_leaf_clover; }
-int Tp::is_fungus(void) const { return _is_fungus; }
 int Tp::is_fungus_edible(void) const { return _is_fungus_edible; }
 int Tp::is_fungus_healing(void) const { return _is_fungus_healing; }
 int Tp::is_fungus_poison(void) const { return _is_fungus_poison; }
+int Tp::is_fungus(void) const { return _is_fungus; }
 int Tp::is_fungus_withered(void) const { return _is_fungus_withered; }
 int Tp::is_gas_blocker(void) const { return _is_gas_blocker; }
 int Tp::is_gas_explosion_blocker(void) const { return _is_gas_explosion_blocker; }
@@ -600,18 +600,18 @@ int Tp::is_glass(void) const { return _is_glass; }
 int Tp::is_gnoll(void) const { return _is_gnoll; }
 int Tp::is_gnome(void) const { return _is_gnome; }
 int Tp::is_goat(void) const { return _is_goat; }
-int Tp::is_gold(void) const { return _is_gold; }
 int Tp::is_golden(void) const { return _is_golden; }
+int Tp::is_gold(void) const { return _is_gold; }
 int Tp::is_golem(void) const { return _is_golem; }
-int Tp::is_grass(void) const { return _is_grass; }
 int Tp::is_grass_dead(void) const { return _is_grass_dead; }
-int Tp::is_grass_dry(void) const { return _is_grass_dry; }
 int Tp::is_grass_dry_trampled(void) const { return _is_grass_dry_trampled; }
+int Tp::is_grass_dry(void) const { return _is_grass_dry; }
 int Tp::is_grass_trampled(void) const { return _is_grass_trampled; }
-int Tp::is_grass_wet(void) const { return _is_grass_wet; }
+int Tp::is_grass(void) const { return _is_grass; }
 int Tp::is_grass_wet_trampled(void) const { return _is_grass_wet_trampled; }
-int Tp::is_green_blood(void) const { return _is_green_blood; }
+int Tp::is_grass_wet(void) const { return _is_grass_wet; }
 int Tp::is_green_blooded(void) const { return _is_green_blooded; }
+int Tp::is_green_blood(void) const { return _is_green_blood; }
 int Tp::is_green_splatter(void) const { return _is_green_splatter; }
 int Tp::is_hard(void) const { return _is_hard; }
 int Tp::is_hazard(void) const { return _is_hazard; }
@@ -654,31 +654,31 @@ int Tp::is_intelligent(void) const { return _is_intelligent; }
 int Tp::is_interesting(void) const { return _is_interesting; }
 int Tp::is_internal(void) const { return _is_internal; }
 int Tp::is_invisible(void) const { return _is_invisible; }
-int Tp::is_item(void) const { return _is_item; }
 int Tp::is_item_carrier(void) const { return _is_item_carrier; }
 int Tp::is_item_collector(void) const { return _is_item_collector; }
 int Tp::is_item_organic(void) const { return _is_item_organic; }
 int Tp::is_item_targeted(void) const { return _is_item_targeted; }
+int Tp::is_item(void) const { return _is_item; }
 int Tp::is_kept_after_final_use(void) const { return _is_kept_after_final_use; }
-int Tp::is_key(void) const { return _is_key; }
 int Tp::is_key_special(void) const { return _is_key_special; }
+int Tp::is_key(void) const { return _is_key; }
 int Tp::is_laser(void) const { return _is_laser; }
 int Tp::is_lava(void) const { return _is_lava; }
 int Tp::is_leech(void) const { return _is_leech; }
 int Tp::is_lifeless(void) const { return _is_lifeless; }
-int Tp::is_light(void) const { return _is_light; }
-int Tp::is_light_blocker(void) const { return _is_light_blocker; }
 int Tp::is_light_blocker_for_monst(void) const { return _is_light_blocker_for_monst; }
+int Tp::is_light_blocker(void) const { return _is_light_blocker; }
 int Tp::is_lightning(void) const { return _is_lightning; }
+int Tp::is_light(void) const { return _is_light; }
 int Tp::is_limb(void) const { return _is_limb; }
 int Tp::is_living(void) const { return _is_living; }
 int Tp::is_loggable(void) const { return _is_loggable; }
 int Tp::is_mace(void) const { return _is_mace; }
 int Tp::is_made_of_rock(void) const { return _is_made_of_rock; }
+int Tp::is_magical_effect(void) const { return _is_magical_effect; }
+int Tp::is_magical(void) const { return _is_magical; }
 int Tp::is_magic_crystal(void) const { return _is_magic_crystal; }
 int Tp::is_magic_stone(void) const { return _is_magic_stone; }
-int Tp::is_magical(void) const { return _is_magical; }
-int Tp::is_magical_effect(void) const { return _is_magical_effect; }
 int Tp::is_mantisman(void) const { return _is_mantisman; }
 int Tp::is_map_beast(void) const { return _is_map_beast; }
 int Tp::is_map_treasure(void) const { return _is_map_treasure; }
@@ -687,45 +687,45 @@ int Tp::is_metal(void) const { return _is_metal; }
 int Tp::is_mimic(void) const { return _is_mimic; }
 int Tp::is_minion(void) const { return _is_minion; }
 int Tp::is_missile(void) const { return _is_missile; }
-int Tp::is_mob(void) const { return _is_mob; }
 int Tp::is_mob_class_A(void) const { return _is_mob_class_A; }
 int Tp::is_mob_class_B(void) const { return _is_mob_class_B; }
 int Tp::is_mob_class_C(void) const { return _is_mob_class_C; }
+int Tp::is_mob(void) const { return _is_mob; }
 int Tp::is_molekin(void) const { return _is_molekin; }
-int Tp::is_monst(void) const { return _is_monst; }
 int Tp::is_monst_class_A(void) const { return _is_monst_class_A; }
 int Tp::is_monst_class_B(void) const { return _is_monst_class_B; }
 int Tp::is_monst_class_C(void) const { return _is_monst_class_C; }
 int Tp::is_monst_class_D(void) const { return _is_monst_class_D; }
 int Tp::is_monst_class_E(void) const { return _is_monst_class_E; }
 int Tp::is_monst_pack(void) const { return _is_monst_pack; }
+int Tp::is_monst(void) const { return _is_monst; }
 int Tp::is_moveable(void) const { return _is_moveable; }
-int Tp::is_msg(void) const { return _is_msg; }
 int Tp::is_msg_allowed_hears_something(void) const { return _is_msg_allowed_hears_something; }
 int Tp::is_msg_allowed_is_dead(void) const { return _is_msg_allowed_is_dead; }
 int Tp::is_msg_allowed_is_seen(void) const { return _is_msg_allowed_is_seen; }
 int Tp::is_msg_allowed_is_surprised(void) const { return _is_msg_allowed_is_surprised; }
 int Tp::is_msg_allowed_is_wounded(void) const { return _is_msg_allowed_is_wounded; }
 int Tp::is_msg_allowed_senses_danger(void) const { return _is_msg_allowed_senses_danger; }
+int Tp::is_msg(void) const { return _is_msg; }
 int Tp::is_mummy(void) const { return _is_mummy; }
 int Tp::is_necrotic_danger_level(void) const { return _is_necrotic_danger_level; }
 int Tp::is_no_tile(void) const { return _is_no_tile; }
 int Tp::is_not_shown_as_a_pet(void) const { return _is_not_shown_as_a_pet; }
-int Tp::is_obj_spawning(void) const { return _is_obj_spawning; }
 int Tp::is_obj_spawning_monst(void) const { return _is_obj_spawning_monst; }
+int Tp::is_obj_spawning(void) const { return _is_obj_spawning; }
 int Tp::is_obs_ai(void) const { return _is_obs_ai; }
 int Tp::is_obs_destructable(void) const { return _is_obs_destructable; }
+int Tp::is_obsidian(void) const { return _is_obsidian; }
 int Tp::is_obs_jump_end(void) const { return _is_obs_jump_end; }
 int Tp::is_obs_jumping(void) const { return _is_obs_jumping; }
 int Tp::is_obs_shooting(void) const { return _is_obs_shooting; }
 int Tp::is_obs_shoving(void) const { return _is_obs_shoving; }
-int Tp::is_obs_spawn(void) const { return _is_obs_spawn; }
 int Tp::is_obs_spawn_monst(void) const { return _is_obs_spawn_monst; }
+int Tp::is_obs_spawn(void) const { return _is_obs_spawn; }
 int Tp::is_obs_spell_casting(void) const { return _is_obs_spell_casting; }
 int Tp::is_obs_throwing(void) const { return _is_obs_throwing; }
 int Tp::is_obs_wall_or_door(void) const { return _is_obs_wall_or_door; }
 int Tp::is_obs_when_dead(void) const { return _is_obs_when_dead; }
-int Tp::is_obsidian(void) const { return _is_obsidian; }
 int Tp::is_ogre(void) const { return _is_ogre; }
 int Tp::is_one_per_tile(void) const { return _is_one_per_tile; }
 int Tp::is_ooze(void) const { return _is_ooze; }
@@ -734,14 +734,14 @@ int Tp::is_organic(void) const { return _is_organic; }
 int Tp::is_pillar(void) const { return _is_pillar; }
 int Tp::is_piranha(void) const { return _is_piranha; }
 int Tp::is_plant(void) const { return _is_plant; }
-int Tp::is_player(void) const { return _is_player; }
-int Tp::is_player_bodypart(void) const { return _is_player_bodypart; }
 int Tp::is_player_bodypart_eyes(void) const { return _is_player_bodypart_eyes; }
 int Tp::is_player_bodypart_face(void) const { return _is_player_bodypart_face; }
 int Tp::is_player_bodypart_hair(void) const { return _is_player_bodypart_hair; }
 int Tp::is_player_bodypart_hat(void) const { return _is_player_bodypart_hat; }
 int Tp::is_player_bodypart_legs(void) const { return _is_player_bodypart_legs; }
 int Tp::is_player_bodypart_torso(void) const { return _is_player_bodypart_torso; }
+int Tp::is_player_bodypart(void) const { return _is_player_bodypart; }
+int Tp::is_player(void) const { return _is_player; }
 int Tp::is_pointy(void) const { return _is_pointy; }
 int Tp::is_poisonous_danger_level(void) const { return _is_poisonous_danger_level; }
 int Tp::is_portal(void) const { return _is_portal; }
@@ -750,16 +750,16 @@ int Tp::is_pressure_plate(void) const { return _is_pressure_plate; }
 int Tp::is_projectile(void) const { return _is_projectile; }
 int Tp::is_ranged_weapon(void) const { return _is_ranged_weapon; }
 int Tp::is_rat(void) const { return _is_rat; }
-int Tp::is_red_blood(void) const { return _is_red_blood; }
 int Tp::is_red_blooded(void) const { return _is_red_blooded; }
+int Tp::is_red_blood(void) const { return _is_red_blood; }
 int Tp::is_red_splatter(void) const { return _is_red_splatter; }
 int Tp::is_reflective(void) const { return _is_reflective; }
 int Tp::is_removable_if_out_of_slots(void) const { return _is_removable_if_out_of_slots; }
 int Tp::is_ring(void) const { return _is_ring; }
 int Tp::is_ripple(void) const { return _is_ripple; }
-int Tp::is_rock(void) const { return _is_rock; }
 int Tp::is_rock_ice(void) const { return _is_rock_ice; }
 int Tp::is_rock_lava(void) const { return _is_rock_lava; }
+int Tp::is_rock(void) const { return _is_rock; }
 int Tp::is_runic_defensive_class_A(void) const { return _is_runic_defensive_class_A; }
 int Tp::is_runic_defensive_class_B(void) const { return _is_runic_defensive_class_B; }
 int Tp::is_runic_offensive_class_A(void) const { return _is_runic_offensive_class_A; }
@@ -772,11 +772,11 @@ int Tp::is_shallow_water(void) const { return _is_shallow_water; }
 int Tp::is_sheep(void) const { return _is_sheep; }
 int Tp::is_shield(void) const { return _is_shield; }
 int Tp::is_shootable(void) const { return _is_shootable; }
-int Tp::is_shovable(void) const { return _is_shovable; }
 int Tp::is_shovable_and_sticky(void) const { return _is_shovable_and_sticky; }
+int Tp::is_shovable(void) const { return _is_shovable; }
 int Tp::is_skeleton(void) const { return _is_skeleton; }
-int Tp::is_skill(void) const { return _is_skill; }
 int Tp::is_skillstone(void) const { return _is_skillstone; }
+int Tp::is_skill(void) const { return _is_skill; }
 int Tp::is_slime(void) const { return _is_slime; }
 int Tp::is_slippery(void) const { return _is_slippery; }
 int Tp::is_sluud(void) const { return _is_sluud; }
@@ -784,18 +784,18 @@ int Tp::is_smoke(void) const { return _is_smoke; }
 int Tp::is_snake(void) const { return _is_snake; }
 int Tp::is_soft(void) const { return _is_soft; }
 int Tp::is_spectral_blade(void) const { return _is_spectral_blade; }
-int Tp::is_spell(void) const { return _is_spell; }
 int Tp::is_spell_always_succeeds(void) const { return _is_spell_always_succeeds; }
-int Tp::is_spell_of_beckoning(void) const { return _is_spell_of_beckoning; }
-int Tp::is_spell_of_holding(void) const { return _is_spell_of_holding; }
-int Tp::is_spell_of_holding_barrier(void) const { return _is_spell_of_holding_barrier; }
-int Tp::is_spell_of_protection(void) const { return _is_spell_of_protection; }
-int Tp::is_spell_of_protection_barrier(void) const { return _is_spell_of_protection_barrier; }
-int Tp::is_spell_of_repulsion(void) const { return _is_spell_of_repulsion; }
-int Tp::is_spell_of_sanctuary(void) const { return _is_spell_of_sanctuary; }
-int Tp::is_spell_of_sanctuary_barrier(void) const { return _is_spell_of_sanctuary_barrier; }
-int Tp::is_spell_of_slowness(void) const { return _is_spell_of_slowness; }
 int Tp::is_spellbook(void) const { return _is_spellbook; }
+int Tp::is_spell_of_beckoning(void) const { return _is_spell_of_beckoning; }
+int Tp::is_spell_of_holding_barrier(void) const { return _is_spell_of_holding_barrier; }
+int Tp::is_spell_of_holding(void) const { return _is_spell_of_holding; }
+int Tp::is_spell_of_protection_barrier(void) const { return _is_spell_of_protection_barrier; }
+int Tp::is_spell_of_protection(void) const { return _is_spell_of_protection; }
+int Tp::is_spell_of_repulsion(void) const { return _is_spell_of_repulsion; }
+int Tp::is_spell_of_sanctuary_barrier(void) const { return _is_spell_of_sanctuary_barrier; }
+int Tp::is_spell_of_sanctuary(void) const { return _is_spell_of_sanctuary; }
+int Tp::is_spell_of_slowness(void) const { return _is_spell_of_slowness; }
+int Tp::is_spell(void) const { return _is_spell; }
 int Tp::is_spider(void) const { return _is_spider; }
 int Tp::is_spiderweb(void) const { return _is_spiderweb; }
 int Tp::is_splatter(void) const { return _is_splatter; }
@@ -804,14 +804,14 @@ int Tp::is_steam(void) const { return _is_steam; }
 int Tp::is_steel(void) const { return _is_steel; }
 int Tp::is_sticky(void) const { return _is_sticky; }
 int Tp::is_stone(void) const { return _is_stone; }
-int Tp::is_swimmer(void) const { return _is_swimmer; }
 int Tp::is_swimmer_but_land_dweller(void) const { return _is_swimmer_but_land_dweller; }
+int Tp::is_swimmer(void) const { return _is_swimmer; }
 int Tp::is_sword(void) const { return _is_sword; }
 int Tp::is_tameable(void) const { return _is_tameable; }
 int Tp::is_target_radial(void) const { return _is_target_radial; }
 int Tp::is_target_select(void) const { return _is_target_select; }
-int Tp::is_tentacle(void) const { return _is_tentacle; }
 int Tp::is_tentacle_horror(void) const { return _is_tentacle_horror; }
+int Tp::is_tentacle(void) const { return _is_tentacle; }
 int Tp::is_tentacleye(void) const { return _is_tentacleye; }
 int Tp::is_the_grid(void) const { return _is_the_grid; }
 int Tp::is_thief(void) const { return _is_thief; }
@@ -824,31 +824,30 @@ int Tp::is_tmp_thing(void) const { return _is_tmp_thing; }
 int Tp::is_torch(void) const { return _is_torch; }
 int Tp::is_totem(void) const { return _is_totem; }
 int Tp::is_trap(void) const { return _is_trap; }
-int Tp::is_treasure(void) const { return _is_treasure; }
 int Tp::is_treasure_chest(void) const { return _is_treasure_chest; }
 int Tp::is_treasure_class_A(void) const { return _is_treasure_class_A; }
 int Tp::is_treasure_class_B(void) const { return _is_treasure_class_B; }
 int Tp::is_treasure_class_C(void) const { return _is_treasure_class_C; }
 int Tp::is_treasure_type(void) const { return _is_treasure_type; }
+int Tp::is_treasure(void) const { return _is_treasure; }
 int Tp::is_troll(void) const { return _is_troll; }
 int Tp::is_turret(void) const { return _is_turret; }
 int Tp::is_undead(void) const { return _is_undead; }
 int Tp::is_unobtanium(void) const { return _is_unobtanium; }
-int Tp::is_unused_flag1(void) const { return _is_unused_flag1; }
 int Tp::is_unused_flag10(void) const { return _is_unused_flag10; }
 int Tp::is_unused_flag11(void) const { return _is_unused_flag11; }
 int Tp::is_unused_flag12(void) const { return _is_unused_flag12; }
 int Tp::is_unused_flag13(void) const { return _is_unused_flag13; }
-int Tp::is_unused_flag14(void) const { return _is_unused_flag14; }
 int Tp::is_unused_flag142(void) const { return _is_unused_flag142; }
+int Tp::is_unused_flag14(void) const { return _is_unused_flag14; }
 int Tp::is_unused_flag15(void) const { return _is_unused_flag15; }
 int Tp::is_unused_flag16(void) const { return _is_unused_flag16; }
-int Tp::is_unused_flag17(void) const { return _is_unused_flag17; }
 int Tp::is_unused_flag179(void) const { return _is_unused_flag179; }
+int Tp::is_unused_flag17(void) const { return _is_unused_flag17; }
 int Tp::is_unused_flag18(void) const { return _is_unused_flag18; }
-int Tp::is_unused_flag19(void) const { return _is_unused_flag19; }
 int Tp::is_unused_flag192(void) const { return _is_unused_flag192; }
-int Tp::is_unused_flag2(void) const { return _is_unused_flag2; }
+int Tp::is_unused_flag19(void) const { return _is_unused_flag19; }
+int Tp::is_unused_flag1(void) const { return _is_unused_flag1; }
 int Tp::is_unused_flag20(void) const { return _is_unused_flag20; }
 int Tp::is_unused_flag21(void) const { return _is_unused_flag21; }
 int Tp::is_unused_flag22(void) const { return _is_unused_flag22; }
@@ -859,7 +858,7 @@ int Tp::is_unused_flag26(void) const { return _is_unused_flag26; }
 int Tp::is_unused_flag27(void) const { return _is_unused_flag27; }
 int Tp::is_unused_flag28(void) const { return _is_unused_flag28; }
 int Tp::is_unused_flag29(void) const { return _is_unused_flag29; }
-int Tp::is_unused_flag3(void) const { return _is_unused_flag3; }
+int Tp::is_unused_flag2(void) const { return _is_unused_flag2; }
 int Tp::is_unused_flag30(void) const { return _is_unused_flag30; }
 int Tp::is_unused_flag31(void) const { return _is_unused_flag31; }
 int Tp::is_unused_flag32(void) const { return _is_unused_flag32; }
@@ -870,18 +869,19 @@ int Tp::is_unused_flag36(void) const { return _is_unused_flag36; }
 int Tp::is_unused_flag37(void) const { return _is_unused_flag37; }
 int Tp::is_unused_flag38(void) const { return _is_unused_flag38; }
 int Tp::is_unused_flag39(void) const { return _is_unused_flag39; }
-int Tp::is_unused_flag4(void) const { return _is_unused_flag4; }
+int Tp::is_unused_flag3(void) const { return _is_unused_flag3; }
 int Tp::is_unused_flag40(void) const { return _is_unused_flag40; }
 int Tp::is_unused_flag41(void) const { return _is_unused_flag41; }
 int Tp::is_unused_flag42(void) const { return _is_unused_flag42; }
 int Tp::is_unused_flag43(void) const { return _is_unused_flag43; }
+int Tp::is_unused_flag4(void) const { return _is_unused_flag4; }
 int Tp::is_unused_flag5(void) const { return _is_unused_flag5; }
 int Tp::is_unused_flag6(void) const { return _is_unused_flag6; }
 int Tp::is_unused_flag7(void) const { return _is_unused_flag7; }
 int Tp::is_unused_flag8(void) const { return _is_unused_flag8; }
 int Tp::is_unused_flag9(void) const { return _is_unused_flag9; }
-int Tp::is_usable(void) const { return _is_usable; }
 int Tp::is_usable_only_after_equipping(void) const { return _is_usable_only_after_equipping; }
+int Tp::is_usable(void) const { return _is_usable; }
 int Tp::is_used_when_thrown(void) const { return _is_used_when_thrown; }
 int Tp::is_value_defensive(void) const { return _is_value_defensive; }
 int Tp::is_value_offensive(void) const { return _is_value_offensive; }
@@ -890,26 +890,26 @@ int Tp::is_very_combustible(void) const { return _is_very_combustible; }
 int Tp::is_very_hard(void) const { return _is_very_hard; }
 int Tp::is_very_heavy(void) const { return _is_very_heavy; }
 int Tp::is_very_intelligent(void) const { return _is_very_intelligent; }
-int Tp::is_wall(void) const { return _is_wall; }
 int Tp::is_wall_dungeon(void) const { return _is_wall_dungeon; }
+int Tp::is_wall(void) const { return _is_wall; }
 int Tp::is_warhammer(void) const { return _is_warhammer; }
-int Tp::is_weapon(void) const { return _is_weapon; }
 int Tp::is_weapon_class_A(void) const { return _is_weapon_class_A; }
 int Tp::is_weapon_class_B(void) const { return _is_weapon_class_B; }
 int Tp::is_weapon_class_C(void) const { return _is_weapon_class_C; }
+int Tp::is_weapon(void) const { return _is_weapon; }
 int Tp::is_wooden(void) const { return _is_wooden; }
 int Tp::is_yeti(void) const { return _is_yeti; }
 int Tp::is_zorblin(void) const { return _is_zorblin; }
 int Tp::item_height(void) const { return _item_height ? _item_height : 1; }
 int Tp::item_width(void) const { return _item_width ? _item_width : 1; }
-int Tp::jump_distance(void) const { return _jump_distance; }
 int Tp::jump_distance_bonus(void) const { return _jump_distance_bonus; }
+int Tp::jump_distance(void) const { return _jump_distance; }
 int Tp::light_dist(void) const { return _light_dist; }
-int Tp::magic(void) const { return _magic; }
 int Tp::magic_drain_on_using(void) const { return _magic_drain_on_using; }
+int Tp::magic(void) const { return _magic; }
 int Tp::minion_limit(void) const { return _minion_limit; }
-int Tp::move_speed(void) const { return _move_speed; }
 int Tp::move_speed_bonus(void) const { return _move_speed_bonus; }
+int Tp::move_speed(void) const { return _move_speed; }
 int Tp::noise_additional_on_jump_end(void) const { return _noise_additional_on_jump_end; }
 int Tp::noise_additional_on_teleporting(void) const { return _noise_additional_on_teleporting; }
 int Tp::noise_blocker(void) const { return _noise_blocker; }
@@ -930,40 +930,35 @@ int Tp::shove_bonus(void) const { return _shove_bonus; }
 int Tp::shove_strength(void) const { return _shove_strength; }
 int Tp::spawn_group_radius(void) const { return _spawn_group_radius; }
 int Tp::spell_cost(void) const { return _spell_cost; }
-int Tp::stamina(void) const { return _stamina; }
 int Tp::stamina_drain_on_attacking(void) const { return _stamina_drain_on_attacking; }
 int Tp::stamina_drain_on_using(void) const { return _stamina_drain_on_using; }
-int Tp::stat_att(void) const { return _stat_att; }
+int Tp::stamina(void) const { return _stamina; }
 int Tp::stat_att_bonus(void) const { return _stat_att_bonus; }
-int Tp::stat_att_penalty_when_idle(void) const { return _stat_att_penalty_when_idle; }
 int Tp::stat_att_penalty_when_idle_max(void) const { return _stat_att_penalty_when_idle_max; }
+int Tp::stat_att_penalty_when_idle(void) const { return _stat_att_penalty_when_idle; }
 int Tp::stat_att_penalty_when_in_deep_water(void) const { return _stat_att_penalty_when_in_deep_water; }
 int Tp::stat_att_penalty_when_in_shallow_water(void) const { return _stat_att_penalty_when_in_shallow_water; }
-int Tp::stat_att_penalty_when_stuck(void) const { return _stat_att_penalty_when_stuck; }
 int Tp::stat_att_penalty_when_stuck_max(void) const { return _stat_att_penalty_when_stuck_max; }
-int Tp::stat_con(void) const { return _stat_con; }
+int Tp::stat_att_penalty_when_stuck(void) const { return _stat_att_penalty_when_stuck; }
+int Tp::stat_att(void) const { return _stat_att; }
 int Tp::stat_con_bonus(void) const { return _stat_con_bonus; }
-int Tp::stat_def(void) const { return _stat_def; }
+int Tp::stat_con(void) const { return _stat_con; }
 int Tp::stat_def_bonus(void) const { return _stat_def_bonus; }
-int Tp::stat_def_penalty_when_idle(void) const { return _stat_def_penalty_when_idle; }
 int Tp::stat_def_penalty_when_idle_max(void) const { return _stat_def_penalty_when_idle_max; }
+int Tp::stat_def_penalty_when_idle(void) const { return _stat_def_penalty_when_idle; }
 int Tp::stat_def_penalty_when_in_deep_water(void) const { return _stat_def_penalty_when_in_deep_water; }
 int Tp::stat_def_penalty_when_in_shallow_water(void) const { return _stat_def_penalty_when_in_shallow_water; }
-int Tp::stat_def_penalty_when_stuck(void) const { return _stat_def_penalty_when_stuck; }
 int Tp::stat_def_penalty_when_stuck_max(void) const { return _stat_def_penalty_when_stuck_max; }
-int Tp::stat_dex(void) const { return _stat_dex; }
+int Tp::stat_def_penalty_when_stuck(void) const { return _stat_def_penalty_when_stuck; }
+int Tp::stat_def(void) const { return _stat_def; }
 int Tp::stat_dex_bonus(void) const { return _stat_dex_bonus; }
-int Tp::stat_int(void) const { return _stat_int; }
+int Tp::stat_dex(void) const { return _stat_dex; }
 int Tp::stat_int_bonus(void) const { return _stat_int_bonus; }
-int Tp::stat_luck(void) const { return _stat_luck; }
+int Tp::stat_int(void) const { return _stat_int; }
 int Tp::stat_luck_bonus(void) const { return _stat_luck_bonus; }
-int Tp::stat_psi(void) const { return _stat_psi; }
+int Tp::stat_luck(void) const { return _stat_luck; }
 int Tp::stat_psi_bonus(void) const { return _stat_psi_bonus; }
-int Tp::stat_str(void) const { return _stat_str; }
-int Tp::stat_str_bonus(void) const { return _stat_str_bonus; }
-int Tp::stat_str_min(void) const { return _stat_str_min; }
-int Tp::stat_thv(void) const { return _stat_thv; }
-int Tp::stat_thv_bonus(void) const { return _stat_thv_bonus; }
+int Tp::stat_psi(void) const { return _stat_psi; }
 int Tp::stats02(void) const { return _stats02; }
 int Tp::stats03(void) const { return _stats03; }
 int Tp::stats04(void) const { return _stats04; }
@@ -971,13 +966,18 @@ int Tp::stats05(void) const { return _stats05; }
 int Tp::stats06(void) const { return _stats06; }
 int Tp::stats07(void) const { return _stats07; }
 int Tp::stats09(void) const { return _stats09; }
+int Tp::stat_str_bonus(void) const { return _stat_str_bonus; }
+int Tp::stat_str_min(void) const { return _stat_str_min; }
+int Tp::stat_str(void) const { return _stat_str; }
+int Tp::stat_thv_bonus(void) const { return _stat_thv_bonus; }
+int Tp::stat_thv(void) const { return _stat_thv; }
 int Tp::teleport_distance(void) const { return _teleport_distance; }
-int Tp::temperature(void) const { return _temperature; }
 int Tp::temperature_max(void) const { return _temperature_max; }
 int Tp::temperature_min(void) const { return _temperature_min; }
 int Tp::temperature_never_changes(void) const { return _temperature_never_changes; }
-int Tp::temperature_sensitive(void) const { return _temperature_sensitive; }
 int Tp::temperature_sensitive_to_sudden_changes(void) const { return _temperature_sensitive_to_sudden_changes; }
+int Tp::temperature_sensitive(void) const { return _temperature_sensitive; }
+int Tp::temperature(void) const { return _temperature; }
 int Tp::thing_size(void) const { return _thing_size; }
 int Tp::tick_prio(void) const { return _tick_prio; }
 int Tp::unused_chance1_d1000(void) const { return _unused_chance1_d1000; }
@@ -1104,11 +1104,11 @@ void Tp::gfx_ascii_shown_set(int v) { _gfx_ascii_shown = v; }
 void Tp::gfx_glows_set(int v) { _gfx_glows = v; }
 void Tp::gfx_on_fire_anim_set(int v) { _gfx_on_fire_anim = v; }
 void Tp::gfx_ooze_set(int v) { _gfx_ooze = v; }
-void Tp::gfx_pixelart_anim_synced_with_owner_set(int v) { _gfx_pixelart_anim_synced_with_owner = v; }
 void Tp::gfx_pixelart_animated_can_hflip_set(int v) { _gfx_pixelart_animated_can_hflip = v; }
 void Tp::gfx_pixelart_animated_can_vflip_set(int v) { _gfx_pixelart_animated_can_vflip = v; }
 void Tp::gfx_pixelart_animated_no_dir_set(int v) { _gfx_pixelart_animated_no_dir = v; }
 void Tp::gfx_pixelart_animated_set(int v) { _gfx_pixelart_animated = v; }
+void Tp::gfx_pixelart_anim_synced_with_owner_set(int v) { _gfx_pixelart_anim_synced_with_owner = v; }
 void Tp::gfx_pixelart_attack_anim_set(int v) { _gfx_pixelart_attack_anim = v; }
 void Tp::gfx_pixelart_bounce_always_set(int v) { _gfx_pixelart_bounce_always = v; }
 void Tp::gfx_pixelart_bounce_on_move_set(int v) { _gfx_pixelart_bounce_on_move = v; }
@@ -1127,9 +1127,9 @@ void Tp::gfx_pixelart_shadow_solid_set(int v) { _gfx_pixelart_shadow_solid = v; 
 void Tp::gfx_pixelart_shadow_very_short_set(int v) { _gfx_pixelart_shadow_very_short = v; }
 void Tp::gfx_pixelart_show_asleep_anim_set(int v) { _gfx_pixelart_show_asleep_anim = v; }
 void Tp::gfx_pixelart_show_highlighted_set(int v) { _gfx_pixelart_show_highlighted = v; }
+void Tp::gfx_pixelart_shown_in_bg_set(int v) { _gfx_pixelart_shown_in_bg = v; }
 void Tp::gfx_pixelart_show_outlined_set(int v) { _gfx_pixelart_show_outlined = v; }
 void Tp::gfx_pixelart_show_square_outlined_set(int v) { _gfx_pixelart_show_square_outlined = v; }
-void Tp::gfx_pixelart_shown_in_bg_set(int v) { _gfx_pixelart_shown_in_bg = v; }
 void Tp::gfx_pixelart_submergible_set(int v) { _gfx_pixelart_submergible = v; }
 void Tp::gfx_pixelart_wobbles_when_hit_set(int v) { _gfx_pixelart_wobbles_when_hit = v; }
 void Tp::gfx_targeted_laser_set(const std::string &v) { _gfx_targeted_laser = v; }
@@ -1266,8 +1266,8 @@ void Tp::is_boots_set(int v) { _is_boots = v; }
 void Tp::is_brazier_set(int v) { _is_brazier = v; }
 void Tp::is_bridge_set(int v) { _is_bridge = v; }
 void Tp::is_brittle_set(int v) { _is_brittle = v; }
-void Tp::is_buff_set(int v) { _is_buff = v; }
 void Tp::is_buffable_set(int v) { _is_buffable = v; }
+void Tp::is_buff_set(int v) { _is_buff = v; }
 void Tp::is_burnable_set(int v) { _is_burnable = v; }
 void Tp::is_carnivorous_plant_set(int v) { _is_carnivorous_plant = v; }
 void Tp::is_cautious_set(int v) { _is_cautious = v; }
@@ -1287,8 +1287,8 @@ void Tp::is_cowardly_set(int v) { _is_cowardly = v; }
 void Tp::is_crab_set(int v) { _is_crab = v; }
 void Tp::is_critical_to_level_set(int v) { _is_critical_to_level = v; }
 void Tp::is_crushable_set(int v) { _is_crushable = v; }
-void Tp::is_crystal_set(int v) { _is_crystal = v; }
 void Tp::is_crystalline_set(int v) { _is_crystalline = v; }
+void Tp::is_crystal_set(int v) { _is_crystal = v; }
 void Tp::is_cursor_can_hover_over_needs_confirm_set(int v) { _is_cursor_can_hover_over_needs_confirm = v; }
 void Tp::is_cursor_can_hover_over_set(int v) { _is_cursor_can_hover_over = v; }
 void Tp::is_cursor_path_blocker_set(int v) { _is_cursor_path_blocker = v; }
@@ -1313,8 +1313,8 @@ void Tp::is_described_when_hovering_over_set(int v) { _is_described_when_hoverin
 void Tp::is_destroyed_on_hit_or_miss_set(int v) { _is_destroyed_on_hit_or_miss = v; }
 void Tp::is_destroyed_on_hitting_set(int v) { _is_destroyed_on_hitting = v; }
 void Tp::is_dirt_set(int v) { _is_dirt = v; }
-void Tp::is_dog_set(int v) { _is_dog = v; }
 void Tp::is_dogman_set(int v) { _is_dogman = v; }
+void Tp::is_dog_set(int v) { _is_dog = v; }
 void Tp::is_door_set(int v) { _is_door = v; }
 void Tp::is_dragon_scales_set(int v) { _is_dragon_scales = v; }
 void Tp::is_drinkable_set(int v) { _is_drinkable = v; }
@@ -1356,8 +1356,8 @@ void Tp::is_explosion_set(int v) { _is_explosion = v; }
 void Tp::is_fairy_set(int v) { _is_fairy = v; }
 void Tp::is_fearless_set(int v) { _is_fearless = v; }
 void Tp::is_fire_elemental_set(int v) { _is_fire_elemental = v; }
-void Tp::is_fire_set(int v) { _is_fire = v; }
 void Tp::is_firefox_set(int v) { _is_firefox = v; }
+void Tp::is_fire_set(int v) { _is_fire = v; }
 void Tp::is_flat_set(int v) { _is_flat = v; }
 void Tp::is_floating_set(int v) { _is_floating = v; }
 void Tp::is_floor_deco_set(int v) { _is_floor_deco = v; }
@@ -1379,8 +1379,8 @@ void Tp::is_glass_set(int v) { _is_glass = v; }
 void Tp::is_gnoll_set(int v) { _is_gnoll = v; }
 void Tp::is_gnome_set(int v) { _is_gnome = v; }
 void Tp::is_goat_set(int v) { _is_goat = v; }
-void Tp::is_gold_set(int v) { _is_gold = v; }
 void Tp::is_golden_set(int v) { _is_golden = v; }
+void Tp::is_gold_set(int v) { _is_gold = v; }
 void Tp::is_golem_set(int v) { _is_golem = v; }
 void Tp::is_grass_dead_set(int v) { _is_grass_dead = v; }
 void Tp::is_grass_dry_set(int v) { _is_grass_dry = v; }
@@ -1389,8 +1389,8 @@ void Tp::is_grass_set(int v) { _is_grass = v; }
 void Tp::is_grass_trampled_set(int v) { _is_grass_trampled = v; }
 void Tp::is_grass_wet_set(int v) { _is_grass_wet = v; }
 void Tp::is_grass_wet_trampled_set(int v) { _is_grass_wet_trampled = v; }
-void Tp::is_green_blood_set(int v) { _is_green_blood = v; }
 void Tp::is_green_blooded_set(int v) { _is_green_blooded = v; }
+void Tp::is_green_blood_set(int v) { _is_green_blood = v; }
 void Tp::is_green_splatter_set(int v) { _is_green_splatter = v; }
 void Tp::is_hard_set(int v) { _is_hard = v; }
 void Tp::is_hazard_set(int v) { _is_hazard = v; }
@@ -1447,17 +1447,17 @@ void Tp::is_leech_set(int v) { _is_leech = v; }
 void Tp::is_lifeless_set(int v) { _is_lifeless = v; }
 void Tp::is_light_blocker_for_monst_set(int v) { _is_light_blocker_for_monst = v; }
 void Tp::is_light_blocker_set(int v) { _is_light_blocker = v; }
-void Tp::is_light_set(int v) { _is_light = v; }
 void Tp::is_lightning_set(int v) { _is_lightning = v; }
+void Tp::is_light_set(int v) { _is_light = v; }
 void Tp::is_limb_set(int v) { _is_limb = v; }
 void Tp::is_living_set(int v) { _is_living = v; }
 void Tp::is_loggable_set(int v) { _is_loggable = v; }
 void Tp::is_mace_set(int v) { _is_mace = v; }
 void Tp::is_made_of_rock_set(int v) { _is_made_of_rock = v; }
-void Tp::is_magic_crystal_set(int v) { _is_magic_crystal = v; }
-void Tp::is_magic_stone_set(int v) { _is_magic_stone = v; }
 void Tp::is_magical_effect_set(int v) { _is_magical_effect = v; }
 void Tp::is_magical_set(int v) { _is_magical = v; }
+void Tp::is_magic_crystal_set(int v) { _is_magic_crystal = v; }
+void Tp::is_magic_stone_set(int v) { _is_magic_stone = v; }
 void Tp::is_mantisman_set(int v) { _is_mantisman = v; }
 void Tp::is_map_beast_set(int v) { _is_map_beast = v; }
 void Tp::is_map_treasure_set(int v) { _is_map_treasure = v; }
@@ -1494,6 +1494,7 @@ void Tp::is_obj_spawning_monst_set(int v) { _is_obj_spawning_monst = v; }
 void Tp::is_obj_spawning_set(int v) { _is_obj_spawning = v; }
 void Tp::is_obs_ai_set(int v) { _is_obs_ai = v; }
 void Tp::is_obs_destructable_set(int v) { _is_obs_destructable = v; }
+void Tp::is_obsidian_set(int v) { _is_obsidian = v; }
 void Tp::is_obs_jump_end_set(int v) { _is_obs_jump_end = v; }
 void Tp::is_obs_jumping_set(int v) { _is_obs_jumping = v; }
 void Tp::is_obs_shooting_set(int v) { _is_obs_shooting = v; }
@@ -1504,7 +1505,6 @@ void Tp::is_obs_spell_casting_set(int v) { _is_obs_spell_casting = v; }
 void Tp::is_obs_throwing_set(int v) { _is_obs_throwing = v; }
 void Tp::is_obs_wall_or_door_set(int v) { _is_obs_wall_or_door = v; }
 void Tp::is_obs_when_dead_set(int v) { _is_obs_when_dead = v; }
-void Tp::is_obsidian_set(int v) { _is_obsidian = v; }
 void Tp::is_ogre_set(int v) { _is_ogre = v; }
 void Tp::is_one_per_tile_set(int v) { _is_one_per_tile = v; }
 void Tp::is_ooze_set(int v) { _is_ooze = v; }
@@ -1529,8 +1529,8 @@ void Tp::is_pressure_plate_set(int v) { _is_pressure_plate = v; }
 void Tp::is_projectile_set(int v) { _is_projectile = v; }
 void Tp::is_ranged_weapon_set(int v) { _is_ranged_weapon = v; }
 void Tp::is_rat_set(int v) { _is_rat = v; }
-void Tp::is_red_blood_set(int v) { _is_red_blood = v; }
 void Tp::is_red_blooded_set(int v) { _is_red_blooded = v; }
+void Tp::is_red_blood_set(int v) { _is_red_blood = v; }
 void Tp::is_red_splatter_set(int v) { _is_red_splatter = v; }
 void Tp::is_reflective_set(int v) { _is_reflective = v; }
 void Tp::is_removable_if_out_of_slots_set(int v) { _is_removable_if_out_of_slots = v; }
@@ -1564,6 +1564,7 @@ void Tp::is_snake_set(int v) { _is_snake = v; }
 void Tp::is_soft_set(int v) { _is_soft = v; }
 void Tp::is_spectral_blade_set(int v) { _is_spectral_blade = v; }
 void Tp::is_spell_always_succeeds_set(int v) { _is_spell_always_succeeds = v; }
+void Tp::is_spellbook_set(int v) { _is_spellbook = v; }
 void Tp::is_spell_of_beckoning_set(int v) { _is_spell_of_beckoning = v; }
 void Tp::is_spell_of_holding_barrier_set(int v) { _is_spell_of_holding_barrier = v; }
 void Tp::is_spell_of_holding_set(int v) { _is_spell_of_holding = v; }
@@ -1574,7 +1575,6 @@ void Tp::is_spell_of_sanctuary_barrier_set(int v) { _is_spell_of_sanctuary_barri
 void Tp::is_spell_of_sanctuary_set(int v) { _is_spell_of_sanctuary = v; }
 void Tp::is_spell_of_slowness_set(int v) { _is_spell_of_slowness = v; }
 void Tp::is_spell_set(int v) { _is_spell = v; }
-void Tp::is_spellbook_set(int v) { _is_spellbook = v; }
 void Tp::is_spider_set(int v) { _is_spider = v; }
 void Tp::is_spiderweb_set(int v) { _is_spiderweb = v; }
 void Tp::is_splatter_set(int v) { _is_splatter = v; }
@@ -1894,11 +1894,6 @@ void Tp::stat_luck_bonus_set(int v) { _stat_luck_bonus = v; }
 void Tp::stat_luck_set(int v) { _stat_luck = v; }
 void Tp::stat_psi_bonus_set(int v) { _stat_psi_bonus = v; }
 void Tp::stat_psi_set(int v) { _stat_psi = v; }
-void Tp::stat_str_bonus_set(int v) { _stat_str_bonus = v; }
-void Tp::stat_str_min_set(int v) { _stat_str_min = v; }
-void Tp::stat_str_set(int v) { _stat_str = v; }
-void Tp::stat_thv_bonus_set(int v) { _stat_thv_bonus = v; }
-void Tp::stat_thv_set(int v) { _stat_thv = v; }
 void Tp::stats02_set(int v) { _stats02 = v; }
 void Tp::stats03_set(int v) { _stats03 = v; }
 void Tp::stats04_set(int v) { _stats04 = v; }
@@ -1906,6 +1901,11 @@ void Tp::stats05_set(int v) { _stats05 = v; }
 void Tp::stats06_set(int v) { _stats06 = v; }
 void Tp::stats07_set(int v) { _stats07 = v; }
 void Tp::stats09_set(int v) { _stats09 = v; }
+void Tp::stat_str_bonus_set(int v) { _stat_str_bonus = v; }
+void Tp::stat_str_min_set(int v) { _stat_str_min = v; }
+void Tp::stat_str_set(int v) { _stat_str = v; }
+void Tp::stat_thv_bonus_set(int v) { _stat_thv_bonus = v; }
+void Tp::stat_thv_set(int v) { _stat_thv = v; }
 void Tp::str1_set(const std::string &v) { _str1 = v; }
 void Tp::str2_set(const std::string &v) { _str2 = v; }
 void Tp::str4_set(const std::string &v) { _str4 = v; }

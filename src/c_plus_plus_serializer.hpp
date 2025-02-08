@@ -344,7 +344,8 @@ static inline std::istream &operator>>(std::istream &in, Bits< C< T, N > & > v)
 ////////////////////////////////////////////////////////////////////////////
 
 template < template < class K, class V, class Compare = std::less< K >,
-                      class Alloc = std::allocator< std::pair< const K, V > > > class M,
+                      class Alloc = std::allocator< std::pair< const K, V > > >
+           class M,
            class K, class V >
 
 static inline std::ostream &operator<<(std::ostream &out, Bits< M< K, V > & > const m)
@@ -361,7 +362,8 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< M< K, V > & > co
 }
 
 template < template < class K, class V, class Compare = std::less< K >,
-                      class Alloc = std::allocator< std::pair< const K, V > > > class M,
+                      class Alloc = std::allocator< std::pair< const K, V > > >
+           class M,
            class K, class V >
 
 static inline std::ostream &operator<<(std::ostream &out, Bits< M< K, const V > & > const m)
@@ -378,7 +380,8 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< M< K, const V > 
 }
 
 template < template < class K, class V, class Compare = std::less< K >,
-                      class Alloc = std::allocator< std::pair< const K, V > > > class M,
+                      class Alloc = std::allocator< std::pair< const K, V > > >
+           class M,
            class K, class V >
 
 static inline std::istream &operator>>(std::istream &in, Bits< M< K, V > & > m)
@@ -405,7 +408,8 @@ static inline std::istream &operator>>(std::istream &in, Bits< M< K, V > & > m)
 ////////////////////////////////////////////////////////////////////////////
 
 template < template < class K, class T, class Hash = std::hash< K >, class Pred = std::equal_to< K >,
-                      class Alloc = std::allocator< std::pair< const K, T > > > class M,
+                      class Alloc = std::allocator< std::pair< const K, T > > >
+           class M,
            class K, class V >
 
 static inline std::ostream &operator<<(std::ostream &out, Bits< M< K, V > & > const m)
@@ -422,7 +426,8 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< M< K, V > & > co
 }
 
 template < template < class K, class T, class Hash = std::hash< K >, class Pred = std::equal_to< K >,
-                      class Alloc = std::allocator< std::pair< const K, T > > > class M,
+                      class Alloc = std::allocator< std::pair< const K, T > > >
+           class M,
            class K, class V >
 
 static inline std::ostream &operator<<(std::ostream &out, Bits< M< K, const V > & > const m)
@@ -439,7 +444,8 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< M< K, const V > 
 }
 
 template < template < class K, class T, class Hash = std::hash< K >, class Pred = std::equal_to< K >,
-                      class Alloc = std::allocator< std::pair< const K, T > > > class M,
+                      class Alloc = std::allocator< std::pair< const K, T > > >
+           class M,
            class K, class V >
 
 static inline std::istream &operator>>(std::istream &in, Bits< M< K, V > & > m)
@@ -481,9 +487,9 @@ static inline std::ostream &operator<<(std::ostream &out, Bits< M< K > & > const
   return out;
 }
 
-template <
-    template < class K, class Compare = std::less< const K >, class Allocator = std::allocator< const K > > class M,
-    class K >
+template < template < class K, class Compare = std::less< const K >, class Allocator = std::allocator< const K > >
+           class M,
+           class K >
 
 static inline std::ostream &operator<<(std::ostream &out, Bits< M< K > & > const m)
 {

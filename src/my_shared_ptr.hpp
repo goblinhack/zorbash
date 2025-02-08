@@ -16,7 +16,7 @@ private:
 
   std::string to_string(void)
   {
-    auto              address = static_cast< const void * >(this);
+    auto              address = static_cast< const void              *>(this);
     std::stringstream ss;
     ss << address;
     if (sptr) {

@@ -206,8 +206,7 @@ void Game::init_jump_paths()
 
   for (const auto &s : cands) {
     if (debug) {
-      std::cout << "[" << s << "]"
-                << " ";
+      std::cout << "[" << s << "]" << " ";
     }
 
     if (s.length() != JUMP_WIDTH * JUMP_WIDTH) {
@@ -263,8 +262,7 @@ void Game::init_jump_paths()
           }
           point p(point(x - offset, y - offset));
           if (debug) {
-            std::cout << "(" << p.x << "," << p.y << ")"
-                      << " ";
+            std::cout << "(" << p.x << "," << p.y << ")" << " ";
           }
           if (ch == 's') {
             jp.begin = p;
