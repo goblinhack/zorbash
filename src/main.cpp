@@ -686,23 +686,24 @@ static void parse_args(int argc, char *argv[])
     //
     if (argv[ i ][ 0 ] == '-') {
       usage();
-#ifdef _WIN32
       //
       // Win32 puts spaces in argv when we restart the process. I'm not sure
       // how to handle that, so don't fail the program. Warn and continue.
       //
       CON("Unknown format argument, %s", argv[ i ]);
+#ifdef _WIN32
       return;
 #else
-      DIE("Unknown format argument, %s", argv[ i ]);
+      exit(1);
 #endif
     }
 
     usage();
-#ifdef _WIN32
     CON("Unknown format argument, %s", argv[ i ]);
+#ifdef _WIN32
+    return;
 #else
-    DIE("Unknown format argument, %s", argv[ i ]);
+    exit(1);
 #endif
   }
 }
@@ -872,7 +873,7 @@ int main(int argc, char *argv[])
   }
 
   {
-    if (! g_opt_tests && ! g_opt_dump_monsters && ! g_opt_dump_weapons) {
+    if (! g_opt_tests) {
       TRACE_NO_INDENT();
       if (! sdl_init()) {
         ERR("SDL: Init");
@@ -894,7 +895,7 @@ int main(int argc, char *argv[])
     parse_args(argc, argv);
   }
 
-  if (! g_opt_tests && ! g_opt_dump_monsters && ! g_opt_dump_weapons) {
+  if (! g_opt_tests) {
     TRACE_NO_INDENT();
     sdl_config_update_all();
   }

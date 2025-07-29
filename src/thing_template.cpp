@@ -700,7 +700,7 @@ void tp_dump_weapons(void)
   }
 
   sort(m.begin(), m.end(),
-       [](Tpp a, Tpp b) -> bool { return a->dmg_melee_dice().max_roll() > b->dmg_melee_dice().max_roll(); });
+       [](Tpp a, Tpp b) -> bool { return a->gold_value_dice().max_roll() > b->gold_value_dice().max_roll(); });
 
   for (auto tp : m) {
     std::string dmg_str;

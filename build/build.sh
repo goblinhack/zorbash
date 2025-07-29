@@ -730,7 +730,7 @@ PYTHONPATH=/${MINGW_TYPE}/lib/python${PYVER}/:/${MINGW_TYPE}/lib/python${PYVER}/
             cat ${TARGET}.sh
             chmod +x ${TARGET}.sh
             ;;
-        Linux)
+        *Darwin*|Linux)
             if [[ $OPT_GITHUB = "" ]]; then
               ./build/list_monsters.sh ./${TARGET} do-it
               ./build/list_weapons.sh ./${TARGET} do-it
