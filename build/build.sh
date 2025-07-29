@@ -527,7 +527,10 @@ case "$MY_OS_NAME" in
         ;;
 esac
 
-GCC_WARN=""
+#
+# How to silence Xcode warning: "variable length arrays are a C99 feature [-Wvla-extension]"?
+#
+GCC_WARN="-Wno-vla-extension"
 
 #
 # Better to leave off for production
