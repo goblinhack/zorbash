@@ -132,6 +132,7 @@ Build options:
 
 Usage: $0 [options]
 
+  [--rel]    Release build (all optimizations and update README)
   [--dev]    Enable development warnings
   [--dev2]   Enable stack checking (SLOW)
   [--prof]   Enable gprof
@@ -140,6 +141,7 @@ Usage: $0 [options]
 %%
 }
 
+OPT_REL=
 OPT_DEV1=
 OPT_DEV2=
 OPT_PROF=
@@ -154,30 +156,37 @@ read_opts()
 
         case $option in
             -*dev2)
+                OPT_REL=
+                OPT_DEV1=
+                OPT_DEV2=
                 OPT_DEV2="yes"
-                export OPT_DEV2
                 OPT_DEV1="yes"
-                export OPT_DEV1
                 shift
                 ;;
             -*dev)
+                OPT_REL=
+                OPT_DEV1=
+                OPT_DEV2=
                 OPT_DEV1="yes"
-                export OPT_DEV1
+                shift
+                ;;
+            -*rel)
+                OPT_REL=
+                OPT_DEV1=
+                OPT_DEV2=
+                OPT_REL="yes"
                 shift
                 ;;
             -*prof)
                 OPT_PROF="yes"
-                export OPT_PROF
                 shift
                 ;;
             -*gcc)
                 OPT_GCC="yes"
-                export OPT_GCC
                 shift
                 ;;
             -*github)
                 OPT_GITHUB="yes"
-                export OPT_GITHUB
                 shift
                 ;;
             *)
@@ -189,6 +198,13 @@ read_opts()
         esac
     done
 }
+
+export OPT_DEV2
+export OPT_DEV1
+export OPT_REL
+export OPT_GITHUB
+export OPT_PROF
+export OPT_GCC
 
 read_opts "$@"
 

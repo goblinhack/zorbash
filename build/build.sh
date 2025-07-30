@@ -441,6 +441,7 @@ LDLIBS="$LDLIBS $Python_LIBS"
 CONFIG_H=src/config.h
 echo "#include \"my_config.hpp\"" > $CONFIG_H
 C_FLAGS+="-include config.h"
+rm -f src/precompiled.hpp.gch
 
 #
 # for backtraces, but it doesn't help much
@@ -674,8 +675,8 @@ fi
 
 cd ..
 
-echo make -f build/Makefile $CORES "$@" all
-make -f build/Makefile $CORES "$@" all
+echo USE_PRECOMPILED=yep make -f build/Makefile $CORES "$@" all
+USE_PRECOMPILED=yep make -f build/Makefile $CORES "$@" all
 
 if [ $? -eq 0 ]
 then
@@ -731,7 +732,7 @@ PYTHONPATH=/${MINGW_TYPE}/lib/python${PYVER}/:/${MINGW_TYPE}/lib/python${PYVER}/
             chmod +x ${TARGET}.sh
             ;;
         *Darwin*|Linux)
-            if [[ $OPT_GITHUB = "" ]]; then
+            if [[ $OPT_REL != "" ]]; then
               ./build/list_monsters.sh ./${TARGET} do-it
               ./build/list_weapons.sh ./${TARGET} do-it
             fi

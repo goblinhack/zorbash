@@ -1,4 +1,11 @@
 
+#
+# For incremental builds, this is a lot faster
+#
+#ifeq ($(origin USE_PRECOMPILED),undefined)
+#COMPILER_FLAGS+=-O0
+#endif
+
 NAME=zorbash
 BUILD_DIR=.build
 
@@ -22,8 +29,26 @@ DEP_FLAGS = -MMD -MP
 $(BUILD_DIR): ; mkdir -p $(BUILD_DIR)
 $(OBJECTS): | $(BUILD_DIR)
 
-$(BUILD_DIR)/%.o: %.cpp
+PRECOMPILED_H := precompiled.hpp
+PRECOMPILED_H_OBJ := $(PRECOMPILED_H).gch
+
+#
+# Must use the same flags as normal .cpp files for precompiled
+#
+%.hpp.gch: $(PRECOMPILED_H)
 	$(CC) $(EXTRA_CFLAGS) $(CFLAGS) $(DEP_FLAGS) -c -o $@ $<
+
+#
+# Precompiled headers are good for the initial build, but after that it
+# is faster to use dependancies
+#
+ifeq ($(origin USE_PRECOMPILED),undefined)
+$(BUILD_DIR)/%.o: %.cpp | $(PRECOMPILED_H_OBJ)
+	$(CC) $(EXTRA_CFLAGS) $(CFLAGS) $(DEP_FLAGS) -c -o $@ $<
+else
+$(BUILD_DIR)/%.o: %.cpp | $(PRECOMPILED_H_OBJ)
+	$(CC) -include $(PRECOMPILED_H) $(EXTRA_CFLAGS) $(CFLAGS) $(DEP_FLAGS) -c -o $@ $<
+endif
 
 $(BUILD_DIR)/%.o: %.S
 	$(CC) $(DEP_FLAGS) -c -o $@ $<
