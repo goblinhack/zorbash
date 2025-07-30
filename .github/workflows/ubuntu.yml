@@ -20,15 +20,3 @@ jobs:
         version: 1.0
     - name: configure
       run: ./RUNME --github
-  release:
-    name: Release pushed tag
-    steps:
-      - name: Create release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.ref_name }}
-        run: |
-          gh release create "$GITHUB_REF_NAME" \
-              --repo="$GITHUB_REPOSITORY" \
-              --title="${GITHUB_REPOSITORY#*/} ${GITHUB_REF_NAME#v}" \
-              --generate-notes
