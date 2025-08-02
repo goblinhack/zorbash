@@ -560,10 +560,10 @@ if [[ $OPT_PROF != "" ]]; then
     LDFLAGS+=" -pg"
 fi
 
-if [[ $OPT_DEV1 != "" ]]; then
-    echo "COMPILER_FLAGS=$WERROR $C_FLAGS -g # AUTOGEN" > .Makefile
+if [[ $OPT_REL != "" ]]; then
+    echo "COMPILER_FLAGS=$WERROR $C_FLAGS -O3 -g" > .Makefile
 else
-    echo "COMPILER_FLAGS=$WERROR $C_FLAGS -O3 # AUTOGEN" > .Makefile
+    echo "COMPILER_FLAGS=$WERROR $C_FLAGS -O0 -g" > .Makefile
 fi
 
 if [[ $OPT_DEV2 != "" ]]; then
@@ -574,8 +574,47 @@ else
 fi
 
 cat >>.Makefile <<%%
-CLANG_COMPILER_WARNINGS=-Wall $GCC_WARN -std=c++2a # AUTOGEN
-GCC_COMPILER_WARNINGS=-x c++ -Wall $GCC_WARN -std=c++2a $GCC_STACK_CHECK # AUTOGEN
+WARNING_FLAGS=-Wall
+#
+# When compiling C, give string constants the type const char[length] so that copying the address of
+# one into a non-const char * pointer produces a warning. These warnings help you find at compile time
+# code that can try to write into a string constant, but only if you have been very careful about using
+# const in declarations and prototypes.
+#
+#WARNING_FLAGS+=-Wwrite-strings
+#
+# Warn whenever a local variable or type declaration shadows another variable, parameter.
+#
+#WARNING_FLAGS+=-Wshadow
+#
+# Warn whenever a function parameter is unused aside from its declaration. This option is not enabled by
+# -Wunused unless -Wextra is also specified.
+#
+#WARNING_FLAGS+=-Wno-unused-parameter
+#
+# Warn if anything is declared more than once in the same scope, even in cases where multiple declaration is valid and changes nothing.
+#
+#WARNING_FLAGS+=-Wredundant-decls
+#
+# Enable -Wformat plus additional format checks. Currently equivalent to -Wformat -Wformat-nonliteral -Wformat-security -Wformat-y2k.
+#
+#WARNING_FLAGS+=-Wformat=2
+#
+# If -Wformat is specified, also warn if the format string is not a string literal and so cannot be checked, unless the format
+# function takes its format arguments as a va_list.
+#
+#WARNING_FLAGS+=-Wno-format-nonliteral
+#
+# To silence Xcode warning: "variable length arrays are a C99 feature [-Wvla-extension]"?
+#
+WARNING_FLAGS+=-Wno-vla-extension
+#
+# A warning is generated if the precision of a value may change.
+#
+#WARNING_FLAGS+=-Wfloat-conversion
+
+CLANG_COMPILER_WARNINGS=\${WARNING_FLAGS} -std=c++2a
+GCC_COMPILER_WARNINGS=\${WARNING_FLAGS} -std=c++2a $GCC_STACK_CHECK
 LDFLAGS=$LDFLAGS
 %%
 
@@ -732,10 +771,13 @@ PYTHONPATH=/${MINGW_TYPE}/lib/python${PYVER}/:/${MINGW_TYPE}/lib/python${PYVER}/
             chmod +x ${TARGET}.sh
             ;;
         *Darwin*|Linux)
-            if [[ $OPT_REL != "" ]]; then
-              ./build/list_monsters.sh ./${TARGET} do-it
-              ./build/list_weapons.sh ./${TARGET} do-it
-            fi
+            #
+            # Enable this to update the tables in README.md
+            #
+            # if [[ $OPT_REL != "" ]]; then
+            #   ./build/list_monsters.sh ./${TARGET} do-it
+            #   ./build/list_weapons.sh ./${TARGET} do-it
+            # fi
             log_info "Run:"
             echo "  ./${TARGET}"
             ;;

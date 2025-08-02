@@ -2,8 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#define __MAIN__
-
 #include <ctime>     // do not remove
 #include <libgen.h>  // dirname
 #include <random>    // std::default_random_engine

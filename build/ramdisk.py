@@ -124,7 +124,7 @@ for record_number, (folder, filenames) in enumerate(sorted(files.items())):
             myfile.write("\n")
 
 #
-# This wierd thing appears harmless but is a warning. Not sure how to check for it.
+# This weird thing appears harmless but is a warning. Not sure how to check for it.
 #
 if sys.platform == "linux":
     for ram_file in range(number_of_ramdisk_files):
@@ -155,8 +155,8 @@ with open("src/ramdisk_data.cpp", "w") as myfile:
             myfile.write("    {\n")
             myfile.write('        extern unsigned char *data_{}_start_\n           asm("data_{}_start_");\n'.format(c_filename, c_filename))
             myfile.write('        extern unsigned char *data_{}_end_\n           asm("data_{}_end_");\n'.format(c_filename, c_filename))
-            myfile.write("        static const unsigned char *const start =\n           (const unsigned char *const) (char*)&data_{}_start_;\n".format(c_filename))
-            myfile.write("        static const unsigned char *const end   =\n           (const unsigned char *const) (char*)&data_{}_end_;\n".format(c_filename))
+            myfile.write("        static const unsigned char *start =\n           (const unsigned char *) (char*)&data_{}_start_;\n".format(c_filename))
+            myfile.write("        static const unsigned char *end   =\n           (const unsigned char *) (char*)&data_{}_end_;\n".format(c_filename))
             myfile.write("        ramdisk_t r;\n")
             myfile.write("        r.data = start;\n")
             myfile.write("        r.len = end - start;\n")

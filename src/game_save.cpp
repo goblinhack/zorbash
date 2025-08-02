@@ -2,7 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "minilzo.hpp"
+#include "3rdparty/minilzo.hpp"
 #include "my_alloc.hpp"
 #include "my_array_bounds_check.hpp"
 #include "my_globals_extra.hpp"

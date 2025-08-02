@@ -588,7 +588,7 @@ int      buf_tex;
 
 void blit_init(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   buf_tex = 0;
 
   if (gl_array_buf) {
@@ -620,7 +620,7 @@ void blit_init(void)
 
 void blit_fini(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (gl_array_buf) {
     myfree(gl_array_buf);
     gl_array_buf = nullptr;
@@ -629,7 +629,7 @@ void blit_fini(void)
 
 void blit_flush(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (gl_array_buf == bufp) {
     return;
   }
@@ -675,19 +675,19 @@ void blit_flush(void)
 
 void blit_flush_triangle_fan(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   blit_flush_triangle_fan(gl_array_buf, bufp);
 }
 
 void blit_flush_colored_triangle_fan(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   blit_flush_colored_triangle_fan(gl_array_buf, bufp);
 }
 
 void blit_flush_colored_triangle_fan(float *b, float *e)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   glEnableClientState(GL_VERTEX_ARRAY);
   glEnableClientState(GL_COLOR_ARRAY);
 
@@ -718,7 +718,7 @@ void blit_flush_colored_triangle_fan(float *b, float *e)
 
 void blit_flush_triangle_fan(float *b, float *e)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   glEnableClientState(GL_VERTEX_ARRAY);
 
   static long nvertices;

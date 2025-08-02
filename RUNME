@@ -208,6 +208,7 @@ export OPT_GCC
 
 read_opts "$@"
 
+make pre
 run build/build.sh $LOG
 
 if [ $? -ne 0 ]; then

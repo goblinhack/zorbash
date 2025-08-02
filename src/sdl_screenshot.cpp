@@ -2,10 +2,10 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "3rdparty/stb_image_write.hpp"
 #include "my_game.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_string.hpp"
-#include "stb_image_write.hpp"
 
 void sdl_screenshot(void)
 {

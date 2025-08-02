@@ -213,8 +213,8 @@ RECENT REVISION HISTORY:
 //   If compiling for Windows and you wish to use Unicode filenames, compile
 //   with
 //       #define STBI_WINDOWS_UTF8
-//   and pass utf8-encoded filenames. Call stbi_convert_wchar_to_utf8 to convert
-//   Windows wchar_t filenames to utf8.
+//   and pass utf8-encoded filenames. Call stbi_convert_charo_utf8 to convert
+//   Windows char filenames to utf8.
 //
 // ===========================================================================
 //
@@ -434,7 +434,7 @@ STBIDEF stbi_uc *stbi_load_gif_from_memory(stbi_uc const *buffer, int len, int *
 #endif
 
 #ifdef STBI_WINDOWS_UTF8
-STBIDEF int stbi_convert_wchar_to_utf8(char *buffer, size_t bufferlen, const wchar_t *input);
+STBIDEF int stbi_convert_charo_utf8(char *buffer, size_t bufferlen, const char *input);
 #endif
 
 ////////////////////////////////////
@@ -673,7 +673,7 @@ typedef unsigned char validate_uint32[ sizeof(stbi__uint32) == 4 ? 1 : -1 ];
 #ifdef STBI_HAS_LROTL
 #define stbi_lrot(x, y) _lrotl(x, y)
 #else
-#define stbi_lrot(x, y) (((x) << (y)) | ((x) >> (-(y) &31)))
+#define stbi_lrot(x, y) (((x) << (y)) | ((x) >> (-(y) & 31)))
 #endif
 
 #if defined(STBI_MALLOC) && defined(STBI_FREE) && (defined(STBI_REALLOC) || defined(STBI_REALLOC_SIZED))
@@ -1327,16 +1327,16 @@ static void stbi__float_postprocess(float *result, int *x, int *y, int *comp, in
 #ifndef STBI_NO_STDIO
 
 #if defined(_WIN32) && defined(STBI_WINDOWS_UTF8)
-STBI_EXTERN __declspec(dllimport) int __stdcall MultiByteToWideChar(unsigned int cp, unsigned long flags,
-                                                                    const char *str, int cbmb, wchar_t *widestr,
-                                                                    int cchwide);
+STBI_EXTERN
+__declspec(dllimport) int __stdcall MultiByteToWideChar(unsigned int cp, unsigned long flags, const char *str,
+                                                        int cbmb, char *widestr, int cchwide);
 STBI_EXTERN __declspec(dllimport) int __stdcall WideCharToMultiByte(unsigned int cp, unsigned long flags,
-                                                                    const wchar_t *widestr, int cchwide, char *str,
+                                                                    const char *widestr, int cchwide, char *str,
                                                                     int cbmb, const char *defchar, int *used_default);
 #endif
 
 #if defined(_WIN32) && defined(STBI_WINDOWS_UTF8)
-STBIDEF int stbi_convert_wchar_to_utf8(char *buffer, size_t bufferlen, const wchar_t *input)
+STBIDEF int stbi_convert_charo_utf8(char *buffer, size_t bufferlen, const char *input)
 {
   return WideCharToMultiByte(65001 /* UTF8 */, 0, input, -1, buffer, (int) bufferlen, NULL, NULL);
 }
@@ -1346,8 +1346,8 @@ static FILE *stbi__fopen(char const *filename, char const *mode)
 {
   FILE *f;
 #if defined(_WIN32) && defined(STBI_WINDOWS_UTF8)
-  wchar_t wMode[ 64 ];
-  wchar_t wFilename[ 1024 ];
+  char wMode[ 64 ];
+  char wFilename[ 1024 ];
   if (0 == MultiByteToWideChar(65001 /* UTF8 */, 0, filename, -1, wFilename, sizeof(wFilename) / sizeof(*wFilename)))
     return 0;
 
@@ -1739,7 +1739,7 @@ static stbi__uint32 stbi__get32le(stbi__context *s)
 }
 #endif
 
-#define STBI__BYTECAST(x) ((stbi_uc) ((x) &255)) // truncate int to byte without warnings
+#define STBI__BYTECAST(x) ((stbi_uc) ((x) & 255)) // truncate int to byte without warnings
 
 #if defined(STBI_NO_JPEG) && defined(STBI_NO_PNG) && defined(STBI_NO_BMP) && defined(STBI_NO_PSD)                    \
     && defined(STBI_NO_TGA) && defined(STBI_NO_GIF) && defined(STBI_NO_PIC) && defined(STBI_NO_PNM)
@@ -1783,7 +1783,7 @@ static unsigned char *stbi__convert_format(unsigned char *data, int img_n, int r
     unsigned char *src  = data + j * x * img_n;
     unsigned char *dest = good + j * x * req_comp;
 
-#define STBI__COMBO(a, b) ((a) *8 + (b))
+#define STBI__COMBO(a, b) ((a) * 8 + (b))
 #define STBI__CASE(a, b)                                                                                             \
   case STBI__COMBO(a, b) :                                                                                           \
     for (i = x - 1; i >= 0; --i, src += a, dest += b)
@@ -1891,7 +1891,7 @@ static stbi__uint16 *stbi__convert_format16(stbi__uint16 *data, int img_n, int r
     stbi__uint16 *src  = data + j * x * img_n;
     stbi__uint16 *dest = good + j * x * req_comp;
 
-#define STBI__COMBO(a, b) ((a) *8 + (b))
+#define STBI__COMBO(a, b) ((a) * 8 + (b))
 #define STBI__CASE(a, b)                                                                                             \
   case STBI__COMBO(a, b) :                                                                                           \
     for (i = x - 1; i >= 0; --i, src += a, dest += b)
@@ -2580,8 +2580,8 @@ stbi_inline static stbi_uc stbi__clamp(int x)
   return (stbi_uc) x;
 }
 
-#define stbi__f2f(x) ((int) (((x) *4096 + 0.5)))
-#define stbi__fsh(x) ((x) *4096)
+#define stbi__f2f(x) ((int) (((x) * 4096 + 0.5)))
+#define stbi__fsh(x) ((x) * 4096)
 
 // derived from jidctint -- DCT_ISLOW
 #define STBI__IDCT_1D(s0, s1, s2, s3, s4, s5, s6, s7)                                                                \
@@ -3935,7 +3935,7 @@ static stbi_uc *stbi__resample_row_generic(stbi_uc *out, stbi_uc *in_near, stbi_
 
 // this is a reduced-precision calculation of YCbCr-to-RGB introduced
 // to make sure the code produces the same results in both SIMD and scalar
-#define stbi__float2fixed(x) (((int) ((x) *4096.0f + 0.5f)) << 8)
+#define stbi__float2fixed(x) (((int) ((x) * 4096.0f + 0.5f)) << 8)
 static void stbi__YCbCr_to_RGB_row(stbi_uc *out, const stbi_uc *y, const stbi_uc *pcb, const stbi_uc *pcr, int count,
                                    int step)
 {
@@ -5072,12 +5072,12 @@ static int stbi__create_png_image_raw(stbi__png *a, stbi_uc *raw, stbi__uint32 r
     // handle first byte explicitly
     for (k = 0; k < filter_bytes; ++k) {
       switch (filter) {
-        case STBI__F_none : cur[ k ] = raw[ k ]; break;
-        case STBI__F_sub : cur[ k ] = raw[ k ]; break;
-        case STBI__F_up : cur[ k ] = STBI__BYTECAST(raw[ k ] + prior[ k ]); break;
-        case STBI__F_avg : cur[ k ] = STBI__BYTECAST(raw[ k ] + (prior[ k ] >> 1)); break;
-        case STBI__F_paeth : cur[ k ] = STBI__BYTECAST(raw[ k ] + stbi__paeth(0, prior[ k ], 0)); break;
-        case STBI__F_avg_first : cur[ k ] = raw[ k ]; break;
+        case STBI__F_none :        cur[ k ] = raw[ k ]; break;
+        case STBI__F_sub :         cur[ k ] = raw[ k ]; break;
+        case STBI__F_up :          cur[ k ] = STBI__BYTECAST(raw[ k ] + prior[ k ]); break;
+        case STBI__F_avg :         cur[ k ] = STBI__BYTECAST(raw[ k ] + (prior[ k ] >> 1)); break;
+        case STBI__F_paeth :       cur[ k ] = STBI__BYTECAST(raw[ k ] + stbi__paeth(0, prior[ k ], 0)); break;
+        case STBI__F_avg_first :   cur[ k ] = raw[ k ]; break;
         case STBI__F_paeth_first : cur[ k ] = raw[ k ]; break;
       }
     }

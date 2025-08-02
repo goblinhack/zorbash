@@ -2963,10 +2963,10 @@ LZO_COMPILE_TIME_ASSERT_HEADER(LZO_SIZEOF_PTRDIFF_T == sizeof(ptrdiff_t))
 #  define LZO_TYPEOF_LZO_INT64E_T   LZO_TYPEOF___INT64
 #  if (LZO_CC_BORLANDC)
 #    define LZO_INT64_C(c)          ((c) + 0i64)
-#    define LZO_UINT64_C(c)         ((c) + 0ui.pixelart.64)
+#    define LZO_UINT64_C(c)         ((c) + 0ui.64)
 #  else
 #    define LZO_INT64_C(c)          (c##i64)
-#    define LZO_UINT64_C(c)         (c##ui.pixelart.64)
+#    define LZO_UINT64_C(c)         (c##ui.64)
 #  endif
 #else
 #endif
