@@ -370,8 +370,6 @@ echo "PYVER=$PYVER" > build/windows/python.version.sh
 
 log_info "Python lib version         : $PYVER"
 
-/bin/rm -f data/zorbash-hiscore.txt data/zorbash-config.txt
-
 #
 # Make the makefile
 #
