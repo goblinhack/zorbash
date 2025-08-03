@@ -139,19 +139,6 @@ std::ostream &operator<<(std::ostream &out, Bits< const HiScore & > const my)
   return out;
 }
 
-std::ostream &operator<<(std::ostream &out, Bits< HiScore & > const my)
-{
-  TRACE_AND_INDENT();
-  out << bits(my.t.name);
-  out << bits(my.t.when);
-  out << bits(my.t.defeated_by);
-  out << bits(my.t.score);
-  out << bits(my.t.level_reached);
-  // CON("Read Hiscore: %s, %d defeated  by %s, %s",
-  //     my.t.name.c_str(), my.t.score, my.t.defeated_by.c_str(), my.t.when.c_str());
-  return out;
-}
-
 std::istream &operator>>(std::istream &in, Bits< HiScores & > my)
 {
   TRACE_AND_INDENT();
