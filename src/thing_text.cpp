@@ -4,7 +4,7 @@
 
 #include "my_english.hpp"
 #include "my_game.hpp"
-#include "my_ptrcheck.hpp"
+// REMOVED #include "my_ptrcheck.hpp"
 #include "my_sdl_proto.hpp"
 #include "my_thing.hpp"
 

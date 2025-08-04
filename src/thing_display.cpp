@@ -2,13 +2,13 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_array_bounds_check.hpp"
+// REMOVED #include "my_array_bounds_check.hpp"
 #include "my_color_defs.hpp"
-#include "my_font.hpp"
+// REMOVED #include "my_font.hpp"
 #include "my_game.hpp"
-#include "my_monst.hpp"
+// REMOVED #include "my_monst.hpp"
 #include "my_thing.hpp"
-#include "my_ui.hpp"
+// REMOVED #include "my_ui.hpp"
 
 //
 // Common to both ascii and pixelart modes. Should we show an outline for the thing?

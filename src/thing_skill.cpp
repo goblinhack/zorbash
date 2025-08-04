@@ -8,9 +8,9 @@
 #include "my_sound.hpp"
 #include "my_thing.hpp"
 #include "my_ui.hpp"
-#include "my_vector_bounds_check.hpp"
+// REMOVED #include "my_vector_bounds_check.hpp"
 #include "my_wid_skillbox.hpp"
-#include <algorithm>
+// REMOVED #include <algorithm>
 
 //
 // Get the list of all other skills this skill replaces. This is done

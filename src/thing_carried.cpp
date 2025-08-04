@@ -3,9 +3,9 @@
 //
 
 #include "my_game.hpp"
-#include "my_level.hpp"
+// REMOVED #include "my_level.hpp"
 #include "my_monst.hpp"
-#include "my_ptrcheck.hpp"
+// REMOVED #include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
 //

@@ -6,7 +6,7 @@
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
-#include <math.h>
+// REMOVED #include <math.h>
 
 void Thing::wobble(float wobble)
 {

@@ -8,7 +8,7 @@
 #include "my_game.hpp"
 #include "my_thing.hpp"
 #include "my_unicode.hpp"
-#include "my_wid.hpp"
+// REMOVED #include "my_wid.hpp"
 
 //
 // For things like walls we color them differently so it is easier to see.

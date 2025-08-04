@@ -5,7 +5,7 @@
 #include "my_english.hpp"
 #include "my_thing.hpp"
 
-#include <math.h>
+// REMOVED #include <math.h>
 
 //
 // See if the weapon crumbles

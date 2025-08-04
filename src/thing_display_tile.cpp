@@ -4,7 +4,7 @@
 
 #include "my_ascii.hpp"
 #include "my_thing.hpp"
-#include "my_wid.hpp"
+// REMOVED #include "my_wid.hpp"
 
 //
 // Blit pixel art or ascii representation.

@@ -4,9 +4,9 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
-#include "my_math.hpp"
-#include "my_monst.hpp"
-#include "my_ptrcheck.hpp"
+// REMOVED #include "my_math.hpp"
+// REMOVED #include "my_monst.hpp"
+// REMOVED #include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
 bool Thing::attempt_to_tame_with(point target_at, Thingp what)

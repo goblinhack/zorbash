@@ -5,7 +5,7 @@
 #include "my_english.hpp"
 #include "my_level.hpp"
 #include "my_monst.hpp"
-#include "my_ptrcheck.hpp"
+// REMOVED #include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
 void Thing::negation_dmg(int dmg, bool &is_killed)

@@ -4,7 +4,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
-#include "my_thing.hpp"
+// REMOVED #include "my_thing.hpp"
 
 uint8_t Level::is_spell_of_protection_barrier(const point p)
 {

@@ -10,7 +10,7 @@
 #include "my_thing.hpp"
 #include "my_wid_inventory.hpp"
 #include "my_wid_thing_info.hpp"
-#include <algorithm>
+// REMOVED #include <algorithm>
 
 void Thing::on_dropped(void)
 {

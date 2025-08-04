@@ -2,13 +2,13 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_array_bounds_check.hpp"
+// REMOVED #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
-#include "my_level.hpp"
+// REMOVED #include "my_level.hpp"
 #include "my_monst.hpp"
-#include "my_python.hpp"
-#include "my_sprintf.hpp"
-#include "my_string.hpp"
+// REMOVED #include "my_python.hpp"
+// REMOVED #include "my_sprintf.hpp"
+// REMOVED #include "my_string.hpp"
 #include "my_thing.hpp"
 
 void Thing::entranced_tick(void)

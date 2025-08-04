@@ -3,11 +3,11 @@
 //
 
 #include "my_game.hpp"
-#include "my_monst.hpp"
+// REMOVED #include "my_monst.hpp"
 #include "my_python.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
-#include "my_thing_attack_options.hpp"
+// REMOVED #include "my_thing_attack_options.hpp"
 
 //
 // Python callback upon being tick

@@ -2,7 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_game.hpp"
+// REMOVED #include "my_game.hpp"
 #include "my_thing.hpp"
 
 int Thing::is_immune_to_cold(void)

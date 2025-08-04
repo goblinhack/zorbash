@@ -2,9 +2,9 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_monst.hpp"
+// REMOVED #include "my_monst.hpp"
 #include "my_thing.hpp"
-#include "my_thing_template.hpp"
+// REMOVED #include "my_thing_template.hpp"
 
 //
 // E.g. for secret doors, is it visible?

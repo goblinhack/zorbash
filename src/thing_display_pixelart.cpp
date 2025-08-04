@@ -7,7 +7,7 @@
 #include "my_font.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
-#include "my_sdl_proto.hpp"
+// REMOVED #include "my_sdl_proto.hpp"
 #include "my_thing.hpp"
 #include "my_ui.hpp"
 

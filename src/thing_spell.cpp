@@ -10,9 +10,9 @@
 #include "my_sound.hpp"
 #include "my_thing.hpp"
 #include "my_ui.hpp"
-#include "my_vector_bounds_check.hpp"
+// REMOVED #include "my_vector_bounds_check.hpp"
 #include "my_wid_spellbox.hpp"
-#include <algorithm>
+// REMOVED #include <algorithm>
 
 //
 // Get the list of all other spells this spell replaces. This is done
