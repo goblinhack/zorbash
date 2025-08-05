@@ -134,19 +134,21 @@ std::ostream &operator<<(std::ostream &out, Bits< const HiScore & > const my)
   out << bits(my.t.defeated_by);
   out << bits(my.t.score);
   out << bits(my.t.level_reached);
-  CON("Saved Hiscore: %s, %d defeated  by %s, %s", my.t.name.c_str(), my.t.score, my.t.defeated_by.c_str(),
+  DBG("Saved Hiscore: %s, %d defeated  by %s, %s", my.t.name.c_str(), my.t.score, my.t.defeated_by.c_str(),
       my.t.when.c_str());
   return out;
 }
 
 //////////////////////////////////////////////////////////////////////////////////////
-// DO NOT REMOVE THIS FUNCTION.
 //
 // It looks almost identical to the above. However const is missing here. The compiler
 // will if it does not find a functon matching this non const, will use some other
 // means of writing the HiScore and hence loading will fail.
 //
 // DO NOT REMOVE THIS FUNCTION.
+//
+// vvvvvvvvvvvvvvvvvvvvvvvvvvvv
+//
 //////////////////////////////////////////////////////////////////////////////////////
 std::ostream &operator<<(std::ostream &out, Bits< HiScore & > const my)
 {
@@ -156,18 +158,20 @@ std::ostream &operator<<(std::ostream &out, Bits< HiScore & > const my)
   out << bits(my.t.defeated_by);
   out << bits(my.t.score);
   out << bits(my.t.level_reached);
-  // CON("Read Hiscore: %s, %d defeated  by %s, %s",
-  //     my.t.name.c_str(), my.t.score, my.t.defeated_by.c_str(), my.t.when.c_str());
+  DBG("Read Hiscore: %s, %d defeated  by %s, %s", my.t.name.c_str(), my.t.score, my.t.defeated_by.c_str(),
+      my.t.when.c_str());
   return out;
 }
 //////////////////////////////////////////////////////////////////////////////////////
+//
+// ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//
 // DO NOT REMOVE THIS FUNCTION.
 //
 // It looks almost identical to the above. However const is missing here. The compiler
 // will if it does not find a functon matching this non const, will use some other
 // means of writing the HiScore and hence loading will fail.
 //
-// DO NOT REMOVE THIS FUNCTION.
 //////////////////////////////////////////////////////////////////////////////////////
 
 std::istream &operator>>(std::istream &in, Bits< HiScores & > my)
@@ -176,7 +180,7 @@ std::istream &operator>>(std::istream &in, Bits< HiScores & > my)
   my.t.hiscores.resize(0);
   in >> bits(my.t.hiscores);
   for (auto h : my.t.hiscores) {
-    CON("Loaded Hiscore: %s, %d killed by %s, %s", h.name.c_str(), h.score, h.defeated_by.c_str(), h.when.c_str());
+    DBG("Loaded Hiscore: %s, %d killed by %s, %s", h.name.c_str(), h.score, h.defeated_by.c_str(), h.when.c_str());
   }
 
   return in;
