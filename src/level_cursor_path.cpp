@@ -255,6 +255,31 @@ std::vector< point > Level::cursor_path_draw_line_attempt(Thingp it, point start
   if (attempt == 1) {
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
+        //
+        // If the tile is really close then just use the shortest path else we can
+        // get things like:
+        //
+        // original path to X:
+        //
+        //     ..@
+        //   ..
+        //  X
+        //
+        // and the return path then looks odd, not taking the shortest path:
+        //
+        //   .
+        //  @ X
+        //
+        //
+        // when we really want:
+        //
+        //  @.X
+        //
+        point p(x, y);
+        if (distance(p, player->curr_at) <= 2) {
+          continue;
+        }
+
         if (! is_walked(x, y)) {
           set(d.val, x, y, DMAP_IS_WALL);
         }
