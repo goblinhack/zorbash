@@ -89,7 +89,7 @@ void Level::err_(const char *fmt, va_list args)
 
   verify(MTYPE_LEVEL, this);
   auto l = this;
-  char buf[ MAXLONGSTR ];
+  char buf[ MAXLONGSTR * 2 ];
   int  len = 0;
 
   callstack_dump();

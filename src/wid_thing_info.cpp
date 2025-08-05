@@ -383,7 +383,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
 
   wid_raise(wid_popup_window->wid_popup_container);
 
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
 
   for (auto t : ts) {
     auto name = t->text_long_and_state_capitalised();
@@ -758,7 +758,7 @@ bool Game::wid_thing_info_create_list(std::vector< Thingp > &ts)
 void Game::wid_thing_info_add_gold_value(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto gold_value_dice = t->gold_value_dice();
@@ -778,7 +778,7 @@ void Game::wid_thing_info_add_gold_value(WidPopup *w, Thingp t)
 void Game::wid_thing_info_add_spell_cost(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto cost = t->spell_cost();
@@ -792,7 +792,7 @@ void Game::wid_thing_info_add_spell_cost(WidPopup *w, Thingp t)
 void Game::wid_thing_info_add_immunity(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
 
   if (t->is_immune_to_acid()) {
     snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Immune to: %18s", "Acid");
@@ -879,7 +879,7 @@ void Game::wid_thing_info_add_immunity(WidPopup *w, Thingp t)
 void Game::wid_thing_info_add_nutrition(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   if (! game->level->player) {
@@ -905,7 +905,7 @@ void Game::wid_thing_info_add_nutrition(WidPopup *w, Thingp t)
 void Game::wid_thing_info_add_health(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
@@ -929,7 +929,7 @@ void Game::wid_thing_info_add_health(WidPopup *w, Thingp t)
 void Game::wid_thing_info_add_dmgd_chance(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto chance = t->chance_d10000_damaged();
@@ -958,7 +958,7 @@ void Game::wid_thing_info_add_dmgd_chance(WidPopup *w, Thingp t)
 void Game::wid_thing_info_add_crit_chance(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto chance = t->chance_d10000_crit();
@@ -981,7 +981,7 @@ void Game::wid_thing_info_add_dmg_melee(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
 
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
@@ -1042,7 +1042,7 @@ void Game::wid_thing_info_add_dmg_melee(WidPopup *w, Thingp t)
 void Game::wid_thing_info_add_dmg_poison(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
@@ -1090,7 +1090,7 @@ void Game::wid_thing_info_add_dmg_poison(WidPopup *w, Thingp t, int attack_index
 void Game::wid_thing_info_add_dmg_drown(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
@@ -1138,7 +1138,7 @@ void Game::wid_thing_info_add_dmg_drown(WidPopup *w, Thingp t, int attack_index)
 void Game::wid_thing_info_add_dmg_bite(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
@@ -1186,7 +1186,7 @@ void Game::wid_thing_info_add_dmg_bite(WidPopup *w, Thingp t, int attack_index)
 void Game::wid_thing_info_add_dmg_claw(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
@@ -1234,7 +1234,7 @@ void Game::wid_thing_info_add_dmg_claw(WidPopup *w, Thingp t, int attack_index)
 void Game::wid_thing_info_add_dmg_cold(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
@@ -1282,7 +1282,7 @@ void Game::wid_thing_info_add_dmg_cold(WidPopup *w, Thingp t, int attack_index)
 void Game::wid_thing_info_add_dmg_fire(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
@@ -1330,7 +1330,7 @@ void Game::wid_thing_info_add_dmg_fire(WidPopup *w, Thingp t, int attack_index)
 void Game::wid_thing_info_add_dmg_heat(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
@@ -1378,7 +1378,7 @@ void Game::wid_thing_info_add_dmg_heat(WidPopup *w, Thingp t, int attack_index)
 void Game::wid_thing_info_add_dmg_crush(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
@@ -1426,7 +1426,7 @@ void Game::wid_thing_info_add_dmg_crush(WidPopup *w, Thingp t, int attack_index)
 void Game::wid_thing_info_add_dmg_impact(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
@@ -1474,7 +1474,7 @@ void Game::wid_thing_info_add_dmg_impact(WidPopup *w, Thingp t, int attack_index
 void Game::wid_thing_info_add_dmg_missile(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
@@ -1522,7 +1522,7 @@ void Game::wid_thing_info_add_dmg_missile(WidPopup *w, Thingp t, int attack_inde
 void Game::wid_thing_info_add_dmg_lightning(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
@@ -1570,7 +1570,7 @@ void Game::wid_thing_info_add_dmg_lightning(WidPopup *w, Thingp t, int attack_in
 void Game::wid_thing_info_add_dmg_energy(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
@@ -1618,7 +1618,7 @@ void Game::wid_thing_info_add_dmg_energy(WidPopup *w, Thingp t, int attack_index
 void Game::wid_thing_info_add_dmg_negation(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
@@ -1666,7 +1666,7 @@ void Game::wid_thing_info_add_dmg_negation(WidPopup *w, Thingp t, int attack_ind
 void Game::wid_thing_info_add_dmg_acid(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
@@ -1714,7 +1714,7 @@ void Game::wid_thing_info_add_dmg_acid(WidPopup *w, Thingp t, int attack_index)
 void Game::wid_thing_info_add_dmg_nat_att(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
@@ -1775,7 +1775,7 @@ void Game::wid_thing_info_add_dmg_nat_att(WidPopup *w, Thingp t, int attack_inde
 void Game::wid_thing_info_add_dmg_digest(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
@@ -1823,7 +1823,7 @@ void Game::wid_thing_info_add_dmg_digest(WidPopup *w, Thingp t, int attack_index
 void Game::wid_thing_info_add_dmg_necrosis(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
@@ -1871,7 +1871,7 @@ void Game::wid_thing_info_add_dmg_necrosis(WidPopup *w, Thingp t, int attack_ind
 void Game::wid_thing_info_add_dmg_stamina(WidPopup *w, Thingp t, int attack_index)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto tp = t->tp();
@@ -1919,7 +1919,7 @@ void Game::wid_thing_info_add_dmg_stamina(WidPopup *w, Thingp t, int attack_inde
 void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
 
   if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
       || t->is_magical()) {
@@ -2083,7 +2083,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
 void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
 
   if (t->is_spell() || t->is_ranged_weapon() || t->is_alive_monst() || t->is_player() || t->is_weapon()
       || t->is_magical()) {
@@ -2248,7 +2248,7 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
 void Game::wid_thing_info_add_stat_att_penalties(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
 
   //
   // Don't display for dead monsters
@@ -2365,7 +2365,7 @@ void Game::wid_thing_info_add_stat_att_penalties(WidPopup *w, Thingp t)
 void Game::wid_thing_info_add_stat_def_penalties(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
 
   //
   // Don't display for dead monsters
@@ -2462,7 +2462,7 @@ void Game::wid_thing_info_add_stat_def_penalties(WidPopup *w, Thingp t)
 void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
 
   auto player = game->level->player;
   if (! player) {
@@ -2623,7 +2623,7 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
 void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->stat_dex_total();
@@ -2763,7 +2763,7 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
 void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->stat_luck_total();
@@ -2903,7 +2903,7 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
 void Game::wid_thing_info_add_stat_thv(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->stat_thv_total();
@@ -3043,7 +3043,7 @@ void Game::wid_thing_info_add_stat_thv(WidPopup *w, Thingp t)
 void Game::wid_thing_info_add_stat_psi(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->stat_psi_total();
@@ -3183,7 +3183,7 @@ void Game::wid_thing_info_add_stat_psi(WidPopup *w, Thingp t)
 void Game::wid_thing_info_add_stat_int(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->stat_int_total();
@@ -3323,7 +3323,7 @@ void Game::wid_thing_info_add_stat_int(WidPopup *w, Thingp t)
 void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXLONGSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
     auto stat = t->stat_con_total();
@@ -3467,7 +3467,7 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
 void Game::wid_thing_info_add_noise(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
 
   auto n = t->noise_total();
   if (n) {
@@ -3506,7 +3506,7 @@ void Game::wid_thing_info_add_noise(WidPopup *w, Thingp t)
 void Game::wid_thing_info_add_move_speed(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
     auto speed = t->move_speed_total();
@@ -3528,7 +3528,7 @@ void Game::wid_thing_info_add_move_speed(WidPopup *w, Thingp t)
 void Game::wid_thing_info_add_shove_strength(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
     auto shove_strength = t->shove_strength_total();
@@ -3556,7 +3556,7 @@ void Game::wid_thing_info_add_shove_strength(WidPopup *w, Thingp t)
 void Game::wid_thing_info_add_jump_distance(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
 
   if (t->is_alive_monst() || t->is_player()) {
     auto dist = t->jump_distance_total();
@@ -3911,7 +3911,7 @@ void Game::wid_thing_info_add_general_info(WidPopup *w, Thingp t)
 void Game::wid_thing_info_add_charge_count(WidPopup *w, Thingp t)
 {
   TRACE_AND_INDENT();
-  char tmp[ MAXSHORTSTR ];
+  char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   auto player = game->level->player;

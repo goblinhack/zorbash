@@ -408,7 +408,7 @@ static void err_(const char *fmt, va_list args)
   }
 
   {
-    char buf[ MAXLONGSTR ];
+    char buf[ MAXLONGSTR * 2 ];
     int  len = 0;
 
     buf[ 0 ] = '\0';
@@ -456,7 +456,7 @@ static void py_err_(const char *fmt, va_list args)
   }
 
   {
-    char buf[ MAXLONGSTR ];
+    char buf[ MAXLONGSTR * 2 ];
     int  len = 0;
 
     buf[ 0 ] = '\0';

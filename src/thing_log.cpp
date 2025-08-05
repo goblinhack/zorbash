@@ -198,7 +198,7 @@ void Thing::err_(const char *fmt, va_list args)
 
   verify(MTYPE_THING, this);
   auto t = this;
-  char buf[ MAXLONGSTR ];
+  char buf[ MAXLONGSTR * 2 ];
   int  len = 0;
 
   buf[ 0 ] = '\0';
