@@ -8,7 +8,6 @@
 #include "my_py_tp.hpp"
 
 #include "my_callstack.hpp"
-#include "my_py_sdl.hpp"
 
 static PyMethodDef python_c_METHODS[] = {
     // begin sort marker1 {
@@ -2278,7 +2277,6 @@ static PyMethodDef python_c_METHODS[] = {
     MY_ADD_WRAPPED_PYTHON_FUNCTION(topcon),
     MY_ADD_WRAPPED_PYTHON_FUNCTION(tp_load),
     MY_ADD_WRAPPED_PYTHON_FUNCTION(tp_update),
-    PYFUNC_REF(SDLGetKeyState),
     // end sort marker1 }
 
     {nullptr, nullptr, 0, nullptr} /* sentinel */

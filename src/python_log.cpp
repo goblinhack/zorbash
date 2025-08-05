@@ -6,7 +6,6 @@
 #include "my_globals_extra.hpp"
 #include "my_main.hpp"
 #include "my_ptrcheck.hpp"
-#include "my_py_sdl.hpp"
 
 PyObject *con_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
