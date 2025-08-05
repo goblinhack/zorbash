@@ -79,7 +79,11 @@ void Level::create(point3d world_at, point grid_at, int difficulty_depth, int du
       //
     } else {
       if (biome != BIOME_SEWER) {
-        err("No monsters placed on level, difficulty_depth %d", difficulty_depth);
+        //
+        // Don't think this is serious enough to break the game. It is odd though and
+        // needs some more investigation.
+        //
+        log("No monsters placed on level, difficulty_depth %d", difficulty_depth);
       }
     }
   }
