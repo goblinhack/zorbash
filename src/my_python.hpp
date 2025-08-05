@@ -294,22 +294,6 @@ std::vector< std::string > py_call_std_vector_string_fn(const char *module, cons
     Py_RETURN_TRUE;                                                                                                  \
   }
 
-//
-// Borrowed from https://github.com/holtrop/pysdl2
-//
-#define PYFUNC(name, desc)                                                                                           \
-  const char name##_doc[] = desc;                                                                                    \
-  PyObject  *pysdl_##name(PyObject *self, PyObject *args)
-
-#define PYDECL(name)                                                                                                 \
-  extern const char name##_doc[];                                                                                    \
-  extern PyObject  *pysdl_##name(PyObject *self, PyObject *args);
-
-#define PYFUNC_REF(name)                                                                                             \
-  {                                                                                                                  \
-    #name, pysdl_##name, METH_VARARGS, name##_doc                                                                    \
-  }
-
 void PY_LOG(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
 void PY_DBG(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
 
