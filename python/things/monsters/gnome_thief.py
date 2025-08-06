@@ -67,7 +67,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="gnome_thief", text_long_name="gnome thief")
+    tp_init(name="gnome_thief",
+            text_long_name="gnome thief")
 
 
 init()

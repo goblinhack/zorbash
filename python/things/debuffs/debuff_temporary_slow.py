@@ -47,7 +47,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="debuff_temporary_slow", text_long_name="sluggishly slow", text_short_name="slowed")
+    tp_init(name="debuff_temporary_slow",
+            text_long_name="sluggishly slow",
+            text_short_name="slowed")
 
 
 init()

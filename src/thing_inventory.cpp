@@ -5,6 +5,7 @@
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_sound.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_ui.hpp"
 #include "my_vector_bounds_check.hpp"
@@ -92,9 +93,9 @@ void Thing::inventory_particle(Thingp item, int slot)
         }
       } else {
         if (value > 1) {
-          player->msg("%s magically converts into %d gold.", item->text_The().c_str(), value);
+          player->msg("%s magically converts into %d gold.", capitalize_first(item->text_the()).c_str(), value);
         } else {
-          player->msg("%s magically converts into a measly one gold.", item->text_The().c_str());
+          player->msg("%s magically converts into a measly one gold.", capitalize_first(item->text_the()).c_str());
         }
       }
     }

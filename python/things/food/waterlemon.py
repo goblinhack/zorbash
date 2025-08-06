@@ -40,6 +40,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "10+1d20")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "waterlemons")
+    my.text_apostrophize(self, "waterlemon's")
     my.text_description_long(self, "A chunk of waterlemon. Yes lemon. Those black bits are likely seeds. Tastes awful")
     my.text_description_short(self, "Waterlemon.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -53,7 +55,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="waterlemon", text_long_name="waterlemon", text_short_name="waterlemon")
+    tp_init(name="waterlemon",
+            text_long_name="waterlemon",
+            text_short_name="waterlemon")
 
 
 init()

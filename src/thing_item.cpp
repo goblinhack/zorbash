@@ -2,8 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include "my_game.hpp"
-// REMOVED #include "my_monst.hpp"
 #include "my_thing.hpp"
 
 int Thing::item_count_including_charges(Tpp tp)

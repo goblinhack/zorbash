@@ -62,6 +62,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_RARE)
     my.stat_def_bonus(self, 4)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "crystal armor")
+    my.text_apostrophize(self, "crystal armor's")
     my.text_description_enchant(self, "+1 DEF")
     my.text_description_long(self, "Crystal armor. Strong, reflective but more fragile than other armors.")
     my.text_description_short(self, "Crystal armor.")

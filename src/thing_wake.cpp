@@ -70,7 +70,7 @@ void Thing::awake(void)
   dbg("Awake");
   TRACE_AND_INDENT();
 
-  msg("%s wakes!", text_The().c_str());
+  msg("%s wakes!", capitalize_first(text_the()).c_str());
 
   //
   // To avoid immediate attacks upon waking.

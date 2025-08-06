@@ -39,6 +39,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "10+1d30")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "honey")
+    my.text_apostrophize(self, "honey's")
     my.text_description_long(self, "A pot of golden spider honey. A rare variety. Tasty with a unique aftertaste of fly.")
     my.text_description_short(self, "Honey.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -52,7 +54,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="honey", text_long_name="honey", text_short_name="honey")
+    tp_init(name="honey",
+            text_long_name="honey",
+            text_short_name="honey")
 
 
 init()

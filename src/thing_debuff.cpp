@@ -6,7 +6,6 @@
 #include "my_monst.hpp"
 #include "my_thing.hpp"
 #include "my_wid_debuffbox.hpp"
-// REMOVED #include <algorithm>
 
 bool Thing::debuff_add(Thingp debuff)
 {

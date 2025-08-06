@@ -104,7 +104,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="fire", text_long_name="fire")
+    tp_init(name="fire",
+            text_long_name="fire")
 
 
 init()

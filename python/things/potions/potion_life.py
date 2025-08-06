@@ -132,6 +132,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "potions of life")
+    my.text_apostrophize(self, "potion of life's")
     my.text_description_long2(self, "Cures all known poison ailments and other... conditions.")
     my.text_description_long3(self, "Guaranteed to work or, well, let's face it, you're not going to make it back!")
     my.text_description_long4(self, "Contains no snake oil, guaranteed.")
@@ -151,7 +153,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="potion_life", text_long_name="potion of life", text_short_name="potion, life")
+    tp_init(name="potion_life",
+            text_long_name="potion of life",
+            text_short_name="potion, life")
 
 
 init()

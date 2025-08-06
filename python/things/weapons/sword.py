@@ -91,6 +91,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_COMMON)
     my.stamina_drain_on_attacking(self, 1)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "short swords")
+    my.text_apostrophize(self, "short sword's")
     my.text_description_enchant(self, "+1 DMG")
     my.text_description_long(self, "A gleaming entry-level short sword. Ideal for beginners or the occasional weekend dungeoneer.")
     my.text_description_short(self, "Thy pointy means of justice.")
@@ -107,7 +109,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="sword", text_long_name="short sword", text_short_name="sword, short")
+    tp_init(name="sword",
+            text_long_name="short sword",
+            text_short_name="sword, short")
 
 
 init()

@@ -4,12 +4,10 @@
 
 #include "my_game.hpp"
 #include "my_monst.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 #include "my_wid_bag.hpp"
 #include "my_wid_inventory.hpp"
 #include "my_wid_thing_info.hpp"
-// REMOVED #include <algorithm>
 
 Thing::~Thing_(void)
 {

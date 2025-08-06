@@ -42,6 +42,8 @@ def key_init(name, text_long_name):
     my.normal_placement_rules(self, True)
     my.rarity(self, my.RARITY_RARE)
     my.text_a_or_an(self, "an")
+    my.text_pluralize(self, "golden keys")
+    my.text_apostrophize(self, "golden key's")
     my.text_description_long(self, "A magical golden key that trans-mutates into ten keys upon carrying.")
     my.text_description_short(self, "A magical golden key.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -56,7 +58,8 @@ def key_init(name, text_long_name):
 
 
 def init():
-    key_init(name="key_golden", text_long_name="golden key")
+    key_init(name="key_golden",
+            text_long_name="golden key")
 
 
 init()

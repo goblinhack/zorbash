@@ -110,6 +110,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_VERY_RARE)
     my.stat_dex_bonus(self, -4)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "stone cloaks")
+    my.text_apostrophize(self, "stone cloak's")
     my.text_description_enchant(self, "+1 DEF")
     my.text_description_long(self, "A strange, almost black, cloak that looks to be covered in shimmering stone dust... It glistens in your torch light as you examine it. It seems magical... but what does it do?")
     my.text_description_short(self, "Stone cloak.")

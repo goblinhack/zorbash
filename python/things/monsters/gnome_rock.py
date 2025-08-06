@@ -72,7 +72,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="gnome_rock", text_long_name="rock gnome")
+    tp_init(name="gnome_rock",
+            text_long_name="rock gnome")
 
 
 init()

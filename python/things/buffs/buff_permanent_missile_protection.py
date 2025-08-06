@@ -138,7 +138,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="buff_permanent_missile_protection", text_long_name="missile protection")
+    tp_init(name="buff_permanent_missile_protection",
+            text_long_name="missile protection")
 
 
 init()

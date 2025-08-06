@@ -143,6 +143,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "flux spiders")
+    my.text_apostrophize(self, "flux spider's")
     my.text_description_long(self, "Flux spiders weave webs both in the material and ethereal plane and can often be seen flitting between the two.")
     my.text_description_short(self, "A phasing in and out flux spider.")
     my.text_hits(self, "bites")
@@ -174,7 +176,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="spider_flux", text_long_name="flux spider", text_short_name="flux spider")
+    tp_init(name="spider_flux",
+            text_long_name="flux spider",
+            text_short_name="flux spider")
 
 
 init()

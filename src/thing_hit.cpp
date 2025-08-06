@@ -2,7 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_english.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_python.hpp"
@@ -365,7 +364,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           if (is_player()) {
             msg("You are immune to non magical weapons!");
           } else if (is_mob() || is_item() || is_alive_monst()) {
-            msg("%s is immune to non magical weapons!", text_The().c_str());
+            msg("%s is immune to non magical weapons!", capitalize_first(text_the()).c_str());
           }
         }
         return false;
@@ -385,7 +384,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         if (is_player()) {
           msg("You are immune to poison damage!");
         } else if (is_mob() || is_item() || is_alive_monst()) {
-          msg("%s is immune to poison damage!", text_The().c_str());
+          msg("%s is immune to poison damage!", capitalize_first(text_the()).c_str());
         }
       } else {
         dbg("Is immune to poison");
@@ -397,7 +396,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (is_player()) {
         msg("You take no poison damage!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no poison damage!", text_The().c_str());
+        msg("%s takes no poison damage!", capitalize_first(text_the()).c_str());
       } else {
         dbg("Takes no poison damage");
       }
@@ -429,7 +428,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (is_player()) {
         msg("You take no drowning damage!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no drowning damage!", text_The().c_str());
+        msg("%s takes no drowning damage!", capitalize_first(text_the()).c_str());
       } else {
         dbg("Takes no drowning damage");
       }
@@ -450,7 +449,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (is_player()) {
         msg("You take no bite damage!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no bite damage!", text_The().c_str());
+        msg("%s takes no bite damage!", capitalize_first(text_the()).c_str());
       } else {
         dbg("Takes no bite damage");
       }
@@ -471,7 +470,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (is_player()) {
         msg("You take no claw damage!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no claw damage!", text_The().c_str());
+        msg("%s takes no claw damage!", capitalize_first(text_the()).c_str());
       } else {
         dbg("Takes no claw damage");
       }
@@ -493,7 +492,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         if (is_player()) {
           msg("You are immune to cold damage!");
         } else if (is_mob() || is_item() || is_alive_monst()) {
-          msg("%s is immune to cold damage!", text_The().c_str());
+          msg("%s is immune to cold damage!", capitalize_first(text_the()).c_str());
         } else {
           dbg("Takes no cold damage");
         }
@@ -507,7 +506,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (is_player()) {
         msg("You take no cold damage!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no cold damage!", text_The().c_str());
+        msg("%s takes no cold damage!", capitalize_first(text_the()).c_str());
       } else {
         dbg("Takes no cold damage");
       }
@@ -538,7 +537,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         if (is_player()) {
           msg("You are immune to fire damage!");
         } else if (is_mob() || is_item() || is_alive_monst()) {
-          msg("%s is immune to fire damage!", text_The().c_str());
+          msg("%s is immune to fire damage!", capitalize_first(text_the()).c_str());
         } else {
           dbg("Is immune to fire damage");
         }
@@ -550,7 +549,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (is_player()) {
         msg("You take no fire damage!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no fire damage!", text_The().c_str());
+        msg("%s takes no fire damage!", capitalize_first(text_the()).c_str());
       } else {
         dbg("Takes no fire damage");
       }
@@ -581,7 +580,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (is_player()) {
         msg("You take no damage due to being super uncrushable!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no crush damage!", text_The().c_str());
+        msg("%s takes no crush damage!", capitalize_first(text_the()).c_str());
       } else {
         dbg("Takes no crush damage");
       }
@@ -603,7 +602,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (is_player()) {
         msg("You take no impact damage due to being super tough!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no impact damage!", text_The().c_str());
+        msg("%s takes no impact damage!", capitalize_first(text_the()).c_str());
       } else {
         dbg("Takes no impact damage");
       }
@@ -624,7 +623,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         if (is_player()) {
           msg("You are immune to electrical damage!");
         } else if (is_mob() || is_item() || is_alive_monst()) {
-          msg("%s is immune to electrical damage!", text_The().c_str());
+          msg("%s is immune to electrical damage!", capitalize_first(text_the()).c_str());
         } else {
           dbg("Takes no electrical damage");
         }
@@ -639,7 +638,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (is_player()) {
         msg("You take no lightning damage!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no lightning damage!", text_The().c_str());
+        msg("%s takes no lightning damage!", capitalize_first(text_the()).c_str());
       } else {
         dbg("Takes no electrical damage");
       }
@@ -666,7 +665,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (is_player()) {
         msg("You take no energy damage!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no energy damage!", text_The().c_str());
+        msg("%s takes no energy damage!", capitalize_first(text_the()).c_str());
       } else {
         dbg("Takes no energy damage");
       }
@@ -696,7 +695,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         if (is_player()) {
           msg("You are immune to negation damage!");
         } else if (is_mob() || is_item() || is_alive_monst()) {
-          msg("%s is immune to negation damage!", text_The().c_str());
+          msg("%s is immune to negation damage!", capitalize_first(text_the()).c_str());
         } else {
           dbg("Takes no negation damage");
         }
@@ -708,7 +707,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (is_player()) {
         msg("You take no negation damage!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no negation damage!", text_The().c_str());
+        msg("%s takes no negation damage!", capitalize_first(text_the()).c_str());
       } else {
         dbg("Is immune to negation damage");
       }
@@ -731,7 +730,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         if (is_player()) {
           msg("You are immune to acid damage!");
         } else if (is_mob() || is_item() || is_alive_monst()) {
-          msg("%s is immune to acid damage!", text_The().c_str());
+          msg("%s is immune to acid damage!", capitalize_first(text_the()).c_str());
         } else {
           dbg("Is immune to acid damage");
         }
@@ -743,7 +742,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (is_player()) {
         msg("You take no acid damage!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no acid damage!", text_The().c_str());
+        msg("%s takes no acid damage!", capitalize_first(text_the()).c_str());
       } else {
         dbg("Takes no acid damage");
       }
@@ -772,7 +771,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         if (is_player()) {
           msg("You are immune to water damage!");
         } else if (is_mob() || is_item() || is_alive_monst()) {
-          msg("%s is immune to water damage!", text_The().c_str());
+          msg("%s is immune to water damage!", capitalize_first(text_the()).c_str());
         } else {
           dbg("Is immune to water damage");
         }
@@ -786,7 +785,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (is_player()) {
         msg("You take no water damage!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no water damage!", text_The().c_str());
+        msg("%s takes no water damage!", capitalize_first(text_the()).c_str());
       } else {
         dbg("Takes no water damage");
       }
@@ -814,7 +813,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (is_player()) {
         msg("You take no digest damage!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no digest damage!", text_The().c_str());
+        msg("%s takes no digest damage!", capitalize_first(text_the()).c_str());
       } else {
         dbg("Takes no digest damage");
       }
@@ -836,7 +835,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         if (is_player()) {
           msg("You are immune to rotting!");
         } else if (is_mob() || is_item() || is_alive_monst()) {
-          msg("%s is immune to rotting!", text_The().c_str());
+          msg("%s is immune to rotting!", capitalize_first(text_the()).c_str());
         } else {
           dbg("Takes no rotting damage");
         }
@@ -848,7 +847,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (is_player()) {
         msg("You take no rotting damage!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no rotting damage!", text_The().c_str());
+        msg("%s takes no rotting damage!", capitalize_first(text_the()).c_str());
       } else {
         dbg("Takes no rotting damage");
       }
@@ -877,7 +876,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         if (is_player()) {
           msg("You are immune to physical draining!");
         } else if (is_mob() || is_item() || is_alive_monst()) {
-          msg("%s is immune to physical draining attacks!", text_The().c_str());
+          msg("%s is immune to physical draining attacks!", capitalize_first(text_the()).c_str());
         } else {
           dbg("Is immune to physical draining damage");
         }
@@ -891,7 +890,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (is_player()) {
         msg("You take no physical draining damage!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no physical draining damage!", text_The().c_str());
+        msg("%s takes no physical draining damage!", capitalize_first(text_the()).c_str());
       } else {
         dbg("Takes no physical draining damage");
       }
@@ -913,7 +912,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         if (is_player()) {
           msg("You are immune to magical draining!");
         } else if (is_mob() || is_item() || is_alive_monst()) {
-          msg("%s is immune to magical draining attacks!", text_The().c_str());
+          msg("%s is immune to magical draining attacks!", capitalize_first(text_the()).c_str());
         } else {
           dbg("Is immune to magical draining damage");
         }
@@ -927,7 +926,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (is_player()) {
         msg("You take no magical draining damage!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no magical draining damage!", text_The().c_str());
+        msg("%s takes no magical draining damage!", capitalize_first(text_the()).c_str());
       } else {
         dbg("Takes no draining damage");
       }
@@ -949,7 +948,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         if (is_player()) {
           msg("You are immune to holy damage!");
         } else if (is_mob() || is_item() || is_alive_monst()) {
-          msg("%s is immune to holy attacks!", text_The().c_str());
+          msg("%s is immune to holy attacks!", capitalize_first(text_the()).c_str());
         } else {
           dbg("Is immune to holy damage");
         }
@@ -963,7 +962,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (is_player()) {
         msg("You take no holy damage!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no holy damage!", text_The().c_str());
+        msg("%s takes no holy damage!", capitalize_first(text_the()).c_str());
       } else {
         dbg("Takes no holy damage");
       }
@@ -1007,7 +1006,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         if (is_player()) {
           msg("You are immune to heat damage!");
         } else if (is_mob() || is_item() || is_alive_monst()) {
-          msg("%s is immune to heat damage!", text_The().c_str());
+          msg("%s is immune to heat damage!", capitalize_first(text_the()).c_str());
         } else {
           dbg("Is immune to heat damage");
         }
@@ -1019,7 +1018,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (is_player()) {
         msg("You take no heat damage!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no heat damage!", text_The().c_str());
+        msg("%s takes no heat damage!", capitalize_first(text_the()).c_str());
       } else {
         dbg("Takes no heat damage");
       }
@@ -1050,7 +1049,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (is_player()) {
         msg("You take no %s damage!", dmg_type.c_str());
       } else if (real_hitter->is_player()) {
-        msg("%s takes no %s damage!", text_The().c_str(), dmg_type.c_str());
+        msg("%s takes no %s damage!", capitalize_first(text_the()).c_str(), dmg_type.c_str());
       } else {
         dbg("Takes no nat damage");
       }
@@ -1066,7 +1065,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (is_player()) {
         msg("You take no attack damage!");
       } else if (real_hitter->is_player()) {
-        msg("%s takes no attack damage!", text_The().c_str());
+        msg("%s takes no attack damage!", capitalize_first(text_the()).c_str());
       } else {
         dbg("Takes no nat damage");
       }
@@ -1089,7 +1088,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         || (curr_at.y >= MAP_HEIGHT - MAP_BORDER_ROCK)) {
       IF_DEBUG { hitter->log("Cannot hit: %s is border rock", to_short_string().c_str()); }
       if (real_hitter->is_player()) {
-        msg("%s is indestructable!", text_The().c_str());
+        msg("%s is indestructable!", capitalize_first(text_the()).c_str());
       }
       if (hitter->is_weapon() || hitter->is_ranged_weapon()) {
         weapon_check_for_dmg(hitter, this);
@@ -1196,7 +1195,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       if (is_player()) {
         msg("You bask in the fire!");
       } else if (real_hitter->is_player()) {
-        msg("%s basks in the fire! You do no damage!", text_The().c_str());
+        msg("%s basks in the fire! You do no damage!", capitalize_first(text_the()).c_str());
       }
       return false;
     }
@@ -1245,7 +1244,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         if (is_player()) {
           msg("You drink in the poison!");
         } else if (real_hitter->is_player()) {
-          msg("%s drinks in the poison! You do no damage!", text_The().c_str());
+          msg("%s drinks in the poison! You do no damage!", capitalize_first(text_the()).c_str());
         }
         if (hitter->is_poisonous_danger_level()) {
           health_boost(hitter, damage);
@@ -1271,7 +1270,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         if (is_player()) {
           msg("You are immune to the withering touch of %s!", text_the().c_str());
         } else if (real_hitter->is_player()) {
-          msg("%s shrugs off your withering touch!", text_The().c_str());
+          msg("%s shrugs off your withering touch!", capitalize_first(text_the()).c_str());
         }
         return false;
       }
@@ -1282,7 +1281,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
             if (is_player()) {
               msg("You gain strength from the withering touch!");
             } else if (real_hitter->is_player()) {
-              msg("%s gains strength from your withering touch!", text_The().c_str());
+              msg("%s gains strength from your withering touch!", capitalize_first(text_the()).c_str());
             }
             stat_str_incr();
             return false;
@@ -1319,7 +1318,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
             if (is_player()) {
               msg("You gain constitution from the withering touch!");
             } else if (real_hitter->is_player()) {
-              msg("%s gains constitution from your withering touch!", text_The().c_str());
+              msg("%s gains constitution from your withering touch!", capitalize_first(text_the()).c_str());
             }
             stat_con_incr();
             return false;
@@ -1456,9 +1455,11 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         dbg("Monst is owner of dead or dying thing");
         if (! o_top->is_dead && ! o_top->is_dying) {
           if (is_drained) {
-            msg("%s %s is drained.", apostrophise(o_top->text_The()).c_str(), text_long_name().c_str());
+            msg("%s %s is drained.", capitalize(o_top->text_the(TEXT_APOSTROPHIZE)).c_str(),
+                text_long_name().c_str());
           } else {
-            msg("%s %s is destroyed!", apostrophise(o_top->text_The()).c_str(), text_long_name().c_str());
+            msg("%s %s is destroyed!", capitalize(o_top->text_the(TEXT_APOSTROPHIZE)).c_str(),
+                text_long_name().c_str());
           }
         }
       }
@@ -1530,15 +1531,20 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         // Fatal/final hit
         //
         if (attack_options->attack[ THING_ATTACK_POISON ]) {
-          msg("%%fg=red$%s's fangs suck the last sustenance from you!%%fg=reset$", real_hitter->text_The().c_str());
+          msg("%%fg=red$%s's fangs suck the last sustenance from you!%%fg=reset$",
+              capitalize_first(real_hitter->text_the()).c_str());
         } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
-          msg("%%fg=red$%s's withering touch finishes you off!%%fg=reset$", real_hitter->text_The().c_str());
+          msg("%%fg=red$%s's withering touch finishes you off!%%fg=reset$",
+              capitalize_first(real_hitter->text_the()).c_str());
         } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
-          msg("%%fg=red$%s's physical draining touch finishes you off!%%fg=reset$", real_hitter->text_The().c_str());
+          msg("%%fg=red$%s's physical draining touch finishes you off!%%fg=reset$",
+              capitalize_first(real_hitter->text_the()).c_str());
         } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
-          msg("%%fg=red$%s's magical draining touch finishes you off!%%fg=reset$", real_hitter->text_The().c_str());
+          msg("%%fg=red$%s's magical draining touch finishes you off!%%fg=reset$",
+              capitalize_first(real_hitter->text_the()).c_str());
         } else if (attack_options->attack[ THING_ATTACK_HOLY ]) {
-          msg("%%fg=red$%s's holy touch finishes you off!%%fg=reset$", real_hitter->text_The().c_str());
+          msg("%%fg=red$%s's holy touch finishes you off!%%fg=reset$",
+              capitalize_first(real_hitter->text_the()).c_str());
         } else if (hitter->is_barrel()) {
           if (is_air_breather()) {
             msg("%%fg=red$You are drowned in a barrel!%%fg=reset$");
@@ -1551,43 +1557,43 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           }
         } else if (hitter->is_weapon() || hitter->is_ranged_weapon()) {
           if (hitter == real_hitter) {
-            msg("%%fg=red$%s cuts you down!%%fg=reset$", real_hitter->text_The().c_str());
+            msg("%%fg=red$%s cuts you down!%%fg=reset$", capitalize_first(real_hitter->text_the()).c_str());
           } else {
-            msg("%%fg=red$%s cuts you down with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+            msg("%%fg=red$%s cuts you down with %s!%%fg=reset$", capitalize_first(real_hitter->text_the()).c_str(),
                 hitter->text_the(false).c_str());
           }
         } else if (hitter->is_laser()) {
           if (hitter == real_hitter) {
-            msg("%%fg=red$%s zaps you apart!%%fg=reset$", real_hitter->text_The().c_str());
+            msg("%%fg=red$%s zaps you apart!%%fg=reset$", capitalize_first(real_hitter->text_the()).c_str());
           } else {
-            msg("%%fg=red$%s zaps you apart with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+            msg("%%fg=red$%s zaps you apart with %s!%%fg=reset$", capitalize_first(real_hitter->text_the()).c_str(),
                 hitter->text_the().c_str());
           }
         } else if (hitter->is_magical() && hitter->is_item()) {
           if (hitter == real_hitter) {
-            msg("%%fg=red$%s blasts you into pieces!%%fg=reset$", real_hitter->text_The().c_str());
+            msg("%%fg=red$%s blasts you into pieces!%%fg=reset$", capitalize_first(real_hitter->text_the()).c_str());
           } else {
-            msg("%%fg=red$%s blasts you into pieces with %s!%%fg=reset$", real_hitter->text_The().c_str(),
-                hitter->text_the().c_str());
+            msg("%%fg=red$%s blasts you into pieces with %s!%%fg=reset$",
+                capitalize_first(real_hitter->text_the()).c_str(), hitter->text_the().c_str());
           }
         } else if (hitter->is_projectile() || hitter->is_laser()) {
           if (hitter == real_hitter) {
-            msg("%%fg=red$%s blasted you into bits!%%fg=reset$", real_hitter->text_The().c_str());
+            msg("%%fg=red$%s blasted you into bits!%%fg=reset$", capitalize_first(real_hitter->text_the()).c_str());
           } else {
-            msg("%%fg=red$%s blasted you into bits with %s!%%fg=reset$", real_hitter->text_The().c_str(),
-                hitter->text_the().c_str());
+            msg("%%fg=red$%s blasted you into bits with %s!%%fg=reset$",
+                capitalize_first(real_hitter->text_the()).c_str(), hitter->text_the().c_str());
           }
         } else if (attack_options->attack[ THING_ATTACK_ACID ]) {
-          msg("%%fg=red$%s dissolves your body!%%fg=reset$", real_hitter->text_The().c_str());
+          msg("%%fg=red$%s dissolves your body!%%fg=reset$", capitalize_first(real_hitter->text_the()).c_str());
         } else if (attack_options->attack[ THING_ATTACK_NATURAL ]) {
-          msg("%%fg=red$%s %s deep!%%fg=reset$", real_hitter->text_The().c_str(),
-              pluralise(real_hitter->dmg_nat_att_type()).c_str());
+          msg("%%fg=red$%s %s deep!%%fg=reset$", capitalize_first(real_hitter->text_the()).c_str(),
+              real_hitter->dmg_nat_att_type().c_str());
         } else if (attack_options->attack[ THING_ATTACK_ENERGY ]) {
-          msg("%%fg=red$%s blasts you apart!%%fg=reset$", real_hitter->text_The().c_str());
+          msg("%%fg=red$%s blasts you apart!%%fg=reset$", capitalize_first(real_hitter->text_the()).c_str());
         } else if (attack_options->attack[ THING_ATTACK_NEGATION ]) {
-          msg("%%fg=red$%s negates you!%%fg=reset$", real_hitter->text_The().c_str());
+          msg("%%fg=red$%s negates you!%%fg=reset$", capitalize_first(real_hitter->text_the()).c_str());
         } else if (attack_options->attack[ THING_ATTACK_LIGHTNING ]) {
-          msg("%%fg=red$%s fries your body!%%fg=reset$", real_hitter->text_The().c_str());
+          msg("%%fg=red$%s fries your body!%%fg=reset$", capitalize_first(real_hitter->text_the()).c_str());
         } else if (attack_options->attack[ THING_ATTACK_CRUSH ]) {
           msg("%%fg=red$You are flattened by %s!%%fg=reset$", real_hitter->text_the().c_str());
         } else if (attack_options->attack[ THING_ATTACK_IMPACT ]) {
@@ -1600,20 +1606,20 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           msg("%%fg=red$You are drowned by %s!%%fg=reset$", real_hitter->text_the().c_str());
         } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
           if (hitter == real_hitter) {
-            msg("%%fg=red$%s strikes you!%%fg=reset$", real_hitter->text_The().c_str());
+            msg("%%fg=red$%s strikes you!%%fg=reset$", capitalize_first(real_hitter->text_the()).c_str());
           } else {
-            msg("%%fg=red$%s strikes you with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+            msg("%%fg=red$%s strikes you with %s!%%fg=reset$", capitalize_first(real_hitter->text_the()).c_str(),
                 hitter->text_the().c_str());
           }
         } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
           if (hitter == real_hitter) {
-            msg("%%fg=red$%s burns you!%%fg=reset$", real_hitter->text_The().c_str());
+            msg("%%fg=red$%s burns you!%%fg=reset$", capitalize_first(real_hitter->text_the()).c_str());
           } else {
-            msg("%%fg=red$%s burns you with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+            msg("%%fg=red$%s burns you with %s!%%fg=reset$", capitalize_first(real_hitter->text_the()).c_str(),
                 hitter->text_the().c_str());
           }
         } else {
-          msg("%%fg=red$%s %s you fatally!%%fg=reset$", real_hitter->text_The().c_str(),
+          msg("%%fg=red$%s %s you fatally!%%fg=reset$", capitalize_first(real_hitter->text_the()).c_str(),
               real_hitter->text_hits().c_str());
         }
       } else {
@@ -1621,24 +1627,28 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
         // Hit when not dead yet...
         //
         if (attack_options->crit) {
-          msg("%%fg=red$%s CRITS you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-              dmg_type.c_str());
+          msg("%%fg=red$%s CRITS you for %d %sdamage!%%fg=reset$", capitalize_first(real_hitter->text_the()).c_str(),
+              damage, dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_POISON ]) {
           if (real_hitter->is_fungus()) {
-            msg("%%fg=yellow$%s's toxins injure you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(),
-                damage, dmg_type.c_str());
+            msg("%%fg=yellow$%s's toxins injure you for %d %sdamage!%%fg=reset$",
+                capitalize_first(real_hitter->text_the()).c_str(), damage, dmg_type.c_str());
           } else {
-            msg("%%fg=yellow$%s injures you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-                dmg_type.c_str());
+            msg("%%fg=yellow$%s injures you for %d %sdamage!%%fg=reset$",
+                capitalize_first(real_hitter->text_the()).c_str(), damage, dmg_type.c_str());
           }
         } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
-          msg("%%fg=limegreen$%s's withering touch rots your skin!%%fg=reset$", real_hitter->text_The().c_str());
+          msg("%%fg=limegreen$%s's withering touch rots your skin!%%fg=reset$",
+              capitalize_first(real_hitter->text_the()).c_str());
         } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
-          msg("%%fg=limegreen$%s's physical draining touch weakens you!%%fg=reset$", real_hitter->text_The().c_str());
+          msg("%%fg=limegreen$%s's physical draining touch weakens you!%%fg=reset$",
+              capitalize_first(real_hitter->text_the()).c_str());
         } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
-          msg("%%fg=limegreen$%s's magical draining touch weakens you!%%fg=reset$", real_hitter->text_The().c_str());
+          msg("%%fg=limegreen$%s's magical draining touch weakens you!%%fg=reset$",
+              capitalize_first(real_hitter->text_the()).c_str());
         } else if (attack_options->attack[ THING_ATTACK_HOLY ]) {
-          msg("%%fg=limegreen$%s's holy touch weakens you!%%fg=reset$", real_hitter->text_The().c_str());
+          msg("%%fg=limegreen$%s's holy touch weakens you!%%fg=reset$",
+              capitalize_first(real_hitter->text_the()).c_str());
         } else if (hitter->is_barrel()) {
           if (is_air_breather()) {
             msg("%%fg=orange$You are drowning in a barrel!%%fg=reset$");
@@ -1647,56 +1657,60 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           }
         } else if (hitter->is_weapon() || hitter->is_ranged_weapon()) {
           if (hitter == real_hitter) {
-            msg("%%fg=orange$%s hits you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-                dmg_type.c_str());
+            msg("%%fg=orange$%s hits you for %d %sdamage!%%fg=reset$",
+                capitalize_first(real_hitter->text_the()).c_str(), damage, dmg_type.c_str());
           } else {
-            msg("%%fg=orange$%s hits you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
-                damage, dmg_type.c_str(), hitter->text_the(false).c_str());
+            msg("%%fg=orange$%s hits you for %d %sdamage with %s!%%fg=reset$",
+                capitalize_first(real_hitter->text_the()).c_str(), damage, dmg_type.c_str(),
+                hitter->text_the(false).c_str());
           }
         } else if (hitter->is_laser()) {
           if (hitter == real_hitter) {
-            msg("%%fg=orange$%s zaps you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-                dmg_type.c_str());
+            msg("%%fg=orange$%s zaps you for %d %sdamage!%%fg=reset$",
+                capitalize_first(real_hitter->text_the()).c_str(), damage, dmg_type.c_str());
           } else {
-            msg("%%fg=orange$%s zaps you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
-                damage, dmg_type.c_str(), hitter->text_the().c_str());
+            msg("%%fg=orange$%s zaps you for %d %sdamage with %s!%%fg=reset$",
+                capitalize_first(real_hitter->text_the()).c_str(), damage, dmg_type.c_str(),
+                hitter->text_the().c_str());
           }
         } else if (hitter->is_magical() && hitter->is_item()) {
           if (hitter == real_hitter) {
-            msg("%%fg=orange$%s blasts you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-                dmg_type.c_str());
+            msg("%%fg=orange$%s blasts you for %d %sdamage!%%fg=reset$",
+                capitalize_first(real_hitter->text_the()).c_str(), damage, dmg_type.c_str());
           } else {
-            msg("%%fg=orange$%s blasts you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
-                damage, dmg_type.c_str(), hitter->text_the().c_str());
+            msg("%%fg=orange$%s blasts you for %d %sdamage with %s!%%fg=reset$",
+                capitalize_first(real_hitter->text_the()).c_str(), damage, dmg_type.c_str(),
+                hitter->text_the().c_str());
           }
         } else if (hitter->is_projectile() || hitter->is_laser()) {
           if (hitter == real_hitter) {
-            msg("%%fg=orange$%s blasted you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-                dmg_type.c_str());
+            msg("%%fg=orange$%s blasted you for %d %sdamage!%%fg=reset$",
+                capitalize_first(real_hitter->text_the()).c_str(), damage, dmg_type.c_str());
           } else {
-            msg("%%fg=orange$%s blasted you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
-                damage, dmg_type.c_str(), hitter->text_the().c_str());
+            msg("%%fg=orange$%s blasted you for %d %sdamage with %s!%%fg=reset$",
+                capitalize_first(real_hitter->text_the()).c_str(), damage, dmg_type.c_str(),
+                hitter->text_the().c_str());
           }
         } else if (attack_options->attack[ THING_ATTACK_ACID ]) {
-          msg("%%fg=orange$%s burns you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-              dmg_type.c_str());
+          msg("%%fg=orange$%s burns you for %d %sdamage!%%fg=reset$",
+              capitalize_first(real_hitter->text_the()).c_str(), damage, dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_NATURAL ]) {
           if (! real_hitter->dmg_nat_att_type().empty()) {
-            msg("%%fg=orange$%s attacks you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-                dmg_type.c_str());
+            msg("%%fg=orange$%s attacks you for %d %sdamage!%%fg=reset$",
+                capitalize_first(real_hitter->text_the()).c_str(), damage, dmg_type.c_str());
           } else {
-            msg("%%fg=orange$%s bites you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-                dmg_type.c_str());
+            msg("%%fg=orange$%s bites you for %d %sdamage!%%fg=reset$",
+                capitalize_first(real_hitter->text_the()).c_str(), damage, dmg_type.c_str());
           }
         } else if (attack_options->attack[ THING_ATTACK_ENERGY ]) {
-          msg("%%fg=orange$%s blasts you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-              dmg_type.c_str());
+          msg("%%fg=orange$%s blasts you for %d %sdamage!%%fg=reset$",
+              capitalize_first(real_hitter->text_the()).c_str(), damage, dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_NEGATION ]) {
-          msg("%%fg=orange$%s negates you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-              dmg_type.c_str());
+          msg("%%fg=orange$%s negates you for %d %sdamage!%%fg=reset$",
+              capitalize_first(real_hitter->text_the()).c_str(), damage, dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_LIGHTNING ]) {
-          msg("%%fg=orange$%s electrocutes you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-              dmg_type.c_str());
+          msg("%%fg=orange$%s electrocutes you for %d %sdamage!%%fg=reset$",
+              capitalize_first(real_hitter->text_the()).c_str(), damage, dmg_type.c_str());
         } else if (attack_options->attack[ THING_ATTACK_CRUSH ]) {
           msg("%%fg=orange$You are being crushed by %s for %d damage!%%fg=reset$", real_hitter->text_the().c_str(),
               damage);
@@ -1718,21 +1732,22 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
           msg("%%fg=orange$You are drowning!%%fg=reset$");
         } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
           if (hitter == real_hitter) {
-            msg("%%fg=orange$%s strikes you!%%fg=reset$", real_hitter->text_The().c_str());
+            msg("%%fg=orange$%s strikes you!%%fg=reset$", capitalize_first(real_hitter->text_the()).c_str());
           } else {
-            msg("%%fg=orange$%s strikes you with %s!%%fg=reset$", real_hitter->text_The().c_str(),
+            msg("%%fg=orange$%s strikes you with %s!%%fg=reset$", capitalize_first(real_hitter->text_the()).c_str(),
                 hitter->text_the().c_str());
           }
         } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
           if (hitter == real_hitter) {
-            msg("%%fg=orange$%s burns you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(), damage,
-                dmg_type.c_str());
+            msg("%%fg=orange$%s burns you for %d %sdamage!%%fg=reset$",
+                capitalize_first(real_hitter->text_the()).c_str(), damage, dmg_type.c_str());
           } else {
-            msg("%%fg=orange$%s burns you for %d %sdamage with %s!%%fg=reset$", real_hitter->text_The().c_str(),
-                damage, dmg_type.c_str(), hitter->text_the().c_str());
+            msg("%%fg=orange$%s burns you for %d %sdamage with %s!%%fg=reset$",
+                capitalize_first(real_hitter->text_the()).c_str(), damage, dmg_type.c_str(),
+                hitter->text_the().c_str());
           }
         } else {
-          msg("%%fg=orange$%s %s you for %d %sdamage!%%fg=reset$", real_hitter->text_The().c_str(),
+          msg("%%fg=orange$%s %s you for %d %sdamage!%%fg=reset$", capitalize_first(real_hitter->text_the()).c_str(),
               real_hitter->text_hits().c_str(), damage, dmg_type.c_str());
         }
       }
@@ -2053,10 +2068,11 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     // Fork lightning passes through water.
     //
     if (real_hitter->is_water()) {
-      hitter->msg("%s surges through the water and electrifies %s for %d damage.", hitter->text_The().c_str(),
-                  text_the().c_str(), damage);
+      hitter->msg("%s surges through the water and electrifies %s for %d damage.",
+                  capitalize_first(hitter->text_the()).c_str(), text_the().c_str(), damage);
     } else {
-      hitter->msg("%s electrifies %s for %d damage.", hitter->text_The().c_str(), text_the().c_str(), damage);
+      hitter->msg("%s electrifies %s for %d damage.", capitalize_first(hitter->text_the()).c_str(),
+                  text_the().c_str(), damage);
     }
   } else if (real_hitter == this) {
     TRACE_NO_INDENT();
@@ -2104,7 +2120,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       }
     } else if (o_top && o_top->is_monst()) {
       if (attack_options->attack[ THING_ATTACK_POISON ]) {
-        msg("%s %s is being poisoned.", pluralise(text_The()).c_str(), text_long_name().c_str());
+        msg("%s %s is being poisoned.", text_the(TEXT_PLURALIZE).c_str(), text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_BITE ]) {
         msg("Your %s is being bitten.", text_long_name().c_str());
       } else if (attack_options->attack[ THING_ATTACK_CLAW ]) {
@@ -2146,54 +2162,54 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       }
     } else {
       if (attack_options->attack[ THING_ATTACK_POISON ]) {
-        real_hitter->msg("%s is being poisoned.", text_The().c_str());
+        real_hitter->msg("%s is being poisoned.", capitalize_first(text_the()).c_str());
       } else if (attack_options->attack[ THING_ATTACK_BITE ]) {
-        real_hitter->msg("%s is biting itself.", text_The().c_str());
+        real_hitter->msg("%s is biting itself.", capitalize_first(text_the()).c_str());
       } else if (attack_options->attack[ THING_ATTACK_CLAW ]) {
-        real_hitter->msg("%s is clawing itself.", text_The().c_str());
+        real_hitter->msg("%s is clawing itself.", capitalize_first(text_the()).c_str());
       } else if (attack_options->attack[ THING_ATTACK_COLD ]) {
-        real_hitter->msg("%s is freezing.", text_The().c_str());
+        real_hitter->msg("%s is freezing.", capitalize_first(text_the()).c_str());
       } else if (attack_options->attack[ THING_ATTACK_FIRE ]) {
-        real_hitter->msg("%s is on fire.", text_The().c_str());
+        real_hitter->msg("%s is on fire.", capitalize_first(text_the()).c_str());
       } else if (attack_options->attack[ THING_ATTACK_CRUSH ]) {
-        real_hitter->msg("%s is being crushed.", text_The().c_str());
+        real_hitter->msg("%s is being crushed.", capitalize_first(text_the()).c_str());
       } else if (attack_options->attack[ THING_ATTACK_IMPACT ]) {
-        real_hitter->msg("%s is being impacted.", text_The().c_str());
+        real_hitter->msg("%s is being impacted.", capitalize_first(text_the()).c_str());
       } else if (attack_options->attack[ THING_ATTACK_LIGHTNING ]) {
-        real_hitter->msg("%s is being electrified.", text_The().c_str());
+        real_hitter->msg("%s is being electrified.", capitalize_first(text_the()).c_str());
       } else if (attack_options->attack[ THING_ATTACK_ENERGY ]) {
-        real_hitter->msg("%s is being disintegrated.", text_The().c_str());
+        real_hitter->msg("%s is being disintegrated.", capitalize_first(text_the()).c_str());
       } else if (attack_options->attack[ THING_ATTACK_NEGATION ]) {
-        real_hitter->msg("%s is being negated.", text_The().c_str());
+        real_hitter->msg("%s is being negated.", capitalize_first(text_the()).c_str());
       } else if (attack_options->attack[ THING_ATTACK_ACID ]) {
-        real_hitter->msg("%s is being dissolved.", text_The().c_str());
+        real_hitter->msg("%s is being dissolved.", capitalize_first(text_the()).c_str());
       } else if (attack_options->attack[ THING_ATTACK_DIGEST ]) {
-        real_hitter->msg("%s is being digested.", text_The().c_str());
+        real_hitter->msg("%s is being digested.", capitalize_first(text_the()).c_str());
       } else if (attack_options->attack[ THING_ATTACK_NECROSIS ]) {
-        real_hitter->msg("%s is rotting.", text_The().c_str());
+        real_hitter->msg("%s is rotting.", capitalize_first(text_the()).c_str());
       } else if (attack_options->attack[ THING_ATTACK_STAMINA_DRAIN ]) {
-        real_hitter->msg("%s is being physically drained.", text_The().c_str());
+        real_hitter->msg("%s is being physically drained.", capitalize_first(text_the()).c_str());
       } else if (attack_options->attack[ THING_ATTACK_MAGIC_DRAIN ]) {
-        real_hitter->msg("%s is being magically drained.", text_The().c_str());
+        real_hitter->msg("%s is being magically drained.", capitalize_first(text_the()).c_str());
       } else if (attack_options->attack[ THING_ATTACK_HOLY ]) {
-        real_hitter->msg("%s is being blessed.", text_The().c_str());
+        real_hitter->msg("%s is being blessed.", capitalize_first(text_the()).c_str());
       } else if (attack_options->attack[ THING_ATTACK_DROWN ]) {
-        real_hitter->msg("%s is drowning.", text_The().c_str());
+        real_hitter->msg("%s is drowning.", capitalize_first(text_the()).c_str());
       } else if (attack_options->attack[ THING_ATTACK_MISSILE ]) {
-        real_hitter->msg("%s is struck.", text_The().c_str());
+        real_hitter->msg("%s is struck.", capitalize_first(text_the()).c_str());
       } else if (attack_options->attack[ THING_ATTACK_HEAT ]) {
-        real_hitter->msg("%s burns.", text_The().c_str());
+        real_hitter->msg("%s burns.", capitalize_first(text_the()).c_str());
       } else {
-        real_hitter->msg("%s is hitting itself.", text_The().c_str());
+        real_hitter->msg("%s is hitting itself.", capitalize_first(text_the()).c_str());
       }
     }
   } else if (real_hitter->is_monst() && (real_hitter != hitter)) {
     TRACE_NO_INDENT();
     if (attack_options->attack[ THING_ATTACK_NATURAL ]) {
-      real_hitter->msg("%s %s %s with %s.", real_hitter->text_The().c_str(), real_hitter->text_hits().c_str(),
-                       text_the().c_str(), hitter->text_the().c_str());
+      real_hitter->msg("%s %s %s with %s.", capitalize_first(real_hitter->text_the()).c_str(),
+                       real_hitter->text_hits().c_str(), text_the().c_str(), hitter->text_the().c_str());
     } else {
-      real_hitter->msg("%s hits %s with %s.", real_hitter->text_The().c_str(), text_the().c_str(),
+      real_hitter->msg("%s hits %s with %s.", capitalize_first(real_hitter->text_the()).c_str(), text_the().c_str(),
                        hitter->text_the().c_str());
     }
   } else if (l && l->is_player()) {
@@ -2206,10 +2222,10 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
     //
     if (victim->is_interesting()) {
       if (attack_options->attack[ THING_ATTACK_NATURAL ]) {
-        real_hitter->msg("%s %s %s.", real_hitter->text_The().c_str(), real_hitter->text_hits().c_str(),
-                         text_the().c_str());
+        real_hitter->msg("%s %s %s.", capitalize_first(real_hitter->text_the()).c_str(),
+                         real_hitter->text_hits().c_str(), text_the().c_str());
       } else {
-        real_hitter->msg("%s hits %s.", real_hitter->text_The().c_str(), text_the().c_str());
+        real_hitter->msg("%s hits %s.", capitalize_first(real_hitter->text_the()).c_str(), text_the().c_str());
       }
     }
   }
@@ -2235,7 +2251,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
       }
     }
     if (hitter->on_fire_set("hit by fire due to attacking")) {
-      msg("%s sets itself on fire!", hitter->text_The().c_str());
+      msg("%s sets itself on fire!", capitalize_first(hitter->text_the()).c_str());
     }
   }
 

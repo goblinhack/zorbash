@@ -146,6 +146,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "pyrolizards")
+    my.text_apostrophize(self, "pyrolizard's")
     my.text_description_long2(self, "Pyro-lizards hate dogmen. Something to do with barking.")
     my.text_description_long3(self, "Pyro-lizards do not make good pets.")
     my.text_description_long(self, "Pyro-lizards are a primitive and savage race and proudly eschew all forms of weaponry, believing that their claws, teeth and... devastating fire breath are all they need for home defense.")
@@ -190,7 +192,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="pyrolizard", text_long_name="pyrolizard")
+    tp_init(name="pyrolizard",
+            text_long_name="pyrolizard")
 
 
 init()

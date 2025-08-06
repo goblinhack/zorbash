@@ -158,6 +158,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.range_max(self, 7)
     my.temperature(self, 30)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "staffs of negation")
+    my.text_apostrophize(self, "staff of negation's")
     my.text_description_enchant(self, "+1 radius")
     my.text_description_long(self, "Discharges a single blast of negation at an ungrateful recipient and their equipment...")
     my.text_description_short(self, "A staff of negation.")
@@ -189,7 +191,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_negation", text_long_name="staff of negation", text_short_name="staff, negation")
+    tp_init(name="staff_negation",
+            text_long_name="staff of negation",
+            text_short_name="staff, negation")
 
 
 init()

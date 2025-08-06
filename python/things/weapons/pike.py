@@ -95,6 +95,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.stamina_drain_on_attacking(self, 3)
     my.stat_att_bonus(self, 1)  # means +1 per enchant
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "pikes")
+    my.text_apostrophize(self, "pike's")
     my.text_description_enchant(self, "+1 DMG, +1 ATT")
     my.text_description_long(self, "Not to be confused with the fish of legend, this deadly weapon is ideal at skewering enemies up to two tiles ahead.")
     my.text_description_short(self, "Thy skewering means of justice.")
@@ -111,7 +113,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="pike", text_long_name="pike", text_short_name="pike")
+    tp_init(name="pike",
+            text_long_name="pike",
+            text_short_name="pike")
 
 
 init()

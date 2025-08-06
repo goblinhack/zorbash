@@ -36,7 +36,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="spell_of_summon_food", text_long_name="summon food", text_short_name="summon food")
+    tp_init(name="spell_of_summon_food",
+            text_long_name="summon food",
+            text_short_name="summon food")
 
 
 init()

@@ -92,6 +92,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_UNCOMMON)
     my.stamina_drain_on_attacking(self, 3)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "shovels")
+    my.text_apostrophize(self, "shovel's")
     my.text_description_enchant(self, "+1 DMG")
     my.text_description_long(self, "A truly inspiring weapon of flatness. The shovel. Ideal for light gardening and decapitation.")
     my.text_description_short(self, "Thy diggy means of justice.")
@@ -108,7 +110,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="shovel", text_long_name="shovel", text_short_name="shovel")
+    tp_init(name="shovel",
+            text_long_name="shovel",
+            text_short_name="shovel")
 
 
 init()

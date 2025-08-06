@@ -40,7 +40,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="spell_of_summon_rock", text_long_name="summon rock", text_short_name="summon rock")
+    tp_init(name="spell_of_summon_rock",
+            text_long_name="summon rock",
+            text_short_name="summon rock")
 
 
 init()

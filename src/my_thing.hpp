@@ -1765,7 +1765,7 @@ public:
   int is_holy(void);
   int is_holy_water(void);
   int is_humanoid(void);
-  int is_iceman(void);
+  int is_icefolk(void);
   int is_immune_to_acid(void);
   int is_immune_to_blinding(void);
   int is_immune_to_cold(void);
@@ -1819,7 +1819,7 @@ public:
   int is_magical(void);
   int is_magic_crystal(void);
   int is_magic_stone(void);
-  int is_mantisman(void);
+  int is_mantisfolk(void);
   int is_map_beast(void);
   int is_map_treasure(void);
   int is_meat(void);
@@ -2591,19 +2591,26 @@ public:
 
   std::size_t light_count(void);
 
-  std::string text_short_and_state_capitalised(size_t max_len = 0);
-  std::string text_long_and_state_capitalised(size_t max_len = 0);
-  std::string text_short_capitalised(size_t max_len = 0);
-  std::string text_long_capitalised(size_t max_len = 0);
+  std::string text_short_and_state_capitalized(size_t max_len = 0);
+  std::string text_long_and_state_capitalized(size_t max_len = 0);
+  std::string text_short_capitalized(size_t max_len = 0);
+  std::string text_long_capitalized(size_t max_len = 0);
   std::string text_short_a_or_an(size_t max_len = 0);
   std::string text_short_the(size_t max_len = 0);
   std::string text_short_The(size_t max_len = 0);
   std::string text_a_or_an(size_t max_len = 0);
+  std::string text_pluralize(size_t max_len = 0);
+  std::string text_apostrophize(size_t max_len = 0);
   std::string text_A_or_An(size_t max_len = 0);
-  std::string text_the(bool include_owner = false);
-  std::string text_the_no_dying(bool include_owner = false);
-  std::string text_The_no_dying(void);
-  std::string text_The(void);
+
+  enum {
+    TEXT_INCLUDE_OWNER = 1,
+    TEXT_EXCLUDE_DEATH = 2,
+    TEXT_APOSTROPHIZE  = 4,
+    TEXT_PLURALIZE     = 8,
+  };
+  std::string text_the(uint8_t flags = 0);
+
   std::string to_dbg_saved_string(void);
   std::string to_dbg_string(void);
   std::string to_short_string(void);

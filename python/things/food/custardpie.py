@@ -51,6 +51,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_thrown_do(self, "me.on_thrown()")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "custard pies")
+    my.text_apostrophize(self, "custard pie's")
     my.text_description_long(self, "At least it might be custard. Whatever it is it oozes a bit and is yellow.")
     my.text_description_short(self, "Custard pie.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -64,7 +66,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="custardpie", text_long_name="custard pie", text_short_name="custard pie")
+    tp_init(name="custardpie",
+            text_long_name="custard pie",
+            text_short_name="custard pie")
 
 
 init()

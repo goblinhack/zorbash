@@ -39,7 +39,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="skill_healing3", text_long_name="accelerated health 3", text_short_name="accelerated health 3")
+    tp_init(name="skill_healing3",
+            text_long_name="accelerated health 3",
+            text_short_name="accelerated health 3")
 
 
 init()

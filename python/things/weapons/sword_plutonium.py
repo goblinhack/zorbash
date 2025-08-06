@@ -128,6 +128,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_att_bonus(self, 4)
     my.stat_str_min(self, 16)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "swords of plutonium")
+    my.text_apostrophize(self, "sword of plutonium's")
     my.text_description_enchant(self, "+1 DMG, +1 ATT")
     my.text_description_long(self, "This glowing and very heavy sword offers supreme damage potential and durability. Crafted from the core of a long gone power source of the ancients, you must take care as prolonged exposure to this sword will make you weak and sick. But maybe it is worth it?")
     my.text_description_short(self, "Thy nuclear means of justice.")
@@ -144,7 +146,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="sword_plutonium", text_long_name="sword of plutonium", text_short_name="sword, pluton")
+    tp_init(name="sword_plutonium",
+            text_long_name="sword of plutonium",
+            text_short_name="sword, pluton")
 
 
 init()

@@ -35,6 +35,8 @@ def tp_init(name, text_long_name):
     my.normal_placement_rules(self, True)
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "topaz")
+    my.text_apostrophize(self, "topaz's")
     my.text_description_long(self, "Topaz is prized for its ability to help you make friends. Just what you need. There are some entrails left on this piece. Just wipe them off.")
     my.text_description_short(self, "Clean cut topaz.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -56,7 +58,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="gem_topaz", text_long_name="topaz")
+    tp_init(name="gem_topaz",
+            text_long_name="topaz")
 
 
 init()

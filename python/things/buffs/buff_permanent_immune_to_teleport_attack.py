@@ -37,7 +37,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="buff_permanent_immune_to_teleport_attack", text_long_name="teleport attack protection")
+    tp_init(name="buff_permanent_immune_to_teleport_attack",
+            text_long_name="teleport attack protection")
 
 
 init()

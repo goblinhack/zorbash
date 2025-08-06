@@ -44,6 +44,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_death_is_open(self, True)
     my.on_open_do(self, "me.on_open()")
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "uneven dungeon walls")
+    my.text_apostrophize(self, "uneven dungeon wall's")
     my.text_description_short(self, "A strange looking wall.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
@@ -102,7 +104,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="door_secret", text_long_name="uneven dungeon wall", text_short_name="dungeon wall")
+    tp_init(name="door_secret",
+            text_long_name="uneven dungeon wall",
+            text_short_name="dungeon wall")
 
 
 init()

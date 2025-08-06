@@ -24,7 +24,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="buff_permanent_raging", text_long_name="raging mad", text_short_name="raging")
+    tp_init(name="buff_permanent_raging",
+            text_long_name="raging mad",
+            text_short_name="raging")
 
 
 init()

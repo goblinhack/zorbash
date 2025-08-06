@@ -42,6 +42,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "10+1d25")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "wine")
+    my.text_apostrophize(self, "wine's")
     my.text_description_long(self, "A bottle of wine from the zorblin vineyards. Not the best vintage.")
     my.text_description_short(self, "Wine.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -55,7 +57,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="wine", text_long_name="wine", text_short_name="wine")
+    tp_init(name="wine",
+            text_long_name="wine",
+            text_short_name="wine")
 
 
 init()

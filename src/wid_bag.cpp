@@ -7,6 +7,7 @@
 #include "my_sdl_event.hpp"
 #include "my_sdl_proto.hpp"
 #include "my_sound.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_ui.hpp"
 #include "my_wid.hpp"
@@ -689,7 +690,7 @@ bool Game::wid_bag_move_item(Thingp t)
       TRACE_AND_INDENT();
       t->unequip_me_from_owner("moved item into ether", true);
     } else if (! bag) {
-      ERR("%s has no bag so cannot move it!", t->text_The().c_str());
+      ERR("%s has no bag so cannot move it!", capitalize_first(t->text_the()).c_str());
       return false;
     }
   }

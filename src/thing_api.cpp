@@ -6,7 +6,6 @@
 #include "my_game.hpp"
 #include "my_globals_extra.hpp"
 #include "my_monst.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
 //
@@ -933,15 +932,15 @@ int Thing::is_yeti(void)
   TRACE_NO_INDENT();
   return (tp()->is_yeti());
 }
-int Thing::is_mantisman(void)
+int Thing::is_mantisfolk(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_mantisman());
+  return (tp()->is_mantisfolk());
 }
-int Thing::is_iceman(void)
+int Thing::is_icefolk(void)
 {
   TRACE_NO_INDENT();
-  return (tp()->is_iceman());
+  return (tp()->is_icefolk());
 }
 int Thing::is_molekin(void)
 {

@@ -60,6 +60,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_def_bonus(self, 7)
     my.stat_dex_bonus(self, -2)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "unobtanium armor")
+    my.text_apostrophize(self, "unobtanium armor's")
     my.text_description_enchant(self, "+1 DEF")
     my.text_description_long(self, "Not available in most retailers.")
     my.text_description_long(self, "Unobtanium armor. As hard as it gets. When the tough get going, the tough put on their unobtanium armor.")

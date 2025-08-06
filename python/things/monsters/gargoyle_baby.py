@@ -122,6 +122,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive_to_sudden_changes(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "gargoyle babies")
+    my.text_apostrophize(self, "baby gargoyle's")
     my.text_description_long2(self, "This particular gargoyle is just starting out in its career, hence the diminutive stature. It is not as capable as its mature form, but is still to be feared...")
     my.text_description_long(self, "This small creature guards the dungeon from the likes of you. Gargoyles lurk amongst the ruins and delight in the art of surprise...")
     my.text_description_short(self, "A fearsome gargoyle.")
@@ -154,7 +156,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="gargoyle_baby", text_long_name="gargoyle baby")
+    tp_init(name="gargoyle_baby",
+            text_long_name="gargoyle baby")
 
 
 init()

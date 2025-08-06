@@ -147,6 +147,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.range_max(self, 7)
     my.temperature(self, 30)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "staffs of haste")
+    my.text_apostrophize(self, "staff of haste's")
     my.text_description_enchant(self, "+1 radius")
     my.text_description_long(self, "Gives a temporary boost in speed to you, a friend, or a beloved enemy.")
     my.text_description_short(self, "A staff of haste.")
@@ -178,7 +180,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_haste", text_long_name="staff of haste", text_short_name="staff, haste")
+    tp_init(name="staff_haste",
+            text_long_name="staff of haste",
+            text_short_name="staff, haste")
 
 
 init()

@@ -59,6 +59,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_thrown_do(self, "me.on_thrown()")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "steel darts")
+    my.text_apostrophize(self, "steel dart's")
     my.text_description_enchant(self, "+1 DMG")
     my.text_description_long(self, "The professional's melee weapon. This steel dart flies through the air with punishing levels of accuracy and has a low chance of being damaged.")
     my.text_description_short(self, "A steel dart.")
@@ -75,7 +77,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="dart_metal", text_long_name="steel dart", text_short_name="steel dart")
+    tp_init(name="dart_metal",
+            text_long_name="steel dart",
+            text_short_name="steel dart")
 
 
 init()

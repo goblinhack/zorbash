@@ -117,6 +117,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_psi_bonus(self, 6)
     my.stat_str_min(self, 16)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "sword of darkness")
+    my.text_apostrophize(self, "sword of darkness'")
     my.text_description_enchant(self, "+1 DMG, +1 ATT")
     my.text_description_long(self, "This dark and sinister blade deals large amounts of damage with some drawbacks that are not for the light of heart")
     my.text_description_short(self, "Thy dark means of justice.")
@@ -133,7 +135,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="sword_darkness", text_long_name="sword of darkness", text_short_name="sword, darkness")
+    tp_init(name="sword_darkness",
+            text_long_name="sword of darkness",
+            text_short_name="sword, darkness")
 
 
 init()

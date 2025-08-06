@@ -74,6 +74,8 @@ def tp_init(name, text_long_name, text_short_name, tiles=[]):
     my.on_thrown_do(self, "me.on_thrown()")
     my.temperature(self, 50)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "torches")
+    my.text_apostrophize(self, "torch's")
     my.text_description_long(self, "A bundle of torches to light the way. Be warned, they do burn out slowly. Don't find yourself lost in the dark...")
     my.text_description_short(self, "A small beacon of light in this blighted place.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -91,7 +93,9 @@ def tp_init(name, text_long_name, text_short_name, tiles=[]):
 
 
 def init():
-    tp_init(name="torch", text_long_name="torch", text_short_name="torch",
+    tp_init(name="torch",
+            text_long_name="torch",
+            text_short_name="torch",
             tiles=[
                 "torch.1",
                 "torch.2",

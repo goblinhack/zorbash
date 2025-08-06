@@ -4,7 +4,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_monst.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 
 //
@@ -64,9 +64,9 @@ void Thing::can_see_you(point p)
                 t->is_wounded_msg = true;
                 if (t->is_msg_allowed_is_wounded()) {
                   if (t->is_red_blooded()) {
-                    msg("%s corpse is covered in blood.", t->text_The().c_str());
+                    msg("%s corpse is covered in blood.", capitalize_first(t->text_the()).c_str());
                   } else if (t->is_green_blooded()) {
-                    msg("%s corpse is covered in goo.", t->text_The().c_str());
+                    msg("%s corpse is covered in goo.", capitalize_first(t->text_the()).c_str());
                   }
                 }
               }
@@ -84,22 +84,22 @@ void Thing::can_see_you(point p)
                   continue;
                 }
                 if (item->is_ring() || item->is_helmet() || item->is_amulet()) {
-                  msg("%s was wearing %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
+                  msg("%s was wearing %s.", capitalize_first(t->text_the()).c_str(), item->text_a_or_an().c_str());
                 }
                 if (item->is_cloak()) {
-                  msg("%s was styled in %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
+                  msg("%s was styled in %s.", capitalize_first(t->text_the()).c_str(), item->text_a_or_an().c_str());
                 }
                 if (item->is_gauntlet() || item->is_armor()) {
-                  msg("%s was wearing %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
+                  msg("%s was wearing %s.", capitalize_first(t->text_the()).c_str(), item->text_a_or_an().c_str());
                 }
                 if (item->is_boots()) {
-                  msg("%s was sporting %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
+                  msg("%s was sporting %s.", capitalize_first(t->text_the()).c_str(), item->text_a_or_an().c_str());
                 }
                 if (item->is_shield()) {
-                  msg("%s was carrying %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
+                  msg("%s was carrying %s.", capitalize_first(t->text_the()).c_str(), item->text_a_or_an().c_str());
                 }
                 if (item->is_weapon()) {
-                  msg("%s was wielding %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
+                  msg("%s was wielding %s.", capitalize_first(t->text_the()).c_str(), item->text_a_or_an().c_str());
                 }
               }
             }
@@ -124,22 +124,22 @@ void Thing::can_see_you(point p)
                   continue;
                 }
                 if (item->is_ring() || item->is_helmet() || item->is_amulet()) {
-                  msg("%s is wearing %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
+                  msg("%s is wearing %s.", capitalize_first(t->text_the()).c_str(), item->text_a_or_an().c_str());
                 }
                 if (item->is_cloak()) {
-                  msg("%s is styled in %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
+                  msg("%s is styled in %s.", capitalize_first(t->text_the()).c_str(), item->text_a_or_an().c_str());
                 }
                 if (item->is_gauntlet() || item->is_armor()) {
-                  msg("%s is wearing %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
+                  msg("%s is wearing %s.", capitalize_first(t->text_the()).c_str(), item->text_a_or_an().c_str());
                 }
                 if (item->is_boots()) {
-                  msg("%s is sporting %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
+                  msg("%s is sporting %s.", capitalize_first(t->text_the()).c_str(), item->text_a_or_an().c_str());
                 }
                 if (item->is_shield()) {
-                  msg("%s is holding %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
+                  msg("%s is holding %s.", capitalize_first(t->text_the()).c_str(), item->text_a_or_an().c_str());
                 }
                 if (item->is_weapon()) {
-                  msg("%s is wielding %s.", t->text_The().c_str(), item->text_a_or_an().c_str());
+                  msg("%s is wielding %s.", capitalize_first(t->text_the()).c_str(), item->text_a_or_an().c_str());
                 }
               }
             }
@@ -150,9 +150,9 @@ void Thing::can_see_you(point p)
               t->is_wounded_msg = true;
               if (t->is_msg_allowed_is_wounded()) {
                 if (t->is_skeleton()) {
-                  msg("%s bone's rattle.", t->text_The().c_str());
+                  msg("%s bone's rattle.", capitalize_first(t->text_the()).c_str());
                 } else {
-                  msg("%s is wounded.", t->text_The().c_str());
+                  msg("%s is wounded.", capitalize_first(t->text_the()).c_str());
                 }
               }
             }
@@ -165,14 +165,14 @@ void Thing::can_see_you(point p)
           has_seen_player_msg_shown = true;
           if (is_msg_allowed_is_seen()) {
             if (t->is_on_fire()) {
-              msg("%s can see your flaming body!", text_The().c_str());
+              msg("%s can see your flaming body!", capitalize_first(text_the()).c_str());
             } else {
               if (level->is_darkness(t->curr_at)) {
-                msg("%s can see your outline in the magical darkness!", text_The().c_str());
+                msg("%s can see your outline in the magical darkness!", capitalize_first(text_the()).c_str());
               } else if (level->is_darkness(curr_at)) {
-                msg("%s can see you vaguely in the magical darkness!", text_The().c_str());
+                msg("%s can see you vaguely in the magical darkness!", capitalize_first(text_the()).c_str());
               } else {
-                msg("%s can see you!", text_The().c_str());
+                msg("%s can see you!", capitalize_first(text_the()).c_str());
               }
             }
           }

@@ -146,6 +146,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "thylacines")
+    my.text_apostrophize(self, "thylacine's")
     my.text_description_long2(self, "History lesson: The thylacine was known as the Tasmanian tiger because it displayed dark stripes that radiated from the top of its back, and it was known as the Tasmanian wolf because it had the general appearance of a medium-to-large-size canid. The name thylacine refers to its the marsupial like pouch.")
     my.text_description_long3(self, "Once common upon the surface world, but hunted down by evil humans to near extinction, the beautiful thylacines have taken refuge in dark dungeons such as this.")
     my.text_description_long(self, "A thylacine. Can you believe it?")
@@ -210,7 +212,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="thylacine", text_long_name="thylacine")
+    tp_init(name="thylacine",
+            text_long_name="thylacine")
 
 
 init()

@@ -79,6 +79,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_dex_bonus(self, -1)
     my.teleport_distance(self, 20)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "boots of teleport")
+    my.text_apostrophize(self, "boots of teleport's")
     my.text_description_enchant(self, "-10 decibels")
     my.text_description_long(self, "Boots of teleport. With these boots you can travel with impunity across large distances. Beware the cold of the void, however.")
     my.text_description_short(self, "Boots of teleport.")

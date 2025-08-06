@@ -125,6 +125,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "narhornets")
+    my.text_apostrophize(self, "narhornet's")
     my.text_description_long(self, "The narhornet is a mythical variant of the giant hornet and is easily spotted by its massive foot long horn that it uses to great effect upon its victims.")
     my.text_description_short(self, "A stabby narhornet.")
     my.text_hits(self, "pierces")
@@ -155,7 +157,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="narhornet", text_long_name="narhornet")
+    tp_init(name="narhornet",
+            text_long_name="narhornet")
 
 
 init()

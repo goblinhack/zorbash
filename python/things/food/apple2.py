@@ -39,6 +39,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "10+1d12")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "juicy apples")
+    my.text_apostrophize(self, "very juicy apple's")
     my.text_description_long(self, "A very juicy dungeon apple. A bit too juicy if you ask me. From local dungeon apple trees, if you can believe that.")
     my.text_description_short(self, "Very juicy apple.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -52,7 +54,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="apple2", text_long_name="very juicy apple", text_short_name="juicy apple")
+    tp_init(name="apple2",
+            text_long_name="very juicy apple",
+            text_short_name="juicy apple")
 
 
 init()

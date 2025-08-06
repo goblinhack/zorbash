@@ -129,6 +129,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature_sensitive(self, True)
     my.temperature_sensitive_to_sudden_changes(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "acid blobs")
+    my.text_apostrophize(self, "acid blob's")
     my.text_description_long(self, "Acid blobs are, surprisingly highly acidic and ideal for getting rid of those extra pesky weapons you have.")
     my.text_description_short(self, "An acid blob.")
     my.text_hits(self, "burns")
@@ -195,7 +197,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="acid_blob", text_long_name="acid blob", text_short_name="acid blob")
+    tp_init(name="acid_blob",
+            text_long_name="acid blob",
+            text_short_name="acid blob")
 
 
 init()

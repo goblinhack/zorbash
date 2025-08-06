@@ -111,6 +111,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "potions of fire immunity")
+    my.text_apostrophize(self, "potion of fire immunity's")
     my.text_description_long2(self, "Lava bathing guaranteed.")
     my.text_description_long3(self, "Explosion damage not covered.")
     my.text_description_long(self, "A bubbling orange elixir that will provide you with a time limited offer of fire immunity.")
@@ -128,7 +130,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="potion_fire_immunity", text_long_name="potion of fire immunity", text_short_name="potion, fire proof")
+    tp_init(name="potion_fire_immunity",
+            text_long_name="potion of fire immunity",
+            text_short_name="potion, fire proof")
 
 
 init()

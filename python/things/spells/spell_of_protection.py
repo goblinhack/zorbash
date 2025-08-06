@@ -45,7 +45,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="spell_of_protection", text_long_name="protection", text_short_name="protection")
+    tp_init(name="spell_of_protection",
+            text_long_name="protection",
+            text_short_name="protection")
 
 
 init()

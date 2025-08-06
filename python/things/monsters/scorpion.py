@@ -135,6 +135,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "scorpions")
+    my.text_apostrophize(self, "scorpion's")
     my.text_description_long(self, "An entry level venomous scorpion. Beware its sting, bite and the fact that it can see heat signatures. So, hiding inside your invisibility cloak will not help you avoid me...")
     my.text_description_short(self, "A venomous scorpion.")
     my.text_hits(self, "bites")
@@ -169,7 +171,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="scorpion", text_long_name="scorpion")
+    tp_init(name="scorpion",
+            text_long_name="scorpion")
 
 
 init()

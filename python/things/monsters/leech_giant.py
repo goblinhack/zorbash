@@ -120,6 +120,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "giant leeches")
+    my.text_apostrophize(self, "giant leech's")
     my.text_description_long(self, "A leech that just wants to be your best friend. Blood drips from its engorged mouth.")
     my.text_description_short(self, "A clingy leech.")
     my.text_hits(self, "bites")
@@ -150,7 +152,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="leech_giant", text_long_name="clingy leech")
+    tp_init(name="leech_giant",
+            text_long_name="clingy leech")
 
 
 init()

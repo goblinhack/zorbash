@@ -3,7 +3,7 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_monst.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 
 bool Thing::is_raging(void)
@@ -51,6 +51,6 @@ void Thing::rage_tick(void)
   bool am_raging = is_raging();
 
   if (! was_raging && am_raging) {
-    msg("%%fg=red$%s enters into a primal rage!%%fg=reset$", text_The().c_str());
+    msg("%%fg=red$%s enters into a primal rage!%%fg=reset$", capitalize_first(text_the()).c_str());
   }
 }

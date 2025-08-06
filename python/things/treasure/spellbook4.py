@@ -46,6 +46,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_VERY_RARE)
     my.stat_luck_bonus(self, -4)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "spellbooks")
+    my.text_apostrophize(self, "spellbook's")
     my.text_description_long2(self, "This book is emblazoned with a skull on its cover and the ink inside is a disconcerting red color. This book is very rare. Use its contents wisely.")
     my.text_description_long(self, "Read this spellbook to learn some new spells into your brain matter thing.")
     my.text_description_short(self, "A skull emblazoned dusty spellbook.")
@@ -62,7 +64,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="spellbook4", text_long_name="spellbook", text_short_name="spellbook")
+    tp_init(name="spellbook4",
+            text_long_name="spellbook",
+            text_short_name="spellbook")
 
 
 init()

@@ -4,7 +4,6 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_monst.hpp"
 #include "my_python.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
@@ -78,7 +77,7 @@ bool Thing::is_target_select(Thingp item)
   TRACE_NO_INDENT();
 
   if (item->initial_charge_count() && ! item->charge_count()) {
-    msg("%s is unable to be used.", item->text_The().c_str());
+    msg("%s is unable to be used.", capitalize_first(item->text_the()).c_str());
     return false;
   }
 

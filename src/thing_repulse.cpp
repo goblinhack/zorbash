@@ -3,6 +3,7 @@
 //
 
 #include "my_level.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 
 bool Thing::repulse(Thingp target)
@@ -20,7 +21,7 @@ bool Thing::repulse(Thingp target)
     if (target->is_player()) {
       target->msg("%%fg=green$You are shielded from repulsion.%%fg=reset$");
     } else if (target->is_monst() && is_player()) {
-      msg("%%fg=yellow$%s is shielded from repulsion.%%fg=reset$", target->text_The().c_str());
+      msg("%%fg=yellow$%s is shielded from repulsion.%%fg=reset$", capitalize_first(target->text_the()).c_str());
     }
 
     dbg("Beckon: %s is held in a magic barrier", target->to_short_string().c_str());
@@ -46,7 +47,7 @@ bool Thing::repulse(Thingp target)
       if (target->is_player()) {
         target->msg("%%fg=green$You are slammed against a wall.%%fg=reset$");
       } else if (target->is_monst() && is_player()) {
-        msg("%%fg=yellow$%s is slammed against a wall.%%fg=reset$", target->text_The().c_str());
+        msg("%%fg=yellow$%s is slammed against a wall.%%fg=reset$", capitalize_first(target->text_the()).c_str());
       }
       target->is_attacked_with_dmg_impact(this, this, d10());
     } else if (level->is_door(dest)) {
@@ -56,7 +57,7 @@ bool Thing::repulse(Thingp target)
       if (target->is_player()) {
         target->msg("%%fg=green$You are slammed against a door.%%fg=reset$");
       } else if (target->is_monst() && is_player()) {
-        msg("%%fg=yellow$%s is slammed against a door.%%fg=reset$", target->text_The().c_str());
+        msg("%%fg=yellow$%s is slammed against a door.%%fg=reset$", capitalize_first(target->text_the()).c_str());
       }
       target->is_attacked_with_dmg_impact(this, this, d8());
     } else {
@@ -66,7 +67,7 @@ bool Thing::repulse(Thingp target)
       if (target->is_player()) {
         target->msg("%%fg=green$You are slammed against an obstacle.%%fg=reset$");
       } else if (target->is_monst() && is_player()) {
-        msg("%%fg=yellow$%s is slammed against an obstacle.%%fg=reset$", target->text_The().c_str());
+        msg("%%fg=yellow$%s is slammed against an obstacle.%%fg=reset$", capitalize_first(target->text_the()).c_str());
       }
       target->is_attacked_with_dmg_impact(this, this, d6());
     }

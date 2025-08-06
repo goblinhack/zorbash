@@ -135,6 +135,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "deathstalker scorpions")
+    my.text_apostrophize(self, "deathstalker scorpion's")
     my.text_description_long(self, "The most venomous scorpion of all, the death stalker. It would be unfortunate if this scorpion was also naturally very aggressive... which it of course is.")
     my.text_description_short(self, "A death stalker scorpion.")
     my.text_hits(self, "bites")
@@ -165,7 +167,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="scorpion_death", text_long_name="deathstalker scorpion", text_short_name="deathstalker")
+    tp_init(name="scorpion_death",
+            text_long_name="deathstalker scorpion",
+            text_short_name="deathstalker")
 
 
 init()

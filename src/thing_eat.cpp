@@ -4,7 +4,6 @@
 
 #include "my_game.hpp"
 #include "my_monst.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
@@ -315,40 +314,40 @@ bool Thing::eat(Thingp victim)
           if (victim->is_player()) {
             if (victim->is_dead || victim->is_dying) {
               if (victim->is_burnt) {
-                msg("%%fg=red$%s tears a chunk from your toasted corpse!%%fg=reset$", text_The().c_str());
+                msg("%%fg=red$%s tears a chunk from your toasted corpse!%%fg=reset$", capitalize_first(text_the()).c_str());
               } else if (victim->is_frozen) {
-                msg("%%fg=red$%s tears a chunk from your frozen corpse!%%fg=reset$", text_The().c_str());
+                msg("%%fg=red$%s tears a chunk from your frozen corpse!%%fg=reset$", capitalize_first(text_the()).c_str());
               } else {
-                msg("%%fg=red$%s tears a chunk from from your corpse!%%fg=reset$", text_The().c_str());
+                msg("%%fg=red$%s tears a chunk from from your corpse!%%fg=reset$", capitalize_first(text_the()).c_str());
               }
             } else {
-              msg("%%fg=orange$%s is eating you!%%fg=reset$", text_The().c_str());
+              msg("%%fg=orange$%s is eating you!%%fg=reset$", capitalize_first(text_the()).c_str());
             }
           } else if (victim->is_monst() || victim->is_player()) {
             if (victim->is_dead || victim->is_dying) {
               if (victim->is_burnt) {
-                msg("%s feasts on the toasted corpse of %s!", text_The().c_str(), victim->text_the().c_str());
+                msg("%s feasts on the toasted corpse of %s!", capitalize_first(text_the()).c_str(), victim->text_the().c_str());
               } else if (victim->is_frozen) {
-                msg("%s feasts on the frozen corpse of %s!", text_The().c_str(), victim->text_the().c_str());
+                msg("%s feasts on the frozen corpse of %s!", capitalize_first(text_the()).c_str(), victim->text_the().c_str());
               } else {
-                msg("%s feasts on the corpse of %s!", text_The().c_str(), victim->text_the().c_str());
+                msg("%s feasts on the corpse of %s!", capitalize_first(text_the()).c_str(), victim->text_the().c_str());
               }
             } else {
-              msg("%s is eating %s!", text_The().c_str(), victim->text_the().c_str());
+              msg("%s is eating %s!", capitalize_first(text_the()).c_str(), victim->text_the().c_str());
             }
           } else if (victim->is_blood()) {
             if (is_humanoid()) {
-              msg("%s laps up %s.", text_The().c_str(), victim->text_the().c_str());
+              msg("%s laps up %s.", capitalize_first(text_the()).c_str(), victim->text_the().c_str());
             } else {
-              msg("%s slurps at %s.", text_The().c_str(), victim->text_the().c_str());
+              msg("%s slurps at %s.", capitalize_first(text_the()).c_str(), victim->text_the().c_str());
             }
           } else {
             if (bite <= 3) {
-              msg("%s nibbles on %s.", text_The().c_str(), victim->text_the().c_str());
+              msg("%s nibbles on %s.", capitalize_first(text_the()).c_str(), victim->text_the().c_str());
             } else if (bite <= 10) {
-              msg("%s munches on %s.", text_The().c_str(), victim->text_the().c_str());
+              msg("%s munches on %s.", capitalize_first(text_the()).c_str(), victim->text_the().c_str());
             } else {
-              msg("%s chomps on %s.", text_The().c_str(), victim->text_the().c_str());
+              msg("%s chomps on %s.", capitalize_first(text_the()).c_str(), victim->text_the().c_str());
             }
           }
         }
@@ -383,35 +382,35 @@ bool Thing::eat(Thingp victim)
             if (victim->is_player()) {
               if (victim->is_dead || victim->is_dying) {
                 if (victim->is_burnt) {
-                  msg("%%fg=red$%s consumes your toasted corpse!%%fg=reset$", text_The().c_str());
+                  msg("%%fg=red$%s consumes your toasted corpse!%%fg=reset$", capitalize_first(text_the()).c_str());
                 } else if (victim->is_frozen) {
-                  msg("%%fg=red$%s consumes your frozen corpse!%%fg=reset$", text_The().c_str());
+                  msg("%%fg=red$%s consumes your frozen corpse!%%fg=reset$", capitalize_first(text_the()).c_str());
                 } else {
-                  msg("%%fg=red$%s consumes your corpse!%%fg=reset$", text_The().c_str());
+                  msg("%%fg=red$%s consumes your corpse!%%fg=reset$", capitalize_first(text_the()).c_str());
                 }
               } else {
-                msg("%%fg=orange$%s consumes you!%%fg=reset$", text_The().c_str());
+                msg("%%fg=orange$%s consumes you!%%fg=reset$", capitalize_first(text_the()).c_str());
               }
             } else if (victim->is_monst() || victim->is_player()) {
               if (victim->is_dead || victim->is_dying) {
                 if (victim->is_burnt) {
-                  msg("%s consumed the toasted corpse of %s!", text_The().c_str(), victim->text_the().c_str());
+                  msg("%s consumed the toasted corpse of %s!", capitalize_first(text_the()).c_str(), victim->text_the().c_str());
                 } else if (victim->is_frozen) {
-                  msg("%s consumed the frozen corpse of %s!", text_The().c_str(), victim->text_the().c_str());
+                  msg("%s consumed the frozen corpse of %s!", capitalize_first(text_the()).c_str(), victim->text_the().c_str());
                 } else {
-                  msg("%s consumes the corpse of %s!", text_The().c_str(), victim->text_the().c_str());
+                  msg("%s consumes the corpse of %s!", capitalize_first(text_the()).c_str(), victim->text_the().c_str());
                 }
               } else {
-                msg("%s consumes %s!", text_The().c_str(), victim->text_the().c_str());
+                msg("%s consumes %s!", capitalize_first(text_the()).c_str(), victim->text_the().c_str());
               }
             } else if (victim->is_blood()) {
               if (is_humanoid()) {
-                msg("%s laps up %s.", text_The().c_str(), victim->text_the().c_str());
+                msg("%s laps up %s.", capitalize_first(text_the()).c_str(), victim->text_the().c_str());
               } else {
-                msg("%s slurps at %s.", text_The().c_str(), victim->text_the().c_str());
+                msg("%s slurps at %s.", capitalize_first(text_the()).c_str(), victim->text_the().c_str());
               }
             } else {
-              msg("%s consumes %s.", text_The().c_str(), victim->text_the().c_str());
+              msg("%s consumes %s.", capitalize_first(text_the()).c_str(), victim->text_the().c_str());
             }
           }
         }
@@ -426,7 +425,7 @@ bool Thing::eat(Thingp victim)
       //
       if (! is_immune_to_poison()) {
         poisoned_amount_incr(poison);
-        msg("%s looks ill.", text_The().c_str());
+        msg("%s looks ill.", capitalize_first(text_the()).c_str());
       }
     }
     return true;

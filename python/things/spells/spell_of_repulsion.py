@@ -43,7 +43,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="spell_of_repulsion", text_long_name="repulsion", text_short_name="repulsion")
+    tp_init(name="spell_of_repulsion",
+            text_long_name="repulsion",
+            text_short_name="repulsion")
 
 
 init()

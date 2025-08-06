@@ -40,6 +40,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "10+1d25")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "eggs")
+    my.text_apostrophize(self, "egg's")
     my.text_description_long(self, "Fried eggs. Just lying on the floor. You'll have to scoop them off the dirt to eat them, but you have no standards, right? Don't even start to ask where they were cooked. Or by whom. On what.")
     my.text_description_short(self, "Fried eggs.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -53,7 +55,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="eggs", text_long_name="eggs", text_short_name="eggs")
+    tp_init(name="eggs",
+            text_long_name="eggs",
+            text_short_name="eggs")
 
 
 init()

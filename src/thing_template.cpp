@@ -6,7 +6,6 @@
 #include "my_ptrcheck.hpp"
 #include "my_string.hpp"
 #include "my_vector_bounds_check.hpp"
-// REMOVED #include <algorithm>
 
 Tpnamemap tp_name_map;
 Tpidmap   tp_id_map;
@@ -667,7 +666,7 @@ void tp_dump_monsters(void)
       imm_str += "Non-Magical-Weapons<newline>";
     }
 
-    printf("DUMP: | %s | %s%s%s%s%s%s%s%s%s%s | %u | %s | %u | %s | %s |\n", capitalise(tp->text_long_name()).c_str(),
+    printf("DUMP: | %s | %s%s%s%s%s%s%s%s%s%s | %u | %s | %u | %s | %s |\n", capitalize(tp->text_long_name()).c_str(),
            tp->is_monst_class_A() ? "A" : "", tp->is_monst_class_B() ? "B" : "", tp->is_monst_class_C() ? "C" : "",
            tp->is_monst_class_D() ? "D" : "", tp->is_monst_class_E() ? "E" : "",
            tp->rarity() == THING_RARITY_COMMON ? "/common" : "",
@@ -909,7 +908,7 @@ void tp_dump_weapons(void)
     }
 
     printf("DUMP: | %s | %s%s%s%s%s%s%s%s | %u - %u | %s | %s | %.2f %% | %c | %u |\n",
-           /* %s | */ capitalise(tp->text_long_name()).c_str(),
+           /* %s | */ capitalize(tp->text_long_name()).c_str(),
            /* %s */ tp->is_weapon_class_A() ? "A" : "",
            /* %s */ tp->is_weapon_class_B() ? "B" : "",
            /* %s */ tp->is_weapon_class_C() ? "C" : "",

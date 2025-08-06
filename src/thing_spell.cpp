@@ -3,16 +3,14 @@
 //
 
 #include "my_array_bounds_check.hpp"
-#include "my_english.hpp"
 #include "my_game.hpp"
 #include "my_math.hpp"
 #include "my_monst.hpp"
 #include "my_sound.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_ui.hpp"
-// REMOVED #include "my_vector_bounds_check.hpp"
 #include "my_wid_spellbox.hpp"
-// REMOVED #include <algorithm>
 
 //
 // Get the list of all other spells this spell replaces. This is done
@@ -330,10 +328,10 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
     TRACE_AND_INDENT();
 
     if (target->is_player()) {
-      target->msg("%%fg=green$You are immune to %s %s spell.%%fg=reset$", apostrophise(text_the()).c_str(),
+      target->msg("%%fg=green$You are immune to %s %s spell.%%fg=reset$", text_the(TEXT_APOSTROPHIZE).c_str(),
                   what->text_long_name().c_str());
     } else if (target->is_monst() && is_player()) {
-      msg("%%fg=yellow$%s is immune to your %s spell.%%fg=reset$", target->text_The().c_str(),
+      msg("%%fg=yellow$%s is immune to your %s spell.%%fg=reset$", capitalize_first(target->text_the()).c_str(),
           what->text_long_name().c_str());
     }
   } else if (this == target) {
@@ -360,7 +358,7 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
       TRACE_AND_INDENT();
 
       if (target->is_player()) {
-        target->msg("%%fg=yellow$You are hit by %s %s spell.%%fg=reset$", apostrophise(text_the()).c_str(),
+        target->msg("%%fg=yellow$You are hit by %s %s spell.%%fg=reset$", text_the(TEXT_APOSTROPHIZE).c_str(),
                     what->text_long_name().c_str());
       } else if (target->is_monst() && is_player()) {
         msg("%%fg=green$Your spell succeeds.%%fg=reset$");
@@ -381,10 +379,10 @@ bool Thing::spell_cast_at(Thingp what, Thingp target)
       TRACE_AND_INDENT();
 
       if (target->is_player()) {
-        target->msg("%%fg=green$You resist %s %s spell.%%fg=reset$", apostrophise(text_the()).c_str(),
+        target->msg("%%fg=green$You resist %s %s spell.%%fg=reset$", text_the(TEXT_APOSTROPHIZE).c_str(),
                     what->text_long_name().c_str());
       } else if (target->is_monst() && is_player()) {
-        msg("%%fg=yellow$%s resists your %s spell.%%fg=reset$", target->text_The().c_str(),
+        msg("%%fg=yellow$%s resists your %s spell.%%fg=reset$", capitalize_first(target->text_the()).c_str(),
             what->text_long_name().c_str());
       }
     }

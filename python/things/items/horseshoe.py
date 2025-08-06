@@ -51,6 +51,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_COMMON)
     my.stat_luck_bonus(self, 2)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "horseshoes")
+    my.text_apostrophize(self, "horseshoe's")
     my.text_description_enchant(self, "+1 LUCK")
     my.text_description_long(self, "Lucky for you, not so much for the horse.")
     my.text_description_short(self, "A lucky horseshoe.")
@@ -66,7 +68,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="horseshoe", text_long_name="horseshoe", text_short_name="horseshoe")
+    tp_init(name="horseshoe",
+            text_long_name="horseshoe",
+            text_short_name="horseshoe")
 
 
 init()

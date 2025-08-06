@@ -129,6 +129,8 @@ def tp_init(name, text_long_name):
     my.stat_psi(self, 8)
     my.stat_str(self, 20)
     my.text_a_or_an(self, "an")
+    my.text_pluralize(self, "undead bears")
+    my.text_apostrophize(self, "undead bear's")
     my.text_description_long(self, "This bear took hibernation to the extreme and became undead. Watch out for its unpleasant attack")
     my.text_description_short(self, "A undead bear.")
     my.text_hits(self, "gores")
@@ -156,7 +158,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="bear_undead", text_long_name="undead bear")
+    tp_init(name="bear_undead",
+            text_long_name="undead bear")
 
 
 init()

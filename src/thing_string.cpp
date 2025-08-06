@@ -3,7 +3,6 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
 #include "my_sprintf.hpp"
 #include "my_thing.hpp"
 

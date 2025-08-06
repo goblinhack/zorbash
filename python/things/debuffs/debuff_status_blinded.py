@@ -29,7 +29,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="debuff_status_blinded", text_long_name="blinded", text_short_name="blinded")
+    tp_init(name="debuff_status_blinded",
+            text_long_name="blinded",
+            text_short_name="blinded")
 
 
 init()

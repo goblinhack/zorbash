@@ -36,7 +36,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="spell_of_dominate_monst4", text_long_name="dominate monst IV", text_short_name="dominate monst IV")
+    tp_init(name="spell_of_dominate_monst4",
+            text_long_name="dominate monst IV",
+            text_short_name="dominate monst IV")
 
 
 init()

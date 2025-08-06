@@ -5,7 +5,6 @@
 #include "my_array_bounds_check.hpp"
 #include "my_level.hpp"
 #include "my_thing.hpp"
-// REMOVED #include <math.h>
 
 point Thing::dest_random_get(int d)
 {

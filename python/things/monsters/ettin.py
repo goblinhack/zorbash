@@ -127,6 +127,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_psi(self, 6)
     my.stat_str(self, 20)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "ettins")
+    my.text_apostrophize(self, "ettin's")
     my.text_description_long2(self, "Ettin are sickly and have poor vision. Best avoid them")
     my.text_description_long(self, "Possibly the result of a wizard fusing two ogres together, the Ettin is a formidable foe, proving two heads are better than one when it comes to combat. Having massive fists helps too.")
     my.text_description_short(self, "An ettin.")
@@ -155,7 +157,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="ettin", text_long_name="ettin, two headed giant", text_short_name="ettin")
+    tp_init(name="ettin",
+            text_long_name="ettin, two headed giant",
+            text_short_name="ettin")
 
 
 init()

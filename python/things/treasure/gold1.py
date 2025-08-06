@@ -44,6 +44,8 @@ def gold_init(name, text_long_name, text_short_name):
     my.light_dist(self, 1)
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "gold coins")
+    my.text_apostrophize(self, "gold coin's")
     my.text_description_long(self, "A lonely gold coin.")
     my.text_description_short(self, "A lonely gold coin.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -80,7 +82,9 @@ def gold_init(name, text_long_name, text_short_name):
 
 
 def init():
-    gold_init(name="gold1", text_long_name="lone gold coin", text_short_name="lone gold coin")
+    gold_init(name="gold1",
+            text_long_name="lone gold coin",
+            text_short_name="lone gold coin")
 
 
 init()

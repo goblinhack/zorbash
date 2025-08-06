@@ -93,6 +93,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_COMMON)
     my.stamina_drain_on_attacking(self, 0)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "wooden short swords")
+    my.text_apostrophize(self, "wooden short sword's")
     my.text_description_enchant(self, "+2 DMG")
     my.text_description_long(self, "Ideal for play fighting and not much else.")
     my.text_description_short(self, "Thy wooden means of justice.")
@@ -109,7 +111,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="sword_wood", text_long_name="wooden short sword", text_short_name="sword, short")
+    tp_init(name="sword_wood",
+            text_long_name="wooden short sword",
+            text_short_name="sword, short")
 
 
 init()

@@ -213,7 +213,7 @@ void Game::wid_choose_avatar_select(void)
       wid_set_shape_none(w);
       wid_set_pos(w, tl, br);
       wid_set_text_lhs(w, true);
-      wid_set_text(w, capitalise(bodypart_name(iter)));
+      wid_set_text(w, capitalize(bodypart_name(iter)));
     }
     {
       TRACE_AND_INDENT();

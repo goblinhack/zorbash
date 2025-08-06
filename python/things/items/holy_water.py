@@ -138,6 +138,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_RARE)
     my.stat_luck_bonus(self, 2)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "beakers of holy water")
+    my.text_apostrophize(self, "beaker of holy water's")
     my.text_description_enchant(self, "+1 LUCK")
     my.text_description_long2(self, "Ideal for those undead visitors that refuse to go away.")
     my.text_description_long(self, "A beaker of holy water. Quite how it got here and managed to be blessed in this accursed place is beyond me.")
@@ -154,7 +156,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="holy_water", text_long_name="beaker of holy water", text_short_name="holy water")
+    tp_init(name="holy_water",
+            text_long_name="beaker of holy water",
+            text_short_name="holy water")
 
 
 init()

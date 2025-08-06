@@ -94,6 +94,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_COMMON)
     my.stamina_drain_on_attacking(self, 1)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "rusty short swords")
+    my.text_apostrophize(self, "rusty short sword's")
     my.text_description_enchant(self, "+1 DMG")
     my.text_description_long(self, "A rusting short sword. Ideal for absolutely no one.")
     my.text_description_short(self, "Thy rusty means of justice.")
@@ -110,7 +112,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="sword_rusty", text_long_name="rusty short sword", text_short_name="sword, rusty")
+    tp_init(name="sword_rusty",
+            text_long_name="rusty short sword",
+            text_short_name="sword, rusty")
 
 
 init()

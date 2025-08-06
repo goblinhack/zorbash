@@ -5,7 +5,6 @@
 #include "my_level.hpp"
 #include "my_math.hpp"
 #include "my_thing.hpp"
-// REMOVED #include <math.h>
 
 void Thing::floating_tick(void) { is_floating_ = is_floating(); }
 

@@ -5,7 +5,7 @@
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_thing_attack_options.hpp"
 
@@ -890,7 +890,7 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
           //
           has_seen_player_msg_shown = true;
           if (is_msg_allowed_is_surprised()) {
-            msg("%s is surprised to see you!", text_The().c_str());
+            msg("%s is surprised to see you!", capitalize_first(text_the()).c_str());
           }
 
           if (is_able_to_be_surprised()) {
@@ -1890,15 +1890,15 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
         }
       } else if (victim->is_player()) {
         if (owner) {
-          msg("%%fg=orange$%s fails to attack you with %s.%%fg=reset$", owner->text_The().c_str(),
+          msg("%%fg=orange$%s fails to attack you with %s.%%fg=reset$", capitalize_first(owner->text_the()).c_str(),
               text_the().c_str());
         } else {
-          msg("%%fg=orange$%s fails to attack you.%%fg=reset$", text_The().c_str());
+          msg("%%fg=orange$%s fails to attack you.%%fg=reset$", capitalize_first(text_the()).c_str());
         }
         popup("It misses");
 
         if (game->robot_mode) {
-          BOTCON("%s misses the robot.", text_The().c_str());
+          BOTCON("%s misses the robot.", capitalize_first(text_the()).c_str());
         }
       }
 
@@ -2057,15 +2057,16 @@ bool Thing::attack(Thingp victim, ThingAttackOptionsp attack_options)
             }
           } else if (victim->is_player()) {
             if (owner) {
-              msg("%%fg=orange$%s misses you with %s.%%fg=reset$", owner->text_The().c_str(), text_the().c_str());
+              msg("%%fg=orange$%s misses you with %s.%%fg=reset$", capitalize_first(owner->text_the()).c_str(),
+                  text_the().c_str());
               owner->popup("It misses");
             } else {
-              msg("%%fg=orange$%s misses you.%%fg=reset$", text_The().c_str());
+              msg("%%fg=orange$%s misses you.%%fg=reset$", capitalize_first(text_the()).c_str());
               popup("It misses");
             }
 
             if (game->robot_mode) {
-              BOTCON("%s misses the robot.", text_The().c_str());
+              BOTCON("%s misses the robot.", capitalize_first(text_the()).c_str());
             }
           } else {
             dbg("The attack missed (att modifier %d, AC %d) on %s", att_roll_modifier, victim_def,

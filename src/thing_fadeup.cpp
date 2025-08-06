@@ -6,7 +6,6 @@
 #include "my_monst.hpp"
 #include "my_thing.hpp"
 
-// REMOVED #include <math.h>
 
 void Thing::fadeup(float fadeup_height, float fadeup_fade, ts_t ms)
 {

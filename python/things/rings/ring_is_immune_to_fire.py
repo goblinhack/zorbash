@@ -61,6 +61,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_unequip_do(self, "me.on_unequip()")
     my.stat_con_bonus(self, -1)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "rings of fire immunities")
+    my.text_apostrophize(self, "ring of fire immunity's")
     my.text_description_enchant(self, "+1 CON")
     my.text_description_long(self, "Dance in the flames with impunity with this ring of fire protection.")
     my.text_description_short(self, "A ring of fire immunity.")
@@ -78,7 +80,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="ring_is_immune_to_fire", text_long_name="ring of fire immunity", text_short_name="ring, fire")
+    tp_init(name="ring_is_immune_to_fire",
+            text_long_name="ring of fire immunity",
+            text_short_name="ring, fire")
 
 
 init()

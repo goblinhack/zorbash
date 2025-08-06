@@ -74,6 +74,8 @@ def tp_init(name, text_long_name):
     my.on_idle_tick_freq_dice(self, "1d5:me.on_idle_tick_freq_dice()")
     my.temperature_never_changes(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "spectral mobs")
+    my.text_apostrophize(self, "spectral mob's")
     my.text_description_long(self, "A spectral device that spits out blades.")
     my.text_description_short(self, "Spectral generator.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -111,7 +113,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="spectral_mob", text_long_name="spectral generator")
+    tp_init(name="spectral_mob",
+            text_long_name="spectral generator")
 
 
 init()

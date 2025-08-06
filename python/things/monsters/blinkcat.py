@@ -141,6 +141,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "blinkcats")
+    my.text_apostrophize(self, "blinkcat's")
     my.text_description_long2(self, "Blinkcats have amazing hearing, but terrible taste in music and is a fan of early 2000s pop music")
     my.text_description_long(self, "The agility of a cat with teleport capabilities, the blink cat is able to avoid your attacks with ease.")
     my.text_description_short(self, "A blinkcat.")
@@ -176,7 +178,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="blinkcat", text_long_name="blinkcat")
+    tp_init(name="blinkcat",
+            text_long_name="blinkcat")
 
 
 init()

@@ -47,7 +47,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="debuff_temporary_ooze", text_long_name="ooze", text_short_name="ooze")
+    tp_init(name="debuff_temporary_ooze",
+            text_long_name="ooze",
+            text_short_name="ooze")
 
 
 init()

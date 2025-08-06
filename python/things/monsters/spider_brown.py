@@ -134,6 +134,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "brown extrovert spiders")
+    my.text_apostrophize(self, "brown extrovert spider's")
     my.text_description_long(self, "A disturbingly large brown spider, the extrovert spider is a close relative of the brown recluse. Beware of its necrotic bite, especially at parties, which it loves to turn up as a surprise guest.")
     my.text_description_short(self, "A brown extrovert spider.")
     my.text_hits(self, "bites")
@@ -165,7 +167,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="spider_brown", text_long_name="brown extrovert spider", text_short_name="extrovert spider")
+    tp_init(name="spider_brown",
+            text_long_name="brown extrovert spider",
+            text_short_name="extrovert spider")
 
 
 init()

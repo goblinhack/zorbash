@@ -4,11 +4,9 @@
 
 #include "my_game.hpp"
 #include "my_monst.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
-// REMOVED #include <algorithm>
 
 void Thing::on_use(Thingp what)
 {
@@ -323,7 +321,7 @@ void Thing::used(Thingp what, Thingp target, UseOptions &use_options)
     TRACE_AND_INDENT();
 
     if (is_player()) {
-      msg("%s is unable to be used.", what->text_The().c_str());
+      msg("%s is unable to be used.", capitalize_first(what->text_the()).c_str());
     }
 
     on_final_use(what);

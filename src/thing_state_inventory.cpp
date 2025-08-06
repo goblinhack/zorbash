@@ -3,7 +3,6 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_monst.hpp"
 #include "my_thing.hpp"
 #include "my_wid_inventory.hpp"
 

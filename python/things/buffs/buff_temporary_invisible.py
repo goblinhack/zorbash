@@ -38,7 +38,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="buff_temporary_invisible", text_long_name="invisible", text_short_name="invisible")
+    tp_init(name="buff_temporary_invisible",
+            text_long_name="invisible",
+            text_short_name="invisible")
 
 
 init()

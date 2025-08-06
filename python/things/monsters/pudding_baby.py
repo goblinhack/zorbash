@@ -130,6 +130,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "baby puddings")
+    my.text_apostrophize(self, "baby pudding's")
     my.text_description_long(self, "Baby black puddings are inky masses of gooey nastiness. Much quicker than their heavier parents, they are best avoided.")
     my.text_description_short(self, "A small black pudding.")
     my.text_hits(self, "splats")
@@ -169,7 +171,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="pudding_baby", text_long_name="baby black pudding")
+    tp_init(name="pudding_baby",
+            text_long_name="baby black pudding")
 
 
 init()

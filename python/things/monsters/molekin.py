@@ -160,6 +160,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "molekins")
+    my.text_apostrophize(self, "molekin's")
     my.text_description_long2(self, "Molekin spend much of their lives underground and have developed large bulbous eyes that glow in the dark. They have powerful upper bodies and long serrated claws, perfect for digging... and goring those that get in their way.")
     my.text_description_long(self, "Molekin are notorious hoarders and highly skilled with throwing heavy items. At you.")
     my.text_description_short(self, "Mole person")
@@ -199,7 +201,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="molekin", text_long_name="molekin")
+    tp_init(name="molekin",
+            text_long_name="molekin")
 
 
 init()

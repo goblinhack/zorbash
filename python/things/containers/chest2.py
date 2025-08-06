@@ -72,6 +72,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_hit_and_still_alive_do(self, "me.on_hit_and_still_alive()")
     my.on_open_do(self, "me.on_open()")
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "crystal treasure chests")
+    my.text_apostrophize(self, "crystal treasure chest's")
     my.text_description_long(self, "A fancy treasure crystal chest.")
     my.text_description_short(self, "A fancy treasure crystal chest.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -92,7 +94,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="chest2", text_long_name="fancy crystal treasure chest", text_short_name="chest, crystal")
+    tp_init(name="chest2",
+            text_long_name="fancy crystal treasure chest",
+            text_short_name="chest, crystal")
 
 
 init()

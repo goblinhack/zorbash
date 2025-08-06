@@ -126,6 +126,8 @@ def tp_init(name, text_long_name):
     my.stat_str(self, 8)
     my.temperature(self, 5)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "zoblins")
+    my.text_apostrophize(self, "zoblin's")
     my.text_description_long(self, "A once proud zorblin, this poor creature has been resurrected as a zombie!")
     my.text_description_short(self, "A staggering zorblin zombie, a zoblin!")
     my.text_hits(self, "claws")
@@ -187,7 +189,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="zoblin_minion", text_long_name="zoblin")
+    tp_init(name="zoblin_minion",
+            text_long_name="zoblin")
 
 
 init()

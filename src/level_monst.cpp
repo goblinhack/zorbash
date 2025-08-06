@@ -71,11 +71,11 @@ Tpp Level::get_random_monst(point p, monst_environ_t monst_environ, monst_class_
       //
       TRACE_NO_INDENT();
       if (tp->is_disliked_by_me(this, p)) {
-        dbg("INF: skip '%s' at %s", tp->text_short_capitalised().c_str(), p.to_string().c_str());
+        dbg("INF: skip '%s' at %s", tp->text_short_capitalized().c_str(), p.to_string().c_str());
         continue;
       }
 
-      dbg("INF: Monster '%s' at %s", tp->text_short_capitalised().c_str(), p.to_string().c_str());
+      dbg("INF: Monster '%s' at %s", tp->text_short_capitalized().c_str(), p.to_string().c_str());
       return tp;
     }
   } else {
@@ -302,7 +302,7 @@ void tp_monst_add(Tpp tp)
 {
   TRACE_NO_INDENT();
 
-  // CON("INF: Add monster '%s'", tp->text_short_capitalised().c_str());
+  // CON("INF: Add monster '%s'", tp->text_short_capitalized().c_str());
 
   std::vector< int > biomes;
   std::vector< int > monst_types;
@@ -342,7 +342,7 @@ void tp_monst_add(Tpp tp)
       //
       if (! tp->is_swimmer_but_land_dweller()) {
         CON("INF: Swimming monster '%s' needs to set shallow and or deep water preferences",
-            tp->text_short_capitalised().c_str());
+            tp->text_short_capitalized().c_str());
       }
     }
   }

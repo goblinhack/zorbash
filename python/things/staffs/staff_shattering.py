@@ -152,6 +152,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.range_max(self, 7)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "staffs of shattering")
+    my.text_apostrophize(self, "staff of shattering's")
     my.text_description_enchant(self, "+1 radius")
     my.text_description_long(self, "This staff will destroy various wall like obstacles and in their place will create a shard of crystal. The crystal is generally easier to then destroy and has additional reflective properties for beam like weapons.")
     my.text_description_short(self, "A staff of shattering.")
@@ -183,7 +185,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_shattering", text_long_name="staff of shattering", text_short_name="staff, shatter")
+    tp_init(name="staff_shattering",
+            text_long_name="staff of shattering",
+            text_short_name="staff, shatter")
 
 
 init()

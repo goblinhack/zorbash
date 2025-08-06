@@ -92,6 +92,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_UNCOMMON)
     my.stamina_drain_on_attacking(self, 3)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "scythes")
+    my.text_apostrophize(self, "scythe's")
     my.text_description_enchant(self, "+1 DMG")
     my.text_description_long(self, "A huge gleaming scythe. Ideal for gardening and other uses.")
     my.text_description_short(self, "Thy swingy means of justice.")
@@ -108,7 +110,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="scythe", text_long_name="scythe", text_short_name="scythe")
+    tp_init(name="scythe",
+            text_long_name="scythe",
+            text_short_name="scythe")
 
 
 init()

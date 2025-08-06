@@ -2,6 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
+#include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
@@ -34,7 +35,7 @@ void Thing::frozen_set(void)
   if (is_player()) {
     msg("You freeze!");
   } else {
-    msg("%s is frozen!", text_The().c_str());
+    msg("%s is frozen!", capitalize_first(text_the()).c_str());
   }
 
   on_fire_unset();
@@ -58,7 +59,7 @@ void Thing::frozen_unset(bool quiet)
     if (is_player()) {
       msg("You defrost!");
     } else {
-      msg("%s is defrosted!", text_The().c_str());
+      msg("%s is defrosted!", capitalize_first(text_the()).c_str());
     }
   }
 }

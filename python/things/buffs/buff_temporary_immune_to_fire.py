@@ -60,7 +60,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="buff_temporary_immune_to_fire", text_long_name="fire proof")
+    tp_init(name="buff_temporary_immune_to_fire",
+            text_long_name="fire proof")
 
 
 init()

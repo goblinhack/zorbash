@@ -37,7 +37,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="buff_temporary_telepathy", text_long_name="telepathy")
+    tp_init(name="buff_temporary_telepathy",
+            text_long_name="telepathy")
 
 
 init()

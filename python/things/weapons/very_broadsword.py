@@ -93,6 +93,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_att_bonus(self, 1)
     my.stat_str_min(self, 12)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "very broadswords")
+    my.text_apostrophize(self, "very broadsword's")
     my.text_description_enchant(self, "+1 DMG, +1 ATT")
     my.text_description_long(self, "A broadsword plus some. The girth of this extreme weapon allows you to additionally attack adjacent targets to your intended target. Also useful for chopping tomatoes.")
     my.text_description_short(self, "Thy beheading means of justice.")
@@ -109,7 +111,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="very_broadsword", text_long_name="very broadsword", text_short_name="sword, vbroad")
+    tp_init(name="very_broadsword",
+            text_long_name="very broadsword",
+            text_short_name="sword, vbroad")
 
 
 init()

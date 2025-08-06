@@ -160,6 +160,8 @@ def tp_init(name, text_long_name):
     my.stat_str(self, 10)
     my.temperature(self, 100)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "flaming skeletons")
+    my.text_apostrophize(self, "flaming skeleton's")
     my.text_description_long2(self, "Takes half damage from pointy weapons.")
     my.text_description_long(self, "A collection of tortured burning bones, driven to wander the dungeon forever. Or at least until you release them. Such creatures abhor the cleansing powers of water.")
     my.text_description_short(self, "The burning bones of one surprised to be moving again and literally on fire.")
@@ -326,7 +328,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="skel_fire", text_long_name="burning skeleton")
+    tp_init(name="skel_fire",
+            text_long_name="burning skeleton")
 
 
 init()

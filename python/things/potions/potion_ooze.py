@@ -115,6 +115,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "potions of creeping death")
+    my.text_apostrophize(self, "potion of creeping death's")
     my.text_description_long2(self, "Drinking not recommended.")
     my.text_description_long(self, "A bubbling dark elixir that when thrown will release a rapidly spreading toxic ooze!")
     my.text_description_short(self, "A potion of ooze.")
@@ -131,7 +133,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="potion_ooze", text_long_name="potion of creeping death", text_short_name="potion, death")
+    tp_init(name="potion_ooze",
+            text_long_name="potion of creeping death",
+            text_short_name="potion, death")
 
 
 init()

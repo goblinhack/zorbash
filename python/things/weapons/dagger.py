@@ -112,6 +112,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.stamina_drain_on_attacking(self, 0)
     my.stat_dex_bonus(self, 1)  # means +1 per enchant
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "daggers")
+    my.text_apostrophize(self, "dagger's")
     my.text_description_enchant(self, "+1 DMG")
     my.text_description_long(self, "Ideal for cutting vegetables and enemies.")
     my.text_description_short(self, "Thy stabby means of justice.")
@@ -128,7 +130,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="dagger", text_long_name="dagger", text_short_name="dagger")
+    tp_init(name="dagger",
+            text_long_name="dagger",
+            text_short_name="dagger")
 
 
 init()

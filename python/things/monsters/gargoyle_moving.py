@@ -110,6 +110,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive_to_sudden_changes(self, True)
     my.text_a_or_an(self, "an")
+    my.text_pluralize(self, "gargoyles")
+    my.text_apostrophize(self, "gargoyle's")
     my.text_description_long(self, "These monstrous creatures guard the dungeon from the likes of you. This particular gargoyle has been unleashed, to roam the dungeon with impunity.")
     my.text_description_short(self, "A fearsome gargoyle.")
     my.text_hits(self, "slashes")
@@ -149,7 +151,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="gargoyle_moving", text_long_name="unleashed gargoyle")
+    tp_init(name="gargoyle_moving",
+            text_long_name="unleashed gargoyle")
 
 
 init()

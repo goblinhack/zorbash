@@ -38,7 +38,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="mummy_pack", text_long_name="mummy pack")
+    tp_init(name="mummy_pack",
+            text_long_name="mummy pack")
 
 
 init()

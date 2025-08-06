@@ -16,6 +16,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_no_tile(self, True)
     my.is_projectile(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "fireballs")
+    my.text_apostrophize(self, "fireball's")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
@@ -41,7 +43,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_projectile_fire", text_long_name="fireball", text_short_name="fireball")
+    tp_init(name="staff_projectile_fire",
+            text_long_name="fireball",
+            text_short_name="fireball")
 
 
 init()

@@ -50,14 +50,22 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="floor_red_blood1", text_long_name="pool of blood")
-    tp_init(name="floor_red_blood2", text_long_name="pool of blood")
-    tp_init(name="floor_red_blood3", text_long_name="pool of blood")
-    tp_init(name="floor_red_blood4", text_long_name="pool of blood")
-    tp_init(name="floor_red_blood5", text_long_name="pool of blood")
-    tp_init(name="floor_red_blood6", text_long_name="pool of blood")
-    tp_init(name="floor_red_blood7", text_long_name="pool of blood")
-    tp_init(name="floor_red_blood8", text_long_name="pool of blood")
+    tp_init(name="floor_red_blood1",
+            text_long_name="pool of blood")
+    tp_init(name="floor_red_blood2",
+            text_long_name="pool of blood")
+    tp_init(name="floor_red_blood3",
+            text_long_name="pool of blood")
+    tp_init(name="floor_red_blood4",
+            text_long_name="pool of blood")
+    tp_init(name="floor_red_blood5",
+            text_long_name="pool of blood")
+    tp_init(name="floor_red_blood6",
+            text_long_name="pool of blood")
+    tp_init(name="floor_red_blood7",
+            text_long_name="pool of blood")
+    tp_init(name="floor_red_blood8",
+            text_long_name="pool of blood")
 
 
 init()

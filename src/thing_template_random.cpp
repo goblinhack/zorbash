@@ -3,7 +3,6 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_monst.hpp"
 #include "my_vector_bounds_check.hpp"
 
 // begin sort marker1 {

@@ -3,6 +3,7 @@
 //
 
 #include "my_level.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 
 //
@@ -54,7 +55,7 @@ void Thing::place_blood(bool force)
       h = health_decr();
       if (h <= 0) {
         h = health_set(0);
-        msg("%s bleeds out!", text_The().c_str());
+        msg("%s bleeds out!", capitalize_first(text_the()).c_str());
         dead("by bleeding out");
       }
     } else {

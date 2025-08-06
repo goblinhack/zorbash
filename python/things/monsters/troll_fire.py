@@ -143,6 +143,8 @@ def tp_init(name, text_long_name):
     my.stat_psi(self, 6)
     my.stat_str(self, 18)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "fire trolls")
+    my.text_apostrophize(self, "fire troll's")
     my.text_description_long2(self, "This fire troll likes the heat of battle and does not appreciate comments that he looks like Iron Man.")
     my.text_description_long3(self, "Trolls can naturally regenerate health. You have been warned.")
     my.text_description_long(self, "An enormous creature that seems to be a collection of burning boulders strung together and brought to life.")
@@ -208,7 +210,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="troll_fire", text_long_name="fire troll")
+    tp_init(name="troll_fire",
+            text_long_name="fire troll")
 
 
 init()

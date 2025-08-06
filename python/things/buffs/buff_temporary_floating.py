@@ -38,7 +38,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="buff_temporary_floating", text_long_name="floating", text_short_name="floating")
+    tp_init(name="buff_temporary_floating",
+            text_long_name="floating",
+            text_short_name="floating")
 
 
 init()

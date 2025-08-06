@@ -3,7 +3,6 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_monst.hpp"
 #include "my_string.hpp"
 #include "my_template.hpp"
 #include "my_ui.hpp"

@@ -148,6 +148,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.range_max(self, 7)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "staffs of energies")
+    my.text_apostrophize(self, "staff of energy's")
     my.text_description_enchant(self, "+5 CHARGE, +1 DMG")
     my.text_description_long(self, "Staff of department of energy. Discharges a powerful ray of energy upon an unwitting recipient...")
     my.text_description_short(self, "A staff of energy.")
@@ -179,7 +181,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_energy", text_long_name="staff of energy", text_short_name="staff, energy")
+    tp_init(name="staff_energy",
+            text_long_name="staff of energy",
+            text_short_name="staff, energy")
 
 
 init()

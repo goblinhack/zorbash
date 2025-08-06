@@ -34,7 +34,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="buff_permanent_double_damage", text_long_name="double damage", text_short_name="double damage")
+    tp_init(name="buff_permanent_double_damage",
+            text_long_name="double damage",
+            text_short_name="double damage")
 
 
 init()

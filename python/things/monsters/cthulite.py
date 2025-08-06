@@ -156,6 +156,8 @@ def tp_init(name, text_long_name):
     my.stat_psi(self, 18)
     my.stat_str(self, 18)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "cthulites")
+    my.text_apostrophize(self, "cthulite's")
     my.text_description_long2(self, "Watch out as this creature oozes living slime")
     my.text_description_long(self, "A lesser form of the eternal unnamed god, this create is still very deserving of your fear")
     my.text_description_short(self, "A lesser god.")
@@ -184,7 +186,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="cthulite", text_long_name="cthulite")
+    tp_init(name="cthulite",
+            text_long_name="cthulite")
 
 
 init()

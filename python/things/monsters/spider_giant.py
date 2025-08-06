@@ -151,6 +151,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "giant spiders")
+    my.text_apostrophize(self, "giant spiders'")
     my.text_description_long(self, "An enormous spider. Ichor drips from its glistening fangs. Watch out for its web and poisonous bite.")
     my.text_description_short(self, "A giant spider.")
     my.text_hits(self, "bites")
@@ -185,7 +187,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="spider_giant", text_long_name="giant spider")
+    tp_init(name="spider_giant",
+            text_long_name="giant spider")
 
 
 init()

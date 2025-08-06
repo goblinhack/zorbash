@@ -66,6 +66,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_def_bonus(self, 3)
     my.stat_dex_bonus(self, -2)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "obsidian shields")
+    my.text_apostrophize(self, "obsidian shield's")
     my.text_description_enchant(self, "+1 DEF")
     my.text_description_long2(self, "This near indestructible shield gives the ideal combination of defense and light weight.")
     my.text_description_long(self, "An obsidian shield, it's surface as dark as the yawning space between stars. Has some shiny bits too.")
@@ -83,7 +85,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="shield_obsidian", text_long_name="obsidian shield", text_short_name="shield, obsidian")
+    tp_init(name="shield_obsidian",
+            text_long_name="obsidian shield",
+            text_short_name="shield, obsidian")
 
 
 init()

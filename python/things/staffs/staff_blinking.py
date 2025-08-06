@@ -109,6 +109,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.range_max(self, 7)
     my.temperature(self, 20)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "staffs of blinking")
+    my.text_apostrophize(self, "staff of blinking's")
     my.text_description_long2(self, "Be warned, teleporting causes intense cold damage!")
     my.text_description_long(self, "This staff will allow you to blink out of existence and re-appear a short distance away. In technical terms, a teleport.")
     my.text_description_short(self, "A staff of blinking.")
@@ -140,7 +142,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_blinking", text_long_name="staff of blinking", text_short_name="staff, blinking")
+    tp_init(name="staff_blinking",
+            text_long_name="staff of blinking",
+            text_short_name="staff, blinking")
 
 
 init()

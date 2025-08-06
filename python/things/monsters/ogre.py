@@ -132,6 +132,8 @@ def tp_init(name, text_long_name):
     my.stat_psi(self, 6)
     my.stat_str(self, 18)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "ogres")
+    my.text_apostrophize(self, "ogre's")
     my.text_description_long2(self, "There are no hills here, which may explain why it is so grumpy.")
     my.text_description_long(self, "An enormous creature that seems to be a collection of moss and lumpy flesh, otherwise known as a hill ogre.")
     my.text_description_short(self, "A grumpy hill ogre.")
@@ -160,7 +162,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="ogre", text_long_name="hill ogre")
+    tp_init(name="ogre",
+            text_long_name="hill ogre")
 
 
 init()

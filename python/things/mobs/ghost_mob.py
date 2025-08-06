@@ -70,6 +70,8 @@ def tp_init(name, text_long_name):
     my.on_idle_tick_freq_dice(self, "1d5+5:me.on_idle_tick_freq_dice()")
     my.temperature_never_changes(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "ghost mobs")
+    my.text_apostrophize(self, "ghost mob's")
     my.text_description_long(self, "A bone portal which spews the angry spirits of those long passed.")
     my.text_description_short(self, "A cursed pile of bones, spawning spirits.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -131,7 +133,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="ghost_mob", text_long_name="ghost generator")
+    tp_init(name="ghost_mob",
+            text_long_name="ghost generator")
 
 
 init()

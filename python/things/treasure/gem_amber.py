@@ -35,6 +35,8 @@ def tp_init(name, text_long_name):
     my.normal_placement_rules(self, True)
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "amber")
+    my.text_apostrophize(self, "amber's")
     my.text_description_long(self, "A rough hunk of amber. Quite how it got here and from what tree it fell, no one knows.")
     my.text_description_short(self, "Translucent amber, no flies in it.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -56,7 +58,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="gem_amber", text_long_name="amber")
+    tp_init(name="gem_amber",
+            text_long_name="amber")
 
 
 init()

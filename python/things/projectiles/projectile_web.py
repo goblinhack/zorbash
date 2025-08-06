@@ -51,7 +51,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="projectile_web", text_long_name="web ball", text_short_name="web ball")
+    tp_init(name="projectile_web",
+            text_long_name="web ball",
+            text_short_name="web ball")
 
 
 init()

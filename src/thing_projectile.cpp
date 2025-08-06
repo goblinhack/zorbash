@@ -3,6 +3,7 @@
 //
 
 #include "my_game.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_thing_attack_options.hpp"
 
@@ -115,12 +116,14 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &effect_name, T
     }
   } else if (item) {
     if (item->is_spell()) {
-      msg("%s casts %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
+      msg("%s casts %s at %s.", capitalize_first(text_the()).c_str(), item->text_the().c_str(),
+          target->text_the().c_str());
     } else {
-      msg("%s shoots %s at %s.", text_The().c_str(), item->text_the().c_str(), target->text_the().c_str());
+      msg("%s shoots %s at %s.", capitalize_first(text_the()).c_str(), item->text_the().c_str(),
+          target->text_the().c_str());
     }
   } else {
-    msg("%s shoots at %s.", text_The().c_str(), target->text_the().c_str());
+    msg("%s shoots at %s.", capitalize_first(text_the()).c_str(), target->text_the().c_str());
   }
   TRACE_AND_INDENT();
 
@@ -132,7 +135,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &effect_name, T
       msg("Misfire!");
       game->tick_begin("failed to shoot projectile");
     } else {
-      msg("%s misfires.", text_The().c_str());
+      msg("%s misfires.", capitalize_first(text_the()).c_str());
     }
     return nullptr;
   }
@@ -142,7 +145,7 @@ Thingp Thing::projectile_shoot_at(Thingp item, const std::string &effect_name, T
       msg("Misfire!");
       game->tick_begin("failed to shoot projectile");
     } else {
-      msg("%s misfires.", text_The().c_str());
+      msg("%s misfires.", capitalize_first(text_the()).c_str());
     }
     return nullptr;
   }

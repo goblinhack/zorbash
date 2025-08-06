@@ -53,7 +53,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="zorb_pack", text_long_name="zorblin pack")
+    tp_init(name="zorb_pack",
+            text_long_name="zorblin pack")
 
 
 init()

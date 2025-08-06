@@ -167,6 +167,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature_sensitive(self, True)
     my.temperature_sensitive_to_sudden_changes(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "dungeon cleaners")
+    my.text_apostrophize(self, "dungeon cleaner's")
     my.text_description_long(self, "Dungeon cleaners have evolved to scrub their domain of all messy organic matter. That means you. Cleaners leave a trail of corrosive slime in their wake. Avoid this. Cleaners also have a habit of eating your hard fought items.")
     my.text_description_short(self, "A dungeon auto cleaner slime thingy.")
     my.text_hits(self, "burns")
@@ -194,7 +196,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="cleaner", text_long_name="dungeon cleaner", text_short_name="cleaner")
+    tp_init(name="cleaner",
+            text_long_name="dungeon cleaner",
+            text_short_name="cleaner")
 
 
 init()

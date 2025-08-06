@@ -32,22 +32,15 @@ PyObject *tp_update_(PyObject *obj, PyObject *args, PyObject *keywds);
 #define TP_SET_PROTO(__field__) PyObject *__field__(PyObject *obj, PyObject *args, PyObject *keywds);
 
 #define MY_ADD_PYTHON_TP_FUNCTION(__field__)                                                                         \
-  {                                                                                                                  \
-    #__field__, (PyCFunction) __field__, METH_VARARGS | METH_KEYWORDS, "set a " #__field__ " in a thing template"    \
-  }
+  {#__field__, (PyCFunction) __field__, METH_VARARGS | METH_KEYWORDS, "set a " #__field__ " in a thing template"}
 
 /*
  * The cast of the function is necessary since PyCFunction values
  * only take two PyObject *parameters, and some take three.
  */
-#define MY_ADD_PYTHON_FUNCTION(__func__)                                                                             \
-  {                                                                                                                  \
-    #__func__, (PyCFunction) __func__, METH_VARARGS | METH_KEYWORDS, #__func__                                       \
-  }
+#define MY_ADD_PYTHON_FUNCTION(__func__) {#__func__, (PyCFunction) __func__, METH_VARARGS | METH_KEYWORDS, #__func__}
 #define MY_ADD_WRAPPED_PYTHON_FUNCTION(__func__)                                                                     \
-  {                                                                                                                  \
-    #__func__, (PyCFunction) __func__##_, METH_VARARGS | METH_KEYWORDS, #__func__                                    \
-  }
+  {#__func__, (PyCFunction) __func__##_, METH_VARARGS | METH_KEYWORDS, #__func__}
 
 // begin sort marker1 {
 TP_SET_PROTO(aggression_pct)
@@ -516,7 +509,7 @@ TP_SET_PROTO(is_hittable)
 TP_SET_PROTO(is_holy)
 TP_SET_PROTO(is_holy_water)
 TP_SET_PROTO(is_humanoid)
-TP_SET_PROTO(is_iceman)
+TP_SET_PROTO(is_icefolk)
 TP_SET_PROTO(is_immune_to_acid)
 TP_SET_PROTO(is_immune_to_blinding)
 TP_SET_PROTO(is_immune_to_cold)
@@ -571,7 +564,7 @@ TP_SET_PROTO(is_magical)
 TP_SET_PROTO(is_magical_effect)
 TP_SET_PROTO(is_magic_crystal)
 TP_SET_PROTO(is_magic_stone)
-TP_SET_PROTO(is_mantisman)
+TP_SET_PROTO(is_mantisfolk)
 TP_SET_PROTO(is_map_beast)
 TP_SET_PROTO(is_map_treasure)
 TP_SET_PROTO(is_meat)
@@ -1042,6 +1035,8 @@ TP_SET_PROTO(temperature_never_changes)
 TP_SET_PROTO(temperature_sensitive)
 TP_SET_PROTO(temperature_sensitive_to_sudden_changes)
 TP_SET_PROTO(text_a_or_an)
+TP_SET_PROTO(text_pluralize)
+TP_SET_PROTO(text_apostrophize)
 TP_SET_PROTO(text_debuff)
 TP_SET_PROTO(text_description_enchant)
 TP_SET_PROTO(text_description_long)

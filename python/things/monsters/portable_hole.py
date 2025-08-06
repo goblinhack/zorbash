@@ -75,6 +75,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_str(self, 10)
     my.teleport_distance(self, 20)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "portable holes")
+    my.text_apostrophize(self, "portable hole's")
     my.text_description_long2(self, "Originally used to get rid of detritus from the dungeon floor, they also work well for getting rid of annoying dungeoneers.")
     my.text_description_long(self, "Portable holes are a one way ticket to other parts of the dungeon, which may or may not be a good thing.")
     my.text_description_short(self, "A portable hole.")
@@ -103,7 +105,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="portable_hole", text_long_name="portable hole", text_short_name="portable hole")
+    tp_init(name="portable_hole",
+            text_long_name="portable hole",
+            text_short_name="portable hole")
 
 
 init()

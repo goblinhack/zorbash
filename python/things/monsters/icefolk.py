@@ -3,7 +3,7 @@ import tp
 
 
 def on_born(me, x, y):
-    my.thing_friend(me, "iceman")
+    my.thing_friend(me, "icefolk")
 
 
 def on_you_nat_attack_attempt(me, x, y):
@@ -23,7 +23,7 @@ def on_hit_dodge_do(me, hitter, x, y):
 
 def on_death(me, x, y):
     my.spawn_at_my_position(me, "water")
-    my.thing_msg(me, "The iceman cries hoarsely and shatters!")
+    my.thing_msg(me, "The icefolk cries hoarsely and shatters!")
 
     sound = f"growl{my.py_non_pcg_random_range_inclusive(1, 10)}"
     if not my.thing_sound_play_channel(me, my.CHANNEL_MONST, sound):
@@ -102,7 +102,7 @@ def tp_init(name, text_long_name):
     my.is_fearless(self, True)
     my.is_hittable(self, True)
     my.is_humanoid(self, True)
-    my.is_iceman(self, True)
+    my.is_icefolk(self, True)
     my.is_immune_to_cold(self, True)
     my.is_interesting(self, True)
     my.is_living(self, True)
@@ -146,8 +146,10 @@ def tp_init(name, text_long_name):
     my.temperature(self, -20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description_long(self, "Icemen are deadly hunters and prefer their prey cold and frozen. Watch out for their deadly ice blast attack and touch of death.")
-    my.text_description_short(self, "A frosty iceman.")
+    my.text_pluralize(self, "icefolk")
+    my.text_apostrophize(self, "ice folks's")
+    my.text_description_long(self, "Ice folk are deadly hunters and prefer their prey cold and frozen. Watch out for their deadly ice blast attack and touch of death.")
+    my.text_description_short(self, "A frosty ice person.")
     my.text_hits(self, "gores")
     my.thing_size(self, my.THING_SIZE_NORMAL)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -193,7 +195,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="iceman", text_long_name="iceman")
+    tp_init(name="icefolk",
+            text_long_name="icefolk")
 
 
 init()

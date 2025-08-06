@@ -65,6 +65,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_def_bonus(self, 3)
     my.stat_dex_bonus(self, -3)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "extra towering shields")
+    my.text_apostrophize(self, "extra towering shield's")
     my.text_description_enchant(self, "+1 DEF")
     my.text_description_long(self, "This modified tower shield comes with additional bling and reduced dexterity penalties.")
     my.text_description_short(self, "Shiny tower shield.")
@@ -81,7 +83,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="shield_tower2", text_long_name="extra towering shield", text_short_name="shield, tower xtra")
+    tp_init(name="shield_tower2",
+            text_long_name="extra towering shield",
+            text_short_name="shield, tower xtra")
 
 
 init()

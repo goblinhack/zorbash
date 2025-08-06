@@ -39,6 +39,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "10+1d10")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "slices of melon")
+    my.text_apostrophize(self, "slice of melon's")
     my.text_description_long(self, "Fresh slice of melon. I mean it does have some things on it, but they'll dust off. Think of it as extra protein.")
     my.text_description_short(self, "Slice of melon.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -52,7 +54,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="melon2", text_long_name="slice of melon", text_short_name="melon")
+    tp_init(name="melon2",
+            text_long_name="slice of melon",
+            text_short_name="melon")
 
 
 init()

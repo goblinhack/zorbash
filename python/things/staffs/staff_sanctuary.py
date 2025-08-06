@@ -156,6 +156,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.range_max(self, 7)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "staffs of sanctuary")
+    my.text_apostrophize(self, "staff of sanctuary's")
     my.text_description_enchant(self, "+1 radius")
     my.text_description_long(self, "This staff creates a protective barrier through which n'er do wells can pass.")
     my.text_description_short(self, "A staff of sanctuary.")
@@ -187,7 +189,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_sanctuary", text_long_name="staff of sanctuary", text_short_name="staff, sanctuary")
+    tp_init(name="staff_sanctuary",
+            text_long_name="staff of sanctuary",
+            text_short_name="staff, sanctuary")
 
 
 init()

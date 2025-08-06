@@ -120,6 +120,8 @@ def tp_init(name, text_long_name):
     my.on_idle_tick_freq_dice(self, "1:me.on_idle_tick_freq_dice()")
     my.on_want_to_shoot_at_do(self, "me.on_want_to_shoot_at()")
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "zorblin totems")
+    my.text_apostrophize(self, "zorblin totem's")
     my.text_description_long(self, "A tall pillar smeared in grease and blood and with the grinning face of a monstrous zorblin carved into the stonework. It's eyes follow you. They really do, this is not a figure of speech.")
     my.text_description_short(self, "Zorblin holy place.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -142,7 +144,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="zorb_totem", text_long_name="zorblin totem")
+    tp_init(name="zorb_totem",
+            text_long_name="zorblin totem")
 
 
 init()

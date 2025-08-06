@@ -122,6 +122,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.range_max(self, 7)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "staffs of lightning")
+    my.text_apostrophize(self, "staff of lightning's")
     my.text_description_enchant(self, "+1 radius")
     my.text_description_long(self, "This staff blasts a charge of lightning at its unwitting target. Be careful when standing in the same pool as your target... Also do not use in the bath.")
     my.text_description_short(self, "A staff of lightning.")
@@ -153,7 +155,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_lightning", text_long_name="staff of lightning", text_short_name="staff, lightning")
+    tp_init(name="staff_lightning",
+            text_long_name="staff of lightning",
+            text_short_name="staff, lightning")
 
 
 init()

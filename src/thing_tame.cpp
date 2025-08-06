@@ -4,9 +4,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_math.hpp"
-// REMOVED #include "my_monst.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 
 bool Thing::attempt_to_tame_with(point target_at, Thingp what)
@@ -55,7 +53,7 @@ bool Thing::attempt_to_tame_with(Thingp it, Thingp what)
   if (is_player()) {
     msg("%%fg=green$You tame %s.%%fg=reset$", it->text_the().c_str());
   } else {
-    msg("%s tames %s.", text_The().c_str(), it->text_the().c_str());
+    msg("%s tames %s.", capitalize_first(text_the()).c_str(), it->text_the().c_str());
   }
 
   if (it->is_sleeping) {

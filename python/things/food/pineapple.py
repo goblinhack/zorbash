@@ -51,6 +51,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_thrown_do(self, "me.on_thrown()")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "pineapples")
+    my.text_apostrophize(self, "pineapple's")
     my.text_description_long(self, "A pineapple. How it got here... I mean I just can't explain this one. Just eat it and enjoy the weird dreams tonight.")
     my.text_description_short(self, "Pineapple.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -64,7 +66,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="pineapple", text_long_name="pineapple", text_short_name="pineapple")
+    tp_init(name="pineapple",
+            text_long_name="pineapple",
+            text_short_name="pineapple")
 
 
 init()

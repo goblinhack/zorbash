@@ -31,7 +31,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="projectile_dart_confusion", text_long_name="confusion dart", text_short_name="confusion dart")
+    tp_init(name="projectile_dart_confusion",
+            text_long_name="confusion dart",
+            text_short_name="confusion dart")
 
 
 init()

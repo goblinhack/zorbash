@@ -1429,7 +1429,7 @@ std::string strerror_to_string(const int err)
 //
 // foo bar -> Foo Bar
 //
-std::string capitalise(std::string in)
+std::string capitalize(std::string in)
 {
   TRACE_NO_INDENT();
   std::string out = in;
@@ -1455,6 +1455,32 @@ std::string capitalise(std::string in)
 }
 
 //
+// foo bar -> Foo bar
+//
+std::string capitalize_first(std::string in)
+{
+  TRACE_NO_INDENT();
+  std::string out = in;
+
+  char *b          = (char *) out.c_str();
+  char *e          = b + out.size();
+  char *c          = b;
+  bool  word_start = true;
+  while (c < e) {
+    if (word_start) {
+      if (islower(*c)) {
+        *c = toupper(*c);
+      }
+      word_start = false;
+    }
+
+    c++;
+  }
+
+  return out;
+}
+
+//
 // Modify the input string with and change "pattern" to "replace_with" repeatedly.
 //
 void replace(std::string &input, const std::string &pattern, const std::string &replace_with)
@@ -1468,4 +1494,16 @@ void replace(std::string &input, const std::string &pattern, const std::string &
     input.replace(pos, pattern.length(), replace_with);
     pos += replace_with.length();
   }
+}
+
+void abbreviate(std::string &s)
+{
+  ::replace(s, "potion of", "potion");
+  ::replace(s, "staff of", "staff");
+  ::replace(s, "ring of", "ring");
+  ::replace(s, "sword of", "sword");
+  ::replace(s, "potion", "pot.");
+  ::replace(s, "poison", "pois.");
+  ::replace(s, "immunity", "imm.");
+  ::replace(s, "lightning", "lghtn.");
 }

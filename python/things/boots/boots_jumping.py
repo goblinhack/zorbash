@@ -61,6 +61,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.stamina_drain_on_using(self, 10)
     my.stat_dex_bonus(self, 1)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "boots of jumping")
+    my.text_apostrophize(self, "boots of jumping's")
     my.text_description_enchant(self, "+1 tile")
     my.text_description_long(self, "Boots of jumping. With these boots you can bound with impunity across chasms. Well, maybe.")
     my.text_description_short(self, "Boots of jumping.")

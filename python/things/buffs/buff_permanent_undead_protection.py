@@ -134,7 +134,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="buff_permanent_undead_protection", text_long_name="holy protection")
+    tp_init(name="buff_permanent_undead_protection",
+            text_long_name="holy protection")
 
 
 init()

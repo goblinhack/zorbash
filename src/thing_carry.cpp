@@ -5,8 +5,8 @@
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
-// REMOVED #include <algorithm>
 
 std::vector< ThingId > Thing::copy_of_carrying(void)
 {
@@ -376,9 +376,9 @@ bool Thing::carry(Thingp item, CarryOptions carry_options)
           if (get(level->player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
             if (! already_carried) {
               if (carry_options.is_being_stolen) {
-                msg("%s has shiny new equipment.", text_The().c_str());
+                msg("%s has shiny new equipment.", capitalize_first(text_the()).c_str());
               } else {
-                msg("%s collects %s.", text_The().c_str(), item->text_the().c_str());
+                msg("%s collects %s.", capitalize_first(text_the()).c_str(), item->text_the().c_str());
               }
             }
           } else if (item->is_weapon()) {
@@ -392,9 +392,9 @@ bool Thing::carry(Thingp item, CarryOptions carry_options)
       } else if (level->player && (level->tick_created < game->tick_current)) {
         if (get(level->player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
           if (carry_options.is_being_stolen) {
-            msg("%s looks shifty.", text_The().c_str());
+            msg("%s looks shifty.", capitalize_first(text_the()).c_str());
           } else {
-            msg("%s collects %s.", text_The().c_str(), item->text_the().c_str());
+            msg("%s collects %s.", capitalize_first(text_the()).c_str(), item->text_the().c_str());
           }
         }
       }

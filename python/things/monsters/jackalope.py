@@ -122,6 +122,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "jackalopes")
+    my.text_apostrophize(self, "jackalope's")
     my.text_description_long2(self, "However if provoked, they can do serious damage with their antlers.")
     my.text_description_long(self, "Jackalopes are shy creatures that will normally try to avoid conflict.")
     my.text_description_short(self, "A jackalope.")
@@ -163,7 +165,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="jackalope", text_long_name="jackalope")
+    tp_init(name="jackalope",
+            text_long_name="jackalope")
 
 
 init()

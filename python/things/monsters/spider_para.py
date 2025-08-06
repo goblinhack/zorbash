@@ -127,6 +127,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_psi(self, 4)
     my.stat_str(self, 8)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "para spiders")
+    my.text_apostrophize(self, "para spider's")
     my.text_description_long(self, "The para spider is the stuff of nightmares. Tired of seeing spiders crawling on walls, well fear no more, as this spider can travel... through walls")
     my.text_description_short(self, "A para spider.")
     my.text_hits(self, "bites")
@@ -158,7 +160,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="spider_para", text_long_name="para spider", text_short_name="para spider")
+    tp_init(name="spider_para",
+            text_long_name="para spider",
+            text_short_name="para spider")
 
 
 init()

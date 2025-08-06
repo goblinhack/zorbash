@@ -25,7 +25,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="buff_status_full", text_long_name="full and happy", text_short_name="full")
+    tp_init(name="buff_status_full",
+            text_long_name="full and happy",
+            text_short_name="full")
 
 
 init()

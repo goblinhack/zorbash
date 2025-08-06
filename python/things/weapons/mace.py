@@ -96,6 +96,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.stamina_drain_on_attacking(self, 3)
     my.stat_str_min(self, 16)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "maces")
+    my.text_apostrophize(self, "mace's")
     my.text_description_enchant(self, "+2 DMG")
     my.text_description_long2(self, "Also ideal for rolling pastry and general home baking.")
     my.text_description_long3(self, "Blunt weapons are very effective against soft slimy enemies.")
@@ -114,7 +116,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="mace", text_long_name="mace", text_short_name="mace")
+    tp_init(name="mace",
+            text_long_name="mace",
+            text_short_name="mace")
 
 
 init()

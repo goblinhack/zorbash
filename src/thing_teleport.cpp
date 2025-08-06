@@ -524,7 +524,7 @@ bool Thing::teleport_randomly(TeleportOptions teleport_options, float max_distan
       if (is_player()) {
         msg("You resist being teleported.");
       } else {
-        msg("%s resists being teleported.", text_The().c_str());
+        msg("%s resists being teleported.", capitalize_first(text_the()).c_str());
       }
       return false;
     }
@@ -699,7 +699,7 @@ void Thing::teleport_end(void)
   if (is_player()) {
     auto t = most_dangerous_adjacent_thing();
     if (t) {
-      std::string s = t->text_The() + " attacks as you appear";
+      std::string s = capitalize_first(t->text_the()) + " attacks as you appear";
       game->tick_begin("monst attacked as player appeared");
     }
   }

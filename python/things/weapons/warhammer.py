@@ -96,6 +96,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.stamina_drain_on_attacking(self, 3)
     my.stat_str_min(self, 14)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "warhammers")
+    my.text_apostrophize(self, "warhammer's")
     my.text_description_enchant(self, "+1 DMG")
     my.text_description_long2(self, "Also useful for pruning and general gardening activities.")
     my.text_description_long3(self, "Blunt weapons are very effective against soft slimy enemies.")
@@ -114,7 +116,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="warhammer", text_long_name="warhammer", text_short_name="warhammer")
+    tp_init(name="warhammer",
+            text_long_name="warhammer",
+            text_short_name="warhammer")
 
 
 init()

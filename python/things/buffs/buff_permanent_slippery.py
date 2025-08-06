@@ -38,7 +38,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="buff_permanent_slippery", text_long_name="slippery as the banana", text_short_name="slippery")
+    tp_init(name="buff_permanent_slippery",
+            text_long_name="slippery as the banana",
+            text_short_name="slippery")
 
 
 init()

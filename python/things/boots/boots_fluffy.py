@@ -69,6 +69,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_UNCOMMON)
     my.temperature(self, 50)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "fluffy boots")
+    my.text_apostrophize(self, "fluffy boot's")
     my.text_description_enchant(self, "-10 decibels")
     my.text_description_long(self, "Fluffy boots. Keeps your feet warm and lowers your noise footprint. Pun intended.")
     my.text_description_short(self, "Fluffy boots.")

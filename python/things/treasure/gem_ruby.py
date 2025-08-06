@@ -35,6 +35,8 @@ def tp_init(name, text_long_name):
     my.normal_placement_rules(self, True)
     my.rarity(self, my.RARITY_UNCOMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "rubies")
+    my.text_apostrophize(self, "ruby's")
     my.text_description_long(self, "Blood red ruby. A bit too red if you ask me. Actually it looks wet and red. Anyway, best pick it up and clean it off.")
     my.text_description_short(self, "Blood-red ruby, but who's blood?")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -56,7 +58,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="gem_ruby", text_long_name="ruby")
+    tp_init(name="gem_ruby",
+            text_long_name="ruby")
 
 
 init()

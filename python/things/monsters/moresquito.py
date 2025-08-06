@@ -129,6 +129,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "moresquitos")
+    my.text_apostrophize(self, "moresquito's")
     my.text_description_long(self, "A moresquito is so much more than your average mosquito. Being about the size of a wardrobe, the moresquito has a dreadful bite.")
     my.text_description_short(self, "A ravenous moresquito.")
     my.text_hits(self, "stabs")
@@ -159,7 +161,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="moresquito", text_long_name="moresquito")
+    tp_init(name="moresquito",
+            text_long_name="moresquito")
 
 
 init()

@@ -35,7 +35,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="skill_artful_dodging3", text_long_name="artful dodging 3", text_short_name="artful dodging 3")
+    tp_init(name="skill_artful_dodging3",
+            text_long_name="artful dodging 3",
+            text_short_name="artful dodging 3")
 
 
 init()

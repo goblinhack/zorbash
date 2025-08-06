@@ -42,6 +42,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "10+1d15")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "chocolate bars")
+    my.text_apostrophize(self, "chocolate bar's")
     my.text_description_long(self, "A chocolate bar. Unwrapped.")
     my.text_description_short(self, "A chocolate bar. Slightly melted..")
     my.z_depth(self, my.MAP_DEPTH_OBJ)

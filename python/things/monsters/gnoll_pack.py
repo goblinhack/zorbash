@@ -30,7 +30,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="gnoll_pack", text_long_name="gnoll pack")
+    tp_init(name="gnoll_pack",
+            text_long_name="gnoll pack")
 
 
 init()

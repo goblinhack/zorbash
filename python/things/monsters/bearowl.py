@@ -125,6 +125,8 @@ def tp_init(name, text_long_name):
     my.stat_psi(self, 12)
     my.stat_str(self, 20)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "bearowls")
+    my.text_apostrophize(self, "bearowl's")
     my.text_description_long(self, "Not to be confused with the owlbear, the bearowl is a vastly different creature. Armed with its formidable multi beak attack per round, the owlbear, I mean bearowl is not to be trifled with.")
     my.text_description_short(self, "A bearowl.")
     my.text_hits(self, "gores")
@@ -155,7 +157,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="bearowl", text_long_name="bearowl")
+    tp_init(name="bearowl",
+            text_long_name="bearowl")
 
 
 init()

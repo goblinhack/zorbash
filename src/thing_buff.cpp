@@ -6,7 +6,6 @@
 #include "my_monst.hpp"
 #include "my_thing.hpp"
 #include "my_wid_buffbox.hpp"
-// REMOVED #include <algorithm>
 
 bool Thing::buff_add(Thingp buff)
 {

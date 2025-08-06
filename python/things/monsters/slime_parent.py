@@ -147,6 +147,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "slime jumpers")
+    my.text_apostrophize(self, "slime jumper's")
     my.text_description_long2(self, "This is an adult. It will eat its own children, and you!")
     my.text_description_long(self, "Slime jumpers are numerous, bouncy and carnivorous. They will eat almost anything, including their own. They have the annoying habit of jumping when threatened and dividing when defeated.")
     my.text_description_short(self, "A gargantuan pile of sentient slime.")
@@ -259,7 +261,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="slime_parent", text_long_name="slime jumper")
+    tp_init(name="slime_parent",
+            text_long_name="slime jumper")
 
 
 init()

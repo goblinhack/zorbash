@@ -177,7 +177,7 @@ WidPopup *Game::wid_tp_info_create_popup(Tpp t, point tl, point br)
     wid_raise(wid_popup_window->wid_popup_container);
   }
 
-  auto name = t->text_long_capitalised();
+  auto name = t->text_long_capitalized();
   wid_popup_window->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$" + name);
   wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
 
@@ -314,7 +314,7 @@ WidPopup *Game::wid_tp_info_create_popup_compact(const std::vector< Tpp > &ts)
   char tmp[ MAXSTR ];
 
   for (auto t : ts) {
-    auto name = t->text_long_capitalised();
+    auto name = t->text_long_capitalized();
     snprintf(tmp, sizeof(tmp) - 2, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$%-28s", name.c_str());
     for (auto c = tmp; c < tmp + sizeof(tmp); c++) {
       if (*c == ' ') {
@@ -518,7 +518,7 @@ bool Game::wid_tp_info_create_list(std::vector< Tpp > &ts)
         if (t->is_floor() || t->is_corridor()) {
           continue;
         }
-        description += t->text_short_capitalised();
+        description += t->text_short_capitalized();
         description += ".`"; // Why does space not work ?
       }
 
@@ -1186,10 +1186,10 @@ void Game::wid_tp_info_add_dmg_nat_att(WidPopup *w, Tpp t, int index)
       } else {
         if (min_value == max_value) {
           snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_nat_att_dice_str().c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dmg:%-9s%16s", capitalise(t->dmg_nat_att_type()).c_str(), tmp2);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dmg:%-9s%16s", capitalize(t->dmg_nat_att_type()).c_str(), tmp2);
         } else {
           snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_nat_att_dice_str().c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dmg:%-9s%16s", capitalise(t->dmg_nat_att_type()).c_str(), tmp2);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dmg:%-9s%16s", capitalize(t->dmg_nat_att_type()).c_str(), tmp2);
         }
         w->log(tmp);
       }

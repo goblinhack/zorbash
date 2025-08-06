@@ -49,7 +49,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="buff_temporary_hasted", text_long_name="quicksilver", text_short_name="hasted")
+    tp_init(name="buff_temporary_hasted",
+            text_long_name="quicksilver",
+            text_short_name="hasted")
 
 
 init()

@@ -135,6 +135,8 @@ def tp_init(name, text_long_name):
     my.stat_str(self, 21)
     my.temperature(self, 5)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "giant skeletons")
+    my.text_apostrophize(self, "giant skeleton's")
     my.text_description_long2(self, "Takes half damage from pointy weapons.")
     my.text_description_long(self, "A monstrous skeleton. It towers above you. It seems unhappy. Quite what body this skeleton came from, you hope not to find out. Water and fire are your friends here with creatures like this. Watch, these can rise again!")
     my.text_description_short(self, "A monstrous skeleton, possibly unfriendly.")
@@ -301,7 +303,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="skel_giant", text_long_name="giant skeleton")
+    tp_init(name="skel_giant",
+            text_long_name="giant skeleton")
 
 
 init()

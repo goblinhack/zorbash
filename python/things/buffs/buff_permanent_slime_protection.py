@@ -145,7 +145,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="buff_permanent_slime_protection", text_long_name="slime protection")
+    tp_init(name="buff_permanent_slime_protection",
+            text_long_name="slime protection")
 
 
 init()

@@ -45,6 +45,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.normal_placement_rules(self, True)
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "spellbooks")
+    my.text_apostrophize(self, "spellbook's")
     my.text_description_long(self, "Read this spellbook to learn some new spells into your brain matter thing.")
     my.text_description_short(self, "A dusty spellbook.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -60,7 +62,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="spellbook1", text_long_name="spellbook", text_short_name="spellbook")
+    tp_init(name="spellbook1",
+            text_long_name="spellbook",
+            text_short_name="spellbook")
 
 
 init()

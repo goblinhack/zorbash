@@ -51,14 +51,22 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="floor_green_blood1", text_long_name="pool of fluorescent blood")
-    tp_init(name="floor_green_blood2", text_long_name="pool of fluorescent blood")
-    tp_init(name="floor_green_blood3", text_long_name="pool of fluorescent blood with bits in it")
-    tp_init(name="floor_green_blood4", text_long_name="pool of fluorescent blood")
-    tp_init(name="floor_green_blood5", text_long_name="pool of yucky fluorescent blood")
-    tp_init(name="floor_green_blood6", text_long_name="pool of icky fluorescent blood")
-    tp_init(name="floor_green_blood7", text_long_name="pool of fluorescent blood")
-    tp_init(name="floor_green_blood8", text_long_name="pool of fluorescent blood")
+    tp_init(name="floor_green_blood1",
+            text_long_name="pool of fluorescent blood")
+    tp_init(name="floor_green_blood2",
+            text_long_name="pool of fluorescent blood")
+    tp_init(name="floor_green_blood3",
+            text_long_name="pool of fluorescent blood with bits in it")
+    tp_init(name="floor_green_blood4",
+            text_long_name="pool of fluorescent blood")
+    tp_init(name="floor_green_blood5",
+            text_long_name="pool of yucky fluorescent blood")
+    tp_init(name="floor_green_blood6",
+            text_long_name="pool of icky fluorescent blood")
+    tp_init(name="floor_green_blood7",
+            text_long_name="pool of fluorescent blood")
+    tp_init(name="floor_green_blood8",
+            text_long_name="pool of fluorescent blood")
 
 
 init()

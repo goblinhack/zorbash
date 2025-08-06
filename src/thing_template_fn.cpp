@@ -624,7 +624,7 @@ int Tp::is_hittable(void) const { return _is_hittable; }
 int Tp::is_holy(void) const { return _is_holy; }
 int Tp::is_holy_water(void) const { return _is_holy_water; }
 int Tp::is_humanoid(void) const { return _is_humanoid; }
-int Tp::is_iceman(void) const { return _is_iceman; }
+int Tp::is_icefolk(void) const { return _is_icefolk; }
 int Tp::is_immune_to_acid(void) const { return _is_immune_to_acid; }
 int Tp::is_immune_to_blinding(void) const { return _is_immune_to_blinding; }
 int Tp::is_immune_to_cold(void) const { return _is_immune_to_cold; }
@@ -679,7 +679,7 @@ int Tp::is_magical_effect(void) const { return _is_magical_effect; }
 int Tp::is_magical(void) const { return _is_magical; }
 int Tp::is_magic_crystal(void) const { return _is_magic_crystal; }
 int Tp::is_magic_stone(void) const { return _is_magic_stone; }
-int Tp::is_mantisman(void) const { return _is_mantisman; }
+int Tp::is_mantisfolk(void) const { return _is_mantisfolk; }
 int Tp::is_map_beast(void) const { return _is_map_beast; }
 int Tp::is_map_treasure(void) const { return _is_map_treasure; }
 int Tp::is_meat(void) const { return _is_meat; }
@@ -1403,7 +1403,7 @@ void Tp::is_hittable_set(int v) { _is_hittable = v; }
 void Tp::is_holy_set(int v) { _is_holy = v; }
 void Tp::is_holy_water_set(int v) { _is_holy_water = v; }
 void Tp::is_humanoid_set(int v) { _is_humanoid = v; }
-void Tp::is_iceman_set(int v) { _is_iceman = v; }
+void Tp::is_icefolk_set(int v) { _is_icefolk = v; }
 void Tp::is_immune_to_acid_set(int v) { _is_immune_to_acid = v; }
 void Tp::is_immune_to_blinding_set(int v) { _is_immune_to_blinding = v; }
 void Tp::is_immune_to_cold_set(int v) { _is_immune_to_cold = v; }
@@ -1458,7 +1458,7 @@ void Tp::is_magical_effect_set(int v) { _is_magical_effect = v; }
 void Tp::is_magical_set(int v) { _is_magical = v; }
 void Tp::is_magic_crystal_set(int v) { _is_magic_crystal = v; }
 void Tp::is_magic_stone_set(int v) { _is_magic_stone = v; }
-void Tp::is_mantisman_set(int v) { _is_mantisman = v; }
+void Tp::is_mantisfolk_set(int v) { _is_mantisfolk = v; }
 void Tp::is_map_beast_set(int v) { _is_map_beast = v; }
 void Tp::is_map_treasure_set(int v) { _is_map_treasure = v; }
 void Tp::is_meat_set(int v) { _is_meat = v; }
@@ -1914,6 +1914,8 @@ void Tp::temperature_never_changes_set(int v) { _temperature_never_changes = v; 
 void Tp::temperature_sensitive_set(int v) { _temperature_sensitive = v; }
 void Tp::temperature_sensitive_to_sudden_changes_set(int v) { _temperature_sensitive_to_sudden_changes = v; }
 void Tp::text_a_or_an_set(const std::string &v) { _text_a_or_an = v; }
+void Tp::text_pluralize_set(const std::string &v) { _text_pluralize = v; }
+void Tp::text_apostrophize_set(const std::string &v) { _text_apostrophize = v; }
 void Tp::text_debuff_set(const std::string &v) { _text_debuff = v; }
 void Tp::text_description_enchant_set(const std::string &v) { _text_description_enchant = v; }
 void Tp::text_description_long2_set(const std::string &v) { _text_description_long2 = v; }

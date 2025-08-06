@@ -5,7 +5,6 @@
 #include "my_game.hpp"
 #include "my_math.hpp"
 #include "my_monst.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
@@ -133,7 +132,7 @@ bool Thing::throw_at(Thingp what, Thingp target)
       if (is_player()) {
         msg("You throw %s into a portal.", what->text_the().c_str());
       } else {
-        msg("%s throws %s into a portal.", text_The().c_str(), what->text_the().c_str());
+        msg("%s throws %s into a portal.", capitalize_first(text_the()).c_str(), what->text_the().c_str());
       }
     } else {
       //

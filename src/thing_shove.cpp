@@ -5,6 +5,7 @@
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_sprintf.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 
 ThingShoved Thing::try_to_shove(Thingp victim, point delta, ShoveOptions shove_options)
@@ -29,7 +30,7 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, ShoveOptions shove_o
   if (! is_daring() && ! is_fearless()) {
     if (victim->thing_size() - thing_size() > 1) {
       dbg("Too large to shove, don't even try to shove %s", victim->to_short_string().c_str());
-      msg("%s is too large to be shoved!", victim->text_The().c_str());
+      msg("%s is too large to be shoved!", capitalize_first(victim->text_the()).c_str());
       return (THING_SHOVE_NEVER_TRIED);
     }
   }
@@ -100,9 +101,9 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, ShoveOptions shove_o
       //
       if (victim->thing_size() - thing_size() > 1) {
         if (is_player()) {
-          msg("%s is too large to be shoved!", victim->text_The().c_str());
+          msg("%s is too large to be shoved!", capitalize_first(victim->text_the()).c_str());
         } else if (victim->is_player()) {
-          msg("%s fails to shove you!", text_The().c_str());
+          msg("%s fails to shove you!", capitalize_first(text_the()).c_str());
         }
         return (THING_SHOVE_TRIED_AND_FAILED);
       }
@@ -111,9 +112,9 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, ShoveOptions shove_o
     if (! victim->is_brazier() && ! victim->is_barrel() && ! victim->is_block_of_ice()) {
       if (! victim->shove_ok(shove_pos)) {
         if (is_player()) {
-          msg("%s cannot be shoved! Something is in the way.", victim->text_The().c_str());
+          msg("%s cannot be shoved! Something is in the way.", capitalize_first(victim->text_the()).c_str());
         } else if (victim->is_player()) {
-          msg("%s fails to shove you!", text_The().c_str());
+          msg("%s fails to shove you!", capitalize_first(text_the()).c_str());
         }
         return (THING_SHOVE_TRIED_AND_FAILED);
       }
@@ -152,15 +153,15 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, ShoveOptions shove_o
         if (is_player()) {
           if (victim->is_monst()) {
             if (victim->is_able_to_shove()) {
-              msg("%s shoves you back!", victim->text_The().c_str());
+              msg("%s shoves you back!", capitalize_first(victim->text_the()).c_str());
             } else {
-              msg("%s is resolute!", victim->text_The().c_str());
+              msg("%s is resolute!", capitalize_first(victim->text_the()).c_str());
             }
           } else {
-            msg("%s refuses to budge!", victim->text_The().c_str());
+            msg("%s refuses to budge!", capitalize_first(victim->text_the()).c_str());
           }
         } else if (victim->is_player()) {
-          msg("%s fails to shove you!", text_The().c_str());
+          msg("%s fails to shove you!", capitalize_first(text_the()).c_str());
         }
         return THING_SHOVE_TRIED_AND_FAILED;
       }
@@ -204,7 +205,7 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, ShoveOptions shove_o
       }
     } else {
       if (is_player()) {
-        msg("%s cannot be shoved! Something blocks the way.", text_The().c_str());
+        msg("%s cannot be shoved! Something blocks the way.", capitalize_first(text_the()).c_str());
       }
     }
   } else {
@@ -227,66 +228,66 @@ ThingShoved Thing::try_to_shove(Thingp victim, point delta, ShoveOptions shove_o
         if (d20_ge(victim->stat_luck_total(), SAVING_ROLL_HARD)) {
           if (is_player()) {
             msg("%%fg=red$%s tries to shove you into the abyss, but luckily you avoid it!%%fg=reset$",
-                text_The().c_str());
+                capitalize_first(text_the()).c_str());
           }
           return (THING_SHOVE_TRIED_AND_FAILED);
         }
-        msg("%%fg=red$%s shoves you into the abyss!%%fg=reset$", text_The().c_str());
+        msg("%%fg=red$%s shoves you into the abyss!%%fg=reset$", capitalize_first(text_the()).c_str());
       } else if (level->is_lava(shove_pos)) {
         if (d20_ge(victim->stat_luck_total(), SAVING_ROLL_HARD)) {
           if (is_monst()) {
             msg("%%fg=red$%s tries to shove you into the lava, but luckily you avoid it!%%fg=reset$",
-                text_The().c_str());
+                capitalize_first(text_the()).c_str());
           }
           return (THING_SHOVE_TRIED_AND_FAILED);
         }
-        msg("%%fg=red$%s shoves you into the red death!%%fg=reset$", text_The().c_str());
+        msg("%%fg=red$%s shoves you into the red death!%%fg=reset$", capitalize_first(text_the()).c_str());
       } else if (level->is_deep_water(shove_pos)) {
         if (d20_ge(victim->stat_luck_total(), SAVING_ROLL_HARD)) {
           if (is_monst()) {
             msg("%%fg=red$%s tries to shove you into the depths, but luckily you avoid it!%%fg=reset$",
-                text_The().c_str());
+                capitalize_first(text_the()).c_str());
           }
           return (THING_SHOVE_TRIED_AND_FAILED);
         }
-        msg("%%fg=red$%s shoves you into the depths!%%fg=reset$", text_The().c_str());
+        msg("%%fg=red$%s shoves you into the depths!%%fg=reset$", capitalize_first(text_the()).c_str());
       } else if (level->is_water(shove_pos)) {
         if (d20_ge(victim->stat_luck_total(), SAVING_ROLL_HARD)) {
           if (is_monst()) {
             msg("%%fg=red$%s tries to shove you into the puddle, but luckily you avoid it!%%fg=reset$",
-                text_The().c_str());
+                capitalize_first(text_the()).c_str());
           }
           return (THING_SHOVE_TRIED_AND_FAILED);
         }
-        msg("%%fg=red$%s shoves you into the puddle!%%fg=reset$", text_The().c_str());
+        msg("%%fg=red$%s shoves you into the puddle!%%fg=reset$", capitalize_first(text_the()).c_str());
       } else if (level->is_fire(shove_pos)) {
         if (d20_ge(victim->stat_luck_total(), SAVING_ROLL_HARD)) {
           if (is_monst()) {
             msg("%%fg=red$%s tries to shove you into the flames, but luckily you avoid it!%%fg=reset$",
-                text_The().c_str());
+                capitalize_first(text_the()).c_str());
           }
           return (THING_SHOVE_TRIED_AND_FAILED);
         }
-        msg("%%fg=red$%s shoves you into the flames!%%fg=reset$", text_The().c_str());
+        msg("%%fg=red$%s shoves you into the flames!%%fg=reset$", capitalize_first(text_the()).c_str());
       } else if (level->is_spiderweb(shove_pos)) {
         if (d20_ge(victim->stat_luck_total(), SAVING_ROLL_HARD)) {
           if (is_monst()) {
             msg("%%fg=red$%s tries to shove you into the web, but luckily you avoid it!%%fg=reset$",
-                text_The().c_str());
+                capitalize_first(text_the()).c_str());
           }
           return (THING_SHOVE_TRIED_AND_FAILED);
         }
-        msg("%%fg=red$%s shoves you into the sticky web!%%fg=reset$", text_The().c_str());
+        msg("%%fg=red$%s shoves you into the sticky web!%%fg=reset$", capitalize_first(text_the()).c_str());
       } else if (victim->is_dead) {
         if (d20_ge(stat_luck_total(), SAVING_ROLL_HARD)) {
           if (is_monst()) {
-            msg("%s kicks your corpse for fun, but hurts itself!", text_The().c_str());
+            msg("%s kicks your corpse for fun, but hurts itself!", capitalize_first(text_the()).c_str());
           }
         } else {
-          msg("%s kicks your corpse for fun!", text_The().c_str());
+          msg("%s kicks your corpse for fun!", capitalize_first(text_the()).c_str());
         }
       } else {
-        msg("%s shoves you!", text_The().c_str());
+        msg("%s shoves you!", capitalize_first(text_the()).c_str());
       }
     }
 

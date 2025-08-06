@@ -3,7 +3,6 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_monst.hpp"
 #include "my_thing.hpp"
 
 bool Thing::try_to_enchant_items(void)

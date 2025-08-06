@@ -3,7 +3,6 @@
 //
 
 #include "my_game.hpp"
-// REMOVED #include "my_monst.hpp"
 #include "my_thing.hpp"
 
 bool Thing::state_resting(bool &do_something, bool &wait)

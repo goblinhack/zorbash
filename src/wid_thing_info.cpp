@@ -184,7 +184,7 @@ WidPopup *Game::wid_thing_info_create_popup(Thingp t, point tl, point br)
     wid_raise(wid_popup_window->wid_popup_container);
   }
 
-  auto name = t->text_long_and_state_capitalised();
+  auto name = t->text_long_and_state_capitalized();
   wid_popup_window->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$" + name);
   wid_popup_window->log(UI_LOGGING_EMPTY_LINE);
 
@@ -386,7 +386,7 @@ WidPopup *Game::wid_thing_info_create_popup_compact(const std::vector< Thingp > 
   char tmp[ MAXSTR ];
 
   for (auto t : ts) {
-    auto name = t->text_long_and_state_capitalised();
+    auto name = t->text_long_and_state_capitalized();
 
     //
     // -2 is intentional as we add a char in the loop following
@@ -634,7 +634,7 @@ bool Game::wid_thing_info_create_list(std::vector< Thingp > &ts)
         if (t->is_floor() || t->is_corridor()) {
           continue;
         }
-        description += t->text_short_and_state_capitalised(UI_LEFTBAR_WIDTH);
+        description += t->text_short_and_state_capitalized(UI_LEFTBAR_WIDTH);
         description += ".`"; // Why does space not work ?
       }
 
@@ -1015,7 +1015,7 @@ void Game::wid_thing_info_add_dmg_melee(WidPopup *w, Thingp t)
         }
         w->log(tmp);
         snprintf(tmp2, sizeof(tmp2) - 1, "%s",
-                 curr_weapon->text_short_and_state_capitalised(UI_LEFTBAR_WIDTH).c_str());
+                 curr_weapon->text_short_and_state_capitalized(UI_LEFTBAR_WIDTH).c_str());
         snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Weapon %20s", tmp2);
         w->log(tmp);
       }
@@ -1749,12 +1749,12 @@ void Game::wid_thing_info_add_dmg_nat_att(WidPopup *w, Thingp t, int attack_inde
       } else {
         if (min_value == max_value) {
           snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_nat_att_dice_str().c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dmg:%-13s%12s", capitalise(t->dmg_nat_att_type()).c_str(), tmp2);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dmg:%-13s%12s", capitalize(t->dmg_nat_att_type()).c_str(), tmp2);
         } else {
           min_value += t->enchant_count_get();
           max_value += t->enchant_count_get();
           snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_nat_att_dice_str().c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dmg:%-13s%12s", capitalise(t->dmg_nat_att_type()).c_str(), tmp2);
+          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dmg:%-13s%12s", capitalize(t->dmg_nat_att_type()).c_str(), tmp2);
         }
         w->log(tmp);
       }
@@ -1947,7 +1947,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_def_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_def_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -1978,7 +1978,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
             char iter_name[ MAXSHORTSTR ];
             if (iter->stat_def_bonus()) {
               snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_def_total() - 10).c_str());
-              snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+              snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
               snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
               w->log(tmp);
             }
@@ -1995,7 +1995,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_def_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_def_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2011,7 +2011,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_def_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_def_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2027,7 +2027,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_def_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_def_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2043,7 +2043,7 @@ void Game::wid_thing_info_add_stat_def(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_def_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_def_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2112,7 +2112,7 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_att_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2143,7 +2143,7 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
             char iter_name[ MAXSHORTSTR ];
             if (iter->stat_att_bonus()) {
               snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
-              snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+              snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
               snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
               w->log(tmp);
             }
@@ -2160,7 +2160,7 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_att_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2176,7 +2176,7 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_att_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2192,7 +2192,7 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_att_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2208,7 +2208,7 @@ void Game::wid_thing_info_add_stat_att(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_att_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2488,7 +2488,7 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_str_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_str_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2519,7 +2519,7 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
             char iter_name[ MAXSHORTSTR ];
             if (iter->stat_str_bonus()) {
               snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_str_total() - 10).c_str());
-              snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+              snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
               snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
               w->log(tmp);
             }
@@ -2536,7 +2536,7 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_str_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_str_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2552,7 +2552,7 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_str_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_str_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2568,7 +2568,7 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_str_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_str_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2584,7 +2584,7 @@ void Game::wid_thing_info_add_stat_str(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_str_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_str_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2644,7 +2644,7 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_dex_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_dex_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2675,7 +2675,7 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
             char iter_name[ MAXSHORTSTR ];
             if (iter->stat_dex_bonus()) {
               snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_dex_total() - 10).c_str());
-              snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+              snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
               snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
               w->log(tmp);
             }
@@ -2692,7 +2692,7 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_dex_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_dex_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2708,7 +2708,7 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_dex_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_dex_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2724,7 +2724,7 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_dex_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_dex_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2740,7 +2740,7 @@ void Game::wid_thing_info_add_stat_dex(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_dex_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_dex_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2784,7 +2784,7 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_luck_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_luck_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2815,7 +2815,7 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
             char iter_name[ MAXSHORTSTR ];
             if (iter->stat_luck_bonus()) {
               snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_luck_total() - 10).c_str());
-              snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+              snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
               snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
               w->log(tmp);
             }
@@ -2832,7 +2832,7 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_luck_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_luck_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2848,7 +2848,7 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_luck_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_luck_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2864,7 +2864,7 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_luck_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_luck_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2880,7 +2880,7 @@ void Game::wid_thing_info_add_stat_luck(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_luck_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_luck_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2924,7 +2924,7 @@ void Game::wid_thing_info_add_stat_thv(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_thv_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_thv_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2955,7 +2955,7 @@ void Game::wid_thing_info_add_stat_thv(WidPopup *w, Thingp t)
             char iter_name[ MAXSHORTSTR ];
             if (iter->stat_thv_bonus()) {
               snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_thv_total() - 10).c_str());
-              snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+              snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
               snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
               w->log(tmp);
             }
@@ -2972,7 +2972,7 @@ void Game::wid_thing_info_add_stat_thv(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_thv_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_thv_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -2988,7 +2988,7 @@ void Game::wid_thing_info_add_stat_thv(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_thv_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_thv_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -3004,7 +3004,7 @@ void Game::wid_thing_info_add_stat_thv(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_thv_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_thv_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -3020,7 +3020,7 @@ void Game::wid_thing_info_add_stat_thv(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_thv_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_thv_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -3064,7 +3064,7 @@ void Game::wid_thing_info_add_stat_psi(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_psi_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_psi_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -3095,7 +3095,7 @@ void Game::wid_thing_info_add_stat_psi(WidPopup *w, Thingp t)
             char iter_name[ MAXSHORTSTR ];
             if (iter->stat_psi_bonus()) {
               snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_psi_total() - 10).c_str());
-              snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+              snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
               snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
               w->log(tmp);
             }
@@ -3112,7 +3112,7 @@ void Game::wid_thing_info_add_stat_psi(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_psi_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_psi_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -3128,7 +3128,7 @@ void Game::wid_thing_info_add_stat_psi(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_psi_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_psi_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -3144,7 +3144,7 @@ void Game::wid_thing_info_add_stat_psi(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_psi_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_psi_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -3160,7 +3160,7 @@ void Game::wid_thing_info_add_stat_psi(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_psi_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_psi_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -3204,7 +3204,7 @@ void Game::wid_thing_info_add_stat_int(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_int_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_int_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -3235,7 +3235,7 @@ void Game::wid_thing_info_add_stat_int(WidPopup *w, Thingp t)
             char iter_name[ MAXSHORTSTR ];
             if (iter->stat_int_bonus()) {
               snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_int_total() - 10).c_str());
-              snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+              snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
               snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
               w->log(tmp);
             }
@@ -3252,7 +3252,7 @@ void Game::wid_thing_info_add_stat_int(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_int_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_int_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -3268,7 +3268,7 @@ void Game::wid_thing_info_add_stat_int(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_int_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_int_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -3284,7 +3284,7 @@ void Game::wid_thing_info_add_stat_int(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_int_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_int_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -3300,7 +3300,7 @@ void Game::wid_thing_info_add_stat_int(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_int_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_int_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -3344,7 +3344,7 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_con_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -3375,7 +3375,7 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
             char iter_name[ MAXSHORTSTR ];
             if (iter->stat_con_bonus()) {
               snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
-              snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+              snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
               snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
               w->log(tmp);
             }
@@ -3392,7 +3392,7 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_con_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -3408,7 +3408,7 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_con_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -3424,7 +3424,7 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_con_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }
@@ -3440,7 +3440,7 @@ void Game::wid_thing_info_add_stat_con(WidPopup *w, Thingp t)
           char iter_name[ MAXSHORTSTR ];
           if (iter->stat_con_bonus()) {
             snprintf(tmp2, sizeof(tmp2) - 1, "%s", bonus_to_string(iter->stat_con_total() - 10).c_str());
-            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalise(iter->text_short_name()).c_str());
+            snprintf(iter_name, sizeof(iter_name) - 1, "- %s", capitalize(iter->text_short_name()).c_str());
             snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$%-23s%6s", iter_name, tmp2);
             w->log(tmp);
           }

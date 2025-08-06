@@ -4,7 +4,6 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_level.hpp"
 #include "my_monst.hpp"
 #include "my_python.hpp"
 #include "my_sprintf.hpp"
@@ -398,7 +397,7 @@ void Thing::is_stuck_update(void)
         debuff_remove(tp_find("debuff_status_stuck"));
         game->set_request_to_remake_rightbar();
       } else if (is_monst()) {
-        msg("%s is no longer stuck.", text_The().c_str());
+        msg("%s is no longer stuck.", capitalize_first(text_the()).c_str());
       }
       unstuck();
       return;
@@ -442,19 +441,19 @@ void Thing::is_stuck_update(void)
       }
     } else if (is_monst()) {
       if (level->is_spiderweb(curr_at.x, curr_at.y)) {
-        msg("%s is trapped in a web!", text_The().c_str());
+        msg("%s is trapped in a web!", capitalize_first(text_the()).c_str());
       } else if (level->is_spell_of_holding_barrier(curr_at.x, curr_at.y) && ! is_immune_to_spell_of_holding()) {
-        msg("%s is trapped in a magical hold!", text_The().c_str());
+        msg("%s is trapped in a magical hold!", capitalize_first(text_the()).c_str());
       } else if (level->is_block_of_ice(curr_at.x, curr_at.y)) {
-        msg("%s is trapped in ice!", text_The().c_str());
+        msg("%s is trapped in ice!", capitalize_first(text_the()).c_str());
       } else if (level->is_block_of_crystal(curr_at.x, curr_at.y)) {
-        msg("%s is trapped in crystal!", text_The().c_str());
+        msg("%s is trapped in crystal!", capitalize_first(text_the()).c_str());
       } else if (level->is_barrel(curr_at.x, curr_at.y)) {
-        msg("%s is trapped inside a barrel!", text_The().c_str());
+        msg("%s is trapped inside a barrel!", capitalize_first(text_the()).c_str());
       } else if (is_frozen) {
-        msg("%s is frozen stiff!", text_The().c_str());
+        msg("%s is frozen stiff!", capitalize_first(text_the()).c_str());
       } else {
-        msg("%s is stuck!", text_The().c_str());
+        msg("%s is stuck!", capitalize_first(text_the()).c_str());
       }
     }
 

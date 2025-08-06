@@ -106,6 +106,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "potions of telepathy")
+    my.text_apostrophize(self, "potion of telepathy's")
     my.text_description_long2(self, "For beyond read, a few tiles away.")
     my.text_description_long(self, "A bubbling purple that will briefly expand your mind and allow you to see into the great beyond.")
     my.text_description_short(self, "A potion of telepathy.")
@@ -122,7 +124,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="potion_telepathy", text_long_name="potion of telepathy", text_short_name="potion, telepathy")
+    tp_init(name="potion_telepathy",
+            text_long_name="potion of telepathy",
+            text_short_name="potion, telepathy")
 
 
 init()

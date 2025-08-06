@@ -132,6 +132,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "electric eels")
+    my.text_apostrophize(self, "electric eel's")
     my.text_description_long(self, "A delightfully friendly electric eel that just wants to have a bath with you.")
     my.text_description_short(self, "An electric eel.")
     my.text_hits(self, "bites")
@@ -175,7 +177,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="electric_eel", text_long_name="electric eel")
+    tp_init(name="electric_eel",
+            text_long_name="electric eel")
 
 
 init()

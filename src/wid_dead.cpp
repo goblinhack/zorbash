@@ -136,7 +136,7 @@ void Game::wid_dead_select(const char *reason)
     // Center the player name
     //
     {
-      std::string text    = capitalise(level->player->title());
+      std::string text    = capitalize(level->player->title());
       int         pad     = UI_RIGHTBAR_WIDTH - text.size();
       int         lhs_pad = pad / 2;
       int         rhs_pad = pad - lhs_pad;
@@ -164,7 +164,7 @@ void Game::wid_dead_select(const char *reason)
     // Center the death reason
     //
     {
-      auto d = split(capitalise(reason), UI_RIGHTBAR_WIDTH);
+      auto d = split(capitalize(reason), UI_RIGHTBAR_WIDTH);
 
       for (const auto &text : *d) {
         int pad     = UI_RIGHTBAR_WIDTH - text.size();
@@ -212,7 +212,7 @@ void Game::wid_dead_select(const char *reason)
     wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
     wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
     wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
-    wid_dead_window->log(capitalise(level->player->title()));
+    wid_dead_window->log(capitalize(level->player->title()));
     wid_dead_window->log(UI_LOGGING_EMPTY_LINE);
     if (game->robot_mode) {
       wid_dead_window->log("Deactivated...");

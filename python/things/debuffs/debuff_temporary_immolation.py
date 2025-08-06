@@ -48,7 +48,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="debuff_temporary_immolation", text_long_name="immolation", text_short_name="immolation")
+    tp_init(name="debuff_temporary_immolation",
+            text_long_name="immolation",
+            text_short_name="immolation")
 
 
 init()

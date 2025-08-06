@@ -384,18 +384,18 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
               t->add_random_enchants();
             }
           }
-          dbg("INF: Placed weapon '%s'", t->text_short_capitalised().c_str());
+          dbg("INF: Placed weapon '%s'", t->text_short_capitalized().c_str());
         } else if (t->is_treasure_type()) {
           if (r && r->is_secret) {
             if (d10000() < t->chance_d10000_enchanted() * 2) {
               t->add_random_enchants();
             }
           }
-          dbg("INF: Placed treasure '%s'", t->text_short_capitalised().c_str());
+          dbg("INF: Placed treasure '%s'", t->text_short_capitalized().c_str());
         } else if (t->is_bag()) {
-          dbg("INF: Placed '%s'", t->text_short_capitalised().c_str());
+          dbg("INF: Placed '%s'", t->text_short_capitalized().c_str());
         } else if (t->is_monst()) {
-          dbg("INF: Placed monster '%s'", t->text_short_capitalised().c_str());
+          dbg("INF: Placed monster '%s'", t->text_short_capitalized().c_str());
         } else {
           //
           // Doors etc... don't log, not as interesting
@@ -606,7 +606,7 @@ void Level::place_random_treasure(Dungeonp d)
         }
       }
 
-      dbg("INF: Placed random item '%s'", t->text_short_capitalised().c_str());
+      dbg("INF: Placed random item '%s'", t->text_short_capitalized().c_str());
 
       if (treasure_max-- < 0) {
         return;
@@ -678,7 +678,7 @@ bool Level::place_random_named(Dungeonp d, const std::string &what)
         }
       }
 
-      dbg("INF: Placed random item '%s'", t->text_short_capitalised().c_str());
+      dbg("INF: Placed random item '%s'", t->text_short_capitalized().c_str());
 
       return true;
     }

@@ -69,6 +69,8 @@ def tp_init(name, text_long_name):
     my.on_death_do(self, "me.on_death()")
     my.on_idle_tick_freq_dice(self, "1d10+10:me.on_idle_tick_freq_dice()")
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "coffin mobs")
+    my.text_apostrophize(self, "coffin mob's")
     my.text_description_long(self, "A dark gateway for the creatures of the night. Also cheap boarding rates.")
     my.text_description_short(self, "A cursed coffin, spawning all manner of surprises.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -103,7 +105,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="coffin_mob", text_long_name="coffin")
+    tp_init(name="coffin_mob",
+            text_long_name="coffin")
 
 
 init()

@@ -42,6 +42,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "10+1d35")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "fish")
+    my.text_apostrophize(self, "fish's")
     my.text_description_long(self, "A misplaced fish.")
     my.text_description_short(self, "Lost fish.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -55,7 +57,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="fish", text_long_name="fish", text_short_name="fish")
+    tp_init(name="fish",
+            text_long_name="fish",
+            text_short_name="fish")
 
 
 init()

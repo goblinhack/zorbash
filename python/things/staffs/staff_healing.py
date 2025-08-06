@@ -171,6 +171,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.range_max(self, 7)
     my.temperature(self, 30)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "staffs of healing")
+    my.text_apostrophize(self, "staff of healing's")
     my.text_description_enchant(self, "+1 radius")
     my.text_description_long(self, "Restores you, a friend, or an enemy with forty percent additional health, with 10 percent extra per enchant.")
     my.text_description_short(self, "A staff of healing.")
@@ -202,7 +204,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_healing", text_long_name="staff of healing", text_short_name="staff, healing")
+    tp_init(name="staff_healing",
+            text_long_name="staff of healing",
+            text_short_name="staff, healing")
 
 
 init()

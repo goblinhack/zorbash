@@ -73,6 +73,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_hit_and_now_dead_do(self, "me.on_hit_and_now_dead()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "skillstones")
+    my.text_apostrophize(self, "skillstone's")
     my.text_description_long(self, "Use this magical stone to learn some new skills into your brain matter thing.")
     my.text_description_short(self, "A glowing skillstone.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -88,7 +90,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="skillstone", text_long_name="skillstone", text_short_name="skillstone")
+    tp_init(name="skillstone",
+            text_long_name="skillstone",
+            text_short_name="skillstone")
 
 
 init()

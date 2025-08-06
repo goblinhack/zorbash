@@ -3,8 +3,6 @@
 //
 
 #include "my_level.hpp"
-// REMOVED #include "my_monst.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
 #include "my_thing.hpp"
 
 void Thing::visible(const std::string &reason)

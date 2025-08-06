@@ -93,6 +93,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.stamina_drain_on_attacking(self, 3)
     my.stat_att_bonus(self, 1)  # means +1 per enchant
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "double shovels")
+    my.text_apostrophize(self, "double shovel's")
     my.text_description_enchant(self, "+1 DMG, +1 ATT")
     my.text_description_long(self, "A truly dreadful weapon of last resort. The masterwork double bladed shovel. Ideal for allotment use and casual bludgeoning.")
     my.text_description_short(self, "Thy diggy means of justice.")
@@ -109,7 +111,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="double_shovel", text_long_name="double shovel", text_short_name="double shovel")
+    tp_init(name="double_shovel",
+            text_long_name="double shovel",
+            text_short_name="double shovel")
 
 
 init()

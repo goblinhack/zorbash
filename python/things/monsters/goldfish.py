@@ -125,6 +125,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "goldfish")
+    my.text_apostrophize(self, "goldfishes")
     my.text_description_long(self, "A tiny little goldfish.")
     my.text_description_short(self, "A goldfish.")
     my.text_hits(self, "nibbles")
@@ -189,7 +191,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="goldfish", text_long_name="goldfish")
+    tp_init(name="goldfish",
+            text_long_name="goldfish")
 
 
 init()

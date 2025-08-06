@@ -63,6 +63,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_con_bonus(self, -1)
     my.stat_def_bonus(self, 1)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "shield rings")
+    my.text_apostrophize(self, "shield ring's")
     my.text_description_enchant(self, "+1 DEF")
     my.text_description_long(self, "This magical ring is designed to create a protective shield from missiles or missile like objects. It will not help if someone throws a wardrobe at you. Damage will be reduced by 50 percent for such attacks whilst this ring is worn. It also provides modest defence from melee attacks.")
     my.text_description_short(self, "Shield ring.")
@@ -79,7 +81,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="ring_shield", text_long_name="shield ring", text_short_name="ring, shield")
+    tp_init(name="ring_shield",
+            text_long_name="shield ring",
+            text_short_name="ring, shield")
 
 
 init()

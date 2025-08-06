@@ -135,6 +135,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "meatfairies")
+    my.text_apostrophize(self, "meatfairy's")
     my.text_description_long2(self, "With no morning dew to feed on, meat fairies developed a ravenous taste for meat and blood, and by inference, you.")
     my.text_description_long3(self, "They often appear in ravenous bloodlust packs, singing sweet songs to lure the unwary.")
     my.text_description_long(self, "Meat fairies are the cannibalistic variant of their surface dwelling and peace loving kin.")
@@ -164,7 +166,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="meatfairy", text_long_name="meatfairy")
+    tp_init(name="meatfairy",
+            text_long_name="meatfairy")
 
 
 init()

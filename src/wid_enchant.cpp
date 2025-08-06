@@ -2,10 +2,10 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_english.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_sdl_proto.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_ui.hpp"
 #include "my_wid_actionbar.hpp"

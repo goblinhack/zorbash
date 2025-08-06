@@ -147,6 +147,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "sheep")
+    my.text_apostrophize(self, "sheep's")
     my.text_description_long(self, "Dungeon sheep subsist on the meagre amounts of moss and vegetation that the dungeon provides. They are generally tame and like to nudge. Watch you don't get nudged into a chasm.")
     my.text_description_short(self, "A hungry dungeon sheep.")
     my.text_hits(self, "butts")
@@ -222,7 +224,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="sheep", text_long_name="sheep")
+    tp_init(name="sheep",
+            text_long_name="sheep")
 
 
 init()

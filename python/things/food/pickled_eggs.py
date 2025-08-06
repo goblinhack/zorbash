@@ -51,6 +51,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_thrown_do(self, "me.on_thrown()")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "pickled eggs")
+    my.text_apostrophize(self, "pickled egg's")
     my.text_description_long(self, "Pickled eggs. What kind of eggs? Don't ask.")
     my.text_description_short(self, "Pickled eggs.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)

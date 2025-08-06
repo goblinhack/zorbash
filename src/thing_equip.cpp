@@ -5,12 +5,10 @@
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_thing_attack_options.hpp"
-// REMOVED #include <algorithm>
 
 void Thing::auto_equip(void)
 {
@@ -695,7 +693,7 @@ bool Thing::unequip(const char *why, int equip, bool allowed_to_recarry)
         //
         // Don't log this here as we have more info in attack()
         //
-        // msg("%s is broken.", item->text_The().c_str());
+        // msg("%s is broken.", item->capitalize_first(text_the()).c_str());
       } else if (item->is_ring()) {
         msg("You slip off %s.", item->text_the().c_str());
         game->tick_begin("Took off something");
@@ -847,7 +845,7 @@ bool Thing::equip(Thingp item, int equip)
   } else if (is_monst() && is_visible_to_player) {
     if (level->player && (level->tick_created < game->tick_current)) {
       if (get(level->player->aip()->can_see_currently.can_see, curr_at.x, curr_at.y)) {
-        msg("%s wields %s.", text_The().c_str(), item->text_the().c_str());
+        msg("%s wields %s.", capitalize_first(text_the()).c_str(), item->text_the().c_str());
       } else if (item->is_weapon()) {
         msg("You hear the whoosh of a weapon being wielded.");
       } else if (item->is_ring()) {

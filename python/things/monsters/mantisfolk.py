@@ -106,7 +106,7 @@ def tp_init(name, text_long_name):
     my.is_interesting(self, True)
     my.is_living(self, True)
     my.is_loggable(self, True)
-    my.is_mantisman(self, True)
+    my.is_mantisfolk(self, True)
     my.is_meat(self, True)
     my.is_molekin(self, True)
     my.is_monst_class_B(self, True)
@@ -154,9 +154,11 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
-    my.text_description_long2(self, "Beware the fearsome mandible bite of the mantisman.")
-    my.text_description_long(self, "Half man, half mantis, the unsurprisingly called, mantisman are often shunned by society due to their abysmal table manners. They lurk the halls of dungeons, messily consuming whatever they find there.")
-    my.text_description_short(self, "Mantisman")
+    my.text_pluralize(self, "mantisfolks")
+    my.text_apostrophize(self, "mantisfolk's")
+    my.text_description_long2(self, "Beware the fearsome mandible bite of the mantisfolk.")
+    my.text_description_long(self, "Half man, half mantis, the unsurprisingly called, mantisfolk are often shunned by society due to their abysmal table manners. They lurk the halls of dungeons, messily consuming whatever they find there.")
+    my.text_description_short(self, "mantisfolk")
     my.text_hits(self, "claws")
     my.thing_size(self, my.THING_SIZE_NORMAL)
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -167,26 +169,27 @@ def tp_init(name, text_long_name):
     delay = 150
     my.tile(self,
             ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="green",
-            tile="mantisman.1", delay_ms=delay)
+            tile="mantisfolk.1", delay_ms=delay)
     my.tile(self,
             ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="green",
-            tile="mantisman.2", delay_ms=delay)
+            tile="mantisfolk.2", delay_ms=delay)
     my.tile(self,
             ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="green",
-            tile="mantisman.3", delay_ms=delay)
+            tile="mantisfolk.3", delay_ms=delay)
     my.tile(self,
             ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="green",
-            tile="mantisman.4", delay_ms=delay)
+            tile="mantisfolk.4", delay_ms=delay)
     delay = 150
     my.tile(self,
             ascii_fg_char="m", ascii_bg_col_name="", ascii_fg_col_name="gray30",
-            tile="mantisman.dead", is_dead=True, delay_ms=delay)
+            tile="mantisfolk.dead", is_dead=True, delay_ms=delay)
 
     my.tp_update(self)
 
 
 def init():
-    tp_init(name="mantisman", text_long_name="mantisman")
+    tp_init(name="mantisfolk",
+            text_long_name="mantisfolk")
 
 
 init()

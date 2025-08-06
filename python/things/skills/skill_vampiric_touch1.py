@@ -98,7 +98,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="skill_vampiric_touch1", text_long_name="vampiric touch 1", text_short_name="vampiric touch 1")
+    tp_init(name="skill_vampiric_touch1",
+            text_long_name="vampiric touch 1",
+            text_short_name="vampiric touch 1")
 
 
 init()

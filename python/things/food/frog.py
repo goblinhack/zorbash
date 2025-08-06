@@ -58,6 +58,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "chocolate frogs")
+    my.text_apostrophize(self, "chocolate frog's")
     my.text_description_long(self, "The food of the Gods. May seem out of place in a dungeon and you'd be correct. It is rumored a helpful god left them here for brave adventurers to assist them on their path. Often found in a purple wrapper. Almost looks too good to eat.")
     my.text_description_short(self, "The food of the Gods: a chocolate frog.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -71,7 +73,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="frog", text_long_name="chocolate frog", text_short_name="choc frog")
+    tp_init(name="frog",
+            text_long_name="chocolate frog",
+            text_short_name="choc frog")
 
 
 init()

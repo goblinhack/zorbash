@@ -5,6 +5,7 @@
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 
 bool Thing::resurrect(void)
@@ -51,7 +52,7 @@ bool Thing::resurrect(void)
     // Must do this after turning off the dead flag, or the monster can appear as "extra dead".
     //
     dbg("Is being resurrected");
-    msg("%%fg=orange$%s rises from the grave!%%fg=reset$", text_The().c_str());
+    msg("%%fg=orange$%s rises from the grave!%%fg=reset$", capitalize_first(text_the()).c_str());
     return true;
   }
 

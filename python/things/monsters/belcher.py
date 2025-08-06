@@ -112,6 +112,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "dungeon belchers")
+    my.text_apostrophize(self, "dungeon belcher's")
     my.text_description_long(self, "Dungeon belchers are carnivorous plants that have evolved creative means of catching their prey. Beware their stench...")
     my.text_description_short(self, "A gaseous belcher. But don't call it that to its face.")
     my.text_hits(self, "burns")
@@ -155,7 +157,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="belcher", text_long_name="dungeon belcher", text_short_name="belcher")
+    tp_init(name="belcher",
+            text_long_name="dungeon belcher",
+            text_short_name="belcher")
 
 
 init()

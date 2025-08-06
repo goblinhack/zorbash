@@ -39,6 +39,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "10+1d20")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "tomatoes")
+    my.text_apostrophize(self, "tomato's")
     my.text_description_long(self, "A tomato big enough to live in.")
     my.text_description_short(self, "Tomato.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -52,7 +54,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="tomato", text_long_name="tomato", text_short_name="tomato")
+    tp_init(name="tomato",
+            text_long_name="tomato",
+            text_short_name="tomato")
 
 
 init()

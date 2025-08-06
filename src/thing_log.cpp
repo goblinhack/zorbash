@@ -6,7 +6,6 @@
 #include "my_console.hpp"
 #include "my_globals_extra.hpp"
 #include "my_log.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_wid_botcon.hpp"

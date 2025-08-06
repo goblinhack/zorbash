@@ -101,6 +101,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "potions of invisibility")
+    my.text_apostrophize(self, "potion of invisibility's")
     my.text_description_long(self, "For a limited time only thwart your enemies by being invisible.")
     my.text_description_short(self, "A potion of invisibility.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -116,7 +118,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="potion_invisibility", text_long_name="potion of invisibility", text_short_name="potion, invisible")
+    tp_init(name="potion_invisibility",
+            text_long_name="potion of invisibility",
+            text_short_name="potion, invisible")
 
 
 init()

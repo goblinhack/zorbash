@@ -98,6 +98,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature(self, 200)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "orbs of fire")
+    my.text_apostrophize(self, "orb of fire's")
     my.text_description_long2(self, "Note that sentry orbs are fragile and prone to explosive outbursts...")
     my.text_description_long(self, "Sentry orbs patrol the dungeon, raining down punishment on whomever should not be there. Essentially you... This one fires beams of fire.")
     my.text_description_short(self, "A sentry orb.")
@@ -123,7 +125,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="sentry_orb_fire", text_long_name="orb of fire", text_short_name="sentry orb")
+    tp_init(name="sentry_orb_fire",
+            text_long_name="orb of fire",
+            text_short_name="sentry orb")
 
 
 init()

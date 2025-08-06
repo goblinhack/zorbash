@@ -130,6 +130,8 @@ def tp_init(name, text_long_name):
     my.stat_str(self, 16)
     my.temperature(self, 5)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "mummies")
+    my.text_apostrophize(self, "mummy's")
     my.text_description_long2(self, "Death is no release for this poor creature. Watch out for its necrotic touch!")
     my.text_description_long(self, "Possibly the corpse of one who ventured into this dungeon before. All life is gone now, and what remains is a corpse wrapped in rags.")
     my.text_description_short(self, "A staggering corpse, covered in tissue paper.")
@@ -188,7 +190,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="mummy", text_long_name="mummy")
+    tp_init(name="mummy",
+            text_long_name="mummy")
 
 
 init()

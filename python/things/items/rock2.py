@@ -63,6 +63,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_thrown_do(self, "me.on_thrown()")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "heavy rocks")
+    my.text_apostrophize(self, "heavy rock's")
     my.text_description_enchant(self, "+1 DMG")
     my.text_description_long(self, "An elegant weapon for a more civilized age, this professional level rock, is a cut above the average rock, in terms of impact.")
     my.text_description_short(self, "A menacing rock.")
@@ -79,7 +81,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="rock2", text_long_name="heavy rock", text_short_name="heavy rock")
+    tp_init(name="rock2",
+            text_long_name="heavy rock",
+            text_short_name="heavy rock")
 
 
 init()

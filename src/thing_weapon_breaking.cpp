@@ -2,10 +2,8 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_english.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
-
-// REMOVED #include <math.h>
 
 //
 // See if the weapon crumbles
@@ -214,18 +212,21 @@ void Thing::weapon_check_for_dmg(Thingp weapon, Thingp victim)
       if (damaged) {
         if (weapon->is_wooden()) {
           my_owner->msg("%%fg=orange$%s %s is splintering on %s.%%fg=reset$",
-                        apostrophise(my_owner->text_The()).c_str(), weapon->text_long_name().c_str(),
+                        capitalize(my_owner->text_the(TEXT_APOSTROPHIZE)).c_str(), weapon->text_long_name().c_str(),
                         victim->text_the().c_str());
         } else {
-          my_owner->msg("%%fg=orange$%s %s is buckling on %s.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
-                        weapon->text_long_name().c_str(), victim->text_the().c_str());
+          my_owner->msg("%%fg=orange$%s %s is buckling on %s.%%fg=reset$",
+                        capitalize(my_owner->text_the(TEXT_APOSTROPHIZE)).c_str(), weapon->text_long_name().c_str(),
+                        victim->text_the().c_str());
         }
       } else if (corrode) {
-        my_owner->msg("%%fg=orange$%s %s is corroding on %s.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
-                      weapon->text_long_name().c_str(), victim->text_the().c_str());
+        my_owner->msg("%%fg=orange$%s %s is corroding on %s.%%fg=reset$",
+                      capitalize(my_owner->text_the(TEXT_APOSTROPHIZE)).c_str(), weapon->text_long_name().c_str(),
+                      victim->text_the().c_str());
       } else {
-        my_owner->msg("%%fg=orange$%s %s is damaged by %s.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
-                      weapon->text_long_name().c_str(), victim->text_the().c_str());
+        my_owner->msg("%%fg=orange$%s %s is damaged by %s.%%fg=reset$",
+                      capitalize(my_owner->text_the(TEXT_APOSTROPHIZE)).c_str(), weapon->text_long_name().c_str(),
+                      victim->text_the().c_str());
       }
     }
     return;
@@ -250,18 +251,18 @@ void Thing::weapon_check_for_dmg(Thingp weapon, Thingp victim)
   } else {
     if (damaged) {
       if (weapon->is_wooden()) {
-        my_owner->msg("%%fg=orange$%s %s shatters.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
-                      weapon->text_long_name().c_str());
+        my_owner->msg("%%fg=orange$%s %s shatters.%%fg=reset$",
+                      capitalize(my_owner->text_the(TEXT_APOSTROPHIZE)).c_str(), weapon->text_long_name().c_str());
       } else {
-        my_owner->msg("%%fg=orange$%s %s is buckled.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
-                      weapon->text_long_name().c_str());
+        my_owner->msg("%%fg=orange$%s %s is buckled.%%fg=reset$",
+                      capitalize(my_owner->text_the(TEXT_APOSTROPHIZE)).c_str(), weapon->text_long_name().c_str());
       }
     } else if (corrode) {
-      my_owner->msg("%%fg=orange$%s %s is corroded.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
-                    weapon->text_long_name().c_str());
+      my_owner->msg("%%fg=orange$%s %s is corroded.%%fg=reset$",
+                    capitalize(my_owner->text_the(TEXT_APOSTROPHIZE)).c_str(), weapon->text_long_name().c_str());
     } else {
-      my_owner->msg("%%fg=orange$%s %s is destroyed.%%fg=reset$", apostrophise(my_owner->text_The()).c_str(),
-                    weapon->text_long_name().c_str());
+      my_owner->msg("%%fg=orange$%s %s is destroyed.%%fg=reset$",
+                    capitalize(my_owner->text_the(TEXT_APOSTROPHIZE)).c_str(), weapon->text_long_name().c_str());
     }
   }
   weapon->dead("broken");

@@ -37,7 +37,8 @@ def chasm_init(name, text_long_name, tiles=[]):
 
 
 def init():
-    chasm_init(name="chasm1", text_long_name="yawning chasm", tiles=[])
+    chasm_init(name="chasm1",
+            text_long_name="yawning chasm", tiles=[])
 
 
 init()

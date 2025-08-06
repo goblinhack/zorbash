@@ -68,6 +68,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_dex_bonus(self, -2)
     my.stat_str_bonus(self, 1)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "eagle shields")
+    my.text_apostrophize(self, "eagle shield's")
     my.text_description_enchant(self, "+1 DEF")
     my.text_description_long(self, "Fight and glide like the eagle with this dazzling lightweight shield.")
     my.text_description_short(self, "Eagle shield.")
@@ -84,7 +86,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="shield_eagle", text_long_name="eagle shield", text_short_name="shield, eagle")
+    tp_init(name="shield_eagle",
+            text_long_name="eagle shield",
+            text_short_name="shield, eagle")
 
 
 init()

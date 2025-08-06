@@ -114,6 +114,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.range_max(self, 7)
     my.temperature(self, 20)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "staffs of beckoning")
+    my.text_apostrophize(self, "staff of beckoning's")
     my.text_description_long(self, "This staff will beckon an unwitting recipient towards you. It would be a shame if there was a chasm in the way...")
     my.text_description_short(self, "A staff of beckoning.")
     my.tick_prio(self, my.MAP_TICK_PRIO_LOW)
@@ -144,7 +146,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_beckoning", text_long_name="staff of beckoning", text_short_name="staff, beckoning")
+    tp_init(name="staff_beckoning",
+            text_long_name="staff of beckoning",
+            text_short_name="staff, beckoning")
 
 
 init()

@@ -41,7 +41,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="spell_of_hasted", text_long_name="hasted", text_short_name="hasted")
+    tp_init(name="spell_of_hasted",
+            text_long_name="hasted",
+            text_short_name="hasted")
 
 
 init()

@@ -43,7 +43,9 @@ shared_vector_string  split(const char *in, int max_line_len);
 shared_vector_string  split(const std::string &, int max_line_len);
 shared_vector_wstring split(const std::wstring &, int max_line_len);
 
-std::string   capitalise(std::string in);
+void          abbreviate(std::string &s);
+std::string   capitalize(std::string in);
+std::string   capitalize_first(std::string in);
 std::string  &ltrim(std::string &s);
 std::string   ltrim_ws(const std::string &s);
 std::string   mybasename(const char *in, const char *who);

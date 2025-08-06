@@ -10,7 +10,6 @@
 #include "my_thing.hpp"
 #include "my_wid_inventory.hpp"
 #include "my_wid_thing_info.hpp"
-// REMOVED #include <algorithm>
 
 void Thing::on_dropped(void)
 {
@@ -211,12 +210,12 @@ bool Thing::drop(Thingp what, Thingp target, DropOptions drop_options)
       }
     } else if (is_bag_item_container()) {
       if (! drop_options.is_being_thrown && ! drop_options.is_able_to_be_equipped && ! drop_options.is_being_stolen) {
-        msg("%s falls out of %s.", what->text_The().c_str(), text_the().c_str());
+        msg("%s falls out of %s.", capitalize_first(what->text_the()).c_str(), text_the().c_str());
         level->sound_sources_incr(curr_at.x, curr_at.y, what->noise_on_dropping());
       }
     } else if (is_monst()) {
       if (! drop_options.is_being_thrown && ! drop_options.is_able_to_be_equipped && ! drop_options.is_being_stolen) {
-        msg("%s drops %s.", text_The().c_str(), what->text_the().c_str());
+        msg("%s drops %s.", capitalize_first(text_the()).c_str(), what->text_the().c_str());
         level->sound_sources_incr(curr_at.x, curr_at.y, what->noise_on_dropping());
       }
     }

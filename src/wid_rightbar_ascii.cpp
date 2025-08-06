@@ -95,7 +95,7 @@ bool wid_rightbar_ascii_create(void)
     point br = make_point(width - 1, y_at);
 
     wid_set_pos(w, tl, br);
-    wid_set_text(w, capitalise(player->title()));
+    wid_set_text(w, capitalize(player->title()));
     wid_set_shape_none(w);
     if (g_opt_test_dungeon) {
       wid_set_shape_none(w);
@@ -834,7 +834,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_pos(w, tl, br);
         wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
         wid_set_text_lhs(w, true);
-        wid_set_text(w, iter->text_short_and_state_capitalised());
+        wid_set_text(w, iter->text_short_and_state_capitalized());
         wid_set_on_mouse_over_begin(w, wid_rightbar_inventory_over_begin);
         wid_set_on_mouse_over_end(w, wid_rightbar_inventory_over_end);
         wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -894,7 +894,7 @@ bool wid_rightbar_ascii_create(void)
         wid_set_int_context(w, slot);
         wid_set_text_lhs(w, true);
 
-        wid_set_text(w, std::to_string((slot + 1) % 10) + " " + t->text_short_and_state_capitalised());
+        wid_set_text(w, std::to_string((slot + 1) % 10) + " " + t->text_short_and_state_capitalized());
         wid_set_on_mouse_over_begin(w, wid_rightbar_inventory_over_begin);
         wid_set_on_mouse_over_end(w, wid_rightbar_inventory_over_end);
         wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -954,7 +954,7 @@ bool wid_rightbar_ascii_create(void)
               wid_set_on_mouse_over_end(w, wid_skill_mouse_over_end);
               wid_set_on_mouse_up(w, wid_skill_item_mouse_up);
               wid_set_text_lhs(w, true);
-              wid_set_text(w, skill->text_short_and_state_capitalised());
+              wid_set_text(w, skill->text_short_and_state_capitalized());
               if (g_opt_test_dungeon) {
                 wid_set_shape_none(w);
               }
@@ -1014,7 +1014,7 @@ bool wid_rightbar_ascii_create(void)
               wid_set_on_mouse_over_end(w, wid_skill_mouse_over_end);
               wid_set_on_mouse_up(w, wid_skill_item_mouse_up);
               wid_set_text_lhs(w, true);
-              wid_set_text(w, skill->text_short_and_state_capitalised());
+              wid_set_text(w, skill->text_short_and_state_capitalized());
               if (g_opt_test_dungeon) {
                 wid_set_shape_none(w);
               }
@@ -1074,7 +1074,7 @@ bool wid_rightbar_ascii_create(void)
               wid_set_on_mouse_over_end(w, wid_spell_mouse_over_end);
               wid_set_on_mouse_up(w, wid_spell_item_mouse_up);
               wid_set_text_lhs(w, true);
-              wid_set_text(w, spell->text_short_and_state_capitalised());
+              wid_set_text(w, spell->text_short_and_state_capitalized());
               if (g_opt_test_dungeon) {
                 wid_set_shape_none(w);
               }
@@ -1134,7 +1134,7 @@ bool wid_rightbar_ascii_create(void)
               wid_set_on_mouse_over_end(w, wid_spell_mouse_over_end);
               wid_set_on_mouse_up(w, wid_spell_item_mouse_up);
               wid_set_text_lhs(w, true);
-              wid_set_text(w, spell->text_short_and_state_capitalised());
+              wid_set_text(w, spell->text_short_and_state_capitalized());
               if (g_opt_test_dungeon) {
                 wid_set_shape_none(w);
               }
@@ -1191,7 +1191,7 @@ bool wid_rightbar_ascii_create(void)
             wid_set_mode(w, WID_MODE_NORMAL);
             wid_set_color(w, WID_COLOR_TEXT_FG, GREEN);
             wid_set_text_lhs(w, true);
-            wid_set_text(w, iter->text_short_and_state_capitalised());
+            wid_set_text(w, iter->text_short_and_state_capitalized());
             wid_set_on_mouse_over_begin(w, wid_buffbox_mouse_over_begin);
             wid_set_on_mouse_over_end(w, wid_buffbox_mouse_over_end);
             wid_set_int_context(w, idx++);
@@ -1250,7 +1250,7 @@ bool wid_rightbar_ascii_create(void)
             wid_set_mode(w, WID_MODE_NORMAL);
             wid_set_color(w, WID_COLOR_TEXT_FG, ORANGE);
             wid_set_text_lhs(w, true);
-            wid_set_text(w, iter->text_short_and_state_capitalised());
+            wid_set_text(w, iter->text_short_and_state_capitalized());
             wid_set_on_mouse_over_begin(w, wid_debuffbox_mouse_over_begin);
             wid_set_on_mouse_over_end(w, wid_debuffbox_mouse_over_end);
             wid_set_int_context(w, idx++);

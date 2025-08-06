@@ -101,7 +101,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="ascend_dungeon", text_long_name="dungeon entrance", text_short_name="entrance")
+    tp_init(name="ascend_dungeon",
+            text_long_name="dungeon entrance",
+            text_short_name="entrance")
 
 
 init()

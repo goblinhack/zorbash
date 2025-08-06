@@ -52,6 +52,8 @@ def tp_init(name, text_long_name):
     my.normal_placement_rules(self, True)
     my.on_death_drop_all_items(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "large bags")
+    my.text_apostrophize(self, "large bag's")
     my.text_description_long(self, "A large leathery brown bag.")
     my.text_description_short(self, "A large brown bag.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -66,7 +68,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="bag_large", text_long_name="large bag")
+    tp_init(name="bag_large",
+            text_long_name="large bag")
 
 
 init()

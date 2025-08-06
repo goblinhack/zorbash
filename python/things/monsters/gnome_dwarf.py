@@ -61,7 +61,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="gnome_dwarf", text_long_name="gnorf")
+    tp_init(name="gnome_dwarf",
+            text_long_name="gnorf")
 
 
 init()

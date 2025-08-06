@@ -117,6 +117,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "piranhas")
+    my.text_apostrophize(self, "piranha's")
     my.text_description_long(self, "A delightful pet piranha. It has friends and they want to play.")
     my.text_description_short(self, "Piranha.")
     my.text_hits(self, "bites")
@@ -148,7 +150,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="piranha", text_long_name="piranha")
+    tp_init(name="piranha",
+            text_long_name="piranha")
 
 
 init()

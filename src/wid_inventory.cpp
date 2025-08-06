@@ -954,7 +954,7 @@ void wid_inventory_add_equip(Widp parent, int equip, point tl, point br, const c
     title_br.y = title_tl.y;
 
     wid_set_pos(w, title_tl, title_br);
-    wid_set_text(w, capitalise(equip_name(equip)));
+    wid_set_text(w, capitalize(equip_name(equip)));
     wid_set_text_lhs(w, true);
     switch (equip) {
       case MONST_EQUIP_HELMET : wid_set_color(w, WID_COLOR_TEXT_FG, WHITE); break;

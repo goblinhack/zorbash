@@ -118,10 +118,10 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
     auto  w  = wid_new_square_button(wid_leftbar, "It");
     point tl = make_point(0, y_at);
     point br = make_point(width - 1, y_at);
-    auto  s  = dynprintf("%%fg=gray$%s", t->text_short_capitalised(UI_LEFTBAR_WIDTH).c_str());
+    auto  s  = dynprintf("%%fg=gray$%s", t->text_short_capitalized(UI_LEFTBAR_WIDTH).c_str());
     if (t == game->current_wid_thing_info) {
       myfree(s);
-      s = dynprintf("%%fg=red$%s", t->text_short_capitalised(UI_LEFTBAR_WIDTH).c_str());
+      s = dynprintf("%%fg=red$%s", t->text_short_capitalized(UI_LEFTBAR_WIDTH).c_str());
     }
     wid_set_pos(w, tl, br);
     if (t->immediate_owner()) {

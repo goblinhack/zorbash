@@ -93,6 +93,8 @@ def tp_init(name, text_long_name):
     my.on_fall_do(self, "me.on_fall()")
     my.on_want_to_shoot_at_do(self, "me.on_want_to_shoot_at()")
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "dart turrets")
+    my.text_apostrophize(self, "dart turret's")
     my.text_description_long(self, "A menacing stone turret with a roaming target-like eye atop it. It's either the entrance to a certain brand of shop, or something nasty. Which can it be...?")
     my.text_description_short(self, "A dart turret")
     my.thing_size(self, my.THING_SIZE_LARGE)
@@ -181,7 +183,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="trap_dart", text_long_name="dart turret")
+    tp_init(name="trap_dart",
+            text_long_name="dart turret")
 
 
 init()

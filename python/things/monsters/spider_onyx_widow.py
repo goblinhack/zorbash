@@ -128,6 +128,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "an")
+    my.text_pluralize(self, "onyx widowers")
+    my.text_apostrophize(self, "onyx widow's")
     my.text_description_long2(self, "Onyx widows are roamers and are renowned for being fast moving. And poisonous. I mean the widow thing kind of gives it away...")
     my.text_description_long(self, "A disturbingly large spider with a shiny onyx carapace emblazoned with a red skull. Sounds friendly.")
     my.text_description_short(self, "A large onyx widow spider.")
@@ -160,7 +162,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="spider_onyx_widow", text_long_name="onyx widow")
+    tp_init(name="spider_onyx_widow",
+            text_long_name="onyx widow")
 
 
 init()

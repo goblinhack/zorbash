@@ -40,6 +40,8 @@ def key_init(name, text_long_name):
     my.light_dist(self, 1)
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "an")
+    my.text_pluralize(self, "evil keys")
+    my.text_apostrophize(self, "evil key's")
     my.text_description_long(self, "An evil looking set of keys. Probably still works just fine though. Translates into five keys when carried.")
     my.text_description_short(self, "An evil looking key.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -54,7 +56,8 @@ def key_init(name, text_long_name):
 
 
 def init():
-    key_init(name="key_penta", text_long_name="evil looking key")
+    key_init(name="key_penta",
+            text_long_name="evil looking key")
 
 
 init()

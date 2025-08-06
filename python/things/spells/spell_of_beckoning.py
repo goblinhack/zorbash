@@ -43,7 +43,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="spell_of_beckoning", text_long_name="beckoning", text_short_name="beckoning")
+    tp_init(name="spell_of_beckoning",
+            text_long_name="beckoning",
+            text_short_name="beckoning")
 
 
 init()

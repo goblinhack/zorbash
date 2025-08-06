@@ -160,6 +160,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "gnolls")
+    my.text_apostrophize(self, "gnoll's")
     my.text_description_long2(self, "The gnoll race carry an unknown curse and are hence very unlucky; as if being part hyena was not bad enough already...")
     my.text_description_long3(self, "Gnolls detest dog-people.")
     my.text_description_long4(self, "Gnolls often appear in packs.")
@@ -199,7 +201,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="gnoll", text_long_name="gnoll")
+    tp_init(name="gnoll",
+            text_long_name="gnoll")
 
 
 init()

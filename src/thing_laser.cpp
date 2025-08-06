@@ -4,6 +4,7 @@
 
 #include "my_game.hpp"
 #include "my_math.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_thing_attack_options.hpp"
 
@@ -185,7 +186,7 @@ Thingp Thing::laser_shoot_at(Thingp item_maybe_null, const std::string &effect_n
       msg("Misfire!");
       game->tick_begin("failed to shoot laser");
     } else {
-      msg("%s misfires.", text_The().c_str());
+      msg("%s misfires.", capitalize_first(text_the()).c_str());
     }
     return nullptr;
   }
@@ -220,30 +221,30 @@ Thingp Thing::laser_shoot_at(Thingp item_maybe_null, const std::string &effect_n
     } else if (use_options.radial_effect) {
       if (item_maybe_null) {
         if (use_options.is_reflected) {
-          msg("%s reflects %s.", text_The().c_str(), item_maybe_null->text_the().c_str());
+          msg("%s reflects %s.", capitalize_first(text_the()).c_str(), item_maybe_null->text_the().c_str());
         } else {
-          msg("%s shoots at %s.", text_The().c_str(), item_maybe_null->text_the().c_str());
+          msg("%s shoots at %s.", capitalize_first(text_the()).c_str(), item_maybe_null->text_the().c_str());
         }
       } else {
         if (use_options.is_reflected) {
-          msg("%s reflected beam blasts.", text_The().c_str());
+          msg("%s reflected beam blasts.", capitalize_first(text_the()).c_str());
         } else {
-          msg("%s beam blasts.", text_The().c_str());
+          msg("%s beam blasts.", capitalize_first(text_the()).c_str());
         }
       }
     } else {
       if (item_maybe_null) {
         if (use_options.is_reflected) {
-          msg("%s reflects %s at %s.", text_The().c_str(), item_maybe_null->text_the().c_str(),
+          msg("%s reflects %s at %s.", capitalize_first(text_the()).c_str(), item_maybe_null->text_the().c_str(),
               target->text_the().c_str());
         } else {
-          msg("%s shoots %s at %s.", text_The().c_str(), item_maybe_null->text_the().c_str(),
+          msg("%s shoots %s at %s.", capitalize_first(text_the()).c_str(), item_maybe_null->text_the().c_str(),
               target->text_the().c_str());
         }
       } else if (is_water()) {
-        msg("%s bubbles around %s.", text_The().c_str(), target->text_the().c_str());
+        msg("%s bubbles around %s.", capitalize_first(text_the()).c_str(), target->text_the().c_str());
       } else {
-        msg("%s shoots at %s.", text_The().c_str(), target->text_the().c_str());
+        msg("%s shoots at %s.", capitalize_first(text_the()).c_str(), target->text_the().c_str());
       }
     }
 
@@ -313,34 +314,34 @@ Thingp Thing::laser_shoot_at(Thingp item_maybe_null, const std::string &effect_n
           TRACE_NO_INDENT();
           if (item_maybe_null) {
             if (use_options.is_reflected) {
-              msg("%s reflects %s.", text_The().c_str(), item_maybe_null->text_the().c_str());
+              msg("%s reflects %s.", capitalize_first(text_the()).c_str(), item_maybe_null->text_the().c_str());
             } else {
-              msg("%s shoots at %s.", text_The().c_str(), item_maybe_null->text_the().c_str());
+              msg("%s shoots at %s.", capitalize_first(text_the()).c_str(), item_maybe_null->text_the().c_str());
             }
           } else {
             if (use_options.is_reflected) {
-              msg("%s reflected beam blasts.", text_The().c_str());
+              msg("%s reflected beam blasts.", capitalize_first(text_the()).c_str());
             } else {
-              msg("%s beam blasts.", text_The().c_str());
+              msg("%s beam blasts.", capitalize_first(text_the()).c_str());
             }
           }
         } else {
           TRACE_NO_INDENT();
           if (item_maybe_null) {
             if (use_options.is_reflected) {
-              msg("%s reflects %s at %s.", text_The().c_str(), item_maybe_null->text_the().c_str(),
+              msg("%s reflects %s at %s.", capitalize_first(text_the()).c_str(), item_maybe_null->text_the().c_str(),
                   other_target->text_the().c_str());
             } else {
-              msg("%s shoots %s at %s.", text_The().c_str(), item_maybe_null->text_the().c_str(),
+              msg("%s shoots %s at %s.", capitalize_first(text_the()).c_str(), item_maybe_null->text_the().c_str(),
                   other_target->text_the().c_str());
             }
           } else if (is_water()) {
-            msg("%s bubbles around %s.", text_The().c_str(), other_target->text_the().c_str());
+            msg("%s bubbles around %s.", capitalize_first(text_the()).c_str(), other_target->text_the().c_str());
           } else {
             if (use_options.is_reflected) {
-              msg("%s shoots at %s.", text_The().c_str(), other_target->text_the().c_str());
+              msg("%s shoots at %s.", capitalize_first(text_the()).c_str(), other_target->text_the().c_str());
             } else {
-              msg("%s reflects %s.", text_The().c_str(), other_target->text_the().c_str());
+              msg("%s reflects %s.", capitalize_first(text_the()).c_str(), other_target->text_the().c_str());
             }
           }
         }
@@ -488,15 +489,15 @@ Thingp Thing::laser_shoot_at(Thingp item_maybe_null, const std::string &effect_n
         TRACE_NO_INDENT();
         if (item_maybe_null) {
           if (use_options.is_reflected) {
-            msg("%s reflects %s.", text_The().c_str(), item_maybe_null->text_the().c_str());
+            msg("%s reflects %s.", capitalize_first(text_the()).c_str(), item_maybe_null->text_the().c_str());
           } else {
-            msg("%s shoots at %s.", text_The().c_str(), item_maybe_null->text_the().c_str());
+            msg("%s shoots at %s.", capitalize_first(text_the()).c_str(), item_maybe_null->text_the().c_str());
           }
         } else {
           if (use_options.is_reflected) {
-            msg("%s reflected beam blasts.", text_The().c_str());
+            msg("%s reflected beam blasts.", capitalize_first(text_the()).c_str());
           } else {
-            msg("%s beam blasts.", text_The().c_str());
+            msg("%s beam blasts.", capitalize_first(text_the()).c_str());
           }
         }
       } else {
@@ -504,21 +505,21 @@ Thingp Thing::laser_shoot_at(Thingp item_maybe_null, const std::string &effect_n
         if (item_maybe_null) {
           TRACE_NO_INDENT();
           if (use_options.is_reflected) {
-            msg("%s reflects %s at %s.", text_The().c_str(), item_maybe_null->text_the().c_str(),
+            msg("%s reflects %s at %s.", capitalize_first(text_the()).c_str(), item_maybe_null->text_the().c_str(),
                 target->text_the().c_str());
           } else {
-            msg("%s shoots at %s %s.", text_The().c_str(), item_maybe_null->text_the().c_str(),
+            msg("%s shoots at %s %s.", capitalize_first(text_the()).c_str(), item_maybe_null->text_the().c_str(),
                 target->text_the().c_str());
           }
         } else if (is_water()) {
           TRACE_NO_INDENT();
-          msg("%s bubbles around %s.", text_The().c_str(), target->text_the().c_str());
+          msg("%s bubbles around %s.", capitalize_first(text_the()).c_str(), target->text_the().c_str());
         } else {
           TRACE_NO_INDENT();
           if (use_options.is_reflected) {
-            msg("%s reflects %s.", text_The().c_str(), target->text_the().c_str());
+            msg("%s reflects %s.", capitalize_first(text_the()).c_str(), target->text_the().c_str());
           } else {
-            msg("%s shoots at %s.", text_The().c_str(), target->text_the().c_str());
+            msg("%s shoots at %s.", capitalize_first(text_the()).c_str(), target->text_the().c_str());
           }
         }
       }

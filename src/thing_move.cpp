@@ -5,7 +5,6 @@
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_sdl_proto.hpp"
 #include "my_sound.hpp"
@@ -632,7 +631,7 @@ bool Thing::move(point future_pos, uint8_t up, uint8_t down, uint8_t left, uint8
         // Too noisy?
         //
         if (is_player()) {
-          std::string s = t->text_The() + " free attacks as you move";
+          std::string s = capitalize_first(t->text_the()) + " free attacks as you move";
           msg("%s.", s.c_str());
         }
       }

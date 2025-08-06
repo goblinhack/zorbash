@@ -57,7 +57,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="skill_primal_rage5", text_long_name="tireless rage 2", text_short_name="tireless rage 2")
+    tp_init(name="skill_primal_rage5",
+            text_long_name="tireless rage 2",
+            text_short_name="tireless rage 2")
 
 
 init()

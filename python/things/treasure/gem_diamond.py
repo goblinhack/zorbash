@@ -35,6 +35,8 @@ def tp_init(name, text_long_name):
     my.normal_placement_rules(self, True)
     my.rarity(self, my.RARITY_UNCOMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "diamonds")
+    my.text_apostrophize(self, "diamond's")
     my.text_description_long(self, "A glistening diamond. Like a spark of white fire in the darkness. Is there anything more precious. Probably. Grab it quick anyway.")
     my.text_description_short(self, "Just a lonely diamond.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -83,7 +85,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="gem_diamond", text_long_name="diamond")
+    tp_init(name="gem_diamond",
+            text_long_name="diamond")
 
 
 init()

@@ -773,8 +773,8 @@ void Game::place_player(void)
         level->thing_new("tentacleye", point(x + 1, y + 1));
         level->thing_new("scorpion_death", point(x + 2, y + 1));
         level->thing_new("yeti", point(x + 2, y + 1));
-        level->thing_new("mantisman", point(x + 2, y + 1));
-        level->thing_new("iceman", point(x + 2, y + 1));
+        level->thing_new("mantisfolk", point(x + 2, y + 1));
+        level->thing_new("icefolk", point(x + 2, y + 1));
         level->thing_new("molekin", point(x + 2, y + 1));
         level->thing_new("gnome_rock", point(x + 2, y + 1));
         level->thing_new("bloodbug", point(x + 2, y + 1));

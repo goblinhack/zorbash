@@ -4,6 +4,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 
 bool Thing::open_door(Thingp door)
@@ -166,7 +167,7 @@ bool Thing::close_door(Thingp door)
     }
 
     if (t->thing_size() > thing_size()) {
-      msg("%s blocks the door from closing.", t->text_The().c_str());
+      msg("%s blocks the door from closing.", capitalize_first(t->text_the()).c_str());
     }
 
     if (is_player()) {

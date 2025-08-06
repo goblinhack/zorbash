@@ -29,7 +29,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="debuff_status_paralysis", text_long_name="paralysis", text_short_name="paralysis")
+    tp_init(name="debuff_status_paralysis",
+            text_long_name="paralysis",
+            text_short_name="paralysis")
 
 
 init()

@@ -145,7 +145,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="attack_major_red", text_long_name="attack")
+    tp_init(name="attack_major_red",
+            text_long_name="attack")
 
 
 init()

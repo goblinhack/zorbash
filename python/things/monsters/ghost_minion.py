@@ -96,6 +96,8 @@ def tp_init(name, text_long_name):
     my.stat_str(self, 7)
     my.temperature(self, 0)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "ghost minions")
+    my.text_apostrophize(self, "ghost minion's")
     my.text_description_long(self, "The spirit of one less fortunate than you. Beware, ghosts can traverse chasms that you cannot.")
     my.text_description_short(self, "The angry spirit of one long passed.")
     my.text_hits(self, "touches")
@@ -144,7 +146,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="ghost_minion", text_long_name="ghost minion")
+    tp_init(name="ghost_minion",
+            text_long_name="ghost minion")
 
 
 init()

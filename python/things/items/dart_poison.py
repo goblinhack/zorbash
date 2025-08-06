@@ -61,6 +61,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_thrown_do(self, "me.on_thrown()")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "poison darts")
+    my.text_apostrophize(self, "poison dart's")
     my.text_description_enchant(self, "+1 DMG")
     my.text_description_long(self, "The assassin's melee weapon. This dart has a poison tip. Ideal for dealing with dinner guests that refuse to leave.")
     my.text_description_short(self, "A poison tipped dart.")
@@ -77,7 +79,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="dart_poison", text_long_name="poison dart", text_short_name="poison dart")
+    tp_init(name="dart_poison",
+            text_long_name="poison dart",
+            text_short_name="poison dart")
 
 
 init()

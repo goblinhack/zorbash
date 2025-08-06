@@ -125,6 +125,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "huge bats")
+    my.text_apostrophize(self, "huge bat's")
     my.text_description_long(self, "A snarling mass of flying death. These creatures of the night tend to hang around the graves of the newly undead.")
     my.text_description_short(self, "An enormous bat.")
     my.text_hits(self, "claws")
@@ -168,7 +170,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="bat_greater", text_long_name="huge fluffy bat")
+    tp_init(name="bat_greater",
+            text_long_name="huge fluffy bat")
 
 
 init()

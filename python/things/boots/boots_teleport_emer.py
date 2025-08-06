@@ -68,6 +68,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_dex_bonus(self, -1)
     my.teleport_distance(self, 20)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "boots of teleport")
+    my.text_apostrophize(self, "boots of teleport's")
     my.text_description_enchant(self, "-10 decibels")
     my.text_description_long(self, "Boots of uncontrolled emergency teleport. Useful in moments of desperation, these squeaky boots will randomly teleport you up to 20 tiles away when used. This may be good or bad depending on your situation.")
     my.text_description_short(self, "Boots of emergency teleport.")

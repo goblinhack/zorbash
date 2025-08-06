@@ -98,7 +98,7 @@ bool wid_rightbar_pixelart_create(void)
     point br = make_point(width - 1, y_at + 1);
 
     wid_set_pos(w, tl, br);
-    wid_set_text(w, capitalise(player->title()));
+    wid_set_text(w, capitalize(player->title()));
     wid_set_shape_none(w);
     wid_set_color(w, WID_COLOR_TEXT_FG, GRAY80);
     wid_set_on_mouse_over_begin(w, wid_rightbar_stats_over_begin);

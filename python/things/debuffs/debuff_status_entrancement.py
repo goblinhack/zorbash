@@ -23,7 +23,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="debuff_status_entranced", text_long_name="entranced", text_short_name="entranced")
+    tp_init(name="debuff_status_entranced",
+            text_long_name="entranced",
+            text_short_name="entranced")
 
 
 init()

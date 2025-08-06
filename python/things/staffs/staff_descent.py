@@ -156,6 +156,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.range_max(self, 7)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "staffs of sudden descent")
+    my.text_apostrophize(self, "staff of sudden descent's")
     my.text_description_enchant(self, "+1 radius")
     my.text_description_long(self, "This most dangerous staff can transport its target to the next level by the most efficacious means possible...")
     my.text_description_short(self, "A staff of descent.")
@@ -187,7 +189,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_descent", text_long_name="staff of sudden descent", text_short_name="staff, descent")
+    tp_init(name="staff_descent",
+            text_long_name="staff of sudden descent",
+            text_short_name="staff, descent")
 
 
 init()

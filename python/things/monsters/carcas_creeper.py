@@ -141,6 +141,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "carcas creepers")
+    my.text_apostrophize(self, "carcas creeper's")
     my.text_description_long2(self, "Watch out for its poisonous mandibles!")
     my.text_description_long(self, "A hideous, and thankfully slow moving, crawling insectoid with sickly flesh coloured skin. This creature has a use however, that of clearing the dungeon of extraneous meaty detritus. Like you.")
     my.text_description_short(self, "A disgusting carcass creeper.")
@@ -186,7 +188,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="carcas_creeper", text_long_name="carcass creeper")
+    tp_init(name="carcas_creeper",
+            text_long_name="carcass creeper")
 
 
 init()

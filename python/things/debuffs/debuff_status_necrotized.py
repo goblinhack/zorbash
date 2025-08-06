@@ -37,7 +37,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="debuff_status_necrotized", text_long_name="rotting")
+    tp_init(name="debuff_status_necrotized",
+            text_long_name="rotting")
 
 
 init()

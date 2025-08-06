@@ -134,6 +134,8 @@ def tp_init(name, text_long_name):
     my.stat_str(self, 10)
     my.temperature(self, 5)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "tentacleyes")
+    my.text_apostrophize(self, "tentacleye's")
     my.text_description_long(self, "A floating mass of tentacles and eyeballs. These creatures are often employed to monitor the dark and dank dungeons with their impressive vision. Beware their lightning gaze...")
     my.text_description_short(self, "A writhing mass of tentacles and eyeballs.")
     my.text_hits(self, "slashes")
@@ -200,7 +202,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="tentacleye", text_long_name="lesser tentacleye")
+    tp_init(name="tentacleye",
+            text_long_name="lesser tentacleye")
 
 
 init()

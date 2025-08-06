@@ -311,6 +311,8 @@ def tp_init(name, text_long_name, text_short_name, title):
     my.temperature_sensitive(self, True)
     my.temperature_sensitive_to_sudden_changes(self, True)
     my.text_a_or_an(self, "the")
+    my.text_pluralize(self, "players")
+    my.text_apostrophize(self, "player's")
     my.text_description_long(self, "A most noble adventurer of no particular race, gender or creed. Devoid of fear and stout of heart.")
     my.text_description_short(self, "Our most noble adventurer. Press 'h' for help.")
     my.text_hits(self, "hits")

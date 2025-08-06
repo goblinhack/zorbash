@@ -137,6 +137,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "tentacled horrors")
+    my.text_apostrophize(self, "tentacle horror's")
     my.text_description_long2(self, "Tentacled horrors regenerate very quickly, making them a challenge to defeat.")
     my.text_description_long(self, "A living nightmare of seething writhing tentacles with a massive central eye that sees all. Ideal for cleaning out blocked drains. And dungeons.")
     my.text_description_short(self, "A seething mass of tentacles.")
@@ -180,7 +182,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="tentacle_horror", text_long_name="tentacle horror")
+    tp_init(name="tentacle_horror",
+            text_long_name="tentacle horror")
 
 
 init()

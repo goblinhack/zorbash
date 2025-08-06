@@ -157,6 +157,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "krakens")
+    my.text_apostrophize(self, "kraken's")
     my.text_description_long(self, "A mighty baby kraken. Beware the grasp of its tentacles and intoxicating fishy breath.")
     my.text_description_short(self, "A baby kraken.")
     my.text_hits(self, "bites")
@@ -211,7 +213,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="kraken", text_long_name="baby kraken")
+    tp_init(name="kraken",
+            text_long_name="baby kraken")
 
 
 init()

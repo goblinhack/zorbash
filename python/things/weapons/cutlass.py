@@ -90,6 +90,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_RARE)
     my.stamina_drain_on_attacking(self, 0)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "cutlasses")
+    my.text_apostrophize(self, "cutlass's")
     my.text_description_enchant(self, "+1 DMG")
     my.text_description_long(self, "A gleaming cutlass. Ideal for the entry level pirate.")
     my.text_description_short(self, "Thy curved and pointy means of justice. Aar.")
@@ -106,7 +108,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="cutlass", text_long_name="cutlass", text_short_name="cutlass")
+    tp_init(name="cutlass",
+            text_long_name="cutlass",
+            text_short_name="cutlass")
 
 
 init()

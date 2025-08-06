@@ -113,6 +113,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "potions of darkness")
+    my.text_apostrophize(self, "potion of darkness'")
     my.text_description_long2(self, "The darkness is so profound that not even other gasses may co-exist in the same tile.")
     my.text_description_long(self, "A bubbling black elixir that will spawn a thick gas cloud of utter darkness when opened. Use this cloud to escape your enemies. Or to get thoroughly lost.")
     my.text_description_short(self, "A potion of darkness.")
@@ -129,7 +131,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="potion_darkness", text_long_name="potion of darkness", text_short_name="potion, darkness")
+    tp_init(name="potion_darkness",
+            text_long_name="potion of darkness",
+            text_short_name="potion, darkness")
 
 
 init()

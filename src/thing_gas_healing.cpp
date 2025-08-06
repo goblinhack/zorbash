@@ -4,6 +4,7 @@
 
 #include "my_game.hpp"
 #include "my_monst.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 
 void Thing::gas_healing_tick(void)
@@ -42,14 +43,14 @@ void Thing::gas_healing_tick(void)
       if (is_player()) {
         msg("%%fg=pink$Your wretched body burns in the healing gas!%%fg=reset$");
       } else {
-        msg("%s burns in the healing gas!", text_The().c_str());
+        msg("%s burns in the healing gas!", capitalize_first(text_the()).c_str());
       }
       is_attacked_with_dmg_holy(this, this, d12());
     } else {
       if (is_player()) {
         msg("%%fg=pink$You breath in the healing gas!%%fg=reset$");
       } else {
-        msg("%s breathes in the healing gas!", text_The().c_str());
+        msg("%s breathes in the healing gas!", capitalize_first(text_the()).c_str());
       }
       health_incr(d6());
       stamina_incr(d6());

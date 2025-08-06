@@ -151,6 +151,8 @@ def tp_init(name, text_long_name):
     my.temperature_sensitive(self, True)
     my.temperature_sensitive_to_sudden_changes(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "goat demons")
+    my.text_apostrophize(self, "goat demon's")
     my.text_description_long(self, "A creature from the darkest depths of the dungeon, the demon goat is not to be trifled with. Watch out for its flaming nostril attack.")
     my.text_description_short(self, "A flaming mad demon goat.")
     my.text_hits(self, "gores")
@@ -196,7 +198,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="goat_demon", text_long_name="demon goat")
+    tp_init(name="goat_demon",
+            text_long_name="demon goat")
 
 
 init()

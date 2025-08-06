@@ -3,6 +3,7 @@
 //
 
 #include "my_level.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 
 bool Thing::beckon(Thingp target)
@@ -25,7 +26,7 @@ bool Thing::beckon(Thingp target)
     if (target->is_player()) {
       target->msg("%%fg=green$You are shielded from beckoning.%%fg=reset$");
     } else if (target->is_monst() && is_player()) {
-      msg("%%fg=yellow$%s is shielded from beckoning.%%fg=reset$", target->text_The().c_str());
+      msg("%%fg=yellow$%s is shielded from beckoning.%%fg=reset$", capitalize_first(target->text_the()).c_str());
     }
 
     dbg("Beckon: %s is held in a magic barrier", target->to_short_string().c_str());

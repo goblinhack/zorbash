@@ -39,6 +39,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "10+1d15")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "lemon pies")
+    my.text_apostrophize(self, "lemon pie's")
     my.text_description_long(self, "Refreshing lemon pie. Might seem out of place but is commonly left in dungeons by caring grandmothers looking out for their adventurer grandchildren..")
     my.text_description_short(self, "Lemon pie.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -52,7 +54,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="lemonpie", text_long_name="lemon pie", text_short_name="lemon pie")
+    tp_init(name="lemonpie",
+            text_long_name="lemon pie",
+            text_short_name="lemon pie")
 
 
 init()

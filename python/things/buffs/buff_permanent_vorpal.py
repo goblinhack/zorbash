@@ -45,7 +45,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="buff_permanent_vorpal", text_long_name="vorpal weapon", text_short_name="vorpal weapon")
+    tp_init(name="buff_permanent_vorpal",
+            text_long_name="vorpal weapon",
+            text_short_name="vorpal weapon")
 
 
 init()

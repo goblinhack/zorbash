@@ -137,6 +137,8 @@ def tp_init(name, text_long_name):
     my.temperature_sensitive(self, True)
     my.temperature_sensitive_to_sudden_changes(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "flameskulls")
+    my.text_apostrophize(self, "flameskull's")
     my.text_description_long(self, "This disembodied skull blasts foes with its fiery eyes, all the while laughing maniacally.")
     my.text_description_short(self, "A floating fire hazard.")
     my.text_hits(self, "slashes")
@@ -177,7 +179,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="flameskull", text_long_name="flameskull")
+    tp_init(name="flameskull",
+            text_long_name="flameskull")
 
 
 init()

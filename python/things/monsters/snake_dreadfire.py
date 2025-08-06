@@ -133,6 +133,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 50)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "dreadfires")
+    my.text_apostrophize(self, "dreadfire's")
     my.text_description_long(self, "Dreadfire snakes are just that, a combination of fire and dread. Fast, venomous and with a spit to die for, best to stay well away.")
     my.text_description_short(self, "A highly volatile dreadfire snake.")
     my.text_hits(self, "gores")
@@ -180,7 +182,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="snake_dreadfire", text_long_name="dreadfire snake")
+    tp_init(name="snake_dreadfire",
+            text_long_name="dreadfire snake")
 
 
 init()

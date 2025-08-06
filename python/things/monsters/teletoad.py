@@ -152,6 +152,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "teletoads")
+    my.text_apostrophize(self, "teletoad's")
     my.text_description_long2(self, "Tastes awful on toast or anything else. Can fire acid blobs. Avoid.")
     my.text_description_long(self, "An oddly aggressive, shortsighted and intensely venomous toad with a knack for escaping delicate situations by teleporting. How a creature like this evolved is beyond me...")
     my.text_description_short(self, "A hopping mad teletoad.")
@@ -206,7 +208,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="teletoad", text_long_name="teletoad")
+    tp_init(name="teletoad",
+            text_long_name="teletoad")
 
 
 init()

@@ -74,7 +74,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="exit1", text_long_name="dungeon exit", text_short_name="exit")
+    tp_init(name="exit1",
+            text_long_name="dungeon exit",
+            text_short_name="exit")
 
 
 init()

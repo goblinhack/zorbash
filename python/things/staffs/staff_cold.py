@@ -169,6 +169,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.range_max(self, 7)
     my.temperature(self, -10)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "staffs of ices")
+    my.text_apostrophize(self, "staff of ice's")
     my.text_description_enchant(self, "+1 radius")
     my.text_description_long2(self, "When enchanted is ideal for building igloos.")
     my.text_description_long(self, "Discharges a single ball of ice at an ungrateful recipient...")
@@ -201,7 +203,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_cold", text_long_name="staff of ice", text_short_name="staff, ice")
+    tp_init(name="staff_cold",
+            text_long_name="staff of ice",
+            text_short_name="staff, ice")
 
 
 init()

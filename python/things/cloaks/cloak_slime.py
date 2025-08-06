@@ -59,6 +59,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_COMMON)
     my.stat_def_bonus(self, 1)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "slime cloaks")
+    my.text_apostrophize(self, "slime cloak's")
     my.text_description_long(self, "A brilliant slimy green cloak that you know will afford you protection against repellent slimes.")
     my.text_description_short(self, "Cloak of slime protection.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)

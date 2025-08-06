@@ -15,6 +15,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.is_no_tile(self, True)
     my.is_projectile(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "poison projectiles")
+    my.text_apostrophize(self, "poison projectile's")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
     # end sort marker
@@ -40,7 +42,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_projectile_poison", text_long_name="poison projectile", text_short_name="poison projectile")
+    tp_init(name="staff_projectile_poison",
+            text_long_name="poison projectile",
+            text_short_name="poison projectile")
 
 
 init()

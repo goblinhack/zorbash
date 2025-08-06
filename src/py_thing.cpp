@@ -1342,7 +1342,7 @@ PyObject *thing_speaks(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   if (owner->is_monst()) {
-    owner->msg("%s says '%s'", owner->text_The().c_str(), msg);
+    owner->msg("%s says '%s'", capitalize_first(owner->text_the()).c_str(), msg);
   } else {
     owner->msg("%s", msg);
   }

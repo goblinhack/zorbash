@@ -143,7 +143,7 @@ void Game::wid_hiscores_show(void)
       auto when        = "When";
 
       snprintf(tmp, sizeof(tmp) - 1, "%%%%fg=%s$%7s  %-*s %-*s %-5s %*s", color, "Score", name_field_len,
-               capitalise(name).c_str(), when_field_len, when, "Level", defeated_by_field_len, defeated_by);
+               capitalize(name).c_str(), when_field_len, when, "Level", defeated_by_field_len, defeated_by);
 
       wid_hiscore_window->log(tmp);
     }

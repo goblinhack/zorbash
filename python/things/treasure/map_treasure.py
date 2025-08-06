@@ -49,6 +49,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.normal_placement_rules(self, True)
     my.on_enchant_do(self, "me.on_enchant()")
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "treasure maps")
+    my.text_apostrophize(self, "treasure map's")
     my.text_description_enchant(self, "all levels")
     my.text_description_long(self, "When carrying this magical map you are able to see all the treasure, food and keys on the current level.")
     my.text_description_short(self, "An aged treasure map.")
@@ -65,7 +67,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="map_treasure", text_long_name="treasure map", text_short_name="treasure map")
+    tp_init(name="map_treasure",
+            text_long_name="treasure map",
+            text_short_name="treasure map")
 
 
 init()

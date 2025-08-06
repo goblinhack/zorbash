@@ -32,14 +32,14 @@ void wid_show_dungeon_contents(Levelp l)
           //
           // Mimics were appearing as ""
           //
-          auto name = t->text_short_and_state_capitalised();
+          auto name = t->text_short_and_state_capitalized();
           if (t->is_mimic()) {
             name = "Something...";
           }
           monst_contents[ name ]++;
         }
         if (t->is_treasure()) {
-          treasure_contents[ t->text_short_and_state_capitalised() ]++;
+          treasure_contents[ t->text_short_and_state_capitalized() ]++;
         }
       }
       TRACE_NO_INDENT();

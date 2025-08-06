@@ -78,7 +78,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="red_splatter", text_long_name="blood splatter")
+    tp_init(name="red_splatter",
+            text_long_name="blood splatter")
 
 
 init()

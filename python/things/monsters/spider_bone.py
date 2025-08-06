@@ -133,6 +133,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "bone spiders")
+    my.text_apostrophize(self, "bone spider's")
     my.text_description_long(self, "Bone spiders are the stuff of nightmares, bones brought to life, in spider form. You can rarely truly destroy a bone spider and they may re-assemble once vanquished... Luckily they are slow.")
     my.text_description_short(self, "A bone spider.")
     my.text_hits(self, "bites")
@@ -183,7 +185,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="spider_bone", text_long_name="bone spider")
+    tp_init(name="spider_bone",
+            text_long_name="bone spider")
 
 
 init()

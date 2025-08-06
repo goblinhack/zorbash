@@ -159,6 +159,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "sluuds")
+    my.text_apostrophize(self, "sluud's")
     my.text_description_long(self, "The Sluud are are proud and slimy race of warriors that rarely leave their swampy domain. Highly sociable, the Sluud live in large groups that are best avoided. Beware the dark sluuds.")
     my.text_description_short(self, "A sluud.")
     my.text_hits(self, "gores")
@@ -189,7 +191,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="sluud", text_long_name="sluud")
+    tp_init(name="sluud",
+            text_long_name="sluud")
 
 
 init()

@@ -41,6 +41,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "10+1d40")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "salami")
+    my.text_apostrophize(self, "salami's")
     my.text_description_long(self, "Dungeon salami. Eat at your own risk.")
     my.text_description_short(self, "Dungeon salami.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -54,7 +56,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="salami", text_long_name="salami", text_short_name="salami")
+    tp_init(name="salami",
+            text_long_name="salami",
+            text_short_name="salami")
 
 
 init()

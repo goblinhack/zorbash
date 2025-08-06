@@ -6,11 +6,10 @@
 #include "my_game.hpp"
 #include "my_math.hpp"
 #include "my_monst.hpp"
-// REMOVED #include "my_player.hpp"
 #include "my_sprintf.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_thing_attack_options.hpp"
-// REMOVED #include <algorithm>
 
 #define GOAL_PRIO_VERY_HIGH 0
 #define GOAL_PRIO_HIGHER    1
@@ -2316,7 +2315,7 @@ bool Thing::ai_tick(bool recursing)
     if (noise_decibels_hearing()) {
       if (level->noisemap(curr_at) * LEVEL_SOUND_DAMPENING > noise_decibels_hearing()) {
         if (is_msg_allowed_hears_something()) {
-          msg("%s hears something!", text_The().c_str());
+          msg("%s hears something!", capitalize_first(text_the()).c_str());
         }
 
         if (! wake("heard something")) {
@@ -2330,7 +2329,7 @@ bool Thing::ai_tick(bool recursing)
     //
     if (environ_dislikes_fire() && level->heatmap(curr_at)) {
       if (is_msg_allowed_senses_danger()) {
-        msg("%s senses danger!", text_The().c_str());
+        msg("%s senses danger!", capitalize_first(text_the()).c_str());
       }
       if (! wake("senses heat")) {
         return false;

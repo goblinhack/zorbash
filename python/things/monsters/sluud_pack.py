@@ -37,7 +37,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="sluud_pack", text_long_name="sluud pack")
+    tp_init(name="sluud_pack",
+            text_long_name="sluud pack")
 
 
 init()

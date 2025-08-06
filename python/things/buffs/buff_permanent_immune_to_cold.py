@@ -48,7 +48,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="buff_permanent_immune_to_cold", text_long_name="cold proof")
+    tp_init(name="buff_permanent_immune_to_cold",
+            text_long_name="cold proof")
 
 
 init()

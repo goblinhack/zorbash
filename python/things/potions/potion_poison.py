@@ -113,6 +113,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "potions of poison gas")
+    my.text_apostrophize(self, "potion of poison gas'")
     my.text_description_long(self, "A bubbling green elixir that will spawn a cloud of poisonous gas when opened. Or thrown... But what sort of person would throw such a thing as a weapon?")
     my.text_description_short(self, "A potion of poison gas.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -128,7 +130,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="potion_poison", text_long_name="potion of poison gas", text_short_name="potion, gas")
+    tp_init(name="potion_poison",
+            text_long_name="potion of poison gas",
+            text_short_name="potion, gas")
 
 
 init()

@@ -3,6 +3,7 @@
 //
 
 #include "my_monst.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 
 void Thing::burnt_set(void)
@@ -17,7 +18,7 @@ void Thing::burnt_set(void)
   is_burnt = true;
   level_push();
 
-  msg("%s is burnt", text_The().c_str());
+  msg("%s is burnt", capitalize_first(text_the()).c_str());
 
   //
   // Burnt things are more tasty.

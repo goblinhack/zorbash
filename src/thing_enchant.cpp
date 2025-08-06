@@ -2,7 +2,6 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_english.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
 #include "my_python.hpp"
@@ -47,7 +46,7 @@ void Thing::enchant_common(Thingp what)
 {
   if (is_player()) {
     if (what->is_enchantable_as_a_group()) {
-      msg("You enchant all of %s.", pluralise(what->text_the()).c_str());
+      msg("You enchant all of %s.", what->text_the(TEXT_PLURALIZE).c_str());
     } else {
       msg("You enchant %s.", what->text_the().c_str());
     }

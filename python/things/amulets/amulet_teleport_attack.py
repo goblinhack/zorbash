@@ -54,6 +54,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_unequip_do(self, "me.on_unequip()")
     my.rarity(self, my.RARITY_UNCOMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "amulets of teleport protection")
+    my.text_apostrophize(self, "amulet of teleport protection's")
     my.text_description_long(self, "Amulet of teleport attack protection. You will no longer fear portable holes.")
     my.text_description_short(self, "Amulet of teleport attack protection.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)

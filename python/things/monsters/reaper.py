@@ -108,6 +108,8 @@ def tp_init(name, text_long_name):
     my.stat_str(self, 25)
     my.temperature(self, -10)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "reapers")
+    my.text_apostrophize(self, "reaper's")
     my.text_description_long(self, "A lesser reaper. You cannot defeat what does not live!")
     my.text_description_short(self, "A lesser reaper. Death incarnate.")
     my.text_hits(self, "claws")
@@ -165,7 +167,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="reaper", text_long_name="reaper")
+    tp_init(name="reaper",
+            text_long_name="reaper")
 
 
 init()

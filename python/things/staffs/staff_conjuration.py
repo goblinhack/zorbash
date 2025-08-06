@@ -151,6 +151,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.range_max(self, 7)
     my.temperature(self, 20)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "staffs of conjuration")
+    my.text_apostrophize(self, "staff of conjuration's")
     my.text_description_long(self, "This staff will conjure a set of ethereal spectral blades around an enemy.")
     my.text_description_short(self, "A staff of conjuration.")
     my.tick_prio(self, my.MAP_TICK_PRIO_LOW)
@@ -181,7 +183,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_conjuration", text_long_name="staff of conjuration", text_short_name="staff, conjure")
+    tp_init(name="staff_conjuration",
+            text_long_name="staff of conjuration",
+            text_short_name="staff, conjure")
 
 
 init()

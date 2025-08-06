@@ -41,7 +41,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="spell_of_magic_missile", text_long_name="magic missile", text_short_name="magic missile")
+    tp_init(name="spell_of_magic_missile",
+            text_long_name="magic missile",
+            text_short_name="magic missile")
 
 
 init()

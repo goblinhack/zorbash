@@ -109,6 +109,8 @@ def tp_init(name, text_long_name):
     my.on_idle_tick_freq_dice(self, "1:me.on_idle_tick_freq_dice()")
     my.on_want_to_shoot_at_do(self, "me.on_want_to_shoot_at()")
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "ogre totems")
+    my.text_apostrophize(self, "ogre totem's")
     my.text_description_long2(self, "You may however find this revolting pillar oddly attracting.")
     my.text_description_long(self, "A tall pillar of skulls, smeared in grease and blood. This is not a place to hang out.")
     my.text_description_short(self, "Ogre holy place.")
@@ -132,7 +134,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="ogre_totem", text_long_name="ogre totem")
+    tp_init(name="ogre_totem",
+            text_long_name="ogre totem")
 
 
 init()

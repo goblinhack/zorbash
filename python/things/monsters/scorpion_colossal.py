@@ -140,6 +140,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "colossal scorpions")
+    my.text_apostrophize(self, "colossal scorpion's")
     my.text_description_long(self, "A frankly ginormous scorpion. It's stinger alone is larger than your body. Do I have to advise, stay away?")
     my.text_description_short(self, "A colossal scorpion.")
     my.text_hits(self, "bites")
@@ -174,7 +176,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="scorpion_colossal", text_long_name="colossal scorpion")
+    tp_init(name="scorpion_colossal",
+            text_long_name="colossal scorpion")
 
 
 init()

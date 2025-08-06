@@ -3,10 +3,7 @@
 //
 
 #include "my_array_bounds_check.hpp"
-#include "my_english.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_monst.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
@@ -157,7 +154,7 @@ void Thing::killed(Thingp defeater, const char *reason)
     destroy_spawned(defeater);
   }
 
-  auto The_no_dying = text_The_no_dying();
+  auto The_no_dying = text_the(TEXT_EXCLUDE_DEATH);
 
   //
   // Resurrect unless say this was a minion and its mob died
@@ -262,13 +259,13 @@ void Thing::killed(Thingp defeater, const char *reason)
           if (defeater && defeater->is_fire()) {
             TRACE_NO_INDENT();
             if (distance < 5) {
-              msg("%s burns.", text_The().c_str());
+              msg("%s burns.", capitalize_first(text_the()).c_str());
             } else {
               msg("You smell smoke in the air.");
             }
           } else if (defeater && defeater->is_player()) {
             TRACE_NO_INDENT();
-            msg("%s breaks open.", text_The().c_str());
+            msg("%s breaks open.", capitalize_first(text_the()).c_str());
           } else {
             TRACE_NO_INDENT();
             if (distance <= 1) {
@@ -383,7 +380,7 @@ void Thing::killed(Thingp defeater, const char *reason)
       // Darts are destroyed sometimes when thrown, so avoid a pointless message
       //
       if (! is_being_thrown) {
-        msg("%s %ss is destroyed.", pluralise(o_top->text_The()).c_str(), text_long_name().c_str());
+        msg("%s %s is destroyed.", o_top->text_the(TEXT_PLURALIZE).c_str(), text_long_name().c_str());
       }
     }
 
@@ -500,9 +497,11 @@ void Thing::killed(Thingp defeater, const char *reason)
               msg("%%fg=green$%s is dead, killed %s.%%fg=reset$", The_no_dying.c_str(), reason);
             }
           } else if (on_death_is_open()) {
-            msg("%s opens the %s.", defeater->text_The_no_dying().c_str(), text_short_name().c_str());
+            msg("%s opens the %s.", capitalize_first(defeater->text_the(TEXT_EXCLUDE_DEATH)).c_str(),
+                text_short_name().c_str());
           } else if (top_owner() == defeater) {
-            msg("%s's %s is destroyed.", defeater->text_The_no_dying().c_str(), text_short_name().c_str());
+            msg("%s's %s is destroyed.", capitalize_first(defeater->text_the(TEXT_EXCLUDE_DEATH)).c_str(),
+                text_short_name().c_str());
           } else {
             msg("%s is destroyed %s.", The_no_dying.c_str(), reason);
           }

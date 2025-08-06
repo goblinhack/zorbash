@@ -40,6 +40,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "10+1d15")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "aubergine")
+    my.text_apostrophize(self, "aubergine's")
     my.text_description_long(self, "A dungeon aubergine. Some call it eggplant. This one, well, it's round and a bit puckered and has seen better days. It might be a rock.")
     my.text_description_short(self, "Aubergine.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -53,7 +55,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="aubergine", text_long_name="aubergine", text_short_name="aubergine")
+    tp_init(name="aubergine",
+            text_long_name="aubergine",
+            text_short_name="aubergine")
 
 
 init()

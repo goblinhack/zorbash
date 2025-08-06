@@ -2,10 +2,9 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-#include "my_english.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_ptrcheck.hpp"
 #include "my_sdl_proto.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 
 std::string Thing::text_a_or_an(size_t max_len)
@@ -62,7 +61,58 @@ std::string Thing::text_a_or_an(size_t max_len)
   return out;
 }
 
-std::string Thing::text_the(bool include_owner)
+std::string Thing::text_pluralize(size_t max_len)
+{
+  TRACE_NO_INDENT();
+  auto tpp = tp();
+  verify(MTYPE_THING, this);
+  verify(MTYPE_TP, tpp);
+
+  auto out = tpp->text_pluralize();
+
+  if (out == "") {
+    return tpp->text_long_name() + "s";
+  }
+
+  if (max_len) {
+    if (out.size() >= max_len) {
+      ::abbreviate(out);
+    }
+  }
+
+  return out;
+}
+
+std::string Thing::text_apostrophize(size_t max_len)
+{
+  TRACE_NO_INDENT();
+  auto tpp = tp();
+  verify(MTYPE_THING, this);
+  verify(MTYPE_TP, tpp);
+
+  auto out = tpp->text_pluralize();
+
+  if (out == "") {
+    return tpp->text_long_name() + "'s";
+  }
+
+  if (max_len) {
+    if (out.size() >= max_len) {
+      ::abbreviate(out);
+    }
+  }
+
+  return out;
+}
+
+enum {
+  TEXT_INCLUDE_OWNER = 1,
+  TEXT_EXCLUDE_DEATH = 2,
+  TEXT_APOSTROPHIZE  = 4,
+  TEXT_PLURALIZE     = 8,
+};
+
+std::string Thing::text_the(uint8_t flags)
 {
   TRACE_NO_INDENT();
   auto tpp = tp();
@@ -86,31 +136,30 @@ std::string Thing::text_the(bool include_owner)
   // "the goblin's short sword" for example
   //
   auto t_o = top_owner();
-  if (include_owner) {
-    if (t_o && ! t_o->is_player()) {
-      out += t_o->text_long_name();
-      out += "'s ";
-    }
+  if (flags & TEXT_INCLUDE_OWNER) {
+    out += t_o->text_apostrophize();
   }
 
-  if (is_player() || is_monst()) {
-    if (is_dead) {
-      if (is_undead()) {
-        out += "extra dead ";
-      } else {
-        out += "dead ";
+  if (! (flags & TEXT_EXCLUDE_DEATH)) {
+    if (is_player() || is_monst()) {
+      if (is_dead) {
+        if (is_undead()) {
+          out += "extra dead ";
+        } else {
+          out += "dead ";
+        }
+      } else if (is_dying) {
+        out += "dying ";
       }
-    } else if (is_dying) {
-      out += "dying ";
     }
-  }
 
-  if (is_frozen) {
-    out += "frozen ";
-  } else if (is_burnt) {
-    out += "burnt ";
-  } else if (tpp->charge_count() && ! charge_count()) {
-    out += "spent ";
+    if (is_frozen) {
+      out += "frozen ";
+    } else if (is_burnt) {
+      out += "burnt ";
+    } else if (tpp->charge_count() && ! charge_count()) {
+      out += "spent ";
+    }
   }
 
   //
@@ -126,7 +175,13 @@ std::string Thing::text_the(bool include_owner)
     }
   }
 
-  out += tpp->text_long_name();
+  if (flags & TEXT_APOSTROPHIZE) {
+    out += text_apostrophize();
+  } else if (flags & TEXT_APOSTROPHIZE) {
+    out += text_pluralize();
+  } else {
+    out += tpp->text_long_name();
+  }
 
   if (tpp->is_spell()) {
     out += " spell";
@@ -136,58 +191,6 @@ std::string Thing::text_the(bool include_owner)
     out += " skill";
   }
 
-  return out;
-}
-
-std::string Thing::text_the_no_dying(bool include_owner)
-{
-  TRACE_NO_INDENT();
-  auto tpp = tp();
-  verify(MTYPE_THING, this);
-  verify(MTYPE_TP, tpp);
-  if (unlikely(! tpp)) {
-    return ("<no name>");
-  }
-
-  std::string out = "the ";
-
-  //
-  // Tamed?
-  //
-  auto l = leader();
-  if (l && (l == level->player)) {
-    out = "your ";
-  }
-
-  //
-  // "the goblin's short sword" for example
-  //
-  auto t_o = top_owner();
-  if (include_owner) {
-    if (t_o && ! t_o->is_player()) {
-      out += t_o->text_long_name();
-      out += "'s ";
-    }
-  }
-
-  out += tpp->text_long_name();
-
-  return out;
-}
-
-std::string Thing::text_The(void)
-{
-  TRACE_NO_INDENT();
-  auto out = text_the();
-  out[ 0 ] = toupper(out[ 0 ]);
-  return out;
-}
-
-std::string Thing::text_The_no_dying(void)
-{
-  TRACE_NO_INDENT();
-  auto out = text_the_no_dying();
-  out[ 0 ] = toupper(out[ 0 ]);
   return out;
 }
 
@@ -327,7 +330,7 @@ std::string Thing::text_A_or_An(size_t max_len)
 //
 // foo bar -> Foo Bar
 //
-std::string Thing::text_short_capitalised(size_t max_len)
+std::string Thing::text_short_capitalized(size_t max_len)
 {
   TRACE_NO_INDENT();
   std::string out = text_short_name(max_len);
@@ -352,7 +355,7 @@ std::string Thing::text_short_capitalised(size_t max_len)
   return out;
 }
 
-std::string Thing::text_long_capitalised(size_t max_len)
+std::string Thing::text_long_capitalized(size_t max_len)
 {
   TRACE_NO_INDENT();
   std::string out = text_long_name(max_len);
@@ -377,7 +380,7 @@ std::string Thing::text_long_capitalised(size_t max_len)
   return out;
 }
 
-std::string Thing::text_short_and_state_capitalised(size_t max_len)
+std::string Thing::text_short_and_state_capitalized(size_t max_len)
 {
   TRACE_NO_INDENT();
   auto tpp = tp();
@@ -452,7 +455,7 @@ std::string Thing::text_short_and_state_capitalised(size_t max_len)
   return out;
 }
 
-std::string Thing::text_long_and_state_capitalised(size_t max_len)
+std::string Thing::text_long_and_state_capitalized(size_t max_len)
 {
   TRACE_NO_INDENT();
   std::string out;
@@ -783,11 +786,13 @@ const std::string Thing::text_short_name(size_t max_len)
 }
 
 std::string Tp::text_a_or_an(void) const { return _text_a_or_an; }
+std::string Tp::text_pluralize(void) const { return _text_pluralize; }
+std::string Tp::text_apostrophize(void) const { return _text_apostrophize; }
 
 //
 // foo bar -> Foo Bar
 //
-std::string Tp::text_short_capitalised(void) const
+std::string Tp::text_short_capitalized(void) const
 {
   TRACE_NO_INDENT();
 
@@ -816,7 +821,7 @@ std::string Tp::text_short_capitalised(void) const
 //
 // foo bar -> Foo Bar
 //
-std::string Tp::text_long_capitalised(void) const
+std::string Tp::text_long_capitalized(void) const
 {
   TRACE_NO_INDENT();
 

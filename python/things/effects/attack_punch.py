@@ -117,7 +117,8 @@ def init1(name, text_long_name):
 
 
 def init():
-    init1(name="attack_punch", text_long_name="punch attack")
+    init1(name="attack_punch",
+            text_long_name="punch attack")
 
 
 init()

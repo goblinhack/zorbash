@@ -13,9 +13,9 @@
 #include <map>
 #include <set>
 
-using Tpidmap   = std::vector< class Tp   *>;
+using Tpidmap   = std::vector< class Tp * >;
 using Tpnamemap = std::map< std::string, class Tp * >;
-using Allies    = std::set< class Tp    *>;
+using Allies    = std::set< class Tp * >;
 
 enum {
   THING_RARITY_COMMON,
@@ -527,7 +527,7 @@ private:
   int _is_holy {};
   int _is_holy_water {};
   int _is_humanoid {};
-  int _is_iceman {};
+  int _is_icefolk {};
   int _is_immune_to_acid {};
   int _is_immune_to_blinding {};
   int _is_immune_to_cold {};
@@ -583,7 +583,7 @@ private:
   int _is_magical_effect {};
   int _is_magic_crystal {};
   int _is_magic_stone {};
-  int _is_mantisman {};
+  int _is_mantisfolk {};
   int _is_map_beast {};
   int _is_map_treasure {};
   int _is_meat {};
@@ -1092,6 +1092,8 @@ private:
   std::string _str2;
   std::string _str4;
   std::string _text_a_or_an;
+  std::string _text_pluralize;
+  std::string _text_apostrophize;
   std::string _text_debuff;
   std::string _text_description_enchant;
   std::string _text_description_long;
@@ -1269,9 +1271,11 @@ public:
   void resurrect_dice_set(const std::string &);
   void spawn_group_size_dice_set(const std::string &);
 
-  std::string text_short_capitalised(void) const;
-  std::string text_long_capitalised(void) const;
+  std::string text_short_capitalized(void) const;
+  std::string text_long_capitalized(void) const;
   std::string text_a_or_an(void) const;
+  std::string text_pluralize(void) const;
+  std::string text_apostrophize(void) const;
   std::string to_string(void);
   std::string to_short_string(void);
 
@@ -1921,7 +1925,7 @@ public:
   int is_holy(void) const;
   int is_holy_water(void) const;
   int is_humanoid(void) const;
-  int is_iceman(void) const;
+  int is_icefolk(void) const;
   int is_immune_to_acid(void) const;
   int is_immune_to_blinding(void) const;
   int is_immune_to_cold(void) const;
@@ -1976,7 +1980,7 @@ public:
   int is_magical(void) const;
   int is_magic_crystal(void) const;
   int is_magic_stone(void) const;
-  int is_mantisman(void) const;
+  int is_mantisfolk(void) const;
   int is_map_beast(void) const;
   int is_map_treasure(void) const;
   int is_meat(void) const;
@@ -2701,7 +2705,7 @@ public:
   void is_holy_set(int v);
   void is_holy_water_set(int v);
   void is_humanoid_set(int v);
-  void is_iceman_set(int v);
+  void is_icefolk_set(int v);
   void is_immune_to_acid_set(int v);
   void is_immune_to_blinding_set(int v);
   void is_immune_to_cold_set(int v);
@@ -2756,7 +2760,7 @@ public:
   void is_magical_set(int v);
   void is_magic_crystal_set(int v);
   void is_magic_stone_set(int v);
-  void is_mantisman_set(int v);
+  void is_mantisfolk_set(int v);
   void is_map_beast_set(int v);
   void is_map_treasure_set(int v);
   void is_meat_set(int v);
@@ -3216,6 +3220,8 @@ public:
   void temperature_sensitive_to_sudden_changes_set(int v);
   void temperature_set(int v);
   void text_a_or_an_set(const std::string &v);
+  void text_pluralize_set(const std::string &v);
+  void text_apostrophize_set(const std::string &v);
   void text_debuff_set(const std::string &v);
   void text_description_enchant_set(const std::string &v);
   void text_description_long2_set(const std::string &v);

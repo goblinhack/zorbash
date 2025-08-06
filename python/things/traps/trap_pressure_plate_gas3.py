@@ -39,6 +39,8 @@ def tp_init(name, text_long_name):
     my.on_activated_do(self, "me.on_activated()")
     my.on_death_do(self, "me.on_death()")
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "wobbly floor tiles")
+    my.text_apostrophize(self, "wobbly floor tile's")
     my.text_description_short(self, "A strange looking floor tile.")
     my.z_depth(self, my.MAP_DEPTH_FLOOR2)
     my.z_prio(self, my.MAP_Z_PRIO_ALWAYS_BEHIND)
@@ -55,7 +57,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="trap_pressure_plate_gas3", text_long_name="uneven floor tile")
+    tp_init(name="trap_pressure_plate_gas3",
+            text_long_name="uneven floor tile")
 
 
 init()

@@ -18,7 +18,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="skill_iron_defense3", text_long_name="iron defense 3", text_short_name="iron defense 3")
+    tp_init(name="skill_iron_defense3",
+            text_long_name="iron defense 3",
+            text_short_name="iron defense 3")
 
 
 init()

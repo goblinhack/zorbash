@@ -166,6 +166,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "black puddings")
+    my.text_apostrophize(self, "black pudding's")
     my.text_description_long2(self, "Black puddings have tough shiny skin and take half damage from slashing weapons.")
     my.text_description_long(self, "An inky black gooey nightmare made real. Black puddings will eat almost anything, even each other. Luckily with its enormous mass, it is a bit slow. Best to avoid or be engulfed.")
     my.text_description_short(self, "A gargantuan inky pudding.")
@@ -278,7 +280,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="pudding_parent", text_long_name="black pudding")
+    tp_init(name="pudding_parent",
+            text_long_name="black pudding")
 
 
 init()

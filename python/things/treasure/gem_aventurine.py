@@ -35,6 +35,8 @@ def tp_init(name, text_long_name):
     my.normal_placement_rules(self, True)
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "aventurine")
+    my.text_apostrophize(self, "aventurine's")
     my.text_description_long(self, "If you are need of luck, a(d)venturine is the stone for you. It has a few drops of blood on it, ignore those. You will be more lucky.")
     my.text_description_short(self, "Some a(d)venturine, the luckiest stone.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -56,7 +58,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="gem_aventurine", text_long_name="aventurine")  # good luck
+    tp_init(name="gem_aventurine",
+            text_long_name="aventurine")  # good luck
 
 
 init()

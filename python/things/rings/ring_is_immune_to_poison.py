@@ -61,6 +61,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_con_bonus(self, 1)
     my.stat_str_bonus(self, -1)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "rings of poison immunities")
+    my.text_apostrophize(self, "ring of poison immunity's")
     my.text_description_enchant(self, "+1 CON")
     my.text_description_long(self, "Eat drink and be merry while wearing this ring, for poison can do you no harm. Please wear responsibly...")
     my.text_description_short(self, "A ring of poison immunity.")
@@ -78,7 +80,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="ring_is_immune_to_poison", text_long_name="ring of poison immunity", text_short_name="ring, poison")
+    tp_init(name="ring_is_immune_to_poison",
+            text_long_name="ring of poison immunity",
+            text_short_name="ring, poison")
 
 
 init()

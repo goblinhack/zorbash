@@ -5,6 +5,7 @@
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_math.hpp"
+#include "my_string.hpp"
 #include "my_template.hpp"
 #include "my_thing.hpp"
 
@@ -651,7 +652,7 @@ bool Thing::spawn_set_fire_to_things_around_me(const std::string &what, int radi
               it->msg("The fires spread to %s!", it->text_the().c_str());
             }
           } else {
-            it->msg("%s dances in the flames!", it->text_The().c_str());
+            it->msg("%s dances in the flames!", capitalize_first(it->text_the()).c_str());
           }
         }
       }

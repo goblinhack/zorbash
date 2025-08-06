@@ -163,6 +163,8 @@ def tp_init(name, text_long_name):
     my.temperature_sensitive(self, True)
     my.temperature_sensitive_to_sudden_changes(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "fire demons")
+    my.text_apostrophize(self, "fire demon's")
     my.text_description_long2(self, "Fire demons are formidable enemies. Execute extreme caution or be executed extremely...")
     my.text_description_long(self, "Accursed creature of the abyss. Devoid of life. Full of hatred, and just wants to get back to the pit so it can take care of its pet cats. And you are in the way...")
     my.text_description_short(self, "A hot fire demon.")
@@ -191,7 +193,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="demon_fire", text_long_name="fire demon")
+    tp_init(name="demon_fire",
+            text_long_name="fire demon")
 
 
 init()

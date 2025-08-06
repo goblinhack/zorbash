@@ -23,7 +23,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="crystal6", text_long_name="crystal VI", text_short_name="crystal VI")
+    tp_init(name="crystal6",
+            text_long_name="crystal VI",
+            text_short_name="crystal VI")
 
 
 init()

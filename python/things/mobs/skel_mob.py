@@ -81,6 +81,8 @@ def tp_init(name, text_long_name):
     my.on_idle_tick_freq_dice(self, "1d10+10:me.on_idle_tick_freq_dice()")
     my.temperature_never_changes(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "skeleton mobs")
+    my.text_apostrophize(self, "skeleton mob's")
     my.text_description_long(self, "A grave portal from which the dead crawl out. Excellent spot for all night parties.")
     my.text_description_short(self, "The dead rise again here.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -118,7 +120,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="skel_mob", text_long_name="skeleton generator")
+    tp_init(name="skel_mob",
+            text_long_name="skeleton generator")
 
 
 init()

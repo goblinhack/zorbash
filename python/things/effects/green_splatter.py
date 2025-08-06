@@ -80,7 +80,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="green_splatter", text_long_name="green slime splatter")
+    tp_init(name="green_splatter",
+            text_long_name="green slime splatter")
 
 
 init()

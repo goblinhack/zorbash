@@ -129,7 +129,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="zorb_necro", text_long_name="zorblomancer")
+    tp_init(name="zorb_necro",
+            text_long_name="zorblomancer")
 
 
 init()

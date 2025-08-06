@@ -4,6 +4,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 
 void Thing::temperature_tick(void)
@@ -356,9 +357,9 @@ void Thing::temperature_tick(void)
 
       is_attacked_with_dmg_cold(this, this, damage);
       if (is_player()) {
-        msg("%%fg=lightblue$%s suffers from the extreme cold.%%fg=reset$", text_The().c_str());
+        msg("%%fg=lightblue$%s suffers from the extreme cold.%%fg=reset$", capitalize_first(text_the()).c_str());
       } else if (is_alive_monst()) {
-        msg("%s suffers from the extreme cold.", text_The().c_str());
+        msg("%s suffers from the extreme cold.", capitalize_first(text_the()).c_str());
       }
       popup("Freezes!");
       return;
@@ -448,9 +449,9 @@ void Thing::temperature_tick(void)
           }
         } else if (is_alive_monst()) {
           if (level->is_lava(curr_at)) {
-            msg("%%fg=orange$%s swims in lava!%%fg=reset$", text_The().c_str());
+            msg("%%fg=orange$%s swims in lava!%%fg=reset$", capitalize_first(text_the()).c_str());
           } else {
-            msg("%%fg=orange$%s suffers from the extreme heat.%%fg=reset$", text_The().c_str());
+            msg("%%fg=orange$%s suffers from the extreme heat.%%fg=reset$", capitalize_first(text_the()).c_str());
           }
         }
       }
@@ -635,9 +636,9 @@ void Thing::temperature_incr(int temperature_change)
     if (temperature_change > 50) {
       if (is_immune_to_fire()) {
         if (is_player()) {
-          msg("%%fg=orange$%s basks in the increasing heat.%%fg=reset$", text_The().c_str());
+          msg("%%fg=orange$%s basks in the increasing heat.%%fg=reset$", capitalize_first(text_the()).c_str());
         } else if (is_monst()) {
-          msg("%s basks in the increasing heat.", text_The().c_str());
+          msg("%s basks in the increasing heat.", capitalize_first(text_the()).c_str());
         }
       } else {
         if ((temperature_curr < 0) && (temperature_curr > -25)) {
@@ -645,15 +646,17 @@ void Thing::temperature_incr(int temperature_change)
           if (is_stone()) {
             popup("Crack!");
             if (is_player()) {
-              msg("%%fg=orange$%s cracks from the increase in temperature.%%fg=reset$", text_The().c_str());
+              msg("%%fg=orange$%s cracks from the increase in temperature.%%fg=reset$",
+                  capitalize_first(text_the()).c_str());
             } else {
-              msg("%s cracks from the change in temperature.%%fg=reset$", text_The().c_str());
+              msg("%s cracks from the change in temperature.%%fg=reset$", capitalize_first(text_the()).c_str());
             }
           } else {
             if (is_player()) {
-              msg("%%fg=orange$%s suffers from the increase in temperature.%%fg=reset$", text_The().c_str());
+              msg("%%fg=orange$%s suffers from the increase in temperature.%%fg=reset$",
+                  capitalize_first(text_the()).c_str());
             } else {
-              msg("%s suffers from the change in temperature.%%fg=reset$", text_The().c_str());
+              msg("%s suffers from the change in temperature.%%fg=reset$", capitalize_first(text_the()).c_str());
             }
           }
           is_attacked_with_dmg_heat(this, this, damage);
@@ -662,9 +665,9 @@ void Thing::temperature_incr(int temperature_change)
     } else if (temperature_change < -50) {
       if (is_immune_to_cold()) {
         if (is_player()) {
-          msg("%%fg=cyan$%s basks in the increasing cold.%%fg=reset$", text_The().c_str());
+          msg("%%fg=cyan$%s basks in the increasing cold.%%fg=reset$", capitalize_first(text_the()).c_str());
         } else if (is_monst()) {
-          msg("%s basks in the increasing cold.", text_The().c_str());
+          msg("%s basks in the increasing cold.", capitalize_first(text_the()).c_str());
         }
       } else {
         if ((temperature_curr > 0) && (temperature_curr < 25)) {
@@ -672,15 +675,17 @@ void Thing::temperature_incr(int temperature_change)
           if (is_stone()) {
             popup("Crack!");
             if (is_player()) {
-              msg("%%fg=cyan$%s cracks from the decrease in temperature.%%fg=reset$", text_The().c_str());
+              msg("%%fg=cyan$%s cracks from the decrease in temperature.%%fg=reset$",
+                  capitalize_first(text_the()).c_str());
             } else {
-              msg("%s cracks from the change in temperature.", text_The().c_str());
+              msg("%s cracks from the change in temperature.", capitalize_first(text_the()).c_str());
             }
           } else {
             if (is_player()) {
-              msg("%%fg=cyan$%s suffers from the decrease in temperature.%%fg=reset$", text_The().c_str());
+              msg("%%fg=cyan$%s suffers from the decrease in temperature.%%fg=reset$",
+                  capitalize_first(text_the()).c_str());
             } else {
-              msg("%s suffers from the change in temperature.", text_The().c_str());
+              msg("%s suffers from the change in temperature.", capitalize_first(text_the()).c_str());
             }
           }
           is_attacked_with_dmg_cold(this, this, damage);

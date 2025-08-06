@@ -63,6 +63,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.stat_def_bonus(self, 5)
     my.stat_dex_bonus(self, -2)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "golden armor")
+    my.text_apostrophize(self, "golden armor's")
     my.text_description_enchant(self, "+2 DEF")
     my.text_description_long(self, "Golden armor. Good protection. Good bling. Heavy. Easily enchanted.")
     my.text_description_short(self, "Golden armor.")

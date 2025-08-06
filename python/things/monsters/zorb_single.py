@@ -69,7 +69,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="zorb_single", text_long_name="lesser zorblin")
+    tp_init(name="zorb_single",
+            text_long_name="lesser zorblin")
 
 
 init()

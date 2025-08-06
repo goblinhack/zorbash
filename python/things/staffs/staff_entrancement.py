@@ -148,6 +148,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.range_max(self, 7)
     my.temperature(self, 30)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "staffs of entrancement")
+    my.text_apostrophize(self, "staff of entrancement's")
     my.text_description_enchant(self, "+1 radius")
     my.text_description_long(self, "Will cause the afflicted party to move in the opposite direction to you.")
     my.text_description_short(self, "A staff of entrancement.")
@@ -179,7 +181,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_entrancement", text_long_name="staff of entrancement", text_short_name="staff, entrance")
+    tp_init(name="staff_entrancement",
+            text_long_name="staff of entrancement",
+            text_short_name="staff, entrance")
 
 
 init()

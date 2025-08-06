@@ -40,6 +40,8 @@ def key_init(name, text_long_name):
     my.light_dist(self, 2)
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "an")
+    my.text_pluralize(self, "crystal keys")
+    my.text_apostrophize(self, "crystal key's")
     my.text_description_long(self, "An shiny transparent crystal key.")
     my.text_description_short(self, "A crystal key.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -54,7 +56,8 @@ def key_init(name, text_long_name):
 
 
 def init():
-    key_init(name="key_crystal", text_long_name="a crystal key")
+    key_init(name="key_crystal",
+            text_long_name="a crystal key")
 
 
 init()

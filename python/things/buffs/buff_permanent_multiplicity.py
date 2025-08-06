@@ -41,7 +41,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="buff_permanent_multiplicity", text_long_name="multiplicity", text_short_name="multiplicity")
+    tp_init(name="buff_permanent_multiplicity",
+            text_long_name="multiplicity",
+            text_short_name="multiplicity")
 
 
 init()

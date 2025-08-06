@@ -31,7 +31,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="projectile_dart", text_long_name="dart", text_short_name="dart")
+    tp_init(name="projectile_dart",
+            text_long_name="dart",
+            text_short_name="dart")
 
 
 init()

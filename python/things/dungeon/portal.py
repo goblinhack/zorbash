@@ -101,7 +101,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="portal", text_long_name="magic portal", text_short_name="magic portal")
+    tp_init(name="portal",
+            text_long_name="magic portal",
+            text_short_name="magic portal")
 
 
 init()

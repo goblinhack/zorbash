@@ -143,6 +143,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "sewer crabs")
+    my.text_apostrophize(self, "sewer crab's")
     my.text_description_long(self, "Sewer crabs are the garbage disposal denizens of the dungeon. They will collect anything they can, but prefer meat.")
     my.text_description_short(self, "A feisty sewer crab.")
     my.text_hits(self, "claws")
@@ -193,7 +195,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="crab_sewer", text_long_name="sewer crab")
+    tp_init(name="crab_sewer",
+            text_long_name="sewer crab")
 
 
 init()

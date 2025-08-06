@@ -184,6 +184,8 @@ def tp_init(name, text_long_name):
     my.stat_str(self, 16)
     my.temperature(self, 5)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "necromummies")
+    my.text_apostrophize(self, "necromummy's")
     my.text_description_long(self, "A corpse wrapped in once fine linens and bathed in the essence of evil. Unlike most corpses, this one likes to wander around with its minions. Beware of the dark powers this mummy can wield. Likes to keep pet snakes.")
     my.text_description_short(self, "A mummy necromancer.")
     my.text_hits(self, "claws")
@@ -241,7 +243,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="mummy_necro", text_long_name="mummy necromancer")
+    tp_init(name="mummy_necro",
+            text_long_name="mummy necromancer")
 
 
 init()

@@ -4,6 +4,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_level.hpp"
+#include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_vector_bounds_check.hpp"
 
@@ -72,7 +73,7 @@ void Thing::brazier_tick(void)
           if (is_player()) {
             msg("You knock over the brazier!");
           } else {
-            msg("%%fg=orange$%s knocks over a brazier.%%fg=reset$", text_The().c_str());
+            msg("%%fg=orange$%s knocks over a brazier.%%fg=reset$", capitalize_first(text_the()).c_str());
           }
           break;
         }
@@ -80,9 +81,9 @@ void Thing::brazier_tick(void)
 
       if (is_monst()) {
         if (on_fire_set("stumbles into the flames")) {
-          msg("%%fg=orange$%s catches fire.%%fg=reset$", text_The().c_str());
+          msg("%%fg=orange$%s catches fire.%%fg=reset$", capitalize_first(text_the()).c_str());
         } else {
-          msg("%s avoids catching fire.", text_The().c_str());
+          msg("%s avoids catching fire.", capitalize_first(text_the()).c_str());
         }
       } else {
         if (pcg_random_range(0, 100) < 20) {
@@ -96,7 +97,7 @@ void Thing::brazier_tick(void)
         }
       }
     } else {
-      msg("%%fg=orange$%s catches fire.%%fg=reset$", text_The().c_str());
+      msg("%%fg=orange$%s catches fire.%%fg=reset$", capitalize_first(text_the()).c_str());
     }
 
     if (! t->is_dead_or_dying()) {

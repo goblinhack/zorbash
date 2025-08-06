@@ -71,6 +71,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 10)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "blocks of crystals")
+    my.text_apostrophize(self, "block of crystal's")
     my.text_description_short(self, "A block of shining crystal.")
     my.thing_size(self, my.THING_SIZE_GIANT)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -146,7 +148,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="block_of_crystal", text_long_name="block of crystal")
+    tp_init(name="block_of_crystal",
+            text_long_name="block of crystal")
 
 
 init()

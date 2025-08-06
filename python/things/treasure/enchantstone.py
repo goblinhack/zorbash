@@ -73,6 +73,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_hit_and_now_dead_do(self, "me.on_hit_and_now_dead()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "enchantstones")
+    my.text_apostrophize(self, "enchantstone's")
     my.text_description_long(self, "Use this magical stone to bestow powers on other items you carry.")
     my.text_description_short(self, "A glowing enchantstone.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -88,7 +90,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="enchantstone", text_long_name="enchantstone", text_short_name="enchantstone")
+    tp_init(name="enchantstone",
+            text_long_name="enchantstone",
+            text_short_name="enchantstone")
 
 
 init()

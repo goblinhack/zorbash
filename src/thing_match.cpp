@@ -320,7 +320,7 @@ bool Tp::matches(const std::string &what)
   if (is_holy_water() && (what == "is_holy_water")) { return true; }
   if (is_holy() && (what == "is_holy")) { return true; }
   if (is_humanoid() && (what == "is_humanoid")) { return true; }
-  if (is_iceman() && (what == "is_iceman")) { return true; }
+  if (is_icefolk() && (what == "is_icefolk")) { return true; }
   if (is_immune_to_acid() && (what == "is_immune_to_acid")) { return true; }
   if (is_immune_to_blinding() && (what == "is_immune_to_blinding")) { return true; }
   if (is_immune_to_cold() && (what == "is_immune_to_cold")) { return true; }
@@ -375,7 +375,7 @@ bool Tp::matches(const std::string &what)
   if (is_magical() && (what == "is_magical")) { return true; }
   if (is_magic_crystal() && (what == "is_magic_crystal")) { return true; }
   if (is_magic_stone() && (what == "is_magic_stone")) { return true; }
-  if (is_mantisman() && (what == "is_mantisman")) { return true; }
+  if (is_mantisfolk() && (what == "is_mantisfolk")) { return true; }
   if (is_map_beast() && (what == "is_map_beast")) { return true; }
   if (is_meat() && (what == "is_meat")) { return true; }
   if (is_metal() && (what == "is_metal")) { return true; }
@@ -931,7 +931,7 @@ bool Thing::matches(const std::string &what)
   if (is_holy_water() && (what == "is_holy_water")) { return true; }
   if (is_holy() && (what == "is_holy")) { return true; }
   if (is_humanoid() && (what == "is_humanoid")) { return true; }
-  if (is_iceman() && (what == "is_iceman")) { return true; }
+  if (is_icefolk() && (what == "is_icefolk")) { return true; }
   if (is_immune_to_acid() && (what == "is_immune_to_acid")) { return true; }
   if (is_immune_to_blinding() && (what == "is_immune_to_blinding")) { return true; }
   if (is_immune_to_cold() && (what == "is_immune_to_cold")) { return true; }
@@ -986,7 +986,7 @@ bool Thing::matches(const std::string &what)
   if (is_magical() && (what == "is_magical")) { return true; }
   if (is_magic_crystal() && (what == "is_magic_crystal")) { return true; }
   if (is_magic_stone() && (what == "is_magic_stone")) { return true; }
-  if (is_mantisman() && (what == "is_mantisman")) { return true; }
+  if (is_mantisfolk() && (what == "is_mantisfolk")) { return true; }
   if (is_map_beast() && (what == "is_map_beast")) { return true; }
   if (is_meat() && (what == "is_meat")) { return true; }
   if (is_metal() && (what == "is_metal")) { return true; }
@@ -1536,7 +1536,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_holy") { return &Thing::is_holy; }
   if (what == "is_holy_water") { return &Thing::is_holy_water; }
   if (what == "is_humanoid") { return &Thing::is_humanoid; }
-  if (what == "is_iceman") { return &Thing::is_iceman; }
+  if (what == "is_icefolk") { return &Thing::is_icefolk; }
   if (what == "is_immune_to_acid") { return &Thing::is_immune_to_acid; }
   if (what == "is_immune_to_blinding") { return &Thing::is_immune_to_blinding; }
   if (what == "is_immune_to_cold") { return &Thing::is_immune_to_cold; }
@@ -1590,7 +1590,7 @@ std::function< int(Thingp) > Thing::matches_to_func(const std::string &what)
   if (what == "is_magical") { return &Thing::is_magical; }
   if (what == "is_magic_crystal") { return &Thing::is_magic_crystal; }
   if (what == "is_magic_stone") { return &Thing::is_magic_stone; }
-  if (what == "is_mantisman") { return &Thing::is_mantisman; }
+  if (what == "is_mantisfolk") { return &Thing::is_mantisfolk; }
   if (what == "is_map_beast") { return &Thing::is_map_beast; }
   if (what == "is_meat") { return &Thing::is_meat; }
   if (what == "is_metal") { return &Thing::is_metal; }

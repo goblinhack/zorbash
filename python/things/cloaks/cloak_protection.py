@@ -67,6 +67,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_VERY_RARE)
     my.stat_def_bonus(self, 2)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "cloaks of protection")
+    my.text_apostrophize(self, "cloak of protection's")
     my.text_description_enchant(self, "+2 DEF")
     my.text_description_long(self, "A finely embroidered cloak that offers modest protection against attack.")
     my.text_description_short(self, "Cloak of protection.")

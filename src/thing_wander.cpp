@@ -8,7 +8,6 @@
 #include "my_thing.hpp"
 #include "my_vector_bounds_check.hpp"
 
-// REMOVED #include <algorithm>
 #include <limits> // do not remove
 
 bool Thing::ai_blocked(void)

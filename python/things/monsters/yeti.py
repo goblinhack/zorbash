@@ -136,6 +136,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, -20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "yetis")
+    my.text_apostrophize(self, "yeti's")
     my.text_description_long(self, "The extra rare dungeon yeti is a formidable foe. With claws able to disembowel in a single swipe, it is best to leave these mostly peaceful creatures alone.")
     my.text_description_short(self, "A lonesome yeti.")
     my.text_hits(self, "gores")
@@ -183,7 +185,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="yeti", text_long_name="yeti")
+    tp_init(name="yeti",
+            text_long_name="yeti")
 
 
 init()

@@ -134,6 +134,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 50)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "lava ants")
+    my.text_apostrophize(self, "lava ant's")
     my.text_description_long(self, "A lava loving lava ant. Lava ants bask in the heat normally avoided by most creatures. They are not especially aggressive, so do not provoke them.")
     my.text_description_short(self, "A little lava ant.")
     my.text_hits(self, "claws")
@@ -164,7 +166,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="lava_ant", text_long_name="lava ant")
+    tp_init(name="lava_ant",
+            text_long_name="lava ant")
 
 
 init()

@@ -144,6 +144,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "hellpups")
+    my.text_apostrophize(self, "hellpup's")
     my.text_description_long(self, "The hellpup is the junior edition of the much feared hellhound. Underestimate its cute undead puppy eyes at your peril!")
     my.text_description_short(self, "Hellhound, junior edition")
     my.text_hits(self, "claws")
@@ -204,7 +206,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="hellpup", text_long_name="hellpup")
+    tp_init(name="hellpup",
+            text_long_name="hellpup")
 
 
 init()

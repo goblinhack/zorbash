@@ -128,6 +128,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "sleeping mimics")
+    my.text_apostrophize(self, "sleeping mimic's")
     my.text_description_long(self, "A small treasure chest.")
     my.text_description_short(self, "A small treasure chest.")
     my.text_hits(self, "gores")
@@ -153,7 +155,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="mimic_sleeping", text_long_name="treasure chest")
+    tp_init(name="mimic_sleeping",
+            text_long_name="treasure chest")
 
 
 init()

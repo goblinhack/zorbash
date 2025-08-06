@@ -161,6 +161,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "dogmen")
+    my.text_apostrophize(self, "dogman's")
     my.text_description_long2(self, "Dogmen have amazing hearing and are hard to creep up on.")
     my.text_description_long3(self, "Very skilled with throwing darts.")
     my.text_description_long4(self, "Dogmen detest gnolls. Dogmen are solitary and do not appear in packs, unlike gnolls.")
@@ -207,7 +209,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="dogman", text_long_name="dogman")
+    tp_init(name="dogman",
+            text_long_name="dogman")
 
 
 init()

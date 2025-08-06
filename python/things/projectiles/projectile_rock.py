@@ -31,7 +31,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="projectile_rock", text_long_name="thrown rock", text_short_name="thrown rock")
+    tp_init(name="projectile_rock",
+            text_long_name="thrown rock",
+            text_short_name="thrown rock")
 
 
 init()

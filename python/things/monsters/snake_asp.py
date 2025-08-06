@@ -128,6 +128,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "an")
+    my.text_pluralize(self, "asps")
+    my.text_apostrophize(self, "asp's")
     my.text_description_long2(self, "It seems friendly and definitely non non venomous. Want to pet it...?")
     my.text_description_long(self, "A two foot long snake with shiny yellow irises and an upturned snout giving it the appearance of a small spike.")
     my.text_description_short(self, "A friendly little venomous snake.")
@@ -176,7 +178,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="snake_asp", text_long_name="asp")
+    tp_init(name="snake_asp",
+            text_long_name="asp")
 
 
 init()

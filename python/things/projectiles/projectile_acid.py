@@ -54,7 +54,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="projectile_acid", text_long_name="acidball", text_short_name="acidball")
+    tp_init(name="projectile_acid",
+            text_long_name="acidball",
+            text_short_name="acidball")
 
 
 init()

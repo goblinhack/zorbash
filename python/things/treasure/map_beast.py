@@ -39,6 +39,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.noise_on_dropping(self, 1)
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "beast maps")
+    my.text_apostrophize(self, "beast map's")
     my.text_description_long(self, "This magical map can show you the position of all monsters on the level as they move around.")
     my.text_description_short(self, "An aged beast map.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -54,7 +56,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="map_beast", text_long_name="beast map", text_short_name="beast map")
+    tp_init(name="map_beast",
+            text_long_name="beast map",
+            text_short_name="beast map")
 
 
 init()

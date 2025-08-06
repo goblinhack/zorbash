@@ -99,6 +99,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_use_do(self, "me.on_use()")
     my.on_you_are_on_fire_do(self, "me.on_fire()")
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "thunderstones")
+    my.text_apostrophize(self, "thunderstone's")
     my.text_description_long(self, "This most dangerous stone can devastate any are where it is thrown. Be careful where you drop it...")
     my.text_description_short(self, "A harmless looking brownish stone.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -114,7 +116,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="thunderstone", text_long_name="thunderstone", text_short_name="thunderstone")
+    tp_init(name="thunderstone",
+            text_long_name="thunderstone",
+            text_short_name="thunderstone")
 
 
 init()

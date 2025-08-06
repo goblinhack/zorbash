@@ -137,6 +137,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "assassin ducks")
+    my.text_apostrophize(self, "assassin duck's")
     my.text_description_long2(self, "They are not overly aggressive, but if slighted will hunt you down until the end of your days; as long as there is some nice water nearby.")
     my.text_description_long3(self, "Do not be the kind of fool that underestimates the dreaded dungeon duck. Many warriors have met their end at a pair of webbed feet!")
     my.text_description_long4(self, "White assassin ducks are extra ferocious and are people eaters! They have high speed and are often, well, sometimes, applied in covert operations to take down hard to reach enemies.")
@@ -177,7 +179,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="duck2", text_long_name="assassin duck")
+    tp_init(name="duck2",
+            text_long_name="assassin duck")
 
 
 init()

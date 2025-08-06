@@ -22,7 +22,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="skill_intimidating_strength4", text_long_name="intimidating strength 4", text_short_name="intimidating strength 4")
+    tp_init(name="skill_intimidating_strength4",
+            text_long_name="intimidating strength 4",
+            text_short_name="intimidating strength 4")
 
 
 init()

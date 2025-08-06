@@ -2,13 +2,7 @@
 // Copyright Neil McGill, goblinhack@gmail.com
 //
 
-// REMOVED #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
-// REMOVED #include "my_level.hpp"
-// REMOVED #include "my_monst.hpp"
-// REMOVED #include "my_python.hpp"
-// REMOVED #include "my_sprintf.hpp"
-// REMOVED #include "my_string.hpp"
 #include "my_thing.hpp"
 
 //

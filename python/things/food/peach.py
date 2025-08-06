@@ -39,6 +39,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "10+1d15")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "peaches")
+    my.text_apostrophize(self, "peach's")
     my.text_description_long(self, "A giant peach...")
     my.text_description_short(self, "Peach.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -52,7 +54,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="peach", text_long_name="peach", text_short_name="peach")
+    tp_init(name="peach",
+            text_long_name="peach",
+            text_short_name="peach")
 
 
 init()

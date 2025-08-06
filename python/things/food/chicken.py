@@ -53,6 +53,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_thrown_do(self, "me.on_thrown()")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "chickens")
+    my.text_apostrophize(self, "chicken's")
     my.text_description_long(self, "A roast chicken leg possibly. No farms nearby. It could, frankly, be a roast anything.")
     my.text_description_short(self, "Roast chicken leg.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -66,7 +68,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="chicken", text_long_name="chicken", text_short_name="chicken")
+    tp_init(name="chicken",
+            text_long_name="chicken",
+            text_short_name="chicken")
 
 
 init()

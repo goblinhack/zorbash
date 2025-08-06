@@ -172,6 +172,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.range_max(self, 7)
     my.temperature(self, -10)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "staffs of poison")
+    my.text_apostrophize(self, "staff of poison's")
     my.text_description_enchant(self, "+1 radius")
     my.text_description_long(self, "Discharges a blast of intense poison at an ungrateful recipient...")
     my.text_description_short(self, "A staff of poison.")
@@ -203,7 +205,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_poison", text_long_name="staff of poison", text_short_name="staff, poison")
+    tp_init(name="staff_poison",
+            text_long_name="staff of poison",
+            text_short_name="staff, poison")
 
 
 init()

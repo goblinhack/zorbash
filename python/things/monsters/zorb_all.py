@@ -188,6 +188,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "zorblins")
+    my.text_apostrophize(self, "zorblin's")
     my.text_description_long(self, "Zorblins are small, green skinned beings that lair in abandoned mines, despoiled dungeons and other dismal settings, otherwise known as their homes. They spend their time defending their natural habitat from invading marauders, like you. They often carry some meagre amounts of gold, dug from the depths with bare, shaking hands.")
     my.text_hits(self, "claws")
     my.thing_size(self, my.THING_SIZE_NORMAL)

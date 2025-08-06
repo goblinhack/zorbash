@@ -50,6 +50,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "10+1d15")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "flagons of weak ales")
+    my.text_apostrophize(self, "flagon of weak ale's")
     my.text_description_long(self, "A flagon of weak ale with small chunks of something floating inside.")
     my.text_description_short(self, "A flagon of weak ale.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -63,7 +65,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="flagon_ale", text_long_name="flagon of weak ale", text_short_name="ale")
+    tp_init(name="flagon_ale",
+            text_long_name="flagon of weak ale",
+            text_short_name="ale")
 
 
 init()

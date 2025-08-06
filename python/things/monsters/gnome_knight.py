@@ -60,7 +60,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="gnome_knight", text_long_name="gnome knight")
+    tp_init(name="gnome_knight",
+            text_long_name="gnome knight")
 
 
 init()

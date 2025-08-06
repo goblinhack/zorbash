@@ -145,6 +145,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "centipedes")
+    my.text_apostrophize(self, "centipede's")
     my.text_description_long2(self, "Watch out for its friends, as centipedes are highly social; but not great conversationalists.")
     my.text_description_long(self, "A bloated centipede of massive proportions. Poison drips from its hungry mandibles.")
     my.text_description_short(self, "A giant centipede.")
@@ -190,7 +192,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="centipede", text_long_name="centipede")
+    tp_init(name="centipede",
+            text_long_name="centipede")
 
 
 init()

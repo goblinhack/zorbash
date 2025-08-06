@@ -23,7 +23,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="debuff_status_stuck", text_long_name="stuck", text_short_name="stuck")
+    tp_init(name="debuff_status_stuck",
+            text_long_name="stuck",
+            text_short_name="stuck")
 
 
 init()

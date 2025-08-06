@@ -71,6 +71,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_thrown_do(self, "me.on_thrown()")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "confusion darts")
+    my.text_apostrophize(self, "confusion dart's")
     my.text_description_enchant(self, "+1 DMG")
     my.text_description_long(self, "This dart will bring a confused look to your enemies faces. If they have faces...")
     my.text_description_short(self, "A confusion tipped dart.")
@@ -87,7 +89,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="dart_confusion", text_long_name="confusion dart", text_short_name="confusion dart")
+    tp_init(name="dart_confusion",
+            text_long_name="confusion dart",
+            text_short_name="confusion dart")
 
 
 init()

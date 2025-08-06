@@ -131,6 +131,8 @@ def tp_init(name, text_long_name):
     my.stat_str(self, 22)
     my.temperature(self, 20)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "cement golems")
+    my.text_apostrophize(self, "cement golem's")
     my.text_description_long2(self, "Cement men are able to slowly recharge health.")
     my.text_description_long3(self, "Makes an excellent patio ornament.")
     my.text_description_long(self, "A hideous mass of animated cement. Possibly brought into being by an evil necromancer who was annoyed with constant roadworks. Cement men are immune to cold, poison, fire and draining attacks.")
@@ -173,7 +175,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="golem_cement", text_long_name="cement man")
+    tp_init(name="golem_cement",
+            text_long_name="cement man")
 
 
 init()

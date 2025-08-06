@@ -44,7 +44,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="skill_devoted_thrust4", text_long_name="insane devotion 1", text_short_name="insane devotion 1")
+    tp_init(name="skill_devoted_thrust4",
+            text_long_name="insane devotion 1",
+            text_short_name="insane devotion 1")
 
 
 init()

@@ -29,6 +29,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.on_born_do(self, "me.on_born()")
     my.temperature(self, 100)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "beams of energy")
+    my.text_apostrophize(self, "beam of energy's")
     my.tick_prio(self, my.MAP_TICK_PRIO_VERY_HIGH)
     my.z_depth(self, my.MAP_DEPTH_OBJ)
     my.z_prio(self, my.MAP_Z_PRIO_BEHIND)
@@ -55,7 +57,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="laser_energy", text_long_name="beam of energy", text_short_name="laser.energy")
+    tp_init(name="laser_energy",
+            text_long_name="beam of energy",
+            text_short_name="laser.energy")
 
 
 init()

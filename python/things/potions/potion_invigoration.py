@@ -133,6 +133,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "potions of invigoration")
+    my.text_apostrophize(self, "potion of invigoration's")
     my.text_description_long2(self, "You'll feel like your old self again. Only even more awesome, if that could be possible...")
     my.text_description_long(self, "A bubbling pink elixir that restores your health and stamina to at least 80 percent.")
     my.text_description_short(self, "A potion of invigoration.")
@@ -149,7 +151,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="potion_invigoration", text_long_name="potion of invigoration", text_short_name="potion, invigorate")
+    tp_init(name="potion_invigoration",
+            text_long_name="potion of invigoration",
+            text_short_name="potion, invigorate")
 
 
 init()

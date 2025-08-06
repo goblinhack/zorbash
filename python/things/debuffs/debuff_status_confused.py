@@ -23,7 +23,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="debuff_status_confused", text_long_name="confusion", text_short_name="confusion")
+    tp_init(name="debuff_status_confused",
+            text_long_name="confusion",
+            text_short_name="confusion")
 
 
 init()

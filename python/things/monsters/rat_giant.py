@@ -136,6 +136,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "giant rats")
+    my.text_apostrophize(self, "giant rats'")
     my.text_description_long2(self, "Watch out for its jump attack!")
     my.text_description_long(self, "An rat about as big as a family sized car... Blood drips from its teeth. Seems friendly...")
     my.text_description_short(self, "An unfeasibly large rat.")
@@ -175,7 +177,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="rat_giant", text_long_name="giant rat")
+    tp_init(name="rat_giant",
+            text_long_name="giant rat")
 
 
 init()

@@ -39,6 +39,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.nutrition_dice(self, "10+1d15")
     my.rarity(self, my.RARITY_COMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "red peppers")
+    my.text_apostrophize(self, "red pepper's")
     my.text_description_long(self, "Spicy red dungeon pepper.")
     my.text_description_short(self, "Red pepper.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -52,7 +54,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="redpepper", text_long_name="red pepper", text_short_name="red pepper")
+    tp_init(name="redpepper",
+            text_long_name="red pepper",
+            text_short_name="red pepper")
 
 
 init()

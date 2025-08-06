@@ -553,7 +553,7 @@ void Game::wid_collect_create(const std::list< ThingId > items /* intentional co
         //
         // The Item Name
         //
-        text += t->text_short_and_state_capitalised();
+        text += t->text_short_and_state_capitalized();
 
         //
         // Does it have value?

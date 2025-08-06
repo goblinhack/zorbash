@@ -131,6 +131,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "fleshbees")
+    my.text_apostrophize(self, "fleshbee's")
     my.text_description_long(self, "Fleshbees collect pollen, not from plants, but from... your blood. Thankfully fleshbees are slow moving.")
     my.text_description_short(self, "A meaty fleshbee.")
     my.text_hits(self, "stabs")
@@ -161,7 +163,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="fleshbee", text_long_name="fleshbee")
+    tp_init(name="fleshbee",
+            text_long_name="fleshbee")
 
 
 init()

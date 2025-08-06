@@ -99,7 +99,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="spell_of_holding_barrier", text_long_name="magic barrier", text_short_name="magic barrier")
+    tp_init(name="spell_of_holding_barrier",
+            text_long_name="magic barrier",
+            text_short_name="magic barrier")
 
 
 init()

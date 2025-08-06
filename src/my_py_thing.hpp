@@ -449,7 +449,7 @@ PyObject *thing_is_hittable(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_holy(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_holy_water(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_humanoid(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_iceman(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_icefolk(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_acid(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_blinding(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_immune_to_cold(PyObject *obj, PyObject *args, PyObject *keywds);
@@ -503,7 +503,7 @@ PyObject *thing_is_magical_effect(PyObject *obj, PyObject *args, PyObject *keywd
 PyObject *thing_is_magical(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_magic_crystal(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_magic_stone(PyObject *obj, PyObject *args, PyObject *keywds);
-PyObject *thing_is_mantisman(PyObject *obj, PyObject *args, PyObject *keywds);
+PyObject *thing_is_mantisfolk(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_meat(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_metal(PyObject *obj, PyObject *args, PyObject *keywds);
 PyObject *thing_is_mimic(PyObject *obj, PyObject *args, PyObject *keywds);

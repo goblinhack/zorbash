@@ -169,6 +169,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.range_max(self, 7)
     my.temperature(self, 30)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "staffs of fireballs")
+    my.text_apostrophize(self, "staff of fireballs")
     my.text_description_enchant(self, "+1 radius")
     my.text_description_long2(self, "When enchanted, creates a blast radius effect. Ideal for taking out multiple enemies.")
     my.text_description_long3(self, "Please use responsibly.")
@@ -202,7 +204,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_fire", text_long_name="staff of fireballs", text_short_name="staff, fire")
+    tp_init(name="staff_fire",
+            text_long_name="staff of fireballs",
+            text_short_name="staff, fire")
 
 
 init()

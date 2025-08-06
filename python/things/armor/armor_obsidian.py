@@ -59,6 +59,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_RARE)
     my.stat_def_bonus(self, 6)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "obsidian armor")
+    my.text_apostrophize(self, "obsidian armor's")
     my.text_description_enchant(self, "+1 DEF")
     my.text_description_long(self, "Lightweight and extremely tough, obsidian armpr is hard to beat. Unlike you.")
     my.text_description_short(self, "Obsidian armor.")

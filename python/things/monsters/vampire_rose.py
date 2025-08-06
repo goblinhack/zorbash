@@ -117,6 +117,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "vampire roses")
+    my.text_apostrophize(self, "vampire rose's")
     my.text_description_long(self, "Vampire roses grow rapidly and primarily feed on blood and unpleasant corpses. Be a good gardener and don't allow them to spread.")
     my.text_description_short(self, "A beautiful vampire rose.")
     my.text_hits(self, "bites")
@@ -149,7 +151,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="vampire_rose", text_long_name="vampire rose", text_short_name="vampire rose")
+    tp_init(name="vampire_rose",
+            text_long_name="vampire rose",
+            text_short_name="vampire rose")
 
 
 init()

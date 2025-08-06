@@ -20,7 +20,7 @@ Tpp Level::tp_random_treasure_class_A(const point p)
       continue;
     }
 
-    dbg("INF: Placed treasure class A '%s'", tpp->text_short_capitalised().c_str());
+    dbg("INF: Placed treasure class A '%s'", tpp->text_short_capitalized().c_str());
     return tpp;
   }
 }
@@ -41,7 +41,7 @@ Tpp Level::tp_random_treasure_class_B(const point p)
       continue;
     }
 
-    dbg("INF: Placed treasure class B '%s'", tpp->text_short_capitalised().c_str());
+    dbg("INF: Placed treasure class B '%s'", tpp->text_short_capitalized().c_str());
     return tpp;
   }
 }
@@ -62,7 +62,7 @@ Tpp Level::tp_random_treasure_class_C(const point p)
       continue;
     }
 
-    dbg("INF: Placed treasure class C '%s'", tpp->text_short_capitalised().c_str());
+    dbg("INF: Placed treasure class C '%s'", tpp->text_short_capitalized().c_str());
     return tpp;
   }
 }
@@ -83,7 +83,7 @@ Tpp Level::tp_random_weapon_class_A(const point p)
       continue;
     }
 
-    dbg("INF: Placed weapon class A '%s'", tpp->text_short_capitalised().c_str());
+    dbg("INF: Placed weapon class A '%s'", tpp->text_short_capitalized().c_str());
     return tpp;
   }
 }
@@ -104,7 +104,7 @@ Tpp Level::tp_random_weapon_class_B(const point p)
       continue;
     }
 
-    dbg("INF: Placed weapon class B '%s'", tpp->text_short_capitalised().c_str());
+    dbg("INF: Placed weapon class B '%s'", tpp->text_short_capitalized().c_str());
     return tpp;
   }
 }
@@ -125,7 +125,7 @@ Tpp Level::tp_random_weapon_class_C(const point p)
       continue;
     }
 
-    dbg("INF: Placed weapon class C '%s'", tpp->text_short_capitalised().c_str());
+    dbg("INF: Placed weapon class C '%s'", tpp->text_short_capitalized().c_str());
     return tpp;
   }
 }

@@ -35,6 +35,8 @@ def tp_init(name, text_long_name):
     my.normal_placement_rules(self, True)
     my.rarity(self, my.RARITY_UNCOMMON)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "sapphires")
+    my.text_apostrophize(self, "sapphire's")
     my.text_description_long(self, "Magnificent and blessed sapphire, in all its celestial hues. It is a stone of wisdom, prophecy and divine good portents. Putting all that aside, it's worth a few bob. Grab it!")
     my.text_description_short(self, "Polished blue sapphire.")
     my.tick_prio(self, my.MAP_TICK_PRIO_NORMAL)
@@ -56,7 +58,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="gem_sapphire", text_long_name="sapphire")
+    tp_init(name="gem_sapphire",
+            text_long_name="sapphire")
 
 
 init()

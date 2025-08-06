@@ -43,6 +43,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.rarity(self, my.RARITY_VERY_RARE)
     my.stat_luck_bonus(self, 4)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "clover")
+    my.text_apostrophize(self, "four leaf clover's")
     my.text_description_enchant(self, "+1 LUCK")
     my.text_description_long(self, "Nutritious and lucky!")
     my.text_description_short(self, "A four leaf clover.")
@@ -58,7 +60,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="four_leaf_clover", text_long_name="four leaf clover", text_short_name="four leaf clover")
+    tp_init(name="four_leaf_clover",
+            text_long_name="four leaf clover",
+            text_short_name="four leaf clover")
 
 
 init()

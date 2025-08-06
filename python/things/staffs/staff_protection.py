@@ -111,6 +111,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.range_max(self, 7)
     my.temperature(self, 20)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "staffs of protection")
+    my.text_apostrophize(self, "staff of protection's")
     my.text_description_long2(self, "The act of being trapped within this barrier will deal cold damage on whatever is trapped inside.")
     my.text_description_long3(self, "Can only be targeted on creatures.")
     my.text_description_long(self, "This staff will conjure a barrier of protection around the target.")
@@ -143,7 +145,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="staff_protection", text_long_name="staff of protection", text_short_name="staff, protection")
+    tp_init(name="staff_protection",
+            text_long_name="staff of protection",
+            text_short_name="staff, protection")
 
 
 init()

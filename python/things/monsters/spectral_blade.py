@@ -81,6 +81,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature(self, 0)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "spectral blades")
+    my.text_apostrophize(self, "spectral blade's")
     my.text_description_long(self, "A phantom blade that just wants to play.")
     my.text_description_short(self, "A spectral blde.")
     my.text_hits(self, "slash")
@@ -118,7 +120,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="spectral_blade", text_long_name="spectral blade", text_short_name="spectral blade")
+    tp_init(name="spectral_blade",
+            text_long_name="spectral blade",
+            text_short_name="spectral blade")
 
 
 init()

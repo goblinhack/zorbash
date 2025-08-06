@@ -40,6 +40,8 @@ def key_init(name, text_long_name):
     my.light_dist(self, 2)
     my.normal_placement_rules(self, True)
     my.text_a_or_an(self, "an")
+    my.text_pluralize(self, "pairs of keys")
+    my.text_apostrophize(self, "pair of keys")
     my.text_description_long(self, "A pair of keys. What more can you say.")
     my.text_description_short(self, "A pair of keys.")
     my.z_depth(self, my.MAP_DEPTH_OBJ)
@@ -54,7 +56,8 @@ def key_init(name, text_long_name):
 
 
 def init():
-    key_init(name="key_pair", text_long_name="pair of keys")
+    key_init(name="key_pair",
+            text_long_name="pair of keys")
 
 
 init()

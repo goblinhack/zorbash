@@ -428,14 +428,14 @@ bool Thing::try_to_jump(point to, bool be_careful, bool *too_far)
       auto old_distance = DISTANCE(curr_at.x, curr_at.y, level->player->curr_at.x, level->player->curr_at.y);
       auto new_distance = DISTANCE(to.x, to.y, level->player->curr_at.x, level->player->curr_at.y);
       if (old_distance > new_distance) {
-        msg("%s jumps closer!", text_The().c_str());
+        msg("%s jumps closer!", capitalize_first(text_the()).c_str());
       } else if (old_distance < new_distance) {
-        msg("%s jumps away!", text_The().c_str());
+        msg("%s jumps away!", capitalize_first(text_the()).c_str());
       } else {
-        msg("%s jumps!", text_The().c_str());
+        msg("%s jumps!", capitalize_first(text_the()).c_str());
       }
     } else if (! get(level->player->aip()->can_see_currently.can_see, to.x, to.y)) {
-      msg("%s lands!", text_The().c_str());
+      msg("%s lands!", capitalize_first(text_the()).c_str());
     }
   }
 
@@ -891,7 +891,7 @@ void Thing::jump_end(void)
   if (is_player()) {
     auto t = most_dangerous_adjacent_thing();
     if (t) {
-      std::string s = t->text_The() + " attacks as you land";
+      std::string s = capitalize_first(t->text_the()) + " attacks as you land";
       game->tick_begin("monst attacked as player landed");
     }
   }

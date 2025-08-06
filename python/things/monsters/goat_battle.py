@@ -145,6 +145,8 @@ def tp_init(name, text_long_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "battle goats")
+    my.text_apostrophize(self, "battle goat's")
     my.text_description_long2(self, "Watch out for its rut attack! In fact, just watch out in general. Many a brave soul has met their end on the horns of a battle goat!")
     my.text_description_long(self, "A goat of impressive stature. Bred for battle, but found to be too wild for the surface world, battle goats have made their home in this dangerous dungeon.")
     my.text_description_short(self, "An unfeasibly large goat.")
@@ -233,7 +235,8 @@ def tp_init(name, text_long_name):
 
 
 def init():
-    tp_init(name="goat_battle", text_long_name="battle goat")
+    tp_init(name="goat_battle",
+            text_long_name="battle goat")
 
 
 init()

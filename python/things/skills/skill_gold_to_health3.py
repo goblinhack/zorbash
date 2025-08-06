@@ -42,7 +42,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="skill_gold_to_health3", text_long_name="golden health 3", text_short_name="golden health 3")
+    tp_init(name="skill_gold_to_health3",
+            text_long_name="golden health 3",
+            text_short_name="golden health 3")
 
 
 init()

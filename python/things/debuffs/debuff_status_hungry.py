@@ -29,7 +29,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="debuff_status_hungry", text_long_name="hungry", text_short_name="hungry")
+    tp_init(name="debuff_status_hungry",
+            text_long_name="hungry",
+            text_short_name="hungry")
 
 
 init()

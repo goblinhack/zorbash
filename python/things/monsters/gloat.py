@@ -117,6 +117,8 @@ def tp_init(name, text_long_name, text_short_name):
     my.temperature(self, 20)
     my.temperature_sensitive(self, True)
     my.text_a_or_an(self, "a")
+    my.text_pluralize(self, "gaseous gloats")
+    my.text_apostrophize(self, "gaseous gloat's")
     my.text_description_long(self, "Gaseous gloat are lonely creatures that spend their lives wandering dungeons, yearning for companionship. As they tend to have explosive friendships... They get their name as they like to gloat over their victories.")
     my.text_description_short(self, "A floating gaseous gloat.")
     my.text_hits(self, "burns")
@@ -156,7 +158,9 @@ def tp_init(name, text_long_name, text_short_name):
 
 
 def init():
-    tp_init(name="gloat", text_long_name="gaseous gloat", text_short_name="gas gloat")
+    tp_init(name="gloat",
+            text_long_name="gaseous gloat",
+            text_short_name="gas gloat")
 
 
 init()
