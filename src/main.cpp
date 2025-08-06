@@ -871,11 +871,8 @@ int main(int argc, char *argv[])
   }
 
   {
-    if (! g_opt_tests) {
-      TRACE_NO_INDENT();
-      if (! sdl_init()) {
-        ERR("SDL: Init");
-      }
+    if (! sdl_init()) {
+      ERR("SDL: Init");
     }
   }
 
@@ -893,10 +890,8 @@ int main(int argc, char *argv[])
     parse_args(argc, argv);
   }
 
-  if (! g_opt_tests) {
-    TRACE_NO_INDENT();
-    sdl_config_update_all();
-  }
+  TRACE_NO_INDENT();
+  sdl_config_update_all();
 
   {
     TRACE_NO_INDENT();
