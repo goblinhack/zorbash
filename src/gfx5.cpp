@@ -1,5 +1,5 @@
 // g:q
-//  Copyright Neil McGill, goblinhack@gmail.com
+//  Copyright goblinhack@gmail.com
 //
 
 #include "my_tile.hpp"
