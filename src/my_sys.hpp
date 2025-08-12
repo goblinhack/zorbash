@@ -170,7 +170,7 @@ void CROAK_CLEAN(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
 #define DIE_CLEAN(...)                                                                                               \
   DYING("Exiting at %s:%s():%u", SRC_FILE_NAME, SRC_FUNC_NAME, SRC_LINE_NUM);                                        \
   CROAK_CLEAN(__VA_ARGS__);                                                                                          \
-  exit(1);
+  exit(0);
 
 #ifdef DEBUG
 #define DODEBUG(x) x
