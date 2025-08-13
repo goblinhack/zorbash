@@ -18,6 +18,7 @@ SRC_DIR=.
 .PHONY: all clean clobber
 
 all: $(TARGET_GAME)
+	$(DSYM)
 
 # function to make object names from source files
 # (changes suffix to .o, encodes directory names so subdirectories in build dir aren't necessary)

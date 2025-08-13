@@ -495,7 +495,7 @@ case "$MY_OS_NAME" in
         LDLIBS+=" -funwind-tables"
         LDLIBS+=" -rdynamic"
         LDLIBS+=" -Wl,-framework,Opengl"
-        DSYM="dsymutil ../${TARGET}"
+        DSYM="dsymutil \${TARGET_GAME}"
 
         if [[ $OPT_DEV2 != "" ]]; then
             C_FLAGS+=" -fsanitize=address -fno-omit-frame-pointer"
