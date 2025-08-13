@@ -10,33 +10,36 @@
 template < class TYPE, std::size_t XDIM >
 static inline void set(std::array< TYPE, XDIM > &container, std::size_t X, TYPE v)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "set [" << X << "] = " << v << std::endl);
-  IF_DEBUG2 {
-    ASSERT_EX(X, >=, 0)
-    ASSERT_EX(X, <, container.size())
-  }
-  container[ X ] = v;
+  IF_DEBUG2 {ASSERT_EX(X, >=, 0) ASSERT_EX(X, <, container.size())}
+#endif
+  container[ X ]
+      = v;
 }
 
 template < class TYPE, std::size_t XDIM >
 static inline void incr(std::array< TYPE, XDIM > &container, std::size_t X, TYPE v)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "incr [" << X << "] = " << v << std::endl);
-  IF_DEBUG2 {
-    ASSERT_EX(X, >=, 0)
-    ASSERT_EX(X, <, container.size())
-  }
-  container[ X ] += v;
+  IF_DEBUG2 {ASSERT_EX(X, >=, 0) ASSERT_EX(X, <, container.size())}
+#endif
+  container[ X ]
+      += v;
 }
 
 template < class TYPE, std::size_t XDIM >
 static inline void decr(std::array< TYPE, XDIM > &container, std::size_t X, TYPE v)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "decr [" << X << "] = " << v << std::endl);
-  IF_DEBUG2 {
+  IF_DEBUG2
+  {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
   }
+#endif
   if (container[ X ]) {
     container[ X ] -= v;
   }
@@ -44,55 +47,57 @@ static inline void decr(std::array< TYPE, XDIM > &container, std::size_t X, TYPE
 
 template < class TYPE, std::size_t XDIM > static inline void incr(std::array< TYPE, XDIM > &container, std::size_t X)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "incr [" << X << "]" << std::endl);
-  IF_DEBUG2 {
-    ASSERT_EX(X, >=, 0)
-    ASSERT_EX(X, <, container.size())
-  }
+  IF_DEBUG2 {ASSERT_EX(X, >=, 0) ASSERT_EX(X, <, container.size())}
+#endif
   container[ X ]++;
 }
 
 template < class TYPE, std::size_t XDIM > static inline void decr(std::array< TYPE, XDIM > &container, std::size_t X)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "decr [" << X << "]" << std::endl);
-  IF_DEBUG2 {
-    ASSERT_EX(X, >=, 0)
-    ASSERT_EX(X, <, container.size())
-  }
+  IF_DEBUG2 {ASSERT_EX(X, >=, 0) ASSERT_EX(X, <, container.size())}
+#endif
   container[ X ]--;
 }
 
 template < class TYPE, std::size_t XDIM >
 static inline TYPE get(std::array< TYPE, XDIM > const &container, std::size_t X)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "get [" << X << "] = ");
-  IF_DEBUG2 {
-    ASSERT_EX(X, >=, 0)
-    ASSERT_EX(X, <, container.size())
-  }
-  DODEBUG(std::cerr << container[ X ] << std::endl);
+  IF_DEBUG2 {ASSERT_EX(X, >=, 0) ASSERT_EX(X, <, container.size())} DODEBUG(std::cerr << container[ X ] << std::endl);
+#endif
   return (container[ X ]);
 }
 
 template < class TYPE, std::size_t XDIM >
 static inline TYPE &getref(std::array< TYPE, XDIM > &container, std::size_t X)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "getref [" << X << "] = ");
-  IF_DEBUG2 {
+  IF_DEBUG2
+  {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
   }
+#endif
   return (container[ X ]);
 }
 
 template < class TYPE, std::size_t XDIM >
 static inline TYPE *getptr(std::array< TYPE, XDIM > &container, std::size_t X)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "getptr [" << X << "] = ");
-  IF_DEBUG2 {
+  IF_DEBUG2
+  {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
   }
+#endif
   return (&container[ X ]);
 }
 
@@ -102,52 +107,52 @@ static inline TYPE *getptr(std::array< TYPE, XDIM > &container, std::size_t X)
 template < class TYPE, std::size_t XDIM, std::size_t YDIM >
 static inline void set(std::array< std::array< TYPE, YDIM >, XDIM > &container, std::size_t X, std::size_t Y, TYPE v)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "set [" << X << "][" << Y << "] = " << v << std::endl);
-  IF_DEBUG2 {
-    ASSERT_EX(X, >=, 0)
-    ASSERT_EX(X, <, container.size())
-    ASSERT_EX(Y, >=, 0)
-    ASSERT_EX(Y, <, container[ X ].size())
-  }
-  container[ X ][ Y ] = v;
+  IF_DEBUG2 {ASSERT_EX(X, >=, 0) ASSERT_EX(X, <, container.size()) ASSERT_EX(Y, >=, 0)
+                 ASSERT_EX(Y, <, container[ X ].size())}
+#endif
+  container[ X ][ Y ]
+      = v;
 }
 
 template < class TYPE, std::size_t XDIM, std::size_t YDIM >
 static inline void set(std::array< std::array< TYPE, YDIM >, XDIM > *container, std::size_t X, std::size_t Y, TYPE v)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "set [" << X << "][" << Y << "] = " << v << std::endl);
-  IF_DEBUG2 {
-    ASSERT_EX(X, >=, 0)
-    ASSERT_EX(X, <, container->size())
-    ASSERT_EX(Y, >=, 0)
-    ASSERT_EX(Y, <, (*container)[ X ].size())
-  }
-  (*container)[ X ][ Y ] = v;
+  IF_DEBUG2 {ASSERT_EX(X, >=, 0) ASSERT_EX(X, <, container->size()) ASSERT_EX(Y, >=, 0)
+                 ASSERT_EX(Y, <, (*container)[ X ].size())}
+#endif
+  (*container)[ X ][ Y ]
+      = v;
 }
 
 template < class TYPE, std::size_t XDIM, std::size_t YDIM >
 static inline void incr(std::array< std::array< TYPE, YDIM >, XDIM > &container, std::size_t X, std::size_t Y, TYPE v)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "incr [" << X << "][" << Y << "]" << v << std::endl);
-  IF_DEBUG2 {
-    ASSERT_EX(X, >=, 0)
-    ASSERT_EX(X, <, container.size())
-    ASSERT_EX(Y, >=, 0)
-    ASSERT_EX(Y, <, container[ X ].size())
-  }
-  container[ X ][ Y ] += v;
+  IF_DEBUG2 {ASSERT_EX(X, >=, 0) ASSERT_EX(X, <, container.size()) ASSERT_EX(Y, >=, 0)
+                 ASSERT_EX(Y, <, container[ X ].size())}
+#endif
+  container[ X ][ Y ]
+      += v;
 }
 
 template < class TYPE, std::size_t XDIM, std::size_t YDIM >
 static inline void decr(std::array< std::array< TYPE, YDIM >, XDIM > &container, std::size_t X, std::size_t Y, TYPE v)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "decr [" << X << "][" << Y << "]" << v << std::endl);
-  IF_DEBUG2 {
+  IF_DEBUG2
+  {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
     ASSERT_EX(Y, >=, 0)
     ASSERT_EX(Y, <, container[ X ].size())
   }
+#endif
   if (container[ X ][ Y ]) {
     container[ X ][ Y ] -= v;
   }
@@ -156,54 +161,54 @@ static inline void decr(std::array< std::array< TYPE, YDIM >, XDIM > &container,
 template < class TYPE, std::size_t XDIM, std::size_t YDIM >
 static inline TYPE &getref(std::array< std::array< TYPE, YDIM >, XDIM > &container, std::size_t X, std::size_t Y)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "getref [" << X << "][" << Y << "] = ");
-  IF_DEBUG2 {
+  IF_DEBUG2
+  {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
     ASSERT_EX(Y, >=, 0)
     ASSERT_EX(Y, <, container[ X ].size())
   }
+#endif
   return (container[ X ][ Y ]);
 }
 
 template < class TYPE, std::size_t XDIM, std::size_t YDIM >
 static inline TYPE *getptr(std::array< std::array< TYPE, YDIM >, XDIM > &container, std::size_t X, std::size_t Y)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "getptr [" << X << "][" << Y << "] = ");
-  IF_DEBUG2 {
+  IF_DEBUG2
+  {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
     ASSERT_EX(Y, >=, 0)
     ASSERT_EX(Y, <, container[ X ].size())
   }
+#endif
   return (&container[ X ][ Y ]);
 }
 
 template < class TYPE, std::size_t XDIM, std::size_t YDIM >
 static inline TYPE get(std::array< std::array< TYPE, YDIM >, XDIM > const &container, std::size_t X, std::size_t Y)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "get [" << X << "][" << Y << "] = ");
-  IF_DEBUG2 {
-    ASSERT_EX(X, >=, 0)
-    ASSERT_EX(X, <, container.size())
-    ASSERT_EX(Y, >=, 0)
-    ASSERT_EX(Y, <, container[ X ].size())
-  }
-  DODEBUG(std::cerr << container[ X ][ Y ] << std::endl);
+  IF_DEBUG2 {ASSERT_EX(X, >=, 0) ASSERT_EX(X, <, container.size()) ASSERT_EX(Y, >=, 0)
+                 ASSERT_EX(Y, <, container[ X ].size())} DODEBUG(std::cerr << container[ X ][ Y ] << std::endl);
+#endif
   return (container[ X ][ Y ]);
 }
 
 template < class TYPE, std::size_t XDIM, std::size_t YDIM >
 static inline TYPE get(const std::array< std::array< TYPE, YDIM >, XDIM > *container, std::size_t X, std::size_t Y)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "get [" << X << "][" << Y << "] = ");
-  IF_DEBUG2 {
-    ASSERT_EX(X, >=, 0)
-    ASSERT_EX(X, <, container->size())
-    ASSERT_EX(Y, >=, 0)
-    ASSERT_EX(Y, <, container[ X ].size())
-  }
-  DODEBUG(std::cerr << (*container)[ X ][ Y ] << std::endl);
+  IF_DEBUG2 {ASSERT_EX(X, >=, 0) ASSERT_EX(X, <, container->size()) ASSERT_EX(Y, >=, 0)
+                 ASSERT_EX(Y, <, container[ X ].size())} DODEBUG(std::cerr << (*container)[ X ][ Y ] << std::endl);
+#endif
   return ((*container)[ X ][ Y ]);
 }
 
@@ -214,32 +219,25 @@ template < class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM >
 static inline void set(std::array< std::array< std::array< TYPE, ZDIM >, YDIM >, XDIM > &container, std::size_t X,
                        std::size_t Y, std::size_t Z, TYPE v)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "set [" << X << "][" << Y << "][" << Z << "] = " << v << std::endl);
-  IF_DEBUG2 {
-    ASSERT_EX(X, >=, 0)
-    ASSERT_EX(X, <, container.size())
-    ASSERT_EX(Y, >=, 0)
-    ASSERT_EX(Y, <, container[ X ].size())
-    ASSERT_EX(Z, >=, 0)
-    ASSERT_EX(Z, <, container[ X ][ Y ].size())
-  }
-  container[ X ][ Y ][ Z ] = v;
+  IF_DEBUG2 {ASSERT_EX(X, >=, 0) ASSERT_EX(X, <, container.size()) ASSERT_EX(Y, >=, 0) ASSERT_EX(
+      Y, <, container[ X ].size()) ASSERT_EX(Z, >=, 0) ASSERT_EX(Z, <, container[ X ][ Y ].size())}
+#endif
+  container[ X ][ Y ][ Z ]
+      = v;
 }
 
 template < class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM >
 static inline TYPE get(std::array< std::array< std::array< TYPE, ZDIM >, YDIM >, XDIM > const &container,
                        std::size_t X, std::size_t Y, std::size_t Z)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "get [" << X << "][" << Y << "][" << Z << "] = ");
-  IF_DEBUG2 {
-    ASSERT_EX(X, >=, 0)
-    ASSERT_EX(X, <, container.size())
-    ASSERT_EX(Y, >=, 0)
-    ASSERT_EX(Y, <, container[ X ].size())
-    ASSERT_EX(Z, >=, 0)
-    ASSERT_EX(Z, <, container[ X ][ Y ].size())
-  }
-  DODEBUG(std::cerr << container[ X ][ Y ][ Z ] << std::endl);
+  IF_DEBUG2 {ASSERT_EX(X, >=, 0) ASSERT_EX(X, <, container.size()) ASSERT_EX(Y, >=, 0)
+                 ASSERT_EX(Y, <, container[ X ].size()) ASSERT_EX(Z, >=, 0) ASSERT_EX(
+                     Z, <, container[ X ][ Y ].size())} DODEBUG(std::cerr << container[ X ][ Y ][ Z ] << std::endl);
+#endif
   return (container[ X ][ Y ][ Z ]);
 }
 
@@ -247,8 +245,10 @@ template < class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM >
 static inline TYPE &getref(std::array< std::array< std::array< TYPE, ZDIM >, YDIM >, XDIM > &container, std::size_t X,
                            std::size_t Y, std::size_t Z)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "getref [" << X << "][" << Y << "][" << Z << "] = ");
-  IF_DEBUG2 {
+  IF_DEBUG2
+  {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
     ASSERT_EX(Y, >=, 0)
@@ -256,6 +256,7 @@ static inline TYPE &getref(std::array< std::array< std::array< TYPE, ZDIM >, YDI
     ASSERT_EX(Z, >=, 0)
     ASSERT_EX(Z, <, container[ X ][ Y ].size())
   }
+#endif
   return (container[ X ][ Y ][ Z ]);
 }
 
@@ -263,8 +264,10 @@ template < class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM >
 static inline TYPE *getptr(std::array< std::array< std::array< TYPE, ZDIM >, YDIM >, XDIM > &container, std::size_t X,
                            std::size_t Y, std::size_t Z)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "getptr [" << X << "][" << Y << "][" << Z << "] = ");
-  IF_DEBUG2 {
+  IF_DEBUG2
+  {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
     ASSERT_EX(Y, >=, 0)
@@ -272,6 +275,7 @@ static inline TYPE *getptr(std::array< std::array< std::array< TYPE, ZDIM >, YDI
     ASSERT_EX(Z, >=, 0)
     ASSERT_EX(Z, <, container[ X ][ Y ].size())
   }
+#endif
   return (&container[ X ][ Y ][ Z ]);
 }
 
@@ -283,18 +287,15 @@ static inline void
     set(std::array< std::array< std::array< std::array< TYPE, IDIM >, ZDIM >, YDIM >, XDIM > &container,
         std::size_t X, std::size_t Y, std::size_t Z, std::size_t I, TYPE v)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "set [" << X << "][" << Y << "][" << Z << "][" << I << "] = " << v << std::endl);
-  IF_DEBUG2 {
-    ASSERT_EX(X, >=, 0)
-    ASSERT_EX(X, <, container.size())
-    ASSERT_EX(Y, >=, 0)
-    ASSERT_EX(Y, <, container[ X ].size())
-    ASSERT_EX(Z, >=, 0)
-    ASSERT_EX(Z, <, container[ X ][ Y ].size())
-    ASSERT(I >= 0)
-    ASSERT(I < container[ X ][ Y ][ Z ].size())
-  }
-  container[ X ][ Y ][ Z ][ I ] = v;
+  IF_DEBUG2 {ASSERT_EX(X, >=, 0) ASSERT_EX(X, <, container.size()) ASSERT_EX(Y, >=, 0)
+                 ASSERT_EX(Y, <, container[ X ].size()) ASSERT_EX(Z, >=, 0)
+                     ASSERT_EX(Z, <, container[ X ][ Y ].size()) ASSERT(I >= 0)
+                         ASSERT(I < container[ X ][ Y ][ Z ].size())}
+#endif
+  container[ X ][ Y ][ Z ][ I ]
+      = v;
 }
 
 template < class TYPE, std::size_t XDIM, std::size_t YDIM, std::size_t ZDIM, std::size_t IDIM >
@@ -302,18 +303,13 @@ static inline TYPE
     get(std::array< std::array< std::array< std::array< TYPE, IDIM >, ZDIM >, YDIM >, XDIM > const &container,
         std::size_t X, std::size_t Y, std::size_t Z, std::size_t I)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "getptr [" << X << "][" << Y << "][" << Z << "][" << I << "] = ");
-  IF_DEBUG2 {
-    ASSERT_EX(X, >=, 0)
-    ASSERT_EX(X, <, container.size())
-    ASSERT_EX(Y, >=, 0)
-    ASSERT_EX(Y, <, container[ X ].size())
-    ASSERT_EX(Z, >=, 0)
-    ASSERT_EX(Z, <, container[ X ][ Y ].size())
-    ASSERT(I >= 0)
-    ASSERT(I < container[ X ][ Y ][ Z ].size())
-  }
-  DODEBUG(std::cerr << container[ X ][ Y ][ Z ][ I ] << std::endl);
+  IF_DEBUG2 {ASSERT_EX(X, >=, 0) ASSERT_EX(X, <, container.size()) ASSERT_EX(Y, >=, 0) ASSERT_EX(
+      Y, <, container[ X ].size()) ASSERT_EX(Z, >=, 0) ASSERT_EX(Z, <, container[ X ][ Y ].size()) ASSERT(I >= 0)
+                 ASSERT(I < container[ X ][ Y ][ Z ].size())} DODEBUG(std::cerr << container[ X ][ Y ][ Z ][ I ]
+                                                                                << std::endl);
+#endif
   return (container[ X ][ Y ][ Z ][ I ]);
 }
 
@@ -322,8 +318,10 @@ static inline TYPE &
     getref(std::array< std::array< std::array< std::array< TYPE, IDIM >, ZDIM >, YDIM >, XDIM > &container,
            std::size_t X, std::size_t Y, std::size_t Z, std::size_t I)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "getref [" << X << "][" << Y << "][" << Z << "][" << I << "] = ");
-  IF_DEBUG2 {
+  IF_DEBUG2
+  {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
     ASSERT_EX(Y, >=, 0)
@@ -333,6 +331,7 @@ static inline TYPE &
     ASSERT(I >= 0)
     ASSERT(I < container[ X ][ Y ][ Z ].size())
   }
+#endif
   return (container[ X ][ Y ][ Z ][ I ]);
 }
 
@@ -341,8 +340,10 @@ static inline TYPE *
     getptr(std::array< std::array< std::array< std::array< TYPE, IDIM >, ZDIM >, YDIM >, XDIM > &container,
            std::size_t X, std::size_t Y, std::size_t Z, std::size_t I)
 {
+#ifdef ENABLE_DEBUG_EXTRA_BOUNDS_CHECKS
   DODEBUG(std::cerr << "getref [" << X << "][" << Y << "][" << Z << "][" << I << "] = )");
-  IF_DEBUG2 {
+  IF_DEBUG2
+  {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
     ASSERT_EX(Y, >=, 0)
@@ -352,6 +353,7 @@ static inline TYPE *
     ASSERT(I >= 0)
     ASSERT(I < container[ X ][ Y ][ Z ].size())
   }
+#endif
   return (&container[ X ][ Y ][ Z ][ I ]);
 }
 
