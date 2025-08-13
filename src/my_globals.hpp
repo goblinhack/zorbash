@@ -65,34 +65,16 @@ extern int TILES_VISIBLE_DOWN;
 #define NODEBUG2 (likely(! g_opt_debug2))
 #define NODEBUG3 (likely(! g_opt_debug3))
 
-#define IF_DEBUG                                                                                                     \
-  TRACE_NO_INDENT();                                                                                                 \
-  if (DEBUG1)
-#define IF_DEBUG1                                                                                                    \
-  TRACE_NO_INDENT();                                                                                                 \
-  if (DEBUG1)
-#define IF_DEBUG2                                                                                                    \
-  TRACE_NO_INDENT();                                                                                                 \
-  if (DEBUG2)
-#define IF_DEBUG3                                                                                                    \
-  TRACE_NO_INDENT();                                                                                                 \
-  if (DEBUG3)
+#define IF_DEBUG  if (DEBUG1)
+#define IF_DEBUG1 if (DEBUG1)
+#define IF_DEBUG2 if (DEBUG2)
+#define IF_DEBUG3 if (DEBUG3)
 
-#define IF_NODEBUG                                                                                                   \
-  TRACE_NO_INDENT();                                                                                                 \
-  if (NODEBUG1)
-#define IF_NODEBUG1                                                                                                  \
-  TRACE_NO_INDENT();                                                                                                 \
-  if (NODEBUG1)
-#define IF_NODEBUG2                                                                                                  \
-  TRACE_NO_INDENT();                                                                                                 \
-  if (NODEBUG2)
-#define IF_NODEBUG2                                                                                                  \
-  TRACE_NO_INDENT();                                                                                                 \
-  if (NODEBUG2)
-#define IF_NODEBUG3                                                                                                  \
-  TRACE_NO_INDENT();                                                                                                 \
-  if (NODEBUG3)
+#define IF_NODEBUG  if (NODEBUG1)
+#define IF_NODEBUG1 if (NODEBUG1)
+#define IF_NODEBUG2 if (NODEBUG2)
+#define IF_NODEBUG2 if (NODEBUG2)
+#define IF_NODEBUG3 if (NODEBUG3)
 
 #define ERR                                                                                                          \
   TRACE_NO_INDENT();                                                                                                 \
@@ -103,28 +85,22 @@ extern int TILES_VISIBLE_DOWN;
   py_myerr
 
 #define dbg                                                                                                          \
-  TRACE_NO_INDENT();                                                                                                 \
   if (DEBUG1)                                                                                                        \
   log
 #define dbg2                                                                                                         \
-  TRACE_NO_INDENT();                                                                                                 \
   if (DEBUG2)                                                                                                        \
   log
 #define dbg3                                                                                                         \
-  TRACE_NO_INDENT();                                                                                                 \
   if (DEBUG3)                                                                                                        \
   log
 
 #define DBG                                                                                                          \
-  TRACE_NO_INDENT();                                                                                                 \
   if (DEBUG1)                                                                                                        \
   LOG
 #define DBG2                                                                                                         \
-  TRACE_NO_INDENT();                                                                                                 \
   if (DEBUG2)                                                                                                        \
   LOG
 #define DBG3                                                                                                         \
-  TRACE_NO_INDENT();                                                                                                 \
   if (DEBUG3)                                                                                                        \
   LOG
 
