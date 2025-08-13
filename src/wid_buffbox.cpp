@@ -7,13 +7,13 @@
 
 void wid_buffbox_fini(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG3("buffbox: Fini");
 }
 
 uint8_t wid_buffbox_init(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return true;
 }
 
@@ -22,7 +22,7 @@ void wid_buffbox_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int wh
   TRACE_NO_INDENT();
   DBG3("buffbox: Begin over buffbox");
 
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   switch (game->state) {
     case Game::STATE_NORMAL : break;
     case Game::STATE_INVENTORY : return;
@@ -53,7 +53,7 @@ void wid_buffbox_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int wh
   auto slot = wid_get_int_context(w);
 
   DBG3("buffbox: Begin over buffbox slot %d", slot);
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (! level->buffbox_over(slot)) {
     DBG3("buffbox: Not over anything");
@@ -70,10 +70,10 @@ void wid_buffbox_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int wh
 
 void wid_buffbox_mouse_over_end(Widp w)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG3("buffbox: End over buffbox");
 
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   switch (game->state) {
     case Game::STATE_NORMAL : break;
     case Game::STATE_INVENTORY : return;
@@ -104,7 +104,7 @@ void wid_buffbox_mouse_over_end(Widp w)
   auto slot = wid_get_int_context(w);
 
   DBG3("buffbox: Over buffbox slot %d", slot);
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! level->buffbox_over(slot)) {
     return;
   }

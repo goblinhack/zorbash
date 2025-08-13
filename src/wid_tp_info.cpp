@@ -20,7 +20,7 @@ void wid_tp_info_fini(const std::string &why)
 {
   DBG("Destroy wid tp info: %s", why.c_str());
   // backtrace_dump();
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   game->wid_tp_info_clear_popup();
 
@@ -36,7 +36,7 @@ void wid_tp_info_fini(const std::string &why)
 
 uint8_t wid_tp_info_init(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return true;
 }
 
@@ -66,21 +66,21 @@ static void wid_tp_info_placement(point &tl, point &br, int height)
 void Game::wid_tp_info_destroy_immediate(void)
 {
   DBG("Destroy wid tp info immediate");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   wid_tp_info_fini("destroy immediate");
 }
 
 void Game::wid_tp_info_destroy_deferred(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   request_destroy_tp_info = time_ms_cached();
 }
 
 WidPopup *Game::wid_tp_info_create_popup(Tpp t, point tl, point br)
 {
   IF_DEBUG1 { t->log("Create tp info popup"); }
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   switch (state) {
     case Game::STATE_NORMAL : break;
@@ -141,7 +141,7 @@ WidPopup *Game::wid_tp_info_create_popup(Tpp t, point tl, point br)
   if (! g_opt_ascii) {
     if (tile->pix_height <= 32) {
       {
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         auto  w  = wid_new_plain(wid_popup_window->wid_popup_container, "ui-circle");
         point tl = make_point(12, 1);
         point br = make_point(17, 6);
@@ -153,7 +153,7 @@ WidPopup *Game::wid_tp_info_create_popup(Tpp t, point tl, point br)
       }
 
       {
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         auto  w  = wid_new_plain(wid_popup_window->wid_popup_container, "ui-circle-bg");
         point tl = make_point(13, 2);
         point br = make_point(16, 5);
@@ -262,7 +262,7 @@ WidPopup *Game::wid_tp_info_create_popup(Tpp t, point tl, point br)
 
 WidPopup *Game::wid_tp_info_create_popup_compact(const std::vector< Tpp > &ts)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   switch (state) {
     case Game::STATE_NORMAL : break;
@@ -315,8 +315,8 @@ WidPopup *Game::wid_tp_info_create_popup_compact(const std::vector< Tpp > &ts)
 
   for (auto t : ts) {
     auto name = t->text_long_capitalized();
-    snprintf(tmp, sizeof(tmp) - 2, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$%-28s", name.c_str());
-    for (auto c = tmp; c < tmp + sizeof(tmp); c++) {
+    snprintf(tmp, SIZEOF(tmp) - 2, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$%-28s", name.c_str());
+    for (auto c = tmp; c < tmp + SIZEOF(tmp); c++) {
       if (*c == ' ') {
         *c = '`';
       }
@@ -354,7 +354,7 @@ WidPopup *Game::wid_tp_info_create_popup_compact(const std::vector< Tpp > &ts)
 bool Game::wid_tp_info_push_popup(Tpp t)
 {
   IF_DEBUG1 { t->log("Push tp info?"); }
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (t->text_description_long() == "") {
     IF_DEBUG1 { t->log("No; cannot push, no text"); }
@@ -409,7 +409,7 @@ bool Game::wid_tp_info_push_popup(Tpp t)
 
 void Game::wid_tp_info_clear_popup(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (wid_tp_info_window.empty()) {
     return;
   }
@@ -426,9 +426,9 @@ bool Game::wid_tp_info_create(Tpp t, bool when_hovering_over)
 {
   TRACE_NO_INDENT();
   DBG2("Create wid tp info for %s", t->to_short_string().c_str());
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (wid_console_window && wid_console_window->visible) {
     IF_DEBUG1 { t->log("No; console visible"); }
     return false;
@@ -452,7 +452,7 @@ bool Game::wid_tp_info_create(Tpp t, bool when_hovering_over)
     DIE("Recursion");
   }
   recursion = true;
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG2("XXX Create wid tp info for %s", t->to_short_string().c_str());
   IF_DEBUG1 { t->log("Yes; create window"); }
 
@@ -465,7 +465,7 @@ bool Game::wid_tp_info_create(Tpp t, bool when_hovering_over)
 
 bool Game::wid_tp_info_create_list(std::vector< Tpp > &ts)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (game->request_to_remake_rightbar) {
     //
@@ -480,7 +480,7 @@ bool Game::wid_tp_info_create_list(std::vector< Tpp > &ts)
     return false;
   }
 
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (wid_console_window && wid_console_window->visible) {
     DBG2("No; console visible");
     return false;
@@ -546,7 +546,7 @@ bool Game::wid_tp_info_create_list(std::vector< Tpp > &ts)
       }
     }
   }
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   IF_DEBUG1
   {
     for (auto t : ts) {
@@ -618,7 +618,7 @@ bool Game::wid_tp_info_create_list(std::vector< Tpp > &ts)
 
 void Game::wid_tp_info_add_gold_value(WidPopup *w, Tpp t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -627,18 +627,18 @@ void Game::wid_tp_info_add_gold_value(WidPopup *w, Tpp t)
   auto max_value       = gold_value_dice.max_roll();
   if (min_value > 0) {
     if (min_value == max_value) {
-      snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->gold_value_dice_str().c_str());
+      snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->gold_value_dice_str().c_str());
     } else {
-      snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->gold_value_dice_str().c_str());
+      snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->gold_value_dice_str().c_str());
     }
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Value in zorkmids %11s", tmp2);
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Value in zorkmids %11s", tmp2);
     w->log(tmp);
   }
 }
 
 void Game::wid_tp_info_add_nutrition(WidPopup *w, Tpp t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -651,31 +651,31 @@ void Game::wid_tp_info_add_nutrition(WidPopup *w, Tpp t)
   auto max_value      = nutrition_dice.max_roll();
   if (min_value > 0) {
     if (min_value == max_value) {
-      snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->nutrition_dice_str().c_str());
+      snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->nutrition_dice_str().c_str());
     } else {
-      snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->nutrition_dice_str().c_str());
+      snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->nutrition_dice_str().c_str());
     }
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Nutrition %19s", tmp2);
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Nutrition %19s", tmp2);
     w->log(tmp);
   }
 }
 
 void Game::wid_tp_info_add_health(WidPopup *w, Tpp t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
   if (t->is_monst() || t->is_player()) {
-    snprintf(tmp2, sizeof(tmp2) - 1, "%d", t->health_initial());
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Health        %15s", tmp2);
+    snprintf(tmp2, SIZEOF(tmp2) - 1, "%d", t->health_initial());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Health        %15s", tmp2);
     w->log(tmp);
   }
 }
 
 void Game::wid_tp_info_add_dmgd_chance(WidPopup *w, Tpp t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -684,12 +684,12 @@ void Game::wid_tp_info_add_dmgd_chance(WidPopup *w, Tpp t)
     int chance = (int) (((((float) t->chance_d10000_damaged())) / 10000.0) * 100.0);
     if (chance < 5) {
       float chance = (((((float) t->chance_d10000_damaged())) / 10000.0) * 100.0);
-      snprintf(tmp2, sizeof(tmp2) - 1, "%3.2f pct", chance);
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Damaged chance  %11s", tmp2);
+      snprintf(tmp2, SIZEOF(tmp2) - 1, "%3.2f pct", chance);
+      snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Damaged chance  %11s", tmp2);
       w->log(tmp);
     } else {
-      snprintf(tmp2, sizeof(tmp2) - 1, "%d pct", chance);
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Damaged chance  %11s", tmp2);
+      snprintf(tmp2, SIZEOF(tmp2) - 1, "%d pct", chance);
+      snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Damaged chance  %11s", tmp2);
       w->log(tmp);
     }
   }
@@ -697,7 +697,7 @@ void Game::wid_tp_info_add_dmgd_chance(WidPopup *w, Tpp t)
 
 void Game::wid_tp_info_add_crit_chance(WidPopup *w, Tpp t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -706,12 +706,12 @@ void Game::wid_tp_info_add_crit_chance(WidPopup *w, Tpp t)
     int chance = (int) (((((float) t->chance_d10000_crit())) / 10000.0) * 100.0);
     if (chance < 5) {
       float chance = (((((float) t->chance_d10000_crit())) / 10000.0) * 100.0);
-      snprintf(tmp2, sizeof(tmp2) - 1, "%3.2f pct", chance);
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Crit hit chance %11s", tmp2);
+      snprintf(tmp2, SIZEOF(tmp2) - 1, "%3.2f pct", chance);
+      snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Crit hit chance %11s", tmp2);
       w->log(tmp);
     } else {
-      snprintf(tmp2, sizeof(tmp2) - 1, "%d pct", chance);
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Crit hit chance %11s", tmp2);
+      snprintf(tmp2, SIZEOF(tmp2) - 1, "%d pct", chance);
+      snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Crit hit chance %11s", tmp2);
       w->log(tmp);
     }
   }
@@ -719,7 +719,7 @@ void Game::wid_tp_info_add_crit_chance(WidPopup *w, Tpp t)
 
 void Game::wid_tp_info_add_dmg_melee(WidPopup *w, Tpp t, int index)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -732,11 +732,11 @@ void Game::wid_tp_info_add_dmg_melee(WidPopup *w, Tpp t, int index)
     max_value           = dmg_melee_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_melee_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee dmg%20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->dmg_melee_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Melee dmg%20s", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_melee_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Melee dmg%20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_melee_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Melee dmg%20s", tmp2);
       }
       w->log(tmp);
     }
@@ -745,7 +745,7 @@ void Game::wid_tp_info_add_dmg_melee(WidPopup *w, Tpp t, int index)
 
 void Game::wid_tp_info_add_dmg_poison(WidPopup *w, Tpp t, int index)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -755,18 +755,18 @@ void Game::wid_tp_info_add_dmg_poison(WidPopup *w, Tpp t, int index)
     auto max_value       = dmg_poison_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_poison_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Poison dmg%19s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->dmg_poison_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Poison dmg%19s", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_poison_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Poison dmg%19s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_poison_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Poison dmg%19s", tmp2);
       }
       w->log(tmp);
 
       int chance = (int) (((((float) t->dmg_chance_d1000_poison(index))) / 1000.0) * 100.0);
       if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
         w->log(tmp);
       }
     }
@@ -775,7 +775,7 @@ void Game::wid_tp_info_add_dmg_poison(WidPopup *w, Tpp t, int index)
 
 void Game::wid_tp_info_add_dmg_drown(WidPopup *w, Tpp t, int index)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -785,18 +785,18 @@ void Game::wid_tp_info_add_dmg_drown(WidPopup *w, Tpp t, int index)
     auto max_value      = dmg_drown_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_drown_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Drown dmg %19s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->dmg_drown_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Drown dmg %19s", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_drown_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Drown dmg %19s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_drown_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Drown dmg %19s", tmp2);
       }
       w->log(tmp);
 
       int chance = (int) (((((float) t->dmg_chance_d1000_drown(index))) / 1000.0) * 100.0);
       if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
         w->log(tmp);
       }
     }
@@ -805,7 +805,7 @@ void Game::wid_tp_info_add_dmg_drown(WidPopup *w, Tpp t, int index)
 
 void Game::wid_tp_info_add_dmg_bite(WidPopup *w, Tpp t, int index)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -815,18 +815,18 @@ void Game::wid_tp_info_add_dmg_bite(WidPopup *w, Tpp t, int index)
     auto max_value     = dmg_bite_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_bite_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Bite dmg  %19s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->dmg_bite_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Bite dmg  %19s", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_bite_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Bite dmg  %19s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_bite_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Bite dmg  %19s", tmp2);
       }
       w->log(tmp);
 
       int chance = (int) (((((float) t->dmg_chance_d1000_bite(index))) / 1000.0) * 100.0);
       if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
         w->log(tmp);
       }
     }
@@ -835,7 +835,7 @@ void Game::wid_tp_info_add_dmg_bite(WidPopup *w, Tpp t, int index)
 
 void Game::wid_tp_info_add_dmg_claw(WidPopup *w, Tpp t, int index)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -845,18 +845,18 @@ void Game::wid_tp_info_add_dmg_claw(WidPopup *w, Tpp t, int index)
     auto max_value     = dmg_claw_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_claw_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Claw dmg  %19s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->dmg_claw_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Claw dmg  %19s", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_claw_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Claw dmg  %19s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_claw_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Claw dmg  %19s", tmp2);
       }
       w->log(tmp);
 
       int chance = (int) (((((float) t->dmg_chance_d1000_claw(index))) / 1000.0) * 100.0);
       if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
         w->log(tmp);
       }
     }
@@ -865,7 +865,7 @@ void Game::wid_tp_info_add_dmg_claw(WidPopup *w, Tpp t, int index)
 
 void Game::wid_tp_info_add_dmg_cold(WidPopup *w, Tpp t, int index)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -875,18 +875,18 @@ void Game::wid_tp_info_add_dmg_cold(WidPopup *w, Tpp t, int index)
     auto max_value     = dmg_cold_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_cold_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Cold dmg%21s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->dmg_cold_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Cold dmg%21s", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_cold_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Cold dmg%21s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_cold_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Cold dmg%21s", tmp2);
       }
       w->log(tmp);
 
       int chance = (int) (((((float) t->dmg_chance_d1000_cold(index))) / 1000.0) * 100.0);
       if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
         w->log(tmp);
       }
     }
@@ -895,7 +895,7 @@ void Game::wid_tp_info_add_dmg_cold(WidPopup *w, Tpp t, int index)
 
 void Game::wid_tp_info_add_dmg_fire(WidPopup *w, Tpp t, int index)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -905,18 +905,18 @@ void Game::wid_tp_info_add_dmg_fire(WidPopup *w, Tpp t, int index)
     auto max_value     = dmg_fire_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_fire_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Fire dmg%21s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->dmg_fire_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Fire dmg%21s", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_fire_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Fire dmg%21s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_fire_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Fire dmg%21s", tmp2);
       }
       w->log(tmp);
 
       int chance = (int) (((((float) t->dmg_chance_d1000_fire(index))) / 1000.0) * 100.0);
       if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
         w->log(tmp);
       }
     }
@@ -925,7 +925,7 @@ void Game::wid_tp_info_add_dmg_fire(WidPopup *w, Tpp t, int index)
 
 void Game::wid_tp_info_add_dmg_heat(WidPopup *w, Tpp t, int index)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -935,18 +935,18 @@ void Game::wid_tp_info_add_dmg_heat(WidPopup *w, Tpp t, int index)
     auto max_value     = dmg_heat_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_heat_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Heat dmg%21s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->dmg_heat_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Heat dmg%21s", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_heat_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Heat dmg%21s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_heat_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Heat dmg%21s", tmp2);
       }
       w->log(tmp);
 
       int chance = (int) (((((float) t->dmg_chance_d1000_heat(index))) / 1000.0) * 100.0);
       if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
         w->log(tmp);
       }
     }
@@ -955,7 +955,7 @@ void Game::wid_tp_info_add_dmg_heat(WidPopup *w, Tpp t, int index)
 
 void Game::wid_tp_info_add_dmg_crush(WidPopup *w, Tpp t, int index)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -965,18 +965,18 @@ void Game::wid_tp_info_add_dmg_crush(WidPopup *w, Tpp t, int index)
     auto max_value      = dmg_crush_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_crush_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Crush dmg%20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->dmg_crush_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Crush dmg%20s", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_crush_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Crush dmg%20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_crush_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Crush dmg%20s", tmp2);
       }
       w->log(tmp);
 
       int chance = (int) (((((float) t->dmg_chance_d1000_crush(index))) / 1000.0) * 100.0);
       if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
         w->log(tmp);
       }
     }
@@ -985,7 +985,7 @@ void Game::wid_tp_info_add_dmg_crush(WidPopup *w, Tpp t, int index)
 
 void Game::wid_tp_info_add_dmg_impact(WidPopup *w, Tpp t, int index)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -995,18 +995,18 @@ void Game::wid_tp_info_add_dmg_impact(WidPopup *w, Tpp t, int index)
     auto max_value       = dmg_impact_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_impact_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Impact dmg%19s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->dmg_impact_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Impact dmg%19s", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_impact_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Impact dmg%19s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_impact_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Impact dmg%19s", tmp2);
       }
       w->log(tmp);
 
       int chance = (int) (((((float) t->dmg_chance_d1000_impact(index))) / 1000.0) * 100.0);
       if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
         w->log(tmp);
       }
     }
@@ -1015,7 +1015,7 @@ void Game::wid_tp_info_add_dmg_impact(WidPopup *w, Tpp t, int index)
 
 void Game::wid_tp_info_add_dmg_missile(WidPopup *w, Tpp t, int index)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -1025,18 +1025,18 @@ void Game::wid_tp_info_add_dmg_missile(WidPopup *w, Tpp t, int index)
     auto max_value        = dmg_missile_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_missile_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Missile dmg%18s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->dmg_missile_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Missile dmg%18s", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_missile_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Missile dmg%18s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_missile_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Missile dmg%18s", tmp2);
       }
       w->log(tmp);
 
       int chance = (int) (((((float) t->dmg_chance_d1000_missile(index))) / 1000.0) * 100.0);
       if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
         w->log(tmp);
       }
     }
@@ -1045,7 +1045,7 @@ void Game::wid_tp_info_add_dmg_missile(WidPopup *w, Tpp t, int index)
 
 void Game::wid_tp_info_add_dmg_lightning(WidPopup *w, Tpp t, int index)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -1055,18 +1055,18 @@ void Game::wid_tp_info_add_dmg_lightning(WidPopup *w, Tpp t, int index)
     auto max_value          = dmg_lightning_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_lightning_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Blast dmg%20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->dmg_lightning_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Blast dmg%20s", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_lightning_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Blast dmg%20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_lightning_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Blast dmg%20s", tmp2);
       }
       w->log(tmp);
 
       int chance = (int) (((((float) t->dmg_chance_d1000_lightning(index))) / 1000.0) * 100.0);
       if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
         w->log(tmp);
       }
     }
@@ -1075,7 +1075,7 @@ void Game::wid_tp_info_add_dmg_lightning(WidPopup *w, Tpp t, int index)
 
 void Game::wid_tp_info_add_dmg_energy(WidPopup *w, Tpp t, int index)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -1085,18 +1085,18 @@ void Game::wid_tp_info_add_dmg_energy(WidPopup *w, Tpp t, int index)
     auto max_value       = dmg_energy_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_energy_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Energy dmg%19s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->dmg_energy_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Energy dmg%19s", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_energy_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Energy dmg%19s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_energy_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Energy dmg%19s", tmp2);
       }
       w->log(tmp);
 
       int chance = (int) (((((float) t->dmg_chance_d1000_energy(index))) / 1000.0) * 100.0);
       if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
         w->log(tmp);
       }
     }
@@ -1105,7 +1105,7 @@ void Game::wid_tp_info_add_dmg_energy(WidPopup *w, Tpp t, int index)
 
 void Game::wid_tp_info_add_dmg_negation(WidPopup *w, Tpp t, int index)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -1115,18 +1115,18 @@ void Game::wid_tp_info_add_dmg_negation(WidPopup *w, Tpp t, int index)
     auto max_value         = dmg_negation_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_negation_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Negat. dmg%19s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->dmg_negation_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Negat. dmg%19s", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_negation_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Negat. dmg%19s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_negation_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Negat. dmg%19s", tmp2);
       }
       w->log(tmp);
 
       int chance = (int) (((((float) t->dmg_chance_d1000_negation(index))) / 1000.0) * 100.0);
       if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
         w->log(tmp);
       }
     }
@@ -1135,7 +1135,7 @@ void Game::wid_tp_info_add_dmg_negation(WidPopup *w, Tpp t, int index)
 
 void Game::wid_tp_info_add_dmg_acid(WidPopup *w, Tpp t, int index)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -1145,18 +1145,18 @@ void Game::wid_tp_info_add_dmg_acid(WidPopup *w, Tpp t, int index)
     auto max_value     = dmg_acid_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_acid_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Acid dmg%21s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->dmg_acid_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Acid dmg%21s", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_acid_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Acid dmg%21s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_acid_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Acid dmg%21s", tmp2);
       }
       w->log(tmp);
 
       int chance = (int) (((((float) t->dmg_chance_d1000_acid(index))) / 1000.0) * 100.0);
       if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
         w->log(tmp);
       }
     }
@@ -1165,7 +1165,7 @@ void Game::wid_tp_info_add_dmg_acid(WidPopup *w, Tpp t, int index)
 
 void Game::wid_tp_info_add_dmg_nat_att(WidPopup *w, Tpp t, int index)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -1176,28 +1176,28 @@ void Game::wid_tp_info_add_dmg_nat_att(WidPopup *w, Tpp t, int index)
     if (min_value > 0) {
       if (t->dmg_nat_att_type().empty()) {
         if (min_value == max_value) {
-          snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_nat_att_dice_str().c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Bite dmg%21s", tmp2);
+          snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->dmg_nat_att_dice_str().c_str());
+          snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Bite dmg%21s", tmp2);
         } else {
-          snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_nat_att_dice_str().c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Bite dmg%21s", tmp2);
+          snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_nat_att_dice_str().c_str());
+          snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Bite dmg%21s", tmp2);
         }
         w->log(tmp);
       } else {
         if (min_value == max_value) {
-          snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_nat_att_dice_str().c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dmg:%-9s%16s", capitalize(t->dmg_nat_att_type()).c_str(), tmp2);
+          snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->dmg_nat_att_dice_str().c_str());
+          snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Dmg:%-9s%16s", capitalize(t->dmg_nat_att_type()).c_str(), tmp2);
         } else {
-          snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_nat_att_dice_str().c_str());
-          snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dmg:%-9s%16s", capitalize(t->dmg_nat_att_type()).c_str(), tmp2);
+          snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_nat_att_dice_str().c_str());
+          snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Dmg:%-9s%16s", capitalize(t->dmg_nat_att_type()).c_str(), tmp2);
         }
         w->log(tmp);
       }
 
       int chance = (int) (((((float) t->dmg_chance_d1000_nat_att(index))) / 1000.0) * 100.0);
       if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
         w->log(tmp);
       }
     }
@@ -1206,7 +1206,7 @@ void Game::wid_tp_info_add_dmg_nat_att(WidPopup *w, Tpp t, int index)
 
 void Game::wid_tp_info_add_dmg_digest(WidPopup *w, Tpp t, int index)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -1216,18 +1216,18 @@ void Game::wid_tp_info_add_dmg_digest(WidPopup *w, Tpp t, int index)
     auto max_value   = attack_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_digest_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Digest dmg%19s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->dmg_digest_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Digest dmg%19s", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_digest_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Digest dmg%19s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_digest_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Digest dmg%19s", tmp2);
       }
       w->log(tmp);
 
       int chance = (int) (((((float) t->dmg_chance_d1000_digest(index))) / 1000.0) * 100.0);
       if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
         w->log(tmp);
       }
     }
@@ -1236,7 +1236,7 @@ void Game::wid_tp_info_add_dmg_digest(WidPopup *w, Tpp t, int index)
 
 void Game::wid_tp_info_add_dmg_necrosis(WidPopup *w, Tpp t, int index)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -1246,18 +1246,18 @@ void Game::wid_tp_info_add_dmg_necrosis(WidPopup *w, Tpp t, int index)
     auto max_value   = attack_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_necrosis_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Rotting dmg%18s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->dmg_necrosis_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Rotting dmg%18s", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_necrosis_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Rotting dmg%18s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_necrosis_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Rotting dmg%18s", tmp2);
       }
       w->log(tmp);
 
       int chance = (int) (((((float) t->dmg_chance_d1000_necrosis(index))) / 1000.0) * 100.0);
       if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
         w->log(tmp);
       }
     }
@@ -1266,7 +1266,7 @@ void Game::wid_tp_info_add_dmg_necrosis(WidPopup *w, Tpp t, int index)
 
 void Game::wid_tp_info_add_dmg_stamina(WidPopup *w, Tpp t, int index)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -1276,18 +1276,18 @@ void Game::wid_tp_info_add_dmg_stamina(WidPopup *w, Tpp t, int index)
     auto max_value   = attack_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_stamina_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Phys Drain dmg  %13s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->dmg_stamina_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Phys Drain dmg  %13s", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_stamina_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Phys Drain dmg  %13s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_stamina_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Phys Drain dmg  %13s", tmp2);
       }
       w->log(tmp);
 
       int chance = (int) (((((float) t->dmg_chance_d1000_stamina_drain(index))) / 1000.0) * 100.0);
       if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
         w->log(tmp);
       }
     }
@@ -1296,7 +1296,7 @@ void Game::wid_tp_info_add_dmg_stamina(WidPopup *w, Tpp t, int index)
 
 void Game::wid_tp_info_add_dmg_magic_drain(WidPopup *w, Tpp t, int index)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -1306,18 +1306,18 @@ void Game::wid_tp_info_add_dmg_magic_drain(WidPopup *w, Tpp t, int index)
     auto max_value   = attack_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_magic_drain_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Magic Drain dmg  %12s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->dmg_magic_drain_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Magic Drain dmg  %12s", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_magic_drain_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Magic Drain dmg  %12s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_magic_drain_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Magic Drain dmg  %12s", tmp2);
       }
       w->log(tmp);
 
       int chance = (int) (((((float) t->dmg_chance_d1000_magic_drain(index))) / 1000.0) * 100.0);
       if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
         w->log(tmp);
       }
     }
@@ -1326,7 +1326,7 @@ void Game::wid_tp_info_add_dmg_magic_drain(WidPopup *w, Tpp t, int index)
 
 void Game::wid_tp_info_add_dmg_holy(WidPopup *w, Tpp t, int index)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
   char tmp2[ MAXSHORTSTR ];
 
@@ -1336,18 +1336,18 @@ void Game::wid_tp_info_add_dmg_holy(WidPopup *w, Tpp t, int index)
     auto max_value   = attack_dice.max_roll();
     if (min_value > 0) {
       if (min_value == max_value) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%s", t->dmg_holy_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Holy dmg  %12s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%s", t->dmg_holy_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Holy dmg  %12s", tmp2);
       } else {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_holy_dice_str().c_str());
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Holy dmg  %12s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d-%d(%s)", min_value, max_value, t->dmg_holy_dice_str().c_str());
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Holy dmg  %12s", tmp2);
       }
       w->log(tmp);
 
       int chance = (int) (((((float) t->dmg_chance_d1000_holy(index))) / 1000.0) * 100.0);
       if (chance < 100) {
-        snprintf(tmp2, sizeof(tmp2) - 1, "%d percent", chance);
-        snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
+        snprintf(tmp2, SIZEOF(tmp2) - 1, "%d percent", chance);
+        snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray60$- Chance %20s", tmp2);
         w->log(tmp);
       }
     }
@@ -1356,18 +1356,18 @@ void Game::wid_tp_info_add_dmg_holy(WidPopup *w, Tpp t, int index)
 
 void Game::wid_tp_info_add_stat_def(WidPopup *w, Tpp t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
 
   if (t->is_ranged_weapon() || t->is_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     auto def = t->stat_def();
     char tmp2[ MAXSHORTSTR ];
-    snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", def, stat_to_bonus_slash_str(def).c_str());
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense                %6s", tmp2);
+    snprintf(tmp2, SIZEOF(tmp2) - 1, "%d%s", def, stat_to_bonus_slash_str(def).c_str());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Defense                %6s", tmp2);
     w->log(tmp);
   } else if (t->stat_def_bonus()) {
     auto stat = t->stat_def_bonus();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Defense bonus            %4s", bonus_to_string(stat).c_str());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Defense bonus            %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
@@ -1380,18 +1380,18 @@ void Game::wid_tp_info_add_stat_def(WidPopup *w, Tpp t)
 
 void Game::wid_tp_info_add_stat_att(WidPopup *w, Tpp t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
 
   if (t->is_ranged_weapon() || t->is_monst() || t->is_player() || t->is_weapon() || t->is_magical()) {
     auto att = t->stat_att();
     char tmp2[ MAXSHORTSTR ];
-    snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", att, stat_to_bonus_slash_str(att).c_str());
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack                 %6s", tmp2);
+    snprintf(tmp2, SIZEOF(tmp2) - 1, "%d%s", att, stat_to_bonus_slash_str(att).c_str());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Attack                 %6s", tmp2);
     w->log(tmp);
   } else if (t->stat_att_bonus()) {
     auto stat = t->stat_att_bonus();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Attack bonus             %4s", bonus_to_string(stat).c_str());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Attack bonus             %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
@@ -1404,18 +1404,18 @@ void Game::wid_tp_info_add_stat_att(WidPopup *w, Tpp t)
 
 void Game::wid_tp_info_add_stat_str(WidPopup *w, Tpp t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
 
   if (t->is_monst() || t->is_player()) {
     auto stat = t->stat_str();
     char tmp2[ MAXSHORTSTR ];
-    snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength               %6s", tmp2);
+    snprintf(tmp2, SIZEOF(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Strength               %6s", tmp2);
     w->log(tmp);
   } else if (t->stat_str_bonus()) {
     auto stat = t->stat_str_bonus();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength bonus           %4s", bonus_to_string(stat).c_str());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Strength bonus           %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
@@ -1427,25 +1427,25 @@ void Game::wid_tp_info_add_stat_str(WidPopup *w, Tpp t)
 
   if (t->stat_str_min()) {
     auto stat = t->stat_str_min();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Strength min needed    %4u", stat);
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Strength min needed    %4u", stat);
     w->log(tmp);
   }
 }
 
 void Game::wid_tp_info_add_stat_dex(WidPopup *w, Tpp t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
 
   if (t->is_monst() || t->is_player()) {
     auto stat = t->stat_dex();
     char tmp2[ MAXSHORTSTR ];
-    snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity              %6s", tmp2);
+    snprintf(tmp2, SIZEOF(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Dexterity              %6s", tmp2);
     w->log(tmp);
   } else if (t->stat_dex_bonus()) {
     auto stat = t->stat_dex_bonus();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Dexterity bonus          %4s", bonus_to_string(stat).c_str());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Dexterity bonus          %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
@@ -1458,18 +1458,18 @@ void Game::wid_tp_info_add_stat_dex(WidPopup *w, Tpp t)
 
 void Game::wid_tp_info_add_stat_luck(WidPopup *w, Tpp t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
 
   if (t->is_monst() || t->is_player()) {
     auto stat = t->stat_luck();
     char tmp2[ MAXSHORTSTR ];
-    snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Luck                   %6s", tmp2);
+    snprintf(tmp2, SIZEOF(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Luck                   %6s", tmp2);
     w->log(tmp);
   } else if (t->stat_luck_bonus()) {
     auto stat = t->stat_luck_bonus();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Luck bonus               %4s", bonus_to_string(stat).c_str());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Luck bonus               %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
@@ -1482,18 +1482,18 @@ void Game::wid_tp_info_add_stat_luck(WidPopup *w, Tpp t)
 
 void Game::wid_tp_info_add_stat_thv(WidPopup *w, Tpp t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
 
   if (t->is_monst() || t->is_player()) {
     auto stat = t->stat_thv();
     char tmp2[ MAXSHORTSTR ];
-    snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Thieving               %6s", tmp2);
+    snprintf(tmp2, SIZEOF(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Thieving               %6s", tmp2);
     w->log(tmp);
   } else if (t->stat_thv_bonus()) {
     auto stat = t->stat_thv_bonus();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Thieving bonus           %4s", bonus_to_string(stat).c_str());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Thieving bonus           %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
@@ -1506,18 +1506,18 @@ void Game::wid_tp_info_add_stat_thv(WidPopup *w, Tpp t)
 
 void Game::wid_tp_info_add_stat_psi(WidPopup *w, Tpp t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
 
   if (t->is_monst() || t->is_player()) {
     auto stat = t->stat_psi();
     char tmp2[ MAXSHORTSTR ];
-    snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Psi                    %6s", tmp2);
+    snprintf(tmp2, SIZEOF(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Psi                    %6s", tmp2);
     w->log(tmp);
   } else if (t->stat_psi_bonus()) {
     auto stat = t->stat_psi_bonus();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Psi bonus                %4s", bonus_to_string(stat).c_str());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Psi bonus                %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
@@ -1530,18 +1530,18 @@ void Game::wid_tp_info_add_stat_psi(WidPopup *w, Tpp t)
 
 void Game::wid_tp_info_add_stat_int(WidPopup *w, Tpp t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
 
   if (t->is_monst() || t->is_player()) {
     auto stat = t->stat_int();
     char tmp2[ MAXSHORTSTR ];
-    snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Intel                  %6s", tmp2);
+    snprintf(tmp2, SIZEOF(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Intel                  %6s", tmp2);
     w->log(tmp);
   } else if (t->stat_int_bonus()) {
     auto stat = t->stat_int_bonus();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Intel bonus              %4s", bonus_to_string(stat).c_str());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Intel bonus              %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
@@ -1554,18 +1554,18 @@ void Game::wid_tp_info_add_stat_int(WidPopup *w, Tpp t)
 
 void Game::wid_tp_info_add_stat_con(WidPopup *w, Tpp t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
 
   if (t->is_monst() || t->is_player()) {
     auto stat = t->stat_con();
     char tmp2[ MAXSHORTSTR ];
-    snprintf(tmp2, sizeof(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution           %6s", tmp2);
+    snprintf(tmp2, SIZEOF(tmp2) - 1, "%d%s", stat, stat_to_bonus_slash_str(stat).c_str());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Constitution           %6s", tmp2);
     w->log(tmp);
   } else if (t->stat_con_bonus()) {
     auto stat = t->stat_con_bonus();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Constitution bonus       %4s", bonus_to_string(stat).c_str());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Constitution bonus       %4s", bonus_to_string(stat).c_str());
     w->log(tmp);
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
@@ -1578,16 +1578,16 @@ void Game::wid_tp_info_add_stat_con(WidPopup *w, Tpp t)
 
 void Game::wid_tp_info_add_move_speed(WidPopup *w, Tpp t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
 
   if (t->is_monst() || t->is_player()) {
     auto speed = t->move_speed();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Move speed               %4d", speed);
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Move speed               %4d", speed);
     w->log(tmp);
   } else if (t->move_speed_bonus()) {
     auto speed = t->move_speed_bonus();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Move speed bonus         %4d", speed);
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Move speed bonus         %4d", speed);
     w->log(tmp);
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
@@ -1600,18 +1600,18 @@ void Game::wid_tp_info_add_move_speed(WidPopup *w, Tpp t)
 
 void Game::wid_tp_info_add_shove_strength(WidPopup *w, Tpp t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
 
   if (t->is_monst() || t->is_player()) {
     auto shove_strength = t->shove_strength();
     if (shove_strength) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Shove strength           %4d", shove_strength);
+      snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Shove strength           %4d", shove_strength);
       w->log(tmp);
     }
   } else if (t->shove_bonus()) {
     auto shove_strength = t->shove_bonus();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Shove strength bonus     %4d", shove_strength);
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Shove strength bonus     %4d", shove_strength);
     w->log(tmp);
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
@@ -1624,18 +1624,18 @@ void Game::wid_tp_info_add_shove_strength(WidPopup *w, Tpp t)
 
 void Game::wid_tp_info_add_jump_distance(WidPopup *w, Tpp t)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char tmp[ MAXSTR ];
 
   if (t->is_monst() || t->is_player()) {
     auto dist = t->jump_distance();
     if (dist) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Jump distance            %4d", dist);
+      snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Jump distance            %4d", dist);
       w->log(tmp);
     }
   } else if (t->jump_distance_bonus()) {
     auto dist = t->jump_distance_bonus();
-    snprintf(tmp, sizeof(tmp) - 1, "%%fg=gray$Jump distance bonus      %4d", dist);
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gray$Jump distance bonus      %4d", dist);
     w->log(tmp);
     if (t->is_skill()) {
       w->log("%%fg=pink$(while skill is active)");
@@ -1650,7 +1650,7 @@ void Game::wid_tp_info_add_general_info(WidPopup *w, Tpp t)
 {
   bool printed_something = false;
 
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (t->is_monst()) {
     if (t->rarity() == THING_RARITY_UNCOMMON) {
       w->log("Creature is uncommon", TEXT_FORMAT_LHS);

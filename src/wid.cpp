@@ -7110,13 +7110,13 @@ static void wid_move_dequeue(Widp w)
   for (i = 0; i < w->moving; i++) {
     if (i < WID_MAX_MOVE_QUEUE - 1) {
       wid_move_t *c = &getref(w->move, i);
-      memcpy(c, c + 1, sizeof(*c));
+      memcpy(c, c + 1, SIZEOF(*c));
     }
   }
 
   {
     wid_move_t *c = &getref(w->move, i);
-    memset(c, 0, sizeof(*c));
+    memset(c, 0, SIZEOF(*c));
   }
 }
 

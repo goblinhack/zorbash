@@ -27,7 +27,7 @@ int wid_inventory_tab = WID_INVENTORY_TAB_BAG1;
 void wid_inventory_fini(bool remake)
 {
   DBG2("Close inventory");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto level = game->get_current_level();
   if (! level) {
@@ -77,7 +77,7 @@ void wid_inventory_fini(bool remake)
 bool wid_inventory_init(void)
 {
   DBG2("Inventory: Init inventory");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   return wid_inventory_create(nullptr, nullptr);
 }
@@ -85,7 +85,7 @@ bool wid_inventory_init(void)
 uint8_t wid_right_bar_inventory_open(Widp w, int x, int y, uint32_t button)
 {
   DBG2("Inventory: open");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   switch (game->state) {
     case Game::STATE_NORMAL : break;
@@ -117,7 +117,7 @@ uint8_t wid_right_bar_inventory_open(Widp w, int x, int y, uint32_t button)
 uint8_t wid_inventory_close(Widp w, int x, int y, uint32_t button)
 {
   DBG2("Inventory: close");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   wid_inventory_fini();
   return true;
@@ -126,7 +126,7 @@ uint8_t wid_inventory_close(Widp w, int x, int y, uint32_t button)
 void wid_inventory_mouse_over_tab_bag1(Widp w, int x, int y, int wheelx, int wheely)
 {
   DBG2("Inventory: mouse over tab bag1");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   //
   // No moving bags into bags
@@ -147,7 +147,7 @@ void wid_inventory_mouse_over_tab_bag1(Widp w, int x, int y, int wheelx, int whe
 void wid_inventory_mouse_over_tab_bag2(Widp w, int x, int y, int wheelx, int wheely)
 {
   DBG2("Inventory: mouse over tab bag2");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   //
   // No moving bags into bags
@@ -168,7 +168,7 @@ void wid_inventory_mouse_over_tab_bag2(Widp w, int x, int y, int wheelx, int whe
 uint8_t wid_inventory_key_down(Widp w, const struct SDL_Keysym *key)
 {
   DBG2("Inventory: key down");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto level = game->get_current_level();
   if (! level) {
@@ -197,7 +197,7 @@ uint8_t wid_inventory_key_down(Widp w, const struct SDL_Keysym *key)
 uint8_t wid_inventory_item_option_use(Widp w, int x, int y, uint32_t button)
 {
   DBG2("Inventory: Item options use");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto level = game->get_current_level();
   if (! level) {
@@ -245,7 +245,7 @@ uint8_t wid_inventory_item_option_use(Widp w, int x, int y, uint32_t button)
 uint8_t wid_inventory_item_option_unequip(Widp w, int x, int y, uint32_t button)
 {
   DBG2("Inventory: Item options unequip");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto level = game->get_current_level();
   if (! level) {
@@ -300,7 +300,7 @@ uint8_t wid_inventory_item_option_unequip(Widp w, int x, int y, uint32_t button)
 uint8_t wid_inventory_item_option_use_radial(Widp w, int x, int y, uint32_t button)
 {
   DBG2("Inventory: Item options use radial");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto level = game->get_current_level();
   if (! level) {
@@ -347,7 +347,7 @@ uint8_t wid_inventory_item_option_use_radial(Widp w, int x, int y, uint32_t butt
 uint8_t wid_inventory_item_option_eat(Widp w, int x, int y, uint32_t button)
 {
   DBG2("Inventory: Item options eat");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto level = game->get_current_level();
   if (! level) {
@@ -396,7 +396,7 @@ uint8_t wid_inventory_item_option_eat(Widp w, int x, int y, uint32_t button)
 uint8_t wid_inventory_item_option_throw(Widp w, int x, int y, uint32_t button)
 {
   DBG2("Inventory: Item options throw");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto level = game->get_current_level();
   if (! level) {
@@ -441,7 +441,7 @@ uint8_t wid_inventory_item_option_throw(Widp w, int x, int y, uint32_t button)
 uint8_t wid_inventory_item_option_drop(Widp w, int x, int y, uint32_t button)
 {
   DBG2("Inventory: Item options drop");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto level = game->get_current_level();
   if (! level) {
@@ -504,7 +504,7 @@ uint8_t wid_inventory_item_option_drop(Widp w, int x, int y, uint32_t button)
 uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
 {
   DBG2("Inventory: Item options key up");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto level = game->get_current_level();
   if (! level) {
@@ -555,7 +555,7 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   //
   if (sdlk_eq(*key, game->config.key_action0)) {
     CON("INF: Pressed action key");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     wid_thing_info_fini("key 0"); // To remove bag or other info
     level->inventory_chosen(9);
     wid_rightbar_init();
@@ -567,7 +567,7 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   }
   if (sdlk_eq(*key, game->config.key_action1)) {
     CON("INF: Pressed action key");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     wid_thing_info_fini("key 1"); // To remove bag or other info
     level->inventory_chosen(0);
     wid_rightbar_init();
@@ -579,7 +579,7 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   }
   if (sdlk_eq(*key, game->config.key_action2)) {
     CON("INF: Pressed action key");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     wid_thing_info_fini("key 2"); // To remove bag or other info
     level->inventory_chosen(1);
     wid_rightbar_init();
@@ -591,7 +591,7 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   }
   if (sdlk_eq(*key, game->config.key_action3)) {
     CON("INF: Pressed action key");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     wid_thing_info_fini("key 3"); // To remove bag or other info
     level->inventory_chosen(2);
     wid_rightbar_init();
@@ -603,7 +603,7 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   }
   if (sdlk_eq(*key, game->config.key_action4)) {
     CON("INF: Pressed action key");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     wid_thing_info_fini("key 4"); // To remove bag or other info
     level->inventory_chosen(3);
     wid_rightbar_init();
@@ -615,7 +615,7 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   }
   if (sdlk_eq(*key, game->config.key_action5)) {
     CON("INF: Pressed action key");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     wid_thing_info_fini("key 5"); // To remove bag or other info
     level->inventory_chosen(4);
     wid_rightbar_init();
@@ -627,7 +627,7 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   }
   if (sdlk_eq(*key, game->config.key_action6)) {
     CON("INF: Pressed action key");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     wid_thing_info_fini("key 6"); // To remove bag or other info
     level->inventory_chosen(5);
     wid_rightbar_init();
@@ -639,7 +639,7 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   }
   if (sdlk_eq(*key, game->config.key_action7)) {
     CON("INF: Pressed action key");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     wid_thing_info_fini("key 7"); // To remove bag or other info
     level->inventory_chosen(6);
     wid_rightbar_init();
@@ -651,7 +651,7 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   }
   if (sdlk_eq(*key, game->config.key_action8)) {
     CON("INF: Pressed action key");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     wid_thing_info_fini("key 8"); // To remove bag or other info
     level->inventory_chosen(7);
     wid_rightbar_init();
@@ -663,7 +663,7 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
   }
   if (sdlk_eq(*key, game->config.key_action9)) {
     CON("INF: Pressed action key");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     wid_thing_info_fini("key 9"); // To remove bag or other info
     level->inventory_chosen(8);
     wid_rightbar_init();
@@ -698,14 +698,14 @@ uint8_t wid_inventory_key_up(Widp w, const struct SDL_Keysym *key)
       switch (key->sym) {
         default :
           {
-            TRACE_AND_INDENT();
+            TRACE_NO_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
               case SDLK_DELETE : wid_inventory_item_option_drop(nullptr, 0, 0, 0); return true;
               case 'b' :
               case SDLK_ESCAPE :
                 {
-                  TRACE_AND_INDENT();
+                  TRACE_NO_INDENT();
                   DBG2("INF: inventory cancelled");
 
                   if (game->in_transit_item) {
@@ -758,7 +758,7 @@ void wid_inventory_select_requested(Thingp selected)
 bool wid_inventory_over(Thingp over)
 {
   DBG2("Inventory: over a thing");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (over == wid_inventory_thing_over) {
     DBG2("Inventory: over the same thing");
     return true;
@@ -852,7 +852,7 @@ void wid_slot_item_mouse_over_end(Widp w)
 uint8_t wid_slot_item_mouse_up(Widp w, int x, int y, uint32_t button)
 {
   DBG2("Inventory: Mouse down, item select");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (game->in_transit_item) {
     return false;

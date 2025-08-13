@@ -25,7 +25,7 @@ WidTextBox::~WidTextBox()
 WidTextBox::WidTextBox(point tl, point br, Widp parent, bool horiz_scroll, bool vert_scoll, int scroll_height_in)
     : scroll_height(scroll_height_in), tl(tl), br(br), wid_parent(parent)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int w = br.x - tl.x;
   int h = br.y - tl.y;
   width = w;
@@ -131,7 +131,7 @@ WidTextBox::WidTextBox(point tl, point br, Widp parent, bool horiz_scroll, bool 
 //
 void WidTextBox::log_(std::wstring str, wid_text_format format, std::string color)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   Widp tmp {};
   Widp text_wid {};
 
@@ -193,7 +193,7 @@ void WidTextBox::log_(std::wstring str, wid_text_format format, std::string colo
 //
 void WidTextBox::log(std::string s, wid_text_format format, std::string color)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int chars_per_line = wid_get_width(wid_text_area);
 
   auto d = split(s, chars_per_line);
@@ -215,7 +215,7 @@ void WidTextBox::log(std::string s, wid_text_format format, std::string color)
 //
 void WidTextBox::log(std::wstring s, wid_text_format format, std::string color)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int chars_per_line = wid_get_width(wid_text_area);
 
   auto d = split(s, chars_per_line);

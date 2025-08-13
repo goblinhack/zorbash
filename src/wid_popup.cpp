@@ -15,7 +15,7 @@ WidPopup::WidPopup(const std::string name, point tl, point br, Tilep title_tile,
                    bool horiz_scroll, bool vert_scoll, int scroll_height)
     : tl(tl), br(br), title_tile(title_tile), background(background)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   outer_w = br.x - tl.x;
   outer_h = br.y - tl.y;
@@ -81,7 +81,7 @@ WidPopup::WidPopup(const std::string name, point tl, point br, Tilep title_tile,
 //
 void WidPopup::log(std::string s, wid_text_format format, std::string color)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_text_area->log(s, format, color);
 }
 
@@ -90,7 +90,7 @@ void WidPopup::log(std::string s, wid_text_format format, std::string color)
 //
 void WidPopup::log(std::wstring s, wid_text_format format, std::string color)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_text_area->log(s, format, color);
 }
 

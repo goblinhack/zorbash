@@ -18,14 +18,14 @@ WidPopup *wid_config_top_window;
 
 static void wid_config_top_destroy(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   delete wid_config_top_window;
   wid_config_top_window = nullptr;
 }
 
 static uint8_t wid_config_top_gfx(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_config_top_destroy();
   game->wid_config_gfx_select();
   return true;
@@ -33,7 +33,7 @@ static uint8_t wid_config_top_gfx(Widp w, int x, int y, uint32_t button)
 
 static uint8_t wid_config_top_mouse(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_config_top_destroy();
   game->wid_config_mouse_select();
   return true;
@@ -41,7 +41,7 @@ static uint8_t wid_config_top_mouse(Widp w, int x, int y, uint32_t button)
 
 static uint8_t wid_config_top_keyboard(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_config_top_destroy();
   game->wid_config_keyboard_select();
   return true;
@@ -49,7 +49,7 @@ static uint8_t wid_config_top_keyboard(Widp w, int x, int y, uint32_t button)
 
 static uint8_t wid_config_top_sound(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_config_top_destroy();
   game->wid_config_sound_select();
   return true;
@@ -57,7 +57,7 @@ static uint8_t wid_config_top_sound(Widp w, int x, int y, uint32_t button)
 
 static uint8_t wid_config_top_other(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_config_top_destroy();
   game->wid_config_other_select();
   return true;
@@ -65,7 +65,7 @@ static uint8_t wid_config_top_other(Widp w, int x, int y, uint32_t button)
 
 static uint8_t wid_config_top_back(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_config_top_destroy();
   game->wid_main_menu_select();
   return true;
@@ -73,7 +73,7 @@ static uint8_t wid_config_top_back(Widp w, int x, int y, uint32_t button)
 
 static uint8_t wid_config_top_key_up(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (sdlk_eq(*key, game->config.key_console)) {
     return false;
   }
@@ -85,7 +85,7 @@ static uint8_t wid_config_top_key_up(Widp w, const struct SDL_Keysym *key)
       switch (key->sym) {
         default :
           {
-            TRACE_AND_INDENT();
+            TRACE_NO_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
               case 'g' : wid_config_top_gfx(nullptr, 0, 0, 0); return true;
@@ -105,7 +105,7 @@ static uint8_t wid_config_top_key_up(Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_config_top_key_down(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (sdlk_eq(*key, game->config.key_console)) {
     return false;
@@ -116,7 +116,7 @@ static uint8_t wid_config_top_key_down(Widp w, const struct SDL_Keysym *key)
 
 void Game::wid_config_top_menu(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   CON("INF: Config menu");
 
   if (wid_config_top_window) {
@@ -150,7 +150,7 @@ void Game::wid_config_top_menu(void)
   }
 
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     Widp w = wid_config_top_window->wid_popup_container;
     wid_set_on_key_up(w, wid_config_top_key_up);
     wid_set_on_key_down(w, wid_config_top_key_down);
@@ -158,7 +158,7 @@ void Game::wid_config_top_menu(void)
 
   int y_at = 0;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_top_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "gfx");
 
@@ -174,7 +174,7 @@ void Game::wid_config_top_menu(void)
   }
   y_at += box_step;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_top_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "mouse");
 
@@ -190,7 +190,7 @@ void Game::wid_config_top_menu(void)
   }
   y_at += box_step;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_top_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "sound");
 
@@ -206,7 +206,7 @@ void Game::wid_config_top_menu(void)
   }
   y_at += box_step;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_top_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "keyboard");
 
@@ -222,7 +222,7 @@ void Game::wid_config_top_menu(void)
   }
   y_at += box_step;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_top_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Other stuffs");
 
@@ -238,7 +238,7 @@ void Game::wid_config_top_menu(void)
   }
   y_at += box_step;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_top_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Back");
 

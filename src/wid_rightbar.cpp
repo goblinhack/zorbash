@@ -21,7 +21,7 @@ static WidPopup *wid_rightbar_popup;
 
 void wid_rightbar_fini(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_destroy(&wid_rightbar);
   wid_destroy(&wid_map_mini);
 
@@ -31,7 +31,7 @@ void wid_rightbar_fini(void)
 
 bool wid_rightbar_init(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return wid_rightbar_create();
 }
 
@@ -81,7 +81,7 @@ void wid_rightbar_stats_over_def_b(Widp w, int relx, int rely, int wheelx, int w
   {
     auto val = player->stat_def();
     char tmp[ MAXSHORTSTR ];
-    snprintf(tmp, sizeof(tmp) - 1, "Your base defense is %d.", val);
+    snprintf(tmp, SIZEOF(tmp) - 1, "Your base defense is %d.", val);
     wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
   }
@@ -91,7 +91,7 @@ void wid_rightbar_stats_over_def_b(Widp w, int relx, int rely, int wheelx, int w
     auto tot = player->stat_def_total() - player->stat_def_penalties_total();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
-      snprintf(tmp, sizeof(tmp) - 1, "Your total defense including all items and modifiers and penalties is %d.",
+      snprintf(tmp, SIZEOF(tmp) - 1, "Your total defense including all items and modifiers and penalties is %d.",
                tot);
       wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     } else {
@@ -149,7 +149,7 @@ void wid_rightbar_stats_over_stat_str_b(Widp w, int relx, int rely, int wheelx, 
   {
     auto val = player->stat_str();
     char tmp[ MAXSHORTSTR ];
-    snprintf(tmp, sizeof(tmp) - 1, "Your strength is %d.", val);
+    snprintf(tmp, SIZEOF(tmp) - 1, "Your strength is %d.", val);
     wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
   }
@@ -159,7 +159,7 @@ void wid_rightbar_stats_over_stat_str_b(Widp w, int relx, int rely, int wheelx, 
     auto tot = player->stat_str_total();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
-      snprintf(tmp, sizeof(tmp) - 1, "Your total strength including all items and modifiers is %d.", val);
+      snprintf(tmp, SIZEOF(tmp) - 1, "Your total strength including all items and modifiers is %d.", val);
       wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     } else {
       wid_rightbar_popup->log("You currently have no strength bonuses", TEXT_FORMAT_LHS);
@@ -215,7 +215,7 @@ void wid_rightbar_stats_over_stat_att_b(Widp w, int relx, int rely, int wheelx, 
   {
     auto val = player->stat_att();
     char tmp[ MAXSHORTSTR ];
-    snprintf(tmp, sizeof(tmp) - 1, "Your attack roll is %d.", val);
+    snprintf(tmp, SIZEOF(tmp) - 1, "Your attack roll is %d.", val);
     wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
   }
@@ -225,7 +225,7 @@ void wid_rightbar_stats_over_stat_att_b(Widp w, int relx, int rely, int wheelx, 
     auto tot = player->stat_att_total() - player->stat_att_penalties_total();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
-      snprintf(tmp, sizeof(tmp) - 1, "Your total attack including all items and modifiers and penalties is %d.", tot);
+      snprintf(tmp, SIZEOF(tmp) - 1, "Your total attack including all items and modifiers and penalties is %d.", tot);
       wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     } else {
       wid_rightbar_popup->log("You currently have no attack bonuses", TEXT_FORMAT_LHS);
@@ -285,7 +285,7 @@ void wid_rightbar_stats_over_stat_con_b(Widp w, int relx, int rely, int wheelx, 
   {
     auto val = player->stat_con();
     char tmp[ MAXSHORTSTR ];
-    snprintf(tmp, sizeof(tmp) - 1, "Your constitution is %d.", val);
+    snprintf(tmp, SIZEOF(tmp) - 1, "Your constitution is %d.", val);
     wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
   }
@@ -295,7 +295,7 @@ void wid_rightbar_stats_over_stat_con_b(Widp w, int relx, int rely, int wheelx, 
     auto tot = player->stat_con_total();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
-      snprintf(tmp, sizeof(tmp) - 1, "Your total constitution including all items and modifiers is %d.", val);
+      snprintf(tmp, SIZEOF(tmp) - 1, "Your total constitution including all items and modifiers is %d.", val);
       wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     } else {
       wid_rightbar_popup->log("You currently have no constitution bonuses", TEXT_FORMAT_LHS);
@@ -356,7 +356,7 @@ void wid_rightbar_stats_over_stat_dex_b(Widp w, int relx, int rely, int wheelx, 
   {
     auto val = player->stat_dex();
     char tmp[ MAXSHORTSTR ];
-    snprintf(tmp, sizeof(tmp) - 1, "Your dexterity is %d.", val);
+    snprintf(tmp, SIZEOF(tmp) - 1, "Your dexterity is %d.", val);
     wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
   }
@@ -366,7 +366,7 @@ void wid_rightbar_stats_over_stat_dex_b(Widp w, int relx, int rely, int wheelx, 
     auto tot = player->stat_dex_total();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
-      snprintf(tmp, sizeof(tmp) - 1, "Your total dexterity including all items and modifiers is %d.", val);
+      snprintf(tmp, SIZEOF(tmp) - 1, "Your total dexterity including all items and modifiers is %d.", val);
       wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     } else {
       wid_rightbar_popup->log("You currently have no dexterity bonuses", TEXT_FORMAT_LHS);
@@ -426,7 +426,7 @@ void wid_rightbar_stats_over_stat_luck_b(Widp w, int relx, int rely, int wheelx,
   {
     auto val = player->stat_luck();
     char tmp[ MAXSHORTSTR ];
-    snprintf(tmp, sizeof(tmp) - 1, "Your luck is %d.", val);
+    snprintf(tmp, SIZEOF(tmp) - 1, "Your luck is %d.", val);
     wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
   }
@@ -436,7 +436,7 @@ void wid_rightbar_stats_over_stat_luck_b(Widp w, int relx, int rely, int wheelx,
     auto tot = player->stat_luck_total();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
-      snprintf(tmp, sizeof(tmp) - 1, "Your total luck including all items and modifiers is %d.", val);
+      snprintf(tmp, SIZEOF(tmp) - 1, "Your total luck including all items and modifiers is %d.", val);
       wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     } else {
       wid_rightbar_popup->log("You currently have no luck bonuses", TEXT_FORMAT_LHS);
@@ -496,7 +496,7 @@ void wid_rightbar_stats_over_stat_thv_b(Widp w, int relx, int rely, int wheelx, 
   {
     auto val = player->stat_thv();
     char tmp[ MAXSHORTSTR ];
-    snprintf(tmp, sizeof(tmp) - 1, "Your thieving stat is %d.", val);
+    snprintf(tmp, SIZEOF(tmp) - 1, "Your thieving stat is %d.", val);
     wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
   }
@@ -506,7 +506,7 @@ void wid_rightbar_stats_over_stat_thv_b(Widp w, int relx, int rely, int wheelx, 
     auto tot = player->stat_thv_total();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
-      snprintf(tmp, sizeof(tmp) - 1, "Your total thieving stat including all items and modifiers is %d.", val);
+      snprintf(tmp, SIZEOF(tmp) - 1, "Your total thieving stat including all items and modifiers is %d.", val);
       wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     } else {
       wid_rightbar_popup->log("You currently have no thieving bonuses", TEXT_FORMAT_LHS);
@@ -571,7 +571,7 @@ void wid_rightbar_stats_over_stat_psi_b(Widp w, int relx, int rely, int wheelx, 
   {
     auto val = player->stat_psi();
     char tmp[ MAXSHORTSTR ];
-    snprintf(tmp, sizeof(tmp) - 1, "Your psi is %d.", val);
+    snprintf(tmp, SIZEOF(tmp) - 1, "Your psi is %d.", val);
     wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
   }
@@ -581,7 +581,7 @@ void wid_rightbar_stats_over_stat_psi_b(Widp w, int relx, int rely, int wheelx, 
     auto tot = player->stat_psi_total();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
-      snprintf(tmp, sizeof(tmp) - 1, "Your total psi including all items and modifiers is %d.", val);
+      snprintf(tmp, SIZEOF(tmp) - 1, "Your total psi including all items and modifiers is %d.", val);
       wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     } else {
       wid_rightbar_popup->log("You currently have no psi bonuses", TEXT_FORMAT_LHS);
@@ -640,7 +640,7 @@ void wid_rightbar_stats_over_stat_int_b(Widp w, int relx, int rely, int wheelx, 
   {
     auto val = player->stat_int();
     char tmp[ MAXSHORTSTR ];
-    snprintf(tmp, sizeof(tmp) - 1, "Your intelligence is %d.", val);
+    snprintf(tmp, SIZEOF(tmp) - 1, "Your intelligence is %d.", val);
     wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     wid_rightbar_popup->log(UI_LOGGING_EMPTY_LINE);
   }
@@ -650,7 +650,7 @@ void wid_rightbar_stats_over_stat_int_b(Widp w, int relx, int rely, int wheelx, 
     auto tot = player->stat_int_total();
     if (val != tot) {
       char tmp[ MAXSHORTSTR ];
-      snprintf(tmp, sizeof(tmp) - 1, "Your total int including all items and modifiers is %d.", val);
+      snprintf(tmp, SIZEOF(tmp) - 1, "Your total int including all items and modifiers is %d.", val);
       wid_rightbar_popup->log(tmp, TEXT_FORMAT_LHS);
     } else {
       wid_rightbar_popup->log("You currently have no int bonuses", TEXT_FORMAT_LHS);
@@ -674,7 +674,7 @@ void wid_rightbar_inventory_over_begin(Widp w, int relx, int rely, int wheelx, i
 {
   TRACE_NO_INDENT();
   DBG2("Inventory: Begin over inventory");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (game->state != Game::STATE_NORMAL) {
     DBG2("Stats: Moving items; ignore");
@@ -695,7 +695,7 @@ void wid_rightbar_inventory_over_begin(Widp w, int relx, int rely, int wheelx, i
   auto slot = wid_get_int_context(w);
 
   DBG2("Inventory: Begin over inventory slot %d", slot);
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! level->inventory_over(slot)) {
     DBG2("Inventory: Not over anything");
     return;
@@ -713,7 +713,7 @@ void wid_rightbar_inventory_over_end(Widp w)
 {
   TRACE_NO_INDENT();
   DBG2("Inventory: End over inventory");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (game->state != Game::STATE_NORMAL) {
     DBG2("Stats: Moving items; ignore");
@@ -734,7 +734,7 @@ void wid_rightbar_inventory_over_end(Widp w)
   auto slot = wid_get_int_context(w);
 
   DBG2("Inventory: Over inventory slot %d", slot);
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! level->inventory_over(slot)) {
     return;
   }
@@ -752,7 +752,7 @@ void wid_rightbar_stats_over_begin(Widp w, int relx, int rely, int wheelx, int w
 {
   TRACE_NO_INDENT();
   DBG2("Stats: Begin over inventory");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (game->state != Game::STATE_NORMAL) {
     DBG2("Stats: Moving items; ignore");
@@ -781,7 +781,7 @@ void wid_rightbar_stats_over_end(Widp w)
 {
   TRACE_NO_INDENT();
   DBG2("Stats: End over inventory");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (game->state != Game::STATE_NORMAL) {
     DBG2("Stats: Moving items; ignore");

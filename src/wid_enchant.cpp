@@ -16,7 +16,7 @@ static std::vector< Thingp > enchant_items;
 
 void wid_enchant_destroy(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (wid_enchant) {
     delete wid_enchant;
     wid_enchant = nullptr;
@@ -26,7 +26,7 @@ void wid_enchant_destroy(void)
 
 static void wid_enchant_slot(int slot)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (slot >= (int) enchant_items.size()) {
     wid_enchant_destroy();
     return;
@@ -44,7 +44,7 @@ static void wid_enchant_slot(int slot)
 
 static uint8_t wid_enchant_key_up(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto level = game->get_current_level();
   if (! level) {
     return true;
@@ -96,7 +96,7 @@ static uint8_t wid_enchant_key_up(Widp w, const struct SDL_Keysym *key)
               case '9' : wid_enchant_slot(c - '1'); return true;
               case SDLK_ESCAPE :
                 {
-                  TRACE_AND_INDENT();
+                  TRACE_NO_INDENT();
                   CON("INF: Enchant cancelled");
                   wid_enchant_destroy();
                   return true;
@@ -111,7 +111,7 @@ static uint8_t wid_enchant_key_up(Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_enchant_key_down(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto level = game->get_current_level();
   if (! level) {
     return true;
@@ -135,7 +135,7 @@ static uint8_t wid_enchant_key_down(Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_enchant_mouse_up(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto level = game->get_current_level();
   if (! level) {
     return true;
@@ -157,7 +157,7 @@ static uint8_t wid_enchant_mouse_up(Widp w, int x, int y, uint32_t button)
 static uint8_t wid_enchant_close(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Thing enchant: close");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   wid_enchant_destroy();
   return true;
@@ -165,7 +165,7 @@ static uint8_t wid_enchant_close(Widp w, int x, int y, uint32_t button)
 
 void Game::wid_enchant_an_item(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON("You lucky thing. Choose an item to enchant.");
 
   DBG3("Thing enchant create");

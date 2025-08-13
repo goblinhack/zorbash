@@ -59,14 +59,14 @@ void wid_show_dungeon_contents(Levelp l)
   {
     auto m = flip_map(monst_contents);
     for (auto p = m.rbegin(); p != m.rend(); ++p) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=red$%d %s", p->first, p->second.c_str());
+      snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=red$%d %s", p->first, p->second.c_str());
       wid_level_contents->log(tmp, TEXT_FORMAT_LHS);
     }
   }
   {
     auto m = flip_map(treasure_contents);
     for (auto p = m.rbegin(); p != m.rend(); ++p) {
-      snprintf(tmp, sizeof(tmp) - 1, "%%fg=gold$%d %s", p->first, p->second.c_str());
+      snprintf(tmp, SIZEOF(tmp) - 1, "%%fg=gold$%d %s", p->first, p->second.c_str());
       wid_level_contents->log(tmp, TEXT_FORMAT_LHS);
     }
   }

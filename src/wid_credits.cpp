@@ -14,7 +14,7 @@ static WidPopup *wid_credits_window;
 
 static void wid_credits_destroy(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   delete wid_credits_window;
   wid_credits_window = nullptr;
   game->fini();
@@ -25,7 +25,7 @@ static void wid_credits_destroy(void)
 
 static uint8_t wid_credits_key_up(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (sdlk_eq(*key, game->config.key_console)) {
     return false;
@@ -38,13 +38,13 @@ static uint8_t wid_credits_key_up(Widp w, const struct SDL_Keysym *key)
       switch (key->sym) {
         default :
           {
-            TRACE_AND_INDENT();
+            TRACE_NO_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
               case 'b' :
               case SDLK_ESCAPE :
                 {
-                  TRACE_AND_INDENT();
+                  TRACE_NO_INDENT();
                   wid_credits_destroy();
                   return true;
                 }
@@ -58,7 +58,7 @@ static uint8_t wid_credits_key_up(Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_credits_key_down(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (sdlk_eq(*key, game->config.key_console)) {
     return false;
@@ -72,7 +72,7 @@ static uint8_t wid_credits_key_down(Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_credits_mouse_up(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_credits_destroy();
   return true;
 }
@@ -83,7 +83,7 @@ static void game_display_credits_bg(void)
     return;
   }
 
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -99,7 +99,7 @@ static void game_display_credits_fg(void)
     return;
   }
 
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -111,7 +111,7 @@ static void game_display_credits_fg(void)
 
 static void wid_credits_tick(Widp w)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   game_display_credits_bg();
   game_display_flames();
   game_display_credits_fg();
@@ -119,7 +119,7 @@ static void wid_credits_tick(Widp w)
 
 void Game::wid_credits_select(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   CON("INF: Credits");
 
   if (wid_credits_window) {
@@ -185,7 +185,7 @@ void Game::wid_credits_select(void)
   wid_credits_window->log("See README.md, too many to show here");
 
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_credits_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "credits");
 

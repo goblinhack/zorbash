@@ -13,17 +13,17 @@ static std::map< std::string, std::shared_ptr< class WidTiles > > wid_tiles_all;
 
 uint8_t wid_tiles_init(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_tiles_init_done = true;
 
   return true;
 }
 
-static void wid_tiles_destroy(wid_tilesp w) { TRACE_AND_INDENT(); }
+static void wid_tiles_destroy(wid_tilesp w) { TRACE_NO_INDENT(); }
 
 void wid_tiles_fini(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (wid_tiles_init_done) {
     wid_tiles_init_done = false;
 
@@ -38,7 +38,7 @@ void wid_tiles_fini(void)
 
 wid_tilesp wid_tiles_load(std::string name, double scale)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto t = wid_tiles_find(name);
 
   if (t) {
@@ -60,7 +60,7 @@ wid_tilesp wid_tiles_load(std::string name, double scale)
 
   char tmp[ 32 ];
 
-  snprintf(tmp, sizeof(tmp) - 1, "%s_tl", name.c_str());
+  snprintf(tmp, SIZEOF(tmp) - 1, "%s_tl", name.c_str());
   Tilep tile = tile_find(tmp);
   if (unlikely(! tile)) {
     DIE("Did not find wid %s tile %s", name.c_str(), tmp);
@@ -84,7 +84,7 @@ wid_tilesp wid_tiles_load(std::string name, double scale)
   c = 1;
   for (j = 1; j < t->down - 1; j++) {
     for (i = 1; i < t->across - 1; i++) {
-      snprintf(tmp, sizeof(tmp) - 1, "%s_%d", name.c_str(), c);
+      snprintf(tmp, SIZEOF(tmp) - 1, "%s_%d", name.c_str(), c);
       Tilep tile = tile_find(tmp);
       if (unlikely(! tile)) {
         DIE("Did not find wid %s tile %s", name.c_str(), tmp);
@@ -97,7 +97,7 @@ wid_tilesp wid_tiles_load(std::string name, double scale)
   c = 1;
   for (i = 1; i < t->across - 1; i++) {
     j = 0;
-    snprintf(tmp, sizeof(tmp) - 1, "%s_top%d", name.c_str(), c);
+    snprintf(tmp, SIZEOF(tmp) - 1, "%s_top%d", name.c_str(), c);
     Tilep tile = tile_find(tmp);
     if (unlikely(! tile)) {
       DIE("Did not find wid %s tile %s", name.c_str(), tmp);
@@ -111,7 +111,7 @@ wid_tilesp wid_tiles_load(std::string name, double scale)
   for (i = 1; i < t->across - 1; i++) {
     j = t->down - 1;
     ;
-    snprintf(tmp, sizeof(tmp) - 1, "%s_bot%d", name.c_str(), c);
+    snprintf(tmp, SIZEOF(tmp) - 1, "%s_bot%d", name.c_str(), c);
     Tilep tile = tile_find(tmp);
     if (unlikely(! tile)) {
       DIE("Did not find wid %s tile %s", name.c_str(), tmp);
@@ -124,7 +124,7 @@ wid_tilesp wid_tiles_load(std::string name, double scale)
   c = 1;
   for (j = 1; j < t->down - 1; j++) {
     i = 0;
-    snprintf(tmp, sizeof(tmp) - 1, "%s_left%d", name.c_str(), c);
+    snprintf(tmp, SIZEOF(tmp) - 1, "%s_left%d", name.c_str(), c);
     Tilep tile = tile_find(tmp);
     if (unlikely(! tile)) {
       DIE("Did not find wid %s tile %s", name.c_str(), tmp);
@@ -137,7 +137,7 @@ wid_tilesp wid_tiles_load(std::string name, double scale)
   c = 1;
   for (j = 1; j < t->down - 1; j++) {
     i = t->across - 1;
-    snprintf(tmp, sizeof(tmp) - 1, "%s_right%d", name.c_str(), c);
+    snprintf(tmp, SIZEOF(tmp) - 1, "%s_right%d", name.c_str(), c);
     Tilep tile = tile_find(tmp);
     if (unlikely(! tile)) {
       DIE("Did not find wid %s tile %s", name.c_str(), tmp);
@@ -149,7 +149,7 @@ wid_tilesp wid_tiles_load(std::string name, double scale)
 
   i = 0;
   j = 0;
-  snprintf(tmp, sizeof(tmp) - 1, "%s_tl", name.c_str());
+  snprintf(tmp, SIZEOF(tmp) - 1, "%s_tl", name.c_str());
   tile = tile_find(tmp);
   if (unlikely(! tile)) {
     DIE("Did not find wid %s tile %s", name.c_str(), tmp);
@@ -159,7 +159,7 @@ wid_tilesp wid_tiles_load(std::string name, double scale)
 
   i = 0;
   j = t->down - 1;
-  snprintf(tmp, sizeof(tmp) - 1, "%s_bl", name.c_str());
+  snprintf(tmp, SIZEOF(tmp) - 1, "%s_bl", name.c_str());
   tile = tile_find(tmp);
   if (unlikely(! tile)) {
     DIE("Did not find wid %s tile %s", name.c_str(), tmp);
@@ -169,7 +169,7 @@ wid_tilesp wid_tiles_load(std::string name, double scale)
 
   i = t->across - 1;
   j = 0;
-  snprintf(tmp, sizeof(tmp) - 1, "%s_tr", name.c_str());
+  snprintf(tmp, SIZEOF(tmp) - 1, "%s_tr", name.c_str());
   tile = tile_find(tmp);
   if (unlikely(! tile)) {
     DIE("Did not find wid %s tile %s", name.c_str(), tmp);
@@ -179,7 +179,7 @@ wid_tilesp wid_tiles_load(std::string name, double scale)
 
   i = t->across - 1;
   j = t->down - 1;
-  snprintf(tmp, sizeof(tmp) - 1, "%s_br", name.c_str());
+  snprintf(tmp, SIZEOF(tmp) - 1, "%s_br", name.c_str());
   tile = tile_find(tmp);
   if (unlikely(! tile)) {
     DIE("Did not find wid %s tile %s", name.c_str(), tmp);
@@ -192,7 +192,7 @@ wid_tilesp wid_tiles_load(std::string name, double scale)
 
 wid_tilesp wid_tiles_find(std::string file)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (file == "") {
     DIE("No filename given for wid_tiles find");
   }

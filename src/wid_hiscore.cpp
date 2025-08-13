@@ -12,7 +12,7 @@ static WidPopup *wid_hiscore_window;
 
 static void wid_hiscore_destroy(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   delete wid_hiscore_window;
   wid_hiscore_window = nullptr;
   game->wid_main_menu_select();
@@ -20,7 +20,7 @@ static void wid_hiscore_destroy(void)
 
 static uint8_t wid_hiscore_key_up(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (sdlk_eq(*key, game->config.key_console)) {
     return false;
@@ -33,12 +33,12 @@ static uint8_t wid_hiscore_key_up(Widp w, const struct SDL_Keysym *key)
       switch (key->sym) {
         default :
           {
-            TRACE_AND_INDENT();
+            TRACE_NO_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
               case SDLK_ESCAPE :
                 {
-                  TRACE_AND_INDENT();
+                  TRACE_NO_INDENT();
                   wid_hiscore_destroy();
                   return true;
                 }
@@ -55,7 +55,7 @@ static uint8_t wid_hiscore_key_up(Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_hiscore_key_down(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (sdlk_eq(*key, game->config.key_console)) {
     return false;
@@ -66,14 +66,14 @@ static uint8_t wid_hiscore_key_down(Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_hiscore_mouse_up(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_hiscore_destroy();
   return true;
 }
 
 void Game::wid_hiscores_show(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (wid_hiscore_window) {
     wid_hiscore_destroy();
   }
@@ -142,7 +142,7 @@ void Game::wid_hiscores_show(void)
       auto name        = "Noble Dungeoneer";
       auto when        = "When";
 
-      snprintf(tmp, sizeof(tmp) - 1, "%%%%fg=%s$%7s  %-*s %-*s %-5s %*s", color, "Score", name_field_len,
+      snprintf(tmp, SIZEOF(tmp) - 1, "%%%%fg=%s$%7s  %-*s %-*s %-5s %*s", color, "Score", name_field_len,
                capitalize(name).c_str(), when_field_len, when, "Level", defeated_by_field_len, defeated_by);
 
       wid_hiscore_window->log(tmp);
@@ -168,7 +168,7 @@ void Game::wid_hiscores_show(void)
     }
 
     auto color = colors[ index++ ];
-    snprintf(tmp, sizeof(tmp) - 1, "%%%%fg=%s$%07u  %-*s %-*s %-5u %*s", color, h->score, name_field_len,
+    snprintf(tmp, SIZEOF(tmp) - 1, "%%%%fg=%s$%07u  %-*s %-*s %-5u %*s", color, h->score, name_field_len,
              name.c_str(), when_field_len, when.c_str(), h->level_reached, defeated_by_field_len,
              defeated_by.c_str());
 

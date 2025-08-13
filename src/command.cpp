@@ -85,9 +85,9 @@ class command_t
 public:
   command_t(void)
   {
-    memset(&this->tokens, 0, sizeof(this->tokens));
-    memset(&this->readable_tokens, 0, sizeof(this->readable_tokens));
-    memset(&this->input_tokens, 0, sizeof(this->input_tokens));
+    memset(&this->tokens, 0, SIZEOF(this->tokens));
+    memset(&this->readable_tokens, 0, SIZEOF(this->readable_tokens));
+    memset(&this->input_tokens, 0, SIZEOF(this->input_tokens));
     this->callback = nullptr;
   }
 
@@ -224,7 +224,7 @@ static int command_matches(const char *input, char *output, uint8_t show_ambiguo
       }
     }
 
-    // tokens_print_to(&command->readable_tokens, match, sizeof(match));
+    // tokens_print_to(&command->readable_tokens, match, SIZEOF(match));
     if (t == longest_match) {
       matches++;
       // CON("  MATCH    \"%s\" [%d] longest %d", match,t,longest_match);
@@ -235,8 +235,8 @@ static int command_matches(const char *input, char *output, uint8_t show_ambiguo
         completes_to[ 0 ] = '\0';
 
         for (t = 0; t < longest_match; t++) {
-          strlcat_(completes_to, command->tokens.args[ t ], sizeof(completes_to));
-          strlcat_(completes_to, " ", sizeof(completes_to));
+          strlcat_(completes_to, command->tokens.args[ t ], SIZEOF(completes_to));
+          strlcat_(completes_to, " ", SIZEOF(completes_to));
         }
 
         if (output) {
@@ -244,9 +244,9 @@ static int command_matches(const char *input, char *output, uint8_t show_ambiguo
         }
       }
 
-      tokens_print_to(&command->input_tokens, match, sizeof(match));
+      tokens_print_to(&command->input_tokens, match, SIZEOF(match));
 
-      tokens_print_to(&command->readable_tokens, match2, sizeof(match2));
+      tokens_print_to(&command->readable_tokens, match2, SIZEOF(match2));
 
       if (show_ambiguous) {
         CON("  %s -- %s", match, match2);
@@ -288,21 +288,21 @@ static int command_matches(const char *input, char *output, uint8_t show_ambiguo
 
           for (t = 0; t < longest_match; t++) {
             if (strisregexp(command->tokens.args[ t ])) {
-              strlcat_(cand_expand_to, input_tokens.args[ t ], sizeof(cand_expand_to));
-              strlcat_(cand_expand_to, " ", sizeof(cand_expand_to));
+              strlcat_(cand_expand_to, input_tokens.args[ t ], SIZEOF(cand_expand_to));
+              strlcat_(cand_expand_to, " ", SIZEOF(cand_expand_to));
               continue;
             }
 
-            strlcat_(cand_expand_to, command->tokens.args[ t ], sizeof(cand_expand_to));
+            strlcat_(cand_expand_to, command->tokens.args[ t ], SIZEOF(cand_expand_to));
 
-            strlcat_(cand_expand_to, " ", sizeof(cand_expand_to));
+            strlcat_(cand_expand_to, " ", SIZEOF(cand_expand_to));
           }
 
           if (expands_to[ 0 ] != '\0') {
             common_len               = strcommon(expands_to, cand_expand_to);
             expands_to[ common_len ] = '\0';
           } else {
-            strlcpy_(expands_to, cand_expand_to, sizeof(expands_to));
+            strlcpy_(expands_to, cand_expand_to, SIZEOF(expands_to));
           }
         }
       }

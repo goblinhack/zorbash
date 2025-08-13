@@ -129,19 +129,19 @@ static void wid_choose_next_dungeons_mouse_over(Widp w, int relx, int rely, int 
     wid_level_description->log("%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$Level reconn");
     wid_level_description->log(UI_LOGGING_EMPTY_LINE);
 
-    snprintf(tmp, sizeof(tmp) - 1, "Monst HP estimate %u", l->total_monst_hp_level());
+    snprintf(tmp, SIZEOF(tmp) - 1, "Monst HP estimate %u", l->total_monst_hp_level());
     wid_level_description->log(tmp, TEXT_FORMAT_LHS);
     wid_level_description->log(UI_LOGGING_EMPTY_LINE);
 
-    snprintf(tmp, sizeof(tmp) - 1, "Monst damage est. %u", l->total_monst_dmg_level());
+    snprintf(tmp, SIZEOF(tmp) - 1, "Monst damage est. %u", l->total_monst_dmg_level());
     wid_level_description->log(tmp, TEXT_FORMAT_LHS);
     wid_level_description->log(UI_LOGGING_EMPTY_LINE);
 
-    snprintf(tmp, sizeof(tmp) - 1, "Loot value est.   %u", l->total_loot_level());
+    snprintf(tmp, SIZEOF(tmp) - 1, "Loot value est.   %u", l->total_loot_level());
     wid_level_description->log(tmp, TEXT_FORMAT_LHS);
     wid_level_description->log(UI_LOGGING_EMPTY_LINE);
 
-    snprintf(tmp, sizeof(tmp) - 1, "Food HP est.      %u", l->total_food_level());
+    snprintf(tmp, SIZEOF(tmp) - 1, "Food HP est.      %u", l->total_food_level());
     wid_level_description->log(tmp, TEXT_FORMAT_LHS);
 
     switch (l->difficulty_depth) {
@@ -571,7 +571,7 @@ static void wid_choose_next_dungeons_update_button(wid_choose_next_dungeons_ctx 
   }
 
   char tmp[ MAXSHORTSTR ];
-  snprintf(tmp, sizeof(tmp) - 1, "%d", l->dungeon_walk_order_level_no);
+  snprintf(tmp, SIZEOF(tmp) - 1, "%d", l->dungeon_walk_order_level_no);
   wid_set_text(b, tmp);
   wid_set_text_lhs(b, true);
   wid_set_text_top(b, true);
@@ -607,7 +607,7 @@ static void wid_choose_next_dungeons_update_buttons(Widp w)
 
 void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_descending)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto level = game->level;
   if (! level) {

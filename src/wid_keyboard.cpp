@@ -145,7 +145,7 @@ static uint8_t wid_keyboard_text_input_key_event(Widp w, const SDL_Keysym *key);
 
 static void wid_keyboard_update_buttons(Widp w)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
   verify(MTYPE_MISC, ctx);
 
@@ -195,7 +195,7 @@ static void wid_keyboard_update_buttons(Widp w)
 
 static void wid_keyboard_event(Widp w, int focusx, int focusy, const SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
   verify(MTYPE_MISC, ctx);
 
@@ -264,7 +264,7 @@ static void wid_keyboard_event(Widp w, int focusx, int focusy, const SDL_Keysym 
 
 static uint8_t wid_keyboard_mouse_event(Widp w, int focusx, int focusy)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_keyboard_event(w, focusx, focusy, 0 /* key */);
 
   return true;
@@ -272,7 +272,7 @@ static uint8_t wid_keyboard_mouse_event(Widp w, int focusx, int focusy)
 
 static uint8_t wid_keyboard_button_mouse_event(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int focus  = wid_get_int_context(w);
   int focusx = (focus & 0xff);
   int focusy = (focus & 0xff00) >> 8;
@@ -282,7 +282,7 @@ static uint8_t wid_keyboard_button_mouse_event(Widp w, int x, int y, uint32_t bu
 
 static void wid_keyboard_focus_right(wid_keyboard_ctx *ctx)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   ctx->focusx++;
   if (ctx->focusx > WID_KEYBOARD_ACROSS - 1) {
     ctx->focusx = 0;
@@ -293,7 +293,7 @@ static void wid_keyboard_focus_right(wid_keyboard_ctx *ctx)
 
 static void wid_keyboard_focus_left(wid_keyboard_ctx *ctx)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   ctx->focusx--;
   if (ctx->focusx < 0) {
     ctx->focusx = WID_KEYBOARD_ACROSS - 1;
@@ -304,7 +304,7 @@ static void wid_keyboard_focus_left(wid_keyboard_ctx *ctx)
 
 static void wid_keyboard_focus_down(wid_keyboard_ctx *ctx)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   ctx->focusy++;
   if (ctx->focusy > WID_KEYBOARD_DOWN - 1) {
     ctx->focusy = 0;
@@ -315,7 +315,7 @@ static void wid_keyboard_focus_down(wid_keyboard_ctx *ctx)
 
 static void wid_keyboard_focus_up(wid_keyboard_ctx *ctx)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   ctx->focusy--;
   if (ctx->focusy < 0) {
     ctx->focusy = WID_KEYBOARD_DOWN - 1;
@@ -326,7 +326,7 @@ static void wid_keyboard_focus_up(wid_keyboard_ctx *ctx)
 
 static void wid_keyboard_last_focus(wid_keyboard_ctx *ctx)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   ctx->focusx = WID_KEYBOARD_ACROSS - 1;
   ctx->focusy = WID_KEYBOARD_DOWN - 1;
 
@@ -335,7 +335,7 @@ static void wid_keyboard_last_focus(wid_keyboard_ctx *ctx)
 
 static void wid_keyboard_first_focus(wid_keyboard_ctx *ctx)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   ctx->focusx = 0;
   ctx->focusy = 0;
 
@@ -344,7 +344,7 @@ static void wid_keyboard_first_focus(wid_keyboard_ctx *ctx)
 
 static void wid_keyboard_set_focus(wid_keyboard_ctx *ctx, int focusx, int focusy)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   ctx->focusx = focusx;
   ctx->focusy = focusy;
 
@@ -353,7 +353,7 @@ static void wid_keyboard_set_focus(wid_keyboard_ctx *ctx, int focusx, int focusy
 
 static uint8_t wid_keyboard_parent_key_down(Widp w, const SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
   verify(MTYPE_MISC, ctx);
 
@@ -396,7 +396,7 @@ static uint8_t wid_keyboard_parent_key_down(Widp w, const SDL_Keysym *key)
 
 static uint8_t wid_keyboard_parent_joy_button(Widp w, int x, int y)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
   verify(MTYPE_MISC, ctx);
   int ret = false;
@@ -473,7 +473,7 @@ static uint8_t wid_keyboard_parent_joy_button(Widp w, int x, int y)
 
 static uint8_t wid_keyboard_button_key_event(Widp w, const SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
   verify(MTYPE_MISC, ctx);
 
@@ -509,7 +509,7 @@ static uint8_t wid_keyboard_button_key_event(Widp w, const SDL_Keysym *key)
 
 static uint8_t wid_keyboard_button_joy_button_event(Widp w, int x, int y)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
   verify(MTYPE_MISC, ctx);
   int ret = false;
@@ -588,7 +588,7 @@ static uint8_t wid_keyboard_button_joy_button_event(Widp w, int x, int y)
 
 static uint8_t wid_keyboard_text_input_key_event(Widp w, const SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
   verify(MTYPE_MISC, ctx);
 
@@ -622,7 +622,7 @@ static uint8_t wid_keyboard_text_input_key_event(Widp w, const SDL_Keysym *key)
 
 static void wid_keyboard_mouse_over(Widp w, int relx, int rely, int wheelx, int wheely)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
   verify(MTYPE_MISC, ctx);
 
@@ -648,7 +648,7 @@ static void wid_keyboard_mouse_over(Widp w, int relx, int rely, int wheelx, int 
 
 static void wid_keyboard_destroy(Widp w)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
   verify(MTYPE_MISC, ctx);
 
@@ -660,7 +660,7 @@ static void wid_keyboard_destroy(Widp w)
 
 static void wid_keyboard_tick(Widp w)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) wid_get_void_context(w);
   verify(MTYPE_MISC, ctx);
 
@@ -711,7 +711,7 @@ static void wid_keyboard_tick(Widp w)
 
 static void wid_keyboard_bg_tick(Widp w)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (g_opt_ascii) {
     return;
   }
@@ -728,14 +728,14 @@ static void wid_keyboard_bg_tick(Widp w)
 Widp wid_keyboard(const std::wstring &text, const std::wstring &title, wid_keyboard_event_t selected,
                   wid_keyboard_event_t cancelled, size_t max_len)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_keyboard_visible = true;
 
   /*
    * Create a context to hold button info so we can update it when the focus
    * changes
    */
-  wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) myzalloc(sizeof(*ctx), "wid keyboard");
+  wid_keyboard_ctx *ctx = (wid_keyboard_ctx *) myzalloc(SIZEOF(*ctx), "wid keyboard");
   ctx->focusx           = -1;
   ctx->focusy           = -1;
   ctx->cancelled        = cancelled;

@@ -20,7 +20,7 @@
 bool wid_rightbar_pixelart_create(void)
 {
   DBG2("Remake rightbar");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto level = game->get_current_level();
   if (! level) {
@@ -275,7 +275,7 @@ bool wid_rightbar_pixelart_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ width + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_def_total() - player->stat_def_penalties_total());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%2d", player->stat_def_total() - player->stat_def_penalties_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -305,7 +305,7 @@ bool wid_rightbar_pixelart_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ width + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_att_total() - player->stat_att_penalties_total());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%2d", player->stat_att_total() - player->stat_att_penalties_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -335,7 +335,7 @@ bool wid_rightbar_pixelart_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ width + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_str_total());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%2d", player->stat_str_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -367,7 +367,7 @@ bool wid_rightbar_pixelart_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ width + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_con_total());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%2d", player->stat_con_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -397,7 +397,7 @@ bool wid_rightbar_pixelart_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ width + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_dex_total());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%2d", player->stat_dex_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -427,7 +427,7 @@ bool wid_rightbar_pixelart_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ width + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_luck_total());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%2d", player->stat_luck_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -459,7 +459,7 @@ bool wid_rightbar_pixelart_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ width + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_thv_total());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%2d", player->stat_thv_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -489,7 +489,7 @@ bool wid_rightbar_pixelart_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ width + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_psi_total());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%2d", player->stat_psi_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }
@@ -519,7 +519,7 @@ bool wid_rightbar_pixelart_create(void)
     wid_set_on_mouse_over_end(w, wid_rightbar_stats_over_popup_e);
 
     char tmp[ width + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_int_total());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%2d", player->stat_int_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
   }

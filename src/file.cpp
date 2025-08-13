@@ -201,7 +201,7 @@ unsigned char *file_io_read(const char *filename, int *out_len)
     return nullptr;
   }
 
-  buffer = (unsigned char *) mymalloc(len + sizeof((char) '\0'), "file read");
+  buffer = (unsigned char *) mymalloc(len + SIZEOF((char) '\0'), "file read");
   if (! buffer) {
     fprintf(MY_STDERR, "Failed to alloc mem for file \"%s\": %s\n", filename, strerror(errno));
     fclose(file);

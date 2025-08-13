@@ -33,7 +33,7 @@ static ts_t wid_last_wait_repeat;
 void wid_actionbar_close_all_popups(void)
 {
   DBG("Close all popups");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   wid_thing_info_fini("close all popups");
   wid_tp_info_fini("close all popups");

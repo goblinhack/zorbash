@@ -17,7 +17,7 @@ static WidPopup *wid_dead_window;
 
 static void wid_dead_destroy(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   delete wid_dead_window;
   wid_dead_window = nullptr;
   game->fini();
@@ -28,7 +28,7 @@ static void wid_dead_destroy(void)
 
 static uint8_t wid_dead_key_up(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (sdlk_eq(*key, game->config.key_console)) {
     return false;
@@ -41,13 +41,13 @@ static uint8_t wid_dead_key_up(Widp w, const struct SDL_Keysym *key)
       switch (key->sym) {
         default :
           {
-            TRACE_AND_INDENT();
+            TRACE_NO_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
               case 'q' :
               case SDLK_ESCAPE :
                 {
-                  TRACE_AND_INDENT();
+                  TRACE_NO_INDENT();
                   wid_dead_destroy();
                   return true;
                 }
@@ -61,7 +61,7 @@ static uint8_t wid_dead_key_up(Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_dead_key_down(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (sdlk_eq(*key, game->config.key_console)) {
     return false;
@@ -72,14 +72,14 @@ static uint8_t wid_dead_key_down(Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_dead_mouse_up(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_dead_destroy();
   return true;
 }
 
 void Game::wid_dead_select(const char *reason)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   LOG("Open dead select: %s", reason);
 
   py_call_void_fn("events", "on_player_death", level->dungeon_walk_order_level_no);
@@ -226,7 +226,7 @@ void Game::wid_dead_select(const char *reason)
   game->robot_mode           = false;
   game->robot_mode_requested = false;
 
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto p = wid_dead_window->wid_text_area->wid_text_area;
   auto w = wid_new_square_button(p, "dead");
 

@@ -34,7 +34,7 @@ bool music_init_done;
 
 bool music_init(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   //
   // MP3 is a pain to use, use OGG instead
   // int flags = MIX_INIT_OGG|MIX_INIT_MP3;
@@ -51,7 +51,7 @@ bool music_init(void)
 
 void music_fini(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (music_init_done) {
     music_init_done = false;
 
@@ -68,7 +68,7 @@ void music_fini(void)
 
 bool music_load(uint32_t rate, const std::string &file, const std::string &name_alias)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (name_alias == "") {
     auto m = music_find(name_alias);
     if (m) {
@@ -117,21 +117,21 @@ bool music_load(uint32_t rate, const std::string &file, const std::string &name_
  */
 bool music_find(const std::string &name_alias)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto result = all_music.find(name_alias);
   return result != all_music.end();
 }
 
 void music_update_volume(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   Mix_VolumeMusic(game->config.music_volume);
   SDL_ClearError();
 }
 
 bool music_play(const std::string &name)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (g_opt_silent) {
     return true;
@@ -162,7 +162,7 @@ bool music_play(const std::string &name)
 
 bool music_halt(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   music_current = "";
 
   Mix_FadeOutMusic(1500);

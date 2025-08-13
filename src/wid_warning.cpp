@@ -17,7 +17,7 @@ WidPopup *wid_warning_window;
 
 static void wid_warning_destroy(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   delete wid_warning_window;
   wid_warning_window                          = nullptr;
   game->warning_popup_exists_for_move_confirm = point(-1, -1);
@@ -25,7 +25,7 @@ static void wid_warning_destroy(void)
 
 static uint8_t wid_warning_key_up(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (sdlk_eq(*key, game->config.key_console)) {
     return false;
@@ -38,13 +38,13 @@ static uint8_t wid_warning_key_up(Widp w, const struct SDL_Keysym *key)
       switch (key->sym) {
         default :
           {
-            TRACE_AND_INDENT();
+            TRACE_NO_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
               case '\n' :
               case SDLK_ESCAPE :
                 {
-                  TRACE_AND_INDENT();
+                  TRACE_NO_INDENT();
                   wid_warning_destroy();
                   return true;
                 }
@@ -58,7 +58,7 @@ static uint8_t wid_warning_key_up(Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_warning_key_down(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (sdlk_eq(*key, game->config.key_console)) {
     return false;
@@ -98,7 +98,7 @@ static uint8_t wid_warning_no(Widp w, int x, int y, uint32_t button)
 
 void wid_warning(std::string warning)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (game->config.disable_player_warnings) {
     return;

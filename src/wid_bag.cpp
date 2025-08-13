@@ -153,7 +153,7 @@ static void wid_in_transit_item_place_in_bag(Widp wid_bag_container, Thingp bag,
 
   IF_DEBUG { t->log("In transit item place completed"); }
 
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   wid_bag_add_items(wid_bag_container, bag);
 
@@ -165,7 +165,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
   TRACE_NO_INDENT();
 
   DBG3("Place in transit item");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto level = game->get_current_level();
   if (! level) {
     return false;
@@ -190,7 +190,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
   }
 
   IF_DEBUG { t->log("In transit item place"); }
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   //
   // Pver the rightbar?
@@ -465,7 +465,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
   }
 
   IF_DEBUG { t->log("Try to place in bag"); }
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto bag_id = wid_get_thing_id_context(wid_bag_container, 0);
   auto bag    = game->thing_find(bag_id);
@@ -491,7 +491,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
   // iteam was at, or last resort, anywhere.
   // /
   IF_DEBUG { bag->log("Try to place %s at %d,%d", t->to_short_string().c_str(), at.x, at.y); }
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto existing_item = bag->bag_what_is_at(at);
   if (bag->bag_can_place_at(t, at)) {
@@ -499,7 +499,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
     // Place at a specific loation
     //
     IF_DEBUG { bag->log("Try to place %s specifically at %d,%d", t->to_short_string().c_str(), at.x, at.y); }
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     wid_in_transit_item_place_in_bag(wid_bag_container, bag, t, at);
   } else if (existing_item && existing_item->is_bag_item_container()) {
     //
@@ -511,7 +511,7 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
       bag->log("Failed to place, try to place %s into %s anywhere", t->to_short_string().c_str(),
                existing_item->to_short_string().c_str());
     }
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     if (existing_item->bag_can_place_anywhere(t, where)) {
       wid_in_transit_item_place_in_bag(wid_bag_container, existing_item, t, where);
     } else {
@@ -523,14 +523,14 @@ uint8_t wid_in_transit_item_place(Widp w, int x, int y, uint32_t button)
     // Place back where it was picked up
     //
     IF_DEBUG { bag->log("Try to place %s back where it was picked up", t->to_short_string().c_str()); }
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     wid_in_transit_item_place_in_bag(wid_bag_container, bag, t, t->itemsp()->last_bag_position);
   } else {
     //
     // Place anywhere
     //
     IF_DEBUG { bag->log("Failed to place, try to place %s anywhere", t->to_short_string().c_str()); }
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     point where;
     if (bag->bag_can_place_anywhere(t, where)) {
       wid_in_transit_item_place_in_bag(wid_bag_container, bag, t, where);
@@ -560,7 +560,7 @@ uint8_t wid_in_transit_item_drop(void)
   TRACE_NO_INDENT();
 
   DBG3("Drop in transit item");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (! game->in_transit_item) {
     DBG3("No in transit item");
@@ -595,7 +595,7 @@ uint8_t wid_bag_item_mouse_up(Widp w, int x, int y, uint32_t button)
   TRACE_NO_INDENT();
 
   DBG3("Mouse down, item select");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (game->in_transit_item) {
     return false;
   }
@@ -619,7 +619,7 @@ uint8_t wid_bag_item_mouse_held(Widp w, int x, int y, uint32_t button)
   TRACE_NO_INDENT();
 
   DBG3("Mouse held down, item select");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (game->in_transit_item) {
     return false;
   }
@@ -640,7 +640,7 @@ bool Game::wid_bag_move_item(Thingp t)
   TRACE_NO_INDENT();
 
   DBG3("Chosen to move item");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto level = game->get_current_level();
   if (! level) {
@@ -660,7 +660,7 @@ bool Game::wid_bag_move_item(Thingp t)
 
   verify(MTYPE_THING, t);
   IF_DEBUG { t->log("Chosen to move me"); }
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   Widp    wid_bag_container;
   ThingId bag_id;
@@ -687,7 +687,7 @@ bool Game::wid_bag_move_item(Thingp t)
       // This is ok, moving from equipment into the ether
       //
       IF_DEBUG { t->log("Moving equipped thing"); }
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       t->unequip_me_from_owner("moved item into ether", true);
     } else if (! bag) {
       ERR("%s has no bag so cannot move it!", capitalize_first(t->text_the()).c_str());
@@ -780,7 +780,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
   TRACE_NO_INDENT();
 
   DBG3("Bag item key down");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   switch (game->state) {
     case Game::STATE_NORMAL : return false;
@@ -817,7 +817,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
   if (game->state == Game::STATE_COLLECTING_ITEMS) {
     if (key->scancode == SDL_SCANCODE_ESCAPE) {
       DBG3("Escape pressed, clear collecting items state");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "stop collecting items");
       return true;
     }
@@ -923,7 +923,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
 
   if (sdlk_eq(*key, game->config.key_drop)) {
     DBG3("Pressed drop key");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     if (player->drop(what)) {
       game->tick_begin("drop");
     }
@@ -934,7 +934,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
 
   if (sdlk_eq(*key, game->config.key_eat)) {
     DBG3("Pressed eat key");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
 
     UseOptions use_options;
     player->use(what, use_options);
@@ -961,7 +961,7 @@ uint8_t wid_bag_item_key_down(Widp w, const struct SDL_Keysym *key)
 
   if (sdlk_eq(*key, game->config.key_throw)) {
     DBG3("Pressed throw key");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     game->change_state(Game::STATE_NORMAL, "pressed throw key");
     wid_thing_info_fini("throw key"); // To remove bag or other info
     player->throw_item_choose_target(what);

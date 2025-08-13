@@ -289,12 +289,12 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
     char tmp[ MAXSHORTSTR ];
     if (l->is_boss_level) {
       if (g_opt_ascii) {
-        snprintf(tmp, sizeof(tmp) - 1, "%d*", node->walk_order_level_no);
+        snprintf(tmp, SIZEOF(tmp) - 1, "%d*", node->walk_order_level_no);
       } else {
-        snprintf(tmp, sizeof(tmp) - 1, "%d", node->walk_order_level_no);
+        snprintf(tmp, SIZEOF(tmp) - 1, "%d", node->walk_order_level_no);
       }
     } else {
-      snprintf(tmp, sizeof(tmp) - 1, "%d", node->walk_order_level_no);
+      snprintf(tmp, SIZEOF(tmp) - 1, "%d", node->walk_order_level_no);
     }
 
     wid_set_text(b, tmp);
@@ -1042,7 +1042,7 @@ void game_grid_node_walk(wid_choose_initial_dungeons_ctx *ctx)
 
 void Game::wid_choose_initial_dungeons(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto box_style           = g_opt_ascii ? UI_WID_STYLE_HORIZ_DARK : UI_WID_STYLE_NORMAL;
   auto box_highlight_style = g_opt_ascii ? UI_WID_STYLE_HORIZ_LIGHT : UI_WID_STYLE_NORMAL;

@@ -312,7 +312,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   TRACE_NO_INDENT();
   auto start = in.tellg();
 
-  READ_MAGIC("thing begin", THING_MAGIC_BEGIN + (int) sizeof(Thing));
+  READ_MAGIC("thing begin", THING_MAGIC_BEGIN + (int) SIZEOF(Thing));
 
   std::string name;
   in >> bits(name);
@@ -1021,7 +1021,7 @@ std::istream &operator>>(std::istream &in, Bits< Config & > my)
   in >> bits(my.t.serialized_size);
   LOG("Read config: serialized_size              = %d", my.t.serialized_size);
 
-  if (my.t.serialized_size != sizeof(Config)) {
+  if (my.t.serialized_size != SIZEOF(Config)) {
     game_load_error = "bad save file header version";
     return in;
   }
@@ -1351,8 +1351,8 @@ std::istream &operator>>(std::istream &in, Bits< class Game & > my)
   in >> bits(my.t.serialized_size);
 
   if (my.t.serialized_size
-      != (uint32_t) (sizeof(Game) + sizeof(Level) + sizeof(Thing) + sizeof(ThingAi) + sizeof(ThingInfo)
-                     + sizeof(ThingItem))) {
+      != (uint32_t) (SIZEOF(Game) + SIZEOF(Level) + SIZEOF(Thing) + SIZEOF(ThingAi) + SIZEOF(ThingInfo)
+                     + SIZEOF(ThingItem))) {
     if (my.t.version == MYVER) {
       game_load_error = "Incompatible save file for version " + my.t.version;
     } else {
@@ -1448,11 +1448,11 @@ static std::vector< char > read_lzo_file(const std::string filename, lzo_uint *u
 
     ifs.seekg(0, std::ios::beg);
     ifs.unsetf(std::ios::skipws);
-    ifs.read((char *) uncompressed_sz, sizeof(*uncompressed_sz));
-    ifs.read((char *) cs, sizeof(*cs));
+    ifs.read((char *) uncompressed_sz, SIZEOF(*uncompressed_sz));
+    ifs.read((char *) cs, SIZEOF(*cs));
 
-    sz -= (int) sizeof(*uncompressed_sz);
-    sz -= (int) sizeof(*cs);
+    sz -= (int) SIZEOF(*uncompressed_sz);
+    sz -= (int) SIZEOF(*cs);
     std::vector< char > bytes(sz);
     ifs.read(bytes.data(), sz);
     return bytes;

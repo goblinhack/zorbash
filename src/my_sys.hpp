@@ -78,6 +78,11 @@
 //
 #define ARRAY_SIZE(_array_) (sizeof(_array_) / sizeof(_array_[ 0 ]))
 
+//
+// Tired of compiler warnings on assuming int.
+//
+#define SIZEOF(_array_) ((int) sizeof(_array_))
+
 #define FOR_ALL_IN_ARRAY(iterator, _array_)                                                                          \
   __typeof__(&_array_[ 0 ]) iterator;                                                                                \
   for ((iterator) = (_array_); (iterator) < ((_array_) + ARRAY_SIZE(_array_)); (iterator)++)

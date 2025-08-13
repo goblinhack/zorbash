@@ -16,7 +16,7 @@
 void wid_actionbar_pixelart_init(void)
 {
   DBG("Actionbar init");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (! game->level) {
     return;
@@ -37,13 +37,13 @@ void wid_actionbar_pixelart_init(void)
   //
   if (wid_actionbar) {
     DBG("Actionbar init exists close it and recreate");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     wid_actionbar_fini();
   }
 
   DBG("Actionbar init create in state %s", gama_state_to_string(game->state).c_str());
   // backtrace_dump();
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   CarryOptions carry_options;
   bool         ui_icon_collect = false;

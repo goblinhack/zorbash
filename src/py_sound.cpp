@@ -10,7 +10,7 @@
 
 PyObject *sound_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char *file   = nullptr;
   char *name   = nullptr;
   float volume = 0;
@@ -48,7 +48,7 @@ PyObject *sound_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *sound_play_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char *name = nullptr;
 
   static char *kwlist[] = {(char *) "name", nullptr};
@@ -80,7 +80,7 @@ PyObject *sound_play_(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *sound_play_channel_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char *name    = nullptr;
   int   channel = 0;
 

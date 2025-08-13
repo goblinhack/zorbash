@@ -57,7 +57,7 @@ PyObject *tile_load_arr_(PyObject *obj, PyObject *args, PyObject *keywds)
   const char *arr[ numLines + 1 ];
   int         i;
 
-  memset(arr, 0, sizeof(arr));
+  memset(arr, 0, SIZEOF(arr));
 
   PY_DBG("tile_load_arr:file=%s, name=%s, width=%d, height=%d, ...)", file, name, width, height);
 
@@ -131,7 +131,7 @@ PyObject *tile_load_arr_sprites_(PyObject *obj, PyObject *args, PyObject *keywds
   const char *arr[ numLines + 1 ];
   int         i;
 
-  memset(arr, 0, sizeof(arr));
+  memset(arr, 0, SIZEOF(arr));
 
   PY_DBG("tile_load_arr:sprites(file=%s, name=%s, width=%d, height=%d, ...)", file, name, width, height);
 

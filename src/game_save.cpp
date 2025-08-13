@@ -287,7 +287,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
 {
   TRACE_NO_INDENT();
   auto start = out.tellp();
-  WRITE_MAGIC(THING_MAGIC_BEGIN + (int) sizeof(Thing));
+  WRITE_MAGIC(THING_MAGIC_BEGIN + (int) SIZEOF(Thing));
 
   const std::string name(tp_id_map[ my.t->tp_id - 1 ]->name());
   out << bits(name);
@@ -383,7 +383,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->_is_immune_to_water                          ? 1LLU : 0LLU) << shift; shift++;
   // end sort marker1 }
   // clang-format on
-  if (shift >= (int) (sizeof(bits64) * 8)) {
+  if (shift >= (int) (SIZEOF(bits64) * 8)) {
     ERR("Ran out of bits in serialization (1)");
   }
   out << bits(bits64);
@@ -444,7 +444,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->was_frozen                                   ? 1LLU : 0LLU) << shift; shift++;
   // end sort marker2 }
   // clang-format on
-  if (shift >= (int) (sizeof(bits64) * 8)) {
+  if (shift >= (int) (SIZEOF(bits64) * 8)) {
     ERR("Ran out of bits in serialization (2)");
   }
   out << bits(bits64);
@@ -514,7 +514,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_is_trap                          ? 1LLU : 0LLU) << shift; shift++;
   // end sort marker3 }
   // clang-format on
-  if (shift >= (int) (sizeof(bits64) * 8)) {
+  if (shift >= (int) (SIZEOF(bits64) * 8)) {
     ERR("Ran out of bits in serialization (3)");
   }
   out << bits(bits64);
@@ -553,7 +553,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Thingp & > const my)
   bits64 |= (my.t->i_set_water                            ? 1LLU : 0LLU) << shift; shift++;
   // end sort marker4 }
   // clang-format on
-  if (shift >= (int) (sizeof(bits64) * 8)) {
+  if (shift >= (int) (SIZEOF(bits64) * 8)) {
     ERR("Ran out of bits in serialization (4)");
   }
   out << bits(bits64);
@@ -912,7 +912,7 @@ std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my)
 {
   TRACE_NO_INDENT();
   out << bits(my.t.version);
-  uint32_t serialized_size = sizeof(Config);
+  uint32_t serialized_size = SIZEOF(Config);
   out << bits(serialized_size);
 
   out << bits(g_opt_player_name);
@@ -1053,8 +1053,8 @@ std::ostream &operator<<(std::ostream &out, Bits< const Config & > const my)
 std::ostream &operator<<(std::ostream &out, Bits< const class Game & > const my)
 {
   TRACE_NO_INDENT();
-  uint32_t serialized_size = (uint32_t) (sizeof(Game) + sizeof(Level) + sizeof(Thing) + sizeof(ThingAi)
-                                         + sizeof(ThingInfo) + sizeof(ThingItem));
+  uint32_t serialized_size = (uint32_t) (SIZEOF(Game) + SIZEOF(Level) + SIZEOF(Thing) + SIZEOF(ThingAi)
+                                         + SIZEOF(ThingInfo) + SIZEOF(ThingItem));
   out << bits(my.t.version);
   out << bits(serialized_size);
   out << bits(my.t.save_slot);
@@ -1181,8 +1181,8 @@ bool Game::save(std::string file_to_save)
   }
   CON("INF: Opened [%s] for writing", file_to_save.c_str());
 
-  fwrite((char *) &uncompressed_len, sizeof(uncompressed_len), 1, ofile);
-  fwrite((char *) &cs, sizeof(cs), 1, ofile);
+  fwrite((char *) &uncompressed_len, SIZEOF(uncompressed_len), 1, ofile);
+  fwrite((char *) &cs, SIZEOF(cs), 1, ofile);
   fwrite(compressed, compressed_len, 1, ofile);
   fclose(ofile);
 

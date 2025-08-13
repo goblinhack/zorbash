@@ -23,7 +23,7 @@ static bool      config_changed;
 
 static void wid_choose_avatar_destroy(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   delete wid_choose_avatar;
   wid_choose_avatar = nullptr;
@@ -32,7 +32,7 @@ static void wid_choose_avatar_destroy(void)
 
 static uint8_t wid_choose_avatar_cancel(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   CON("INF: Reload config for avatar");
   if (config_changed) {
     config_changed = false;
@@ -46,7 +46,7 @@ static uint8_t wid_choose_avatar_cancel(Widp w, int x, int y, uint32_t button)
 
 static uint8_t wid_choose_avatar_save(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   CON("INF: Save config for avatar");
   game->save_config();
 
@@ -58,7 +58,7 @@ static uint8_t wid_choose_avatar_save(Widp w, int x, int y, uint32_t button)
 
 static uint8_t wid_choose_avatar_back(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_choose_avatar_destroy();
   game->wid_main_menu_select();
   return true;
@@ -66,7 +66,7 @@ static uint8_t wid_choose_avatar_back(Widp w, int x, int y, uint32_t button)
 
 static uint8_t wid_choose_avatar_key_up(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (sdlk_eq(*key, game->config.key_console)) {
     return false;
@@ -79,7 +79,7 @@ static uint8_t wid_choose_avatar_key_up(Widp w, const struct SDL_Keysym *key)
       switch (key->sym) {
         default :
           {
-            TRACE_AND_INDENT();
+            TRACE_NO_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
               case 'b' :
@@ -94,7 +94,7 @@ static uint8_t wid_choose_avatar_key_up(Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_choose_avatar_key_down(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (sdlk_eq(*key, game->config.key_console)) {
     return false;
@@ -108,7 +108,7 @@ static uint8_t wid_choose_avatar_key_down(Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_choose_avatar_bodypart_next(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   config_changed        = true;
   auto bodypart         = wid_get_int_context(w);
@@ -122,7 +122,7 @@ static uint8_t wid_choose_avatar_bodypart_next(Widp w, int x, int y, uint32_t bu
 
 static uint8_t wid_choose_avatar_bodypart_prev(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   config_changed        = true;
   auto bodypart         = wid_get_int_context(w);
@@ -150,7 +150,7 @@ static void wid_choose_avatar_tick(Widp w)
 
 void Game::wid_choose_avatar_select(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   wid_rightbar_fini();
   wid_leftbar_fini();
@@ -204,7 +204,7 @@ void Game::wid_choose_avatar_select(void)
     }
 
     {
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       auto p = wid_choose_avatar->wid_text_area->wid_text_area;
       auto w = wid_new_square_button(p, "body part");
 
@@ -216,7 +216,7 @@ void Game::wid_choose_avatar_select(void)
       wid_set_text(w, capitalize(bodypart_name(iter)));
     }
     {
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       auto p = wid_choose_avatar->wid_text_area->wid_text_area;
       auto w = wid_new_square_button(p, "<");
 
@@ -232,7 +232,7 @@ void Game::wid_choose_avatar_select(void)
       wid_set_text(w, "<");
     }
     {
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       auto p = wid_choose_avatar->wid_text_area->wid_text_area;
       auto w = wid_new_square_button(p, ">");
 
@@ -250,7 +250,7 @@ void Game::wid_choose_avatar_select(void)
   }
 
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p                = wid_choose_avatar->wid_text_area->wid_text_area;
     auto avatar_container = wid_new_square_button(p, "avatar");
 
@@ -320,7 +320,7 @@ void Game::wid_choose_avatar_select(void)
 
   y_at = height - 2;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_choose_avatar->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Back");
 
@@ -332,7 +332,7 @@ void Game::wid_choose_avatar_select(void)
     wid_set_text(w, "%%fg=white$B%%fg=reset$ack");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_choose_avatar->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Save");
 
@@ -344,7 +344,7 @@ void Game::wid_choose_avatar_select(void)
     wid_set_text(w, "%%fg=white$S%%fg=reset$ave");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_choose_avatar->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Cancel");
 

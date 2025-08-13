@@ -70,7 +70,7 @@ color string2color(const char **s)
 {
   TRACE_AND_INDENT();
   static char        tmp[ MAXSHORTSTR ];
-  static const char *eo_tmp = tmp + sizeof(tmp);
+  static const char *eo_tmp = tmp + SIZEOF(tmp);
   const char        *c      = *s;
   char              *t      = tmp;
 

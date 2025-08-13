@@ -16,7 +16,7 @@ static std::vector< ThingId > collect_items;
 
 void wid_collect_destroy(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (wid_collect) {
     delete wid_collect;
     wid_collect = nullptr;
@@ -26,9 +26,9 @@ void wid_collect_destroy(void)
 
 static void wid_collect_slot(int slot)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG2("Collect slot %d", slot);
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (slot >= (int) collect_items.size()) {
     wid_collect_destroy();
@@ -46,7 +46,7 @@ static void wid_collect_slot(int slot)
   }
 
   DBG2("Old items");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   for (auto id : collect_items) {
     auto t = level->thing_find_optional(id);
     IF_DEBUG
@@ -85,7 +85,7 @@ static void wid_collect_slot(int slot)
   }
 
   DBG2("Remake collect wid");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_collect_destroy();
 
   //
@@ -144,7 +144,7 @@ static void wid_collect_slot(int slot)
 
 static uint8_t wid_collect_key_up(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto level = game->get_current_level();
   if (! level) {
     return true;
@@ -196,7 +196,7 @@ static uint8_t wid_collect_key_up(Widp w, const struct SDL_Keysym *key)
               case '9' : wid_collect_slot(c - '1'); return true;
               case SDLK_ESCAPE :
                 {
-                  TRACE_AND_INDENT();
+                  TRACE_NO_INDENT();
                   CON("INF: collect cancelled");
                   wid_collect_destroy();
                   return true;
@@ -211,7 +211,7 @@ static uint8_t wid_collect_key_up(Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_collect_key_down(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto level = game->get_current_level();
   if (! level) {
     return true;
@@ -240,7 +240,7 @@ static uint8_t wid_collect_key_down(Widp w, const struct SDL_Keysym *key)
 //
 static uint8_t wid_collect_mouse_down(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto level = game->get_current_level();
   if (! level) {
     return true;
@@ -261,11 +261,11 @@ static uint8_t wid_collect_mouse_down(Widp w, int x, int y, uint32_t button)
 
 static void wid_collect_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int slot = wid_get_int_context(w);
 
   DBG2("Describe collect slot %d", slot);
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (slot >= (int) collect_items.size()) {
     wid_collect_destroy();
     return;
@@ -293,7 +293,7 @@ static void wid_collect_mouse_over_begin(Widp w, int relx, int rely, int wheelx,
 static uint8_t wid_collect_close(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Thing collect: close");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   wid_collect_destroy();
   return true;
@@ -302,7 +302,7 @@ static uint8_t wid_collect_close(Widp w, int x, int y, uint32_t button)
 void Game::wid_collect_create(const std::list< ThingId > items /* intentional copy */)
 {
   DBG("Thing collect create");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   wid_collect_destroy();
   wid_thing_info_fini("collect create");

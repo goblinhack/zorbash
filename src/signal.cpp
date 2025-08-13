@@ -38,7 +38,7 @@ std::string callstack_string(void)
 
   for (auto depth = 0; depth < g_callframes_depth; depth++) {
     auto iter = &callframes[ depth ];
-    snprintf(tmp + strlen(tmp), sizeof(tmp) - strlen(tmp), "(strace) %d %s, line %u\n", depth, iter->func,
+    snprintf(tmp + strlen(tmp), SIZEOF(tmp) - strlen(tmp), "(strace) %d %s, line %u\n", depth, iter->func,
              iter->line);
   }
 

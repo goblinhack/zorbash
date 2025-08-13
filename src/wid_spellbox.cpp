@@ -8,21 +8,21 @@
 
 void wid_spellbox_fini(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG3("Spellbox: Fini");
 }
 
 uint8_t wid_spellbox_init(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   return true;
 }
 
 void wid_spellbox_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG3("Spellbox: Begin over spellbox");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   switch (game->state) {
     case Game::STATE_NORMAL : break;
     case Game::STATE_INVENTORY : return;
@@ -53,7 +53,7 @@ void wid_spellbox_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int w
   auto slot = wid_get_int_context(w);
 
   DBG3("Spellbox: Begin over spellbox slot %d", slot);
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! level->spellbox_over(slot)) {
     DBG3("Spellbox: Not over anything");
     return;
@@ -69,9 +69,9 @@ void wid_spellbox_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int w
 
 void wid_spellbox_mouse_over_end(Widp w)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG3("Spellbox: End over spellbox");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   switch (game->state) {
     case Game::STATE_NORMAL : break;
     case Game::STATE_INVENTORY : return;
@@ -102,7 +102,7 @@ void wid_spellbox_mouse_over_end(Widp w)
   auto slot = wid_get_int_context(w);
 
   DBG3("Spellbox: Over spellbox slot %d", slot);
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! level->spellbox_over(slot)) {
     return;
   }
@@ -116,7 +116,7 @@ void wid_spellbox_mouse_over_end(Widp w)
 
 uint8_t wid_spellbox_item_mouse_up(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto slot = wid_get_int_context(w);
   DBG3("Spellbox: Mouse up on slot %d", slot);
 
@@ -160,9 +160,9 @@ uint8_t wid_spellbox_item_mouse_up(Widp w, int x, int y, uint32_t button)
 
 void wid_spell_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG3("Spellbox: Begin over spell");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   switch (game->state) {
     case Game::STATE_NORMAL : break;
     case Game::STATE_INVENTORY : return;
@@ -203,9 +203,9 @@ void wid_spell_mouse_over_begin(Widp w, int relx, int rely, int wheelx, int whee
 
 void wid_spell_mouse_over_end(Widp w)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG3("Spellbox: End over spell");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   switch (game->state) {
     case Game::STATE_NORMAL : break;
     case Game::STATE_INVENTORY : return;
@@ -242,7 +242,7 @@ void wid_spell_mouse_over_end(Widp w)
 
 uint8_t wid_spell_item_mouse_up(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto slot = wid_get_int_context(w);
   DBG3("Spellbox: Mouse up on slot %d", slot);
 

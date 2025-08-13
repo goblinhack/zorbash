@@ -3,20 +3,17 @@
 //
 
 #include <iostream>
-#include <locale.h>  // do not remove
-#include <stdint.h>  // do not remove
-#include <stdio.h>   // do not remove
-#include <string.h>  // do not remove
-#include <strings.h> // do not remove
-#include <time.h>    // do not remove
-#include <unistd.h>  // do not remove
+#include <string.h>
 
 #include "my_backtrace.hpp"
 #include "my_callstack.hpp"
-#include "my_main.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_sprintf.hpp"
 #include "my_time.hpp"
+
+#include <mutex>
+
+static std::mutex ptrcheck_mutex;
 
 //
 // A single event in the life of a pointer.
@@ -89,7 +86,7 @@ static void die(void)
   exit(1);
 }
 
-static void croak_(const char *fmt, va_list args)
+static void cleanup_wrapper_(const char *fmt, va_list args)
 {
   static int g_die_occurred;
   if (g_die_occurred) {
@@ -106,11 +103,11 @@ static void croak_(const char *fmt, va_list args)
   die();
 }
 
-void CROAK(const char *fmt, ...)
+void CLEANUP(const char *fmt, ...)
 {
   va_list args;
   va_start(args, fmt);
-  croak_(fmt, args);
+  cleanup_wrapper_(fmt, args);
   va_end(args);
 }
 
@@ -133,7 +130,7 @@ void ERROR(const char *fmt, ...)
 
 #define DIE(args...)                                                                                                 \
   std::cerr << string_sprintf("Died at %s:%s line %u", SRC_FILE_NAME, SRC_FUNC_NAME, SRC_LINE_NUM);                  \
-  CROAK(args);
+  CLEANUP(args);
 
 #define ERR(args...)                                                                                                 \
   std::cerr << string_sprintf("Error at %s:%s line %u", SRC_FILE_NAME, SRC_FUNC_NAME, SRC_LINE_NUM);                 \
@@ -198,11 +195,11 @@ static hash_t *hash_init(int hash_size)
 {
   hash_t *hash_table;
 
-  hash_table = (__typeof__(hash_table)) local_zalloc(sizeof(hash_t));
+  hash_table = (__typeof__(hash_table)) local_zalloc(SIZEOF(hash_t));
 
   hash_table->hash_size = hash_size;
 
-  hash_table->elements = (__typeof__(hash_table->elements)) local_zalloc(hash_size * sizeof(hash_elem_t *));
+  hash_table->elements = (__typeof__(hash_table->elements)) local_zalloc(hash_size * SIZEOF(hash_elem_t *));
 
   return hash_table;
 }
@@ -235,7 +232,7 @@ static void hash_add(hash_t *hash_table, Ptrcheck *pc)
     return;
   }
 
-  elem       = (__typeof__(elem)) local_zalloc(sizeof(*elem));
+  elem       = (__typeof__(elem)) local_zalloc(SIZEOF(*elem));
   elem->pc   = pc;
   elem->next = *slot;
   *slot      = elem;
@@ -304,8 +301,7 @@ static void hash_free(hash_t *hash_table, void *ptr)
 
 static Ptrcheck *ptrcheck_describe_pointer(int mtype, const void *ptr)
 {
-  int       ring_ptr_size;
-  Ptrcheck *pc;
+  int ring_ptr_size;
 
   //
   // Currently active pointer?
@@ -346,7 +342,7 @@ static Ptrcheck *ptrcheck_describe_pointer(int mtype, const void *ptr)
   //
   // Check the ring buffer to see if we've seen this pointer before.
   //
-  pc = &ringbuf_next[ mtype ][ 0 ];
+  auto pc = &ringbuf_next[ mtype ][ 0 ];
   pc--;
 
   if (pc < ringbuf_base[ mtype ]) {
@@ -451,9 +447,11 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, const char 
     pc = e->pc;
 
     if (dont_store) {
+#if 0
 #ifdef ENABLE_DEBUG_PTRCHECK
       std::cerr << string_sprintf("PTRCHECK: %p verified at \"%s\" (%u bytes) at %s:%s line %u (do not store)\n", ptr,
                                   pc->what, pc->size, file, func, line);
+#endif
 #endif
       return pc;
     }
@@ -463,7 +461,7 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, const char 
     // point in time.
     //
 #ifdef ENABLE_PTRCHECK_HISTORY
-    IF_DEBUG2
+    IF_DEBUG
     {
       auto l = pc->last_seen[ pc->last_seen_at ];
       if (! l) {
@@ -476,7 +474,7 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, const char 
 
       l->bt = new Backtrace();
       l->bt->init();
-      timestamp(l->ts, sizeof(l->ts));
+      timestamp(l->ts, SIZEOF(l->ts));
 
 #ifdef ENABLE_DEBUG_PTRCHECK
       std::cerr << string_sprintf("PTRCHECK: %p verified at \"%s\" (%u bytes) at %s:%s line %u at %s\n", ptr,
@@ -513,14 +511,14 @@ static Ptrcheck *ptrcheck_verify_pointer(int mtype, const void *ptr, const char 
 //
 // Record this pointer.
 //
-void *ptrcheck_alloc(int mtype, const void *ptr, const char *what, int size, const char *func, const char *file,
-                     int line)
+static void *ptrcheck_alloc_(int mtype, const void *ptr, const char *what, int size, const char *func,
+                             const char *file, int line)
 {
   Ptrcheck *pc;
 
 #ifdef ENABLE_DEBUG_PTRCHECK
   char tmp[ MY_TIMESTAMP_SIZE ];
-  auto ts = timestamp(tmp, sizeof(tmp));
+  auto ts = timestamp(tmp, SIZEOF(tmp));
   fprintf(stderr, "%s: PTRCHECK: Alloc %p \"%s\" (%u bytes) at %s:%s line %u\n", ts, ptr, what, size, file, func,
           line);
 #endif
@@ -577,7 +575,7 @@ void *ptrcheck_alloc(int mtype, const void *ptr, const char *what, int size, con
   a->file = file;
   a->line = line;
 
-  timestamp(a->ts, sizeof(a->ts));
+  timestamp(a->ts, SIZEOF(a->ts));
   a->bt = new Backtrace();
   a->bt->init();
 
@@ -589,17 +587,28 @@ void *ptrcheck_alloc(int mtype, const void *ptr, const char *what, int size, con
   return ((void *) ptr);
 }
 
+void *ptrcheck_alloc(int mtype, const void *ptr, const char *what, int size, const char *func, const char *file,
+                     int line)
+{
+  ptrcheck_mutex.lock();
+  TRACE_NO_INDENT();
+  auto ret = ptrcheck_alloc_(mtype, ptr, what, size, func, file, line);
+  ptrcheck_mutex.unlock();
+
+  return ret;
+}
+
 //
 // Check a pointer is valid and if so add it to the ring buffer. If not,
 // return false and avert the myfree(), just in case.
 //
-int ptrcheck_free(int mtype, void *ptr, const char *func, const char *file, int line)
+static int ptrcheck_free_(int mtype, void *ptr, const char *func, const char *file, int line)
 {
   Ptrcheck *pc;
 
 #ifdef ENABLE_DEBUG_PTRCHECK
   char tmp[ MY_TIMESTAMP_SIZE ];
-  auto ts = timestamp(tmp, sizeof(tmp));
+  auto ts = timestamp(tmp, SIZEOF(tmp));
   fprintf(stderr, "%s: PTRCHECK: Free %p at %s:%s line %u ringbuf_current_size %u\n", ts, ptr, file, func, line,
           ringbuf_current_size[ mtype ]);
 #endif
@@ -628,7 +637,7 @@ int ptrcheck_free(int mtype, void *ptr, const char *func, const char *file, int 
   f->bt = new Backtrace();
   f->bt->init();
 
-  timestamp(f->ts, sizeof(f->ts));
+  timestamp(f->ts, SIZEOF(f->ts));
 
   //
   // Add the free info to the ring buffer.
@@ -655,16 +664,33 @@ int ptrcheck_free(int mtype, void *ptr, const char *func, const char *file, int 
   return true;
 }
 
+int ptrcheck_free(int mtype, void *ptr, const char *func, const char *file, int line)
+{
+  ptrcheck_mutex.lock();
+  TRACE_NO_INDENT();
+  auto ret = ptrcheck_free_(mtype, ptr, func, file, line);
+  ptrcheck_mutex.unlock();
+
+  return ret;
+}
+
 //
 // Check a pointer for validity with no recording of history.
 //
 int ptrcheck_verify(int mtype, const void *ptr, const char *func, const char *file, int line)
 {
+  ptrcheck_mutex.lock();
+  TRACE_NO_INDENT();
+
   //
   // Handy if things get too slow, to see what is firing most
   //
   // fprintf(stderr, "PTRCHECK %s %s %d\n", file, func, line);
-  return (ptrcheck_verify_pointer(mtype, ptr, file, func, line, false /* don't store */) != nullptr);
+  auto ret = ptrcheck_verify_pointer(mtype, ptr, file, func, line, false /* don't store */) != nullptr;
+
+  ptrcheck_mutex.unlock();
+
+  return ret;
 }
 
 //

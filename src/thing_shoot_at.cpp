@@ -140,7 +140,7 @@ static void thing_possible_hit_add(Thingp me, Thingp target)
   }
 
   ThingPossibleHit *h = &thing_possible_hits[ thing_possible_hit_size++ ];
-  memset(h, 0, sizeof(*h));
+  memset(h, 0, SIZEOF(*h));
   h->target   = target;
   h->priority = target->collision_hit_priority();
 }

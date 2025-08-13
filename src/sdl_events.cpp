@@ -140,7 +140,7 @@ static void __attribute__((noinline)) sdl_event_keyup(SDL_Keysym *key, SDL_Event
   sdl.key_repeat_count    = 0;
   sdl.key_repeat_this_key = 0;
 
-  memset(&last_key_pressed, 0, sizeof(last_key_pressed));
+  memset(&last_key_pressed, 0, SIZEOF(last_key_pressed));
 
   LOG("SDL: Keyboard: Key released keycode 0x%08" PRIX32 " = %s", event->key.keysym.sym,
       to_string(event->key.keysym).c_str());
@@ -318,7 +318,7 @@ void sdl_event(SDL_Event *event, bool &processed_mouse_motion_event)
         int value = event->jaxis.value;
 
         if (! sdl.joy_axes) {
-          sdl.joy_axes = (int *) myzalloc(sizeof(int) * sdl.joy_naxes, "joy axes");
+          sdl.joy_axes = (int *) myzalloc(SIZEOF(int) * sdl.joy_naxes, "joy axes");
         }
 
         sdl.joy_axes[ axis ] = value;

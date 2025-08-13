@@ -14,7 +14,7 @@ static bool      config_changed;
 
 static void wid_config_gfx_destroy(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   delete wid_config_gfx_window;
   wid_config_gfx_window = nullptr;
   config_changed        = false;
@@ -22,7 +22,7 @@ static void wid_config_gfx_destroy(void)
 
 static uint8_t wid_config_gfx_cancel(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   CON("INF: Reload config");
   if (config_changed) {
     config_changed = false;
@@ -36,7 +36,7 @@ static uint8_t wid_config_gfx_cancel(Widp w, int x, int y, uint32_t button)
 
 static uint8_t wid_config_gfx_save(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   CON("INF: Save config");
   game->save_config();
 
@@ -54,7 +54,7 @@ static uint8_t wid_config_gfx_save(Widp w, int x, int y, uint32_t button)
 
 static uint8_t wid_config_gfx_back(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_config_gfx_destroy();
   game->wid_config_top_menu();
   return true;
@@ -62,7 +62,7 @@ static uint8_t wid_config_gfx_back(Widp w, int x, int y, uint32_t button)
 
 static uint8_t wid_config_gfx_vsync_enable_toggle(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   config_changed = true;
   CON("INF: Toggle vsync");
   game->config.gfx_vsync_enable = ! game->config.gfx_vsync_enable;
@@ -73,7 +73,7 @@ static uint8_t wid_config_gfx_vsync_enable_toggle(Widp w, int x, int y, uint32_t
 
 static uint8_t wid_config_ascii_toggle(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   config_changed = true;
   CON("INF: Toggle gfx");
   g_opt_ascii = ! g_opt_ascii;
@@ -85,7 +85,7 @@ static uint8_t wid_config_ascii_toggle(Widp w, int x, int y, uint32_t button)
 
 static uint8_t wid_config_gfx_fullscreen_toggle(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   config_changed = true;
   CON("INF: Toggle gfx fullscreen");
   game->config.gfx_fullscreen = ! game->config.gfx_fullscreen;
@@ -99,7 +99,7 @@ static uint8_t wid_config_gfx_fullscreen_toggle(Widp w, int x, int y, uint32_t b
 
 static uint8_t wid_config_gfx_fullscreen_desktop_toggle(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   config_changed = true;
   CON("INF: Toggle gfx fullscreen desktop");
   game->config.gfx_fullscreen_desktop = ! game->config.gfx_fullscreen_desktop;
@@ -113,7 +113,7 @@ static uint8_t wid_config_gfx_fullscreen_desktop_toggle(Widp w, int x, int y, ui
 
 static uint8_t wid_config_gfx_allow_highdpi_toggle(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   config_changed = true;
   CON("INF: Toggle gfx allow highdpi");
   game->config.gfx_allow_highdpi = ! game->config.gfx_allow_highdpi;
@@ -124,7 +124,7 @@ static uint8_t wid_config_gfx_allow_highdpi_toggle(Widp w, int x, int y, uint32_
 
 static uint8_t wid_config_gfx_borderless_toggle(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   config_changed = true;
   CON("INF: Toggle gfx borderless");
   game->config.gfx_borderless = ! game->config.gfx_borderless;
@@ -135,7 +135,7 @@ static uint8_t wid_config_gfx_borderless_toggle(Widp w, int x, int y, uint32_t b
 
 static uint8_t wid_config_gfx_inverted_toggle(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   config_changed = true;
   CON("INF: Toggle inverted");
   game->config.gfx_inverted = ! game->config.gfx_inverted;
@@ -145,7 +145,7 @@ static uint8_t wid_config_gfx_inverted_toggle(Widp w, int x, int y, uint32_t but
 
 static uint8_t wid_config_gfx_monochrome_toggle(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   config_changed = true;
   CON("INF: Toggle monochrome");
   game->config.gfx_monochrome = ! game->config.gfx_monochrome;
@@ -157,7 +157,7 @@ static uint8_t wid_config_gfx_monochrome_toggle(Widp w, int x, int y, uint32_t b
 
 static uint8_t wid_config_other_fps_counter_toggle(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   config_changed = true;
   CON("INF: Toggle fps counter");
   game->config.fps_counter = ! game->config.fps_counter;
@@ -167,7 +167,7 @@ static uint8_t wid_config_other_fps_counter_toggle(Widp w, int x, int y, uint32_
 
 static uint8_t wid_config_gfx_resolution_incr(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   config_changed = true;
   CON("INF: Increment resolution");
   auto res    = std::to_string(game->config.window_pix_width) + "x" + std::to_string(game->config.window_pix_height);
@@ -202,7 +202,7 @@ static uint8_t wid_config_gfx_resolution_incr(Widp w, int x, int y, uint32_t but
 
 static uint8_t wid_config_gfx_resolution_decr(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   config_changed = true;
   CON("INF: Decrement resolution");
   auto res    = std::to_string(game->config.window_pix_width) + "x" + std::to_string(game->config.window_pix_height);
@@ -237,7 +237,7 @@ static uint8_t wid_config_gfx_resolution_decr(Widp w, int x, int y, uint32_t but
 
 static uint8_t wid_config_gfx_term_width_size_decr(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   config_changed = true;
 
   CON("INF: Decrement term width");
@@ -262,7 +262,7 @@ static uint8_t wid_config_gfx_term_width_size_decr(Widp w, int x, int y, uint32_
 
 static uint8_t wid_config_gfx_term_width_size_incr(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   config_changed = true;
 
   CON("INF: Decrement term width");
@@ -287,7 +287,7 @@ static uint8_t wid_config_gfx_term_width_size_incr(Widp w, int x, int y, uint32_
 
 static uint8_t wid_config_gfx_term_height_size_decr(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   config_changed = true;
 
   CON("INF: Decrement term height");
@@ -312,7 +312,7 @@ static uint8_t wid_config_gfx_term_height_size_decr(Widp w, int x, int y, uint32
 
 static uint8_t wid_config_gfx_term_height_size_incr(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   config_changed = true;
 
   CON("INF: Decrement term height");
@@ -337,7 +337,7 @@ static uint8_t wid_config_gfx_term_height_size_incr(Widp w, int x, int y, uint32
 
 static uint8_t wid_config_gfx_key_up(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (sdlk_eq(*key, game->config.key_console)) {
     return false;
@@ -350,7 +350,7 @@ static uint8_t wid_config_gfx_key_up(Widp w, const struct SDL_Keysym *key)
       switch (key->sym) {
         default :
           {
-            TRACE_AND_INDENT();
+            TRACE_NO_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
               case 'c' : wid_config_gfx_cancel(nullptr, 0, 0, 0); return true;
@@ -367,7 +367,7 @@ static uint8_t wid_config_gfx_key_up(Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_config_gfx_key_down(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (sdlk_eq(*key, game->config.key_console)) {
     return false;
@@ -378,7 +378,7 @@ static uint8_t wid_config_gfx_key_down(Widp w, const struct SDL_Keysym *key)
 
 void Game::wid_config_gfx_select(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (wid_config_gfx_window) {
     wid_config_gfx_destroy();
   }
@@ -394,7 +394,7 @@ void Game::wid_config_gfx_select(void)
 
   wid_config_gfx_window = new WidPopup("Gfx select", tl, br, nullptr, "", false, false);
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     Widp w = wid_config_gfx_window->wid_popup_container;
     wid_set_on_key_up(w, wid_config_gfx_key_up);
     wid_set_on_key_down(w, wid_config_gfx_key_down);
@@ -402,7 +402,7 @@ void Game::wid_config_gfx_select(void)
 
   int y_at = 0;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "configuration");
 
@@ -415,7 +415,7 @@ void Game::wid_config_gfx_select(void)
 
   y_at = 3;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Back");
 
@@ -427,7 +427,7 @@ void Game::wid_config_gfx_select(void)
     wid_set_text(w, "%%fg=white$B%%fg=reset$ack");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Save");
 
@@ -439,7 +439,7 @@ void Game::wid_config_gfx_select(void)
     wid_set_text(w, "%%fg=white$S%%fg=reset$ave");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Cancel");
 
@@ -456,7 +456,7 @@ void Game::wid_config_gfx_select(void)
   /////////////////////////////////////////////////////////////////////////
   y_at += 4;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Resolution");
 
@@ -468,7 +468,7 @@ void Game::wid_config_gfx_select(void)
     wid_set_text(w, "Resolution");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Resolution value");
 
@@ -481,7 +481,7 @@ void Game::wid_config_gfx_select(void)
     wid_set_text(w, res);
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Resolution value +");
 
@@ -496,7 +496,7 @@ void Game::wid_config_gfx_select(void)
     wid_set_text(w, "+");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Resolution value -");
 
@@ -516,7 +516,7 @@ void Game::wid_config_gfx_select(void)
   /////////////////////////////////////////////////////////////////////////
   y_at++;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Term width");
 
@@ -528,7 +528,7 @@ void Game::wid_config_gfx_select(void)
     wid_set_text(w, "Term width");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Term size value");
 
@@ -546,7 +546,7 @@ void Game::wid_config_gfx_select(void)
     }
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Term width value +");
 
@@ -561,7 +561,7 @@ void Game::wid_config_gfx_select(void)
     wid_set_text(w, "+");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Term width value -");
 
@@ -581,7 +581,7 @@ void Game::wid_config_gfx_select(void)
   /////////////////////////////////////////////////////////////////////////
   y_at++;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Term height");
 
@@ -593,7 +593,7 @@ void Game::wid_config_gfx_select(void)
     wid_set_text(w, "Term height");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Term size value");
 
@@ -611,7 +611,7 @@ void Game::wid_config_gfx_select(void)
     }
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Term height value +");
 
@@ -626,7 +626,7 @@ void Game::wid_config_gfx_select(void)
     wid_set_text(w, "+");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Term height value -");
 
@@ -646,7 +646,7 @@ void Game::wid_config_gfx_select(void)
   /////////////////////////////////////////////////////////////////////////
   y_at += 2;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Ascii mode");
 
@@ -658,7 +658,7 @@ void Game::wid_config_gfx_select(void)
     wid_set_text(w, "Ascii mode");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Ascii mode");
 
@@ -683,7 +683,7 @@ void Game::wid_config_gfx_select(void)
   /////////////////////////////////////////////////////////////////////////
   y_at++;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Fullscreen");
 
@@ -695,7 +695,7 @@ void Game::wid_config_gfx_select(void)
     wid_set_text(w, "Fullscreen video");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Fullscreen value");
 
@@ -720,7 +720,7 @@ void Game::wid_config_gfx_select(void)
   /////////////////////////////////////////////////////////////////////////
   y_at++;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Fullscreen desktop");
 
@@ -732,7 +732,7 @@ void Game::wid_config_gfx_select(void)
     wid_set_text(w, "Fullscreen desktop");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Fullscreen value");
 
@@ -757,7 +757,7 @@ void Game::wid_config_gfx_select(void)
   /////////////////////////////////////////////////////////////////////////
   y_at++;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "High DPI res");
 
@@ -769,7 +769,7 @@ void Game::wid_config_gfx_select(void)
     wid_set_text(w, "High DPI resolution");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "High DPI value");
 
@@ -794,7 +794,7 @@ void Game::wid_config_gfx_select(void)
   /////////////////////////////////////////////////////////////////////////
   y_at++;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Borderless");
 
@@ -806,7 +806,7 @@ void Game::wid_config_gfx_select(void)
     wid_set_text(w, "Borderless window");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Borderless");
 
@@ -832,7 +832,7 @@ void Game::wid_config_gfx_select(void)
     /////////////////////////////////////////////////////////////////////////
     y_at++;
     {
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
       auto w = wid_new_square_button(p, "Vertical sync");
 
@@ -844,7 +844,7 @@ void Game::wid_config_gfx_select(void)
       wid_set_text(w, "Vertical sync");
     }
     {
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
       auto w = wid_new_square_button(p, "Vertical sync value");
 
@@ -869,7 +869,7 @@ void Game::wid_config_gfx_select(void)
     /////////////////////////////////////////////////////////////////////////
     y_at++;
     {
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
       auto w = wid_new_square_button(p, "Vertical sync");
 
@@ -881,7 +881,7 @@ void Game::wid_config_gfx_select(void)
       wid_set_text(w, "Vertical sync");
     }
     {
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
       auto w = wid_new_square_button(p, "Vertical sync value");
 
@@ -902,7 +902,7 @@ void Game::wid_config_gfx_select(void)
   /////////////////////////////////////////////////////////////////////////
   y_at++;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inverted graphics");
 
@@ -914,7 +914,7 @@ void Game::wid_config_gfx_select(void)
     wid_set_text(w, "Inverted graphics");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Inverted graphics value");
 
@@ -939,7 +939,7 @@ void Game::wid_config_gfx_select(void)
   /////////////////////////////////////////////////////////////////////////
   y_at++;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Monochrome graphics");
 
@@ -951,7 +951,7 @@ void Game::wid_config_gfx_select(void)
     wid_set_text(w, "Monochrome");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Monochrome value");
 
@@ -976,7 +976,7 @@ void Game::wid_config_gfx_select(void)
   //////////////////////////////////////////////////////////////////////
   y_at++;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "FPS counter");
 
@@ -988,7 +988,7 @@ void Game::wid_config_gfx_select(void)
     wid_set_text(w, "FPS counter");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_gfx_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "FPS counter value");
 

@@ -242,7 +242,7 @@ void topcon_(const char *fmt, va_list args)
   buf[ 0 ] = '\0';
   if (! g_opt_test_dungeon) {
     get_timestamp(ts, MAXLONGSTR);
-    snprintf(buf, sizeof(buf) - 1, "%s", ts);
+    snprintf(buf, SIZEOF(buf) - 1, "%s", ts);
     len = (int) strlen(buf);
   }
   vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
@@ -728,7 +728,7 @@ static void botcon_(const char *fmt, va_list args)
   buf[ 0 ] = '\0';
   if (! g_opt_test_dungeon) {
     get_timestamp(ts, MAXLONGSTR);
-    snprintf(buf, sizeof(buf) - 1, "%sBOTCON: ", ts);
+    snprintf(buf, SIZEOF(buf) - 1, "%sBOTCON: ", ts);
     len = (int) strlen(buf);
   }
 

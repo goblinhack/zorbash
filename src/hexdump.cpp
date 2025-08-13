@@ -46,7 +46,7 @@ void hexdump(const unsigned char *addr, size_t len)
       /*
        * Skip blank blocks.
        */
-      if (! memcmp(pc + i, empty, sizeof(empty))) {
+      if (! memcmp(pc + i, empty, SIZEOF(empty))) {
         i += HEX_DUMP_WIDTH - 1;
         skipping_blanks = true;
         buf[ 0 ]        = '\0';

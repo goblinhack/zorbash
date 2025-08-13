@@ -12,7 +12,7 @@ static bool      config_changed;
 
 static void wid_config_other_destroy(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   delete wid_config_other_window;
   wid_config_other_window = nullptr;
   config_changed          = false;
@@ -20,7 +20,7 @@ static void wid_config_other_destroy(void)
 
 static uint8_t wid_config_other_cancel(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   CON("INF: Reload config");
   if (config_changed) {
     config_changed = false;
@@ -34,7 +34,7 @@ static uint8_t wid_config_other_cancel(Widp w, int x, int y, uint32_t button)
 
 static uint8_t wid_config_other_save(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   CON("INF: Save config");
   game->save_config();
   wid_config_other_destroy();
@@ -44,7 +44,7 @@ static uint8_t wid_config_other_save(Widp w, int x, int y, uint32_t button)
 
 static uint8_t wid_config_other_back(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_config_other_destroy();
   game->wid_config_top_menu();
   return true;
@@ -52,7 +52,7 @@ static uint8_t wid_config_other_back(Widp w, int x, int y, uint32_t button)
 
 static uint8_t wid_config_debug_mode_toggle(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   config_changed = true;
   CON("INF: Toggle debug_mode");
   game->config.debug_mode = ! game->config.debug_mode;
@@ -64,7 +64,7 @@ static uint8_t wid_config_debug_mode_toggle(Widp w, int x, int y, uint32_t butto
 
 static uint8_t wid_config_disable_player_warnings_toggle(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   config_changed = true;
   CON("INF: Toggle disable_player_warnings");
   game->config.disable_player_warnings = ! game->config.disable_player_warnings;
@@ -76,7 +76,7 @@ static uint8_t wid_config_disable_player_warnings_toggle(Widp w, int x, int y, u
 
 static uint8_t wid_config_other_sdl_delay_incr(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   config_changed = true;
   CON("INF: Increment sdl_delay");
   game->config.sdl_delay++;
@@ -86,7 +86,7 @@ static uint8_t wid_config_other_sdl_delay_incr(Widp w, int x, int y, uint32_t bu
 
 static uint8_t wid_config_other_sdl_delay_decr(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   config_changed = true;
   CON("INF: Decrement sdl_delay");
   game->config.sdl_delay--;
@@ -96,7 +96,7 @@ static uint8_t wid_config_other_sdl_delay_decr(Widp w, int x, int y, uint32_t bu
 
 static uint8_t wid_config_other_snapshot_freq_incr(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   config_changed = true;
   CON("INF: Increment snapshot_freq");
   game->config.snapshot_freq++;
@@ -106,7 +106,7 @@ static uint8_t wid_config_other_snapshot_freq_incr(Widp w, int x, int y, uint32_
 
 static uint8_t wid_config_other_snapshot_freq_decr(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   config_changed = true;
   CON("INF: Decrement snapshot_freq");
   game->config.snapshot_freq--;
@@ -116,7 +116,7 @@ static uint8_t wid_config_other_snapshot_freq_decr(Widp w, int x, int y, uint32_
 
 static uint8_t wid_config_other_key_up(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (sdlk_eq(*key, game->config.key_console)) {
     return false;
@@ -129,7 +129,7 @@ static uint8_t wid_config_other_key_up(Widp w, const struct SDL_Keysym *key)
       switch (key->sym) {
         default :
           {
-            TRACE_AND_INDENT();
+            TRACE_NO_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
               case 'c' : wid_config_other_cancel(nullptr, 0, 0, 0); return true;
@@ -146,7 +146,7 @@ static uint8_t wid_config_other_key_up(Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_config_other_key_down(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (sdlk_eq(*key, game->config.key_console)) {
     return false;
@@ -157,7 +157,7 @@ static uint8_t wid_config_other_key_down(Widp w, const struct SDL_Keysym *key)
 
 void Game::wid_config_other_select(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (wid_config_other_window) {
     wid_config_other_destroy();
   }
@@ -173,7 +173,7 @@ void Game::wid_config_other_select(void)
 
   wid_config_other_window = new WidPopup("Config other select", tl, br, nullptr, "", false, false);
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     Widp w = wid_config_other_window->wid_popup_container;
     wid_set_on_key_up(w, wid_config_other_key_up);
     wid_set_on_key_down(w, wid_config_other_key_down);
@@ -181,7 +181,7 @@ void Game::wid_config_other_select(void)
 
   int y_at = 0;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_other_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "configuration");
 
@@ -194,7 +194,7 @@ void Game::wid_config_other_select(void)
 
   y_at = 3;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_other_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Back");
 
@@ -206,7 +206,7 @@ void Game::wid_config_other_select(void)
     wid_set_text(w, "%%fg=white$B%%fg=reset$ack");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_other_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Save");
 
@@ -218,7 +218,7 @@ void Game::wid_config_other_select(void)
     wid_set_text(w, "%%fg=white$S%%fg=reset$ave");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_other_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Cancel");
 
@@ -235,7 +235,7 @@ void Game::wid_config_other_select(void)
   //////////////////////////////////////////////////////////////////////
   y_at += 4;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_other_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "player warnings");
 
@@ -247,7 +247,7 @@ void Game::wid_config_other_select(void)
     wid_set_text(w, "Disable player warnings");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_other_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "player warnings value");
 
@@ -272,7 +272,7 @@ void Game::wid_config_other_select(void)
   //////////////////////////////////////////////////////////////////////
   y_at++;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_other_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "debug mode");
 
@@ -284,7 +284,7 @@ void Game::wid_config_other_select(void)
     wid_set_text(w, "Debug mode (restart needed)");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_other_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "debug mode value");
 
@@ -309,7 +309,7 @@ void Game::wid_config_other_select(void)
   //////////////////////////////////////////////////////////////////////
   y_at++;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_other_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Snapshot auto save frequency");
 
@@ -321,7 +321,7 @@ void Game::wid_config_other_select(void)
     wid_set_text(w, "Snapshot auto save frequency");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_other_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Snapshot save freq value");
 
@@ -332,7 +332,7 @@ void Game::wid_config_other_select(void)
     wid_set_text(w, std::to_string(game->config.snapshot_freq));
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_other_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Snapshot save freq +");
 
@@ -347,7 +347,7 @@ void Game::wid_config_other_select(void)
     wid_set_text(w, "+");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_other_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Snapshot save freq -");
 
@@ -367,7 +367,7 @@ void Game::wid_config_other_select(void)
   //////////////////////////////////////////////////////////////////////
   y_at++;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_other_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "Delay milliseconds per frame");
 
@@ -379,7 +379,7 @@ void Game::wid_config_other_select(void)
     wid_set_text(w, "Delay milliseconds per frame");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_other_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "SDL: delay value");
 
@@ -390,7 +390,7 @@ void Game::wid_config_other_select(void)
     wid_set_text(w, std::to_string(game->config.sdl_delay));
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_other_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "SDL: delay value +");
 
@@ -405,7 +405,7 @@ void Game::wid_config_other_select(void)
     wid_set_text(w, "+");
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto p = wid_config_other_window->wid_text_area->wid_text_area;
     auto w = wid_new_square_button(p, "SDL: delay value -");
 

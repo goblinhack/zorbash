@@ -189,7 +189,7 @@ uint8_t sdl_init(void)
     // Else guess.
     //
     SDL_DisplayMode mode;
-    memset(&mode, 0, sizeof(mode));
+    memset(&mode, 0, SIZEOF(mode));
 
     LOG("SDL: Init display");
     if (SDL_GetCurrentDisplayMode(0, &mode) < 0) {

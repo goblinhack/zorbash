@@ -31,7 +31,7 @@ void backtrace_unwind(void **buffer, int size)
     char  symbol[ 256 ] = {"<unknown>"};
     char *name          = symbol;
 
-    if (! unw_get_proc_name(&cursor, symbol, sizeof(symbol), &off)) {
+    if (! unw_get_proc_name(&cursor, symbol, SIZEOF(symbol), &off)) {
       int status;
       if ((name = abi::__cxa_demangle(symbol, nullptr, nullptr, &status)) == nullptr)
         name = symbol;

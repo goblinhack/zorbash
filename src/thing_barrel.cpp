@@ -16,7 +16,7 @@ void Thing::barrel_tick(void)
   }
 
   dbg("Barrel tick");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   //
   // Find all non barrels and crush them

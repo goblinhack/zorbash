@@ -22,27 +22,27 @@ WidPopup *wid_main_menu_window;
 
 void wid_main_menu_destroy(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   delete wid_main_menu_window;
   wid_main_menu_window = nullptr;
 }
 
 void wid_main_menu_hide(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_hide(wid_main_menu_window->wid_popup_container);
 }
 
 static uint8_t wid_main_menu_load_game(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   game->wid_load_select();
   return false;
 }
 
 static uint8_t wid_main_menu_config(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   game->wid_config_top_menu();
   wid_main_menu_hide();
   return false;
@@ -50,7 +50,7 @@ static uint8_t wid_main_menu_config(Widp w, int x, int y, uint32_t button)
 
 static uint8_t game_menu_new_game(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_main_menu_hide();
   wid_main_menu_destroy();
   game->wid_choose_initial_dungeons();
@@ -59,7 +59,7 @@ static uint8_t game_menu_new_game(Widp w, int x, int y, uint32_t button)
 
 static uint8_t wid_choose_player_name(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   game->wid_choose_player_name_select();
   wid_main_menu_destroy();
   return false;
@@ -67,7 +67,7 @@ static uint8_t wid_choose_player_name(Widp w, int x, int y, uint32_t button)
 
 static uint8_t wid_choose_avatar(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   game->wid_choose_avatar_select();
   wid_main_menu_destroy();
   return false;
@@ -75,7 +75,7 @@ static uint8_t wid_choose_avatar(Widp w, int x, int y, uint32_t button)
 
 static uint8_t wid_main_menu_credits_game(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   game->wid_credits_select();
   wid_main_menu_destroy();
   return false;
@@ -83,7 +83,7 @@ static uint8_t wid_main_menu_credits_game(Widp w, int x, int y, uint32_t button)
 
 static uint8_t wid_main_menu_quit_game(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   game->quit_select();
   wid_main_menu_destroy();
   return false;
@@ -91,14 +91,14 @@ static uint8_t wid_main_menu_quit_game(Widp w, int x, int y, uint32_t button)
 
 static uint8_t wid_main_menu_hiscores(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   game->wid_hiscores_show();
   return false;
 }
 
 static uint8_t wid_main_menu_key_up(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (sdlk_eq(*key, game->config.key_console)) {
     return false;
@@ -111,7 +111,7 @@ static uint8_t wid_main_menu_key_up(Widp w, const struct SDL_Keysym *key)
       switch (key->sym) {
         default :
           {
-            TRACE_AND_INDENT();
+            TRACE_NO_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
               case SDLK_RETURN :
@@ -132,7 +132,7 @@ static uint8_t wid_main_menu_key_up(Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_main_menu_key_down(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (sdlk_eq(*key, game->config.key_console)) {
     return false;
@@ -164,7 +164,7 @@ static void game_display_title_bg(void)
     return;
   }
 
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   glcolor(WHITE);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -176,7 +176,7 @@ static void game_display_title_bg(void)
 
 static void game_display_title_fg1(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (g_opt_ascii) {
     return;
   }
@@ -192,7 +192,7 @@ static void game_display_title_fg1(void)
 
 static void game_display_title_fg2(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (g_opt_ascii) {
     return;
   }
@@ -259,7 +259,7 @@ color color_change_hue(const color &in, const float fHue)
 
 static void game_display_title_fg3(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (g_opt_ascii) {
     return;
   }
@@ -308,7 +308,7 @@ static void game_display_title_fg3(void)
 
 static void game_display_title_fg4(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (g_opt_ascii) {
     return;
   }
@@ -335,7 +335,7 @@ static void game_display_title_fg4(void)
 
 static void wid_main_menu_tick(Widp w)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   game_display_title_bg();
   game_display_flames();
   game_display_title_fg1();
@@ -372,7 +372,7 @@ static void wid_main_menu_tick(Widp w)
 
 void Game::wid_main_menu_select(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   LOG("Main menu");
 
   py_call_void_fn("events", "on_main_menu_select", 0);

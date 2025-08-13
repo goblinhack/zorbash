@@ -12,7 +12,7 @@
 
 PyObject *music_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char    *file = nullptr;
   char    *name = nullptr;
   uint32_t rate = 44100;
@@ -46,7 +46,7 @@ PyObject *music_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *music_play_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   char *name = nullptr;
 
   static char *kwlist[] = {(char *) "name", nullptr};
@@ -76,7 +76,7 @@ PyObject *music_play_(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *music_halt_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   PY_DBG("music_halt()");
 

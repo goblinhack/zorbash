@@ -19,7 +19,7 @@
 
 bool wid_rightbar_ascii_create(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG2("Remake rightbar");
 
   auto level = game->get_current_level();
@@ -36,7 +36,7 @@ bool wid_rightbar_ascii_create(void)
   int y_at  = 0;
 
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     point tl = make_point(TERM_WIDTH - width, 0);
     point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
 
@@ -49,7 +49,7 @@ bool wid_rightbar_ascii_create(void)
   }
 
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_square_button(wid_rightbar, "level no");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at);
@@ -68,7 +68,7 @@ bool wid_rightbar_ascii_create(void)
 
   {
     y_at++;
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "Seed");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at);
@@ -88,7 +88,7 @@ bool wid_rightbar_ascii_create(void)
 
   {
     y_at++;
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "title name");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at);
@@ -106,7 +106,7 @@ bool wid_rightbar_ascii_create(void)
 
   {
     y_at++;
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto  w  = wid_new_square_button(wid_rightbar, "Stats");
     point tl = make_point(0, y_at);
     point br = make_point(width - 1, y_at);
@@ -120,7 +120,7 @@ bool wid_rightbar_ascii_create(void)
 
   {
     y_at++;
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "gold and keys"); // NOTE this same is referenced elsewhere for particles
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at - 1);
@@ -141,7 +141,7 @@ bool wid_rightbar_ascii_create(void)
 
   {
     y_at++;
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto  w  = wid_new_square_button(wid_rightbar, "Stats");
     point tl = make_point(0, y_at);
     point br = make_point(width - 1, y_at);
@@ -155,7 +155,7 @@ bool wid_rightbar_ascii_create(void)
 
   {
     y_at++;
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "score and move");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at - 1);
@@ -242,7 +242,7 @@ bool wid_rightbar_ascii_create(void)
 
   {
     y_at++;
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto  w  = wid_new_square_button(wid_rightbar, "Vitality");
     point tl = make_point(0, y_at);
     point br = make_point(width - 1, y_at);
@@ -259,7 +259,7 @@ bool wid_rightbar_ascii_create(void)
   ///////////////////////////////////////////////////////////////////////////
   y_at++;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "Health-bar");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at);
@@ -278,7 +278,7 @@ bool wid_rightbar_ascii_create(void)
     }
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto  w  = wid_new_plain(wid_rightbar, "Health");
     point tl = make_point(0, y_at);
     point br = make_point(width - 1, y_at);
@@ -293,7 +293,7 @@ bool wid_rightbar_ascii_create(void)
     }
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "health-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(3, y_at);
@@ -316,7 +316,7 @@ bool wid_rightbar_ascii_create(void)
   ///////////////////////////////////////////////////////////////////////////
   y_at++;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "Stamina-bar");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at);
@@ -335,7 +335,7 @@ bool wid_rightbar_ascii_create(void)
     }
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto  w  = wid_new_plain(wid_rightbar, "Stamina");
     point tl = make_point(0, y_at);
     point br = make_point(width - 1, y_at);
@@ -350,7 +350,7 @@ bool wid_rightbar_ascii_create(void)
     }
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stamina-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(3, y_at);
@@ -373,7 +373,7 @@ bool wid_rightbar_ascii_create(void)
   ///////////////////////////////////////////////////////////////////////////
   y_at++;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "Magic-bar");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at);
@@ -392,7 +392,7 @@ bool wid_rightbar_ascii_create(void)
     }
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto  w  = wid_new_plain(wid_rightbar, "Magic");
     point tl = make_point(0, y_at);
     point br = make_point(width - 1, y_at);
@@ -407,7 +407,7 @@ bool wid_rightbar_ascii_create(void)
     }
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "magic-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(3, y_at);
@@ -427,7 +427,7 @@ bool wid_rightbar_ascii_create(void)
 
   {
     y_at++;
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto  w  = wid_new_square_button(wid_rightbar, "Stats");
     point tl = make_point(0, y_at);
     point br = make_point(width - 1, y_at);
@@ -444,7 +444,7 @@ bool wid_rightbar_ascii_create(void)
   ///////////////////////////////////////////////////////////////////////////
   y_at++;
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto  w  = wid_new_plain(wid_rightbar, "Def");
     point tl = make_point(0, y_at);
     point br = make_point(2, tl.y);
@@ -461,7 +461,7 @@ bool wid_rightbar_ascii_create(void)
     }
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(3, y_at);
@@ -475,7 +475,7 @@ bool wid_rightbar_ascii_create(void)
     }
 
     char tmp[ width + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_def_total() - player->stat_def_penalties_total());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%2d", player->stat_def_total() - player->stat_def_penalties_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
     wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
@@ -484,7 +484,7 @@ bool wid_rightbar_ascii_create(void)
   // ATT
   ///////////////////////////////////////////////////////////////////////////
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto  w  = wid_new_plain(wid_rightbar, "Att");
     point tl = make_point(6, y_at);
     point br = make_point(8, tl.y);
@@ -500,7 +500,7 @@ bool wid_rightbar_ascii_create(void)
     }
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(9, y_at);
@@ -514,7 +514,7 @@ bool wid_rightbar_ascii_create(void)
     }
 
     char tmp[ width + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_att_total() - player->stat_att_penalties_total());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%2d", player->stat_att_total() - player->stat_att_penalties_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
     wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
@@ -523,7 +523,7 @@ bool wid_rightbar_ascii_create(void)
   // STR
   ///////////////////////////////////////////////////////////////////////////
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto  w  = wid_new_plain(wid_rightbar, "Str");
     point tl = make_point(12, y_at);
     point br = make_point(14, tl.y);
@@ -539,7 +539,7 @@ bool wid_rightbar_ascii_create(void)
     }
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(15, y_at);
@@ -553,7 +553,7 @@ bool wid_rightbar_ascii_create(void)
     }
 
     char tmp[ width + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_str_total());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%2d", player->stat_str_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
     wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
@@ -564,7 +564,7 @@ bool wid_rightbar_ascii_create(void)
   // CON
   ///////////////////////////////////////////////////////////////////////////
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto  w  = wid_new_plain(wid_rightbar, "Con");
     point tl = make_point(0, y_at);
     point br = make_point(2, tl.y);
@@ -580,7 +580,7 @@ bool wid_rightbar_ascii_create(void)
     }
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(3, y_at);
@@ -594,7 +594,7 @@ bool wid_rightbar_ascii_create(void)
     }
 
     char tmp[ width + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_con_total());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%2d", player->stat_con_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
     wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
@@ -603,7 +603,7 @@ bool wid_rightbar_ascii_create(void)
   // DEX
   ///////////////////////////////////////////////////////////////////////////
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto  w  = wid_new_plain(wid_rightbar, "Dex");
     point tl = make_point(6, y_at);
     point br = make_point(8, tl.y);
@@ -619,7 +619,7 @@ bool wid_rightbar_ascii_create(void)
     }
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(9, y_at);
@@ -633,7 +633,7 @@ bool wid_rightbar_ascii_create(void)
     }
 
     char tmp[ width + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_dex_total());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%2d", player->stat_dex_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
     wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
@@ -642,7 +642,7 @@ bool wid_rightbar_ascii_create(void)
   // LUCK
   ///////////////////////////////////////////////////////////////////////////
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto  w  = wid_new_plain(wid_rightbar, "Lck");
     point tl = make_point(12, y_at);
     point br = make_point(14, tl.y);
@@ -658,7 +658,7 @@ bool wid_rightbar_ascii_create(void)
     }
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(15, y_at);
@@ -672,7 +672,7 @@ bool wid_rightbar_ascii_create(void)
     }
 
     char tmp[ width + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_luck_total());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%2d", player->stat_luck_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
     wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
@@ -683,7 +683,7 @@ bool wid_rightbar_ascii_create(void)
   // THV
   ///////////////////////////////////////////////////////////////////////////
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto  w  = wid_new_plain(wid_rightbar, "Thv");
     point tl = make_point(0, y_at);
     point br = make_point(2, tl.y);
@@ -699,7 +699,7 @@ bool wid_rightbar_ascii_create(void)
     }
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(3, y_at);
@@ -713,7 +713,7 @@ bool wid_rightbar_ascii_create(void)
     }
 
     char tmp[ width + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_thv_total());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%2d", player->stat_thv_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
     wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
@@ -722,7 +722,7 @@ bool wid_rightbar_ascii_create(void)
   // PSI
   ///////////////////////////////////////////////////////////////////////////
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto  w  = wid_new_plain(wid_rightbar, "Psi");
     point tl = make_point(6, y_at);
     point br = make_point(8, tl.y);
@@ -738,7 +738,7 @@ bool wid_rightbar_ascii_create(void)
     }
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(9, y_at);
@@ -752,7 +752,7 @@ bool wid_rightbar_ascii_create(void)
     }
 
     char tmp[ width + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_psi_total());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%2d", player->stat_psi_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
     wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
@@ -761,7 +761,7 @@ bool wid_rightbar_ascii_create(void)
   // LUCK
   ///////////////////////////////////////////////////////////////////////////
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto  w  = wid_new_plain(wid_rightbar, "Int");
     point tl = make_point(12, y_at);
     point br = make_point(14, tl.y);
@@ -777,7 +777,7 @@ bool wid_rightbar_ascii_create(void)
     }
   }
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_plain(wid_rightbar, "stats1-value");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(15, y_at);
@@ -791,7 +791,7 @@ bool wid_rightbar_ascii_create(void)
     }
 
     char tmp[ width + 1 ];
-    snprintf(tmp, sizeof(tmp) - 1, "%2d", player->stat_int_total());
+    snprintf(tmp, SIZEOF(tmp) - 1, "%2d", player->stat_int_total());
     wid_set_text(w, tmp);
     wid_set_text_lhs(w, true);
     wid_set_color(w, WID_COLOR_TEXT_FG, GRAY);
@@ -808,7 +808,7 @@ bool wid_rightbar_ascii_create(void)
   // Print equipped items
   //
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto w = wid_new_square_button(wid_rightbar, "Equipped");
     wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
     point tl = make_point(0, y_at);
@@ -827,7 +827,7 @@ bool wid_rightbar_ascii_create(void)
     if (iter) {
       {
         y_at++;
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         auto  w  = wid_new_square_button(wid_rightbar, "equipment");
         point tl = make_point(0, y_at);
         point br = make_point(width - 1, y_at);
@@ -851,7 +851,7 @@ bool wid_rightbar_ascii_create(void)
   //
   {
     {
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       y_at++;
       auto w = wid_new_square_button(wid_rightbar, "Shortcuts");
       wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -923,7 +923,7 @@ bool wid_rightbar_ascii_create(void)
     }
     if (got_one) {
       {
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         y_at++;
         auto w = wid_new_square_button(wid_rightbar, "Skills");
         wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -983,7 +983,7 @@ bool wid_rightbar_ascii_create(void)
     }
     if (got_one) {
       {
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         y_at++;
         auto w = wid_new_square_button(wid_rightbar, "Skills");
         wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -1043,7 +1043,7 @@ bool wid_rightbar_ascii_create(void)
     }
     if (got_one) {
       {
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         y_at++;
         auto w = wid_new_square_button(wid_rightbar, "Spells");
         wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -1103,7 +1103,7 @@ bool wid_rightbar_ascii_create(void)
     }
     if (got_one) {
       {
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         y_at++;
         auto w = wid_new_square_button(wid_rightbar, "Spells");
         wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -1160,7 +1160,7 @@ bool wid_rightbar_ascii_create(void)
     }
     if (got_one) {
       {
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         y_at++;
         auto w = wid_new_square_button(wid_rightbar, "Buffs");
         wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -1181,7 +1181,7 @@ bool wid_rightbar_ascii_create(void)
           auto iter = level->thing_find(id);
           if (iter) {
             y_at++;
-            TRACE_AND_INDENT();
+            TRACE_NO_INDENT();
             auto  w  = wid_new_square_button(wid_rightbar, "buffs");
             point tl = make_point(0, y_at);
             point br = make_point(width - 1, y_at);
@@ -1219,7 +1219,7 @@ bool wid_rightbar_ascii_create(void)
     }
     if (got_one) {
       {
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         y_at++;
         auto w = wid_new_square_button(wid_rightbar, "Debuffs");
         wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -1240,7 +1240,7 @@ bool wid_rightbar_ascii_create(void)
           auto iter = level->thing_find(id);
           if (iter) {
             y_at++;
-            TRACE_AND_INDENT();
+            TRACE_NO_INDENT();
             auto  w  = wid_new_square_button(wid_rightbar, "debuffs");
             point tl = make_point(0, y_at);
             point br = make_point(width - 1, y_at);
@@ -1267,7 +1267,7 @@ bool wid_rightbar_ascii_create(void)
         || player->blinded_count() || player->stuck_count() || player->is_sleeping || player->is_frozen
         || (player->stamina() < player->stamina_max() / 2) || (player->health() < player->health_max() / 2)) {
       {
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         y_at++;
         auto w = wid_new_square_button(wid_rightbar, "Status");
         wid_set_on_mouse_up(w, wid_right_bar_inventory_open);
@@ -1282,7 +1282,7 @@ bool wid_rightbar_ascii_create(void)
       }
       if (player->is_on_fire()) {
         y_at++;
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         auto  w  = wid_new_square_button(wid_rightbar, "state");
         point tl = make_point(0, y_at);
         point br = make_point(width - 1, y_at);
@@ -1300,7 +1300,7 @@ bool wid_rightbar_ascii_create(void)
       }
       if (player->is_frozen) {
         y_at++;
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         auto  w  = wid_new_square_button(wid_rightbar, "state");
         point tl = make_point(0, y_at);
         point br = make_point(width - 1, y_at);
@@ -1318,7 +1318,7 @@ bool wid_rightbar_ascii_create(void)
       }
       if (player->is_sleeping) {
         y_at++;
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         auto  w  = wid_new_square_button(wid_rightbar, "state");
         point tl = make_point(0, y_at);
         point br = make_point(width - 1, y_at);
@@ -1336,7 +1336,7 @@ bool wid_rightbar_ascii_create(void)
       }
       if (player->blinded_count()) {
         y_at++;
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         auto  w  = wid_new_square_button(wid_rightbar, "state");
         point tl = make_point(0, y_at);
         point br = make_point(width - 1, y_at);
@@ -1354,7 +1354,7 @@ bool wid_rightbar_ascii_create(void)
       }
       if (player->confused_count()) {
         y_at++;
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         auto  w  = wid_new_square_button(wid_rightbar, "state");
         point tl = make_point(0, y_at);
         point br = make_point(width - 1, y_at);
@@ -1372,7 +1372,7 @@ bool wid_rightbar_ascii_create(void)
       }
       if (player->entranced_count()) {
         y_at++;
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         auto  w  = wid_new_square_button(wid_rightbar, "state");
         point tl = make_point(0, y_at);
         point br = make_point(width - 1, y_at);
@@ -1390,7 +1390,7 @@ bool wid_rightbar_ascii_create(void)
       }
       if (player->stuck_count()) {
         y_at++;
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         auto  w  = wid_new_square_button(wid_rightbar, "state");
         point tl = make_point(0, y_at);
         point br = make_point(width - 1, y_at);
@@ -1408,7 +1408,7 @@ bool wid_rightbar_ascii_create(void)
       }
       if (player->stamina() < player->stamina_max() / 4) {
         y_at++;
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         auto  w  = wid_new_square_button(wid_rightbar, "state");
         point tl = make_point(0, y_at);
         point br = make_point(width - 1, y_at);
@@ -1425,7 +1425,7 @@ bool wid_rightbar_ascii_create(void)
         wid_update(w);
       } else if (player->stamina() < player->stamina_max() / 2) {
         y_at++;
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         auto  w  = wid_new_square_button(wid_rightbar, "state");
         point tl = make_point(0, y_at);
         point br = make_point(width - 1, y_at);
@@ -1443,7 +1443,7 @@ bool wid_rightbar_ascii_create(void)
       }
       if (player->health() < player->health_max() / 4) {
         y_at++;
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         auto  w  = wid_new_square_button(wid_rightbar, "state");
         point tl = make_point(0, y_at);
         point br = make_point(width - 1, y_at);
@@ -1460,7 +1460,7 @@ bool wid_rightbar_ascii_create(void)
         wid_update(w);
       } else if (player->health() < player->health_max() / 2) {
         y_at++;
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         auto  w  = wid_new_square_button(wid_rightbar, "state");
         point tl = make_point(0, y_at);
         point br = make_point(width - 1, y_at);

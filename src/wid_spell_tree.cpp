@@ -19,7 +19,7 @@ static std::string        current_spell_tree;
 
 void wid_choose_spell_destroy(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (wid_spells) {
     delete wid_spells;
     wid_spells = nullptr;
@@ -29,7 +29,7 @@ void wid_choose_spell_destroy(void)
 
 static void wid_spells_slot(int slot)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (slot >= (int) spells.size()) {
     wid_choose_spell_destroy();
     return;
@@ -47,7 +47,7 @@ static void wid_spells_slot(int slot)
 
 static uint8_t wid_spells_key_up(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto level = game->get_current_level();
   if (! level) {
     return true;
@@ -99,7 +99,7 @@ static uint8_t wid_spells_key_up(Widp w, const struct SDL_Keysym *key)
               case '9' : wid_spells_slot(c - '1'); return true;
               case SDLK_ESCAPE :
                 {
-                  TRACE_AND_INDENT();
+                  TRACE_NO_INDENT();
                   CON("INF: Spell choose cancelled");
                   wid_choose_spell_destroy();
                   return true;
@@ -114,7 +114,7 @@ static uint8_t wid_spells_key_up(Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_spells_key_down(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto level = game->get_current_level();
   if (! level) {
     return true;
@@ -138,7 +138,7 @@ static uint8_t wid_spells_key_down(Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_spells_mouse_up(Widp w, int x, int y, uint32_t button)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto level = game->get_current_level();
   if (! level) {
     return true;
@@ -167,7 +167,7 @@ static uint8_t wid_spells_mouse_up(Widp w, int x, int y, uint32_t button)
 static uint8_t wid_spell_close(Widp w, int x, int y, uint32_t button)
 {
   DBG3("Thing spell: close");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   wid_choose_spell_destroy();
   return true;
@@ -177,7 +177,7 @@ void wid_spell_over_begin(Widp w, int relx, int rely, int wheelx, int wheely)
 {
   TRACE_NO_INDENT();
   DBG2("Spell: Begin over spell");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   Spellp spell = (Spellp) wid_get_void_context(w);
   if (! spell) {
@@ -210,7 +210,7 @@ void wid_spell_over_end(Widp w)
 {
   TRACE_NO_INDENT();
   DBG2("Spell: End over spell");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   game->wid_tp_info_destroy_deferred();
 
@@ -300,7 +300,7 @@ void Game::wid_choose_spell(void)
 
 void Game::wid_choose_from_spell_tree(std::string current_tree_name)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   BOTCON("You lucky thing. Time to learn some new spell.");
 
   DBG3("Thing spells create");

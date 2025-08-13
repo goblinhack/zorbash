@@ -77,7 +77,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
 
   if (sdlk_eq(*key, game->config.key_robot_mode)) {
     CON("INF: Pressed robot mode key");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     wid_actionbar_robot_mode_toggle();
     game->change_state(Game::STATE_NORMAL, "key press");
     wid_thing_info_fini("robot key"); // To remove bag or other info
@@ -260,7 +260,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
 
   if (sdlk_eq(*key, game->config.key_quit)) {
     CON("INF: Pressed quit key");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     wid_actionbar_robot_mode_off();
     game->change_state(Game::STATE_NORMAL, "key press");
     wid_thing_info_fini("quit key"); // To remove bag or other info
@@ -326,7 +326,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
 
   if (sdlk_eq(*key, game->config.key_drop)) {
     CON("INF: Pressed drop key");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
 
     //
     // If we are moving an item, prefer to drop that.
@@ -355,7 +355,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   if (game->state == Game::STATE_COLLECTING_ITEMS) {
     if (key->scancode == SDL_SCANCODE_ESCAPE) {
       CON("INF: Escape pressed, clear collecting items state");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       return true;
     }
@@ -364,7 +364,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   if (game->state == Game::STATE_ENCHANTING_ITEMS) {
     if (key->scancode == SDL_SCANCODE_ESCAPE) {
       CON("INF: Escape pressed, clear enchanting items state");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       return true;
     }
@@ -372,7 +372,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
 
   if (sdlk_eq(*key, game->config.key_eat)) {
     CON("INF: Pressed eat key");
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     if (game->state == Game::STATE_CHOOSING_TARGET) {
       game->change_state(Game::STATE_NORMAL, "key press");
     }
@@ -398,7 +398,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   if (game->state == Game::STATE_CHOOSING_TARGET) {
     if (key->scancode == SDL_SCANCODE_ESCAPE) {
       CON("INF: Escape pressed, clear choosing target flag");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       return true;
     }
@@ -411,7 +411,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
   } else {
     if (sdlk_eq(*key, game->config.key_help)) {
       CON("INF: Pressed help key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       wid_actionbar_robot_mode_off();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("help key"); // To remove bag or other info
@@ -420,7 +420,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_load)) {
       CON("INF: Pressed load key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       wid_actionbar_robot_mode_off();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("load key"); // To remove bag or other info
@@ -430,7 +430,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_save)) {
       CON("INF: Pressed save key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       wid_actionbar_robot_mode_off();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("save key"); // To remove bag or other info
@@ -440,7 +440,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_use)) {
       CON("INF: Pressed use key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       if (game->state == Game::STATE_CHOOSING_TARGET || game->state == Game::STATE_COLLECTING_ITEMS) {
         return false;
       }
@@ -457,7 +457,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_throw)) {
       CON("INF: Pressed throw key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       if (game->state == Game::STATE_CHOOSING_TARGET || game->state == Game::STATE_COLLECTING_ITEMS) {
         return false;
       }
@@ -479,7 +479,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
 
     if (sdlk_eq(*key, game->config.key_skill0)) {
       CON("INF: Pressed skill key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("skill key"); // To remove bag or other info
       level->skillbox_chosen(9);
@@ -488,7 +488,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_skill1)) {
       CON("INF: Pressed skill key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("skill key"); // To remove bag or other info
       level->skillbox_chosen(0);
@@ -497,7 +497,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_skill2)) {
       CON("INF: Pressed skill key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("skill key"); // To remove bag or other info
       level->skillbox_chosen(1);
@@ -506,7 +506,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_skill3)) {
       CON("INF: Pressed skill key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("skill key"); // To remove bag or other info
       level->skillbox_chosen(2);
@@ -515,7 +515,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_skill4)) {
       CON("INF: Pressed skill key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("skill key"); // To remove bag or other info
       level->skillbox_chosen(3);
@@ -524,7 +524,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_skill5)) {
       CON("INF: Pressed skill key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("skill key"); // To remove bag or other info
       level->skillbox_chosen(4);
@@ -533,7 +533,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_skill6)) {
       CON("INF: Pressed skill key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("skill key"); // To remove bag or other info
       level->skillbox_chosen(5);
@@ -542,7 +542,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_skill7)) {
       CON("INF: Pressed skill key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("skill key"); // To remove bag or other info
       level->skillbox_chosen(6);
@@ -551,7 +551,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_skill8)) {
       CON("INF: Pressed skill key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("skill key"); // To remove bag or other info
       level->skillbox_chosen(7);
@@ -560,7 +560,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_skill9)) {
       CON("INF: Pressed skill key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("skill key"); // To remove bag or other info
       level->skillbox_chosen(8);
@@ -570,7 +570,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
 
     if (sdlk_eq(*key, game->config.key_spell0)) {
       CON("INF: Pressed spell key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("spell key"); // To remove bag or other info
       level->spellbox_chosen(9);
@@ -579,7 +579,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_spell1)) {
       CON("INF: Pressed spell key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("spell key"); // To remove bag or other info
       level->spellbox_chosen(0);
@@ -588,7 +588,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_spell2)) {
       CON("INF: Pressed spell key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("spell key"); // To remove bag or other info
       level->spellbox_chosen(1);
@@ -597,7 +597,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_spell3)) {
       CON("INF: Pressed spell key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("spell key"); // To remove bag or other info
       level->spellbox_chosen(2);
@@ -606,7 +606,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_spell4)) {
       CON("INF: Pressed spell key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("spell key"); // To remove bag or other info
       level->spellbox_chosen(3);
@@ -615,7 +615,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_spell5)) {
       CON("INF: Pressed spell key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("spell key"); // To remove bag or other info
       level->spellbox_chosen(4);
@@ -624,7 +624,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_spell6)) {
       CON("INF: Pressed spell key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("spell key"); // To remove bag or other info
       level->spellbox_chosen(5);
@@ -633,7 +633,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_spell7)) {
       CON("INF: Pressed spell key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("spell key"); // To remove bag or other info
       level->spellbox_chosen(6);
@@ -642,7 +642,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_spell8)) {
       CON("INF: Pressed spell key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("spell key"); // To remove bag or other info
       level->spellbox_chosen(7);
@@ -651,7 +651,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_spell9)) {
       CON("INF: Pressed spell key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("spell key"); // To remove bag or other info
       level->spellbox_chosen(8);
@@ -661,7 +661,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
 
     if (sdlk_eq(*key, game->config.key_action0)) {
       CON("INF: Pressed action key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("action key"); // To remove bag or other info
       level->inventory_chosen(9);
@@ -674,7 +674,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_action1)) {
       CON("INF: Pressed action key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("action key"); // To remove bag or other info
       level->inventory_chosen(0);
@@ -687,7 +687,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_action2)) {
       CON("INF: Pressed action key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("action key"); // To remove bag or other info
       level->inventory_chosen(1);
@@ -700,7 +700,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_action3)) {
       CON("INF: Pressed action key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("action key"); // To remove bag or other info
       level->inventory_chosen(2);
@@ -713,7 +713,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_action4)) {
       CON("INF: Pressed action key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("action key"); // To remove bag or other info
       level->inventory_chosen(3);
@@ -726,7 +726,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_action5)) {
       CON("INF: Pressed action key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("action key"); // To remove bag or other info
       level->inventory_chosen(4);
@@ -739,7 +739,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_action6)) {
       CON("INF: Pressed action key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("action key"); // To remove bag or other info
       level->inventory_chosen(5);
@@ -752,7 +752,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_action7)) {
       CON("INF: Pressed action key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("action key"); // To remove bag or other info
       level->inventory_chosen(6);
@@ -765,7 +765,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_action8)) {
       CON("INF: Pressed action key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("action key"); // To remove bag or other info
       level->inventory_chosen(7);
@@ -778,7 +778,7 @@ uint8_t wid_topcon_input(Widp w, const SDL_Keysym *key)
     }
     if (sdlk_eq(*key, game->config.key_action9)) {
       CON("INF: Pressed action key");
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       game->change_state(Game::STATE_NORMAL, "key press");
       wid_thing_info_fini("action key"); // To remove bag or other info
       level->inventory_chosen(8);

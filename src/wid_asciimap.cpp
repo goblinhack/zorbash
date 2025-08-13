@@ -13,7 +13,7 @@ static void wid_asciimap_display(Widp w, point tl, point br);
 
 void wid_asciimap_fini(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_destroy(&wid_asciimap);
 }
 
@@ -26,7 +26,7 @@ bool wid_asciimap_init(void)
   int width  = TERM_WIDTH - UI_LEFTBAR_WIDTH - UI_RIGHTBAR_WIDTH - 4;
   int height = TERM_HEIGHT - UI_TOPCON_VIS_HEIGHT - 2;
 
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   point tl = make_point(UI_LEFTBAR_WIDTH + 3, UI_TOPCON_VIS_HEIGHT);
   point br = tl + point(width - 1, height - 1);
 

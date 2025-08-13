@@ -15,7 +15,7 @@
 bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
 {
   DBG2("Create inventory");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto level = game->get_current_level();
   if (! level) {
@@ -52,7 +52,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
   int bot_half   = inventory_height - top_half;
 
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     point tl = make_point(TERM_WIDTH / 2 - left_half, TERM_HEIGHT / 2 - top_half);
     point br = make_point(TERM_WIDTH / 2 + right_half - 1, TERM_HEIGHT / 2 + bot_half - 1);
 
@@ -271,7 +271,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
     int width = 21;
 
     if (player->can_eat(item)) {
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       auto p = wid_inventory_window;
       auto w = wid_new_square_button(p, "eat");
 
@@ -283,7 +283,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
       wid_set_text(w, "Eat");
       y_at += 3;
     } else if (item->is_able_to_be_equipped() && ! player->is_equipped(item)) {
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       auto p = wid_inventory_window;
       auto w = wid_new_square_button(p, "use");
 
@@ -317,7 +317,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
       }
       y_at += 3;
     } else if (item->is_able_to_be_equipped() && player->is_equipped(item)) {
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       auto p = wid_inventory_window;
       auto w = wid_new_square_button(p, "use");
 
@@ -358,7 +358,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
         //
         // Can no longer be used
         //
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         auto p = wid_inventory_window;
         auto w = wid_new_square_button(p, "use");
 
@@ -370,7 +370,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
         y_at += 3;
 
       } else if (! item->gfx_targeted_laser().empty()) {
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         auto p = wid_inventory_window;
         auto w = wid_new_square_button(p, "use");
 
@@ -383,7 +383,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
         y_at += 3;
 
       } else if (item->is_drinkable()) {
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         auto p = wid_inventory_window;
         auto w = wid_new_square_button(p, "Use (drink)");
 
@@ -400,7 +400,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
           //
           // For example boots of teleport
           //
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
           auto p = wid_inventory_window;
           auto w = wid_new_square_button(p, "use");
 
@@ -419,7 +419,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
           //
           // For example sword of duck summoning
           //
-          TRACE_AND_INDENT();
+          TRACE_NO_INDENT();
           auto p = wid_inventory_window;
           auto w = wid_new_square_button(p, "use");
 
@@ -441,7 +441,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
         //
         // For example an enchantstone
         //
-        TRACE_AND_INDENT();
+        TRACE_NO_INDENT();
         auto p = wid_inventory_window;
         auto w = wid_new_square_button(p, "use");
 
@@ -459,7 +459,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
     // "You shall not pass" mode
     //
     if (item->is_target_radial()) {
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       if (item->charge_count()) {
         auto p = wid_inventory_window;
         auto w = wid_new_square_button(p, "use");
@@ -475,7 +475,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
     }
 
     if (item->is_throwable()) {
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       auto p = wid_inventory_window;
       auto w = wid_new_square_button(p, "throw");
 
@@ -490,7 +490,7 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
     }
 
     {
-      TRACE_AND_INDENT();
+      TRACE_NO_INDENT();
       auto p = wid_inventory_window;
       auto w = wid_new_square_button(p, "drop");
 
@@ -503,10 +503,10 @@ bool wid_inventory_create_pixelart(Thingp selected, Thingp over)
     }
   }
 
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG2("Add equip");
 
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG2("Current equip:");
   player->dump_equip();
 

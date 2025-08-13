@@ -20,7 +20,7 @@ void wid_progress_bar_destroy(void)
 void wid_progress_bar(const std::string &title, float pct)
 {
   DBG("Progress bar");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (wid_progress_bar_window) {
     wid_progress_bar_destroy();

@@ -16,7 +16,7 @@ static WidPopup *wid_error_window;
 
 static void wid_error_destroy(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   delete wid_error_window;
   wid_error_window = nullptr;
 
@@ -33,7 +33,7 @@ static void wid_error_destroy(void)
 
 static uint8_t wid_error_key_up(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (sdlk_eq(*key, game->config.key_console)) {
     return false;
@@ -46,13 +46,13 @@ static uint8_t wid_error_key_up(Widp w, const struct SDL_Keysym *key)
       switch (key->sym) {
         default :
           {
-            TRACE_AND_INDENT();
+            TRACE_NO_INDENT();
             auto c = wid_event_to_char(key);
             switch (c) {
               case '\n' :
               case SDLK_ESCAPE :
                 {
-                  TRACE_AND_INDENT();
+                  TRACE_NO_INDENT();
                   wid_error_destroy();
                   return true;
                 }
@@ -66,7 +66,7 @@ static uint8_t wid_error_key_up(Widp w, const struct SDL_Keysym *key)
 
 static uint8_t wid_error_key_down(Widp w, const struct SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (sdlk_eq(*key, game->config.key_console)) {
     return false;
@@ -77,7 +77,7 @@ static uint8_t wid_error_key_down(Widp w, const struct SDL_Keysym *key)
 
 void wid_error(std::string error)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   CON("ERROR: %s", error.c_str());
 
   if (wid_error_window) {
@@ -103,7 +103,7 @@ void wid_error(std::string error)
   sdl_screenshot_do();
 
   {
-    TRACE_AND_INDENT();
+    TRACE_NO_INDENT();
     auto bt = new Backtrace();
     bt->init();
     auto s = bt->to_string();

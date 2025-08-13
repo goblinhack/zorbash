@@ -738,7 +738,7 @@ static void wid_leftbar_display_describe(Levelp level, Thingp t, int &y_at, int 
 bool wid_leftbar_display_create(void)
 {
   DBG2("Remake leftbar");
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   auto level = game->get_current_level();
   if (! level) {

@@ -12,7 +12,7 @@ bool sound_init_done;
 
 bool sound_init(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   Mix_AllocateChannels(16);
 
   sound_init_done = true;
@@ -22,7 +22,7 @@ bool sound_init(void)
 
 void sound_fini(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (sound_init_done) {
     sound_init_done = false;
 
@@ -41,7 +41,7 @@ void sound_fini(void)
 
 bool sound_load(float volume, const char *file_in, const char *alias_in)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto file  = std::string(file_in);
   auto alias = std::string(alias_in);
 
@@ -50,7 +50,7 @@ bool sound_load(float volume, const char *file_in, const char *alias_in)
 
 bool sound_load(float volume, const std::string &file, const std::string &alias)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (alias == "") {
     auto s = sound_find(alias);
     if (s) {
@@ -103,14 +103,14 @@ bool sound_load(float volume, const std::string &file, const std::string &alias)
 //
 bool sound_find(const std::string &alias)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto result = all_sound.find(alias);
   return result != all_sound.end();
 }
 
 bool sound_play(const std::string &alias)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (g_opt_silent) {
     return true;
@@ -156,7 +156,7 @@ bool sound_play(const std::string &alias)
 
 bool sound_play_channel(int channel, const std::string &alias)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (g_opt_silent) {
     return true;
@@ -204,4 +204,4 @@ bool sound_play_channel(int channel, const std::string &alias)
   return true;
 }
 
-void sound_halt(void) { TRACE_AND_INDENT(); }
+void sound_halt(void) { TRACE_NO_INDENT(); }

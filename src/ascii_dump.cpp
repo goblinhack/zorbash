@@ -99,13 +99,13 @@ void ascii_dump_to_console(FILE *out, bool use_color)
         }
 
         if ((fg != COLOR_NONE) && (bg != COLOR_NONE)) {
-          snprintf(fgstr, sizeof(fgstr), "\e[38;2;%u;%u;%u;48;2;%u;%u;%um", fg.r, fg.g, fg.b, bg.r, bg.g, bg.b);
+          snprintf(fgstr, SIZEOF(fgstr), "\e[38;2;%u;%u;%u;48;2;%u;%u;%um", fg.r, fg.g, fg.b, bg.r, bg.g, bg.b);
         } else if (fg != COLOR_NONE) {
-          snprintf(fgstr, sizeof(fgstr), "\e[38;2;%u;%u;%um", fg.r, fg.g, fg.b);
+          snprintf(fgstr, SIZEOF(fgstr), "\e[38;2;%u;%u;%um", fg.r, fg.g, fg.b);
         } else if (bg != COLOR_NONE) {
-          snprintf(fgstr, sizeof(fgstr), "\e[48;2;%u;%u;%um", bg.r, bg.g, bg.b);
+          snprintf(fgstr, SIZEOF(fgstr), "\e[48;2;%u;%u;%um", bg.r, bg.g, bg.b);
         } else {
-          snprintf(fgstr, sizeof(fgstr), "\e[39m\e[49m");
+          snprintf(fgstr, SIZEOF(fgstr), "\e[39m\e[49m");
         }
         fprintf(out, "%s", fgstr);
       }
@@ -140,7 +140,7 @@ void ascii_dump_to_console(FILE *out, bool use_color)
       // Reset colors
       //
       if (use_color) {
-        snprintf(fgstr, sizeof(fgstr), "\e[39m\e[49m");
+        snprintf(fgstr, SIZEOF(fgstr), "\e[39m\e[49m");
         fprintf(out, "%s", fgstr);
       }
     }

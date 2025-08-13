@@ -26,7 +26,7 @@ static std::map< unsigned int, std::wstring > wid_console_lines;
 
 void wid_console_fini(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_console_exiting = true;
 
   if (wid_console_inited) {
@@ -42,7 +42,7 @@ void wid_console_fini(void)
 
 uint8_t wid_console_init(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
 
   if (! wid_console_commands_inited) {
     command_add(config_debug_set, "set debug [0123]", "set debug level");
@@ -74,7 +74,7 @@ uint8_t wid_console_init(void)
 //
 static void wid_console_reset_scroll(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (! wid_console_vert_scroll) {
     return;
   }
@@ -87,7 +87,7 @@ static void wid_console_reset_scroll(void)
 //
 static void wid_console_log_(std::wstring s)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   static int log_wid_console_buffered_lines;
 
   if (wid_console_exiting) {
@@ -127,7 +127,7 @@ static void wid_console_log_(std::wstring s)
 //
 void wid_console_log(std::string s)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int chars_per_line = UI_CONSOLE_WIDTH;
   if (chars_per_line <= 0) {
     chars_per_line = 80;
@@ -147,7 +147,7 @@ void wid_console_log(std::string s)
 //
 void wid_console_log(std::wstring s)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   int chars_per_line = UI_CONSOLE_WIDTH;
   if (chars_per_line <= 0) {
     chars_per_line = 80;
@@ -167,7 +167,7 @@ void wid_console_log(std::wstring s)
 //
 uint8_t wid_console_receive_input(Widp w, const SDL_Keysym *key)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   wid_console_reset_scroll();
 
   switch (key->sym) {
@@ -190,7 +190,7 @@ uint8_t wid_console_receive_input(Widp w, const SDL_Keysym *key)
 //
 static void wid_console_wid_create(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   point tl = make_point(0, 0);
   point br = make_point(TERM_WIDTH - 1, TERM_HEIGHT - 1);
   int   w  = br.x - tl.x;
@@ -276,7 +276,7 @@ static void wid_console_wid_create(void)
 
 std::vector< std::wstring > wid_console_serialize(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   std::vector< std::wstring > r;
   auto                        tmp = wid_get_head(wid_console_input_line);
   while (tmp) {
@@ -292,7 +292,7 @@ std::vector< std::wstring > wid_console_serialize(void)
 
 void wid_console_deserialize(std::vector< std::wstring > r)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   DBG3("Start of replaying old logs");
   DBG3("Vvvvvvvvvvvvvvvvvvvvvvvvvvv");
   for (auto s : r) {

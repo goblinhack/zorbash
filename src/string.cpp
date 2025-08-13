@@ -87,7 +87,7 @@ static char *substr (const char *in, int pos, int len)
     len = slen - pos;
   }
 
-  out = (__typeof__(out)) mymalloc(len + sizeof((char)'\0'), "substr");
+  out = (__typeof__(out)) mymalloc(len + SIZEOF((char)'\0'), "substr");
   if (!out) {
     return 0;
   }
@@ -131,7 +131,7 @@ char *strsub_(const char *in, const char *look_for, const char *replace_with, co
   newlen = (uint32_t) strlen(replace_with);
 
   len = (uint32_t) strlen(in) - oldlen + newlen;
-  buf = (__typeof__(buf)) myzalloc_(len + sizeof((char) '\0'), what, file, func, line);
+  buf = (__typeof__(buf)) myzalloc_(len + SIZEOF((char) '\0'), what, file, func, line);
   if (! buf) {
     return nullptr;
   }
@@ -168,7 +168,7 @@ char *strappend(const char *in, const char *append)
 
   newlen = (uint32_t) strlen(append);
   len    = (uint32_t) strlen(in) + newlen;
-  buf    = (__typeof__(buf)) myzalloc(len + sizeof((char) '\0'), "strappend");
+  buf    = (__typeof__(buf)) myzalloc(len + SIZEOF((char) '\0'), "strappend");
   if (! buf) {
     return nullptr;
   }
@@ -197,7 +197,7 @@ char *strprepend(const char *in, const char *prepend)
 
   newlen = (uint32_t) strlen(prepend);
   len    = (uint32_t) strlen(in) + newlen;
-  buf    = (__typeof__(buf)) myzalloc(len + sizeof((char) '\0'), "strprepend");
+  buf    = (__typeof__(buf)) myzalloc(len + SIZEOF((char) '\0'), "strprepend");
   if (! buf) {
     return nullptr;
   }
@@ -1283,7 +1283,7 @@ int snprintf_realloc(char **str, int *size, int *used, const char *fmt, ...)
 
   char add[ MAXSTR ];
   va_start(ap, fmt);
-  vsnprintf(add, sizeof(add) - 1, fmt, ap);
+  vsnprintf(add, SIZEOF(add) - 1, fmt, ap);
   va_end(ap);
   add[ MAXSHORTSTR - 1 ] = '\0';
 
@@ -1419,7 +1419,7 @@ std::string strerror_to_string(const int err)
   //
   // XSI version returns 0 on success
   //
-  if (! strerror_r(err, err_out, sizeof(err_out))) {
+  if (! strerror_r(err, err_out, SIZEOF(err_out))) {
     return std::string(err_out);
   }
 #endif
