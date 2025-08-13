@@ -35,6 +35,8 @@ struct callframe {
 //
 #define MAXCALLFRAME 256
 
+#define USE_THREADS
+
 #ifdef USE_THREADS
 #ifdef __MAIN__
 thread_local struct callframe callframes[ MAXCALLFRAME ];

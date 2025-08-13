@@ -33,10 +33,11 @@
 #define _MY_PCG_BASIC_HPP_INCLUDED 1
 
 #include <inttypes.h>
+#include <pthread.h>
 
 using pcg32_random_t = struct pcg_state_setseq_64;
 
-extern int pcg_random_allowed;
+extern thread_local int pcg_random_allowed;
 
 extern uint32_t pcg32_random_r(pcg32_random_t *rng);
 extern void     pcg32_srandom_r(pcg32_random_t *rng, uint64_t initstate, uint64_t initseq);
