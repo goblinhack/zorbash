@@ -76,10 +76,38 @@ void py_init(char *argv[])
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
   py_add_to_path("python");
+
+  //
+  // ../python
+  //
   py_add_to_path(".." DIR_SEP "python");
+
+  //
+  // data/gfx
+  //
   py_add_to_path(GFX_PATH);
+
+  //
+  // data
+  //
   py_add_to_path(DATA_PATH);
+
+  //
+  // /usr/bin/python3.10
+  //
   py_add_to_path(EXEC_PYTHONPATH);
+
+  //
+  // <dir>/zorbash
+  //
+  py_add_to_path(EXEC_DIR);
+
+  //
+  // <dir>/zorbash/python
+  //
+  auto exec_path_python_dir = std::string(EXEC_DIR) + DIR_SEP + "python";
+  py_add_to_path(exec_path_python_dir.c_str());
+
   sdl_flush_display();
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
