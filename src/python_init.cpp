@@ -6,6 +6,7 @@
 
 #include "my_callstack.hpp"
 #include "my_main.hpp"
+#include "my_python.hpp"
 #include "my_sdl_proto.hpp"
 
 PyObject *my_mod;

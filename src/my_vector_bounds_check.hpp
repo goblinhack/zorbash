@@ -12,7 +12,7 @@
 template < class TYPE > static inline void set(std::vector< TYPE > &container, std::size_t X, TYPE v)
 {
   DODEBUG(std::cerr << "set [" << X << "] = " << v << std::endl);
-  if (DEBUG2) {
+  IF_DEBUG2 {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
   }
@@ -22,7 +22,7 @@ template < class TYPE > static inline void set(std::vector< TYPE > &container, s
 template < class TYPE > static inline void incr(std::vector< TYPE > &container, std::size_t X, TYPE v)
 {
   DODEBUG(std::cerr << "incr [" << X << "] = " << v << std::endl);
-  if (DEBUG2) {
+  IF_DEBUG2 {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
   }
@@ -32,7 +32,7 @@ template < class TYPE > static inline void incr(std::vector< TYPE > &container, 
 template < class TYPE > static inline void decr(std::vector< TYPE > &container, std::size_t X, TYPE v)
 {
   DODEBUG(std::cerr << "decr [" << X << "] = " << v << std::endl);
-  if (DEBUG2) {
+  IF_DEBUG2 {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
   }
@@ -42,7 +42,7 @@ template < class TYPE > static inline void decr(std::vector< TYPE > &container, 
 template < class TYPE > static inline void incr(std::vector< TYPE > &container, std::size_t X)
 {
   DODEBUG(std::cerr << "incr [" << X << "]" << std::endl);
-  if (DEBUG2) {
+  IF_DEBUG2 {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
   }
@@ -52,7 +52,7 @@ template < class TYPE > static inline void incr(std::vector< TYPE > &container, 
 template < class TYPE > static inline void decr(std::vector< TYPE > &container, std::size_t X)
 {
   DODEBUG(std::cerr << "decr [" << X << "]" << std::endl);
-  if (DEBUG2) {
+  IF_DEBUG2 {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
   }
@@ -62,7 +62,7 @@ template < class TYPE > static inline void decr(std::vector< TYPE > &container, 
 template < class TYPE > static inline TYPE get(std::vector< TYPE > const &container, std::size_t X)
 {
   DODEBUG(std::cerr << "get [" << X << "] = ");
-  if (DEBUG2) {
+  IF_DEBUG2 {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
   }
@@ -73,7 +73,7 @@ template < class TYPE > static inline TYPE get(std::vector< TYPE > const &contai
 template < class TYPE > static inline TYPE &getref(std::vector< TYPE > &container, std::size_t X)
 {
   DODEBUG(std::cerr << "getref [" << X << "] = ");
-  if (DEBUG2) {
+  IF_DEBUG2 {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
   }
@@ -83,7 +83,7 @@ template < class TYPE > static inline TYPE &getref(std::vector< TYPE > &containe
 template < class TYPE > static inline TYPE *getptr(std::vector< TYPE > &container, std::size_t X)
 {
   DODEBUG(std::cerr << "getptr [" << X << "] = ");
-  if (DEBUG2) {
+  IF_DEBUG2 {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
   }
@@ -97,7 +97,7 @@ template < class TYPE >
 static inline void set(std::vector< std::vector< TYPE > > &container, std::size_t X, std::size_t Y, TYPE v)
 {
   DODEBUG(std::cerr << "set [" << X << "][" << Y << "] = " << v << std::endl);
-  if (DEBUG2) {
+  IF_DEBUG2 {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
     ASSERT_EX(Y, >=, 0)
@@ -110,7 +110,7 @@ template < class TYPE >
 static inline void incr(std::vector< std::vector< TYPE > > &container, std::size_t X, std::size_t Y, TYPE v)
 {
   DODEBUG(std::cerr << "incr [" << X << "][" << Y << "]" << v << std::endl);
-  if (DEBUG2) {
+  IF_DEBUG2 {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
     ASSERT_EX(Y, >=, 0)
@@ -123,7 +123,7 @@ template < class TYPE >
 static inline void decr(std::vector< std::vector< TYPE > > &container, std::size_t X, std::size_t Y, TYPE v)
 {
   DODEBUG(std::cerr << "decr [" << X << "][" << Y << "]" << v << std::endl);
-  if (DEBUG2) {
+  IF_DEBUG2 {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
     ASSERT_EX(Y, >=, 0)
@@ -136,7 +136,7 @@ template < class TYPE >
 static inline TYPE &getref(std::vector< std::vector< TYPE > > &container, std::size_t X, std::size_t Y)
 {
   DODEBUG(std::cerr << "getref [" << X << "][" << Y << "] = ");
-  if (DEBUG2) {
+  IF_DEBUG2 {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
     ASSERT_EX(Y, >=, 0)
@@ -149,7 +149,7 @@ template < class TYPE >
 static inline TYPE *getptr(std::vector< std::vector< TYPE > > &container, std::size_t X, std::size_t Y)
 {
   DODEBUG(std::cerr << "getptr [" << X << "][" << Y << "] = ");
-  if (DEBUG2) {
+  IF_DEBUG2 {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
     ASSERT_EX(Y, >=, 0)
@@ -162,7 +162,7 @@ template < class TYPE >
 static inline TYPE get(std::vector< std::vector< TYPE > > const &container, std::size_t X, std::size_t Y)
 {
   DODEBUG(std::cerr << "get [" << X << "][" << Y << "] = ");
-  if (DEBUG2) {
+  IF_DEBUG2 {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
     ASSERT_EX(Y, >=, 0)
@@ -180,7 +180,7 @@ static inline void set(std::vector< std::vector< std::vector< TYPE > > > &contai
                        std::size_t Z, TYPE v)
 {
   DODEBUG(std::cerr << "set [" << X << "][" << Y << "][" << Z << "] = " << v << std::endl);
-  if (DEBUG2) {
+  IF_DEBUG2 {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
     ASSERT_EX(Y, >=, 0)
@@ -196,7 +196,7 @@ static inline TYPE get(std::vector< std::vector< std::vector< TYPE > > > const &
                        std::size_t Y, std::size_t Z)
 {
   DODEBUG(std::cerr << "get [" << X << "][" << Y << "][" << Z << "] = ");
-  if (DEBUG2) {
+  IF_DEBUG2 {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
     ASSERT_EX(Y, >=, 0)
@@ -213,7 +213,7 @@ static inline TYPE &getref(std::vector< std::vector< std::vector< TYPE > > > &co
                            std::size_t Z)
 {
   DODEBUG(std::cerr << "getref [" << X << "][" << Y << "][" << Z << "] = ");
-  if (DEBUG2) {
+  IF_DEBUG2 {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
     ASSERT_EX(Y, >=, 0)
@@ -229,7 +229,7 @@ static inline TYPE *getptr(std::vector< std::vector< std::vector< TYPE > > > &co
                            std::size_t Z)
 {
   DODEBUG(std::cerr << "getptr [" << X << "][" << Y << "][" << Z << "] = ");
-  if (DEBUG2) {
+  IF_DEBUG2 {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
     ASSERT_EX(Y, >=, 0)
@@ -248,7 +248,7 @@ static inline void set(std::vector< std::vector< std::vector< std::vector< TYPE 
                        std::size_t Y, std::size_t Z, std::size_t I, TYPE v)
 {
   DODEBUG(std::cerr << "set [" << X << "][" << Y << "][" << Z << "][" << I << "] = " << v << std::endl);
-  if (DEBUG2) {
+  IF_DEBUG2 {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
     ASSERT_EX(Y, >=, 0)
@@ -266,7 +266,7 @@ static inline TYPE get(std::vector< std::vector< std::vector< std::vector< TYPE 
                        std::size_t X, std::size_t Y, std::size_t Z, std::size_t I)
 {
   DODEBUG(std::cerr << "getptr [" << X << "][" << Y << "][" << Z << "][" << I << "] = ");
-  if (DEBUG2) {
+  IF_DEBUG2 {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
     ASSERT_EX(Y, >=, 0)
@@ -285,7 +285,7 @@ static inline TYPE &getref(std::vector< std::vector< std::vector< std::vector< T
                            std::size_t Y, std::size_t Z, std::size_t I)
 {
   DODEBUG(std::cerr << "getref [" << X << "][" << Y << "][" << Z << "][" << I << "] = ");
-  if (DEBUG2) {
+  IF_DEBUG2 {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
     ASSERT_EX(Y, >=, 0)
@@ -303,7 +303,7 @@ static inline TYPE *getptr(std::vector< std::vector< std::vector< std::vector< T
                            std::size_t Y, std::size_t Z, std::size_t I)
 {
   DODEBUG(std::cerr << "getref [" << X << "][" << Y << "][" << Z << "][" << I << "] = )");
-  if (DEBUG2) {
+  IF_DEBUG2 {
     ASSERT_EX(X, >=, 0)
     ASSERT_EX(X, <, container.size())
     ASSERT_EX(Y, >=, 0)

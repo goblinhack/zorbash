@@ -5,6 +5,7 @@
 #include "my_callstack.hpp"
 #include "my_main.hpp"
 #include "my_ptrcheck.hpp"
+#include "my_python.hpp"
 #include "my_string.hpp"
 
 void py_exec(const char *str)

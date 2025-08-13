@@ -2,12 +2,12 @@
 // Copyright goblinhack@gmail.com
 //
 
+#include "my_callstack.hpp"
 #include "my_py_game.hpp"
 #include "my_py_level.hpp"
 #include "my_py_thing.hpp"
 #include "my_py_tp.hpp"
-
-#include "my_callstack.hpp"
+#include "my_python.hpp"
 
 static PyMethodDef python_c_METHODS[] = {
     // begin sort marker1 {

@@ -5,6 +5,7 @@
 #include "my_ascii.hpp"
 #include "my_enums.hpp"
 #include "my_monst.hpp"
+#include "my_python.hpp"
 #include "my_sound.hpp"
 #include "my_thing_template.hpp"
 
