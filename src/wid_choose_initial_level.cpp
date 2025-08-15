@@ -15,10 +15,6 @@
 #include "my_wid_choose_level.hpp"
 #include "my_wid_popup.hpp" // do not remove
 
-#include <thread>
-
-static std::vector< std::thread > threads;
-
 static uint8_t wid_choose_initial_dungeons_enter(Widp w, int x, int y, uint32_t button);
 static uint8_t wid_choose_initial_dungeons_shortcut_enter(Widp w, int x, int y, uint32_t button);
 
@@ -68,6 +64,8 @@ public:
   //
   bool generating {};
   bool generated {};
+  int  generating_level {};
+  int  max_generating_level {};
 
   //
   // Items in the level_grid
@@ -201,7 +199,7 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
   auto level_at = wid_choose_level_grid_to_level_coord(x, y);
   auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
 
-  if (l && node->generated) {
+  if (l) {
     //
     // Place crystals at level transitions
     //
@@ -413,8 +411,6 @@ static void wid_choose_initial_dungeons_create_level_at(wid_choose_initial_dunge
   auto node     = ctx->nodes->getn(x, y);
   auto level_at = wid_choose_level_grid_to_level_coord(x, y);
 
-  node->generating = true;
-
   //
   // Create a level of the given difficulty at a fixed location
   //
@@ -445,9 +441,6 @@ static void wid_choose_initial_dungeons_create_level_at(wid_choose_initial_dunge
   if (node->is_descend_dungeon) {
     l->is_final_level = true;
   }
-
-  node->generated  = true;
-  node->generating = false;
 }
 
 //
@@ -468,10 +461,6 @@ static void game_join_levels(wid_choose_initial_dungeons_ctx *ctx)
 
       auto node = ctx->nodes->getn(x, y);
       if (! node) {
-        continue;
-      }
-
-      if (! node->generated) {
         continue;
       }
 
@@ -574,10 +563,6 @@ static void wid_choose_initial_dungeons_tick(Widp w)
     delta = 2;
   }
 
-  int node_count = 0;
-  int generated  = 0;
-  int generating = 0;
-
   {
     for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
       for (auto y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
@@ -587,16 +572,6 @@ static void wid_choose_initial_dungeons_tick(Widp w)
         }
 
         auto node = ctx->nodes->getn(x, y);
-        node_count++;
-
-        if (node->generated) {
-          generated++;
-        }
-
-        if (node->generating) {
-          generating++;
-        }
-
         if (node->is_ascend_dungeon) {
           color c = UI_DUNGEONS_CURRENT_LEVEL_COLOR;
           c.g     = val;
@@ -605,15 +580,6 @@ static void wid_choose_initial_dungeons_tick(Widp w)
         }
       }
     }
-  }
-
-  ctx->generated  = false;
-  ctx->generating = false;
-
-  if (node_count && (generated == node_count)) {
-    ctx->generated = true;
-  } else {
-    ctx->generating = true;
   }
 
   if (! ctx->generated) {
@@ -647,6 +613,9 @@ static void wid_choose_initial_dungeons_tick(Widp w)
           }
 
           wid_choose_initial_dungeons_create_level_at(ctx, x, y);
+          ctx->generating       = true;
+          ctx->generating_level = node->walk_order_level_no;
+          ctx->generated        = true;
           wid_choose_initial_dungeons_enter(w, 0, 0, 0);
           return;
         }
@@ -683,21 +652,16 @@ static void wid_choose_initial_dungeons_tick(Widp w)
           continue;
         }
 
-        if (node->generating) {
-          continue;
-        }
+        if (node->walk_order_level_no == ctx->generating_level) {
+          ctx->generating_level++;
+          wid_choose_initial_dungeons_create_level_at(ctx, x, y);
+          wid_choose_initial_dungeons_update_buttons(ctx->w);
 
-        if (generating < MAX_CONCURRENT_THREADS) {
-          CON("Start new level generation thread, currently %d running", generating);
-          generating++;
-          node->generating = true;
-          threads.push_back(std::thread(wid_choose_initial_dungeons_create_level_at, ctx, x, y));
+          ctx->generating = true;
+          return;
         }
       }
     }
-
-    wid_choose_initial_dungeons_update_buttons(ctx->w);
-    return;
   }
 
   {
@@ -721,6 +685,8 @@ static void wid_choose_initial_dungeons_tick(Widp w)
     wid_set_shape_square(b);
     wid_update(b);
   }
+
+  ctx->generated = true;
 }
 
 static void wid_choose_initial_dungeons_post_display_tick(Widp w)
@@ -1066,6 +1032,8 @@ void game_grid_node_walk(wid_choose_initial_dungeons_ctx *ctx)
     // If no next then this is the furthest last node
     //
     if (same_depth_nodes.empty() && next_depth_nodes.empty()) {
+      ctx->generating_level         = 1;
+      ctx->max_generating_level     = walk_order_level_no;
       curr_node->is_descend_dungeon = true;
       break;
     }
@@ -1075,8 +1043,6 @@ void game_grid_node_walk(wid_choose_initial_dungeons_ctx *ctx)
 void Game::wid_choose_initial_dungeons(void)
 {
   TRACE_NO_INDENT();
-
-  threads.resize(0);
 
   auto box_style           = g_opt_ascii ? UI_WID_STYLE_HORIZ_DARK : UI_WID_STYLE_NORMAL;
   auto box_highlight_style = g_opt_ascii ? UI_WID_STYLE_HORIZ_LIGHT : UI_WID_STYLE_NORMAL;
@@ -1105,10 +1071,11 @@ void Game::wid_choose_initial_dungeons(void)
 
   ctx->nodes
       = new Nodes(BIOME_DUNGEONS, DUNGEONS_GRID_CHUNK_WIDTH, DUNGEONS_GRID_CHUNK_WIDTH, false /* not a dungeon */);
-  ctx->focusx     = -1;
-  ctx->focusy     = -1;
-  ctx->generated  = false;
-  ctx->generating = false;
+  ctx->focusx           = -1;
+  ctx->focusy           = -1;
+  ctx->generated        = false;
+  ctx->generating       = false;
+  ctx->generating_level = 1;
 
   //
   // Find the entry node

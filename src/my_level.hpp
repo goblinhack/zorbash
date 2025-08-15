@@ -8,7 +8,6 @@
 
 #include <deque>
 #include <list>
-#include <thread>
 
 #include "my_biomes.hpp"
 #include "my_dmap.hpp"
@@ -218,8 +217,6 @@ public:
   // If this level is new to the player, we reset magic on entering.
   //
   bool is_entered {};
-
-  bool is_created {};
 
   //
   // Chances for various things to appear
@@ -470,7 +467,7 @@ public:
 
 #define FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)                                                                   \
   if (! (level)->is_oob(x, y)) {                                                                                     \
-    static thread_local Thingp things_to_walk[ MAP_SLOTS ];                                                          \
+    static Thingp things_to_walk[ MAP_SLOTS ];                                                                       \
     {                                                                                                                \
       auto _vec_               = getptr(level->all_things_ptr_at, x, y);                                             \
       auto things_to_walk_size = _vec_->size();                                                                      \

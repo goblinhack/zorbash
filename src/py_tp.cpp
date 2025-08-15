@@ -3,7 +3,6 @@
 //
 
 #include "my_game.hpp"
-#include "my_log.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
 #include "my_thing.hpp"
@@ -12,43 +11,37 @@ static int NO_VALUE = -99999;
 
 PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_NO_INDENT();
-
-  big_lock.lock();
+  TRACE_AND_INDENT();
   PyObject *py_class = nullptr;
 
   static char *kwlist[] = {(char *) "tp", nullptr};
 
+  TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "O", kwlist, &py_class)) {
     PY_ERR("tp_load: Bad args");
-    big_lock.unlock();
     Py_RETURN_FALSE;
   }
 
   if (! py_class) {
     PY_ERR("tp_load: Missing name attr");
-    big_lock.unlock();
     Py_RETURN_FALSE;
   }
 
   char *tp_name = py_obj_attr_str(py_class, "name");
   if (! tp_name) {
     PY_ERR("tp_load: Missing tp name");
-    big_lock.unlock();
     Py_RETURN_FALSE;
   }
 
   char *tp_text_long_name = py_obj_attr_str(py_class, "text_long_name");
   if (! tp_text_long_name) {
     PY_ERR("tp_load: Missing tp text_long_name");
-    big_lock.unlock();
     Py_RETURN_FALSE;
   }
 
   char *tp_text_short_name = py_obj_attr_str(py_class, "text_short_name");
   if (! tp_text_short_name) {
     PY_ERR("tp_load: Missing tp text_short_name");
-    big_lock.unlock();
     Py_RETURN_FALSE;
   }
 
@@ -60,7 +53,6 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
   myfree(tp_text_long_name);
   myfree(tp_text_short_name);
 
-  big_lock.unlock();
   Py_RETURN_TRUE;
 }
 
@@ -360,7 +352,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *tp_update_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   PyObject *py_class = nullptr;
   char     *tp_name  = nullptr;
   int       value    = 0;
@@ -368,6 +360,7 @@ PyObject *tp_update_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   static char *kwlist[] = {(char *) "class", (char *) "value", nullptr};
 
+  TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|i", kwlist, &py_class, &value)) {
     PY_ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
@@ -402,12 +395,13 @@ done:
 
 PyObject *spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   char    *what = nullptr;
   uint32_t id   = 0;
 
   static char *kwlist[] = {(char *) "id", (char *) "what", nullptr};
 
+  TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
     PY_ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
@@ -440,12 +434,13 @@ PyObject *spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   char    *what = nullptr;
   uint32_t id   = 0;
 
   static char *kwlist[] = {(char *) "id", (char *) "what", nullptr};
 
+  TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
     PY_ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
@@ -478,7 +473,7 @@ PyObject *spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *ke
 
 PyObject *spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   char    *what       = nullptr;
   uint32_t id         = 0;
   uint32_t parent_id  = 0;
@@ -490,6 +485,7 @@ PyObject *spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObjec
       = {(char *) "id", (char *) "parent_id", (char *) "victim_id", (char *) "what", (char *) "min", (char *) "max",
          nullptr};
 
+  TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIIs|ii", kwlist, &id, &parent_id, &victim_id, &what, &radius_min,
                                     &radius_max)) {
     PY_ERR("%s: Bad args", __FUNCTION__);
@@ -553,7 +549,7 @@ PyObject *spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObjec
 
 PyObject *spawn_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   char    *what       = nullptr;
   uint32_t id         = 0;
   uint32_t radius_min = 0;
@@ -561,6 +557,7 @@ PyObject *spawn_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   static char *kwlist[] = {(char *) "id", (char *) "what", (char *) "min", (char *) "max", nullptr};
 
+  TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is|ii", kwlist, &id, &what, &radius_min, &radius_max)) {
     PY_ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
@@ -593,7 +590,7 @@ PyObject *spawn_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *if_matches_then_dead_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   char    *what = nullptr;
   uint32_t id   = 0;
   int      x    = NO_VALUE;
@@ -601,6 +598,7 @@ PyObject *if_matches_then_dead_(PyObject *obj, PyObject *args, PyObject *keywds)
 
   static char *kwlist[] = {(char *) "id", (char *) "what", (char *) "x", (char *) "y", nullptr};
 
+  TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Isii", kwlist, &id, &what, &x, &y)) {
     PY_ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
@@ -646,12 +644,13 @@ PyObject *if_matches_then_dead_(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *if_matches_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   char    *what = nullptr;
   uint32_t id   = 0;
 
   static char *kwlist[] = {(char *) "id", (char *) "what", nullptr};
 
+  TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
     PY_ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
@@ -683,7 +682,7 @@ PyObject *if_matches_(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   char    *what = nullptr;
   uint32_t id   = 0;
   int      x    = NO_VALUE;
@@ -691,6 +690,7 @@ PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds)
 
   static char *kwlist[] = {(char *) "id", (char *) "what", (char *) "x", (char *) "y", nullptr};
 
+  TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Isii", kwlist, &id, &what, &x, &y)) {
     PY_ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
@@ -737,7 +737,7 @@ PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds)
 
 PyObject *place_at(PyObject *obj, PyObject *args, PyObject *keywds)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   char    *what = nullptr;
   uint32_t id   = 0;
   int      x    = NO_VALUE;
@@ -745,6 +745,7 @@ PyObject *place_at(PyObject *obj, PyObject *args, PyObject *keywds)
 
   static char *kwlist[] = {(char *) "id", (char *) "what", (char *) "x", (char *) "y", nullptr};
 
+  TRACE_NO_INDENT();
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Isii", kwlist, &id, &what, &x, &y)) {
     PY_ERR("%s: Bad args", __FUNCTION__);
     Py_RETURN_FALSE;
@@ -781,7 +782,7 @@ PyObject *place_at(PyObject *obj, PyObject *args, PyObject *keywds)
   }
 
   PY_DBG("%s(%s, %d, %d)", __FUNCTION__, what, x, y);
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
 
   auto t = game->thing_find(ThingId(id));
   if (unlikely(! t)) {

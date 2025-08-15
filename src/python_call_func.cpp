@@ -3,13 +3,12 @@
 //
 
 #include "my_callstack.hpp"
-#include "my_log.hpp"
 #include "my_main.hpp"
 #include "my_python.hpp"
 
-static void py_call_void_(const char *name)
+void py_call_void(const char *name)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   if (! my_mod) {
     DIE("Python module not inited yet");
     return;
@@ -28,9 +27,9 @@ static void py_call_void_(const char *name)
   py_err();
 }
 
-static void py_call_void_fn_(const char *module, const char *name, int val1)
+void py_call_void_fn(const char *module, const char *name, int val1)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return;
@@ -52,9 +51,9 @@ static void py_call_void_fn_(const char *module, const char *name, int val1)
   py_err();
 }
 
-static void py_call_void_fn_(const char *module, const char *name, int val1, int val2)
+void py_call_void_fn(const char *module, const char *name, int val1, int val2)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return;
@@ -76,9 +75,9 @@ static void py_call_void_fn_(const char *module, const char *name, int val1, int
   py_err();
 }
 
-static void py_call_void_fn_(const char *module, const char *name, int val1, int val2, int val3)
+void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return;
@@ -100,9 +99,9 @@ static void py_call_void_fn_(const char *module, const char *name, int val1, int
   py_err();
 }
 
-static void py_call_void_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4)
+void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return;
@@ -124,9 +123,9 @@ static void py_call_void_fn_(const char *module, const char *name, int val1, int
   py_err();
 }
 
-static void py_call_void_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
+void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return;
@@ -148,10 +147,9 @@ static void py_call_void_fn_(const char *module, const char *name, int val1, int
   py_err();
 }
 
-static void py_call_void_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
-                             int val6)
+void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return;
@@ -173,10 +171,10 @@ static void py_call_void_fn_(const char *module, const char *name, int val1, int
   py_err();
 }
 
-static void py_call_void_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
-                             int val6, int val7)
+void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
+                     int val7)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return;
@@ -198,10 +196,10 @@ static void py_call_void_fn_(const char *module, const char *name, int val1, int
   py_err();
 }
 
-static void py_call_void_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
-                             int val6, int val7, int val8)
+void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
+                     int val7, int val8)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return;
@@ -223,10 +221,10 @@ static void py_call_void_fn_(const char *module, const char *name, int val1, int
   py_err();
 }
 
-static void py_call_void_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
-                             int val6, int val7, int val8, int val9)
+void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
+                     int val7, int val8, int val9)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return;
@@ -249,9 +247,9 @@ static void py_call_void_fn_(const char *module, const char *name, int val1, int
   py_err();
 }
 
-static void py_call_void_fn_(const char *module, const char *name, uint32_t val1)
+void py_call_void_fn(const char *module, const char *name, unsigned int val1)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return;
@@ -273,9 +271,9 @@ static void py_call_void_fn_(const char *module, const char *name, uint32_t val1
   py_err();
 }
 
-static void py_call_void_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2)
+void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return;
@@ -297,9 +295,9 @@ static void py_call_void_fn_(const char *module, const char *name, uint32_t val1
   py_err();
 }
 
-static void py_call_void_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3)
+void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return;
@@ -321,10 +319,10 @@ static void py_call_void_fn_(const char *module, const char *name, uint32_t val1
   py_err();
 }
 
-static void py_call_void_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
-                             uint32_t val4)
+void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                     unsigned int val4)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return;
@@ -346,10 +344,10 @@ static void py_call_void_fn_(const char *module, const char *name, uint32_t val1
   py_err();
 }
 
-static void py_call_void_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
-                             uint32_t val4, uint32_t val5)
+void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                     unsigned int val4, unsigned int val5)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return;
@@ -371,10 +369,10 @@ static void py_call_void_fn_(const char *module, const char *name, uint32_t val1
   py_err();
 }
 
-static void py_call_void_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
-                             uint32_t val4, uint32_t val5, uint32_t val6)
+void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                     unsigned int val4, unsigned int val5, unsigned int val6)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return;
@@ -396,10 +394,10 @@ static void py_call_void_fn_(const char *module, const char *name, uint32_t val1
   py_err();
 }
 
-static void py_call_void_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
-                             uint32_t val4, uint32_t val5, uint32_t val6, uint32_t val7)
+void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                     unsigned int val4, unsigned int val5, unsigned int val6, unsigned int val7)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return;
@@ -421,10 +419,10 @@ static void py_call_void_fn_(const char *module, const char *name, uint32_t val1
   py_err();
 }
 
-static void py_call_void_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
-                             uint32_t val4, uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8)
+void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                     unsigned int val4, unsigned int val5, unsigned int val6, unsigned int val7, unsigned int val8)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return;
@@ -446,10 +444,11 @@ static void py_call_void_fn_(const char *module, const char *name, uint32_t val1
   py_err();
 }
 
-static void py_call_void_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
-                             uint32_t val4, uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8, uint32_t val9)
+void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                     unsigned int val4, unsigned int val5, unsigned int val6, unsigned int val7, unsigned int val8,
+                     unsigned int val9)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return;
@@ -472,11 +471,11 @@ static void py_call_void_fn_(const char *module, const char *name, uint32_t val1
   py_err();
 }
 
-static void py_call_void_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
-                             uint32_t val4, uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8, uint32_t val9,
-                             uint32_t val10)
+void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                     unsigned int val4, unsigned int val5, unsigned int val6, unsigned int val7, unsigned int val8,
+                     unsigned int val9, unsigned int val10)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return;
@@ -499,9 +498,9 @@ static void py_call_void_fn_(const char *module, const char *name, uint32_t val1
   py_err();
 }
 
-static bool py_call_bool_(const char *name)
+bool py_call_bool(const char *name)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   if (! my_mod) {
     PY_ERR("Python module not inited yet");
     return false;
@@ -525,9 +524,9 @@ static bool py_call_bool_(const char *name)
   return false;
 }
 
-static bool py_call_bool_fn_(const char *module, const char *name, int val1)
+bool py_call_bool_fn(const char *module, const char *name, int val1)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -553,9 +552,9 @@ static bool py_call_bool_fn_(const char *module, const char *name, int val1)
   return false;
 }
 
-static bool py_call_bool_fn_(const char *module, const char *name, int val1, int val2)
+bool py_call_bool_fn(const char *module, const char *name, int val1, int val2)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -581,9 +580,9 @@ static bool py_call_bool_fn_(const char *module, const char *name, int val1, int
   return false;
 }
 
-static bool py_call_bool_fn_(const char *module, const char *name, int val1, int val2, int val3)
+bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -609,9 +608,9 @@ static bool py_call_bool_fn_(const char *module, const char *name, int val1, int
   return false;
 }
 
-static bool py_call_bool_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4)
+bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -637,9 +636,9 @@ static bool py_call_bool_fn_(const char *module, const char *name, int val1, int
   return false;
 }
 
-static bool py_call_bool_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
+bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -665,10 +664,9 @@ static bool py_call_bool_fn_(const char *module, const char *name, int val1, int
   return false;
 }
 
-static bool py_call_bool_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
-                             int val6)
+bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -694,10 +692,10 @@ static bool py_call_bool_fn_(const char *module, const char *name, int val1, int
   return false;
 }
 
-static bool py_call_bool_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
-                             int val6, int val7)
+bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
+                     int val7)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -723,10 +721,10 @@ static bool py_call_bool_fn_(const char *module, const char *name, int val1, int
   return false;
 }
 
-static bool py_call_bool_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
-                             int val6, int val7, int val8)
+bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
+                     int val7, int val8)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -752,9 +750,9 @@ static bool py_call_bool_fn_(const char *module, const char *name, int val1, int
   return false;
 }
 
-static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1)
+bool py_call_bool_fn(const char *module, const char *name, unsigned int val1)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -780,9 +778,9 @@ static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1
   return false;
 }
 
-static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2)
+bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, unsigned int val2)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -808,9 +806,9 @@ static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1
   return false;
 }
 
-static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3)
+bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -836,10 +834,10 @@ static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1
   return false;
 }
 
-static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
-                             uint32_t val4)
+bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                     unsigned int val4)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -865,10 +863,10 @@ static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1
   return false;
 }
 
-static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
-                             uint32_t val4, uint32_t val5)
+bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                     unsigned int val4, unsigned int val5)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -894,10 +892,10 @@ static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1
   return false;
 }
 
-static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
-                             uint32_t val4, uint32_t val5, uint32_t val6)
+bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                     unsigned int val4, unsigned int val5, unsigned int val6)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -923,10 +921,10 @@ static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1
   return false;
 }
 
-static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
-                             uint32_t val4, uint32_t val5, uint32_t val6, uint32_t val7)
+bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                     unsigned int val4, unsigned int val5, unsigned int val6, unsigned int val7)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -952,10 +950,10 @@ static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1
   return false;
 }
 
-static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
-                             uint32_t val4, uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8)
+bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                     unsigned int val4, unsigned int val5, unsigned int val6, unsigned int val7, unsigned int val8)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -981,9 +979,9 @@ static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1
   return false;
 }
 
-static int py_call_int_(const char *name)
+int py_call_int(const char *name)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   if (! my_mod) {
     PY_ERR("Python module not inited yet");
     return false;
@@ -1007,9 +1005,9 @@ static int py_call_int_(const char *name)
   return false;
 }
 
-static int py_call_int_fn_(const char *module, const char *name, int val1)
+int py_call_int_fn(const char *module, const char *name, int val1)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -1035,9 +1033,9 @@ static int py_call_int_fn_(const char *module, const char *name, int val1)
   return false;
 }
 
-static int py_call_int_fn_(const char *module, const char *name, int val1, int val2)
+int py_call_int_fn(const char *module, const char *name, int val1, int val2)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -1063,9 +1061,9 @@ static int py_call_int_fn_(const char *module, const char *name, int val1, int v
   return false;
 }
 
-static int py_call_int_fn_(const char *module, const char *name, int val1, int val2, int val3)
+int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -1091,9 +1089,9 @@ static int py_call_int_fn_(const char *module, const char *name, int val1, int v
   return false;
 }
 
-static int py_call_int_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4)
+int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3, int val4)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -1119,9 +1117,9 @@ static int py_call_int_fn_(const char *module, const char *name, int val1, int v
   return false;
 }
 
-static int py_call_int_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
+int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -1147,10 +1145,9 @@ static int py_call_int_fn_(const char *module, const char *name, int val1, int v
   return false;
 }
 
-static int py_call_int_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
-                           int val6)
+int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -1176,10 +1173,10 @@ static int py_call_int_fn_(const char *module, const char *name, int val1, int v
   return false;
 }
 
-static int py_call_int_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
-                           int val6, int val7)
+int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
+                   int val7)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -1205,10 +1202,10 @@ static int py_call_int_fn_(const char *module, const char *name, int val1, int v
   return false;
 }
 
-static int py_call_int_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
-                           int val6, int val7, int val8)
+int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
+                   int val7, int val8)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -1234,9 +1231,9 @@ static int py_call_int_fn_(const char *module, const char *name, int val1, int v
   return false;
 }
 
-static int py_call_int_fn_(const char *module, const char *name, uint32_t val1)
+int py_call_int_fn(const char *module, const char *name, unsigned int val1)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -1262,9 +1259,9 @@ static int py_call_int_fn_(const char *module, const char *name, uint32_t val1)
   return false;
 }
 
-static int py_call_int_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2)
+int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsigned int val2)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -1290,9 +1287,9 @@ static int py_call_int_fn_(const char *module, const char *name, uint32_t val1, 
   return false;
 }
 
-static int py_call_int_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3)
+int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -1318,10 +1315,10 @@ static int py_call_int_fn_(const char *module, const char *name, uint32_t val1, 
   return false;
 }
 
-static int py_call_int_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
-                           uint32_t val4)
+int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                   unsigned int val4)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -1347,10 +1344,10 @@ static int py_call_int_fn_(const char *module, const char *name, uint32_t val1, 
   return false;
 }
 
-static int py_call_int_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
-                           uint32_t val4, uint32_t val5)
+int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                   unsigned int val4, unsigned int val5)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -1376,10 +1373,10 @@ static int py_call_int_fn_(const char *module, const char *name, uint32_t val1, 
   return false;
 }
 
-static int py_call_int_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
-                           uint32_t val4, uint32_t val5, uint32_t val6)
+int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                   unsigned int val4, unsigned int val5, unsigned int val6)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -1405,10 +1402,10 @@ static int py_call_int_fn_(const char *module, const char *name, uint32_t val1, 
   return false;
 }
 
-static int py_call_int_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
-                           uint32_t val4, uint32_t val5, uint32_t val6, uint32_t val7)
+int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                   unsigned int val4, unsigned int val5, unsigned int val6, unsigned int val7)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -1434,10 +1431,10 @@ static int py_call_int_fn_(const char *module, const char *name, uint32_t val1, 
   return false;
 }
 
-static int py_call_int_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
-                           uint32_t val4, uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8)
+int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+                   unsigned int val4, unsigned int val5, unsigned int val6, unsigned int val7, unsigned int val8)
 {
-  TRACE_NO_INDENT();
+  TRACE_AND_INDENT();
   auto pmod = py_add_module(module);
   if (! pmod) {
     return false;
@@ -1461,491 +1458,4 @@ static int py_call_int_fn_(const char *module, const char *name, uint32_t val1, 
 
   py_err();
   return false;
-}
-
-void py_call_void(const char *name)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  py_call_void_(name);
-  big_lock.unlock();
-}
-
-void py_call_void_fn(const char *module, const char *name, int val1)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  py_call_void_fn_(module, name, val1);
-  big_lock.unlock();
-}
-
-void py_call_void_fn(const char *module, const char *name, int val1, int val2)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  py_call_void_fn_(module, name, val1, val2);
-  big_lock.unlock();
-}
-
-void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  py_call_void_fn_(module, name, val1, val2, val3);
-  big_lock.unlock();
-}
-
-void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  py_call_void_fn_(module, name, val1, val2, val3, val4);
-  big_lock.unlock();
-}
-
-void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  py_call_void_fn_(module, name, val1, val2, val3, val4, val5);
-  big_lock.unlock();
-}
-
-void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6);
-  big_lock.unlock();
-}
-
-void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
-                     int val7)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6, val7);
-  big_lock.unlock();
-}
-
-void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
-                     int val7, int val8)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8);
-  big_lock.unlock();
-}
-
-void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
-                     int val7, int val8, int val9)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8, val9);
-  big_lock.unlock();
-}
-
-void py_call_void_fn(const char *module, const char *name, uint32_t val1)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  py_call_void_fn_(module, name, val1);
-  big_lock.unlock();
-}
-
-void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  py_call_void_fn_(module, name, val1, val2);
-  big_lock.unlock();
-}
-
-void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  py_call_void_fn_(module, name, val1, val2, val3);
-  big_lock.unlock();
-}
-
-void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  py_call_void_fn_(module, name, val1, val2, val3, val4);
-  big_lock.unlock();
-}
-
-void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
-                     uint32_t val5)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  py_call_void_fn_(module, name, val1, val2, val3, val4, val5);
-  big_lock.unlock();
-}
-
-void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
-                     uint32_t val5, uint32_t val6)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6);
-  big_lock.unlock();
-}
-
-void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
-                     uint32_t val5, uint32_t val6, uint32_t val7)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6, val7);
-  big_lock.unlock();
-}
-
-void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
-                     uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8);
-  big_lock.unlock();
-}
-
-void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
-                     uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8, uint32_t val9)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8, val9);
-  big_lock.unlock();
-}
-
-void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
-                     uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8, uint32_t val9, uint32_t val10)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8, val9, val10);
-  big_lock.unlock();
-}
-
-bool py_call_bool(const char *name)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_bool_(name);
-  big_lock.unlock();
-  return ret;
-}
-
-bool py_call_bool_fn(const char *module, const char *name, int val1)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_bool_fn_(module, name, val1);
-  big_lock.unlock();
-  return ret;
-}
-
-bool py_call_bool_fn(const char *module, const char *name, int val1, int val2)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_bool_fn_(module, name, val1, val2);
-  big_lock.unlock();
-  return ret;
-}
-
-bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_bool_fn_(module, name, val1, val2, val3);
-  big_lock.unlock();
-  return ret;
-}
-
-bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4);
-  big_lock.unlock();
-  return ret;
-}
-
-bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5);
-  big_lock.unlock();
-  return ret;
-}
-
-bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5, val6);
-  big_lock.unlock();
-  return ret;
-}
-
-bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
-                     int val7)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5, val6, val7);
-  big_lock.unlock();
-  return ret;
-}
-
-bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
-                     int val7, int val8)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8);
-  big_lock.unlock();
-  return ret;
-}
-
-bool py_call_bool_fn(const char *module, const char *name, uint32_t val1)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_bool_fn_(module, name, val1);
-  big_lock.unlock();
-  return ret;
-}
-
-bool py_call_bool_fn(const char *module, const char *name, uint32_t val1, uint32_t val2)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_bool_fn_(module, name, val1, val2);
-  big_lock.unlock();
-  return ret;
-}
-
-bool py_call_bool_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_bool_fn_(module, name, val1, val2, val3);
-  big_lock.unlock();
-  return ret;
-}
-
-bool py_call_bool_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4);
-  big_lock.unlock();
-  return ret;
-}
-
-bool py_call_bool_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
-                     uint32_t val5)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5);
-  big_lock.unlock();
-  return ret;
-}
-
-bool py_call_bool_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
-                     uint32_t val5, uint32_t val6)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5, val6);
-  big_lock.unlock();
-  return ret;
-}
-
-bool py_call_bool_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
-                     uint32_t val5, uint32_t val6, uint32_t val7)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5, val6, val7);
-  big_lock.unlock();
-  return ret;
-}
-
-bool py_call_bool_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
-                     uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8);
-  big_lock.unlock();
-  return ret;
-}
-
-int py_call_int(const char *name)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_int_(name);
-  big_lock.unlock();
-  return ret;
-}
-
-int py_call_int_fn(const char *module, const char *name, int val1)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_int_fn_(module, name, val1);
-  big_lock.unlock();
-  return ret;
-}
-
-int py_call_int_fn(const char *module, const char *name, int val1, int val2)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_int_fn_(module, name, val1, val2);
-  big_lock.unlock();
-  return ret;
-}
-
-int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_int_fn_(module, name, val1, val2, val3);
-  big_lock.unlock();
-  return ret;
-}
-
-int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3, int val4)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4);
-  big_lock.unlock();
-  return ret;
-}
-
-int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5);
-  big_lock.unlock();
-  return ret;
-}
-
-int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5, val6);
-  big_lock.unlock();
-  return ret;
-}
-
-int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
-                   int val7)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5, val6, val7);
-  big_lock.unlock();
-  return ret;
-}
-
-int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
-                   int val7, int val8)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8);
-  big_lock.unlock();
-  return ret;
-}
-
-int py_call_int_fn(const char *module, const char *name, uint32_t val1)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_int_fn_(module, name, val1);
-  big_lock.unlock();
-  return ret;
-}
-
-int py_call_int_fn(const char *module, const char *name, uint32_t val1, uint32_t val2)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_int_fn_(module, name, val1, val2);
-  big_lock.unlock();
-  return ret;
-}
-
-int py_call_int_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_int_fn_(module, name, val1, val2, val3);
-  big_lock.unlock();
-  return ret;
-}
-
-int py_call_int_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4);
-  big_lock.unlock();
-  return ret;
-}
-
-int py_call_int_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
-                   uint32_t val5)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5);
-  big_lock.unlock();
-  return ret;
-}
-
-int py_call_int_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
-                   uint32_t val5, uint32_t val6)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5, val6);
-  big_lock.unlock();
-  return ret;
-}
-
-int py_call_int_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
-                   uint32_t val5, uint32_t val6, uint32_t val7)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5, val6, val7);
-  big_lock.unlock();
-  return ret;
-}
-
-int py_call_int_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
-                   uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8)
-{
-  TRACE_NO_INDENT();
-  big_lock.lock();
-  auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8);
-  big_lock.unlock();
-  return ret;
 }

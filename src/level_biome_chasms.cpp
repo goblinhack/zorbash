@@ -28,14 +28,14 @@ bool Level::create_biome_chasms(point3d at, uint32_t seed)
     auto     dungeon
         = new Dungeon(biome, MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT, seed);
     if (dungeon->failed) {
-      dbg("INF: create dungeon, failed, retry");
+      log("INF: create dungeon, failed, retry");
       seed++;
       delete dungeon;
       continue;
     }
 
     if (! g_opt_test_dungeon) {
-      dbg("INF: Create dungeon layout took %u ms", time_ms() - start);
+      log("INF: Create dungeon layout took %u ms", time_ms() - start);
     }
 
     //

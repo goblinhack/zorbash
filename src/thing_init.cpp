@@ -4,7 +4,6 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
-#include "my_log.hpp"
 #include "my_python.hpp"
 #include "my_string.hpp"
 #include "my_template.hpp"
@@ -105,7 +104,7 @@ void Thing::on_born(void)
   }
 }
 
-void Thing::init_(Levelp level, const std::string &name_in, const point born, Thingp owner)
+void Thing::init(Levelp level, const std::string &name_in, const point born, Thingp owner)
 {
   TRACE_NO_INDENT();
 
@@ -359,13 +358,6 @@ void Thing::init_(Levelp level, const std::string &name_in, const point born, Th
   if (g_loading) {
     err("Trying to create a thing during loading.");
   }
-}
-
-void Thing::init(Levelp level, const std::string &name_in, const point born, Thingp owner)
-{
-  big_lock.lock();
-  init_(level, name_in, born, owner);
-  big_lock.unlock();
 }
 
 void Thing::init_slower_stuff(void)

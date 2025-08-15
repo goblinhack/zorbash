@@ -301,7 +301,7 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
 
       if (tp->environ_likes_deep_water()) {
         if (! is_deep_water(x, y)) {
-          dbg("INF: Dropping %s for deep water", tp->name().c_str());
+          log("INF: Dropping %s for deep water", tp->name().c_str());
           continue;
         }
       }
@@ -309,7 +309,7 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
       if (tp->is_swimmer()) {
         if (! is_water(x, y)) {
           if (! tp->is_swimmer_but_land_dweller()) {
-            dbg("INF: Dropping %s for deep water", tp->name().c_str());
+            log("INF: Dropping %s for deep water", tp->name().c_str());
             continue;
           }
         }
@@ -318,37 +318,37 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
       if (! tp->is_critical_to_level()) {
         if (biome == BIOME_DUNGEON) {
           if (! tp->is_biome_dungeon()) {
-            dbg("INF: Dropping %s for biome dungeon", tp->name().c_str());
+            log("INF: Dropping %s for biome dungeon", tp->name().c_str());
             continue;
           }
         } else if (biome == BIOME_FLOODED) {
           if (! tp->is_biome_flooded()) {
-            dbg("INF: Dropping %s for biome flooded", tp->name().c_str());
+            log("INF: Dropping %s for biome flooded", tp->name().c_str());
             continue;
           }
         } else if (biome == BIOME_SWAMP) {
           if (! tp->is_biome_swamp()) {
-            dbg("INF: Dropping %s for biome swamp", tp->name().c_str());
+            log("INF: Dropping %s for biome swamp", tp->name().c_str());
             continue;
           }
         } else if (biome == BIOME_SEWER) {
           if (! tp->is_biome_sewer()) {
-            dbg("INF: Dropping %s for biome sewer", tp->name().c_str());
+            log("INF: Dropping %s for biome sewer", tp->name().c_str());
             continue;
           }
         } else if (biome == BIOME_ICE) {
           if (! tp->is_biome_ice()) {
-            dbg("INF: Dropping %s for biome ice", tp->name().c_str());
+            log("INF: Dropping %s for biome ice", tp->name().c_str());
             continue;
           }
         } else if (biome == BIOME_CHASMS) {
           if (! tp->is_biome_chasms()) {
-            dbg("INF: Dropping %s for biome chasms", tp->name().c_str());
+            log("INF: Dropping %s for biome chasms", tp->name().c_str());
             continue;
           }
         } else if (biome == BIOME_LAVA) {
           if (! tp->is_biome_lava()) {
-            dbg("INF: Dropping %s for biome lava", tp->name().c_str());
+            log("INF: Dropping %s for biome lava", tp->name().c_str());
             continue;
           }
         } else {

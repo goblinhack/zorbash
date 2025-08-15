@@ -136,9 +136,7 @@ void sdl_loop(void)
 
       if (likely(! g_errored)) {
         if (likely(game->level != nullptr)) {
-          if (game->level->is_created) {
-            game->level->tick();
-          }
+          game->level->tick();
         }
       }
 

@@ -1,0 +1,4708 @@
+commit 66a9b579d6504b99bc5d8b4967f65d01baebf3cc
+Author: Goblin Hack <goblinhack@gmail.com>
+Date:   Fri Aug 15 20:31:49 2025 +0100
+
+    experimental multi threaded level generation
+
+diff --git a/src/dmap.cpp b/src/dmap.cpp
+index be36a904..779604dc 100644
+--- a/src/dmap.cpp
++++ b/src/dmap.cpp
+@@ -149,23 +149,23 @@ void dmap_print(const Dmap *D)
+ 
+ void dmap_process_no_diagonals(Dmap *D, point tl, point br, bool place_border)
+ {
+-  auto                                                                      before = SDL_GetTicks();
+-  uint8_t                                                                   x;
+-  uint8_t                                                                   y;
+-  uint8_t                                                                   a;
+-  uint8_t                                                                   b;
+-  uint8_t                                                                   c;
+-  uint8_t                                                                   d;
+-  uint8_t                                                                  *e;
+-  uint8_t                                                                   f;
+-  uint8_t                                                                   g;
+-  uint8_t                                                                   h;
+-  uint8_t                                                                   i;
+-  uint8_t                                                                   lowest;
+-  uint8_t                                                                   changed;
+-  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig;
+-  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig_valid;
+-  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > valid;
++  auto                                                                                   before = SDL_GetTicks();
++  uint8_t                                                                                x;
++  uint8_t                                                                                y;
++  uint8_t                                                                                a;
++  uint8_t                                                                                b;
++  uint8_t                                                                                c;
++  uint8_t                                                                                d;
++  uint8_t                                                                               *e;
++  uint8_t                                                                                f;
++  uint8_t                                                                                g;
++  uint8_t                                                                                h;
++  uint8_t                                                                                i;
++  uint8_t                                                                                lowest;
++  uint8_t                                                                                changed;
++  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig;
++  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig_valid;
++  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > valid;
+ 
+   int minx, miny, maxx, maxy;
+   if (tl.x < br.x) {
+@@ -386,8 +386,8 @@ void dmap_process_no_diagonals(Dmap *D, point tl, point br, bool place_border)
+   //
+   if (unlikely(g_opt_debug1)) {
+     auto after = SDL_GetTicks();
+-    if (after - before > 70) {
+-      ERR("DMAP is taking too long, %d ms", after - before);
++    if (after - before > 100) {
++      LOG("DMAP is taking too long, %d ms", after - before);
+       dmap_print(D);
+     }
+     if (after - before > 0) {
+@@ -421,23 +421,23 @@ void dmap_process_no_diagonals(Dmap *D, point tl, point br, bool place_border)
+ //
+ void dmap_process_allow_diagonals(Dmap *D, point tl, point br, bool place_border)
+ {
+-  auto                                                                      before = SDL_GetTicks();
+-  uint8_t                                                                   x;
+-  uint8_t                                                                   y;
+-  uint8_t                                                                   a;
+-  uint8_t                                                                   b;
+-  uint8_t                                                                   c;
+-  uint8_t                                                                   d;
+-  uint8_t                                                                  *e;
+-  uint8_t                                                                   f;
+-  uint8_t                                                                   g;
+-  uint8_t                                                                   h;
+-  uint8_t                                                                   i;
+-  uint8_t                                                                   lowest;
+-  uint8_t                                                                   changed;
+-  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig;
+-  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig_valid;
+-  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > valid;
++  auto                                                                                   before = SDL_GetTicks();
++  uint8_t                                                                                x;
++  uint8_t                                                                                y;
++  uint8_t                                                                                a;
++  uint8_t                                                                                b;
++  uint8_t                                                                                c;
++  uint8_t                                                                                d;
++  uint8_t                                                                               *e;
++  uint8_t                                                                                f;
++  uint8_t                                                                                g;
++  uint8_t                                                                                h;
++  uint8_t                                                                                i;
++  uint8_t                                                                                lowest;
++  uint8_t                                                                                changed;
++  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig;
++  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig_valid;
++  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > valid;
+ 
+   int minx, miny, maxx, maxy;
+   if (tl.x < br.x) {
+@@ -668,23 +668,23 @@ void dmap_process_allow_diagonals(Dmap *D, point tl, point br, bool place_border
+ //
+ void dmap_process_reverse_allow_diagonals(Dmap *D, point tl, point br, bool place_border)
+ {
+-  auto                                                                      before = SDL_GetTicks();
+-  uint8_t                                                                   x;
+-  uint8_t                                                                   y;
+-  uint8_t                                                                   a;
+-  uint8_t                                                                   b;
+-  uint8_t                                                                   c;
+-  uint8_t                                                                   d;
+-  uint8_t                                                                  *e;
+-  uint8_t                                                                   f;
+-  uint8_t                                                                   g;
+-  uint8_t                                                                   h;
+-  uint8_t                                                                   i;
+-  uint8_t                                                                   highest;
+-  uint8_t                                                                   changed;
+-  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig;
+-  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig_valid;
+-  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > valid;
++  auto                                                                                   before = SDL_GetTicks();
++  uint8_t                                                                                x;
++  uint8_t                                                                                y;
++  uint8_t                                                                                a;
++  uint8_t                                                                                b;
++  uint8_t                                                                                c;
++  uint8_t                                                                                d;
++  uint8_t                                                                               *e;
++  uint8_t                                                                                f;
++  uint8_t                                                                                g;
++  uint8_t                                                                                h;
++  uint8_t                                                                                i;
++  uint8_t                                                                                highest;
++  uint8_t                                                                                changed;
++  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig;
++  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig_valid;
++  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > valid;
+ 
+   int minx, miny, maxx, maxy;
+   if (tl.x < br.x) {
+diff --git a/src/dungeon.cpp b/src/dungeon.cpp
+index 4ded91e1..d172f561 100644
+--- a/src/dungeon.cpp
++++ b/src/dungeon.cpp
+@@ -440,6 +440,7 @@ Dungeon::Dungeon(biome_t biome, int map_width, int map_height, int grid_width, i
+ {
+   TRACE_NO_INDENT();
+   this->biome = biome;
++  this->all_rooms = Room::all_rooms;
+   make_dungeon();
+ }
+ 
+@@ -1806,40 +1807,43 @@ void Dungeon::dump(void)
+     }
+   }
+ 
+-  //
+-  // Pass 2 without room depths
+-  //
+-  LOG("INF: Seed %u", seed);
+-  // printf("INF: Seed %u\n", seed);
+-  for (auto y = 0; y < map_height; y++) {
+-    std::string s;
+-    for (auto x = 0; x < map_width; x++) {
+-      bool got_one = false;
+-      for (auto d = map_depth - 1; d >= 0; d--) {
+-        if (! is_anything_at(x, y, d)) {
+-          continue;
+-        }
++  IF_DEBUG
++  {
++    //
++    // Pass 2 without room depths
++    //
++    LOG("INF: Seed %u", seed);
++    // printf("INF: Seed %u\n", seed);
++    for (auto y = 0; y < map_height; y++) {
++      std::string s;
++      for (auto x = 0; x < map_width; x++) {
++        bool got_one = false;
++        for (auto d = map_depth - 1; d >= 0; d--) {
++          if (! is_anything_at(x, y, d)) {
++            continue;
++          }
++
++          auto m  = getc(x, y, d);
++          auto cr = get(Charmap::all_charmaps, m);
++          auto c  = cr.c;
+ 
+-        auto m  = getc(x, y, d);
+-        auto cr = get(Charmap::all_charmaps, m);
+-        auto c  = cr.c;
++          if (! c) {
++            DIE("Unknown map char %c at x %d, y %d, depth %d", m, x, y, d);
++          }
+ 
+-        if (! c) {
+-          DIE("Unknown map char %c at x %d, y %d, depth %d", m, x, y, d);
++          s += c;
++          got_one = true;
++          break;
++        }
++        if (! got_one) {
++          s += " ";
+         }
+-
+-        s += c;
+-        got_one = true;
+-        break;
+       }
+-      if (! got_one) {
+-        s += " ";
++      if (s != "") {
++        LOG("[%s]", s.c_str());
++        // printf("[%s]\n", s.c_str());
+       }
+     }
+-    if (s != "") {
+-      LOG("[%s]", s.c_str());
+-      // printf("[%s]\n", s.c_str());
+-    }
+   }
+ }
+ 
+@@ -1851,7 +1855,7 @@ void Dungeon::reset_possible_rooms(void)
+   std::fill(cells.begin(), cells.end(), Charmap::CHAR_SPACE);
+   std::fill(cells_room.begin(), cells_room.end(), nullptr);
+ 
+-  for (auto &r : Room::all_rooms) {
++  for (auto &r : all_rooms) {
+     r->placed = false;
+     r->skip   = false;
+ 
+@@ -2248,11 +2252,11 @@ bool Dungeon::solve(int x, int y, Grid *g)
+ 
+   std::vector< Roomp > candidates;
+ 
+-  if (! Room::all_rooms.size()) {
++  if (! all_rooms.size()) {
+     DIE("Failed to load any rooms. Initialization error?");
+   }
+ 
+-  for (auto r : Room::all_rooms) {
++  for (auto r : all_rooms) {
+     if (! room_is_a_candidate(n, r)) {
+       continue;
+     }
+@@ -2262,7 +2266,7 @@ bool Dungeon::solve(int x, int y, Grid *g)
+ 
+   auto ncandidates = candidates.size();
+   if (! ncandidates) {
+-    for (auto r : Room::all_rooms) {
++    for (auto r : all_rooms) {
+       if (! room_is_a_candidate_less_restrictive(n, r)) {
+         continue;
+       }
+@@ -2272,7 +2276,7 @@ bool Dungeon::solve(int x, int y, Grid *g)
+ 
+     ncandidates = candidates.size();
+     if (! ncandidates) {
+-      for (auto r : Room::all_rooms) {
++      for (auto r : all_rooms) {
+         if (! room_is_a_candidate_any_depth(n, r)) {
+           continue;
+         }
+@@ -3307,7 +3311,7 @@ bool Dungeon::rooms_move_closer_together(void)
+ 
+   all_placed_rooms.resize(0);
+ 
+-  for (auto r : Room::all_rooms) {
++  for (auto r : all_rooms) {
+     r->placed = false;
+   }
+ 
+diff --git a/src/game_display.cpp b/src/game_display.cpp
+index be2bb511..6dce7521 100644
+--- a/src/game_display.cpp
++++ b/src/game_display.cpp
+@@ -13,7 +13,7 @@ void Game::display(void)
+     return;
+   }
+ 
+-  if (level) {
++  if (level && level->is_created) {
+     level->display_pixelart_map();
+   }
+ }
+diff --git a/src/game_level.cpp b/src/game_level.cpp
+index 7aeb9163..ac449d78 100644
+--- a/src/game_level.cpp
++++ b/src/game_level.cpp
+@@ -5,6 +5,8 @@
+ #include "my_array_bounds_check.hpp"
+ #include "my_game.hpp"
+ 
++static std::recursive_mutex init_mutex;
++
+ bool Game::init_level(point3d world_at, point grid_at, int difficulty_depth, int dungeon_walk_order_level_no)
+ {
+   DBG("Game init level %d,%d,%d", world_at.x, world_at.y, world_at.z);
+@@ -13,18 +15,18 @@ bool Game::init_level(point3d world_at, point grid_at, int difficulty_depth, int
+   //
+   // Make sure init has occurred.
+   //
++  init_mutex.lock();
+   if (jump_paths.empty()) {
+     init();
+   }
++  init_mutex.unlock();
+ 
+   if (world_at.z >= LEVELS_DEEP) {
+     LOG("Cannot create new level at: %d,%d,%d, too deep", world_at.x, world_at.y, world_at.z);
+     return false;
+   }
+ 
+-  TRACE_AND_INDENT();
+   auto l = get(world.levels, world_at.x, world_at.y, world_at.z);
+-  TRACE_AND_INDENT();
+   if (! l) {
+     DBG("Create new level at: %d,%d,%d", world_at.x, world_at.y, world_at.z);
+     world.new_level_at(world_at, grid_at, difficulty_depth, dungeon_walk_order_level_no);
+@@ -36,5 +38,6 @@ bool Game::init_level(point3d world_at, point grid_at, int difficulty_depth, int
+   } else {
+     LOG("Level already exists: %d,%d,%d", world_at.x, world_at.y, world_at.z);
+   }
++  l->is_created = true;
+   return true;
+ }
+diff --git a/src/globals.cpp b/src/globals.cpp
+index 26461167..4bb9f84e 100644
+--- a/src/globals.cpp
++++ b/src/globals.cpp
+@@ -75,8 +75,6 @@ int MAP_WIDTH;
+ int DUNGEON_GRID_CHUNK_HEIGHT;
+ int DUNGEON_GRID_CHUNK_WIDTH;
+ 
+-int g_last_logged_callframes_depth;
+-
+ void reset_globals(void)
+ {
+   g_opt_ascii                = false;
+diff --git a/src/level_biome_chasms.cpp b/src/level_biome_chasms.cpp
+index d57818e3..a6805766 100644
+--- a/src/level_biome_chasms.cpp
++++ b/src/level_biome_chasms.cpp
+@@ -28,14 +28,14 @@ bool Level::create_biome_chasms(point3d at, uint32_t seed)
+     auto     dungeon
+         = new Dungeon(biome, MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT, seed);
+     if (dungeon->failed) {
+-      log("INF: create dungeon, failed, retry");
++      dbg("INF: create dungeon, failed, retry");
+       seed++;
+       delete dungeon;
+       continue;
+     }
+ 
+     if (! g_opt_test_dungeon) {
+-      log("INF: Create dungeon layout took %u ms", time_ms() - start);
++      dbg("INF: Create dungeon layout took %u ms", time_ms() - start);
+     }
+ 
+     //
+diff --git a/src/level_biome_common.cpp b/src/level_biome_common.cpp
+index 02417cd6..344e1905 100644
+--- a/src/level_biome_common.cpp
++++ b/src/level_biome_common.cpp
+@@ -301,7 +301,7 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
+ 
+       if (tp->environ_likes_deep_water()) {
+         if (! is_deep_water(x, y)) {
+-          log("INF: Dropping %s for deep water", tp->name().c_str());
++          dbg("INF: Dropping %s for deep water", tp->name().c_str());
+           continue;
+         }
+       }
+@@ -309,7 +309,7 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
+       if (tp->is_swimmer()) {
+         if (! is_water(x, y)) {
+           if (! tp->is_swimmer_but_land_dweller()) {
+-            log("INF: Dropping %s for deep water", tp->name().c_str());
++            dbg("INF: Dropping %s for deep water", tp->name().c_str());
+             continue;
+           }
+         }
+@@ -318,37 +318,37 @@ void Level::place_objects_with_normal_placement_rules(Dungeonp d)
+       if (! tp->is_critical_to_level()) {
+         if (biome == BIOME_DUNGEON) {
+           if (! tp->is_biome_dungeon()) {
+-            log("INF: Dropping %s for biome dungeon", tp->name().c_str());
++            dbg("INF: Dropping %s for biome dungeon", tp->name().c_str());
+             continue;
+           }
+         } else if (biome == BIOME_FLOODED) {
+           if (! tp->is_biome_flooded()) {
+-            log("INF: Dropping %s for biome flooded", tp->name().c_str());
++            dbg("INF: Dropping %s for biome flooded", tp->name().c_str());
+             continue;
+           }
+         } else if (biome == BIOME_SWAMP) {
+           if (! tp->is_biome_swamp()) {
+-            log("INF: Dropping %s for biome swamp", tp->name().c_str());
++            dbg("INF: Dropping %s for biome swamp", tp->name().c_str());
+             continue;
+           }
+         } else if (biome == BIOME_SEWER) {
+           if (! tp->is_biome_sewer()) {
+-            log("INF: Dropping %s for biome sewer", tp->name().c_str());
++            dbg("INF: Dropping %s for biome sewer", tp->name().c_str());
+             continue;
+           }
+         } else if (biome == BIOME_ICE) {
+           if (! tp->is_biome_ice()) {
+-            log("INF: Dropping %s for biome ice", tp->name().c_str());
++            dbg("INF: Dropping %s for biome ice", tp->name().c_str());
+             continue;
+           }
+         } else if (biome == BIOME_CHASMS) {
+           if (! tp->is_biome_chasms()) {
+-            log("INF: Dropping %s for biome chasms", tp->name().c_str());
++            dbg("INF: Dropping %s for biome chasms", tp->name().c_str());
+             continue;
+           }
+         } else if (biome == BIOME_LAVA) {
+           if (! tp->is_biome_lava()) {
+-            log("INF: Dropping %s for biome lava", tp->name().c_str());
++            dbg("INF: Dropping %s for biome lava", tp->name().c_str());
+             continue;
+           }
+         } else {
+diff --git a/src/level_biome_dungeon.cpp b/src/level_biome_dungeon.cpp
+index ca50625b..bb16ca54 100644
+--- a/src/level_biome_dungeon.cpp
++++ b/src/level_biome_dungeon.cpp
+@@ -25,7 +25,7 @@ bool Level::create_biome_dungeon(point3d at, uint32_t seed)
+ 
+   while (true) {
+     uint32_t start = time_ms();
+-    auto     dungeon
++    auto dungeon
+         = new Dungeon(biome, MAP_WIDTH, MAP_HEIGHT, DUNGEON_GRID_CHUNK_WIDTH, DUNGEON_GRID_CHUNK_HEIGHT, seed);
+     if (dungeon->failed) {
+       log("INF: create dungeon, failed, retry");
+diff --git a/src/level_log.cpp b/src/level_log.cpp
+index 2efb0101..87069af8 100644
+--- a/src/level_log.cpp
++++ b/src/level_log.cpp
+@@ -34,13 +34,14 @@ void Level::log_(const char *fmt, va_list args)
+ 
+ void Level::log(const char *fmt, ...)
+ {
++  big_lock.lock();
+   verify(MTYPE_LEVEL, this);
+-  log_catchup_missing_indent_levels();
+   auto    l = this;
+   va_list args;
+   va_start(args, fmt);
+   l->log_(fmt, args);
+   va_end(args);
++  big_lock.unlock();
+ }
+ 
+ void Level::con_(const char *fmt, va_list args)
+@@ -70,6 +71,7 @@ void Level::con_(const char *fmt, va_list args)
+ 
+ void Level::con(const char *fmt, ...)
+ {
++  big_lock.lock();
+   verify(MTYPE_LEVEL, this);
+   auto    l = this;
+   va_list args;
+@@ -77,6 +79,7 @@ void Level::con(const char *fmt, ...)
+   va_start(args, fmt);
+   l->con_(fmt, args);
+   va_end(args);
++  big_lock.unlock();
+ }
+ 
+ void Level::err_(const char *fmt, va_list args)
+@@ -133,6 +136,8 @@ void Level::err(const char *fmt, ...)
+   if (nested_error) {
+     return;
+   }
++
++  big_lock.lock();
+   bool old_nested_error = nested_error;
+   nested_error          = true;
+ 
+@@ -152,4 +157,5 @@ void Level::err(const char *fmt, ...)
+     va_end(args);
+   }
+   nested_error = false;
++  big_lock.unlock();
+ }
+diff --git a/src/log.cpp b/src/log.cpp
+index 50071ca0..61db81bd 100644
+--- a/src/log.cpp
++++ b/src/log.cpp
+@@ -13,39 +13,7 @@
+ #include "my_wid_console.hpp"
+ #include "my_wid_topcon.hpp"
+ 
+-//
+-// Whan a log appears, if some indent levels are missing, then pull them
+-// out of the callstack - it's like a mini backtrace
+-//
+-void log_catchup_missing_indent_levels(void)
+-{
+-  //
+-  // Seems to need more work - not reliable
+-  //
+-#if 0
+-  IF_NODEBUG2 {
+-    return;
+-  }
+-
+-  if (!g_log_stdout) {
+-    g_last_logged_callframes_depth = 0;
+-  }
+-
+-  if (g_callframes_depth > 0) {
+-    if (g_last_logged_callframes_depth > g_callframes_depth) {
+-      g_last_logged_callframes_depth = g_callframes_depth - 1;
+-      return;
+-    }
+-  }
+-
+-  while (g_last_logged_callframes_depth < g_callframes_depth - 1) {
+-    auto func = callframes[g_last_logged_callframes_depth].func;
+-    g_last_logged_callframes_depth++;
+-    LOG_MISSING("%s", func);
+-  }
+-  g_last_logged_callframes_depth = g_callframes_depth;
+-#endif
+-}
++std::recursive_mutex big_lock;
+ 
+ static void log_(const char *fmt, va_list args)
+ {
+@@ -72,50 +40,16 @@ static void log_(const char *fmt, va_list args)
+   putf(MY_STDOUT, buf);
+ }
+ 
+-static void log_missing_(const char *fmt, va_list args)
+-{
+-  TRACE_NO_INDENT();
+-
+-  char buf[ MAXLONGSTR ];
+-  int  len = 0;
+-
+-  buf[ 0 ] = '\0';
+-  if (! g_opt_test_dungeon) {
+-    get_timestamp(buf, MAXLONGSTR);
+-    len = (int) strlen(buf);
+-  }
+-
+-  if (! g_log_stdout) {
+-    // No indent
+-  } else {
+-    snprintf(buf + len, MAXLONGSTR - len, "%100s: %*s", "", g_last_logged_callframes_depth, "");
+-  }
+-
+-  len = (int) strlen(buf);
+-  vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
+-
+-  putf(MY_STDOUT, buf);
+-}
+-
+ void LOG(const char *fmt, ...)
+ {
+   TRACE_NO_INDENT();
+ 
+-  log_catchup_missing_indent_levels();
++  big_lock.lock();
+   va_list args;
+   va_start(args, fmt);
+   log_(fmt, args);
+   va_end(args);
+-}
+-
+-void LOG_MISSING(const char *fmt, ...)
+-{
+-  TRACE_NO_INDENT();
+-
+-  va_list args;
+-  va_start(args, fmt);
+-  log_missing_(fmt, args);
+-  va_end(args);
++  big_lock.unlock();
+ }
+ 
+ static void warn_(const char *fmt, va_list args)
+@@ -142,11 +76,13 @@ void WARN(const char *fmt, ...)
+ {
+   TRACE_NO_INDENT();
+ 
++  big_lock.lock();
+   va_list args;
+ 
+   va_start(args, fmt);
+   warn_(fmt, args);
+   va_end(args);
++  big_lock.unlock();
+ }
+ 
+ static void con_(const char *fmt, va_list args)
+@@ -319,44 +255,51 @@ void CON(const char *fmt, ...)
+ {
+   TRACE_NO_INDENT();
+ 
+-  log_catchup_missing_indent_levels();
++  big_lock.lock();
+   va_list args;
+   va_start(args, fmt);
+   con_(fmt, args);
+   va_end(args);
++  big_lock.unlock();
+ }
+ 
+ void CON(const wchar_t *fmt, ...)
+ {
+   TRACE_NO_INDENT();
+ 
++  big_lock.lock();
+   va_list args;
+ 
+   va_start(args, fmt);
+   con_(fmt, args);
+   va_end(args);
++  big_lock.unlock();
+ }
+ 
+ void TOPCON(const char *fmt, ...)
+ {
+   TRACE_NO_INDENT();
+ 
++  big_lock.lock();
+   va_list args;
+ 
+   va_start(args, fmt);
+   topcon_(fmt, args);
+   va_end(args);
++  big_lock.unlock();
+ }
+ 
+ void TOPCON(const wchar_t *fmt, ...)
+ {
+   TRACE_NO_INDENT();
+ 
++  big_lock.lock();
+   va_list args;
+ 
+   va_start(args, fmt);
+   topcon_(fmt, args);
+   va_end(args);
++  big_lock.unlock();
+ }
+ 
+ static void dying_(const char *fmt, va_list args)
+@@ -524,11 +467,13 @@ void CROAK(const char *fmt, ...)
+ {
+   TRACE_NO_INDENT();
+ 
++  big_lock.lock();
+   va_list args;
+ 
+   va_start(args, fmt);
+   croak_(fmt, args);
+   va_end(args);
++  big_lock.unlock();
+ }
+ 
+ static void croak_clean_(const char *fmt, va_list args)
+@@ -550,22 +495,26 @@ void CROAK_CLEAN(const char *fmt, ...)
+ {
+   TRACE_NO_INDENT();
+ 
++  big_lock.lock();
+   va_list args;
+ 
+   va_start(args, fmt);
+   croak_clean_(fmt, args);
+   va_end(args);
++  big_lock.unlock();
+ }
+ 
+ void DYING(const char *fmt, ...)
+ {
+   TRACE_NO_INDENT();
+ 
++  big_lock.lock();
+   va_list args;
+ 
+   va_start(args, fmt);
+   dying_(fmt, args);
+   va_end(args);
++  big_lock.unlock();
+ }
+ 
+ void myerr(const char *fmt, ...)
+@@ -576,6 +525,7 @@ void myerr(const char *fmt, ...)
+   if (nested_error) {
+     return;
+   }
++  big_lock.lock();
+   bool old_nested_error = nested_error;
+   nested_error          = true;
+ 
+@@ -604,6 +554,7 @@ void myerr(const char *fmt, ...)
+   if (g_quitting) {
+     DIE("Error while quitting");
+   }
++  big_lock.unlock();
+ }
+ 
+ void py_myerr(const char *fmt, ...)
+@@ -614,6 +565,7 @@ void py_myerr(const char *fmt, ...)
+   if (nested_error) {
+     return;
+   }
++  big_lock.lock();
+   bool old_nested_error = nested_error;
+   nested_error          = true;
+ 
+@@ -642,6 +594,7 @@ void py_myerr(const char *fmt, ...)
+   if (g_quitting) {
+     DIE("Error while quitting");
+   }
++  big_lock.unlock();
+ }
+ 
+ static void msgerr_(const char *fmt, va_list args)
+@@ -686,9 +639,11 @@ void GAME_UI_MSG_BOX(const char *fmt, ...)
+ 
+   va_list args;
+ 
++  big_lock.lock();
+   va_start(args, fmt);
+   msgerr_(fmt, args);
+   va_end(args);
++  big_lock.unlock();
+ }
+ 
+ static void sdl_msgerr_(const char *fmt, va_list args)
+@@ -710,11 +665,13 @@ void SDL_MSG_BOX(const char *fmt, ...)
+ {
+   TRACE_NO_INDENT();
+ 
++  big_lock.lock();
+   va_list args;
+ 
+   va_start(args, fmt);
+   sdl_msgerr_(fmt, args);
+   va_end(args);
++  big_lock.unlock();
+ }
+ 
+ static void botcon_(const char *fmt, va_list args)
+@@ -797,20 +754,24 @@ void BOTCON(const char *fmt, ...)
+ {
+   TRACE_NO_INDENT();
+ 
++  big_lock.lock();
+   va_list args;
+ 
+   va_start(args, fmt);
+   botcon_(fmt, args);
+   va_end(args);
++  big_lock.unlock();
+ }
+ 
+ void BOTCON(const wchar_t *fmt, ...)
+ {
+   TRACE_NO_INDENT();
+ 
++  big_lock.lock();
+   va_list args;
+ 
+   va_start(args, fmt);
+   botcon_(fmt, args);
+   va_end(args);
++  big_lock.unlock();
+ }
+diff --git a/src/my_dungeon.hpp b/src/my_dungeon.hpp
+index 3c896f4e..8a4750ae 100644
+--- a/src/my_dungeon.hpp
++++ b/src/my_dungeon.hpp
+@@ -40,7 +40,11 @@ public:
+   //
+   // Pointers from map position to room
+   //
+-  std::vector< Roomp >                                           cells_room;
++  std::vector< Roomp > cells_room;
++  //
++  // Copy of the global
++  //
++  std::vector< Roomp >                                           all_rooms;
+   int                                                            map_width {MAP_WIDTH};
+   int                                                            map_height {MAP_HEIGHT};
+   int                                                            map_depth {MAP_DEPTH};
+diff --git a/src/my_dungeon_grid.hpp b/src/my_dungeon_grid.hpp
+index 8ec9426e..f5950751 100644
+--- a/src/my_dungeon_grid.hpp
++++ b/src/my_dungeon_grid.hpp
+@@ -26,6 +26,9 @@ public:
+   //
+   int walk_order_level_no {};
+ 
++  bool generating {};
++  bool generated {};
++
+   //
+   // pass 1 is the main dungeon
+   // pass 2 are secret levels
+diff --git a/src/my_game_defs.hpp b/src/my_game_defs.hpp
+index 03a3aa80..481103ed 100644
+--- a/src/my_game_defs.hpp
++++ b/src/my_game_defs.hpp
+@@ -6,6 +6,13 @@
+ #ifndef _MY_GAME_DEFS_HPP_
+ #define _MY_GAME_DEFS_HPP_
+ 
++//
++// The number of concurrent levels we can generate.
++//
++// If set to 1, essentially single threaded
++//
++#define MAX_CONCURRENT_THREADS 2
++
+ //
+ // Grid chunks are used to construct the levels and the overall dungeon
+ //
+diff --git a/src/my_globals.hpp b/src/my_globals.hpp
+index abfe576a..bbc12917 100644
+--- a/src/my_globals.hpp
++++ b/src/my_globals.hpp
+@@ -109,11 +109,6 @@ extern int TILES_VISIBLE_DOWN;
+   if (DEBUG1)                                                                                                        \
+   ai_log
+ 
+-//
+-// Used to fill in gaps in log depth
+-//
+-extern int g_last_logged_callframes_depth;
+-
+ #define MY_STDERR (g_log_stderr ? g_log_stderr : stderr)
+ #define MY_STDOUT (g_log_stdout ? g_log_stdout : stdout)
+ 
+diff --git a/src/my_level.hpp b/src/my_level.hpp
+index e899f8ae..b9f06a4c 100644
+--- a/src/my_level.hpp
++++ b/src/my_level.hpp
+@@ -8,6 +8,7 @@
+ 
+ #include <deque>
+ #include <list>
++#include <thread>
+ 
+ #include "my_biomes.hpp"
+ #include "my_dmap.hpp"
+@@ -218,6 +219,8 @@ public:
+   //
+   bool is_entered {};
+ 
++  bool is_created {};
++
+   //
+   // Chances for various things to appear
+   //
+@@ -467,7 +470,7 @@ public:
+ 
+ #define FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)                                                                   \
+   if (! (level)->is_oob(x, y)) {                                                                                     \
+-    static Thingp things_to_walk[ MAP_SLOTS ];                                                                       \
++    static thread_local Thingp things_to_walk[ MAP_SLOTS ];                                                          \
+     {                                                                                                                \
+       auto _vec_               = getptr(level->all_things_ptr_at, x, y);                                             \
+       auto things_to_walk_size = _vec_->size();                                                                      \
+diff --git a/src/my_log.hpp b/src/my_log.hpp
+index b5f6ee5e..ac002c8e 100644
+--- a/src/my_log.hpp
++++ b/src/my_log.hpp
+@@ -26,4 +26,8 @@ void topcon_(const wchar_t *fmt, va_list args);
+ #define FLUSH_THE_CONSOLE() // sensible OS
+ #endif
+ 
++#include <mutex>
++
++extern std::recursive_mutex big_lock;
++
+ #endif
+diff --git a/src/my_main.hpp b/src/my_main.hpp
+index a3a00f6d..4719df6d 100644
+--- a/src/my_main.hpp
++++ b/src/my_main.hpp
+@@ -15,7 +15,6 @@ void CON(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
+ void CON(const wchar_t *fmt, ...);
+ void GAME_UI_MSG_BOX(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
+ void LOG(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
+-void LOG_MISSING(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
+ void TOPCON(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
+ void TOPCON(const wchar_t *fmt, ...);
+ void SDL_MSG_BOX(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
+@@ -25,7 +24,6 @@ void botcon(const wchar_t *fmt);
+ void con(const wchar_t *fmt);
+ void ctrlc_handler(int sig);
+ void die(void);
+-void log_catchup_missing_indent_levels(void);
+ void topcon(const wchar_t *fmt);
+ void myerr(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
+ void py_myerr(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
+diff --git a/src/my_thing.hpp b/src/my_thing.hpp
+index 62c62102..8a91c575 100644
+--- a/src/my_thing.hpp
++++ b/src/my_thing.hpp
+@@ -3005,6 +3005,7 @@ public:
+   void inherit_from(Thingp it);
+   void init_hue(void);
+   void init(Levelp, const std::string &name, point at, Thingp owner = nullptr);
++  void init_(Levelp, const std::string &name, point at, Thingp owner = nullptr);
+   void init_slower_stuff(void);
+   void init_lights(void);
+   void interpolated_at_set(fpoint v);
+@@ -3021,7 +3022,9 @@ public:
+   void level_enter(bool rejoin = false);
+   void level_leave(void);
+   void level_pop(void);
++  void level_pop_(void);
+   void level_push(void);
++  void level_push_(void);
+   void level_rejoin(void);
+   void lifespan_tick(void);
+   void light_distance_upd_with_torch_effect(uint8_t &light_dist);
+diff --git a/src/precompiled.hpp b/src/precompiled.hpp
+index d5a90ce2..cf171043 100644
+--- a/src/precompiled.hpp
++++ b/src/precompiled.hpp
+@@ -11,6 +11,7 @@
+ #include <cstdint>
+ #include <list>
+ #include <map>
++#include <mutex>
+ #include <string>
+ #include <unordered_map>
+ #include <vector>
+diff --git a/src/ptrcheck.cpp b/src/ptrcheck.cpp
+index f13686f5..6c0182db 100644
+--- a/src/ptrcheck.cpp
++++ b/src/ptrcheck.cpp
+@@ -13,8 +13,6 @@
+ #include "my_sprintf.hpp"
+ #include "my_time.hpp"
+ 
+-#include <mutex>
+-
+ static std::mutex ptrcheck_mutex;
+ 
+ //
+diff --git a/src/py_tp.cpp b/src/py_tp.cpp
+index 2683573b..f375c1ca 100644
+--- a/src/py_tp.cpp
++++ b/src/py_tp.cpp
+@@ -3,6 +3,7 @@
+ //
+ 
+ #include "my_game.hpp"
++#include "my_log.hpp"
+ #include "my_ptrcheck.hpp"
+ #include "my_python.hpp"
+ #include "my_thing.hpp"
+@@ -11,37 +12,43 @@ static int NO_VALUE = -99999;
+ 
+ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
++
++  big_lock.lock();
+   PyObject *py_class = nullptr;
+ 
+   static char *kwlist[] = {(char *) "tp", nullptr};
+ 
+-  TRACE_NO_INDENT();
+   if (! PyArg_ParseTupleAndKeywords(args, keywds, "O", kwlist, &py_class)) {
+     PY_ERR("tp_load: Bad args");
++    big_lock.unlock();
+     Py_RETURN_FALSE;
+   }
+ 
+   if (! py_class) {
+     PY_ERR("tp_load: Missing name attr");
++    big_lock.unlock();
+     Py_RETURN_FALSE;
+   }
+ 
+   char *tp_name = py_obj_attr_str(py_class, "name");
+   if (! tp_name) {
+     PY_ERR("tp_load: Missing tp name");
++    big_lock.unlock();
+     Py_RETURN_FALSE;
+   }
+ 
+   char *tp_text_long_name = py_obj_attr_str(py_class, "text_long_name");
+   if (! tp_text_long_name) {
+     PY_ERR("tp_load: Missing tp text_long_name");
++    big_lock.unlock();
+     Py_RETURN_FALSE;
+   }
+ 
+   char *tp_text_short_name = py_obj_attr_str(py_class, "text_short_name");
+   if (! tp_text_short_name) {
+     PY_ERR("tp_load: Missing tp text_short_name");
++    big_lock.unlock();
+     Py_RETURN_FALSE;
+   }
+ 
+@@ -53,6 +60,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
+   myfree(tp_text_long_name);
+   myfree(tp_text_short_name);
+ 
++  big_lock.unlock();
+   Py_RETURN_TRUE;
+ }
+ 
+@@ -352,7 +360,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
+ 
+ PyObject *tp_update_(PyObject *obj, PyObject *args, PyObject *keywds)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   PyObject *py_class = nullptr;
+   char     *tp_name  = nullptr;
+   int       value    = 0;
+@@ -360,7 +368,6 @@ PyObject *tp_update_(PyObject *obj, PyObject *args, PyObject *keywds)
+ 
+   static char *kwlist[] = {(char *) "class", (char *) "value", nullptr};
+ 
+-  TRACE_NO_INDENT();
+   if (! PyArg_ParseTupleAndKeywords(args, keywds, "O|i", kwlist, &py_class, &value)) {
+     PY_ERR("%s: Bad args", __FUNCTION__);
+     Py_RETURN_FALSE;
+@@ -395,13 +402,12 @@ done:
+ 
+ PyObject *spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   char    *what = nullptr;
+   uint32_t id   = 0;
+ 
+   static char *kwlist[] = {(char *) "id", (char *) "what", nullptr};
+ 
+-  TRACE_NO_INDENT();
+   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
+     PY_ERR("%s: Bad args", __FUNCTION__);
+     Py_RETURN_FALSE;
+@@ -434,13 +440,12 @@ PyObject *spawn_next_to_(PyObject *obj, PyObject *args, PyObject *keywds)
+ 
+ PyObject *spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *keywds)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   char    *what = nullptr;
+   uint32_t id   = 0;
+ 
+   static char *kwlist[] = {(char *) "id", (char *) "what", nullptr};
+ 
+-  TRACE_NO_INDENT();
+   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
+     PY_ERR("%s: Bad args", __FUNCTION__);
+     Py_RETURN_FALSE;
+@@ -473,7 +478,7 @@ PyObject *spawn_next_to_or_on_monst_(PyObject *obj, PyObject *args, PyObject *ke
+ 
+ PyObject *spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   char    *what       = nullptr;
+   uint32_t id         = 0;
+   uint32_t parent_id  = 0;
+@@ -485,7 +490,6 @@ PyObject *spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObjec
+       = {(char *) "id", (char *) "parent_id", (char *) "victim_id", (char *) "what", (char *) "min", (char *) "max",
+          nullptr};
+ 
+-  TRACE_NO_INDENT();
+   if (! PyArg_ParseTupleAndKeywords(args, keywds, "IIIs|ii", kwlist, &id, &parent_id, &victim_id, &what, &radius_min,
+                                     &radius_max)) {
+     PY_ERR("%s: Bad args", __FUNCTION__);
+@@ -549,7 +553,7 @@ PyObject *spawn_using_items_radius_range_(PyObject *obj, PyObject *args, PyObjec
+ 
+ PyObject *spawn_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   char    *what       = nullptr;
+   uint32_t id         = 0;
+   uint32_t radius_min = 0;
+@@ -557,7 +561,6 @@ PyObject *spawn_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds)
+ 
+   static char *kwlist[] = {(char *) "id", (char *) "what", (char *) "min", (char *) "max", nullptr};
+ 
+-  TRACE_NO_INDENT();
+   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is|ii", kwlist, &id, &what, &radius_min, &radius_max)) {
+     PY_ERR("%s: Bad args", __FUNCTION__);
+     Py_RETURN_FALSE;
+@@ -590,7 +593,7 @@ PyObject *spawn_radius_range_(PyObject *obj, PyObject *args, PyObject *keywds)
+ 
+ PyObject *if_matches_then_dead_(PyObject *obj, PyObject *args, PyObject *keywds)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   char    *what = nullptr;
+   uint32_t id   = 0;
+   int      x    = NO_VALUE;
+@@ -598,7 +601,6 @@ PyObject *if_matches_then_dead_(PyObject *obj, PyObject *args, PyObject *keywds)
+ 
+   static char *kwlist[] = {(char *) "id", (char *) "what", (char *) "x", (char *) "y", nullptr};
+ 
+-  TRACE_NO_INDENT();
+   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Isii", kwlist, &id, &what, &x, &y)) {
+     PY_ERR("%s: Bad args", __FUNCTION__);
+     Py_RETURN_FALSE;
+@@ -644,13 +646,12 @@ PyObject *if_matches_then_dead_(PyObject *obj, PyObject *args, PyObject *keywds)
+ 
+ PyObject *if_matches_(PyObject *obj, PyObject *args, PyObject *keywds)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   char    *what = nullptr;
+   uint32_t id   = 0;
+ 
+   static char *kwlist[] = {(char *) "id", (char *) "what", nullptr};
+ 
+-  TRACE_NO_INDENT();
+   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Is", kwlist, &id, &what)) {
+     PY_ERR("%s: Bad args", __FUNCTION__);
+     Py_RETURN_FALSE;
+@@ -682,7 +683,7 @@ PyObject *if_matches_(PyObject *obj, PyObject *args, PyObject *keywds)
+ 
+ PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   char    *what = nullptr;
+   uint32_t id   = 0;
+   int      x    = NO_VALUE;
+@@ -690,7 +691,6 @@ PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds)
+ 
+   static char *kwlist[] = {(char *) "id", (char *) "what", (char *) "x", (char *) "y", nullptr};
+ 
+-  TRACE_NO_INDENT();
+   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Isii", kwlist, &id, &what, &x, &y)) {
+     PY_ERR("%s: Bad args", __FUNCTION__);
+     Py_RETURN_FALSE;
+@@ -737,7 +737,7 @@ PyObject *spawn_at(PyObject *obj, PyObject *args, PyObject *keywds)
+ 
+ PyObject *place_at(PyObject *obj, PyObject *args, PyObject *keywds)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   char    *what = nullptr;
+   uint32_t id   = 0;
+   int      x    = NO_VALUE;
+@@ -745,7 +745,6 @@ PyObject *place_at(PyObject *obj, PyObject *args, PyObject *keywds)
+ 
+   static char *kwlist[] = {(char *) "id", (char *) "what", (char *) "x", (char *) "y", nullptr};
+ 
+-  TRACE_NO_INDENT();
+   if (! PyArg_ParseTupleAndKeywords(args, keywds, "Isii", kwlist, &id, &what, &x, &y)) {
+     PY_ERR("%s: Bad args", __FUNCTION__);
+     Py_RETURN_FALSE;
+@@ -782,7 +781,7 @@ PyObject *place_at(PyObject *obj, PyObject *args, PyObject *keywds)
+   }
+ 
+   PY_DBG("%s(%s, %d, %d)", __FUNCTION__, what, x, y);
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+ 
+   auto t = game->thing_find(ThingId(id));
+   if (unlikely(! t)) {
+diff --git a/src/python_call_func.cpp b/src/python_call_func.cpp
+index b1c50a45..15c818fc 100644
+--- a/src/python_call_func.cpp
++++ b/src/python_call_func.cpp
+@@ -3,12 +3,13 @@
+ //
+ 
+ #include "my_callstack.hpp"
++#include "my_log.hpp"
+ #include "my_main.hpp"
+ #include "my_python.hpp"
+ 
+-void py_call_void(const char *name)
++static void py_call_void_(const char *name)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   if (! my_mod) {
+     DIE("Python module not inited yet");
+     return;
+@@ -27,9 +28,9 @@ void py_call_void(const char *name)
+   py_err();
+ }
+ 
+-void py_call_void_fn(const char *module, const char *name, int val1)
++static void py_call_void_fn_(const char *module, const char *name, int val1)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return;
+@@ -51,9 +52,9 @@ void py_call_void_fn(const char *module, const char *name, int val1)
+   py_err();
+ }
+ 
+-void py_call_void_fn(const char *module, const char *name, int val1, int val2)
++static void py_call_void_fn_(const char *module, const char *name, int val1, int val2)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return;
+@@ -75,9 +76,9 @@ void py_call_void_fn(const char *module, const char *name, int val1, int val2)
+   py_err();
+ }
+ 
+-void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3)
++static void py_call_void_fn_(const char *module, const char *name, int val1, int val2, int val3)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return;
+@@ -99,9 +100,9 @@ void py_call_void_fn(const char *module, const char *name, int val1, int val2, i
+   py_err();
+ }
+ 
+-void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4)
++static void py_call_void_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return;
+@@ -123,9 +124,9 @@ void py_call_void_fn(const char *module, const char *name, int val1, int val2, i
+   py_err();
+ }
+ 
+-void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
++static void py_call_void_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return;
+@@ -147,9 +148,10 @@ void py_call_void_fn(const char *module, const char *name, int val1, int val2, i
+   py_err();
+ }
+ 
+-void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6)
++static void py_call_void_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
++                             int val6)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return;
+@@ -171,10 +173,10 @@ void py_call_void_fn(const char *module, const char *name, int val1, int val2, i
+   py_err();
+ }
+ 
+-void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
+-                     int val7)
++static void py_call_void_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
++                             int val6, int val7)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return;
+@@ -196,10 +198,10 @@ void py_call_void_fn(const char *module, const char *name, int val1, int val2, i
+   py_err();
+ }
+ 
+-void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
+-                     int val7, int val8)
++static void py_call_void_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
++                             int val6, int val7, int val8)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return;
+@@ -221,10 +223,10 @@ void py_call_void_fn(const char *module, const char *name, int val1, int val2, i
+   py_err();
+ }
+ 
+-void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
+-                     int val7, int val8, int val9)
++static void py_call_void_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
++                             int val6, int val7, int val8, int val9)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return;
+@@ -247,9 +249,9 @@ void py_call_void_fn(const char *module, const char *name, int val1, int val2, i
+   py_err();
+ }
+ 
+-void py_call_void_fn(const char *module, const char *name, unsigned int val1)
++static void py_call_void_fn_(const char *module, const char *name, uint32_t val1)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return;
+@@ -271,9 +273,9 @@ void py_call_void_fn(const char *module, const char *name, unsigned int val1)
+   py_err();
+ }
+ 
+-void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2)
++static void py_call_void_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return;
+@@ -295,9 +297,9 @@ void py_call_void_fn(const char *module, const char *name, unsigned int val1, un
+   py_err();
+ }
+ 
+-void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3)
++static void py_call_void_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return;
+@@ -319,10 +321,10 @@ void py_call_void_fn(const char *module, const char *name, unsigned int val1, un
+   py_err();
+ }
+ 
+-void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+-                     unsigned int val4)
++static void py_call_void_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
++                             uint32_t val4)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return;
+@@ -344,10 +346,10 @@ void py_call_void_fn(const char *module, const char *name, unsigned int val1, un
+   py_err();
+ }
+ 
+-void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+-                     unsigned int val4, unsigned int val5)
++static void py_call_void_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
++                             uint32_t val4, uint32_t val5)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return;
+@@ -369,10 +371,10 @@ void py_call_void_fn(const char *module, const char *name, unsigned int val1, un
+   py_err();
+ }
+ 
+-void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+-                     unsigned int val4, unsigned int val5, unsigned int val6)
++static void py_call_void_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
++                             uint32_t val4, uint32_t val5, uint32_t val6)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return;
+@@ -394,10 +396,10 @@ void py_call_void_fn(const char *module, const char *name, unsigned int val1, un
+   py_err();
+ }
+ 
+-void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+-                     unsigned int val4, unsigned int val5, unsigned int val6, unsigned int val7)
++static void py_call_void_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
++                             uint32_t val4, uint32_t val5, uint32_t val6, uint32_t val7)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return;
+@@ -419,10 +421,10 @@ void py_call_void_fn(const char *module, const char *name, unsigned int val1, un
+   py_err();
+ }
+ 
+-void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+-                     unsigned int val4, unsigned int val5, unsigned int val6, unsigned int val7, unsigned int val8)
++static void py_call_void_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
++                             uint32_t val4, uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return;
+@@ -444,11 +446,10 @@ void py_call_void_fn(const char *module, const char *name, unsigned int val1, un
+   py_err();
+ }
+ 
+-void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+-                     unsigned int val4, unsigned int val5, unsigned int val6, unsigned int val7, unsigned int val8,
+-                     unsigned int val9)
++static void py_call_void_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
++                             uint32_t val4, uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8, uint32_t val9)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return;
+@@ -471,11 +472,11 @@ void py_call_void_fn(const char *module, const char *name, unsigned int val1, un
+   py_err();
+ }
+ 
+-void py_call_void_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+-                     unsigned int val4, unsigned int val5, unsigned int val6, unsigned int val7, unsigned int val8,
+-                     unsigned int val9, unsigned int val10)
++static void py_call_void_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
++                             uint32_t val4, uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8, uint32_t val9,
++                             uint32_t val10)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return;
+@@ -498,9 +499,9 @@ void py_call_void_fn(const char *module, const char *name, unsigned int val1, un
+   py_err();
+ }
+ 
+-bool py_call_bool(const char *name)
++static bool py_call_bool_(const char *name)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   if (! my_mod) {
+     PY_ERR("Python module not inited yet");
+     return false;
+@@ -524,9 +525,9 @@ bool py_call_bool(const char *name)
+   return false;
+ }
+ 
+-bool py_call_bool_fn(const char *module, const char *name, int val1)
++static bool py_call_bool_fn_(const char *module, const char *name, int val1)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -552,9 +553,9 @@ bool py_call_bool_fn(const char *module, const char *name, int val1)
+   return false;
+ }
+ 
+-bool py_call_bool_fn(const char *module, const char *name, int val1, int val2)
++static bool py_call_bool_fn_(const char *module, const char *name, int val1, int val2)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -580,9 +581,9 @@ bool py_call_bool_fn(const char *module, const char *name, int val1, int val2)
+   return false;
+ }
+ 
+-bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3)
++static bool py_call_bool_fn_(const char *module, const char *name, int val1, int val2, int val3)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -608,9 +609,9 @@ bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, i
+   return false;
+ }
+ 
+-bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4)
++static bool py_call_bool_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -636,9 +637,9 @@ bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, i
+   return false;
+ }
+ 
+-bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
++static bool py_call_bool_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -664,9 +665,10 @@ bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, i
+   return false;
+ }
+ 
+-bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6)
++static bool py_call_bool_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
++                             int val6)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -692,10 +694,10 @@ bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, i
+   return false;
+ }
+ 
+-bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
+-                     int val7)
++static bool py_call_bool_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
++                             int val6, int val7)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -721,10 +723,10 @@ bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, i
+   return false;
+ }
+ 
+-bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
+-                     int val7, int val8)
++static bool py_call_bool_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
++                             int val6, int val7, int val8)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -750,9 +752,9 @@ bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, i
+   return false;
+ }
+ 
+-bool py_call_bool_fn(const char *module, const char *name, unsigned int val1)
++static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -778,9 +780,9 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1)
+   return false;
+ }
+ 
+-bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, unsigned int val2)
++static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -806,9 +808,9 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, un
+   return false;
+ }
+ 
+-bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3)
++static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -834,10 +836,10 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, un
+   return false;
+ }
+ 
+-bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+-                     unsigned int val4)
++static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
++                             uint32_t val4)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -863,10 +865,10 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, un
+   return false;
+ }
+ 
+-bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+-                     unsigned int val4, unsigned int val5)
++static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
++                             uint32_t val4, uint32_t val5)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -892,10 +894,10 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, un
+   return false;
+ }
+ 
+-bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+-                     unsigned int val4, unsigned int val5, unsigned int val6)
++static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
++                             uint32_t val4, uint32_t val5, uint32_t val6)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -921,10 +923,10 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, un
+   return false;
+ }
+ 
+-bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+-                     unsigned int val4, unsigned int val5, unsigned int val6, unsigned int val7)
++static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
++                             uint32_t val4, uint32_t val5, uint32_t val6, uint32_t val7)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -950,10 +952,10 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, un
+   return false;
+ }
+ 
+-bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+-                     unsigned int val4, unsigned int val5, unsigned int val6, unsigned int val7, unsigned int val8)
++static bool py_call_bool_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
++                             uint32_t val4, uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -979,9 +981,9 @@ bool py_call_bool_fn(const char *module, const char *name, unsigned int val1, un
+   return false;
+ }
+ 
+-int py_call_int(const char *name)
++static int py_call_int_(const char *name)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   if (! my_mod) {
+     PY_ERR("Python module not inited yet");
+     return false;
+@@ -1005,9 +1007,9 @@ int py_call_int(const char *name)
+   return false;
+ }
+ 
+-int py_call_int_fn(const char *module, const char *name, int val1)
++static int py_call_int_fn_(const char *module, const char *name, int val1)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -1033,9 +1035,9 @@ int py_call_int_fn(const char *module, const char *name, int val1)
+   return false;
+ }
+ 
+-int py_call_int_fn(const char *module, const char *name, int val1, int val2)
++static int py_call_int_fn_(const char *module, const char *name, int val1, int val2)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -1061,9 +1063,9 @@ int py_call_int_fn(const char *module, const char *name, int val1, int val2)
+   return false;
+ }
+ 
+-int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3)
++static int py_call_int_fn_(const char *module, const char *name, int val1, int val2, int val3)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -1089,9 +1091,9 @@ int py_call_int_fn(const char *module, const char *name, int val1, int val2, int
+   return false;
+ }
+ 
+-int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3, int val4)
++static int py_call_int_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -1117,9 +1119,9 @@ int py_call_int_fn(const char *module, const char *name, int val1, int val2, int
+   return false;
+ }
+ 
+-int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
++static int py_call_int_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -1145,9 +1147,10 @@ int py_call_int_fn(const char *module, const char *name, int val1, int val2, int
+   return false;
+ }
+ 
+-int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6)
++static int py_call_int_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
++                           int val6)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -1173,10 +1176,10 @@ int py_call_int_fn(const char *module, const char *name, int val1, int val2, int
+   return false;
+ }
+ 
+-int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
+-                   int val7)
++static int py_call_int_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
++                           int val6, int val7)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -1202,10 +1205,10 @@ int py_call_int_fn(const char *module, const char *name, int val1, int val2, int
+   return false;
+ }
+ 
+-int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
+-                   int val7, int val8)
++static int py_call_int_fn_(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5,
++                           int val6, int val7, int val8)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -1231,9 +1234,9 @@ int py_call_int_fn(const char *module, const char *name, int val1, int val2, int
+   return false;
+ }
+ 
+-int py_call_int_fn(const char *module, const char *name, unsigned int val1)
++static int py_call_int_fn_(const char *module, const char *name, uint32_t val1)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -1259,9 +1262,9 @@ int py_call_int_fn(const char *module, const char *name, unsigned int val1)
+   return false;
+ }
+ 
+-int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsigned int val2)
++static int py_call_int_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -1287,9 +1290,9 @@ int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsi
+   return false;
+ }
+ 
+-int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3)
++static int py_call_int_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -1315,10 +1318,10 @@ int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsi
+   return false;
+ }
+ 
+-int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+-                   unsigned int val4)
++static int py_call_int_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
++                           uint32_t val4)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -1344,10 +1347,10 @@ int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsi
+   return false;
+ }
+ 
+-int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+-                   unsigned int val4, unsigned int val5)
++static int py_call_int_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
++                           uint32_t val4, uint32_t val5)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -1373,10 +1376,10 @@ int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsi
+   return false;
+ }
+ 
+-int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+-                   unsigned int val4, unsigned int val5, unsigned int val6)
++static int py_call_int_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
++                           uint32_t val4, uint32_t val5, uint32_t val6)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -1402,10 +1405,10 @@ int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsi
+   return false;
+ }
+ 
+-int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+-                   unsigned int val4, unsigned int val5, unsigned int val6, unsigned int val7)
++static int py_call_int_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
++                           uint32_t val4, uint32_t val5, uint32_t val6, uint32_t val7)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -1431,10 +1434,10 @@ int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsi
+   return false;
+ }
+ 
+-int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsigned int val2, unsigned int val3,
+-                   unsigned int val4, unsigned int val5, unsigned int val6, unsigned int val7, unsigned int val8)
++static int py_call_int_fn_(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3,
++                           uint32_t val4, uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8)
+ {
+-  TRACE_AND_INDENT();
++  TRACE_NO_INDENT();
+   auto pmod = py_add_module(module);
+   if (! pmod) {
+     return false;
+@@ -1459,3 +1462,490 @@ int py_call_int_fn(const char *module, const char *name, unsigned int val1, unsi
+   py_err();
+   return false;
+ }
++
++void py_call_void(const char *name)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  py_call_void_(name);
++  big_lock.unlock();
++}
++
++void py_call_void_fn(const char *module, const char *name, int val1)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  py_call_void_fn_(module, name, val1);
++  big_lock.unlock();
++}
++
++void py_call_void_fn(const char *module, const char *name, int val1, int val2)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  py_call_void_fn_(module, name, val1, val2);
++  big_lock.unlock();
++}
++
++void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  py_call_void_fn_(module, name, val1, val2, val3);
++  big_lock.unlock();
++}
++
++void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  py_call_void_fn_(module, name, val1, val2, val3, val4);
++  big_lock.unlock();
++}
++
++void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  py_call_void_fn_(module, name, val1, val2, val3, val4, val5);
++  big_lock.unlock();
++}
++
++void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6);
++  big_lock.unlock();
++}
++
++void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
++                     int val7)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6, val7);
++  big_lock.unlock();
++}
++
++void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
++                     int val7, int val8)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8);
++  big_lock.unlock();
++}
++
++void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
++                     int val7, int val8, int val9)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8, val9);
++  big_lock.unlock();
++}
++
++void py_call_void_fn(const char *module, const char *name, uint32_t val1)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  py_call_void_fn_(module, name, val1);
++  big_lock.unlock();
++}
++
++void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  py_call_void_fn_(module, name, val1, val2);
++  big_lock.unlock();
++}
++
++void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  py_call_void_fn_(module, name, val1, val2, val3);
++  big_lock.unlock();
++}
++
++void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  py_call_void_fn_(module, name, val1, val2, val3, val4);
++  big_lock.unlock();
++}
++
++void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
++                     uint32_t val5)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  py_call_void_fn_(module, name, val1, val2, val3, val4, val5);
++  big_lock.unlock();
++}
++
++void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
++                     uint32_t val5, uint32_t val6)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6);
++  big_lock.unlock();
++}
++
++void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
++                     uint32_t val5, uint32_t val6, uint32_t val7)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6, val7);
++  big_lock.unlock();
++}
++
++void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
++                     uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8);
++  big_lock.unlock();
++}
++
++void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
++                     uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8, uint32_t val9)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8, val9);
++  big_lock.unlock();
++}
++
++void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
++                     uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8, uint32_t val9, uint32_t val10)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8, val9, val10);
++  big_lock.unlock();
++}
++
++bool py_call_bool(const char *name)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_bool_(name);
++  big_lock.unlock();
++  return ret;
++}
++
++bool py_call_bool_fn(const char *module, const char *name, int val1)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_bool_fn_(module, name, val1);
++  big_lock.unlock();
++  return ret;
++}
++
++bool py_call_bool_fn(const char *module, const char *name, int val1, int val2)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_bool_fn_(module, name, val1, val2);
++  big_lock.unlock();
++  return ret;
++}
++
++bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_bool_fn_(module, name, val1, val2, val3);
++  big_lock.unlock();
++  return ret;
++}
++
++bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4);
++  big_lock.unlock();
++  return ret;
++}
++
++bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5);
++  big_lock.unlock();
++  return ret;
++}
++
++bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5, val6);
++  big_lock.unlock();
++  return ret;
++}
++
++bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
++                     int val7)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5, val6, val7);
++  big_lock.unlock();
++  return ret;
++}
++
++bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
++                     int val7, int val8)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8);
++  big_lock.unlock();
++  return ret;
++}
++
++bool py_call_bool_fn(const char *module, const char *name, uint32_t val1)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_bool_fn_(module, name, val1);
++  big_lock.unlock();
++  return ret;
++}
++
++bool py_call_bool_fn(const char *module, const char *name, uint32_t val1, uint32_t val2)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_bool_fn_(module, name, val1, val2);
++  big_lock.unlock();
++  return ret;
++}
++
++bool py_call_bool_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_bool_fn_(module, name, val1, val2, val3);
++  big_lock.unlock();
++  return ret;
++}
++
++bool py_call_bool_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4);
++  big_lock.unlock();
++  return ret;
++}
++
++bool py_call_bool_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
++                     uint32_t val5)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5);
++  big_lock.unlock();
++  return ret;
++}
++
++bool py_call_bool_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
++                     uint32_t val5, uint32_t val6)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5, val6);
++  big_lock.unlock();
++  return ret;
++}
++
++bool py_call_bool_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
++                     uint32_t val5, uint32_t val6, uint32_t val7)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5, val6, val7);
++  big_lock.unlock();
++  return ret;
++}
++
++bool py_call_bool_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
++                     uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8);
++  big_lock.unlock();
++  return ret;
++}
++
++int py_call_int(const char *name)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_int_(name);
++  big_lock.unlock();
++  return ret;
++}
++
++int py_call_int_fn(const char *module, const char *name, int val1)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_int_fn_(module, name, val1);
++  big_lock.unlock();
++  return ret;
++}
++
++int py_call_int_fn(const char *module, const char *name, int val1, int val2)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_int_fn_(module, name, val1, val2);
++  big_lock.unlock();
++  return ret;
++}
++
++int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_int_fn_(module, name, val1, val2, val3);
++  big_lock.unlock();
++  return ret;
++}
++
++int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3, int val4)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4);
++  big_lock.unlock();
++  return ret;
++}
++
++int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5);
++  big_lock.unlock();
++  return ret;
++}
++
++int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5, val6);
++  big_lock.unlock();
++  return ret;
++}
++
++int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
++                   int val7)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5, val6, val7);
++  big_lock.unlock();
++  return ret;
++}
++
++int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
++                   int val7, int val8)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8);
++  big_lock.unlock();
++  return ret;
++}
++
++int py_call_int_fn(const char *module, const char *name, uint32_t val1)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_int_fn_(module, name, val1);
++  big_lock.unlock();
++  return ret;
++}
++
++int py_call_int_fn(const char *module, const char *name, uint32_t val1, uint32_t val2)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_int_fn_(module, name, val1, val2);
++  big_lock.unlock();
++  return ret;
++}
++
++int py_call_int_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_int_fn_(module, name, val1, val2, val3);
++  big_lock.unlock();
++  return ret;
++}
++
++int py_call_int_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4);
++  big_lock.unlock();
++  return ret;
++}
++
++int py_call_int_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
++                   uint32_t val5)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5);
++  big_lock.unlock();
++  return ret;
++}
++
++int py_call_int_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
++                   uint32_t val5, uint32_t val6)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5, val6);
++  big_lock.unlock();
++  return ret;
++}
++
++int py_call_int_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
++                   uint32_t val5, uint32_t val6, uint32_t val7)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5, val6, val7);
++  big_lock.unlock();
++  return ret;
++}
++
++int py_call_int_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
++                   uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8)
++{
++  TRACE_NO_INDENT();
++  big_lock.lock();
++  auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8);
++  big_lock.unlock();
++  return ret;
++}
+diff --git a/src/sdl_loop.cpp b/src/sdl_loop.cpp
+index d8cef813..500be5b3 100644
+--- a/src/sdl_loop.cpp
++++ b/src/sdl_loop.cpp
+@@ -136,7 +136,9 @@ void sdl_loop(void)
+ 
+       if (likely(! g_errored)) {
+         if (likely(game->level != nullptr)) {
+-          game->level->tick();
++          if (game->level->is_created) {
++            game->level->tick();
++          }
+         }
+       }
+ 
+diff --git a/src/thing_init.cpp b/src/thing_init.cpp
+index 3a2d6b71..f7eab887 100644
+--- a/src/thing_init.cpp
++++ b/src/thing_init.cpp
+@@ -4,6 +4,7 @@
+ 
+ #include "my_array_bounds_check.hpp"
+ #include "my_game.hpp"
++#include "my_log.hpp"
+ #include "my_python.hpp"
+ #include "my_string.hpp"
+ #include "my_template.hpp"
+@@ -104,7 +105,7 @@ void Thing::on_born(void)
+   }
+ }
+ 
+-void Thing::init(Levelp level, const std::string &name_in, const point born, Thingp owner)
++void Thing::init_(Levelp level, const std::string &name_in, const point born, Thingp owner)
+ {
+   TRACE_NO_INDENT();
+ 
+@@ -360,6 +361,13 @@ void Thing::init(Levelp level, const std::string &name_in, const point born, Thi
+   }
+ }
+ 
++void Thing::init(Levelp level, const std::string &name_in, const point born, Thingp owner)
++{
++  big_lock.lock();
++  init_(level, name_in, born, owner);
++  big_lock.unlock();
++}
++
+ void Thing::init_slower_stuff(void)
+ {
+   TRACE_NO_INDENT();
+diff --git a/src/thing_level.cpp b/src/thing_level.cpp
+index 63ed3d67..2e26b262 100644
+--- a/src/thing_level.cpp
++++ b/src/thing_level.cpp
+@@ -2,7 +2,9 @@
+ // Copyright goblinhack@gmail.com
+ //
+ 
++#include "my_game.hpp"
+ #include "my_level.hpp"
++#include "my_log.hpp"
+ #include "my_thing.hpp"
+ 
+ int Thing::level_get(void)
+@@ -10,3 +12,960 @@ int Thing::level_get(void)
+   TRACE_NO_INDENT();
+   return level->num();
+ }
++
++//
++// push/pop are for things moving on the same level
++//
++void Thing::level_push_(void)
++{
++  TRACE_NO_INDENT();
++  level_pop();
++
++  auto x = curr_at.x;
++  auto y = curr_at.y;
++
++  level->put_thing(x, y, id);
++  is_attached   = true;
++  last_attached = point(x, y);
++
++#if 0
++  if (is_torch()) {
++    con("push at %d,%d", last_attached.x, last_attached.y);
++  }
++#endif
++
++  if (is_the_grid_) {
++    return;
++  }
++
++  //
++  // Don't have things like lasers or projectiles briefly setting fire on a tile
++  // as that will cause interactions. And they really are brief, not long lived
++  // like actual fire.
++  //
++  if (is_tmp_thing()) {
++    return;
++  }
++
++  //
++  // We don't want torches for example to act as if they are on the level/
++  //
++  if (is_hidden) {
++    return;
++  }
++
++  if (is_ascend_dungeon()) {
++    i_set_is_ascend_dungeon = true;
++    level->is_ascend_dungeon_set(x, y);
++  }
++  if (is_ascend_sewer()) {
++    i_set_is_ascend_sewer = true;
++    level->is_ascend_sewer_set(x, y);
++  }
++  if (is_basalt()) {
++    i_set_is_basalt = true;
++    level->is_basalt_set(x, y);
++  }
++  if (is_block_of_ice()) {
++    i_set_is_block_of_ice = true;
++    level->is_block_of_ice_set(x, y);
++  }
++  if (is_block_of_crystal()) {
++    i_set_is_block_of_crystal = true;
++    level->is_block_of_crystal_set(x, y);
++  }
++  if (is_spell_of_holding_barrier()) {
++    i_set_is_spell_of_holding_barrier = true;
++    level->is_spell_of_holding_barrier_set(x, y);
++  }
++  if (is_spell_of_sanctuary_barrier()) {
++    i_set_is_spell_of_sanctuary_barrier = true;
++    level->is_spell_of_sanctuary_barrier_set(x, y);
++  }
++  if (is_spell_of_protection_barrier()) {
++    i_set_is_spell_of_protection_barrier = true;
++    level->is_spell_of_protection_barrier_set(x, y);
++  }
++  if (is_bridge()) {
++    i_set_is_bridge = true;
++    level->is_bridge_set(x, y);
++  }
++  if (is_burnable()) {
++    i_set_is_burnable = true;
++    level->is_burnable_set(x, y);
++  }
++  if (is_chasm()) {
++    i_set_is_chasm = true;
++    level->is_chasm_set(x, y);
++  }
++  if (is_combustible()) {
++    i_set_is_combustible = true;
++    level->is_combustible_set(x, y);
++  }
++  if (is_corpse()) {
++    i_set_is_corpse = true;
++    level->is_corpse_set(x, y);
++  }
++  if (is_corridor()) {
++    i_set_is_corridor = true;
++    level->is_corridor_set(x, y);
++  }
++  if (is_descend_dungeon()) {
++    i_set_is_descend_dungeon = true;
++    level->is_descend_dungeon_set(x, y);
++  }
++  if (is_descend_sewer()) {
++    i_set_is_descend_sewer = true;
++    level->is_descend_sewer_set(x, y);
++  }
++  if (is_dirt()) {
++    i_set_is_dirt = true;
++    level->is_dirt_set(x, y);
++  }
++  if (is_door() && ! is_open) {
++    i_set_is_door = true;
++    level->is_door_set(x, y);
++  }
++  if (is_enchantstone()) {
++    i_set_is_enchantstone = true;
++    level->is_enchantstone_set(x, y);
++  }
++  if (is_floor() || is_corridor()) {
++    i_set_is_floor = true;
++    level->is_floor_set(x, y);
++  }
++  if (is_foliage()) {
++    i_set_is_foliage = true;
++    level->is_foliage_set(x, y);
++  }
++  if (is_food()) {
++    i_set_is_food = true;
++    level->is_food_set(x, y);
++  }
++  if (is_fungus_edible()) {
++    i_set_is_fungus_edible = true;
++    level->is_fungus_edible_set(x, y);
++  }
++  if (is_fungus_poison()) {
++    i_set_is_fungus_poison = true;
++    level->is_fungus_poison_set(x, y);
++  }
++  if (is_fungus_healing()) {
++    i_set_is_fungus_healing = true;
++    level->is_fungus_healing_set(x, y);
++  }
++  if (is_gold()) {
++    i_set_is_gold = true;
++    level->is_gold_set(x, y);
++  }
++  if (is_grass_dry()) {
++    i_set_is_grass_dry = true;
++    level->is_grass_dry_set(x, y);
++  }
++  if (is_grass_wet()) {
++    i_set_is_grass_wet = true;
++    level->is_grass_wet_set(x, y);
++  }
++  if (is_green_blood()) {
++    i_set_is_green_blood = true;
++    level->is_green_blood_set(x, y);
++  }
++  if (is_key()) {
++    i_set_is_key = true;
++    level->is_key_set(x, y);
++  }
++  if (is_lava()) {
++    i_set_is_lava = true;
++    level->is_lava_set(x, y);
++  }
++  if (is_mob()) {
++    i_set_is_mob = true;
++    level->is_mob_set(x, y);
++  }
++  if (is_portal()) {
++    i_set_is_portal = true;
++    level->is_portal_set(x, y);
++  }
++  if (is_potion()) {
++    i_set_is_potion = true;
++    level->is_potion_set(x, y);
++  }
++  if (is_red_blood()) {
++    i_set_is_red_blood = true;
++    level->is_red_blood_set(x, y);
++  }
++  if (is_ring()) {
++    i_set_is_ring = true;
++    level->is_ring_set(x, y);
++  }
++  if (is_ripple()) {
++    i_set_is_ripple = true;
++    level->is_ripple_set(x, y);
++  }
++  if (is_rock()) {
++    i_set_is_rock = true;
++    level->is_rock_set(x, y);
++  }
++  if (is_shovable()) {
++    i_set_is_shovable = true;
++    level->is_shovable_set(x, y);
++  }
++  if (is_skillstone()) {
++    i_set_is_skillstone = true;
++    level->is_skillstone_set(x, y);
++  }
++  if (is_smoke()) {
++    i_set_is_smoke = true;
++    level->is_smoke_set(x, y);
++  }
++  if (is_spellbook()) {
++    i_set_is_spellbook = true;
++    level->is_spellbook_set(x, y);
++  }
++  if (is_spiderweb()) {
++    i_set_is_spiderweb = true;
++    level->is_spiderweb_set(x, y);
++  }
++  if (is_staff()) {
++    i_set_is_staff = true;
++    level->is_staff_set(x, y);
++  }
++  if (is_steam()) {
++    i_set_is_steam = true;
++    level->is_steam_set(x, y);
++  }
++  if (is_sticky()) {
++    i_set_is_sticky = true;
++    level->is_sticky_set(x, y);
++  }
++  if (is_torch()) {
++    i_set_is_torch = true;
++    level->is_torch_set(x, y);
++  }
++  if (is_treasure_type()) {
++    i_set_is_treasure_type = true;
++    level->is_treasure_type_set(x, y);
++  }
++  if (is_wall()) {
++    i_set_is_wall = true;
++    level->is_wall_set(x, y);
++  }
++  if (is_shallow_water() || is_deep_water()) {
++    i_set_water = true;
++    level->gfx_water_set(x, y);
++  }
++  if (is_shallow_water()) {
++    if (! is_falling) {
++      i_set_is_shallow_water = true;
++      level->is_shallow_water_set(x, y);
++    }
++  }
++  if (is_deep_water()) {
++    if (! is_falling) {
++      i_set_is_deep_water = true;
++      level->is_deep_water_set(x, y);
++    }
++  }
++  if (is_ooze()) {
++    i_set_is_ooze = true;
++    level->gfx_ooze_set(x, y);
++    level->is_ooze_set(x, y);
++  }
++
++  if (! is_dead && ! is_open) {
++    //
++    // Do we want dead giant spiders to be an obstacle?
++    //
++    if (is_acid()) {
++      i_set_is_acid = true;
++      level->is_acid_set(x, y);
++    }
++    if (is_engulfer()) {
++      i_set_is_engulfer = true;
++      level->is_engulfer_set(x, y);
++    }
++    if (is_carnivorous_plant()) {
++      i_set_is_carnivorous_plant = true;
++      level->is_carnivorous_plant_set(x, y);
++    }
++    if (is_spectral_blade()) {
++      i_set_is_spectral_blade = true;
++      level->is_spectral_blade_set(x, y);
++    }
++    if (is_heavy()) {
++      i_set_is_heavy = true;
++      level->is_heavy_set(x, y);
++    }
++    if (is_able_to_dampen_footsteps()) {
++      i_set_is_able_to_dampen_footsteps = true;
++      level->is_able_to_dampen_footsteps_set(x, y);
++    }
++    if (is_able_to_amplify_footsteps()) {
++      i_set_is_able_to_amplify_footsteps = true;
++      level->is_able_to_amplify_footsteps_set(x, y);
++    }
++    if (is_attackable_by_monst()) {
++      i_set_is_attackable_by_monst = true;
++      level->is_attackable_by_monst_set(x, y);
++    }
++    if (is_attackable_by_player()) {
++      i_set_is_attackable_by_player = true;
++      level->is_attackable_by_player_set(x, y);
++    }
++    if (is_fire()) {
++      i_set_is_fire = true;
++      level->is_fire_set(x, y);
++    }
++    if (is_secret_door()) {
++      i_set_is_secret_door = true;
++      level->is_secret_door_set(x, y);
++    }
++    if (is_hazard()) {
++      i_set_is_hazard = true;
++      level->is_hazard_set(x, y);
++    }
++    if (is_cursor_path_hazard()) {
++      i_set_is_cursor_path_hazard = true;
++      level->is_cursor_path_hazard_set(x, y);
++    }
++    if (is_cursor_path_blocker()) {
++      i_set_is_cursor_path_blocker = true;
++      level->is_cursor_path_blocker_set(x, y);
++    }
++    if (is_light_blocker() && ! is_open && ! is_invisible_currently()) {
++      i_set_is_light_blocker = true;
++      level->is_light_blocker_set(x, y);
++    }
++    if (is_light_blocker_for_monst() && ! is_open && ! is_invisible_currently()) {
++      i_set_is_light_blocker_for_monst = true;
++      level->is_light_blocker_for_monst_set(x, y);
++    }
++    if (is_gas_blocker() && ! is_open) {
++      i_set_is_gas_blocker = true;
++      level->is_gas_blocker_set(x, y);
++    }
++    if (is_gas_explosion_blocker() && ! is_dead) {
++      i_set_is_gas_explosion_blocker = true;
++      level->is_gas_explosion_blocker_set(x, y);
++    }
++    if (noise_blocker() && ! is_open) {
++      i_set_noise_blocker = true;
++      level->noise_blocker_set(x, y);
++    }
++    if (is_obs_wall_or_door() && ! is_open) {
++      i_set_is_obs_wall_or_door = true;
++      level->is_obs_wall_or_door_set(x, y);
++    }
++    if (is_obs_when_dead() && is_dead) {
++      i_set_is_obs_when_dead = true;
++      level->is_obs_when_dead_set(x, y);
++    }
++    if (is_obs_shoving()) {
++      i_set_is_obs_shoving = true;
++      level->is_obs_shoving_set(x, y);
++    }
++    if (is_obs_jump_end() && ! is_open) {
++      i_set_is_obs_jump_end = true;
++      level->is_obs_jump_end_set(x, y);
++    }
++    if (is_obs_spawn_monst() && ! is_open) {
++      i_set_is_obs_spawn_monst = true;
++      level->is_obs_spawn_monst_set(x, y);
++    }
++    if (is_obs_spawn() && ! is_open) {
++      i_set_is_obs_spawn = true;
++      level->is_obs_spawn_set(x, y);
++    }
++    if (is_obs_destructable() && ! is_open) {
++      i_set_is_obs_destructable = true;
++      level->is_obs_destructable_set(x, y);
++    }
++    if (is_monst()) {
++      i_set_is_monst = true;
++      level->monst_count++;
++      level->is_monst_set(x, y);
++    }
++    if (is_barrel()) {
++      i_set_is_barrel = true;
++      level->is_barrel_set(x, y);
++    }
++    if (is_fungus()) {
++      i_set_is_fungus = true;
++      level->is_fungus_set(x, y);
++    }
++    if (is_brazier()) {
++      //
++      // Dead/extinguished braziers are not an obstacle
++      //
++      i_set_is_brazier = true;
++      level->is_brazier_set(x, y);
++    }
++    if (is_trap()) {
++      i_set_is_trap = true;
++      level->is_trap_set(x, y);
++    }
++    if (is_tentacle()) {
++      i_set_is_tentacle = true;
++      level->is_tentacle_set(x, y);
++    }
++  }
++
++  if (gfx_pixelart_shown_in_bg()) {
++    //
++    // Set this on the first change, to avoid the redraw being pushed out too
++    // far by subsequent changes.
++    //
++    if (! level->ts_redraw_bg) {
++      level->ts_redraw_bg = time_ms_cached() + LEVEL_REDRAW_BG_DELAY_MS;
++    }
++  }
++
++  if (is_lava() || is_fire()) {
++    level->is_heatmap_valid = false;
++  }
++
++  //
++  // Keep track of what we are submerged in (or our owner).
++  //
++  auto o_top = top_owner();
++
++  if (! is_water()) {
++    is_in_water = level->is_water(curr_at);
++    if (o_top && o_top->is_in_water) {
++      is_in_water = true;
++    }
++  }
++
++  if (! is_lava()) {
++    is_in_lava = level->is_lava(curr_at);
++    if (o_top && o_top->is_in_lava) {
++      is_in_lava = true;
++    }
++  }
++
++  if (! is_ooze()) {
++    is_in_ooze = level->is_ooze(curr_at);
++    if (o_top && o_top->is_in_ooze) {
++      is_in_ooze = true;
++    }
++  }
++
++  //
++  // Update submerged status
++  //
++  if (gfx_pixelart_submergible()) {
++    auto map_loc = curr_at;
++    if (o_top) {
++      map_loc = o_top->curr_at;
++    }
++
++    submerged_offset_set(0);
++
++    if (level->is_deep_water((int) map_loc.x, (int) map_loc.y)) {
++      submerged_offset_set(8);
++    } else if (level->is_lava((int) map_loc.x, (int) map_loc.y)) {
++      submerged_offset_set(TILE_HEIGHT / 2);
++    } else if (level->is_ooze((int) map_loc.x, (int) map_loc.y)) {
++      submerged_offset_set(TILE_HEIGHT / 2);
++    } else if (level->is_shallow_water((int) map_loc.x, (int) map_loc.y)) {
++      submerged_offset_set(4);
++    }
++
++    if (! is_dead && (is_floating_currently() || is_flying())) {
++      //
++      // Ghosts do not sink into lava
++      //
++      submerged_offset_set(0);
++    }
++  }
++
++  //
++  // If loading, then the animations may not be loaded yet, so take care.
++  //
++  if (! g_loading) {
++    //
++    // Need to push all animations also; so if we are changing state, like being
++    // submerged, then when we push again, the animations are also suitably submerged.
++    //
++    FOR_ALL_EQUIP(iter)
++    {
++      if (equip_id_carry_anim(iter).ok()) {
++        auto it = level->thing_find(equip_id_carry_anim(iter));
++        if (it) {
++          it->level_push();
++        }
++      }
++
++      if (equip_id_use_anim(iter).ok()) {
++        auto it = level->thing_find(equip_id_use_anim(iter));
++        if (it) {
++          it->level_push();
++        }
++      }
++    }
++
++    FOR_ALL_BODYPART(iter)
++    {
++      if (bodypart_id_get(iter).ok()) {
++        auto it = level->thing_find(bodypart_id_get(iter));
++        if (it) {
++          it->level_push();
++        }
++      }
++    }
++
++    auto on_fire_id = on_fire_anim_id();
++    if (on_fire_id.ok()) {
++      auto it = level->thing_find(on_fire_id);
++      if (it) {
++        it->level_push();
++      }
++    }
++  }
++
++  // dbg("Is_monst count %d (after push) at %d,%d", level->is_monst(x, y), x, y);
++}
++
++void Thing::level_push(void)
++{
++  big_lock.lock();
++  level_push_();
++  big_lock.unlock();
++}
++
++void Thing::level_pop_(void)
++{
++  TRACE_NO_INDENT();
++
++  if (! is_attached) {
++    return;
++  }
++  is_attached = false;
++
++#if 0
++  if (is_torch()) {
++    con("pop at %d,%d", last_attached.x, last_attached.y);
++  }
++#endif
++
++  auto x = last_attached.x;
++  auto y = last_attached.y;
++
++  if (! is_the_grid_) {
++    if (i_set_is_able_to_amplify_footsteps) {
++      i_set_is_able_to_amplify_footsteps = false;
++      level->is_able_to_amplify_footsteps_unset(x, y);
++    }
++    if (i_set_is_able_to_dampen_footsteps) {
++      i_set_is_able_to_dampen_footsteps = false;
++      level->is_able_to_dampen_footsteps_unset(x, y);
++    }
++    if (i_set_is_acid) {
++      i_set_is_acid = false;
++      level->is_acid_unset(x, y);
++    }
++    if (i_set_is_engulfer) {
++      i_set_is_engulfer = false;
++      level->is_engulfer_unset(x, y);
++    }
++    if (i_set_is_ascend_dungeon) {
++      i_set_is_ascend_dungeon = false;
++      level->is_ascend_dungeon_unset(x, y);
++    }
++    if (i_set_is_ascend_sewer) {
++      i_set_is_ascend_sewer = false;
++      level->is_ascend_sewer_unset(x, y);
++    }
++    if (i_set_is_attackable_by_monst) {
++      i_set_is_attackable_by_monst = false;
++      level->is_attackable_by_monst_unset(x, y);
++    }
++    if (i_set_is_attackable_by_player) {
++      i_set_is_attackable_by_player = false;
++      level->is_attackable_by_player_unset(x, y);
++    }
++    if (i_set_is_barrel) {
++      i_set_is_barrel = false;
++      level->is_barrel_unset(x, y);
++    }
++    if (i_set_is_basalt) {
++      i_set_is_basalt = false;
++      level->is_basalt_unset(x, y);
++    }
++    if (i_set_is_block_of_ice) {
++      i_set_is_block_of_ice = false;
++      level->is_block_of_ice_unset(x, y);
++    }
++    if (i_set_is_block_of_crystal) {
++      i_set_is_block_of_crystal = false;
++      level->is_block_of_crystal_unset(x, y);
++    }
++    if (i_set_is_spell_of_holding_barrier) {
++      i_set_is_spell_of_holding_barrier = false;
++      level->is_spell_of_holding_barrier_unset(x, y);
++    }
++    if (i_set_is_spell_of_sanctuary_barrier) {
++      i_set_is_spell_of_sanctuary_barrier = false;
++      level->is_spell_of_sanctuary_barrier_unset(x, y);
++    }
++    if (i_set_is_spell_of_protection_barrier) {
++      i_set_is_spell_of_protection_barrier = false;
++      level->is_spell_of_protection_barrier_unset(x, y);
++    }
++    if (i_set_is_brazier) {
++      i_set_is_brazier = false;
++      level->is_brazier_unset(x, y);
++    }
++    if (i_set_is_bridge) {
++      i_set_is_bridge = false;
++      level->is_bridge_unset(x, y);
++    }
++    if (i_set_is_burnable) {
++      i_set_is_burnable = false;
++      level->is_burnable_unset(x, y);
++    }
++    if (i_set_is_carnivorous_plant) {
++      i_set_is_carnivorous_plant = false;
++      level->is_carnivorous_plant_unset(x, y);
++    }
++    if (i_set_is_spectral_blade) {
++      i_set_is_spectral_blade = false;
++      level->is_spectral_blade_unset(x, y);
++    }
++    if (i_set_is_chasm) {
++      i_set_is_chasm = false;
++      level->is_chasm_unset(x, y);
++    }
++    if (i_set_is_combustible) {
++      i_set_is_combustible = false;
++      level->is_combustible_unset(x, y);
++    }
++    if (i_set_is_corpse) {
++      i_set_is_corpse = false;
++      level->is_corpse_unset(x, y);
++    }
++    if (i_set_is_corridor) {
++      i_set_is_corridor = false;
++      level->is_corridor_unset(x, y);
++    }
++    if (i_set_is_cursor_path_blocker) {
++      i_set_is_cursor_path_blocker = false;
++      level->is_cursor_path_blocker_unset(x, y);
++    }
++    if (i_set_is_cursor_path_hazard) {
++      i_set_is_cursor_path_hazard = false;
++      level->is_cursor_path_hazard_unset(x, y);
++    }
++    if (i_set_is_deep_water) {
++      i_set_is_deep_water = false;
++      level->is_deep_water_unset(x, y);
++    }
++    if (i_set_is_descend_dungeon) {
++      i_set_is_descend_dungeon = false;
++      level->is_descend_dungeon_unset(x, y);
++    }
++    if (i_set_is_descend_sewer) {
++      i_set_is_descend_sewer = false;
++      level->is_descend_sewer_unset(x, y);
++    }
++    if (i_set_is_dirt) {
++      i_set_is_dirt = false;
++      level->is_dirt_unset(x, y);
++    }
++    if (i_set_is_door) {
++      i_set_is_door = false;
++      level->is_door_unset(x, y);
++    }
++    if (i_set_is_enchantstone) {
++      i_set_is_enchantstone = false;
++      level->is_enchantstone_unset(x, y);
++    }
++    if (i_set_is_fire) {
++      i_set_is_fire = false;
++      level->is_fire_unset(x, y);
++    }
++    if (i_set_is_floor) {
++      i_set_is_floor = false;
++      level->is_floor_unset(x, y);
++    }
++    if (i_set_is_foliage) {
++      i_set_is_foliage = false;
++      level->is_foliage_unset(x, y);
++    }
++    if (i_set_is_food) {
++      i_set_is_food = false;
++      level->is_food_unset(x, y);
++    }
++    if (i_set_is_fungus_edible) {
++      i_set_is_fungus_edible = false;
++      level->is_fungus_edible_unset(x, y);
++    }
++    if (i_set_is_fungus) {
++      i_set_is_fungus = false;
++      level->is_fungus_unset(x, y);
++    }
++    if (i_set_is_fungus_poison) {
++      i_set_is_fungus_poison = false;
++      level->is_fungus_poison_unset(x, y);
++    }
++    if (i_set_is_fungus_withered) {
++      i_set_is_fungus_withered = false;
++      level->is_fungus_withered_unset(x, y);
++    }
++    if (i_set_is_fungus_healing) {
++      i_set_is_fungus_healing = false;
++      level->is_fungus_healing_unset(x, y);
++    }
++    if (i_set_is_gas_blocker) {
++      i_set_is_gas_blocker = false;
++      level->is_gas_blocker_unset(x, y);
++    }
++    if (i_set_is_gas_explosion_blocker) {
++      i_set_is_gas_explosion_blocker = false;
++      level->is_gas_explosion_blocker_unset(x, y);
++    }
++    if (i_set_is_gold) {
++      i_set_is_gold = false;
++      level->is_gold_unset(x, y);
++    }
++    if (i_set_is_grass_dry) {
++      i_set_is_grass_dry = false;
++      level->is_grass_dry_unset(x, y);
++    }
++    if (i_set_is_grass_wet) {
++      i_set_is_grass_wet = false;
++      level->is_grass_wet_unset(x, y);
++    }
++    if (i_set_is_green_blood) {
++      i_set_is_green_blood = false;
++      level->is_green_blood_unset(x, y);
++    }
++    if (i_set_is_hazard) {
++      i_set_is_hazard = false;
++      level->is_hazard_unset(x, y);
++    }
++    if (i_set_is_heavy) {
++      i_set_is_heavy = false;
++      level->is_heavy_unset(x, y);
++    }
++    if (i_set_is_key) {
++      i_set_is_key = false;
++      level->is_key_unset(x, y);
++    }
++    if (i_set_is_lava) {
++      i_set_is_lava = false;
++      level->is_lava_unset(x, y);
++    }
++    if (i_set_is_light_blocker_for_monst) {
++      i_set_is_light_blocker_for_monst = false;
++      level->is_light_blocker_for_monst_unset(x, y);
++    }
++    if (i_set_is_light_blocker) {
++      i_set_is_light_blocker = false;
++      level->is_light_blocker_unset(x, y);
++    }
++    if (i_set_is_mob) {
++      i_set_is_mob = false;
++      level->is_mob_unset(x, y);
++    }
++    if (i_set_is_obs_destructable) {
++      i_set_is_obs_destructable = false;
++      level->is_obs_destructable_unset(x, y);
++    }
++    if (i_set_is_obs_jump_end) {
++      i_set_is_obs_jump_end = false;
++      level->is_obs_jump_end_unset(x, y);
++    }
++    if (i_set_is_obs_spawn) {
++      i_set_is_obs_spawn = false;
++      level->is_obs_spawn_unset(x, y);
++    }
++    if (i_set_is_obs_spawn_monst) {
++      i_set_is_obs_spawn_monst = false;
++      level->is_obs_spawn_monst_unset(x, y);
++    }
++    if (i_set_is_obs_wall_or_door) {
++      i_set_is_obs_wall_or_door = false;
++      level->is_obs_wall_or_door_unset(x, y);
++    }
++    if (i_set_is_portal) {
++      i_set_is_portal = false;
++      level->is_portal_unset(x, y);
++    }
++    if (i_set_is_potion) {
++      i_set_is_potion = false;
++      level->is_potion_unset(x, y);
++    }
++    if (i_set_is_red_blood) {
++      i_set_is_red_blood = false;
++      level->is_red_blood_unset(x, y);
++    }
++    if (i_set_is_ring) {
++      i_set_is_ring = false;
++      level->is_ring_unset(x, y);
++    }
++    if (i_set_is_ripple) {
++      i_set_is_ripple = false;
++      level->is_ripple_unset(x, y);
++    }
++    if (i_set_is_rock) {
++      i_set_is_rock = false;
++      level->is_rock_unset(x, y);
++    }
++    if (i_set_is_secret_door) {
++      i_set_is_secret_door = false;
++      level->is_secret_door_unset(x, y);
++    }
++    if (i_set_is_shallow_water) {
++      i_set_is_shallow_water = false;
++      level->is_shallow_water_unset(x, y);
++    }
++    if (i_set_is_shovable) {
++      i_set_is_shovable = false;
++      level->is_shovable_unset(x, y);
++    }
++    if (i_set_is_skillstone) {
++      i_set_is_skillstone = false;
++      level->is_skillstone_unset(x, y);
++    }
++    if (i_set_is_smoke) {
++      i_set_is_smoke = false;
++      level->is_smoke_unset(x, y);
++    }
++    if (i_set_is_spellbook) {
++      i_set_is_spellbook = false;
++      level->is_spellbook_unset(x, y);
++    }
++    if (i_set_is_spiderweb) {
++      i_set_is_spiderweb = false;
++      level->is_spiderweb_unset(x, y);
++    }
++    if (i_set_is_staff) {
++      i_set_is_staff = false;
++      level->is_staff_unset(x, y);
++    }
++    if (i_set_is_steam) {
++      i_set_is_steam = false;
++      level->is_steam_unset(x, y);
++    }
++    if (i_set_is_sticky) {
++      i_set_is_sticky = false;
++      level->is_sticky_unset(x, y);
++    }
++    if (i_set_is_tentacle) {
++      i_set_is_tentacle = false;
++      level->is_tentacle_unset(x, y);
++    }
++    if (i_set_is_torch) {
++      i_set_is_torch = false;
++      level->is_torch_unset(x, y);
++    }
++    if (i_set_is_trap) {
++      i_set_is_trap = false;
++      level->is_trap_unset(x, y);
++    }
++    if (i_set_is_treasure_type) {
++      i_set_is_treasure_type = false;
++      level->is_treasure_type_unset(x, y);
++    }
++    if (i_set_is_wall) {
++      i_set_is_wall = false;
++      level->is_wall_unset(x, y);
++    }
++    if (i_set_noise_blocker) {
++      i_set_noise_blocker = false;
++      level->noise_blocker_unset(x, y);
++    }
++    if (i_set_water) {
++      i_set_water = false;
++      level->gfx_water_unset(x, y);
++    }
++    if (i_set_is_ooze) {
++      i_set_is_ooze = false;
++      level->gfx_ooze_unset(x, y);
++      level->is_ooze_unset(x, y);
++    }
++    if (i_set_is_obs_when_dead) {
++      i_set_is_obs_when_dead = false;
++      level->is_obs_when_dead_unset(x, y);
++    }
++    if (i_set_is_obs_shoving) {
++      i_set_is_obs_shoving = false;
++      level->is_obs_shoving_unset(x, y);
++    }
++
++    if (i_set_is_monst) {
++      i_set_is_monst = false;
++      level->monst_count--;
++      level->is_monst_unset(x, y);
++    }
++    if (is_lava() || is_fire()) {
++      level->is_heatmap_valid = false;
++    }
++
++    if (gfx_pixelart_shown_in_bg()) {
++      //
++      // Set this on the first change, to avoid the redraw being pushed out too
++      // far by subsequent changes.
++      //
++      if (! level->ts_redraw_bg) {
++        level->ts_redraw_bg = time_ms_cached() + LEVEL_REDRAW_BG_DELAY_MS;
++      }
++    }
++
++    //
++    // If loading, then the animations may not be loaded yet, so take care.
++    //
++    if (! g_loading) {
++      //
++      // Need to pop all animations also; so if we are changing state, like being
++      // submerged, then when we push again, the animations are also suitably submerged.
++      //
++      FOR_ALL_EQUIP(iter)
++      {
++        if (equip_id_carry_anim(iter).ok()) {
++          auto w = level->thing_find(equip_id_carry_anim(iter));
++          if (w) {
++            w->level_pop();
++          }
++        }
++
++        if (equip_id_use_anim(iter).ok()) {
++          auto w = level->thing_find(equip_id_use_anim(iter));
++          if (w) {
++            w->level_pop();
++          }
++        }
++      }
++
++      FOR_ALL_BODYPART(iter)
++      {
++        if (bodypart_id_get(iter).ok()) {
++          auto w = level->thing_find(bodypart_id_get(iter));
++          if (w) {
++            w->level_pop();
++          }
++        }
++      }
++
++      auto on_fire_id = on_fire_anim_id();
++      if (on_fire_id.ok()) {
++        auto w = level->thing_find(on_fire_id);
++        if (w) {
++          w->level_pop();
++        }
++      }
++    }
++  }
++
++  level->remove_thing(x, y, id);
++
++  // dbg("Is_monst count %d (after pop) at %d,%d", level->is_monst(x, y), x, y);
++}
++
++void Thing::level_pop(void)
++{
++  big_lock.lock();
++  level_pop_();
++  big_lock.unlock();
++}
+diff --git a/src/thing_level_pop.cpp b/src/thing_level_pop.cpp
+deleted file mode 100644
+index 49593cda..00000000
+--- a/src/thing_level_pop.cpp
++++ /dev/null
+@@ -1,439 +0,0 @@
+-//
+-// Copyright goblinhack@gmail.com
+-//
+-
+-#include "my_game.hpp"
+-#include "my_thing.hpp"
+-
+-void Thing::level_pop(void)
+-{
+-  TRACE_NO_INDENT();
+-
+-  if (! is_attached) {
+-    return;
+-  }
+-  is_attached = false;
+-
+-#if 0
+-  if (is_torch()) {
+-    con("pop at %d,%d", last_attached.x, last_attached.y);
+-  }
+-#endif
+-
+-  auto x = last_attached.x;
+-  auto y = last_attached.y;
+-
+-  if (! is_the_grid_) {
+-    if (i_set_is_able_to_amplify_footsteps) {
+-      i_set_is_able_to_amplify_footsteps = false;
+-      level->is_able_to_amplify_footsteps_unset(x, y);
+-    }
+-    if (i_set_is_able_to_dampen_footsteps) {
+-      i_set_is_able_to_dampen_footsteps = false;
+-      level->is_able_to_dampen_footsteps_unset(x, y);
+-    }
+-    if (i_set_is_acid) {
+-      i_set_is_acid = false;
+-      level->is_acid_unset(x, y);
+-    }
+-    if (i_set_is_engulfer) {
+-      i_set_is_engulfer = false;
+-      level->is_engulfer_unset(x, y);
+-    }
+-    if (i_set_is_ascend_dungeon) {
+-      i_set_is_ascend_dungeon = false;
+-      level->is_ascend_dungeon_unset(x, y);
+-    }
+-    if (i_set_is_ascend_sewer) {
+-      i_set_is_ascend_sewer = false;
+-      level->is_ascend_sewer_unset(x, y);
+-    }
+-    if (i_set_is_attackable_by_monst) {
+-      i_set_is_attackable_by_monst = false;
+-      level->is_attackable_by_monst_unset(x, y);
+-    }
+-    if (i_set_is_attackable_by_player) {
+-      i_set_is_attackable_by_player = false;
+-      level->is_attackable_by_player_unset(x, y);
+-    }
+-    if (i_set_is_barrel) {
+-      i_set_is_barrel = false;
+-      level->is_barrel_unset(x, y);
+-    }
+-    if (i_set_is_basalt) {
+-      i_set_is_basalt = false;
+-      level->is_basalt_unset(x, y);
+-    }
+-    if (i_set_is_block_of_ice) {
+-      i_set_is_block_of_ice = false;
+-      level->is_block_of_ice_unset(x, y);
+-    }
+-    if (i_set_is_block_of_crystal) {
+-      i_set_is_block_of_crystal = false;
+-      level->is_block_of_crystal_unset(x, y);
+-    }
+-    if (i_set_is_spell_of_holding_barrier) {
+-      i_set_is_spell_of_holding_barrier = false;
+-      level->is_spell_of_holding_barrier_unset(x, y);
+-    }
+-    if (i_set_is_spell_of_sanctuary_barrier) {
+-      i_set_is_spell_of_sanctuary_barrier = false;
+-      level->is_spell_of_sanctuary_barrier_unset(x, y);
+-    }
+-    if (i_set_is_spell_of_protection_barrier) {
+-      i_set_is_spell_of_protection_barrier = false;
+-      level->is_spell_of_protection_barrier_unset(x, y);
+-    }
+-    if (i_set_is_brazier) {
+-      i_set_is_brazier = false;
+-      level->is_brazier_unset(x, y);
+-    }
+-    if (i_set_is_bridge) {
+-      i_set_is_bridge = false;
+-      level->is_bridge_unset(x, y);
+-    }
+-    if (i_set_is_burnable) {
+-      i_set_is_burnable = false;
+-      level->is_burnable_unset(x, y);
+-    }
+-    if (i_set_is_carnivorous_plant) {
+-      i_set_is_carnivorous_plant = false;
+-      level->is_carnivorous_plant_unset(x, y);
+-    }
+-    if (i_set_is_spectral_blade) {
+-      i_set_is_spectral_blade = false;
+-      level->is_spectral_blade_unset(x, y);
+-    }
+-    if (i_set_is_chasm) {
+-      i_set_is_chasm = false;
+-      level->is_chasm_unset(x, y);
+-    }
+-    if (i_set_is_combustible) {
+-      i_set_is_combustible = false;
+-      level->is_combustible_unset(x, y);
+-    }
+-    if (i_set_is_corpse) {
+-      i_set_is_corpse = false;
+-      level->is_corpse_unset(x, y);
+-    }
+-    if (i_set_is_corridor) {
+-      i_set_is_corridor = false;
+-      level->is_corridor_unset(x, y);
+-    }
+-    if (i_set_is_cursor_path_blocker) {
+-      i_set_is_cursor_path_blocker = false;
+-      level->is_cursor_path_blocker_unset(x, y);
+-    }
+-    if (i_set_is_cursor_path_hazard) {
+-      i_set_is_cursor_path_hazard = false;
+-      level->is_cursor_path_hazard_unset(x, y);
+-    }
+-    if (i_set_is_deep_water) {
+-      i_set_is_deep_water = false;
+-      level->is_deep_water_unset(x, y);
+-    }
+-    if (i_set_is_descend_dungeon) {
+-      i_set_is_descend_dungeon = false;
+-      level->is_descend_dungeon_unset(x, y);
+-    }
+-    if (i_set_is_descend_sewer) {
+-      i_set_is_descend_sewer = false;
+-      level->is_descend_sewer_unset(x, y);
+-    }
+-    if (i_set_is_dirt) {
+-      i_set_is_dirt = false;
+-      level->is_dirt_unset(x, y);
+-    }
+-    if (i_set_is_door) {
+-      i_set_is_door = false;
+-      level->is_door_unset(x, y);
+-    }
+-    if (i_set_is_enchantstone) {
+-      i_set_is_enchantstone = false;
+-      level->is_enchantstone_unset(x, y);
+-    }
+-    if (i_set_is_fire) {
+-      i_set_is_fire = false;
+-      level->is_fire_unset(x, y);
+-    }
+-    if (i_set_is_floor) {
+-      i_set_is_floor = false;
+-      level->is_floor_unset(x, y);
+-    }
+-    if (i_set_is_foliage) {
+-      i_set_is_foliage = false;
+-      level->is_foliage_unset(x, y);
+-    }
+-    if (i_set_is_food) {
+-      i_set_is_food = false;
+-      level->is_food_unset(x, y);
+-    }
+-    if (i_set_is_fungus_edible) {
+-      i_set_is_fungus_edible = false;
+-      level->is_fungus_edible_unset(x, y);
+-    }
+-    if (i_set_is_fungus) {
+-      i_set_is_fungus = false;
+-      level->is_fungus_unset(x, y);
+-    }
+-    if (i_set_is_fungus_poison) {
+-      i_set_is_fungus_poison = false;
+-      level->is_fungus_poison_unset(x, y);
+-    }
+-    if (i_set_is_fungus_withered) {
+-      i_set_is_fungus_withered = false;
+-      level->is_fungus_withered_unset(x, y);
+-    }
+-    if (i_set_is_fungus_healing) {
+-      i_set_is_fungus_healing = false;
+-      level->is_fungus_healing_unset(x, y);
+-    }
+-    if (i_set_is_gas_blocker) {
+-      i_set_is_gas_blocker = false;
+-      level->is_gas_blocker_unset(x, y);
+-    }
+-    if (i_set_is_gas_explosion_blocker) {
+-      i_set_is_gas_explosion_blocker = false;
+-      level->is_gas_explosion_blocker_unset(x, y);
+-    }
+-    if (i_set_is_gold) {
+-      i_set_is_gold = false;
+-      level->is_gold_unset(x, y);
+-    }
+-    if (i_set_is_grass_dry) {
+-      i_set_is_grass_dry = false;
+-      level->is_grass_dry_unset(x, y);
+-    }
+-    if (i_set_is_grass_wet) {
+-      i_set_is_grass_wet = false;
+-      level->is_grass_wet_unset(x, y);
+-    }
+-    if (i_set_is_green_blood) {
+-      i_set_is_green_blood = false;
+-      level->is_green_blood_unset(x, y);
+-    }
+-    if (i_set_is_hazard) {
+-      i_set_is_hazard = false;
+-      level->is_hazard_unset(x, y);
+-    }
+-    if (i_set_is_heavy) {
+-      i_set_is_heavy = false;
+-      level->is_heavy_unset(x, y);
+-    }
+-    if (i_set_is_key) {
+-      i_set_is_key = false;
+-      level->is_key_unset(x, y);
+-    }
+-    if (i_set_is_lava) {
+-      i_set_is_lava = false;
+-      level->is_lava_unset(x, y);
+-    }
+-    if (i_set_is_light_blocker_for_monst) {
+-      i_set_is_light_blocker_for_monst = false;
+-      level->is_light_blocker_for_monst_unset(x, y);
+-    }
+-    if (i_set_is_light_blocker) {
+-      i_set_is_light_blocker = false;
+-      level->is_light_blocker_unset(x, y);
+-    }
+-    if (i_set_is_mob) {
+-      i_set_is_mob = false;
+-      level->is_mob_unset(x, y);
+-    }
+-    if (i_set_is_obs_destructable) {
+-      i_set_is_obs_destructable = false;
+-      level->is_obs_destructable_unset(x, y);
+-    }
+-    if (i_set_is_obs_jump_end) {
+-      i_set_is_obs_jump_end = false;
+-      level->is_obs_jump_end_unset(x, y);
+-    }
+-    if (i_set_is_obs_spawn) {
+-      i_set_is_obs_spawn = false;
+-      level->is_obs_spawn_unset(x, y);
+-    }
+-    if (i_set_is_obs_spawn_monst) {
+-      i_set_is_obs_spawn_monst = false;
+-      level->is_obs_spawn_monst_unset(x, y);
+-    }
+-    if (i_set_is_obs_wall_or_door) {
+-      i_set_is_obs_wall_or_door = false;
+-      level->is_obs_wall_or_door_unset(x, y);
+-    }
+-    if (i_set_is_portal) {
+-      i_set_is_portal = false;
+-      level->is_portal_unset(x, y);
+-    }
+-    if (i_set_is_potion) {
+-      i_set_is_potion = false;
+-      level->is_potion_unset(x, y);
+-    }
+-    if (i_set_is_red_blood) {
+-      i_set_is_red_blood = false;
+-      level->is_red_blood_unset(x, y);
+-    }
+-    if (i_set_is_ring) {
+-      i_set_is_ring = false;
+-      level->is_ring_unset(x, y);
+-    }
+-    if (i_set_is_ripple) {
+-      i_set_is_ripple = false;
+-      level->is_ripple_unset(x, y);
+-    }
+-    if (i_set_is_rock) {
+-      i_set_is_rock = false;
+-      level->is_rock_unset(x, y);
+-    }
+-    if (i_set_is_secret_door) {
+-      i_set_is_secret_door = false;
+-      level->is_secret_door_unset(x, y);
+-    }
+-    if (i_set_is_shallow_water) {
+-      i_set_is_shallow_water = false;
+-      level->is_shallow_water_unset(x, y);
+-    }
+-    if (i_set_is_shovable) {
+-      i_set_is_shovable = false;
+-      level->is_shovable_unset(x, y);
+-    }
+-    if (i_set_is_skillstone) {
+-      i_set_is_skillstone = false;
+-      level->is_skillstone_unset(x, y);
+-    }
+-    if (i_set_is_smoke) {
+-      i_set_is_smoke = false;
+-      level->is_smoke_unset(x, y);
+-    }
+-    if (i_set_is_spellbook) {
+-      i_set_is_spellbook = false;
+-      level->is_spellbook_unset(x, y);
+-    }
+-    if (i_set_is_spiderweb) {
+-      i_set_is_spiderweb = false;
+-      level->is_spiderweb_unset(x, y);
+-    }
+-    if (i_set_is_staff) {
+-      i_set_is_staff = false;
+-      level->is_staff_unset(x, y);
+-    }
+-    if (i_set_is_steam) {
+-      i_set_is_steam = false;
+-      level->is_steam_unset(x, y);
+-    }
+-    if (i_set_is_sticky) {
+-      i_set_is_sticky = false;
+-      level->is_sticky_unset(x, y);
+-    }
+-    if (i_set_is_tentacle) {
+-      i_set_is_tentacle = false;
+-      level->is_tentacle_unset(x, y);
+-    }
+-    if (i_set_is_torch) {
+-      i_set_is_torch = false;
+-      level->is_torch_unset(x, y);
+-    }
+-    if (i_set_is_trap) {
+-      i_set_is_trap = false;
+-      level->is_trap_unset(x, y);
+-    }
+-    if (i_set_is_treasure_type) {
+-      i_set_is_treasure_type = false;
+-      level->is_treasure_type_unset(x, y);
+-    }
+-    if (i_set_is_wall) {
+-      i_set_is_wall = false;
+-      level->is_wall_unset(x, y);
+-    }
+-    if (i_set_noise_blocker) {
+-      i_set_noise_blocker = false;
+-      level->noise_blocker_unset(x, y);
+-    }
+-    if (i_set_water) {
+-      i_set_water = false;
+-      level->gfx_water_unset(x, y);
+-    }
+-    if (i_set_is_ooze) {
+-      i_set_is_ooze = false;
+-      level->gfx_ooze_unset(x, y);
+-      level->is_ooze_unset(x, y);
+-    }
+-    if (i_set_is_obs_when_dead) {
+-      i_set_is_obs_when_dead = false;
+-      level->is_obs_when_dead_unset(x, y);
+-    }
+-    if (i_set_is_obs_shoving) {
+-      i_set_is_obs_shoving = false;
+-      level->is_obs_shoving_unset(x, y);
+-    }
+-
+-    if (i_set_is_monst) {
+-      i_set_is_monst = false;
+-      level->monst_count--;
+-      level->is_monst_unset(x, y);
+-    }
+-    if (is_lava() || is_fire()) {
+-      level->is_heatmap_valid = false;
+-    }
+-
+-    if (gfx_pixelart_shown_in_bg()) {
+-      //
+-      // Set this on the first change, to avoid the redraw being pushed out too
+-      // far by subsequent changes.
+-      //
+-      if (! level->ts_redraw_bg) {
+-        level->ts_redraw_bg = time_ms_cached() + LEVEL_REDRAW_BG_DELAY_MS;
+-      }
+-    }
+-
+-    //
+-    // If loading, then the animations may not be loaded yet, so take care.
+-    //
+-    if (! g_loading) {
+-      //
+-      // Need to pop all animations also; so if we are changing state, like being
+-      // submerged, then when we push again, the animations are also suitably submerged.
+-      //
+-      TRACE_NO_INDENT();
+-      FOR_ALL_EQUIP(iter)
+-      {
+-        if (equip_id_carry_anim(iter).ok()) {
+-          auto w = level->thing_find(equip_id_carry_anim(iter));
+-          if (w) {
+-            w->level_pop();
+-          }
+-        }
+-
+-        if (equip_id_use_anim(iter).ok()) {
+-          auto w = level->thing_find(equip_id_use_anim(iter));
+-          if (w) {
+-            w->level_pop();
+-          }
+-        }
+-      }
+-
+-      TRACE_NO_INDENT();
+-      FOR_ALL_BODYPART(iter)
+-      {
+-        if (bodypart_id_get(iter).ok()) {
+-          auto w = level->thing_find(bodypart_id_get(iter));
+-          if (w) {
+-            w->level_pop();
+-          }
+-        }
+-      }
+-
+-      auto on_fire_id = on_fire_anim_id();
+-      if (on_fire_id.ok()) {
+-        TRACE_NO_INDENT();
+-        auto w = level->thing_find(on_fire_id);
+-        if (w) {
+-          w->level_pop();
+-        }
+-      }
+-    }
+-  }
+-
+-  level->remove_thing(x, y, id);
+-
+-  // dbg("Is_monst count %d (after pop) at %d,%d", level->is_monst(x, y), x, y);
+-}
+diff --git a/src/thing_level_push.cpp b/src/thing_level_push.cpp
+deleted file mode 100644
+index 390c3bf9..00000000
+--- a/src/thing_level_push.cpp
++++ /dev/null
+@@ -1,522 +0,0 @@
+-//
+-// Copyright goblinhack@gmail.com
+-//
+-
+-#include "my_game.hpp"
+-#include "my_thing.hpp"
+-
+-//
+-// push/pop are for things moving on the same level
+-//
+-void Thing::level_push(void)
+-{
+-  TRACE_NO_INDENT();
+-  level_pop();
+-
+-  auto x = curr_at.x;
+-  auto y = curr_at.y;
+-
+-  level->put_thing(x, y, id);
+-  is_attached   = true;
+-  last_attached = point(x, y);
+-
+-#if 0
+-  if (is_torch()) {
+-    con("push at %d,%d", last_attached.x, last_attached.y);
+-  }
+-#endif
+-
+-  if (is_the_grid_) {
+-    return;
+-  }
+-
+-  //
+-  // Don't have things like lasers or projectiles briefly setting fire on a tile
+-  // as that will cause interactions. And they really are brief, not long lived
+-  // like actual fire.
+-  //
+-  if (is_tmp_thing()) {
+-    return;
+-  }
+-
+-  //
+-  // We don't want torches for example to act as if they are on the level/
+-  //
+-  if (is_hidden) {
+-    return;
+-  }
+-
+-  if (is_ascend_dungeon()) {
+-    i_set_is_ascend_dungeon = true;
+-    level->is_ascend_dungeon_set(x, y);
+-  }
+-  if (is_ascend_sewer()) {
+-    i_set_is_ascend_sewer = true;
+-    level->is_ascend_sewer_set(x, y);
+-  }
+-  if (is_basalt()) {
+-    i_set_is_basalt = true;
+-    level->is_basalt_set(x, y);
+-  }
+-  if (is_block_of_ice()) {
+-    i_set_is_block_of_ice = true;
+-    level->is_block_of_ice_set(x, y);
+-  }
+-  if (is_block_of_crystal()) {
+-    i_set_is_block_of_crystal = true;
+-    level->is_block_of_crystal_set(x, y);
+-  }
+-  if (is_spell_of_holding_barrier()) {
+-    i_set_is_spell_of_holding_barrier = true;
+-    level->is_spell_of_holding_barrier_set(x, y);
+-  }
+-  if (is_spell_of_sanctuary_barrier()) {
+-    i_set_is_spell_of_sanctuary_barrier = true;
+-    level->is_spell_of_sanctuary_barrier_set(x, y);
+-  }
+-  if (is_spell_of_protection_barrier()) {
+-    i_set_is_spell_of_protection_barrier = true;
+-    level->is_spell_of_protection_barrier_set(x, y);
+-  }
+-  if (is_bridge()) {
+-    i_set_is_bridge = true;
+-    level->is_bridge_set(x, y);
+-  }
+-  if (is_burnable()) {
+-    i_set_is_burnable = true;
+-    level->is_burnable_set(x, y);
+-  }
+-  if (is_chasm()) {
+-    i_set_is_chasm = true;
+-    level->is_chasm_set(x, y);
+-  }
+-  if (is_combustible()) {
+-    i_set_is_combustible = true;
+-    level->is_combustible_set(x, y);
+-  }
+-  if (is_corpse()) {
+-    i_set_is_corpse = true;
+-    level->is_corpse_set(x, y);
+-  }
+-  if (is_corridor()) {
+-    i_set_is_corridor = true;
+-    level->is_corridor_set(x, y);
+-  }
+-  if (is_descend_dungeon()) {
+-    i_set_is_descend_dungeon = true;
+-    level->is_descend_dungeon_set(x, y);
+-  }
+-  if (is_descend_sewer()) {
+-    i_set_is_descend_sewer = true;
+-    level->is_descend_sewer_set(x, y);
+-  }
+-  if (is_dirt()) {
+-    i_set_is_dirt = true;
+-    level->is_dirt_set(x, y);
+-  }
+-  if (is_door() && ! is_open) {
+-    i_set_is_door = true;
+-    level->is_door_set(x, y);
+-  }
+-  if (is_enchantstone()) {
+-    i_set_is_enchantstone = true;
+-    level->is_enchantstone_set(x, y);
+-  }
+-  if (is_floor() || is_corridor()) {
+-    i_set_is_floor = true;
+-    level->is_floor_set(x, y);
+-  }
+-  if (is_foliage()) {
+-    i_set_is_foliage = true;
+-    level->is_foliage_set(x, y);
+-  }
+-  if (is_food()) {
+-    i_set_is_food = true;
+-    level->is_food_set(x, y);
+-  }
+-  if (is_fungus_edible()) {
+-    i_set_is_fungus_edible = true;
+-    level->is_fungus_edible_set(x, y);
+-  }
+-  if (is_fungus_poison()) {
+-    i_set_is_fungus_poison = true;
+-    level->is_fungus_poison_set(x, y);
+-  }
+-  if (is_fungus_healing()) {
+-    i_set_is_fungus_healing = true;
+-    level->is_fungus_healing_set(x, y);
+-  }
+-  if (is_gold()) {
+-    i_set_is_gold = true;
+-    level->is_gold_set(x, y);
+-  }
+-  if (is_grass_dry()) {
+-    i_set_is_grass_dry = true;
+-    level->is_grass_dry_set(x, y);
+-  }
+-  if (is_grass_wet()) {
+-    i_set_is_grass_wet = true;
+-    level->is_grass_wet_set(x, y);
+-  }
+-  if (is_green_blood()) {
+-    i_set_is_green_blood = true;
+-    level->is_green_blood_set(x, y);
+-  }
+-  if (is_key()) {
+-    i_set_is_key = true;
+-    level->is_key_set(x, y);
+-  }
+-  if (is_lava()) {
+-    i_set_is_lava = true;
+-    level->is_lava_set(x, y);
+-  }
+-  if (is_mob()) {
+-    i_set_is_mob = true;
+-    level->is_mob_set(x, y);
+-  }
+-  if (is_portal()) {
+-    i_set_is_portal = true;
+-    level->is_portal_set(x, y);
+-  }
+-  if (is_potion()) {
+-    i_set_is_potion = true;
+-    level->is_potion_set(x, y);
+-  }
+-  if (is_red_blood()) {
+-    i_set_is_red_blood = true;
+-    level->is_red_blood_set(x, y);
+-  }
+-  if (is_ring()) {
+-    i_set_is_ring = true;
+-    level->is_ring_set(x, y);
+-  }
+-  if (is_ripple()) {
+-    i_set_is_ripple = true;
+-    level->is_ripple_set(x, y);
+-  }
+-  if (is_rock()) {
+-    i_set_is_rock = true;
+-    level->is_rock_set(x, y);
+-  }
+-  if (is_shovable()) {
+-    i_set_is_shovable = true;
+-    level->is_shovable_set(x, y);
+-  }
+-  if (is_skillstone()) {
+-    i_set_is_skillstone = true;
+-    level->is_skillstone_set(x, y);
+-  }
+-  if (is_smoke()) {
+-    i_set_is_smoke = true;
+-    level->is_smoke_set(x, y);
+-  }
+-  if (is_spellbook()) {
+-    i_set_is_spellbook = true;
+-    level->is_spellbook_set(x, y);
+-  }
+-  if (is_spiderweb()) {
+-    i_set_is_spiderweb = true;
+-    level->is_spiderweb_set(x, y);
+-  }
+-  if (is_staff()) {
+-    i_set_is_staff = true;
+-    level->is_staff_set(x, y);
+-  }
+-  if (is_steam()) {
+-    i_set_is_steam = true;
+-    level->is_steam_set(x, y);
+-  }
+-  if (is_sticky()) {
+-    i_set_is_sticky = true;
+-    level->is_sticky_set(x, y);
+-  }
+-  if (is_torch()) {
+-    i_set_is_torch = true;
+-    level->is_torch_set(x, y);
+-  }
+-  if (is_treasure_type()) {
+-    i_set_is_treasure_type = true;
+-    level->is_treasure_type_set(x, y);
+-  }
+-  if (is_wall()) {
+-    i_set_is_wall = true;
+-    level->is_wall_set(x, y);
+-  }
+-  if (is_shallow_water() || is_deep_water()) {
+-    i_set_water = true;
+-    level->gfx_water_set(x, y);
+-  }
+-  if (is_shallow_water()) {
+-    if (! is_falling) {
+-      i_set_is_shallow_water = true;
+-      level->is_shallow_water_set(x, y);
+-    }
+-  }
+-  if (is_deep_water()) {
+-    if (! is_falling) {
+-      i_set_is_deep_water = true;
+-      level->is_deep_water_set(x, y);
+-    }
+-  }
+-  if (is_ooze()) {
+-    i_set_is_ooze = true;
+-    level->gfx_ooze_set(x, y);
+-    level->is_ooze_set(x, y);
+-  }
+-
+-  if (! is_dead && ! is_open) {
+-    //
+-    // Do we want dead giant spiders to be an obstacle?
+-    //
+-    if (is_acid()) {
+-      i_set_is_acid = true;
+-      level->is_acid_set(x, y);
+-    }
+-    if (is_engulfer()) {
+-      i_set_is_engulfer = true;
+-      level->is_engulfer_set(x, y);
+-    }
+-    if (is_carnivorous_plant()) {
+-      i_set_is_carnivorous_plant = true;
+-      level->is_carnivorous_plant_set(x, y);
+-    }
+-    if (is_spectral_blade()) {
+-      i_set_is_spectral_blade = true;
+-      level->is_spectral_blade_set(x, y);
+-    }
+-    if (is_heavy()) {
+-      i_set_is_heavy = true;
+-      level->is_heavy_set(x, y);
+-    }
+-    if (is_able_to_dampen_footsteps()) {
+-      i_set_is_able_to_dampen_footsteps = true;
+-      level->is_able_to_dampen_footsteps_set(x, y);
+-    }
+-    if (is_able_to_amplify_footsteps()) {
+-      i_set_is_able_to_amplify_footsteps = true;
+-      level->is_able_to_amplify_footsteps_set(x, y);
+-    }
+-    if (is_attackable_by_monst()) {
+-      i_set_is_attackable_by_monst = true;
+-      level->is_attackable_by_monst_set(x, y);
+-    }
+-    if (is_attackable_by_player()) {
+-      i_set_is_attackable_by_player = true;
+-      level->is_attackable_by_player_set(x, y);
+-    }
+-    if (is_fire()) {
+-      i_set_is_fire = true;
+-      level->is_fire_set(x, y);
+-    }
+-    if (is_secret_door()) {
+-      i_set_is_secret_door = true;
+-      level->is_secret_door_set(x, y);
+-    }
+-    if (is_hazard()) {
+-      i_set_is_hazard = true;
+-      level->is_hazard_set(x, y);
+-    }
+-    if (is_cursor_path_hazard()) {
+-      i_set_is_cursor_path_hazard = true;
+-      level->is_cursor_path_hazard_set(x, y);
+-    }
+-    if (is_cursor_path_blocker()) {
+-      i_set_is_cursor_path_blocker = true;
+-      level->is_cursor_path_blocker_set(x, y);
+-    }
+-    if (is_light_blocker() && ! is_open && ! is_invisible_currently()) {
+-      i_set_is_light_blocker = true;
+-      level->is_light_blocker_set(x, y);
+-    }
+-    if (is_light_blocker_for_monst() && ! is_open && ! is_invisible_currently()) {
+-      i_set_is_light_blocker_for_monst = true;
+-      level->is_light_blocker_for_monst_set(x, y);
+-    }
+-    if (is_gas_blocker() && ! is_open) {
+-      i_set_is_gas_blocker = true;
+-      level->is_gas_blocker_set(x, y);
+-    }
+-    if (is_gas_explosion_blocker() && ! is_dead) {
+-      i_set_is_gas_explosion_blocker = true;
+-      level->is_gas_explosion_blocker_set(x, y);
+-    }
+-    if (noise_blocker() && ! is_open) {
+-      i_set_noise_blocker = true;
+-      level->noise_blocker_set(x, y);
+-    }
+-    if (is_obs_wall_or_door() && ! is_open) {
+-      i_set_is_obs_wall_or_door = true;
+-      level->is_obs_wall_or_door_set(x, y);
+-    }
+-    if (is_obs_when_dead() && is_dead) {
+-      i_set_is_obs_when_dead = true;
+-      level->is_obs_when_dead_set(x, y);
+-    }
+-    if (is_obs_shoving()) {
+-      i_set_is_obs_shoving = true;
+-      level->is_obs_shoving_set(x, y);
+-    }
+-    if (is_obs_jump_end() && ! is_open) {
+-      i_set_is_obs_jump_end = true;
+-      level->is_obs_jump_end_set(x, y);
+-    }
+-    if (is_obs_spawn_monst() && ! is_open) {
+-      i_set_is_obs_spawn_monst = true;
+-      level->is_obs_spawn_monst_set(x, y);
+-    }
+-    if (is_obs_spawn() && ! is_open) {
+-      i_set_is_obs_spawn = true;
+-      level->is_obs_spawn_set(x, y);
+-    }
+-    if (is_obs_destructable() && ! is_open) {
+-      i_set_is_obs_destructable = true;
+-      level->is_obs_destructable_set(x, y);
+-    }
+-    if (is_monst()) {
+-      i_set_is_monst = true;
+-      level->monst_count++;
+-      level->is_monst_set(x, y);
+-    }
+-    if (is_barrel()) {
+-      i_set_is_barrel = true;
+-      level->is_barrel_set(x, y);
+-    }
+-    if (is_fungus()) {
+-      i_set_is_fungus = true;
+-      level->is_fungus_set(x, y);
+-    }
+-    if (is_brazier()) {
+-      //
+-      // Dead/extinguished braziers are not an obstacle
+-      //
+-      i_set_is_brazier = true;
+-      level->is_brazier_set(x, y);
+-    }
+-    if (is_trap()) {
+-      i_set_is_trap = true;
+-      level->is_trap_set(x, y);
+-    }
+-    if (is_tentacle()) {
+-      i_set_is_tentacle = true;
+-      level->is_tentacle_set(x, y);
+-    }
+-  }
+-
+-  if (gfx_pixelart_shown_in_bg()) {
+-    //
+-    // Set this on the first change, to avoid the redraw being pushed out too
+-    // far by subsequent changes.
+-    //
+-    if (! level->ts_redraw_bg) {
+-      level->ts_redraw_bg = time_ms_cached() + LEVEL_REDRAW_BG_DELAY_MS;
+-    }
+-  }
+-
+-  if (is_lava() || is_fire()) {
+-    level->is_heatmap_valid = false;
+-  }
+-
+-  //
+-  // Keep track of what we are submerged in (or our owner).
+-  //
+-  auto o_top = top_owner();
+-
+-  if (! is_water()) {
+-    is_in_water = level->is_water(curr_at);
+-    if (o_top && o_top->is_in_water) {
+-      is_in_water = true;
+-    }
+-  }
+-
+-  if (! is_lava()) {
+-    is_in_lava = level->is_lava(curr_at);
+-    if (o_top && o_top->is_in_lava) {
+-      is_in_lava = true;
+-    }
+-  }
+-
+-  if (! is_ooze()) {
+-    is_in_ooze = level->is_ooze(curr_at);
+-    if (o_top && o_top->is_in_ooze) {
+-      is_in_ooze = true;
+-    }
+-  }
+-
+-  //
+-  // Update submerged status
+-  //
+-  if (gfx_pixelart_submergible()) {
+-    auto map_loc = curr_at;
+-    if (o_top) {
+-      map_loc = o_top->curr_at;
+-    }
+-
+-    submerged_offset_set(0);
+-
+-    if (level->is_deep_water((int) map_loc.x, (int) map_loc.y)) {
+-      submerged_offset_set(8);
+-    } else if (level->is_lava((int) map_loc.x, (int) map_loc.y)) {
+-      submerged_offset_set(TILE_HEIGHT / 2);
+-    } else if (level->is_ooze((int) map_loc.x, (int) map_loc.y)) {
+-      submerged_offset_set(TILE_HEIGHT / 2);
+-    } else if (level->is_shallow_water((int) map_loc.x, (int) map_loc.y)) {
+-      submerged_offset_set(4);
+-    }
+-
+-    if (! is_dead && (is_floating_currently() || is_flying())) {
+-      //
+-      // Ghosts do not sink into lava
+-      //
+-      submerged_offset_set(0);
+-    }
+-  }
+-
+-  //
+-  // If loading, then the animations may not be loaded yet, so take care.
+-  //
+-  if (! g_loading) {
+-    //
+-    // Need to push all animations also; so if we are changing state, like being
+-    // submerged, then when we push again, the animations are also suitably submerged.
+-    //
+-    TRACE_NO_INDENT();
+-    FOR_ALL_EQUIP(iter)
+-    {
+-      if (equip_id_carry_anim(iter).ok()) {
+-        auto it = level->thing_find(equip_id_carry_anim(iter));
+-        if (it) {
+-          it->level_push();
+-        }
+-      }
+-
+-      if (equip_id_use_anim(iter).ok()) {
+-        auto it = level->thing_find(equip_id_use_anim(iter));
+-        if (it) {
+-          it->level_push();
+-        }
+-      }
+-    }
+-
+-    TRACE_NO_INDENT();
+-    FOR_ALL_BODYPART(iter)
+-    {
+-      if (bodypart_id_get(iter).ok()) {
+-        auto it = level->thing_find(bodypart_id_get(iter));
+-        if (it) {
+-          it->level_push();
+-        }
+-      }
+-    }
+-
+-    auto on_fire_id = on_fire_anim_id();
+-    if (on_fire_id.ok()) {
+-      TRACE_NO_INDENT();
+-      auto it = level->thing_find(on_fire_id);
+-      if (it) {
+-        it->level_push();
+-      }
+-    }
+-  }
+-
+-  // dbg("Is_monst count %d (after push) at %d,%d", level->is_monst(x, y), x, y);
+-}
+diff --git a/src/thing_log.cpp b/src/thing_log.cpp
+index 3736d396..fd7b3bdb 100644
+--- a/src/thing_log.cpp
++++ b/src/thing_log.cpp
+@@ -36,15 +36,16 @@ void Thing::log_(const char *fmt, va_list args)
+ 
+ void Thing::log(const char *fmt, ...)
+ {
++  big_lock.lock();
+   TRACE_NO_INDENT();
+   verify(MTYPE_THING, this);
+-  log_catchup_missing_indent_levels();
+ 
+   auto    t = this;
+   va_list args;
+   va_start(args, fmt);
+   t->log_(fmt, args);
+   va_end(args);
++  big_lock.unlock();
+ }
+ 
+ void Thing::dbg_(const char *fmt, ...)
+@@ -53,7 +54,6 @@ void Thing::dbg_(const char *fmt, ...)
+   IF_NODEBUG { return; }
+ 
+   verify(MTYPE_THING, this);
+-  log_catchup_missing_indent_levels();
+ 
+   auto    t = this;
+   va_list args;
+@@ -85,6 +85,7 @@ void Thing::die_(const char *fmt, va_list args)
+ 
+ void Thing::die(const char *fmt, ...)
+ {
++  big_lock.lock();
+   TRACE_NO_INDENT();
+   g_errored = true;
+ 
+@@ -95,6 +96,7 @@ void Thing::die(const char *fmt, ...)
+   va_start(args, fmt);
+   t->die_(fmt, args);
+   va_end(args);
++  big_lock.unlock();
+ }
+ 
+ void Thing::con_(const char *fmt, va_list args)
+@@ -152,6 +154,7 @@ void Thing::topcon_(const char *fmt, va_list args)
+ 
+ void Thing::con(const char *fmt, ...)
+ {
++  big_lock.lock();
+   TRACE_NO_INDENT();
+   verify(MTYPE_THING, this);
+   auto    t = this;
+@@ -160,10 +163,12 @@ void Thing::con(const char *fmt, ...)
+   va_start(args, fmt);
+   t->con_(fmt, args);
+   va_end(args);
++  big_lock.unlock();
+ }
+ 
+ void Thing::topcon(const char *fmt, ...)
+ {
++  big_lock.lock();
+   TRACE_NO_INDENT();
+   verify(MTYPE_THING, this);
+   auto    t = this;
+@@ -172,6 +177,7 @@ void Thing::topcon(const char *fmt, ...)
+   va_start(args, fmt);
+   t->topcon_(fmt, args);
+   va_end(args);
++  big_lock.unlock();
+ }
+ 
+ void Thing::err_(const char *fmt, va_list args)
+@@ -230,6 +236,7 @@ void Thing::err(const char *fmt, ...)
+   if (nested_error) {
+     return;
+   }
++  big_lock.lock();
+   bool old_nested_error = nested_error;
+   nested_error          = true;
+ 
+@@ -250,6 +257,7 @@ void Thing::err(const char *fmt, ...)
+   }
+ 
+   nested_error = false;
++  big_lock.unlock();
+ }
+ 
+ void Thing::botcon_(const char *fmt, va_list args)
+@@ -281,6 +289,7 @@ void Thing::botcon_(const char *fmt, va_list args)
+ 
+ void Thing::botcon(const char *fmt, ...)
+ {
++  big_lock.lock();
+   TRACE_NO_INDENT();
+   verify(MTYPE_THING, this);
+   auto    t = this;
+@@ -289,4 +298,5 @@ void Thing::botcon(const char *fmt, ...)
+   va_start(args, fmt);
+   t->botcon_(fmt, args);
+   va_end(args);
++  big_lock.unlock();
+ }
+diff --git a/src/thing_template.cpp b/src/thing_template.cpp
+index f1d18af3..45ca6001 100644
+--- a/src/thing_template.cpp
++++ b/src/thing_template.cpp
+@@ -418,7 +418,7 @@ Tpp tp_load(int id, std::string const &name, const std::string &text_long_name,
+   TRACE_NO_INDENT();
+   Tpp tp = tp_find(name);
+   if (tp) {
+-    LOG("Thing template name [%s] already loaded", name.c_str());
++    // DIE("Thing template name [%s] already loaded", name.c_str());
+     return tp;
+   }
+ 
+diff --git a/src/thing_template_log.cpp b/src/thing_template_log.cpp
+index 9bce440c..2d43b34b 100644
+--- a/src/thing_template_log.cpp
++++ b/src/thing_template_log.cpp
+@@ -36,7 +36,6 @@ void Tp::log_(const char *fmt, va_list args)
+ void Tp::log(const char *fmt, ...)
+ {
+   verify(MTYPE_TP, this);
+-  log_catchup_missing_indent_levels();
+ 
+   auto    t = this;
+   va_list args;
+@@ -50,7 +49,6 @@ void Tp::dbg_(const char *fmt, ...)
+   IF_NODEBUG { return; }
+ 
+   verify(MTYPE_TP, this);
+-  log_catchup_missing_indent_levels();
+ 
+   auto    t = this;
+   va_list args;
+diff --git a/src/wid_choose_initial_level.cpp b/src/wid_choose_initial_level.cpp
+index bfbe5a21..937f0266 100644
+--- a/src/wid_choose_initial_level.cpp
++++ b/src/wid_choose_initial_level.cpp
+@@ -15,6 +15,10 @@
+ #include "my_wid_choose_level.hpp"
+ #include "my_wid_popup.hpp" // do not remove
+ 
++#include <thread>
++
++static std::vector< std::thread > threads;
++
+ static uint8_t wid_choose_initial_dungeons_enter(Widp w, int x, int y, uint32_t button);
+ static uint8_t wid_choose_initial_dungeons_shortcut_enter(Widp w, int x, int y, uint32_t button);
+ 
+@@ -64,8 +68,6 @@ public:
+   //
+   bool generating {};
+   bool generated {};
+-  int  generating_level {};
+-  int  max_generating_level {};
+ 
+   //
+   // Items in the level_grid
+@@ -199,7 +201,7 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
+   auto level_at = wid_choose_level_grid_to_level_coord(x, y);
+   auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
+ 
+-  if (l) {
++  if (l && node->generated) {
+     //
+     // Place crystals at level transitions
+     //
+@@ -411,6 +413,8 @@ static void wid_choose_initial_dungeons_create_level_at(wid_choose_initial_dunge
+   auto node     = ctx->nodes->getn(x, y);
+   auto level_at = wid_choose_level_grid_to_level_coord(x, y);
+ 
++  node->generating = true;
++
+   //
+   // Create a level of the given difficulty at a fixed location
+   //
+@@ -441,6 +445,9 @@ static void wid_choose_initial_dungeons_create_level_at(wid_choose_initial_dunge
+   if (node->is_descend_dungeon) {
+     l->is_final_level = true;
+   }
++
++  node->generated  = true;
++  node->generating = false;
+ }
+ 
+ //
+@@ -464,6 +471,10 @@ static void game_join_levels(wid_choose_initial_dungeons_ctx *ctx)
+         continue;
+       }
+ 
++      if (! node->generated) {
++        continue;
++      }
++
+       auto level_at = wid_choose_level_grid_to_level_coord(x, y);
+       auto l        = get(game->world.levels, level_at.x, level_at.y, level_at.z);
+       if (! l) {
+@@ -563,6 +574,10 @@ static void wid_choose_initial_dungeons_tick(Widp w)
+     delta = 2;
+   }
+ 
++  int node_count = 0;
++  int generated  = 0;
++  int generating = 0;
++
+   {
+     for (auto x = 0; x < DUNGEONS_GRID_CHUNK_WIDTH; x++) {
+       for (auto y = 0; y < DUNGEONS_GRID_CHUNK_HEIGHT; y++) {
+@@ -572,6 +587,16 @@ static void wid_choose_initial_dungeons_tick(Widp w)
+         }
+ 
+         auto node = ctx->nodes->getn(x, y);
++        node_count++;
++
++        if (node->generated) {
++          generated++;
++        }
++
++        if (node->generating) {
++          generating++;
++        }
++
+         if (node->is_ascend_dungeon) {
+           color c = UI_DUNGEONS_CURRENT_LEVEL_COLOR;
+           c.g     = val;
+@@ -582,6 +607,15 @@ static void wid_choose_initial_dungeons_tick(Widp w)
+     }
+   }
+ 
++  ctx->generated  = false;
++  ctx->generating = false;
++
++  if (node_count && (generated == node_count)) {
++    ctx->generated = true;
++  } else {
++    ctx->generating = true;
++  }
++
+   if (! ctx->generated) {
+     //
+     // For quick start we only create one level
+@@ -613,9 +647,6 @@ static void wid_choose_initial_dungeons_tick(Widp w)
+           }
+ 
+           wid_choose_initial_dungeons_create_level_at(ctx, x, y);
+-          ctx->generating       = true;
+-          ctx->generating_level = node->walk_order_level_no;
+-          ctx->generated        = true;
+           wid_choose_initial_dungeons_enter(w, 0, 0, 0);
+           return;
+         }
+@@ -652,16 +683,21 @@ static void wid_choose_initial_dungeons_tick(Widp w)
+           continue;
+         }
+ 
+-        if (node->walk_order_level_no == ctx->generating_level) {
+-          ctx->generating_level++;
+-          wid_choose_initial_dungeons_create_level_at(ctx, x, y);
+-          wid_choose_initial_dungeons_update_buttons(ctx->w);
++        if (node->generating) {
++          continue;
++        }
+ 
+-          ctx->generating = true;
+-          return;
++        if (generating < MAX_CONCURRENT_THREADS) {
++          CON("Start new level generation thread, currently %d running", generating);
++          generating++;
++          node->generating = true;
++          threads.push_back(std::thread(wid_choose_initial_dungeons_create_level_at, ctx, x, y));
+         }
+       }
+     }
++
++    wid_choose_initial_dungeons_update_buttons(ctx->w);
++    return;
+   }
+ 
+   {
+@@ -685,8 +721,6 @@ static void wid_choose_initial_dungeons_tick(Widp w)
+     wid_set_shape_square(b);
+     wid_update(b);
+   }
+-
+-  ctx->generated = true;
+ }
+ 
+ static void wid_choose_initial_dungeons_post_display_tick(Widp w)
+@@ -1032,8 +1066,6 @@ void game_grid_node_walk(wid_choose_initial_dungeons_ctx *ctx)
+     // If no next then this is the furthest last node
+     //
+     if (same_depth_nodes.empty() && next_depth_nodes.empty()) {
+-      ctx->generating_level         = 1;
+-      ctx->max_generating_level     = walk_order_level_no;
+       curr_node->is_descend_dungeon = true;
+       break;
+     }
+@@ -1044,6 +1076,8 @@ void Game::wid_choose_initial_dungeons(void)
+ {
+   TRACE_NO_INDENT();
+ 
++  threads.resize(0);
++
+   auto box_style           = g_opt_ascii ? UI_WID_STYLE_HORIZ_DARK : UI_WID_STYLE_NORMAL;
+   auto box_highlight_style = g_opt_ascii ? UI_WID_STYLE_HORIZ_LIGHT : UI_WID_STYLE_NORMAL;
+ 
+@@ -1071,11 +1105,10 @@ void Game::wid_choose_initial_dungeons(void)
+ 
+   ctx->nodes
+       = new Nodes(BIOME_DUNGEONS, DUNGEONS_GRID_CHUNK_WIDTH, DUNGEONS_GRID_CHUNK_WIDTH, false /* not a dungeon */);
+-  ctx->focusx           = -1;
+-  ctx->focusy           = -1;
+-  ctx->generated        = false;
+-  ctx->generating       = false;
+-  ctx->generating_level = 1;
++  ctx->focusx     = -1;
++  ctx->focusy     = -1;
++  ctx->generated  = false;
++  ctx->generating = false;
+ 
+   //
+   // Find the entry node

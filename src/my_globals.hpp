@@ -109,6 +109,11 @@ extern int TILES_VISIBLE_DOWN;
   if (DEBUG1)                                                                                                        \
   ai_log
 
+//
+// Used to fill in gaps in log depth
+//
+extern int g_last_logged_callframes_depth;
+
 #define MY_STDERR (g_log_stderr ? g_log_stderr : stderr)
 #define MY_STDOUT (g_log_stdout ? g_log_stdout : stdout)
 
