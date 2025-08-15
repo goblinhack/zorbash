@@ -73,8 +73,10 @@ extern int DUNGEON_GRID_CHUNK_WIDTH;
 //
 #define MAP_MINI_HEIGHT (MAP_HEIGHT * (MAP_WIDTH / MAP_HEIGHT))
 
-#define LIGHT_MAX_RAYS      180 // Max light rays cast
-#define LIGHT_FLICKER_SPEED 10  // Max light rays cast
+#define LIGHT_MAX_RAYS_MAX        180
+#define LIGHT_MAX_RAYS_PLAYER     180 // Max light rays cast for the player
+#define LIGHT_MAX_RAYS_NON_PLAYER 90  // Max light rays cast (e.g. lava)
+#define LIGHT_FLICKER_SPEED       10  // Light flicker rate; tied to frame rate
 //
 // Max things per map slot. This also includes carried items, as they really do
 // exist in the same place as the player; and might catch fire for example. Hence

@@ -29,8 +29,7 @@ public:
   Levelp level {};
   Thingp owner {}; // The owner, so we don't block our own light.
   color  col;
-  int    fbo;
-  bool   ray_cast_only {};
+  int    fbo {-1};
 
   point offset;
   point cached_light_pos;
@@ -44,14 +43,18 @@ public:
 
   float light_power {}; // Light_scale
   int   light_dist {};
+  int   light_dist_prev {};
+
+  uint32_t tick {}; // Last time the light was updated
 
   uint16_t max_light_rays {};
 
-  uint8_t is_being_destroyed : 1 {};
+  bool is_being_destroyed : 1 {};
+  bool ray_cast_only      : 1 {};
 
-  std::vector< Ray >                                    ray;
-  std::vector< float >                                  cached_gl_cmds;
-  std::array< std::vector< RayPoint >, LIGHT_MAX_RAYS > points;
+  std::vector< Ray >                                        ray;
+  std::vector< float >                                      cached_gl_cmds;
+  std::array< std::vector< RayPoint >, LIGHT_MAX_RAYS_MAX > points;
 
   bool calculate(void);
   void con(const char *fmt, ...) CHECK_FORMAT_STR(printf, 2, 3);

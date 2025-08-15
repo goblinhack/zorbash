@@ -146,8 +146,28 @@ void Light::update(void)
 {
   TRACE_NO_INDENT();
 
-  level          = owner->level;
-  max_light_rays = LIGHT_MAX_RAYS;
+  //
+  // No change in light strength?
+  //
+  if (light_dist == light_dist_prev) {
+    return;
+  }
+
+  level = owner->level;
+
+  //
+  // Ensure we only update lights once per tick
+  //
+  if (game->tick_current && (tick == game->tick_current)) {
+    return;
+  }
+  tick = game->tick_current;
+
+  if (owner->is_player()) {
+    max_light_rays = LIGHT_MAX_RAYS_PLAYER;
+  } else {
+    max_light_rays = LIGHT_MAX_RAYS_NON_PLAYER;
+  }
 
   ray.resize(max_light_rays);
   std::fill(ray.begin(), ray.end(), Ray {0});
@@ -161,6 +181,8 @@ void Light::update(void)
     sincosf(dr * i, &sinr, &cosr);
     draw_line(i, point(0, 0), point(light_dist * cosr, light_dist * sinr));
   }
+
+  light_dist_prev = light_dist;
 }
 
 void Light::destroy(void) { TRACE_NO_INDENT(); }
@@ -866,10 +888,10 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
           // Fade the lights according to how recently seen.
           //
           auto scale = (((float) t->level->is_currently_pixelart_raycast_lit_no_check(x, y))) / 255.0;
-          c.r        = (((float) c.r)) * scale;
-          c.g        = (((float) c.g)) * scale;
-          c.b        = (((float) c.b)) * scale;
-          c.a        = (((float) c.a)) * scale;
+          c.r        = (((float) c.r)) *scale;
+          c.g        = (((float) c.g)) *scale;
+          c.b        = (((float) c.b)) *scale;
+          c.a        = (((float) c.a)) *scale;
 
           glcolor(c);
           blit(g_light_overlay_texid, 0, 0, 1, 1, tlx, tly, brx, bry);
@@ -954,10 +976,10 @@ void Level::lights_render_small_lights(int minx, int miny, int maxx, int maxy, i
           // Fade the lights according to how recently seen.
           //
           auto scale = (((float) t->level->is_currently_pixelart_raycast_lit_no_check(x, y))) / 255.0;
-          c.r        = (((float) c.r)) * scale;
-          c.g        = (((float) c.g)) * scale;
-          c.b        = (((float) c.b)) * scale;
-          c.a        = (((float) c.a)) * scale;
+          c.r        = (((float) c.r)) *scale;
+          c.g        = (((float) c.g)) *scale;
+          c.b        = (((float) c.b)) *scale;
+          c.a        = (((float) c.a)) *scale;
 
           glcolor(c);
           blit(g_glow_overlay_texid, 0, 0, 1, 1, tlx, tly, brx, bry);
