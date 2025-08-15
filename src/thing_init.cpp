@@ -279,26 +279,6 @@ void Thing::init(Levelp level, const std::string &name_in, const point born, Thi
   }
 
   //
-  // Create the large player dmap
-  //
-  if (is_player()) {
-    level->player = this;
-    level->dmap_to_player_update();
-  }
-
-  //
-  // Add AI ability
-  //
-  if (is_monst() || is_player()) {
-    clear_age_map();
-    clear_dmap_can_see_old();
-    clear_interrupt_map();
-    clear_dmap_can_see();
-    clear_can_see_currently();
-    clear_can_see_ever();
-  }
-
-  //
   // Start off up to data with the player
   //
   if (is_tickable()) {
@@ -324,32 +304,10 @@ void Thing::init(Levelp level, const std::string &name_in, const point born, Thi
   }
 
   //
-  // Init light sources like torches
-  //
-  init_lights();
-
-  //
-  // Initialize random color spread.
-  //
-  init_hue();
-
-  //
   // e.g. staff charges
   //
   if (unlikely(tpp->charge_count())) {
     charge_count_set(tpp->charge_count());
-  }
-
-  //
-  // Do on born actions.
-  //
-  on_born();
-
-  //
-  // In case we carry something here, check for equipping
-  //
-  if (is_player() || is_monst()) {
-    update();
   }
 
   //
@@ -400,6 +358,47 @@ void Thing::init(Levelp level, const std::string &name_in, const point born, Thi
   if (g_loading) {
     err("Trying to create a thing during loading.");
   }
+}
+
+void Thing::init_slower_stuff(void)
+{
+  TRACE_NO_INDENT();
+
+  verify(MTYPE_THING, this);
+
+  //
+  // Add AI ability
+  //
+  if (is_monst() || is_player()) {
+    clear_age_map();
+    clear_dmap_can_see_old();
+    clear_interrupt_map();
+    clear_dmap_can_see();
+    clear_can_see_currently();
+    clear_can_see_ever();
+  }
+
+  //
+  // Init light sources like torches
+  //
+  init_lights();
+
+  //
+  // Initialize random color spread.
+  //
+  init_hue();
+
+  //
+  // In case we carry something here, check for equipping
+  //
+  if (is_player() || is_monst()) {
+    update();
+  }
+
+  //
+  // Call python if needed
+  //
+  on_born();
 }
 
 void Thing::reinit(void)

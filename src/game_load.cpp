@@ -443,6 +443,7 @@ std::istream &operator>>(std::istream &in, Bits< Thingp & > my)
   shift = 0;
   // clang-format off
   // begin sort marker2 {
+             my.t->is_newborn                                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_activated                                 = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_attached                                  = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;
              my.t->is_auto_equip_done                           = ((bits64 >> shift) & 1LLU) ? 1LLU : 0LLU; shift++;

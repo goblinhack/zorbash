@@ -192,91 +192,92 @@ public:
   // v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v
   /////////////////////////////////////////////////////////////////////////
   // begin sort marker1 {
-  uint64_t corpse_cleanup                               : 1 {}; // Used to remove corpses when eaten or burnt
-  uint64_t gfx_ascii_animated                           : 1 {}; // Animated in ascii mode?
-  uint64_t gfx_pixelart_animated                        : 1 {}; // Animated in pixelart mode?
-  uint64_t has_attacked_player                          : 1 {}; // Has it attacked the precious?
-  uint64_t has_ever_moved                               : 1 {}; // Has it ever moved? e.g. a gargoyle
-  uint64_t has_light                                    : 1 {}; // Has it a light source?
-  uint64_t has_projectile                               : 1 {}; // Current projectile being fired
-  uint64_t has_seen_player_msg_shown                    : 1 {}; // Seen by player has been shown
-  uint64_t _is_able_to_be_resurrected                   : 1 {}; // Can be removed by negation
-  uint64_t _is_able_to_regenerate                       : 1 {}; // Can be removed by negation
-  uint64_t is_activated                                 : 1 {}; // This skill is activated
-  uint64_t is_attached                                  : 1 {}; // Is attached to the level
-  uint64_t is_auto_equip_done                           : 1 {}; // Has initially auto equipped itself
-  uint64_t is_being_destroyed                           : 1 {}; // In the process of deleting the thing
-  uint64_t is_bouncing                                  : 1 {}; // Is graphically bouncing
-  uint64_t is_burnt                                     : 1 {}; // Burnt by ice and cannot move
-  uint64_t is_changing_level                            : 1 {}; // Is in the process of changing level
-  uint64_t is_dead                                      : 1 {}; // It's dead Jim
-  uint64_t is_discorded                                 : 1 {}; // Will attack what normally it would not
-  uint64_t is_discovered                                : 1 {}; // Can you see that secret door?
-  uint64_t is_drained                                   : 1 {}; // E.g. enchant or skillstone used up
-  uint64_t is_dying                                     : 1 {}; // Is currently in the throes of death
-  uint64_t is_facing_left                               : 1 {}; // It's in the process of dying
-  uint64_t is_fadeup                                    : 1 {}; // For text that fades upwards
-  uint64_t is_falling                                   : 1 {}; // Falling to a new level
-  uint64_t is_floating_                                 : 1 {}; // Updated per tick
-  uint64_t is_frozen                                    : 1 {}; // Frozen by ice and cannot move
-  uint64_t is_hidden                                    : 1 {}; // Carried perhaps and hence not visible
-  uint64_t is_hunger_level_gorged                       : 1 {}; // Hunger levels
-  uint64_t is_hunger_level_hungry                       : 1 {}; // Hunger levels
-  uint64_t is_hunger_level_satiated                     : 1 {}; // Hunger levels
-  uint64_t is_hunger_level_starving                     : 1 {}; // Hunger levels
-  uint64_t _is_immune_to_acid                           : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_blinding                       : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_cold                           : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_confusion                      : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_electricity                    : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_entrancement                   : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_fire                           : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_holy_damage                    : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_lightning                      : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_magic_drain                    : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_necrosis                       : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_negation                       : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_non_magical_weapons            : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_paralysis                      : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_poison                         : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_spell_of_beckoning             : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_spell_of_holding               : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_spell_of_repulsion             : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_spell_of_sanctuary             : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_spell_of_slowness              : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_spiderwebs                     : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_stamina_drain                  : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_teleport_attack                : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_vorpal_weapons                 : 1 {}; // Can be removed by negation
-  uint64_t _is_immune_to_water                          : 1 {}; // Can be removed by negation
-  uint64_t is_invisible_                                : 1 {}; // Updated per tick
-  uint64_t is_jumping                                   : 1 {}; // Is mid jump
-  uint64_t is_key_in_lock                               : 1 {}; // Key stuck in rusty lock?
-  uint64_t is_minion_set                                : 1 {}; // Overrides is_minion in template
-  uint64_t is_moving                                    : 1 {}; // Is currently moving tiles
-  uint64_t is_open                                      : 1 {}; // Door or chest is open
-  uint64_t is_raging_currently                          : 1 {}; // Is raging currently?
-  uint64_t is_resurrected                               : 1 {}; // Has finished resurrecting
-  uint64_t is_resurrecting                              : 1 {}; // Is currently resurrecing
-  uint64_t is_resurrection_blocked                      : 1 {}; // Blocked from resurrection
-  uint64_t is_ring2                                     : 1 {}; // For 2nd rings
-  uint64_t is_scheduled_for_death                       : 1 {}; // Will die in next game loop
-  uint64_t is_scheduled_for_gc                          : 1 {}; // Scheduled for garbage cleanup
-  uint64_t is_scheduled_for_jump_end                    : 1 {}; // Particle for jumping is present
-  uint64_t is_seen_by_player_msg_shown                  : 1 {}; // Seen by player message
-  uint64_t is_sleeping                                  : 1 {}; // Zzz
-  uint64_t is_teleporting                               : 1 {}; // Mid teleport
-  uint64_t is_the_grid_                                 : 1 {}; // The backbone of the game. cached for speed
-  uint64_t is_the_player                                : 1 {}; // Brave player
-  uint64_t is_visible_to_player                         : 1 {}; // Can be seen by the player
-  uint64_t is_waiting                                   : 1 {}; // Is waiting on this tick
-  uint64_t is_waiting_to_ascend_dungeon                 : 1 {}; // Temporary state while changing levels
-  uint64_t is_waiting_to_ascend_sewer                   : 1 {}; // Temporary state while changing levels
-  uint64_t is_waiting_to_descend_dungeon                : 1 {}; // Temporary state while changing levels
-  uint64_t is_waiting_to_descend_sewer                  : 1 {}; // Temporary state while changing levels
-  uint64_t is_waiting_to_leave_level_has_completed_fall : 1 {}; // Has fallen to the next level
-  uint64_t is_wounded_msg                               : 1 {}; // Avoid duplicate messages
-  uint64_t was_frozen                                   : 1 {}; // Was frozen at the start of the tick
+  uint64_t corpse_cleanup                               : 1 {};  // Used to remove corpses when eaten or burnt
+  uint64_t gfx_ascii_animated                           : 1 {};  // Animated in ascii mode?
+  uint64_t gfx_pixelart_animated                        : 1 {};  // Animated in pixelart mode?
+  uint64_t has_attacked_player                          : 1 {};  // Has it attacked the precious?
+  uint64_t has_ever_moved                               : 1 {};  // Has it ever moved? e.g. a gargoyle
+  uint64_t has_light                                    : 1 {};  // Has it a light source?
+  uint64_t has_projectile                               : 1 {};  // Current projectile being fired
+  uint64_t has_seen_player_msg_shown                    : 1 {};  // Seen by player has been shown
+  uint64_t _is_able_to_be_resurrected                   : 1 {};  // Can be removed by negation
+  uint64_t _is_able_to_regenerate                       : 1 {};  // Can be removed by negation
+  uint64_t is_newborn                                   : 1 {1}; // Used to call on_born on level enter
+  uint64_t is_activated                                 : 1 {};  // This skill is activated
+  uint64_t is_attached                                  : 1 {};  // Is attached to the level
+  uint64_t is_auto_equip_done                           : 1 {};  // Has initially auto equipped itself
+  uint64_t is_being_destroyed                           : 1 {};  // In the process of deleting the thing
+  uint64_t is_bouncing                                  : 1 {};  // Is graphically bouncing
+  uint64_t is_burnt                                     : 1 {};  // Burnt by ice and cannot move
+  uint64_t is_changing_level                            : 1 {};  // Is in the process of changing level
+  uint64_t is_dead                                      : 1 {};  // It's dead Jim
+  uint64_t is_discorded                                 : 1 {};  // Will attack what normally it would not
+  uint64_t is_discovered                                : 1 {};  // Can you see that secret door?
+  uint64_t is_drained                                   : 1 {};  // E.g. enchant or skillstone used up
+  uint64_t is_dying                                     : 1 {};  // Is currently in the throes of death
+  uint64_t is_facing_left                               : 1 {};  // It's in the process of dying
+  uint64_t is_fadeup                                    : 1 {};  // For text that fades upwards
+  uint64_t is_falling                                   : 1 {};  // Falling to a new level
+  uint64_t is_floating_                                 : 1 {};  // Updated per tick
+  uint64_t is_frozen                                    : 1 {};  // Frozen by ice and cannot move
+  uint64_t is_hidden                                    : 1 {};  // Carried perhaps and hence not visible
+  uint64_t is_hunger_level_gorged                       : 1 {};  // Hunger levels
+  uint64_t is_hunger_level_hungry                       : 1 {};  // Hunger levels
+  uint64_t is_hunger_level_satiated                     : 1 {};  // Hunger levels
+  uint64_t is_hunger_level_starving                     : 1 {};  // Hunger levels
+  uint64_t _is_immune_to_acid                           : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_blinding                       : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_cold                           : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_confusion                      : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_electricity                    : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_entrancement                   : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_fire                           : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_holy_damage                    : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_lightning                      : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_magic_drain                    : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_necrosis                       : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_negation                       : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_non_magical_weapons            : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_paralysis                      : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_poison                         : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_spell_of_beckoning             : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_spell_of_holding               : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_spell_of_repulsion             : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_spell_of_sanctuary             : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_spell_of_slowness              : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_spiderwebs                     : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_stamina_drain                  : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_teleport_attack                : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_vorpal_weapons                 : 1 {};  // Can be removed by negation
+  uint64_t _is_immune_to_water                          : 1 {};  // Can be removed by negation
+  uint64_t is_invisible_                                : 1 {};  // Updated per tick
+  uint64_t is_jumping                                   : 1 {};  // Is mid jump
+  uint64_t is_key_in_lock                               : 1 {};  // Key stuck in rusty lock?
+  uint64_t is_minion_set                                : 1 {};  // Overrides is_minion in template
+  uint64_t is_moving                                    : 1 {};  // Is currently moving tiles
+  uint64_t is_open                                      : 1 {};  // Door or chest is open
+  uint64_t is_raging_currently                          : 1 {};  // Is raging currently?
+  uint64_t is_resurrected                               : 1 {};  // Has finished resurrecting
+  uint64_t is_resurrecting                              : 1 {};  // Is currently resurrecing
+  uint64_t is_resurrection_blocked                      : 1 {};  // Blocked from resurrection
+  uint64_t is_ring2                                     : 1 {};  // For 2nd rings
+  uint64_t is_scheduled_for_death                       : 1 {};  // Will die in next game loop
+  uint64_t is_scheduled_for_gc                          : 1 {};  // Scheduled for garbage cleanup
+  uint64_t is_scheduled_for_jump_end                    : 1 {};  // Particle for jumping is present
+  uint64_t is_seen_by_player_msg_shown                  : 1 {};  // Seen by player message
+  uint64_t is_sleeping                                  : 1 {};  // Zzz
+  uint64_t is_teleporting                               : 1 {};  // Mid teleport
+  uint64_t is_the_grid_                                 : 1 {};  // The backbone of the game. cached for speed
+  uint64_t is_the_player                                : 1 {};  // Brave player
+  uint64_t is_visible_to_player                         : 1 {};  // Can be seen by the player
+  uint64_t is_waiting                                   : 1 {};  // Is waiting on this tick
+  uint64_t is_waiting_to_ascend_dungeon                 : 1 {};  // Temporary state while changing levels
+  uint64_t is_waiting_to_ascend_sewer                   : 1 {};  // Temporary state while changing levels
+  uint64_t is_waiting_to_descend_dungeon                : 1 {};  // Temporary state while changing levels
+  uint64_t is_waiting_to_descend_sewer                  : 1 {};  // Temporary state while changing levels
+  uint64_t is_waiting_to_leave_level_has_completed_fall : 1 {};  // Has fallen to the next level
+  uint64_t is_wounded_msg                               : 1 {};  // Avoid duplicate messages
+  uint64_t was_frozen                                   : 1 {};  // Was frozen at the start of the tick
   // end sort marker1 }
 
   //
@@ -3004,6 +3005,7 @@ public:
   void inherit_from(Thingp it);
   void init_hue(void);
   void init(Levelp, const std::string &name, point at, Thingp owner = nullptr);
+  void init_slower_stuff(void);
   void init_lights(void);
   void interpolated_at_set(fpoint v);
   void inventory_particle(Thingp what, int slot);

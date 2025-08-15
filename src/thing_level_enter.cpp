@@ -154,6 +154,20 @@ void Thing::level_enter(bool rejoin)
     //
     if (! level->is_entered) {
       level->is_entered = true;
+
+      //
+      // Do one time init stuff for all things
+      //
+      FOR_ALL_TICKABLE_THINGS_ON_LEVEL(level, t)
+      {
+        if (t->is_newborn) {
+          t->is_newborn = false;
+
+          t->init_slower_stuff();
+        }
+      }
+      FOR_ALL_TICKABLE_THINGS_ON_LEVEL_END(level)
+
       magic_set(magic_max());
     }
 
