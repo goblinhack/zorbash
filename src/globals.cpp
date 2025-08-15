@@ -75,8 +75,6 @@ int MAP_WIDTH;
 int DUNGEON_GRID_CHUNK_HEIGHT;
 int DUNGEON_GRID_CHUNK_WIDTH;
 
-int g_last_logged_callframes_depth;
-
 void reset_globals(void)
 {
   g_opt_ascii                = false;

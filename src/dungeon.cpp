@@ -440,6 +440,7 @@ Dungeon::Dungeon(biome_t biome, int map_width, int map_height, int grid_width, i
 {
   TRACE_NO_INDENT();
   this->biome = biome;
+  this->all_rooms = Room::all_rooms;
   make_dungeon();
 }
 
@@ -1806,39 +1807,42 @@ void Dungeon::dump(void)
     }
   }
 
-  //
-  // Pass 2 without room depths
-  //
-  LOG("INF: Seed %u", seed);
-  // printf("INF: Seed %u\n", seed);
-  for (auto y = 0; y < map_height; y++) {
-    std::string s;
-    for (auto x = 0; x < map_width; x++) {
-      bool got_one = false;
-      for (auto d = map_depth - 1; d >= 0; d--) {
-        if (! is_anything_at(x, y, d)) {
-          continue;
+  IF_DEBUG
+  {
+    //
+    // Pass 2 without room depths
+    //
+    LOG("INF: Seed %u", seed);
+    // printf("INF: Seed %u\n", seed);
+    for (auto y = 0; y < map_height; y++) {
+      std::string s;
+      for (auto x = 0; x < map_width; x++) {
+        bool got_one = false;
+        for (auto d = map_depth - 1; d >= 0; d--) {
+          if (! is_anything_at(x, y, d)) {
+            continue;
+          }
+
+          auto m  = getc(x, y, d);
+          auto cr = get(Charmap::all_charmaps, m);
+          auto c  = cr.c;
+
+          if (! c) {
+            DIE("Unknown map char %c at x %d, y %d, depth %d", m, x, y, d);
+          }
+
+          s += c;
+          got_one = true;
+          break;
         }
-
-        auto m  = getc(x, y, d);
-        auto cr = get(Charmap::all_charmaps, m);
-        auto c  = cr.c;
-
-        if (! c) {
-          DIE("Unknown map char %c at x %d, y %d, depth %d", m, x, y, d);
+        if (! got_one) {
+          s += " ";
         }
-
-        s += c;
-        got_one = true;
-        break;
       }
-      if (! got_one) {
-        s += " ";
+      if (s != "") {
+        LOG("[%s]", s.c_str());
+        // printf("[%s]\n", s.c_str());
       }
-    }
-    if (s != "") {
-      LOG("[%s]", s.c_str());
-      // printf("[%s]\n", s.c_str());
     }
   }
 }
@@ -1851,7 +1855,7 @@ void Dungeon::reset_possible_rooms(void)
   std::fill(cells.begin(), cells.end(), Charmap::CHAR_SPACE);
   std::fill(cells_room.begin(), cells_room.end(), nullptr);
 
-  for (auto &r : Room::all_rooms) {
+  for (auto &r : all_rooms) {
     r->placed = false;
     r->skip   = false;
 
@@ -2248,11 +2252,11 @@ bool Dungeon::solve(int x, int y, Grid *g)
 
   std::vector< Roomp > candidates;
 
-  if (! Room::all_rooms.size()) {
+  if (! all_rooms.size()) {
     DIE("Failed to load any rooms. Initialization error?");
   }
 
-  for (auto r : Room::all_rooms) {
+  for (auto r : all_rooms) {
     if (! room_is_a_candidate(n, r)) {
       continue;
     }
@@ -2262,7 +2266,7 @@ bool Dungeon::solve(int x, int y, Grid *g)
 
   auto ncandidates = candidates.size();
   if (! ncandidates) {
-    for (auto r : Room::all_rooms) {
+    for (auto r : all_rooms) {
       if (! room_is_a_candidate_less_restrictive(n, r)) {
         continue;
       }
@@ -2272,7 +2276,7 @@ bool Dungeon::solve(int x, int y, Grid *g)
 
     ncandidates = candidates.size();
     if (! ncandidates) {
-      for (auto r : Room::all_rooms) {
+      for (auto r : all_rooms) {
         if (! room_is_a_candidate_any_depth(n, r)) {
           continue;
         }
@@ -3307,7 +3311,7 @@ bool Dungeon::rooms_move_closer_together(void)
 
   all_placed_rooms.resize(0);
 
-  for (auto r : Room::all_rooms) {
+  for (auto r : all_rooms) {
     r->placed = false;
   }
 

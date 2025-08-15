@@ -26,4 +26,8 @@ void topcon_(const wchar_t *fmt, va_list args);
 #define FLUSH_THE_CONSOLE() // sensible OS
 #endif
 
+#include <mutex>
+
+extern std::recursive_mutex big_lock;
+
 #endif

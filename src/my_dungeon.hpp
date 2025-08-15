@@ -40,7 +40,11 @@ public:
   //
   // Pointers from map position to room
   //
-  std::vector< Roomp >                                           cells_room;
+  std::vector< Roomp > cells_room;
+  //
+  // Copy of the global
+  //
+  std::vector< Roomp >                                           all_rooms;
   int                                                            map_width {MAP_WIDTH};
   int                                                            map_height {MAP_HEIGHT};
   int                                                            map_depth {MAP_DEPTH};

@@ -11,6 +11,7 @@
 #include <cstdint>
 #include <list>
 #include <map>
+#include <mutex>
 #include <string>
 #include <unordered_map>
 #include <vector>

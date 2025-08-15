@@ -13,8 +13,6 @@
 #include "my_sprintf.hpp"
 #include "my_time.hpp"
 
-#include <mutex>
-
 static std::mutex ptrcheck_mutex;
 
 //

@@ -13,39 +13,7 @@
 #include "my_wid_console.hpp"
 #include "my_wid_topcon.hpp"
 
-//
-// Whan a log appears, if some indent levels are missing, then pull them
-// out of the callstack - it's like a mini backtrace
-//
-void log_catchup_missing_indent_levels(void)
-{
-  //
-  // Seems to need more work - not reliable
-  //
-#if 0
-  IF_NODEBUG2 {
-    return;
-  }
-
-  if (!g_log_stdout) {
-    g_last_logged_callframes_depth = 0;
-  }
-
-  if (g_callframes_depth > 0) {
-    if (g_last_logged_callframes_depth > g_callframes_depth) {
-      g_last_logged_callframes_depth = g_callframes_depth - 1;
-      return;
-    }
-  }
-
-  while (g_last_logged_callframes_depth < g_callframes_depth - 1) {
-    auto func = callframes[g_last_logged_callframes_depth].func;
-    g_last_logged_callframes_depth++;
-    LOG_MISSING("%s", func);
-  }
-  g_last_logged_callframes_depth = g_callframes_depth;
-#endif
-}
+std::recursive_mutex big_lock;
 
 static void log_(const char *fmt, va_list args)
 {
@@ -72,50 +40,16 @@ static void log_(const char *fmt, va_list args)
   putf(MY_STDOUT, buf);
 }
 
-static void log_missing_(const char *fmt, va_list args)
-{
-  TRACE_NO_INDENT();
-
-  char buf[ MAXLONGSTR ];
-  int  len = 0;
-
-  buf[ 0 ] = '\0';
-  if (! g_opt_test_dungeon) {
-    get_timestamp(buf, MAXLONGSTR);
-    len = (int) strlen(buf);
-  }
-
-  if (! g_log_stdout) {
-    // No indent
-  } else {
-    snprintf(buf + len, MAXLONGSTR - len, "%100s: %*s", "", g_last_logged_callframes_depth, "");
-  }
-
-  len = (int) strlen(buf);
-  vsnprintf(buf + len, MAXLONGSTR - len, fmt, args);
-
-  putf(MY_STDOUT, buf);
-}
-
 void LOG(const char *fmt, ...)
 {
   TRACE_NO_INDENT();
 
-  log_catchup_missing_indent_levels();
+  big_lock.lock();
   va_list args;
   va_start(args, fmt);
   log_(fmt, args);
   va_end(args);
-}
-
-void LOG_MISSING(const char *fmt, ...)
-{
-  TRACE_NO_INDENT();
-
-  va_list args;
-  va_start(args, fmt);
-  log_missing_(fmt, args);
-  va_end(args);
+  big_lock.unlock();
 }
 
 static void warn_(const char *fmt, va_list args)
@@ -142,11 +76,13 @@ void WARN(const char *fmt, ...)
 {
   TRACE_NO_INDENT();
 
+  big_lock.lock();
   va_list args;
 
   va_start(args, fmt);
   warn_(fmt, args);
   va_end(args);
+  big_lock.unlock();
 }
 
 static void con_(const char *fmt, va_list args)
@@ -319,44 +255,51 @@ void CON(const char *fmt, ...)
 {
   TRACE_NO_INDENT();
 
-  log_catchup_missing_indent_levels();
+  big_lock.lock();
   va_list args;
   va_start(args, fmt);
   con_(fmt, args);
   va_end(args);
+  big_lock.unlock();
 }
 
 void CON(const wchar_t *fmt, ...)
 {
   TRACE_NO_INDENT();
 
+  big_lock.lock();
   va_list args;
 
   va_start(args, fmt);
   con_(fmt, args);
   va_end(args);
+  big_lock.unlock();
 }
 
 void TOPCON(const char *fmt, ...)
 {
   TRACE_NO_INDENT();
 
+  big_lock.lock();
   va_list args;
 
   va_start(args, fmt);
   topcon_(fmt, args);
   va_end(args);
+  big_lock.unlock();
 }
 
 void TOPCON(const wchar_t *fmt, ...)
 {
   TRACE_NO_INDENT();
 
+  big_lock.lock();
   va_list args;
 
   va_start(args, fmt);
   topcon_(fmt, args);
   va_end(args);
+  big_lock.unlock();
 }
 
 static void dying_(const char *fmt, va_list args)
@@ -524,11 +467,13 @@ void CROAK(const char *fmt, ...)
 {
   TRACE_NO_INDENT();
 
+  big_lock.lock();
   va_list args;
 
   va_start(args, fmt);
   croak_(fmt, args);
   va_end(args);
+  big_lock.unlock();
 }
 
 static void croak_clean_(const char *fmt, va_list args)
@@ -550,22 +495,26 @@ void CROAK_CLEAN(const char *fmt, ...)
 {
   TRACE_NO_INDENT();
 
+  big_lock.lock();
   va_list args;
 
   va_start(args, fmt);
   croak_clean_(fmt, args);
   va_end(args);
+  big_lock.unlock();
 }
 
 void DYING(const char *fmt, ...)
 {
   TRACE_NO_INDENT();
 
+  big_lock.lock();
   va_list args;
 
   va_start(args, fmt);
   dying_(fmt, args);
   va_end(args);
+  big_lock.unlock();
 }
 
 void myerr(const char *fmt, ...)
@@ -576,6 +525,7 @@ void myerr(const char *fmt, ...)
   if (nested_error) {
     return;
   }
+  big_lock.lock();
   bool old_nested_error = nested_error;
   nested_error          = true;
 
@@ -604,6 +554,7 @@ void myerr(const char *fmt, ...)
   if (g_quitting) {
     DIE("Error while quitting");
   }
+  big_lock.unlock();
 }
 
 void py_myerr(const char *fmt, ...)
@@ -614,6 +565,7 @@ void py_myerr(const char *fmt, ...)
   if (nested_error) {
     return;
   }
+  big_lock.lock();
   bool old_nested_error = nested_error;
   nested_error          = true;
 
@@ -642,6 +594,7 @@ void py_myerr(const char *fmt, ...)
   if (g_quitting) {
     DIE("Error while quitting");
   }
+  big_lock.unlock();
 }
 
 static void msgerr_(const char *fmt, va_list args)
@@ -686,9 +639,11 @@ void GAME_UI_MSG_BOX(const char *fmt, ...)
 
   va_list args;
 
+  big_lock.lock();
   va_start(args, fmt);
   msgerr_(fmt, args);
   va_end(args);
+  big_lock.unlock();
 }
 
 static void sdl_msgerr_(const char *fmt, va_list args)
@@ -710,11 +665,13 @@ void SDL_MSG_BOX(const char *fmt, ...)
 {
   TRACE_NO_INDENT();
 
+  big_lock.lock();
   va_list args;
 
   va_start(args, fmt);
   sdl_msgerr_(fmt, args);
   va_end(args);
+  big_lock.unlock();
 }
 
 static void botcon_(const char *fmt, va_list args)
@@ -797,20 +754,24 @@ void BOTCON(const char *fmt, ...)
 {
   TRACE_NO_INDENT();
 
+  big_lock.lock();
   va_list args;
 
   va_start(args, fmt);
   botcon_(fmt, args);
   va_end(args);
+  big_lock.unlock();
 }
 
 void BOTCON(const wchar_t *fmt, ...)
 {
   TRACE_NO_INDENT();
 
+  big_lock.lock();
   va_list args;
 
   va_start(args, fmt);
   botcon_(fmt, args);
   va_end(args);
+  big_lock.unlock();
 }

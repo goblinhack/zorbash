@@ -36,15 +36,16 @@ void Thing::log_(const char *fmt, va_list args)
 
 void Thing::log(const char *fmt, ...)
 {
+  big_lock.lock();
   TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
-  log_catchup_missing_indent_levels();
 
   auto    t = this;
   va_list args;
   va_start(args, fmt);
   t->log_(fmt, args);
   va_end(args);
+  big_lock.unlock();
 }
 
 void Thing::dbg_(const char *fmt, ...)
@@ -53,7 +54,6 @@ void Thing::dbg_(const char *fmt, ...)
   IF_NODEBUG { return; }
 
   verify(MTYPE_THING, this);
-  log_catchup_missing_indent_levels();
 
   auto    t = this;
   va_list args;
@@ -85,6 +85,7 @@ void Thing::die_(const char *fmt, va_list args)
 
 void Thing::die(const char *fmt, ...)
 {
+  big_lock.lock();
   TRACE_NO_INDENT();
   g_errored = true;
 
@@ -95,6 +96,7 @@ void Thing::die(const char *fmt, ...)
   va_start(args, fmt);
   t->die_(fmt, args);
   va_end(args);
+  big_lock.unlock();
 }
 
 void Thing::con_(const char *fmt, va_list args)
@@ -152,6 +154,7 @@ void Thing::topcon_(const char *fmt, va_list args)
 
 void Thing::con(const char *fmt, ...)
 {
+  big_lock.lock();
   TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
   auto    t = this;
@@ -160,10 +163,12 @@ void Thing::con(const char *fmt, ...)
   va_start(args, fmt);
   t->con_(fmt, args);
   va_end(args);
+  big_lock.unlock();
 }
 
 void Thing::topcon(const char *fmt, ...)
 {
+  big_lock.lock();
   TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
   auto    t = this;
@@ -172,6 +177,7 @@ void Thing::topcon(const char *fmt, ...)
   va_start(args, fmt);
   t->topcon_(fmt, args);
   va_end(args);
+  big_lock.unlock();
 }
 
 void Thing::err_(const char *fmt, va_list args)
@@ -230,6 +236,7 @@ void Thing::err(const char *fmt, ...)
   if (nested_error) {
     return;
   }
+  big_lock.lock();
   bool old_nested_error = nested_error;
   nested_error          = true;
 
@@ -250,6 +257,7 @@ void Thing::err(const char *fmt, ...)
   }
 
   nested_error = false;
+  big_lock.unlock();
 }
 
 void Thing::botcon_(const char *fmt, va_list args)
@@ -281,6 +289,7 @@ void Thing::botcon_(const char *fmt, va_list args)
 
 void Thing::botcon(const char *fmt, ...)
 {
+  big_lock.lock();
   TRACE_NO_INDENT();
   verify(MTYPE_THING, this);
   auto    t = this;
@@ -289,4 +298,5 @@ void Thing::botcon(const char *fmt, ...)
   va_start(args, fmt);
   t->botcon_(fmt, args);
   va_end(args);
+  big_lock.unlock();
 }

@@ -13,7 +13,7 @@ void Game::display(void)
     return;
   }
 
-  if (level) {
+  if (level && level->is_created) {
     level->display_pixelart_map();
   }
 }
