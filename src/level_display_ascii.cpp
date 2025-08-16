@@ -117,7 +117,7 @@ void Level::display_ascii_treasure_map(point tl, point br)
         for (auto x = minx; x < maxx; x++) {
           point p(x, y);
 
-          FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
+          FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z)
           {
             if (t->is_key() || t->is_food() || t->is_treasure_type() || t->is_skillstone() || t->is_spellbook()
                 || t->is_enchantstone()) {
@@ -163,7 +163,7 @@ void Level::display_ascii_beast_map(point tl, point br)
         for (auto x = minx; x < maxx; x++) {
           point p(x, y);
 
-          FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
+          FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z)
           {
             if (t->is_monst() || t->is_spiderweb() || t->is_mob()) {
               if (t->gfx_ascii_animated) {
@@ -191,7 +191,7 @@ void Level::display_ascii_beast_map(point tl, point br)
             continue;
           }
 
-          FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
+          FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z)
           {
             if (t->is_monst() || t->is_spiderweb() || t->is_mob()) {
               if (t->gfx_ascii_animated) {
@@ -238,7 +238,7 @@ void Level::display_ascii_map(point tl, point br)
       for (auto x = minx; x < maxx; x++) {
         point p(x, y);
 
-        FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
+        FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z)
         {
           if (t->gfx_ascii_animated) {
             t->animate();

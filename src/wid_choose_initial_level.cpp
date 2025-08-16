@@ -17,6 +17,9 @@
 
 static uint8_t wid_choose_initial_dungeons_enter(Widp w, int x, int y, uint32_t button);
 static uint8_t wid_choose_initial_dungeons_shortcut_enter(Widp w, int x, int y, uint32_t button);
+static uint8_t wid_choose_initial_dungeons_wid_choose_seed(Widp w, int x, int y, uint32_t button);
+static uint8_t wid_choose_initial_dungeons_random(Widp w, int x, int y, uint32_t button);
+static uint8_t wid_choose_initial_dungeons_go_back(Widp w, int x, int y, uint32_t button);
 
 #include <thread>
 
@@ -46,6 +49,9 @@ public:
   // Enyer button
   //
   Widp wid_enter {};
+  Widp wid_choose_seed {};
+  Widp wid_back {};
+  Widp wid_random {};
 
   //
   // Current button
@@ -186,7 +192,7 @@ static void wid_choose_initial_dungeons_update_button(wid_choose_initial_dungeon
 
   TRACE_NO_INDENT();
   if (g_opt_ascii) {
-    wid_set_style(b, UI_WID_STYLE_SOLID_DEFAULT);
+    wid_set_style(b, UI_WID_STYLE_DARK);
   } else {
     wid_set_color(b, WID_COLOR_BG, WHITE);
     wid_set_style(b, UI_WID_STYLE_SPARSE_NONE);
@@ -678,12 +684,20 @@ static void wid_choose_initial_dungeons_tick(Widp w)
 
         if (node->walk_order_level_no == ctx->generating_level) {
           if (generating < MAX_CONCURRENT_THREADS) {
-            CON("Start new level generation thread, currently %d running", generating);
+            CON("Start new level generation thread for seed %s, currently %d running", game->seed_name.c_str(),
+                generating);
             generating++;
             node->generating = true;
             ctx->generating_level++;
             ctx->generating = true;
-            threads.push_back(std::thread(wid_choose_initial_dungeons_create_level_at, ctx, x, y));
+            //
+            // Until threads work...
+            //
+            if (ENABLE_THREADS) {
+              threads.push_back(std::thread(wid_choose_initial_dungeons_create_level_at, ctx, x, y));
+            } else {
+              wid_choose_initial_dungeons_create_level_at(ctx, x, y);
+            }
           }
         }
       }
@@ -702,6 +716,9 @@ static void wid_choose_initial_dungeons_tick(Widp w)
   //
   game_join_levels(ctx);
 
+  auto box_style           = g_opt_ascii ? UI_WID_STYLE_HORIZ_DARK : UI_WID_STYLE_NORMAL;
+  auto box_highlight_style = g_opt_ascii ? UI_WID_STYLE_HORIZ_LIGHT : UI_WID_STYLE_NORMAL;
+
   {
     //
     // Tell the user the dungeons are ready!
@@ -709,13 +726,13 @@ static void wid_choose_initial_dungeons_tick(Widp w)
     auto b = ctx->wid_enter;
     wid_set_text(b, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$E%%fg=" UI_TEXT_COLOR_STR "$nter the Dungeon");
     {
-      color c = RED;
+      color c = GREEN;
       c.a     = val;
       wid_set_mode(b, WID_MODE_OVER);
       wid_set_color(b, WID_COLOR_BG, c);
     }
     {
-      color c = WHITE;
+      color c = DARKGREEN;
       c.a     = val;
       wid_set_mode(b, WID_MODE_NORMAL);
       wid_set_color(b, WID_COLOR_BG, c);
@@ -724,13 +741,48 @@ static void wid_choose_initial_dungeons_tick(Widp w)
     wid_update(b);
   }
 
-  ctx->generated = true;
+  {
+    auto b = ctx->wid_choose_seed;
 
-  for (auto &t : threads) {
-    t.join();
+    wid_set_on_mouse_up(b, wid_choose_initial_dungeons_wid_choose_seed);
+    wid_set_mode(b, WID_MODE_OVER);
+    wid_set_style(b, box_highlight_style);
+    wid_set_mode(b, WID_MODE_NORMAL);
+    wid_set_style(b, box_style);
+    wid_set_text(b, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$C%%fg=" UI_TEXT_COLOR_STR "$hange seed");
   }
 
-  threads.resize(0);
+  {
+    auto b = ctx->wid_random;
+
+    wid_set_on_mouse_up(b, wid_choose_initial_dungeons_random);
+    wid_set_mode(b, WID_MODE_OVER);
+    wid_set_style(b, box_highlight_style);
+    wid_set_mode(b, WID_MODE_NORMAL);
+    wid_set_style(b, box_style);
+    wid_set_text(b, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$R%%fg=" UI_TEXT_COLOR_STR "$andom dungeon");
+  }
+
+  {
+    auto b = ctx->wid_back;
+
+    wid_set_on_mouse_up(b, wid_choose_initial_dungeons_go_back);
+    wid_set_text(b, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$B%%fg=" UI_TEXT_COLOR_STR "$ack?");
+    wid_set_mode(b, WID_MODE_OVER);
+    wid_set_style(b, box_highlight_style);
+    wid_set_mode(b, WID_MODE_NORMAL);
+    wid_set_style(b, box_style);
+  }
+
+  ctx->generated = true;
+
+  if (ENABLE_THREADS) {
+    for (auto &t : threads) {
+      t.join();
+    }
+
+    threads.resize(0);
+  }
 }
 
 static void wid_choose_initial_dungeons_post_display_tick(Widp w)
@@ -920,6 +972,10 @@ static uint8_t wid_choose_initial_dungeons_key_up(Widp w, const struct SDL_Keysy
     return false;
   }
 
+  if (g_ctx && ! g_ctx->generated) {
+    return false;
+  }
+
   switch (key->mod) {
     case KMOD_LCTRL :
     case KMOD_RCTRL :
@@ -1090,8 +1146,8 @@ void Game::wid_choose_initial_dungeons(void)
 
   creating_dungeon = true;
 
-  auto box_style           = g_opt_ascii ? UI_WID_STYLE_HORIZ_DARK : UI_WID_STYLE_NORMAL;
-  auto box_highlight_style = g_opt_ascii ? UI_WID_STYLE_HORIZ_LIGHT : UI_WID_STYLE_NORMAL;
+  auto box_style           = UI_WID_STYLE_GRAY;
+  auto box_highlight_style = UI_WID_STYLE_GRAY;
 
   py_call_void_fn("events", "on_initial_dungeon_menu_select", 0);
 
@@ -1217,7 +1273,6 @@ void Game::wid_choose_initial_dungeons(void)
     point br = make_point(x_at + width, y_at + 4);
 
     wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, wid_choose_initial_dungeons_enter);
     wid_set_shape_none(w);
     ctx->wid_enter = w;
   }
@@ -1235,12 +1290,12 @@ void Game::wid_choose_initial_dungeons(void)
     point br = make_point(x_at + width, y_at + box_height);
 
     wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, wid_choose_initial_dungeons_wid_choose_seed);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
     wid_set_style(w, box_style);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$C%%fg=" UI_TEXT_COLOR_STR "$hange seed");
+    ctx->wid_choose_seed = w;
   }
 
   y_at += box_step;
@@ -1252,12 +1307,12 @@ void Game::wid_choose_initial_dungeons(void)
     point br = make_point(x_at + width, y_at + box_height);
 
     wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, wid_choose_initial_dungeons_random);
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
     wid_set_style(w, box_style);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$R%%fg=" UI_TEXT_COLOR_STR "$andom dungeon");
+    ctx->wid_random = w;
   }
 
   y_at += box_step;
@@ -1269,12 +1324,12 @@ void Game::wid_choose_initial_dungeons(void)
     point br = make_point(x_at + width, y_at + box_height);
 
     wid_set_pos(w, tl, br);
-    wid_set_on_mouse_up(w, wid_choose_initial_dungeons_go_back);
     wid_set_text(w, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$B%%fg=" UI_TEXT_COLOR_STR "$ack?");
     wid_set_mode(w, WID_MODE_OVER);
     wid_set_style(w, box_highlight_style);
     wid_set_mode(w, WID_MODE_NORMAL);
     wid_set_style(w, box_style);
+    ctx->wid_back = w;
   }
 
   /*
@@ -1370,7 +1425,7 @@ void Game::wid_choose_initial_dungeons(void)
             wid_set_pos(b, tl, br);
             wid_set_color(b, WID_COLOR_BG, UI_DUNGEONS_PLAYER_COLOR);
             wid_set_text(b, "@");
-            wid_set_style(b, UI_WID_STYLE_SOLID_DEFAULT);
+            wid_set_style(b, UI_WID_STYLE_DARK);
           }
 
           if (node->is_descend_dungeon) {
@@ -1386,7 +1441,7 @@ void Game::wid_choose_initial_dungeons(void)
             wid_set_pos(b, tl, br);
             wid_set_color(b, WID_COLOR_BG, UI_DUNGEONS_FINAL_BOSS_COLOR);
             wid_set_text(b, "Z");
-            wid_set_style(b, UI_WID_STYLE_SOLID_DEFAULT);
+            wid_set_style(b, UI_WID_STYLE_DARK);
           }
         }
 
@@ -1549,7 +1604,7 @@ void Game::wid_choose_initial_dungeons(void)
           auto  w  = wid_new_square_button(window, "wid key");
           point tl = make_point(TERM_WIDTH - 10, 15 + difficulty_depth);
           point br = make_point(TERM_WIDTH - 10, 15 + difficulty_depth);
-          wid_set_style(w, UI_WID_STYLE_SOLID_DEFAULT);
+          wid_set_style(w, UI_WID_STYLE_DARK);
           wid_set_color(w, WID_COLOR_BG, get_biome_color(get_biome(difficulty_depth)));
           wid_set_pos(w, tl, br);
           wid_set_text(w, " ");

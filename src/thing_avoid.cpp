@@ -146,8 +146,7 @@ bool Thing::will_avoid_monst(const point p)
   TRACE_NO_INDENT();
   auto me = tp();
 
-  TRACE_NO_INDENT();
-  FOR_ALL_THINGS_THAT_INTERACT_UNSAFE(level, it, p.x, p.y)
+  FOR_ALL_THINGS_THAT_INTERACT(level, it, p.x, p.y)
   {
     if (it == this) {
       continue;
@@ -266,7 +265,6 @@ bool Thing::will_avoid_monst(const point p)
       }
     }
   }
-  TRACE_NO_INDENT();
   FOR_ALL_THINGS_END()
 
   return false;

@@ -470,23 +470,10 @@ public:
 
 #define FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)                                                                   \
   if (! (level)->is_oob(x, y)) {                                                                                     \
-    static thread_local Thingp things_to_walk[ MAP_SLOTS ];                                                          \
+    auto _copy_of_vector_ = level->all_things_ptr_at[ x ][ y ];                                                      \
     {                                                                                                                \
-      auto _vec_               = getptr(level->all_things_ptr_at, x, y);                                             \
-      auto things_to_walk_size = _vec_->size();                                                                      \
-      for (size_t idx = 0; idx < things_to_walk_size; idx++)                                                         \
-        things_to_walk[ idx ] = (*_vec_)[ idx ];                                                                     \
-      for (size_t idx = 0; idx < things_to_walk_size; idx++) {                                                       \
-        Thingp t;                                                                                                    \
-        t = things_to_walk[ idx ];                                                                                   \
+      for (auto t : _copy_of_vector_) {                                                                              \
   /* verify(MTYPE_THING, t); */
-
-#define FOR_ALL_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                 \
-  if (! (level)->is_oob(x, y)) {                                                                                     \
-    {                                                                                                                \
-      for (auto t : level->all_things_ptr_at[ x ][ y ]) {
-
-#define FOR_ALL_THINGS(level, t, x, y) FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)
 
 #define FOR_ALL_THINGS(level, t, x, y) FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)
 
@@ -590,17 +577,8 @@ public:
   }
 
 #define FOR_ALL_GRID_THINGS(level, t, x, y)                                                                          \
-  FOR_ALL_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                       \
+  FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)                                                                         \
   if (! t->is_the_grid_) {                                                                                           \
-    continue;                                                                                                        \
-  }
-
-#define FOR_ALL_THINGS_AT_DEPTH_UNSAFE(level, t, x, y, z)                                                            \
-  FOR_ALL_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                       \
-  if (t->z_depth != z) {                                                                                             \
-    continue;                                                                                                        \
-  }                                                                                                                  \
-  if (t->is_hidden) {                                                                                                \
     continue;                                                                                                        \
   }
 
@@ -614,7 +592,7 @@ public:
   }
 
 #define FOR_ALL_LIGHTS_AT(level, t, x, y)                                                                            \
-  FOR_ALL_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                       \
+  FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)                                                                         \
   if (likely(! t->has_light)) {                                                                                      \
     continue;                                                                                                        \
   }                                                                                                                  \
@@ -665,24 +643,6 @@ public:
     continue;                                                                                                        \
   }
 
-#define FOR_ALL_THINGS_THAT_INTERACT_UNSAFE(level, t, x, y)                                                          \
-  FOR_ALL_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                       \
-  if (t->is_internal()) {                                                                                            \
-    continue;                                                                                                        \
-  }                                                                                                                  \
-  if (t->is_floor() || t->is_corridor()) {                                                                           \
-    continue;                                                                                                        \
-  }                                                                                                                  \
-  if (t->is_hidden) {                                                                                                \
-    continue;                                                                                                        \
-  }                                                                                                                  \
-  if (t->is_animation()) {                                                                                           \
-    continue;                                                                                                        \
-  }                                                                                                                  \
-  if (! t->is_interesting()) {                                                                                       \
-    continue;                                                                                                        \
-  }
-
 //
 // Things you can bump into
 //
@@ -715,13 +675,13 @@ public:
 // Cursor path is the highlighted path the player follows.
 //
 #define FOR_ALL_CURSOR_PATH_THINGS(level, t, x, y)                                                                   \
-  FOR_ALL_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                       \
+  FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)                                                                         \
   if (! t->is_cursor_path()) {                                                                                       \
     continue;                                                                                                        \
   }
 
 #define FOR_ALL_DEBUG_PATH_THINGS(level, t, x, y)                                                                    \
-  FOR_ALL_THINGS_WALKER_UNSAFE(level, t, x, y)                                                                       \
+  FOR_ALL_THINGS_SAFE_WALKER(level, t, x, y)                                                                         \
   if (! t->is_debug_path()) {                                                                                        \
     continue;                                                                                                        \
   }

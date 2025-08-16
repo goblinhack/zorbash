@@ -619,6 +619,13 @@ void Level::tick_(void)
   FOR_ALL_INTERESTING_THINGS_ON_LEVEL_END(this)
 
   //
+  // If some things were pending removal from the level, clean up now
+  //
+  if (! this->player) {
+    things_gc_force();
+  }
+
+  //
   // If things are still moving, we need to wait.
   //
   if (game->things_are_moving) {
@@ -777,6 +784,7 @@ void Level::tick_(void)
 
     handle_all_pending_things();
     things_gc_if_possible();
+
     create_wandering_monster_periodically();
 
 #if 0

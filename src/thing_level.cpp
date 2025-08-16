@@ -19,7 +19,10 @@ int Thing::level_get(void)
 void Thing::level_push_(void)
 {
   TRACE_NO_INDENT();
-  level_pop();
+
+  if (is_attached) {
+    level_pop_();
+  }
 
   auto x = curr_at.x;
   auto y = curr_at.y;

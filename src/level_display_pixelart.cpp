@@ -90,7 +90,7 @@ void Level::display_pixelart_map_bg_things(void)
       for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
           TRACE_NO_INDENT();
-          FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
+          FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z)
           {
             if (! t->gfx_pixelart_shown_in_bg()) {
               continue;
@@ -122,7 +122,7 @@ void Level::display_pixelart_map_bg_things(void)
       for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
           TRACE_NO_INDENT();
-          FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
+          FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z)
           {
             if (! t->gfx_pixelart_shown_in_bg()) {
               continue;
@@ -168,7 +168,7 @@ void Level::display_pixelart_map_things(int fbo, const int16_t minx, const int16
         // thing in the blit as we are using the unsafe(faster) walker.
         //
         TRACE_NO_INDENT();
-        FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z) { t->blit_pixelart(fbo); }
+        FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) { t->blit_pixelart(fbo); }
         TRACE_NO_INDENT();
         FOR_ALL_THINGS_END()
       }
@@ -195,7 +195,7 @@ void Level::display_pixelart_map_things(int fbo, const int16_t minx, const int16
       for (uint8_t z_prio = MAP_Z_PRIO_ALWAYS_BEHIND; z_prio < MAP_Z_PRIO_LAST; z_prio++) {
         for (auto x = minx; x < maxx; x++) {
           TRACE_NO_INDENT();
-          FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
+          FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z)
           {
             if (t->z_prio() != z_prio) {
               continue;
@@ -231,7 +231,7 @@ void Level::display_pixelart_map_fg_things(int fbo, const int16_t minx, const in
       for (uint8_t z_prio = MAP_Z_PRIO_ALWAYS_BEHIND; z_prio < MAP_Z_PRIO_LAST; z_prio++) {
         for (auto x = minx; x < maxx; x++) {
           TRACE_NO_INDENT();
-          FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z)
+          FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z)
           {
             if (t->z_prio() != z_prio) {
               continue;
@@ -279,7 +279,7 @@ void Level::display_pixelart_map_fg2_things(int fbo, const int16_t minx, const i
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
         TRACE_NO_INDENT();
-        FOR_ALL_THINGS_AT_DEPTH_UNSAFE(this, t, x, y, z) { t->blit_pixelart(fbo); }
+        FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) { t->blit_pixelart(fbo); }
         TRACE_NO_INDENT();
         FOR_ALL_THINGS_END()
       }

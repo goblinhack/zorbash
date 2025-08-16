@@ -12,6 +12,7 @@
 // If set to 1, essentially single threaded
 //
 #define MAX_CONCURRENT_THREADS 3
+#define ENABLE_THREADS         0
 
 //
 // Grid chunks are used to construct the levels and the overall dungeon
