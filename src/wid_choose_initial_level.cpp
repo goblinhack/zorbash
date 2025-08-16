@@ -725,6 +725,7 @@ static void wid_choose_initial_dungeons_tick(Widp w)
     //
     auto b = ctx->wid_enter;
     wid_set_text(b, "%%fg=" UI_TEXT_HIGHLIGHT_COLOR_STR "$E%%fg=" UI_TEXT_COLOR_STR "$nter the Dungeon");
+    wid_set_on_mouse_up(b, wid_choose_initial_dungeons_enter);
     {
       color c = GREEN;
       c.a     = val;
