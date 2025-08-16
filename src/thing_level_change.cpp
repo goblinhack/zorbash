@@ -28,6 +28,12 @@ void Thing::level_change(Levelp l)
   TRACE_AND_INDENT();
 
   level_leave();
+
+  //
+  // If some things were pending removal from the old level, clean up now
+  //
+  old_level->things_gc_force();
+
   level = l;
   level_enter();
 

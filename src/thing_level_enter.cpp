@@ -31,7 +31,7 @@ void Thing::level_enter(bool rejoin)
     if (level->interesting_things_walk_in_progress) {
       level->interesting_things_pending_remove.erase(id);
       level->interesting_things_pending_add.insert(std::pair(id, this));
-      dbg3("Pending remove and then add to interesting things");
+      dbg2("Pending remove and then add to interesting things");
     } else {
       auto result = level->interesting_things.insert(std::pair(id, this));
       if (! result.second) {
@@ -39,10 +39,10 @@ void Thing::level_enter(bool rejoin)
         // If polymorphing then we are already on the level.
         //
         if (! rejoin) {
-          err("Failed to insert into active thing map");
+          err("Failed to insert into interesting_things map");
         }
       }
-      dbg3("Added to interesting things");
+      dbg2("Added to interesting things");
     }
   }
 
@@ -53,7 +53,7 @@ void Thing::level_enter(bool rejoin)
     if (level->tickable_things_walk_in_progress) {
       level->tickable_things_pending_remove.erase(id);
       level->tickable_things_pending_add.insert(std::pair(id, this));
-      dbg3("Pending remove and then add to tickable things");
+      dbg2("Pending remove and then add to tickable things");
     } else {
       auto result = level->tickable_things.insert(std::pair(id, this));
       if (! result.second) {
@@ -61,10 +61,10 @@ void Thing::level_enter(bool rejoin)
         // If polymorphing then we are already on the level.
         //
         if (! rejoin) {
-          err("Failed to insert into active thing map");
+          err("Failed to insert into tickable_things map");
         }
       }
-      dbg3("Added to tickable things");
+      dbg2("Added to tickable things");
     }
   }
 
@@ -75,15 +75,15 @@ void Thing::level_enter(bool rejoin)
     if (level->describable_things_walk_in_progress) {
       level->describable_things_pending_remove.erase(id);
       level->describable_things_pending_add.insert(std::pair(id, this));
-      dbg3("Pending remove and then add to describable things");
+      dbg2("Pending remove and then add to describable things");
     } else {
       auto result = level->describable_things.insert(std::pair(id, this));
       if (! result.second) {
         if (! rejoin) {
-          err("Failed to insert into active thing map");
+          err("Failed to insert into describable_things map");
         }
       }
-      dbg3("Added to describable things");
+      dbg2("Added to describable things");
     }
   }
 
@@ -94,7 +94,7 @@ void Thing::level_enter(bool rejoin)
     if (level->animated_things_walk_in_progress) {
       level->animated_things_pending_remove.erase(id);
       level->animated_things_pending_add.insert(std::pair(id, this));
-      dbg3("Pending remove and then add to animated things");
+      dbg2("Pending remove and then add to animated things");
     } else {
       auto result = level->animated_things.insert(std::pair(id, this));
       if (! result.second) {
@@ -102,7 +102,7 @@ void Thing::level_enter(bool rejoin)
           err("Failed to insert into animated thing map");
         }
       }
-      dbg3("Added to pending things");
+      dbg2("Added to pending things");
     }
   }
 
