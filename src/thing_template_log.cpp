@@ -36,7 +36,6 @@ void Tp::log_(const char *fmt, va_list args)
 void Tp::log(const char *fmt, ...)
 {
   verify(MTYPE_TP, this);
-  log_catchup_missing_indent_levels();
 
   auto    t = this;
   va_list args;
@@ -50,7 +49,6 @@ void Tp::dbg_(const char *fmt, ...)
   IF_NODEBUG { return; }
 
   verify(MTYPE_TP, this);
-  log_catchup_missing_indent_levels();
 
   auto    t = this;
   va_list args;

@@ -418,7 +418,7 @@ Tpp tp_load(int id, std::string const &name, const std::string &text_long_name, 
   TRACE_NO_INDENT();
   Tpp tp = tp_find(name);
   if (tp) {
-    LOG("Thing template name [%s] already loaded", name.c_str());
+    // DIE("Thing template name [%s] already loaded", name.c_str());
     return tp;
   }
 

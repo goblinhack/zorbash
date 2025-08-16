@@ -293,6 +293,11 @@ public:
   bool player_is_ready_for_messages {};
 
   //
+  // Set whilst making levels
+  //
+  bool creating_dungeon {};
+
+  //
   // All randomness jumps off of this.
   //
   uint32_t seed {};

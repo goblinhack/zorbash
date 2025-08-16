@@ -3005,6 +3005,7 @@ public:
   void inherit_from(Thingp it);
   void init_hue(void);
   void init(Levelp, const std::string &name, point at, Thingp owner = nullptr);
+  void init_(Levelp, const std::string &name, point at, Thingp owner = nullptr);
   void init_slower_stuff(void);
   void init_lights(void);
   void interpolated_at_set(fpoint v);
@@ -3021,7 +3022,9 @@ public:
   void level_enter(bool rejoin = false);
   void level_leave(void);
   void level_pop(void);
+  void level_pop_(void);
   void level_push(void);
+  void level_push_(void);
   void level_rejoin(void);
   void lifespan_tick(void);
   void light_distance_upd_with_torch_effect(uint8_t &light_dist);

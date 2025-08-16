@@ -27,10 +27,10 @@ void sdl_loop(void)
   // 4 - seems ok
   // 10 - too much lag now due to cursor redraws
   //
-  SDL_Event events[ 6 ] = {};
-  int       found       = 0;
-  int       i           = 0;
-  int       frames      = 0;
+  SDL_Event events[ 6 ]  = {};
+  int       found_events = 0;
+  int       i            = 0;
+  int       frames       = 0;
 
   sdl_mouse_center();
   SDL_SetEventFilter(sdl_filter_events, nullptr);
@@ -134,10 +134,8 @@ void sdl_loop(void)
     if (unlikely(update_very_slow)) {
       ui_ts_very_slow_last = ts_now;
 
-      if (likely(! g_errored)) {
-        if (likely(game->level != nullptr)) {
-          game->level->tick();
-        }
+      if (! g_errored && game && ! game->creating_dungeon && game->level) {
+        game->level->tick();
       }
 
       wid_display_all();
@@ -152,7 +150,7 @@ void sdl_loop(void)
       //
       // Update status and rightbars
       //
-      if (game) {
+      if (! g_errored && game && ! game->creating_dungeon && game->level) {
         //
         // Start the game if needed.
         //
@@ -182,16 +180,16 @@ void sdl_loop(void)
       sdl.wheel_x = 0;
       sdl.wheel_y = 0;
 
-      found = SDL_PeepEvents(events, ARRAY_SIZE(events), SDL_GETEVENT, SDL_QUIT, SDL_LASTEVENT);
+      found_events = SDL_PeepEvents(events, ARRAY_SIZE(events), SDL_GETEVENT, SDL_QUIT, SDL_LASTEVENT);
 
       //
       // Only process one mouse motion event; and when we do we only look at the latest
       // mouse position, to avoid perception of lag. Mouse motion events can be expensive
       // as we redraw the cursor path.
       //
-      DBG("SDL: Process %u events", found);
+      DBG("SDL: Process %u events", found_events);
       bool processed_mouse_motion_event = false;
-      for (i = 0; i < found; ++i) {
+      for (i = 0; i < found_events; ++i) {
         sdl_event(&events[ i ], processed_mouse_motion_event);
       }
 
@@ -203,7 +201,7 @@ void sdl_loop(void)
       //
       // Mouse held?
       //
-      if (unlikely(! found)) {
+      if (unlikely(! found_events)) {
         auto mouse_down = sdl_get_mouse();
         if (mouse_down) {
           if (sdl.last_mouse_held_down_when) {
@@ -237,11 +235,9 @@ void sdl_loop(void)
       // If the user has moved the mouse, tick to allow the cursor to move.
       // Or if a tick has started, tick quickly.
       //
-      if (likely(! g_errored)) {
-        if (likely(game->level != nullptr)) {
-          if (found || game->tick_begin_ms) {
-            game->level->tick();
-          }
+      if (! g_errored && game && ! game->creating_dungeon && game->level) {
+        if (found_events || game->tick_begin_ms) {
+          game->level->tick();
         }
       }
 
@@ -257,7 +253,9 @@ void sdl_loop(void)
     gl_enter_2d_mode(game->config.game_pix_width, game->config.game_pix_height);
 
     glcolor(WHITE);
-    game->display();
+    if (! g_errored && game && ! game->creating_dungeon && game->level) {
+      game->display();
+    }
     blit_fbo_unbind();
 
     gl_leave_2d_mode();

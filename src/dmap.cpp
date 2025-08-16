@@ -149,23 +149,23 @@ void dmap_print(const Dmap *D)
 
 void dmap_process_no_diagonals(Dmap *D, point tl, point br, bool place_border)
 {
-  auto                                                                      before = SDL_GetTicks();
-  uint8_t                                                                   x;
-  uint8_t                                                                   y;
-  uint8_t                                                                   a;
-  uint8_t                                                                   b;
-  uint8_t                                                                   c;
-  uint8_t                                                                   d;
-  uint8_t                                                                  *e;
-  uint8_t                                                                   f;
-  uint8_t                                                                   g;
-  uint8_t                                                                   h;
-  uint8_t                                                                   i;
-  uint8_t                                                                   lowest;
-  uint8_t                                                                   changed;
-  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig;
-  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig_valid;
-  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > valid;
+  auto                                                                                   before = SDL_GetTicks();
+  uint8_t                                                                                x;
+  uint8_t                                                                                y;
+  uint8_t                                                                                a;
+  uint8_t                                                                                b;
+  uint8_t                                                                                c;
+  uint8_t                                                                                d;
+  uint8_t                                                                               *e;
+  uint8_t                                                                                f;
+  uint8_t                                                                                g;
+  uint8_t                                                                                h;
+  uint8_t                                                                                i;
+  uint8_t                                                                                lowest;
+  uint8_t                                                                                changed;
+  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig;
+  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig_valid;
+  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > valid;
 
   int minx, miny, maxx, maxy;
   if (tl.x < br.x) {
@@ -386,8 +386,8 @@ void dmap_process_no_diagonals(Dmap *D, point tl, point br, bool place_border)
   //
   if (unlikely(g_opt_debug1)) {
     auto after = SDL_GetTicks();
-    if (after - before > 70) {
-      ERR("DMAP is taking too long, %d ms", after - before);
+    if (after - before > 100) {
+      LOG("DMAP is taking too long, %d ms", after - before);
       dmap_print(D);
     }
     if (after - before > 0) {
@@ -421,23 +421,23 @@ void dmap_process_no_diagonals(Dmap *D, point tl, point br, bool place_border)
 //
 void dmap_process_allow_diagonals(Dmap *D, point tl, point br, bool place_border)
 {
-  auto                                                                      before = SDL_GetTicks();
-  uint8_t                                                                   x;
-  uint8_t                                                                   y;
-  uint8_t                                                                   a;
-  uint8_t                                                                   b;
-  uint8_t                                                                   c;
-  uint8_t                                                                   d;
-  uint8_t                                                                  *e;
-  uint8_t                                                                   f;
-  uint8_t                                                                   g;
-  uint8_t                                                                   h;
-  uint8_t                                                                   i;
-  uint8_t                                                                   lowest;
-  uint8_t                                                                   changed;
-  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig;
-  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig_valid;
-  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > valid;
+  auto                                                                                   before = SDL_GetTicks();
+  uint8_t                                                                                x;
+  uint8_t                                                                                y;
+  uint8_t                                                                                a;
+  uint8_t                                                                                b;
+  uint8_t                                                                                c;
+  uint8_t                                                                                d;
+  uint8_t                                                                               *e;
+  uint8_t                                                                                f;
+  uint8_t                                                                                g;
+  uint8_t                                                                                h;
+  uint8_t                                                                                i;
+  uint8_t                                                                                lowest;
+  uint8_t                                                                                changed;
+  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig;
+  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig_valid;
+  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > valid;
 
   int minx, miny, maxx, maxy;
   if (tl.x < br.x) {
@@ -668,23 +668,23 @@ void dmap_process_allow_diagonals(Dmap *D, point tl, point br, bool place_border
 //
 void dmap_process_reverse_allow_diagonals(Dmap *D, point tl, point br, bool place_border)
 {
-  auto                                                                      before = SDL_GetTicks();
-  uint8_t                                                                   x;
-  uint8_t                                                                   y;
-  uint8_t                                                                   a;
-  uint8_t                                                                   b;
-  uint8_t                                                                   c;
-  uint8_t                                                                   d;
-  uint8_t                                                                  *e;
-  uint8_t                                                                   f;
-  uint8_t                                                                   g;
-  uint8_t                                                                   h;
-  uint8_t                                                                   i;
-  uint8_t                                                                   highest;
-  uint8_t                                                                   changed;
-  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig;
-  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig_valid;
-  static std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > valid;
+  auto                                                                                   before = SDL_GetTicks();
+  uint8_t                                                                                x;
+  uint8_t                                                                                y;
+  uint8_t                                                                                a;
+  uint8_t                                                                                b;
+  uint8_t                                                                                c;
+  uint8_t                                                                                d;
+  uint8_t                                                                               *e;
+  uint8_t                                                                                f;
+  uint8_t                                                                                g;
+  uint8_t                                                                                h;
+  uint8_t                                                                                i;
+  uint8_t                                                                                highest;
+  uint8_t                                                                                changed;
+  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig;
+  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig_valid;
+  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > valid;
 
   int minx, miny, maxx, maxy;
   if (tl.x < br.x) {

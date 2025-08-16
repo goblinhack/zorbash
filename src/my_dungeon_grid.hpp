@@ -26,6 +26,9 @@ public:
   //
   int walk_order_level_no {};
 
+  bool generating {};
+  bool generated {};
+
   //
   // pass 1 is the main dungeon
   // pass 2 are secret levels

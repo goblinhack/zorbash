@@ -7,6 +7,13 @@
 #define _MY_GAME_DEFS_HPP_
 
 //
+// The number of concurrent levels we can generate.
+//
+// If set to 1, essentially single threaded
+//
+#define MAX_CONCURRENT_THREADS 3
+
+//
 // Grid chunks are used to construct the levels and the overall dungeon
 //
 #define DUNGEON_GRID_CHUNK_HEIGHT_MAX 3 // Levels are split into grids. Each grid can have a room.
