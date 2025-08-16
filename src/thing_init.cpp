@@ -143,6 +143,12 @@ void Thing::init_(Levelp level, Tpp tpp, const std::string &name_in, const point
   }
 
   //
+  // The grid is the perma background matrix like substrate that is the ether of
+  // this universe!
+  //
+  is_the_grid_ = tpp->is_the_grid();
+
+  //
   // If the wildcard was "random_xxx" then use the real name from now on
   //
   auto name = tpp->name();
@@ -158,43 +164,44 @@ void Thing::init_(Levelp level, Tpp tpp, const std::string &name_in, const point
   //
   // Cached as used often
   //
-  gfx_pixelart_animated = tp()->gfx_pixelart_animated();
-  gfx_ascii_animated    = tp()->gfx_ascii_animated();
+  gfx_pixelart_animated = tpp->gfx_pixelart_animated();
+  gfx_ascii_animated    = tpp->gfx_ascii_animated();
 
   //
   // Cache this flag so that polymorphing works
   //
-  is_the_player = tp()->is_player();
+  is_the_player = tpp->is_player();
 
   //
   // Make sure we have the ability to carry items.
   //
-  TRACE_NO_INDENT();
-  if (gfx_pixelart_attack_anim() || is_buff() || is_debuff() || is_msg() || is_player() || is_monst() || is_item()
-      || is_splatter() || is_cursor() || is_laser() || is_projectile() || is_weapon() || is_fire()
-      || is_magical_effect() || is_tentacle()) {
-    new_infop();
+  if (! is_the_grid_) {
+    if (gfx_pixelart_attack_anim() || is_buff() || is_debuff() || is_msg() || is_player() || is_monst() || is_item()
+        || is_splatter() || is_cursor() || is_laser() || is_projectile() || is_weapon() || is_fire()
+        || is_magical_effect() || is_tentacle()) {
+      new_infop();
 
-    //
-    // This is useful for treasure maps to tell if they work on this level
-    //
-    born_set(point3d(born.x, born.y, level->world_at.z));
-  }
+      //
+      // This is useful for treasure maps to tell if they work on this level
+      //
+      born_set(point3d(born.x, born.y, level->world_at.z));
+    }
 
-  TRACE_NO_INDENT();
-  if (is_player() || is_monst() || is_item() || is_turret()) {
-    new_itemsp();
-  }
+    TRACE_NO_INDENT();
+    if (is_player() || is_monst() || is_item() || is_turret()) {
+      new_itemsp();
+    }
 
-  TRACE_NO_INDENT();
-  if (is_totem() || is_player() || is_trap() || is_monst() || is_cursor()) {
-    new_aip();
+    TRACE_NO_INDENT();
+    if (is_totem() || is_player() || is_trap() || is_monst() || is_cursor()) {
+      new_aip();
+    }
   }
 
   //
   // Init the z depth
   //
-  z_depth = tp()->z_depth;
+  z_depth = tpp->z_depth;
 
   if (is_tmp_thing()) {
     game->world.alloc_tmp_thing_id(this);
@@ -243,18 +250,30 @@ void Thing::init_(Levelp level, Tpp tpp, const std::string &name_in, const point
   }
 
   //
+  // Make sure and call this after any state changes so we get the
+  // sleeping tile assigned if needed.
+  //
+  update();
+
+  //
+  // Set position prior to attach
+  //
+  if (curr_at != point(-1, -1)) {
+    interpolated_at_set(make_fpoint(curr_at));
+    update_interpolated_position();
+  }
+
+  if (is_the_grid_) {
+    return;
+  }
+
+  //
   // Change state prior to choosing the first tile so we get the
   // sleep anim immediately.
   //
   if (is_asleep_initially()) {
     change_state(MONST_STATE_SLEEPING, "asleep initially");
   }
-
-  //
-  // Make sure and call this after any state changes so we get the
-  // sleeping tile assigned if needed.
-  //
-  update();
 
   //
   // Set the initial nutrition.
@@ -268,23 +287,6 @@ void Thing::init_(Levelp level, Tpp tpp, const std::string &name_in, const point
     if (level->dungeon_walk_order_level_no > 1) {
       is_open = true;
     }
-  }
-
-  //
-  // Set position prior to attach
-  //
-  if (curr_at != point(-1, -1)) {
-    interpolated_at_set(make_fpoint(curr_at));
-    update_interpolated_position();
-  }
-
-  //
-  // The grid is the perma background matrix like substrate that is the ether of
-  // this universe!
-  //
-  is_the_grid_ = tp()->is_the_grid();
-  if (is_the_grid_) {
-    return;
   }
 
   //

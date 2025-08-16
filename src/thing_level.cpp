@@ -535,12 +535,12 @@ void Thing::level_push(void)
 
 void Thing::level_pop_(void)
 {
-  TRACE_NO_INDENT();
-
   if (! is_attached) {
     return;
   }
   is_attached = false;
+
+  TRACE_NO_INDENT();
 
 #if 0
   if (is_torch()) {
