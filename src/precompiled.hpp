@@ -25,4 +25,6 @@
 #include "my_point.hpp"
 #include "my_python.hpp"
 #include "my_size.hpp"
+#include "my_thing.hpp"
+#include "my_thing_template.hpp"
 #include "my_wid.hpp"
