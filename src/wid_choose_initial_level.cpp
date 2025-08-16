@@ -684,8 +684,10 @@ static void wid_choose_initial_dungeons_tick(Widp w)
 
         if (node->walk_order_level_no == ctx->generating_level) {
           if (generating < MAX_CONCURRENT_THREADS) {
-            CON("Start new level generation thread for seed %s, currently %d running", game->seed_name.c_str(),
-                generating);
+            if (ENABLE_THREADS) {
+              CON("Start new level generation thread for seed %s, currently %d running", game->seed_name.c_str(),
+                  generating);
+            }
             generating++;
             node->generating = true;
             ctx->generating_level++;
