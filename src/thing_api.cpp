@@ -637,11 +637,6 @@ int Thing::is_immune_to_spell_of_beckoning(void)
   TRACE_NO_INDENT();
   return (tp()->is_immune_to_spell_of_beckoning());
 }
-int Thing::is_animation(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_animation());
-}
 int Thing::temperature_never_changes(void)
 {
   TRACE_NO_INDENT();
@@ -1748,12 +1743,6 @@ int Thing::is_intelligent(void)
   return (tp()->is_intelligent());
 }
 
-int Thing::is_interesting(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_interesting());
-}
-
 int Thing::is_item_carrier(void)
 {
   TRACE_NO_INDENT();
@@ -1901,12 +1890,6 @@ int Thing::is_mob(void)
   return (tp()->is_mob());
 }
 
-int Thing::is_monst(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_monst());
-}
-
 int Thing::is_obs_wall_or_door(void)
 {
   TRACE_NO_INDENT();
@@ -1935,12 +1918,6 @@ int Thing::is_openable(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_openable());
-}
-
-int Thing::is_player(void)
-{
-  TRACE_NO_INDENT();
-  return is_the_player;
 }
 
 int Thing::is_poisonous_danger_level(void)
@@ -2349,12 +2326,6 @@ int Thing::is_msg_allowed_is_seen(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_msg_allowed_is_seen());
-}
-
-int Thing::is_internal(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_internal());
 }
 
 int Thing::is_eater_of_helmets(void)
@@ -3279,12 +3250,6 @@ int Thing::is_auto_throw(void)
 {
   TRACE_NO_INDENT();
   return (tp()->is_auto_throw());
-}
-
-int Thing::is_tickable(void)
-{
-  TRACE_NO_INDENT();
-  return (tp()->is_tickable());
 }
 
 int Thing::is_tmp_thing(void)
