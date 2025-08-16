@@ -40,6 +40,34 @@ void Thing::update(void)
   gfx_ascii_animated    = tpp->gfx_ascii_animated();
 
   //
+  // If not already animating, then start it
+  //
+  if (! ts_next_frame) {
+    TRACE_NO_INDENT();
+    auto tiles = &tpp->tiles;
+    if (gfx_pixelart_animated || gfx_ascii_animated) {
+      animate();
+    } else {
+      auto tile = tile_random(tiles);
+      if (tile) {
+        tile_curr = tile->global_index;
+        if (is_debug_type()) {
+          con("Tile init (random): %s", tile_name(tile).c_str());
+        }
+      } else {
+        tile_curr = 0;
+      }
+    }
+  }
+
+  //
+  // The grid doesn't do a lot, so skip for performance
+  //
+  if (is_the_grid()) {
+    return;
+  }
+
+  //
   // If polymorphed, retain the same health
   //
   if (! health()) {
@@ -342,27 +370,6 @@ void Thing::update(void)
 
   if (unlikely(tpp->charge_count())) {
     charge_count_set(tpp->charge_count());
-  }
-
-  //
-  // If not already animating, then start it
-  //
-  if (! ts_next_frame) {
-    TRACE_NO_INDENT();
-    auto tiles = &tpp->tiles;
-    if (gfx_pixelart_animated || gfx_ascii_animated) {
-      animate();
-    } else {
-      auto tile = tile_random(tiles);
-      if (tile) {
-        tile_curr = tile->global_index;
-        if (is_debug_type()) {
-          con("Tile init (random): %s", tile_name(tile).c_str());
-        }
-      } else {
-        tile_curr = 0;
-      }
-    }
   }
 
   //
