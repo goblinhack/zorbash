@@ -10,8 +10,8 @@
 #include "my_template.hpp"
 #include "my_tex.hpp"
 
-std::map< std::string, class Tile * > all_tiles;
-std::vector< class Tile * >           all_tiles_array;
+std::unordered_map< std::string, class Tile * > all_tiles;
+std::vector< class Tile * >                     all_tiles_array;
 
 static uint8_t tile_init_done;
 
@@ -32,7 +32,7 @@ Tilep tile_index_to_tile(uint16_t i)
 uint8_t tile_init(void);
 uint8_t tile_init(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   tile_init_done = true;
 
   return true;
@@ -40,7 +40,7 @@ uint8_t tile_init(void)
 
 void tile_fini(void)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (tile_init_done) {
     tile_init_done = false;
   }
@@ -150,7 +150,7 @@ Tile::Tile(const class Tile *tile)
 void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t height, uint32_t nargs,
                    const char *arr[])
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   Texp tex;
   Texp tex_monochrome;
   Texp tex_mask;
@@ -301,7 +301,7 @@ void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t 
 void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t height,
                    const std::vector< std::string > &arr)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   Texp tex;
   Texp tex_monochrome;
   Texp tex_mask;
@@ -452,7 +452,7 @@ void tile_load_arr(std::string file, std::string name, uint32_t width, uint32_t 
 void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, uint32_t height, uint32_t nargs,
                            const char *arr[], int gl_mode)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   Texp tex;
   Texp tex_monochrome;
   Texp tex_mask;
@@ -612,7 +612,7 @@ void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, u
 void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, uint32_t height,
                            const std::vector< std::string > &arr, int gl_mode)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   Texp tex;
   Texp tex_monochrome;
   Texp tex_mask;
@@ -767,7 +767,7 @@ void tile_load_arr_sprites(std::string file, std::string name, uint32_t width, u
 //
 Tilep tile_find(std::string name)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (name == "") {
     return nullptr;
   }
@@ -782,7 +782,7 @@ Tilep tile_find(std::string name)
 
 Tilep tile_find_mand(std::string name)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   if (name == "") {
     ERR("No tile name given");
     return nullptr;
@@ -817,7 +817,7 @@ void tile_get_coords(Tilep tile, float *x1, float *y1, float *x2, float *y2)
 
 Tilep string2tile(const char **s)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   static char        name[ MAXSHORTSTR ];
   static const char *eo_name = name + MAXSHORTSTR;
   const char        *c       = *s;
@@ -849,7 +849,7 @@ Tilep string2tile(const char **s)
 
 Tilep string2tile(std::string &s, int *len)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto        iter = s.begin();
   std::string name;
 
@@ -882,7 +882,7 @@ Tilep string2tile(std::string &s, int *len)
 
 Tilep string2tile(std::wstring &s, int *len)
 {
-  TRACE_AND_INDENT();
+  TRACE_NO_INDENT();
   auto v = wstring_to_string(s);
   return (string2tile(v, len));
 }

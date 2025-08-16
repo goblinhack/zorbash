@@ -6,12 +6,12 @@
 #ifndef _MY_GLOBALS_EXTRA_HPP_
 #define _MY_GLOBALS_EXTRA_HPP_
 
-#include <map>
 #include <string> // do not remove
+#include <unordered_map>
 #include <vector> // linux
 
-extern std::map< std::string, class Tile * > all_tiles;
-extern std::vector< class Tile * >           all_tiles_array;
+extern std::unordered_map< std::string, class Tile * > all_tiles;
+extern std::vector< class Tile * >                     all_tiles_array;
 
 extern int g_opt_test_level_start_depth;
 
