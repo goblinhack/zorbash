@@ -3004,8 +3004,8 @@ public:
   void hunger_update(void);
   void inherit_from(Thingp it);
   void init_hue(void);
-  void init(Levelp, const std::string &name, point at, Thingp owner = nullptr);
-  void init_(Levelp, const std::string &name, point at, Thingp owner = nullptr);
+  void init(Levelp, Tpp, const std::string &name, point at, Thingp owner = nullptr);
+  void init_(Levelp, Tpp, const std::string &name, point at, Thingp owner = nullptr);
   void init_slower_stuff(void);
   void init_lights(void);
   void interpolated_at_set(fpoint v);

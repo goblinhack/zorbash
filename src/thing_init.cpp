@@ -73,7 +73,7 @@ Thingp Level::thing_new(const std::string &name, const point at, Thingp owner)
   }
 
   auto t = new class Thing_();
-  t->init(this, name, at, owner);
+  t->init(this, tp, name, at, owner);
   return t;
 }
 
@@ -110,7 +110,7 @@ void Thing::on_born(void)
   }
 }
 
-void Thing::init_(Levelp level, const std::string &name_in, const point born, Thingp owner)
+void Thing::init_(Levelp level, Tpp tpp, const std::string &name_in, const point born, Thingp owner)
 {
   TRACE_NO_INDENT();
 
@@ -127,13 +127,16 @@ void Thing::init_(Levelp level, const std::string &name_in, const point born, Th
     DIE("Thing template cannot be created: No name given");
   }
 
-  auto tp_cands = tp_find_wildcard(name_in);
-  if (! tp_cands.size()) {
-    err("Cannot find any %s to spawn", name_in.c_str());
-    return;
+  if (! tpp) {
+    auto tp_cands = tp_find_wildcard(name_in);
+    if (! tp_cands.size()) {
+      err("Cannot find any %s to spawn", name_in.c_str());
+      return;
+    }
+
+    tpp = pcg_one_of(tp_cands);
   }
 
-  auto tpp = pcg_one_of(tp_cands);
   if (unlikely(! tpp)) {
     ERR("Thing template [%s] not found", name_in.c_str());
     return;
@@ -366,10 +369,10 @@ void Thing::init_(Levelp level, const std::string &name_in, const point born, Th
   }
 }
 
-void Thing::init(Levelp level, const std::string &name_in, const point born, Thingp owner)
+void Thing::init(Levelp level, Tpp tpp, const std::string &name_in, const point born, Thingp owner)
 {
   big_lock.lock();
-  init_(level, name_in, born, owner);
+  init_(level, tpp, name_in, born, owner);
   big_lock.unlock();
 }
 
