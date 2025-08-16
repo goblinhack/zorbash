@@ -89,7 +89,6 @@ void Level::display_pixelart_map_bg_things(void)
     for (auto z = 0; z <= MAP_DEPTH_OBJ; z++) {
       for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
-          TRACE_NO_INDENT();
           FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z)
           {
             if (! t->gfx_pixelart_shown_in_bg()) {
@@ -99,7 +98,6 @@ void Level::display_pixelart_map_bg_things(void)
               t->blit_pixelart(fbo);
             }
           }
-          TRACE_NO_INDENT();
           FOR_ALL_THINGS_END()
         }
       }
@@ -121,7 +119,6 @@ void Level::display_pixelart_map_bg_things(void)
     {
       for (auto y = 0; y < MAP_HEIGHT; y++) {
         for (auto x = 0; x < MAP_WIDTH; x++) {
-          TRACE_NO_INDENT();
           FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z)
           {
             if (! t->gfx_pixelart_shown_in_bg()) {
@@ -129,7 +126,6 @@ void Level::display_pixelart_map_bg_things(void)
             }
             t->blit_pixelart(fbo);
           }
-          TRACE_NO_INDENT();
           FOR_ALL_THINGS_END()
         }
       }
@@ -149,9 +145,7 @@ void Level::display_pixelart_map_things(int fbo, const int16_t minx, const int16
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glcolor(WHITE);
 
-  TRACE_NO_INDENT();
   FOR_ALL_ANIMATED_THINGS_LEVEL(this, t) { t->animate(); }
-  TRACE_NO_INDENT();
   FOR_ALL_ANIMATED_THINGS_LEVEL_END(this)
 
   //
@@ -167,9 +161,7 @@ void Level::display_pixelart_map_things(int fbo, const int16_t minx, const int16
         // NOTE: if level pop/push happens here then we can end up missing this
         // thing in the blit as we are using the unsafe(faster) walker.
         //
-        TRACE_NO_INDENT();
         FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) { t->blit_pixelart(fbo); }
-        TRACE_NO_INDENT();
         FOR_ALL_THINGS_END()
       }
     }
@@ -194,7 +186,6 @@ void Level::display_pixelart_map_things(int fbo, const int16_t minx, const int16
     for (auto y = miny; y < maxy; y++) {
       for (uint8_t z_prio = MAP_Z_PRIO_ALWAYS_BEHIND; z_prio < MAP_Z_PRIO_LAST; z_prio++) {
         for (auto x = minx; x < maxx; x++) {
-          TRACE_NO_INDENT();
           FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z)
           {
             if (t->z_prio() != z_prio) {
@@ -202,7 +193,6 @@ void Level::display_pixelart_map_things(int fbo, const int16_t minx, const int16
             }
             t->blit_pixelart(fbo);
           }
-          TRACE_NO_INDENT();
           FOR_ALL_THINGS_END()
         }
       }
@@ -230,7 +220,6 @@ void Level::display_pixelart_map_fg_things(int fbo, const int16_t minx, const in
     for (auto y = miny; y < maxy; y++) {
       for (uint8_t z_prio = MAP_Z_PRIO_ALWAYS_BEHIND; z_prio < MAP_Z_PRIO_LAST; z_prio++) {
         for (auto x = minx; x < maxx; x++) {
-          TRACE_NO_INDENT();
           FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z)
           {
             if (t->z_prio() != z_prio) {
@@ -254,7 +243,6 @@ void Level::display_pixelart_map_fg_things(int fbo, const int16_t minx, const in
             }
           }
         }
-        TRACE_NO_INDENT();
         FOR_ALL_THINGS_END()
       }
     }
@@ -278,9 +266,7 @@ void Level::display_pixelart_map_fg2_things(int fbo, const int16_t minx, const i
   for (auto z = (int) MAP_DEPTH_TOP; z < MAP_DEPTH; z++) {
     for (auto y = miny; y < maxy; y++) {
       for (auto x = minx; x < maxx; x++) {
-        TRACE_NO_INDENT();
         FOR_ALL_THINGS_AT_DEPTH(this, t, x, y, z) { t->blit_pixelart(fbo); }
-        TRACE_NO_INDENT();
         FOR_ALL_THINGS_END()
       }
     }
@@ -349,7 +335,6 @@ void Level::display_pixelart_map_all(void)
   pixel_map_at = point(map_at.x * TILE_WIDTH, map_at.y * TILE_HEIGHT);
 
   if (! changing_level) {
-    TRACE_NO_INDENT();
     //
     // Generate an FBO with all light sources merged together
     //
@@ -385,7 +370,6 @@ void Level::display_pixelart_map_all(void)
   }
 
   if (! changing_level) {
-    TRACE_NO_INDENT();
     //
     // Generate the non visited map with the light inverted on it to hide visible areas
     //
@@ -425,7 +409,6 @@ void Level::display_pixelart_map_all(void)
   }
 
   if (! changing_level) {
-    TRACE_NO_INDENT();
     //
     // Generate the currently visible map
     //
@@ -508,7 +491,6 @@ void Level::display_pixelart_map_all(void)
   }
 
   {
-    TRACE_NO_INDENT();
     //
     // This is the final map output
     //
