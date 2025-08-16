@@ -715,7 +715,7 @@ bool Thing::spawn_things_around_me(const std::string &what, int radius)
       }
 
       auto tp = pcg_one_of(tp_cands);
-      if (! tp) {
+      if (unlikely(! tp)) {
         return false;
       }
 

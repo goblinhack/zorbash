@@ -36,7 +36,7 @@ Thingp Level::thing_new(const std::string &name, const point at, Thingp owner)
   TRACE_NO_INDENT();
 
   auto tp = tp_find(name);
-  if (! tp) {
+  if (unlikely(! tp)) {
     auto tp_cands = tp_find_wildcard(this, at, name);
     if (! tp_cands.size()) {
       DIE("Could not find thing '%s'", name.c_str());
@@ -51,7 +51,7 @@ Thingp Level::thing_new(const std::string &name, const point at, Thingp owner)
     tp = pcg_one_of(tp_cands);
   }
 
-  if (! tp) {
+  if (unlikely(! tp)) {
     DIE("Could not create thing '%s'", name.c_str());
     return nullptr;
   }
@@ -59,8 +59,7 @@ Thingp Level::thing_new(const std::string &name, const point at, Thingp owner)
   //
   // Ensure things like chasms don't pile up on the same tile.
   //
-  if (tp->is_one_per_tile()) {
-    TRACE_NO_INDENT();
+  if (unlikely(tp->is_one_per_tile())) {
     FOR_ALL_THINGS_AT_DEPTH(this, o, at.x, at.y, tp->z_depth)
     {
       if (o->tp() == tp) {
@@ -68,7 +67,6 @@ Thingp Level::thing_new(const std::string &name, const point at, Thingp owner)
         return nullptr;
       }
     }
-    TRACE_NO_INDENT();
     FOR_ALL_THINGS_END()
   }
 

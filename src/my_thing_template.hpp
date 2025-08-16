@@ -12,9 +12,10 @@
 #include "my_tile.hpp"
 #include <map>
 #include <set>
+#include <unordered_map>
 
 using Tpidmap   = std::vector< class Tp * >;
-using Tpnamemap = std::map< std::string, class Tp * >;
+using Tpnamemap = std::unordered_map< std::string, class Tp * >;
 using Allies    = std::set< class Tp * >;
 
 enum {

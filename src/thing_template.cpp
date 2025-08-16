@@ -441,7 +441,7 @@ Tpp tp_load(int id, std::string const &name, const std::string &text_long_name, 
 Tilep tp_first_tile(Tpp tp)
 {
   TRACE_NO_INDENT();
-  if (! tp) {
+  if (unlikely(! tp)) {
     return nullptr;
   }
 

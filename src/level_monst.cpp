@@ -62,7 +62,7 @@ Tpp Level::get_random_monst(point p, monst_environ_t monst_environ, monst_class_
       //
       TRACE_NO_INDENT();
       auto tp = tp_get_with_rarity_filter(tp_monst[ biome ][ monst_environ ][ monst_class ]);
-      if (! tp) {
+      if (unlikely(! tp)) {
         continue;
       }
 

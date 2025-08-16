@@ -647,7 +647,7 @@ static Tpp tp_get_with_no_rarity_filter(Tpidmap &m)
   while (tries-- > 0) {
     auto index = pcg_rand() % m.size();
     auto tp    = get(m, index);
-    if (! tp) {
+    if (unlikely(! tp)) {
       break;
     }
 
