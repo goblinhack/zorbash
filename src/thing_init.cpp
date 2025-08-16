@@ -34,18 +34,23 @@ Thingp Level::thing_new(const std::string &name, const point at, Thingp owner)
   // like "random_monst_class_A") Else just find the named thing.
   //
   TRACE_NO_INDENT();
-  auto tp_cands = tp_find_wildcard(this, at, name);
-  if (! tp_cands.size()) {
-    DIE("Could not find thing '%s'", name.c_str());
-    return nullptr;
+
+  auto tp = tp_find(name);
+  if (! tp) {
+    auto tp_cands = tp_find_wildcard(this, at, name);
+    if (! tp_cands.size()) {
+      DIE("Could not find thing '%s'", name.c_str());
+      return nullptr;
+    }
+
+    if (! tp_cands.size()) {
+      err("Cannot find any %s to spawn", name.c_str());
+      return nullptr;
+    }
+
+    tp = pcg_one_of(tp_cands);
   }
 
-  if (! tp_cands.size()) {
-    err("Cannot find any %s to spawn", name.c_str());
-    return nullptr;
-  }
-
-  auto tp = pcg_one_of(tp_cands);
   if (! tp) {
     DIE("Could not create thing '%s'", name.c_str());
     return nullptr;
