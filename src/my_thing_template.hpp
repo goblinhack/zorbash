@@ -1353,17 +1353,18 @@ public:
   int dmg_chance_d1000_stamina_drain(int) const;
   int dmg_chance_d1000_water(int) const;
 
-  const std::string &on_idle_tick_freq_dice_str(void) const;
-  const std::string &lifespan_dice_str(void) const;
-  const std::string &spawn_group_size_dice_str(void) const;
   const std::string &gold_value_dice_str(void) const;
-  int                get_danger_level(void);
-  const std::string &nutrition_dice_str(void) const;
   const std::string &health_initial_dice_str(void) const;
-  void               temperature_max_set(int v);
-  void               temperature_min_set(int v);
+  const std::string &lifespan_dice_str(void) const;
+  const std::string &nutrition_dice_str(void) const;
+  const std::string &on_idle_tick_freq_dice_str(void) const;
   const std::string &resurrect_dice_str(void) const;
-  void               temperature_set(int v);
+  const std::string &spawn_group_size_dice_str(void) const;
+
+  int  get_danger_level(void);
+  void temperature_max_set(int v);
+  void temperature_min_set(int v);
+  void temperature_set(int v);
 
   inline const std::string &dmg_nat_att_type(void) const { return _dmg_nat_att_type; }
   inline const std::string &equip_carry_anim(void) const { return _equip_carry_anim; }
