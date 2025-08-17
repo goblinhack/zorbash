@@ -32,6 +32,8 @@
 #ifndef _MY_PCG_BASIC_HPP_INCLUDED
 #define _MY_PCG_BASIC_HPP_INCLUDED 1
 
+#include "my_game_defs.hpp"
+
 #include <inttypes.h>
 #include <pthread.h>
 
