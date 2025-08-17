@@ -5,6 +5,7 @@
 #ifndef _MY_CALLSTACK_HPP_
 #define _MY_CALLSTACK_HPP_
 
+#include "my_game_defs.hpp"
 #include "my_globals.hpp"
 #include "my_sys.hpp"
 #include <string>
@@ -35,9 +36,7 @@ struct callframe {
 //
 #define MAXCALLFRAME 256
 
-#define USE_THREADS
-
-#ifdef USE_THREADS
+#ifdef ENABLE_THREADS
 #ifdef __MAIN__
 thread_local struct callframe callframes[ MAXCALLFRAME ];
 thread_local unsigned char    g_callframes_depth;

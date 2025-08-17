@@ -163,9 +163,9 @@ void dmap_process_no_diagonals(Dmap *D, point tl, point br, bool place_border)
   uint8_t                                                                                i;
   uint8_t                                                                                lowest;
   uint8_t                                                                                changed;
-  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig;
-  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig_valid;
-  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > valid;
+  static THREAD_LOCAL std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig;
+  static THREAD_LOCAL std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig_valid;
+  static THREAD_LOCAL std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > valid;
 
   int minx, miny, maxx, maxy;
   if (tl.x < br.x) {
@@ -435,9 +435,9 @@ void dmap_process_allow_diagonals(Dmap *D, point tl, point br, bool place_border
   uint8_t                                                                                i;
   uint8_t                                                                                lowest;
   uint8_t                                                                                changed;
-  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig;
-  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig_valid;
-  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > valid;
+  static THREAD_LOCAL std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig;
+  static THREAD_LOCAL std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig_valid;
+  static THREAD_LOCAL std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > valid;
 
   int minx, miny, maxx, maxy;
   if (tl.x < br.x) {
@@ -682,9 +682,9 @@ void dmap_process_reverse_allow_diagonals(Dmap *D, point tl, point br, bool plac
   uint8_t                                                                                i;
   uint8_t                                                                                highest;
   uint8_t                                                                                changed;
-  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig;
-  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig_valid;
-  static thread_local std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > valid;
+  static THREAD_LOCAL std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig;
+  static THREAD_LOCAL std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > orig_valid;
+  static THREAD_LOCAL std::array< std::array< uint8_t, MAP_HEIGHT_MAX >, MAP_WIDTH_MAX > valid;
 
   int minx, miny, maxx, maxy;
   if (tl.x < br.x) {

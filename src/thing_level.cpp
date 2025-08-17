@@ -531,9 +531,9 @@ void Thing::level_push_(void)
 
 void Thing::level_push(void)
 {
-  big_lock.lock();
+  BIG_LOCK();
   level_push_();
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void Thing::level_pop_(void)
@@ -968,7 +968,7 @@ void Thing::level_pop_(void)
 
 void Thing::level_pop(void)
 {
-  big_lock.lock();
+  BIG_LOCK();
   level_pop_();
-  big_lock.unlock();
+  BIG_UNLOCK();
 }

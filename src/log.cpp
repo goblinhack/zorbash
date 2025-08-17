@@ -44,12 +44,12 @@ void LOG(const char *fmt, ...)
 {
   TRACE_NO_INDENT();
 
-  big_lock.lock();
+  BIG_LOCK();
   va_list args;
   va_start(args, fmt);
   log_(fmt, args);
   va_end(args);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 static void warn_(const char *fmt, va_list args)
@@ -76,13 +76,13 @@ void WARN(const char *fmt, ...)
 {
   TRACE_NO_INDENT();
 
-  big_lock.lock();
+  BIG_LOCK();
   va_list args;
 
   va_start(args, fmt);
   warn_(fmt, args);
   va_end(args);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 static void con_(const char *fmt, va_list args)
@@ -255,51 +255,51 @@ void CON(const char *fmt, ...)
 {
   TRACE_NO_INDENT();
 
-  big_lock.lock();
+  BIG_LOCK();
   va_list args;
   va_start(args, fmt);
   con_(fmt, args);
   va_end(args);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void CON(const wchar_t *fmt, ...)
 {
   TRACE_NO_INDENT();
 
-  big_lock.lock();
+  BIG_LOCK();
   va_list args;
 
   va_start(args, fmt);
   con_(fmt, args);
   va_end(args);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void TOPCON(const char *fmt, ...)
 {
   TRACE_NO_INDENT();
 
-  big_lock.lock();
+  BIG_LOCK();
   va_list args;
 
   va_start(args, fmt);
   topcon_(fmt, args);
   va_end(args);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void TOPCON(const wchar_t *fmt, ...)
 {
   TRACE_NO_INDENT();
 
-  big_lock.lock();
+  BIG_LOCK();
   va_list args;
 
   va_start(args, fmt);
   topcon_(fmt, args);
   va_end(args);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 static void dying_(const char *fmt, va_list args)
@@ -467,13 +467,13 @@ void CROAK(const char *fmt, ...)
 {
   TRACE_NO_INDENT();
 
-  big_lock.lock();
+  BIG_LOCK();
   va_list args;
 
   va_start(args, fmt);
   croak_(fmt, args);
   va_end(args);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 static void croak_clean_(const char *fmt, va_list args)
@@ -495,26 +495,26 @@ void CROAK_CLEAN(const char *fmt, ...)
 {
   TRACE_NO_INDENT();
 
-  big_lock.lock();
+  BIG_LOCK();
   va_list args;
 
   va_start(args, fmt);
   croak_clean_(fmt, args);
   va_end(args);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void DYING(const char *fmt, ...)
 {
   TRACE_NO_INDENT();
 
-  big_lock.lock();
+  BIG_LOCK();
   va_list args;
 
   va_start(args, fmt);
   dying_(fmt, args);
   va_end(args);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void myerr(const char *fmt, ...)
@@ -525,7 +525,7 @@ void myerr(const char *fmt, ...)
   if (nested_error) {
     return;
   }
-  big_lock.lock();
+  BIG_LOCK();
   bool old_nested_error = nested_error;
   nested_error          = true;
 
@@ -554,7 +554,7 @@ void myerr(const char *fmt, ...)
   if (g_quitting) {
     DIE("Error while quitting");
   }
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void py_myerr(const char *fmt, ...)
@@ -565,7 +565,7 @@ void py_myerr(const char *fmt, ...)
   if (nested_error) {
     return;
   }
-  big_lock.lock();
+  BIG_LOCK();
   bool old_nested_error = nested_error;
   nested_error          = true;
 
@@ -594,7 +594,7 @@ void py_myerr(const char *fmt, ...)
   if (g_quitting) {
     DIE("Error while quitting");
   }
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 static void msgerr_(const char *fmt, va_list args)
@@ -639,11 +639,11 @@ void GAME_UI_MSG_BOX(const char *fmt, ...)
 
   va_list args;
 
-  big_lock.lock();
+  BIG_LOCK();
   va_start(args, fmt);
   msgerr_(fmt, args);
   va_end(args);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 static void sdl_msgerr_(const char *fmt, va_list args)
@@ -665,13 +665,13 @@ void SDL_MSG_BOX(const char *fmt, ...)
 {
   TRACE_NO_INDENT();
 
-  big_lock.lock();
+  BIG_LOCK();
   va_list args;
 
   va_start(args, fmt);
   sdl_msgerr_(fmt, args);
   va_end(args);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 static void botcon_(const char *fmt, va_list args)
@@ -754,24 +754,24 @@ void BOTCON(const char *fmt, ...)
 {
   TRACE_NO_INDENT();
 
-  big_lock.lock();
+  BIG_LOCK();
   va_list args;
 
   va_start(args, fmt);
   botcon_(fmt, args);
   va_end(args);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void BOTCON(const wchar_t *fmt, ...)
 {
   TRACE_NO_INDENT();
 
-  big_lock.lock();
+  BIG_LOCK();
   va_list args;
 
   va_start(args, fmt);
   botcon_(fmt, args);
   va_end(args);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }

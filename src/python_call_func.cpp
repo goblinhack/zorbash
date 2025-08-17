@@ -1466,232 +1466,232 @@ static int py_call_int_fn_(const char *module, const char *name, uint32_t val1, 
 void py_call_void(const char *name)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   py_call_void_(name);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void py_call_void_fn(const char *module, const char *name, int val1)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   py_call_void_fn_(module, name, val1);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void py_call_void_fn(const char *module, const char *name, int val1, int val2)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   py_call_void_fn_(module, name, val1, val2);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   py_call_void_fn_(module, name, val1, val2, val3);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   py_call_void_fn_(module, name, val1, val2, val3, val4);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   py_call_void_fn_(module, name, val1, val2, val3, val4, val5);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
                      int val7)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6, val7);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
                      int val7, int val8)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void py_call_void_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6,
                      int val7, int val8, int val9)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8, val9);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void py_call_void_fn(const char *module, const char *name, uint32_t val1)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   py_call_void_fn_(module, name, val1);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   py_call_void_fn_(module, name, val1, val2);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   py_call_void_fn_(module, name, val1, val2, val3);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   py_call_void_fn_(module, name, val1, val2, val3, val4);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
                      uint32_t val5)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   py_call_void_fn_(module, name, val1, val2, val3, val4, val5);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
                      uint32_t val5, uint32_t val6)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
                      uint32_t val5, uint32_t val6, uint32_t val7)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6, val7);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
                      uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
                      uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8, uint32_t val9)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8, val9);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void py_call_void_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4,
                      uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8, uint32_t val9, uint32_t val10)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   py_call_void_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8, val9, val10);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 bool py_call_bool(const char *name)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_bool_(name);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
 bool py_call_bool_fn(const char *module, const char *name, int val1)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_bool_fn_(module, name, val1);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
 bool py_call_bool_fn(const char *module, const char *name, int val1, int val2)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_bool_fn_(module, name, val1, val2);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
 bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_bool_fn_(module, name, val1, val2, val3);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
 bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
 bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
 bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5, val6);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
@@ -1699,9 +1699,9 @@ bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, i
                      int val7)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5, val6, val7);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
@@ -1709,45 +1709,45 @@ bool py_call_bool_fn(const char *module, const char *name, int val1, int val2, i
                      int val7, int val8)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
 bool py_call_bool_fn(const char *module, const char *name, uint32_t val1)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_bool_fn_(module, name, val1);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
 bool py_call_bool_fn(const char *module, const char *name, uint32_t val1, uint32_t val2)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_bool_fn_(module, name, val1, val2);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
 bool py_call_bool_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_bool_fn_(module, name, val1, val2, val3);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
 bool py_call_bool_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
@@ -1755,9 +1755,9 @@ bool py_call_bool_fn(const char *module, const char *name, uint32_t val1, uint32
                      uint32_t val5)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
@@ -1765,9 +1765,9 @@ bool py_call_bool_fn(const char *module, const char *name, uint32_t val1, uint32
                      uint32_t val5, uint32_t val6)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5, val6);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
@@ -1775,9 +1775,9 @@ bool py_call_bool_fn(const char *module, const char *name, uint32_t val1, uint32
                      uint32_t val5, uint32_t val6, uint32_t val7)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5, val6, val7);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
@@ -1785,72 +1785,72 @@ bool py_call_bool_fn(const char *module, const char *name, uint32_t val1, uint32
                      uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_bool_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
 int py_call_int(const char *name)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_int_(name);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
 int py_call_int_fn(const char *module, const char *name, int val1)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_int_fn_(module, name, val1);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
 int py_call_int_fn(const char *module, const char *name, int val1, int val2)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_int_fn_(module, name, val1, val2);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
 int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_int_fn_(module, name, val1, val2, val3);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
 int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3, int val4)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
 int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
 int py_call_int_fn(const char *module, const char *name, int val1, int val2, int val3, int val4, int val5, int val6)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5, val6);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
@@ -1858,9 +1858,9 @@ int py_call_int_fn(const char *module, const char *name, int val1, int val2, int
                    int val7)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5, val6, val7);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
@@ -1868,45 +1868,45 @@ int py_call_int_fn(const char *module, const char *name, int val1, int val2, int
                    int val7, int val8)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
 int py_call_int_fn(const char *module, const char *name, uint32_t val1)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_int_fn_(module, name, val1);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
 int py_call_int_fn(const char *module, const char *name, uint32_t val1, uint32_t val2)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_int_fn_(module, name, val1, val2);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
 int py_call_int_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_int_fn_(module, name, val1, val2, val3);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
 int py_call_int_fn(const char *module, const char *name, uint32_t val1, uint32_t val2, uint32_t val3, uint32_t val4)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
@@ -1914,9 +1914,9 @@ int py_call_int_fn(const char *module, const char *name, uint32_t val1, uint32_t
                    uint32_t val5)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
@@ -1924,9 +1924,9 @@ int py_call_int_fn(const char *module, const char *name, uint32_t val1, uint32_t
                    uint32_t val5, uint32_t val6)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5, val6);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
@@ -1934,9 +1934,9 @@ int py_call_int_fn(const char *module, const char *name, uint32_t val1, uint32_t
                    uint32_t val5, uint32_t val6, uint32_t val7)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5, val6, val7);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }
 
@@ -1944,8 +1944,8 @@ int py_call_int_fn(const char *module, const char *name, uint32_t val1, uint32_t
                    uint32_t val5, uint32_t val6, uint32_t val7, uint32_t val8)
 {
   TRACE_NO_INDENT();
-  big_lock.lock();
+  BIG_LOCK();
   auto ret = py_call_int_fn_(module, name, val1, val2, val3, val4, val5, val6, val7, val8);
-  big_lock.unlock();
+  BIG_UNLOCK();
   return ret;
 }

@@ -6,7 +6,7 @@
 
 #define __MAIN__
 
-#ifdef USE_THREADS
+#ifdef ENABLE_THREADS
 #ifdef __MAIN__
 thread_local struct callframe callframes[ MAXCALLFRAME ];
 thread_local unsigned char    g_callframes_depth;

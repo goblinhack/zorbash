@@ -14,41 +14,41 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_NO_INDENT();
 
-  big_lock.lock();
+  BIG_LOCK();
   PyObject *py_class = nullptr;
 
   static char *kwlist[] = {(char *) "tp", nullptr};
 
   if (! PyArg_ParseTupleAndKeywords(args, keywds, "O", kwlist, &py_class)) {
     PY_ERR("tp_load: Bad args");
-    big_lock.unlock();
+    BIG_UNLOCK();
     Py_RETURN_FALSE;
   }
 
   if (! py_class) {
     PY_ERR("tp_load: Missing name attr");
-    big_lock.unlock();
+    BIG_UNLOCK();
     Py_RETURN_FALSE;
   }
 
   char *tp_name = py_obj_attr_str(py_class, "name");
   if (! tp_name) {
     PY_ERR("tp_load: Missing tp name");
-    big_lock.unlock();
+    BIG_UNLOCK();
     Py_RETURN_FALSE;
   }
 
   char *tp_text_long_name = py_obj_attr_str(py_class, "text_long_name");
   if (! tp_text_long_name) {
     PY_ERR("tp_load: Missing tp text_long_name");
-    big_lock.unlock();
+    BIG_UNLOCK();
     Py_RETURN_FALSE;
   }
 
   char *tp_text_short_name = py_obj_attr_str(py_class, "text_short_name");
   if (! tp_text_short_name) {
     PY_ERR("tp_load: Missing tp text_short_name");
-    big_lock.unlock();
+    BIG_UNLOCK();
     Py_RETURN_FALSE;
   }
 
@@ -60,7 +60,7 @@ PyObject *tp_load_(PyObject *obj, PyObject *args, PyObject *keywds)
   myfree(tp_text_long_name);
   myfree(tp_text_short_name);
 
-  big_lock.unlock();
+  BIG_UNLOCK();
   Py_RETURN_TRUE;
 }
 

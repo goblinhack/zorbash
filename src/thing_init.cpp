@@ -371,9 +371,9 @@ void Thing::init_(Levelp level, Tpp tpp, const std::string &name_in, const point
 
 void Thing::init(Levelp level, Tpp tpp, const std::string &name_in, const point born, Thingp owner)
 {
-  big_lock.lock();
+  BIG_LOCK();
   init_(level, tpp, name_in, born, owner);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void Thing::init_slower_stuff(void)

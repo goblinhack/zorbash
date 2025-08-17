@@ -34,14 +34,14 @@ void Level::log_(const char *fmt, va_list args)
 
 void Level::log(const char *fmt, ...)
 {
-  big_lock.lock();
+  BIG_LOCK();
   verify(MTYPE_LEVEL, this);
   auto    l = this;
   va_list args;
   va_start(args, fmt);
   l->log_(fmt, args);
   va_end(args);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void Level::con_(const char *fmt, va_list args)
@@ -71,7 +71,7 @@ void Level::con_(const char *fmt, va_list args)
 
 void Level::con(const char *fmt, ...)
 {
-  big_lock.lock();
+  BIG_LOCK();
   verify(MTYPE_LEVEL, this);
   auto    l = this;
   va_list args;
@@ -79,7 +79,7 @@ void Level::con(const char *fmt, ...)
   va_start(args, fmt);
   l->con_(fmt, args);
   va_end(args);
-  big_lock.unlock();
+  BIG_UNLOCK();
 }
 
 void Level::err_(const char *fmt, va_list args)
@@ -137,7 +137,7 @@ void Level::err(const char *fmt, ...)
     return;
   }
 
-  big_lock.lock();
+  BIG_LOCK();
   bool old_nested_error = nested_error;
   nested_error          = true;
 
@@ -157,5 +157,5 @@ void Level::err(const char *fmt, ...)
     va_end(args);
   }
   nested_error = false;
-  big_lock.unlock();
+  BIG_UNLOCK();
 }

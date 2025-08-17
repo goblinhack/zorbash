@@ -12,7 +12,21 @@
 // If set to 1, essentially single threaded
 //
 #define MAX_CONCURRENT_THREADS 3
-#define ENABLE_THREADS         0
+
+//
+// Disabled for now as we get weird STL errors on creating levels sometimes.
+//
+#define ENABLE_THREADS 0
+
+#if ENABLE_THREADS == 1
+#define BIG_LOCK()   big_lock.lock();
+#define BIG_UNLOCK() big_lock.unlock();
+#define THREAD_LOCAL thread_local
+#else
+#define BIG_LOCK()
+#define BIG_UNLOCK()
+#define THREAD_LOCAL
+#endif
 
 //
 // Grid chunks are used to construct the levels and the overall dungeon
