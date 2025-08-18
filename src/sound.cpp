@@ -8,12 +8,22 @@
 
 std::unordered_map< std::string, class sound * > all_sound;
 
-bool sound_init_done;
+static bool sound_init_done;
+
+static std::unordered_map< int, std::string > already_playing;
+
+static void sound_finished(int channel)
+{
+  if (channel != -1) {
+    already_playing[ channel ] = "";
+  }
+}
 
 bool sound_init(void)
 {
   TRACE_NO_INDENT();
   Mix_AllocateChannels(16);
+  Mix_ChannelFinished(sound_finished);
 
   sound_init_done = true;
 
@@ -108,6 +118,33 @@ bool sound_find(const std::string &alias)
   return result != all_sound.end();
 }
 
+int sound_play_internal(int channel, class sound *s, int loops)
+{
+  TRACE_NO_INDENT();
+
+  if (! s->chunk) {
+    ERR("Cannot find sound chunk %s", s->alias.c_str());
+    return -1;
+  }
+
+  //
+  // Playing already?
+  //
+  for (auto p : already_playing) {
+    if (p.second == s->alias) {
+      return -1;
+    }
+  }
+
+  auto chan = Mix_PlayChannel(-1, s->chunk, loops);
+  if (chan == -1) {
+    return chan;
+  }
+
+  already_playing[ chan ] = s->alias;
+  return chan;
+}
+
 bool sound_play(const std::string &alias)
 {
   TRACE_NO_INDENT();
@@ -140,15 +177,9 @@ bool sound_play(const std::string &alias)
 
   Mix_VolumeChunk(sound->second->chunk, volume);
 
-  if (Mix_PlayChannel(-1 /* first free channel */, sound->second->chunk, 0 /* loops */) == -1) {
+  if (sound_play_internal(-1 /* first free channel */, sound->second, 0 /* loops */) == -1) {
     DBG2("Cannot play sound %s on any channel", alias.c_str());
-    Mix_HaltChannel(0);
-    SDL_ClearError();
-
-    if (Mix_PlayChannel(-1 /* first free channel */, sound->second->chunk, 0 /* loops */) == -1) {
-      ERR("Cannot play sound %s: %s", alias.c_str(), Mix_GetError());
-      SDL_ClearError();
-    }
+    return false;
   }
 
   return true;
@@ -182,7 +213,7 @@ bool sound_play_channel(int channel, const std::string &alias)
   Mix_VolumeChunk(sound->second->chunk, volume);
 
   if (Mix_Playing(channel)) {
-    if (Mix_PlayChannel(-1, sound->second->chunk, 0 /* loops */) == -1) {
+    if (sound_play_internal(-1, sound->second, 0 /* loops */) == -1) {
       DBG2("Cannot play sound %s on channel %d", alias.c_str(), channel);
       return false;
     }
@@ -194,8 +225,8 @@ bool sound_play_channel(int channel, const std::string &alias)
     return false;
   }
 
-  if (Mix_PlayChannel(channel, sound->second->chunk, 0 /* loops */) == -1) {
-    if (Mix_PlayChannel(-1, sound->second->chunk, 0 /* loops */) == -1) {
+  if (sound_play_internal(channel, sound->second, 0 /* loops */) == -1) {
+    if (sound_play_internal(-1, sound->second, 0 /* loops */) == -1) {
       DBG2("Cannot play sound %s on channel %d", alias.c_str(), channel);
       return false;
     }

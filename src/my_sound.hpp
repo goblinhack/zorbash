@@ -43,6 +43,8 @@ public:
   float          volume {};
 };
 
+int sound_play_internal(int channel, class sound *, int loops);
+
 extern std::unordered_map< std::string, class sound * > all_sound;
 
 enum {
