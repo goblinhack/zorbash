@@ -99,9 +99,9 @@ public:
   command_fn_t callback;
 };
 
-typedef std::shared_ptr< class command_t > commandp;
-typedef std::map< std::string, commandp >  commands;
-static commands                            commands_map;
+typedef std::shared_ptr< class command_t >          commandp;
+typedef std::unordered_map< std::string, commandp > commands;
+static commands                                     commands_map;
 
 static uint8_t command_inited;
 

@@ -6,7 +6,7 @@
 #include "my_game.hpp"
 #include "my_sound.hpp"
 
-std::map< std::string, class sound * > all_sound;
+std::unordered_map< std::string, class sound * > all_sound;
 
 bool sound_init_done;
 

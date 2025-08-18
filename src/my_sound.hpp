@@ -43,7 +43,7 @@ public:
   float          volume {};
 };
 
-extern std::map< std::string, class sound * > all_sound;
+extern std::unordered_map< std::string, class sound * > all_sound;
 
 enum {
   CHANNEL_MISC,

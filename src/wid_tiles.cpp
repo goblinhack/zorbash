@@ -10,8 +10,8 @@
 
 #include <map>
 
-static int                                                        wid_tiles_init_done;
-static std::map< std::string, std::shared_ptr< class WidTiles > > wid_tiles_all;
+static int                                                                  wid_tiles_init_done;
+static std::unordered_map< std::string, std::shared_ptr< class WidTiles > > wid_tiles_all;
 
 uint8_t wid_tiles_init(void)
 {

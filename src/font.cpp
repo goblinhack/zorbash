@@ -11,7 +11,7 @@ Fontp font_pixelart_large;
 Fontp font_ascii;
 Fontp font_ui;
 
-static std::map< std::string, Fontp > fonts;
+static std::unordered_map< std::string, Fontp > fonts;
 
 void font_fini(void) { TRACE_AND_INDENT(); }
 

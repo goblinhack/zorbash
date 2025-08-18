@@ -979,7 +979,7 @@ std::initializer_list< std::string > tps = {
     "zorb_wizard",
 };
 
-static std::map< std::string, int > tp_preferred_id;
+static std::unordered_map< std::string, int > tp_preferred_id;
 
 //
 // Assign template IDs

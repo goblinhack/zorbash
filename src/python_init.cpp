@@ -138,7 +138,7 @@ void py_init(char *argv[])
 
 PyObject *py_add_module(const char *mod)
 {
-  static std::map< std::string, PyObject * > py_mods;
+  static std::unordered_map< std::string, PyObject * > py_mods;
 
   auto name = std::string(mod);
   auto pmod = py_mods[ name ];

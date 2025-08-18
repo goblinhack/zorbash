@@ -47,9 +47,9 @@ public:
   SDL_Surface *surface            = {};
 };
 
-static std::map< std::string, Texp > textures;
-static std::map< std::string, Texp > textures_monochrome;
-static std::map< std::string, Texp > textures_mask;
+static std::unordered_map< std::string, Texp > textures;
+static std::unordered_map< std::string, Texp > textures_monochrome;
+static std::unordered_map< std::string, Texp > textures_mask;
 
 uint8_t tex_init(void)
 {

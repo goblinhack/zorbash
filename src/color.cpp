@@ -12,7 +12,7 @@
 #include <string.h>  // do not remove
 #include <strings.h> // do not remove, strcasecmp
 
-using colors = std::map< std::string, color >;
+using colors = std::unordered_map< std::string, color >;
 
 colors      color_map;
 static bool color_init_done;
