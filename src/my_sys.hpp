@@ -186,8 +186,8 @@ void CROAK_CLEAN(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
 #ifdef ENABLE_ASSERT
 #undef ASSERT
 #define ASSERT(x)                                                                                                    \
-  if (! (x)) {                                                                                                       \
-    TRACE_AND_INDENT();                                                                                              \
+  if (unlikely(! (x))) {                                                                                             \
+    TRACE_NO_INDENT();                                                                                               \
     std::stringstream ss;                                                                                            \
     ss << "Assert '" << #x << "' failed at line " << __LINE__ << ", file " << __FILE__ << ", function "              \
        << __FUNCTION__ << "()";                                                                                      \
@@ -204,7 +204,7 @@ void CROAK_CLEAN(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
 // https://stackoverflow.com/questions/2193544/how-to-print-additional-information-when-assert-fails
 #ifdef ENABLE_ASSERT
 #define ASSERT_EX(left, operator, right)                                                                                             \
-  if (! ((left) operator(right))) {                                                                                                  \
+  if (unlikely(! ((left) operator(right)))) {                                                                                        \
     TRACE_AND_INDENT();                                                                                                              \
     std::cerr << "ASSERT FAILED: " << #left << " "                                                                                   \
               << #                                                                                                                   \
