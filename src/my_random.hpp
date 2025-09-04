@@ -16,15 +16,15 @@
 //
 #define pcg_rand()                       pcg32_random()
 #define pcg_srand(a)                     pcg32_srandom(a, a)
-#define pcg_random_range(a, b)           (pcg32_boundedrand((b) - (a)) + (a))
-#define pcg_random_range_inclusive(a, b) (pcg32_boundedrand((b) - (a) + 1) + (a))
+#define pcg_random_range(a, b)           ((b) > (a) ? pcg32_boundedrand((b) - (a)) + (a) : (a))
+#define pcg_random_range_inclusive(a, b) ((b) > (a) ? pcg32_boundedrand((b) - (a) + 1) + (a) : (a))
 
 //
 // For randomness that does not matter for reproducability.
 //
 #define non_pcg_rand()                       rand()
 #define non_pcg_srand(a)                     srand(a)
-#define non_pcg_random_range(a, b)           (rand() % ((b) - (a)) + (a))
-#define non_pcg_random_range_inclusive(a, b) (rand() % ((b) - (a) + 1) + (a))
+#define non_pcg_random_range(a, b)           ((b) > (a) ? rand() % ((b) - (a)) + (a) : (a))
+#define non_pcg_random_range_inclusive(a, b) ((b) > (a) ? rand() % ((b) - (a) + 1) + (a) : (a))
 
 #endif
