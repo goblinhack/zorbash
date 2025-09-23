@@ -615,6 +615,10 @@ static void parse_args(int argc, char *argv[])
     }
 
     if (! strcasecmp(argv[ i ], "--test-depth") || ! strcasecmp(argv[ i ], "-test-depth")) {
+      if (i == argc - 1) {
+        usage();
+        DIE("Missing parameter for argument, %s", argv[ i ]);
+      }
       g_opt_test_level_start       = true;
       g_opt_test_skip_main_menu    = true;
       g_opt_test_level_start_depth = std::stoi(argv[ i + 1 ]);
@@ -635,6 +639,10 @@ static void parse_args(int argc, char *argv[])
     }
 
     if (! strcasecmp(argv[ i ], "--seed") || ! strcasecmp(argv[ i ], "-seed")) {
+      if (i == argc - 1) {
+        usage();
+        DIE("Missing parameter for argument, %s", argv[ i ]);
+      }
       g_opt_seed_name   = argv[ i + 1 ];
       seed_manually_set = true;
       i++;
@@ -643,6 +651,10 @@ static void parse_args(int argc, char *argv[])
 
     if (! strcasecmp(argv[ i ], "--player-name") || ! strcasecmp(argv[ i ], "-player-name")
         || ! strcasecmp(argv[ i ], "--playername") || ! strcasecmp(argv[ i ], "-playername")) {
+      if (i == argc - 1) {
+        usage();
+        DIE("Missing parameter for argument, %s", argv[ i ]);
+      }
       g_opt_player_name = argv[ i + 1 ];
       i++;
       continue;
