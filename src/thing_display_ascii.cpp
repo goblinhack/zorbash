@@ -248,6 +248,13 @@ void Thing::blit_ascii_adjust_color(color &c, bool fg, bool left_bar)
     }
     float brightness = 1.0 - (((float) distance_to_player() - 1) / light_dist);
 
+    if (brightness < 0) {
+      brightness = 0;
+    }
+    if (brightness > 1) {
+      brightness = 1;
+    }
+
     IF_DEBUG2 { brightness = 1.0; }
 
     c.r = ((float) c.r) * brightness;

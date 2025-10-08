@@ -441,6 +441,8 @@ echo "#include \"my_config.hpp\"" > $CONFIG_H
 C_FLAGS+="-include config.h"
 rm -f src/precompiled.hpp.gch
 
+EXTRA_CHECKS=" -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer -fno-common"
+
 #
 # for backtraces, but it doesn't help much
 #
@@ -501,8 +503,8 @@ case "$MY_OS_NAME" in
         DSYM="dsymutil \${TARGET_GAME} &"
 
         if [[ $OPT_DEV2 != "" ]]; then
-            C_FLAGS+=" -fsanitize=address -fno-omit-frame-pointer"
-            LDFLAGS+=" -fsanitize=address"
+            C_FLAGS+="$EXTRA_CHECKS"
+            LDFLAGS+="$EXTRA_CHECKS"
         fi
         ;;
     *inux*)
@@ -511,8 +513,8 @@ case "$MY_OS_NAME" in
         LDLIBS+="-lGL "
 
         if [[ $OPT_DEV2 != "" ]]; then
-            C_FLAGS+=" -fsanitize=address -fno-omit-frame-pointer -fno-common"
-            LDFLAGS+=" -fsanitize=address"
+            C_FLAGS+="$EXTRA_CHECKS"
+            LDFLAGS+="$EXTRA_CHECKS"
         fi
 
         pkg-config --print-provides libunwind >/dev/null 2>/dev/null
@@ -562,7 +564,7 @@ if [[ $OPT_REL != "" ]]; then
     #
     echo "COMPILER_FLAGS=$WERROR $C_FLAGS -O3 -ffast-math -g" > .Makefile
 else
-    echo "COMPILER_FLAGS=$WERROR $C_FLAGS -O0 -g" > .Makefile
+    echo "COMPILER_FLAGS=$WERROR $C_FLAGS -Og -g" > .Makefile
 fi
 
 if [[ $OPT_DEV2 != "" ]]; then
@@ -581,8 +583,9 @@ WARNING_FLAGS+=-Wno-unknown-warning-option
 #
 # Additional warnings for uninitialized variables; seem to be gcc only
 #
+WARNING_FLAGS+=-Wuninitialized
 WARNING_FLAGS+=-Wmaybe-uninitialized
-#WARNING_FLAGS+=-Wuninitialized=verbose
+WARNING_FLAGS+=-Wuninitialized=verbose
 #WARNING_FLAGS+=-Wunsafe-buffer-usage -fsafe-buffer-usage-suggestions
 #
 # When compiling C, give string constants the type const char[length] so that copying the address of
