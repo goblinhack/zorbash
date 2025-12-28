@@ -7,19 +7,21 @@
 #include "my_main.hpp"
 #include "my_ptrcheck.hpp"
 #include "my_python.hpp"
+#include "my_string.hpp"
 
 PyObject *con_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  wchar_t *a = nullptr;
+  char *a = nullptr;
 
-  if (! PyArg_ParseTuple(args, "u", &a)) {
-    PY_ERR("con: Bad args");
+  if (! PyArg_ParseTuple(args, "s", &a)) {
+    PY_ERR("puts: Bad args");
     Py_RETURN_FALSE;
   }
 
   if (a) {
-    con(a);
+    auto b = string_to_wstring(a);
+    con(b.c_str());
   }
 
   Py_RETURN_TRUE;
@@ -28,15 +30,16 @@ PyObject *con_(PyObject *obj, PyObject *args, PyObject *keywds)
 PyObject *topcon_(PyObject *obj, PyObject *args, PyObject *keywds)
 {
   TRACE_AND_INDENT();
-  wchar_t *a = nullptr;
+  char *a = nullptr;
 
-  if (! PyArg_ParseTuple(args, "u", &a)) {
-    PY_ERR("topcon: Bad args");
+  if (! PyArg_ParseTuple(args, "s", &a)) {
+    PY_ERR("puts: Bad args");
     Py_RETURN_FALSE;
   }
 
   if (a) {
-    topcon(a);
+    auto b = string_to_wstring(a);
+    topcon(b.c_str());
   }
 
   Py_RETURN_TRUE;
