@@ -382,7 +382,7 @@ void wid_set_string_context(Widp w, std::string string_context)
 {
   TRACE_NO_INDENT();
   if (! w) {
-    ERR("NULL postringer");
+    ERR("NULL pointer");
     return;
   }
   w->string_context = string_context;
@@ -392,8 +392,8 @@ std::string wid_get_string_context(Widp w)
 {
   TRACE_NO_INDENT();
   if (! w) {
-    ERR("NULL postringer");
-    return 0;
+    ERR("NULL pointer");
+    return "";
   }
   return (w->string_context);
 }
