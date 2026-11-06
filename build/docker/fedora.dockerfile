@@ -12,7 +12,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN yum update -y
 RUN dnf install -y findutils
 RUN dnf install -y SDL2_mixer-devel SDL2_mixer
-RUN dnf install -y SDL2_ttf-devel SDL2_ttf
 RUN dnf install -y SDL2 SDL2-devel
 RUN dnf install -y SDL2_image SDL2_image-devel
 RUN dnf install -y python3

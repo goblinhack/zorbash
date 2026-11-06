@@ -110,7 +110,6 @@ help_full()
         ${MINGW_PKG_TYPE}-x86_64-SDL2_image \
         ${MINGW_PKG_TYPE}-x86_64-SDL2_mixer \
         ${MINGW_PKG_TYPE}-x86_64-SDL2_net \
-        ${MINGW_PKG_TYPE}-x86_64-SDL2_ttf \
         ${MINGW_PKG_TYPE}-x86_64-ag \
         ${MINGW_PKG_TYPE}-x86_64-binutils \
         ${MINGW_PKG_TYPE}-x86_64-bzip2 \

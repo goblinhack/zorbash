@@ -43,7 +43,7 @@ echo Package with bitrock
 echo ====================
 /bin/rm -f /c/Users/${LOGNAME}/Documents/InstallBuilder/output/*orbash*exe
 ls -la /c/Users/${LOGNAME}/Documents/InstallBuilder/output/
-"/c/Program Files/InstallBuilder Enterprise 23.4.0/bin/builder-cli.exe" build windows.xml
+"/c/Program Files/InstallBuilder Enterprise 26.8.0/bin/builder-cli.exe" build windows.xml
 
 if [[ $? -ne 0 ]];
 then
