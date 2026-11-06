@@ -62,7 +62,7 @@ void py_init(char *argv[])
 #endif
 
   LOG("INI: Calling PyImport_AppendInittab");
-  PyImport_AppendInittab("my", +py_my_module_create);
+  PyImport_AppendInittab("my", py_my_module_create);
   sdl_flush_display();
   ////////////////////////////////////////////////////////////////////////////////////////////////////
 
