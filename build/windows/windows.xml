@@ -1,7 +1,7 @@
 <project>
     <shortName>Zorbash</shortName>
     <fullName>Zorbash</fullName>
-    <version>0.2.5</version>
+    <version>0.2.6</version>
     <installerFilename></installerFilename>
     <licenseFile>C:/msys64/home/neila/zorbash/src/LICENSE</licenseFile>
     <logoImage>C:/msys64/home/neila/zorbash/build/windows/zorbash-logo.png</logoImage>
@@ -71,10 +71,10 @@
                             <origin>C:/msys64/ucrt64/bin/SDL2_mixer.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/bin/libpython3.10.dll</origin>
+                            <origin>C:/msys64/ucrt64/bin/libpython3.14.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/home/neila/zorbash/build/windows/python3.10</origin>
+                            <origin>C:/msys64/home/neila/zorbash/build/windows/python3.14</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>C:/msys64/ucrt64/bin/libwinpthread-1.dll</origin>
@@ -122,9 +122,6 @@
                             <origin>C:/msys64/ucrt64/bin/libspeex-1.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/bin/libfreetype-6.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
                             <origin>C:/msys64/ucrt64/bin/libvorbisenc-2.dll</origin>
                         </distributionFile>
                         <distributionFile>
@@ -135,12 +132,6 @@
                         </distributionFile>
                         <distributionFile>
                             <origin>C:/msys64/ucrt64/bin/liblzma-5.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>C:/msys64/ucrt64/bin/libharfbuzz-0.dll</origin>
-                        </distributionFile>
-                        <distributionFile>
-                            <origin>C:/msys64/ucrt64/bin/libgraphite2.dll</origin>
                         </distributionFile>
                         <distributionFile>
                             <origin>C:/msys64/ucrt64/bin/libpcre-1.dll</origin>
@@ -185,203 +176,226 @@
                             <origin>C:/msys64/ucrt64/bin/libopusfile-0.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_asyncio.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/bin/libxmp.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_bisect.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/bin/libwavpack-1.dll</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_blake2.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_asyncio.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_bz2.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_bisect.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_codecs_cn.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_blake2.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_codecs_hk.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_bz2.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_codecs_iso2022.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_codecs_cn.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_codecs_jp.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_codecs_hk.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_codecs_kr.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_codecs_iso2022.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_codecs_tw.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_codecs_jp.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_contextvars.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_codecs_kr.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_csv.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_codecs_tw.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_ctypes.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_csv.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_ctypes_test.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_ctypes.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_curses.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_ctypes_test.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_curses_panel.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_curses.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_datetime.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_curses_panel.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_decimal.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_decimal.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_elementtree.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_elementtree.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_hashlib.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_hashlib.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_heapq.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_heapq.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_json.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_hmac.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_lsprof.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_interpchannels.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_lzma.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_interpqueues.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_md5.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_interpreters.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_msi.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_json.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_multibytecodec.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_lsprof.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_multiprocessing.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_lzma.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_opcode.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_md5.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_overlapped.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_multibytecodec.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_pickle.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_multiprocessing.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_queue.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_overlapped.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_random.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_pickle.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_sha1.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_queue.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_sha3.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_random.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_sha256.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_remote_debugging.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_sha512.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_sha1.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_socket.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_sha2.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_sqlite3.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_sha3.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_ssl.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_socket.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_statistics.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_sqlite3.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_struct.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_ssl.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_testbuffer.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_statistics.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_testcapi.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_struct.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_testclinic.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_testbuffer.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_testconsole.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_testcapi.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_testimportmultiple.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_testclinic.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_testinternalcapi.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_testclinic_limited.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_testmultiphase.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_testconsole.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_tkinter.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_testimportmultiple.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_xxsubinterpreters.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_testinternalcapi.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_xxtestfuzz.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_testlimitedcapi.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/_zoneinfo.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_testmultiphase.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/array.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_testsinglephase.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/audioop.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_tkinter.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/binascii.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_uuid.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/cmath.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_wmi.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/math.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_xxtestfuzz.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/mmap.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_zoneinfo.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/pyexpat.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/_zstd.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/select.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/array.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/unicodedata.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/binascii.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/winsound.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/cmath.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/xxlimited.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/math.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/xxlimited_35.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/mmap.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
                         <distributionFile>
-                            <origin>C:/msys64/ucrt64/lib/python3.10/lib-dynload/zlib.cp310-mingw_x86_64_ucrt.pyd</origin>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/pyexpat.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
                         </distributionFile>
+                        <distributionFile>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/select.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/unicodedata.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/winsound.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/xxlimited.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/xxlimited_35.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/xxsubtype.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
+                        </distributionFile>
+                        <distributionFile>
+                            <origin>C:/msys64/ucrt64/lib/python3.14/lib-dynload/zlib.cp314-mingw_x86_64_ucrt_gnu.pyd</origin>
+                        </distributionFile>
+
+
                     </distributionFileList>
                 </folder>
                 <folder>
