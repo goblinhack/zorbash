@@ -1,70 +1,8 @@
-<!-- Bugs                                                                                                                                         -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
-<!-- Idea list                                                                                                                                    -->
-<!-- ---------                                                                                                                                    -->
-<!-- - auto explore                                                                                                                               -->
-<!-- - basecamp level?                                                                                                                            -->
-<!-- - chickens - battle chickens - lay eggs as food - and they get names                                                                         -->
-<!-- - chocolate golem fires chocolate                                                                                                            -->
-<!-- - cracked walls                                                                                                                              -->
-<!-- - eat corpses, like a bat corpse?                                                                                                            -->
-<!-- - hub shop levels                                                                                                                            -->
-<!-- - invisible phantoms that leave puddles of ectoplasm ?                                                                                       -->
-<!-- - level fall through to special level ?                                                                                                      -->
-<!-- - monsters with random buffs like vampirism would be interesting                                                                             -->
-<!-- - moving blocks?                                                                                                                             -->
-<!-- - portable hunger - teleports you to a room full of digestive juices                                                                         -->
-<!-- - rat pack and king rat / cranium rat                                                                                                        -->
-<!-- - rest until better                                                                                                                          -->
-<!-- - shove chocolate frog statue, get frog?                                                                                                     -->
-<!-- - skill, blind strike, attack the eyes                                                                                                       -->
-<!-- - skill, guaranteed hit, but you have no defense in the next move                                                                            -->
-<!-- - skill, heroic charge, rush enemy                                                                                                           -->
-<!-- - skill, instakill, once per level                                                                                                           -->
-<!-- - skill, kneecap, hobble enemy                                                                                                               -->
-<!-- - skill, slash and jump                                                                                                                      -->
-<!-- - skill, slash and roll                                                                                                                      -->
-<!-- - skill, spring attack, give up a round for 2.5 times damage                                                                                 -->
-<!-- - skill, whirl attack, attack 2 or 3 enemies                                                                                                 -->
-<!-- - spider web spawn small spiders?                                                                                                            -->
-<!-- - tentacles out of the ground that try to surround you                                                                                       -->
-<!-- - tiny pixel effects that bounce?                                                                                                            -->
-<!-- - tomb of past player ? or random player ? leads to random small room?                                                                       -->
-<!-- - vaults                                                                                                                                     -->
-<!--                                                                                                                                              -->
-<!-- MVP plan                                                                                                                                     -->
-<!-- ------                                                                                                                                       -->
-<!-- - boss 1 Mummy mummy, ankh of life                                                                                                           -->
-<!-- - boss 2 slime boss, spawns slimes, tries to jump splat the player                                                                           -->
-<!-- - boss 3 rat king boss, sewer like level with rats coming out of the walls                                                                   -->
-<!-- - explode bog tiles to kill boss                                                                                                             -->
-<!-- - boss 4 goblin king boss, will be happy if the rat king crown is given                                                                      -->
-<!-- - boss 5 water level, kraken?                                                                                                                -->
-<!-- - boss 6 ...                                                                                                                                 -->
-<!-- - boss 7 face a clone of yourself                                                                                                            -->
-<!-- - boss 8 Place crystals at the alter of Zorb. This opens a vault. Go inside and battle zorbash.                                              -->
-<!-- -        If you win, the gods turn on you and you get to replaced Zorbash.                                                                   -->
-<!-- -        You spare zorbash, he regenerates, you run out and destroy the alter and the demi gods, return to home.                             -->
-<!-- -        The curse was that the alter of Zorb would grant demi god status to any that sacrificed one that was dear to them.                  -->
-<!-- -        This curse must be renewed many times. Zorbash, -ash means servant of Zorb was such a team member who was sacrificed.               -->
-<!-- -        The only way to break the curse is to destroy the crystals. Zorbash will then be freed from servitude.                              -->
-<!-- - different sound for bosses                                                                                                                 -->
-<!-- - 4 bosses and final zorb boss                                                                                                               -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
-<!-- NOTES                                                                                                                                        -->
-<!-- ------                                                                                                                                       -->
-<!-- sudo operf ./zorbash --playername discobob --seed victimlake --nodebug --test-start                                                          -->
-<!-- opreport  --demangle=smart --symbols| less                                                                                                   -->
-<!-- ------                                                                                                                                       -->
-<!--                                                                                                                                              -->
-
 <p align="center">
 <img alt="Pixel art" src="data/pics/banner.png" width="100%">
 </p>
 
-Welcome to the lair of the dread tentacleye, Zorbash. Collect the crystals of Zorb and confront Zorbash to win.
+Welcome to the lair of the dread tentacleye, Zorbash.
 [Itch.io](https://goblinhackgmailcom.itch.io/zorbash)
 
 Pixel art and ascii mode options
