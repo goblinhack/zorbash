@@ -1,4 +1,4 @@
-name: MSYS2
+name: MSYS2-gcc
 
 on:
   push:
@@ -12,6 +12,10 @@ jobs:
     defaults:
       run:
         shell: msys2 {0}
+    strategy:
+      matrix:
+        include:
+          - { sys: ucrt64,  env: ucrt-x86_64 }
     steps:
       - uses: actions/checkout@v3
       - uses: msys2/setup-msys2@v2
@@ -21,61 +25,62 @@ jobs:
           install:
             git
             make
-            mingw-w64-ucrt-x86_64-gcc
-            mingw-w64-ucrt-x86_64-SDL
-            mingw-w64-ucrt-x86_64-SDL2
-            mingw-w64-ucrt-x86_64-SDL2_gfx
-            mingw-w64-ucrt-x86_64-SDL2_image
-            mingw-w64-ucrt-x86_64-SDL2_mixer
-            mingw-w64-ucrt-x86_64-SDL2_net
-            mingw-w64-ucrt-x86_64-SDL2_ttf
-            mingw-w64-ucrt-x86_64-binutils
-            mingw-w64-ucrt-x86_64-bzip2
-            mingw-w64-ucrt-x86_64-clang
-            mingw-w64-ucrt-x86_64-clang-tools-extra
-            mingw-w64-ucrt-x86_64-crt-git
-            mingw-w64-ucrt-x86_64-expat
-            mingw-w64-ucrt-x86_64-flac
-            mingw-w64-ucrt-x86_64-fluidsynth
-            mingw-w64-ucrt-x86_64-gcc
-            mingw-w64-ucrt-x86_64-gcc-libs
-            mingw-w64-ucrt-x86_64-gdb
-            mingw-w64-ucrt-x86_64-gdbm
-            mingw-w64-ucrt-x86_64-gettext
-            mingw-w64-ucrt-x86_64-giflib
-            mingw-w64-ucrt-x86_64-glib2
-            mingw-w64-ucrt-x86_64-gmp
-            mingw-w64-ucrt-x86_64-headers-git
-            mingw-w64-ucrt-x86_64-isl
-            mingw-w64-ucrt-x86_64-libffi
-            mingw-w64-ucrt-x86_64-libiconv
-            mingw-w64-ucrt-x86_64-libjpeg-turbo
-            mingw-w64-ucrt-x86_64-libmad
-            mingw-w64-ucrt-x86_64-libmodplug
-            mingw-w64-ucrt-x86_64-libogg
-            mingw-w64-ucrt-x86_64-libpng
-            mingw-w64-ucrt-x86_64-libsndfile
-            mingw-w64-ucrt-x86_64-libsystre
-            mingw-w64-ucrt-x86_64-libtiff
-            mingw-w64-ucrt-x86_64-libvorbis
-            mingw-w64-ucrt-x86_64-libwebp
-            mingw-w64-ucrt-x86_64-libwinpthread-git
-            mingw-w64-ucrt-x86_64-mpc
-            mingw-w64-ucrt-x86_64-mpfr
-            mingw-w64-ucrt-x86_64-ncurses
-            mingw-w64-ucrt-x86_64-openssl
-            mingw-w64-ucrt-x86_64-portaudio
-            mingw-w64-ucrt-x86_64-python
-            mingw-w64-ucrt-x86_64-python-pip
-            mingw-w64-ucrt-x86_64-readline
-            mingw-w64-ucrt-x86_64-smpeg2
-            mingw-w64-ucrt-x86_64-speex
-            mingw-w64-ucrt-x86_64-speexdsp
-            mingw-w64-ucrt-x86_64-termcap
-            mingw-w64-ucrt-x86_64-windows-default-manifest
-            mingw-w64-ucrt-x86_64-winpthreads-git
-            mingw-w64-ucrt-x86_64-xz
-            mingw-w64-ucrt-x86_64-zlib
+            base-devel
+            mingw-w64-${{matrix.env}}-binutils
+            mingw-w64-${{matrix.env}}-python3
+            mingw-w64-${{matrix.env}}-bzip2
+            mingw-w64-${{matrix.env}}-crt-git
+            mingw-w64-${{matrix.env}}-toolchain
+            mingw-w64-${{matrix.env}}-expat
+            mingw-w64-${{matrix.env}}-flac
+            mingw-w64-${{matrix.env}}-fluidsynth
+            mingw-w64-${{matrix.env}}-gcc
+            mingw-w64-${{matrix.env}}-gcc-libs
+            mingw-w64-${{matrix.env}}-gdb
+            mingw-w64-${{matrix.env}}-gdbm
+            mingw-w64-${{matrix.env}}-gettext
+            mingw-w64-${{matrix.env}}-giflib
+            mingw-w64-${{matrix.env}}-glib2
+            mingw-w64-${{matrix.env}}-gmp
+            mingw-w64-${{matrix.env}}-headers-git
+            mingw-w64-${{matrix.env}}-isl
+            mingw-w64-${{matrix.env}}-libffi
+            mingw-w64-${{matrix.env}}-libiconv
+            mingw-w64-${{matrix.env}}-libjpeg-turbo
+            mingw-w64-${{matrix.env}}-libmad
+            mingw-w64-${{matrix.env}}-libmodplug
+            mingw-w64-${{matrix.env}}-libogg
+            mingw-w64-${{matrix.env}}-libpng
+            mingw-w64-${{matrix.env}}-libsndfile
+            mingw-w64-${{matrix.env}}-libsystre
+            mingw-w64-${{matrix.env}}-libtiff
+            mingw-w64-${{matrix.env}}-libvorbis
+            mingw-w64-${{matrix.env}}-libwebp
+            mingw-w64-${{matrix.env}}-libwinpthread-git
+            mingw-w64-${{matrix.env}}-lld
+            mingw-w64-${{matrix.env}}-llvm
+            mingw-w64-${{matrix.env}}-lz4
+            mingw-w64-${{matrix.env}}-mpc
+            mingw-w64-${{matrix.env}}-mpfr
+            mingw-w64-${{matrix.env}}-ncurses
+            mingw-w64-${{matrix.env}}-openssl
+            mingw-w64-${{matrix.env}}-portaudio
+            mingw-w64-${{matrix.env}}-readline
+            mingw-w64-${{matrix.env}}-SDL
+            mingw-w64-${{matrix.env}}-SDL2
+            mingw-w64-${{matrix.env}}-SDL2_gfx
+            mingw-w64-${{matrix.env}}-SDL2_image
+            mingw-w64-${{matrix.env}}-SDL2_mixer
+            mingw-w64-${{matrix.env}}-SDL2_net
+            mingw-w64-${{matrix.env}}-SDL2_ttf
+            mingw-w64-${{matrix.env}}-smpeg2
+            mingw-w64-${{matrix.env}}-speex
+            mingw-w64-${{matrix.env}}-speexdsp
+            mingw-w64-${{matrix.env}}-termcap
+            mingw-w64-${{matrix.env}}-windows-default-manifest
+            mingw-w64-${{matrix.env}}-winpthreads-git
+            mingw-w64-${{matrix.env}}-xz
+            mingw-w64-${{matrix.env}}-zlib
       - name: CI-Build
         run: |
           echo 'Running in MSYS2!'
