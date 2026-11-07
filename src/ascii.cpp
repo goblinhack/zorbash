@@ -1095,5 +1095,5 @@ void ascii_display(void)
 void ascii_clear_display(void)
 {
   TRACE_NO_INDENT();
-  cells = {};
+  //  cells = {};
 }
