@@ -658,7 +658,7 @@ fi
 
 case "$MY_OS_NAME" in
     *MING*|*MSYS*)
-        echo "CC=/${MINGW_TYPE}/bin/clang++.exe # AUTOGEN" >> .Makefile
+        echo "CC=clang++.exe # AUTOGEN" >> .Makefile
         #
         # To resolve WinMain, add these at the end again
         #
