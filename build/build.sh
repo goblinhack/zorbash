@@ -658,18 +658,7 @@ fi
 
 case "$MY_OS_NAME" in
     *MING*|*MSYS*)
-        CC=/${MINGW_TYPE}/bin/clang++.exe
-        if [[ -x $CC ]]; then
-          echo "CC=/${MINGW_TYPE}/bin/clang++.exe" >> .Makefile
-        else
-          CC=/${MINGW_TYPE}/bin/g++.exe
-          if [[ -x $CC ]]; then
-            echo "CC=/${MINGW_TYPE}/bin/g++.exe" >> .Makefile
-          else
-            CC=/${MINGW_TYPE}/bin/clang++.exe
-            echo "CC=/${MINGW_TYPE}/bin/clang++.exe" >> .Makefile
-          fi
-        fi
+        echo "CC=/${MINGW_TYPE}/bin/clang++.exe" >> .Makefile
 
         #
         # To resolve WinMain, add these at the end again
