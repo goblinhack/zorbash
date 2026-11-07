@@ -725,8 +725,8 @@ fi
 
 cd ..
 
-echo USE_PRECOMPILED=yep make -f build/Makefile $CORES "$@" all
-USE_PRECOMPILED=yep make -f build/Makefile $CORES "$@" all
+echo USE_PRECOMPILED=yep make -f Makefile $CORES "$@" all
+USE_PRECOMPILED=yep make -f Makefile $CORES "$@" all
 
 if [ $? -eq 0 ]
 then

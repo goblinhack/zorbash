@@ -222,7 +222,6 @@ else
     #
     # For quick re-makes
     #
-    ln -sf build/Makefile .
     log "Built successfully"
     rm $LOG
 fi
