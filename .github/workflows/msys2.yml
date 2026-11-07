@@ -1,4 +1,4 @@
-name: MSYS2-gcc
+name: MSYS2-clang
 
 on:
   push:
@@ -27,6 +27,8 @@ jobs:
             make
             base-devel
             mingw-w64-${{matrix.env}}-binutils
+            mingw-w64-${{matrix.env}}-clang
+            mingw-w64-${{matrix.env}}-clang-tools-extra
             mingw-w64-${{matrix.env}}-python3
             mingw-w64-${{matrix.env}}-bzip2
             mingw-w64-${{matrix.env}}-crt-git
