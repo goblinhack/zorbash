@@ -5,9 +5,11 @@
 #include "my_command.hpp"
 #include "my_command_history.hpp"
 #include "my_main.hpp"
-#include "my_python.hpp"
 #include "my_sys.hpp"
 #include <array> // do not remove
+#include <string.h>
+#include <strings.h>
+#include <unordered_map>
 
 /*
  * Simple console expanding code, takes a comand input and expands it as
@@ -339,11 +341,11 @@ uint8_t command_handle(const char *input, char *expandedtext, uint8_t show_ambig
   matches = command_matches(input, expandedtext, false, false, execute_command, context);
   if (matches == 0) {
     //
-    // If unknown, run as python
+    // Unknown command. The console used to fall back to running the input as python.
     //
-    // CON(">%%fg=red$Unknown command: \"%s\"%%fg=reset$", input);
-    // return false;
-    py_exec(input);
+    if (execute_command) {
+      CON(">%%fg=red$Unknown command: \"%s\"%%fg=reset$", input);
+    }
 
     history[ g_history_at ] = string_to_wstring(std::string(input));
 

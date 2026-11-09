@@ -9,7 +9,6 @@ class Game *game;
 char *DATA_PATH;
 char *EXEC_DIR;
 char *EXEC_FULL_PATH_AND_NAME;
-char *EXEC_PYTHONPATH;
 char *GFX_PATH;
 char *TTF_PATH;
 char *WORLD_PATH;

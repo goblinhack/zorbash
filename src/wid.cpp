@@ -877,7 +877,7 @@ static void wid_mouse_over_end(void)
   wid_set_mode(w, WID_MODE_NORMAL);
 
   //
-  // Python can try and do cleanup - and if we're exiting already, no point.
+  // Callbacks can try and do cleanup - and if we're exiting already, no point.
   //
   if (wid_exiting) {
     return;

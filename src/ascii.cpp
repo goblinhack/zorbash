@@ -1095,10 +1095,5 @@ void ascii_display(void)
 void ascii_clear_display(void)
 {
   TRACE_NO_INDENT();
-
-  for (auto y = 0; y < TERM_HEIGHT; y++) {
-    for (auto x = 0; x < TERM_WIDTH; x++) {
-      (cells)[ x ][ y ] = {};
-    }
-  }
+  cells = {};
 }

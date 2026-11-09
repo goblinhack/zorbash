@@ -2,7 +2,6 @@
 #include <stdarg.h>
 #include <string.h>
 
-#include <Python.h>
 #include <SDL.h>
 
 #include <algorithm>
@@ -23,7 +22,6 @@
 #include "my_color_defs.hpp"
 #include "my_main.hpp"
 #include "my_point.hpp"
-#include "my_python.hpp"
 #include "my_size.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"

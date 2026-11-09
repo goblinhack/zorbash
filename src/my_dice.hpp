@@ -19,8 +19,8 @@ private:
   std::string hd;
 
 public:
-  std::string python_func;
-  std::string python_mod;
+  std::string callback_func;
+  std::string callback_mod;
   std::string to_string(void) const;
 
   Dice(void);

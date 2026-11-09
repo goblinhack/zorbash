@@ -5,7 +5,7 @@
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_sprintf.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
@@ -35,7 +35,7 @@ void Thing::on_stuck(void)
     dbg("Call %s.%s(%s, %d, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(), (int) curr_at.x,
         (int) curr_at.y);
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_stuck call [%s] expected mod:function, got %d elems", on_stuck.c_str(), (int) on_stuck.size());
   }

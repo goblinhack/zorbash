@@ -6,13 +6,13 @@
 #include "my_game.hpp"
 #include "my_math.hpp"
 #include "my_monst.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_vector_bounds_check.hpp"
 
 //
-// Python callback upon being teleport
+// Callback upon being teleport
 //
 void Thing::on_teleport(void)
 {
@@ -37,7 +37,7 @@ void Thing::on_teleport(void)
 
     dbg("Call %s.%s(%ss)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_teleport call [%s] expected mod:function, got %d elems", on_teleport.c_str(),
         (int) on_teleport.size());
@@ -67,7 +67,7 @@ void Thing::on_pre_teleport(void)
 
     dbg("Call %s.%s(%ss)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_pre_teleport call [%s] expected mod:function, got %d elems", on_pre_teleport.c_str(),
         (int) on_pre_teleport.size());

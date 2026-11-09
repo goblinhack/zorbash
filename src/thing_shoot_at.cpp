@@ -6,7 +6,7 @@
 #include "my_game.hpp"
 #include "my_math.hpp"
 #include "my_monst.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 
@@ -44,7 +44,7 @@ int Thing::is_able_to_shoot_at(void)
 }
 
 //
-// Python callback upon being shoot_at
+// Callback upon being shoot_at
 //
 bool Thing::on_want_to_shoot_at(Thingp target)
 {
@@ -72,7 +72,7 @@ bool Thing::on_want_to_shoot_at(Thingp target)
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), target->to_short_string().c_str());
 
-    return py_call_bool_fn(mod.c_str(), fn.c_str(), id.id, target->id.id, (unsigned int) target->curr_at.x,
+    return native_call_bool_fn(mod.c_str(), fn.c_str(), id.id, target->id.id, (unsigned int) target->curr_at.x,
                            (unsigned int) target->curr_at.y);
   }
 

@@ -3,7 +3,7 @@
 //
 
 #include "my_game.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_sdl_proto.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
@@ -82,7 +82,7 @@ void Game::wid_dead_select(const char *reason)
   TRACE_NO_INDENT();
   LOG("Open dead select: %s", reason);
 
-  py_call_void_fn("events", "on_player_death", level->dungeon_walk_order_level_no);
+  native_call_void_fn("events", "on_player_death", level->dungeon_walk_order_level_no);
 
   game->change_state(Game::STATE_NORMAL, "player is dead");
 

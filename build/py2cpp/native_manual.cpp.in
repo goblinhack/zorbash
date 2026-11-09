@@ -1,0 +1,249 @@
+//
+// Functions below used to return Python lists/tuples. They now return plain C++ containers.
+//
+
+std::vector<uint32_t> level_get_all(uint32_t id, int x, int y)
+{
+  TRACE_NO_INDENT();
+  std::vector<uint32_t> out;
+
+  if (! id) {
+    ERR("%s: Missing 'id'", __FUNCTION__);
+    return out;
+  }
+
+  Thingp t = game->thing_find(id);
+  if (unlikely(! t)) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    return out;
+  }
+
+  if (t->level->is_oob(x, y)) {
+    return out;
+  }
+
+  FOR_ALL_NON_INTERNAL_THINGS(t->level, t, x, y)
+  {
+    //
+    // Don't include carried things else lasers will destroy all items carried!
+    //
+    if (t->immediate_owner()) {
+      continue;
+    }
+    out.push_back(t->id.id);
+  }
+  FOR_ALL_THINGS_END()
+
+  return out;
+}
+
+std::vector<uint32_t> level_flood_fill_get_all_things(uint32_t id, int x, int y, const char *filter)
+{
+  TRACE_NO_INDENT();
+  std::vector<uint32_t> out;
+
+  if (! id) {
+    ERR("%s: Missing 'id'", __FUNCTION__);
+    return out;
+  }
+
+  if (! filter) {
+    ERR("%s: Missing 'filter'", __FUNCTION__);
+    return out;
+  }
+
+  Thingp t = game->thing_find(id);
+  if (unlikely(! t)) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    return out;
+  }
+
+  if (t->level->is_oob(x, y)) {
+    return out;
+  }
+
+  auto things = t->level->flood_fill_things(point(x, y), Thing::matches_to_func(filter));
+  for (auto it : things) {
+    out.push_back(it->id.id);
+  }
+  return out;
+}
+
+std::vector<uint32_t> level_flood_fill_gas_get_all_grid_things(uint32_t id, int x, int y, int distance)
+{
+  TRACE_NO_INDENT();
+  std::vector<uint32_t> out;
+
+  if (! id) {
+    ERR("%s: Missing 'id'", __FUNCTION__);
+    return out;
+  }
+
+  Thingp t = game->thing_find(id);
+  if (unlikely(! t)) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    return out;
+  }
+
+  if (t->level->is_oob(x, y)) {
+    return out;
+  }
+
+  auto things = t->level->flood_fill_gas_grid_things(point(x, y), distance);
+  for (auto it : things) {
+    out.push_back(it->id.id);
+  }
+  return out;
+}
+
+//
+// Empty if the thing has no followers (or cannot be found).
+//
+std::vector<uint32_t> thing_all_followers_get(uint32_t id)
+{
+  TRACE_NO_INDENT();
+  std::vector<uint32_t> out;
+
+  if (! id) {
+    ERR("%s: Missing 'id'", __FUNCTION__);
+    return out;
+  }
+
+  Thingp t = game->thing_find(id);
+  if (unlikely(! t)) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    return out;
+  }
+
+  for (auto follower : t->all_followers_get()) {
+    out.push_back(follower->id.id);
+  }
+  return out;
+}
+
+std::vector<uint32_t> thing_get_followers(uint32_t id)
+{
+  TRACE_NO_INDENT();
+  std::vector<uint32_t> out;
+
+  if (! id) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    return out;
+  }
+
+  Thingp t = game->thing_find(id);
+  if (unlikely(! t)) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    return out;
+  }
+
+  if (! t->maybe_infop()) {
+    return out;
+  }
+
+  for (auto f : t->infop()->followers) {
+    out.push_back(f.id);
+  }
+  return out;
+}
+
+//
+// Returns {0, 0} if the thing cannot be found.
+//
+std::pair< int, int > thing_coords_get(uint32_t id)
+{
+  TRACE_NO_INDENT();
+
+  if (! id) {
+    ERR("%s: Missing 'id'", __FUNCTION__);
+    return {0, 0};
+  }
+
+  Thingp t = game->thing_find(id);
+  if (unlikely(! t)) {
+    ERR("%s: Cannot find thing ID %u", __FUNCTION__, id);
+    return {0, 0};
+  }
+
+  return {t->curr_at.x, t->curr_at.y};
+}
+
+static bool thing_hit_common(uint32_t owner_id, uint32_t hitter_id, uint32_t victim_id, int damage, int crit, int thrown,
+                             ThingAttack type)
+{
+  TRACE_NO_INDENT();
+
+  Thingp real_hitter = game->thing_find_optional(owner_id);
+
+  if (! hitter_id) {
+    ERR("%s: No real_hitter thing ID set", __FUNCTION__);
+    return false;
+  }
+
+  Thingp hitter = game->thing_find(hitter_id);
+  if (! hitter) {
+    ERR("%s: Cannot find hitter thing ID %u", __FUNCTION__, hitter_id);
+    return false;
+  }
+
+  if (! victim_id) {
+    ERR("%s: No target thing ID set", __FUNCTION__);
+    return false;
+  }
+
+  Thingp target = game->thing_find(victim_id);
+  if (! target) {
+    ERR("%s: Cannot find target thing ID %u", __FUNCTION__, victim_id);
+    return false;
+  }
+
+  ThingAttackOptions attack_options {};
+
+  if (damage) {
+    attack_options.dmg_set = true;
+    attack_options.damage  = damage;
+  }
+
+  attack_options.thrown = thrown ? true : false;
+  attack_options.crit   = crit ? true : false;
+  if (type != THING_ATTACK_NONE) {
+    attack_options.attack_type_set = true;
+    attack_options.attack[ type ]  = true;
+  }
+  attack_options.real_hitter = real_hitter;
+
+  if (attack_options.real_hitter) {
+    if (damage) {
+      IF_DEBUG { attack_options.real_hitter->log("Attack for %d", damage); }
+    } else {
+      IF_DEBUG { attack_options.real_hitter->log("Attack"); }
+    }
+  } else {
+    if (damage) {
+      IF_DEBUG { hitter->log("Attack for %d", damage); }
+    } else {
+      IF_DEBUG { hitter->log("Attack"); }
+    }
+  }
+  TRACE_AND_INDENT();
+
+  if (hitter->attack(target, &attack_options)) {
+    return true;
+  }
+  return false;
+}
+
+#define THING_HIT_FN(__name__, __type__)                                                                             \
+  bool __name__(uint32_t owner, uint32_t hitter, uint32_t target, int damage, int crit, int thrown)                  \
+  {                                                                                                                  \
+    TRACE_NO_INDENT();                                                                                               \
+    return thing_hit_common(owner, hitter, target, damage, crit, thrown, __type__);                                  \
+  }
+
+THING_HIT_FN(thing_hit, THING_ATTACK_NONE)
+THING_HIT_FN(thing_hit_dmg_energy, THING_ATTACK_ENERGY)
+THING_HIT_FN(thing_hit_dmg_fire, THING_ATTACK_FIRE)
+THING_HIT_FN(thing_hit_dmg_impact, THING_ATTACK_IMPACT)
+THING_HIT_FN(thing_hit_dmg_missile, THING_ATTACK_MISSILE)
+THING_HIT_FN(thing_hit_dmg_poison, THING_ATTACK_POISON)
+THING_HIT_FN(thing_hit_dmg_stamina, THING_ATTACK_STAMINA_DRAIN)

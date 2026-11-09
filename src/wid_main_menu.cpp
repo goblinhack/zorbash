@@ -5,7 +5,7 @@
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
 #include "my_globals_extra.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_sdl_proto.hpp"
 #include "my_string.hpp"
 #include "my_ui.hpp"
@@ -375,7 +375,7 @@ void Game::wid_main_menu_select(void)
   TRACE_NO_INDENT();
   LOG("Main menu");
 
-  py_call_void_fn("events", "on_main_menu_select", 0);
+  native_call_void_fn("events", "on_main_menu_select", 0);
 
   if (wid_main_menu_window) {
     wid_main_menu_destroy();

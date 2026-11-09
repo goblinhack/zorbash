@@ -5,12 +5,12 @@
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 
 //
-// Python callback upon being fall
+// Callback upon being fall
 //
 void Thing::on_fall(void)
 {
@@ -35,7 +35,7 @@ void Thing::on_fall(void)
 
     dbg("Call %s.%s(%ss)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_fall call [%s] expected mod:function, got %d elems", on_fall.c_str(), (int) on_fall.size());
   }
@@ -64,7 +64,7 @@ void Thing::on_fall_begin(void)
 
     dbg("Call %s.%s(%ss)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_fall_begin call [%s] expected mod:function, got %d elems", on_fall_begin.c_str(),
         (int) on_fall_begin.size());

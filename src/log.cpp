@@ -7,7 +7,6 @@
 #include "my_game.hpp"
 #include "my_globals_extra.hpp"
 #include "my_log.hpp"
-#include "my_python.hpp"
 #include "my_string.hpp"
 #include "my_wid_botcon.hpp"
 #include "my_wid_console.hpp"
@@ -374,55 +373,6 @@ static void err_(const char *fmt, va_list args)
   nested_error = false;
 }
 
-static void py_err_(const char *fmt, va_list args)
-{
-  TRACE_NO_INDENT();
-
-  static bool nested_error;
-  if (nested_error) {
-    return;
-  }
-  nested_error = true;
-
-  callstack_dump();
-  backtrace_dump();
-
-  char error_buf[ MAXLONGSTR ];
-  {
-    int len;
-
-    error_buf[ 0 ] = '\0';
-    len            = (int) strlen(error_buf);
-    vsnprintf(error_buf + len, MAXLONGSTR - len, fmt, args);
-
-    error_handler(error_buf);
-  }
-
-  {
-    char buf[ MAXLONGSTR * 2 ];
-    int  len = 0;
-
-    buf[ 0 ] = '\0';
-    if (! g_opt_test_dungeon) {
-      get_timestamp(buf, MAXLONGSTR);
-      len = (int) strlen(buf);
-    }
-
-    snprintf(buf + len, MAXLONGSTR - len, "ERROR: %%%%fg=red$%s%%%%fg=reset$", error_buf);
-    putf(MY_STDERR, buf);
-    putf(MY_STDOUT, buf);
-
-    PyErr_SetString(PyExc_RuntimeError, buf);
-    term_log(buf);
-    putchar('\n');
-
-    wid_console_log(buf);
-  }
-
-  FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
-  nested_error = false;
-}
-
 static void croak_(const char *fmt, va_list args)
 {
   TRACE_NO_INDENT();
@@ -452,11 +402,6 @@ static void croak_(const char *fmt, va_list args)
 
   ERR("%s", buf + tslen);
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
-
-  //
-  // Seems to hang on crashes. Is it useful?
-  //
-  py_trace();
 
   FLUSH_THE_CONSOLE_FOR_ALL_PLATFORMS();
 
@@ -542,46 +487,6 @@ void myerr(const char *fmt, ...)
     va_list args;
     va_start(args, fmt);
     err_(fmt, args);
-    va_end(args);
-  }
-
-  wid_unset_focus();
-  wid_unset_focus_lock();
-
-  wid_hide(wid_topcon_window);
-  nested_error = false;
-
-  if (g_quitting) {
-    DIE("Error while quitting");
-  }
-  BIG_UNLOCK();
-}
-
-void py_myerr(const char *fmt, ...)
-{
-  TRACE_NO_INDENT();
-
-  static bool nested_error;
-  if (nested_error) {
-    return;
-  }
-  BIG_LOCK();
-  bool old_nested_error = nested_error;
-  nested_error          = true;
-
-  if (old_nested_error) {
-    //
-    // Subsequent errors on quitting, avoid error logging
-    //
-    va_list args;
-    va_start(args, fmt);
-    log_(fmt, args);
-    va_end(args);
-  } else {
-    g_errored = true;
-    va_list args;
-    va_start(args, fmt);
-    py_err_(fmt, args);
     va_end(args);
   }
 

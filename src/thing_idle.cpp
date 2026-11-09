@@ -4,7 +4,7 @@
 
 #include "my_game.hpp"
 #include "my_monst.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_thing.hpp"
 
 //
@@ -20,13 +20,13 @@ bool Thing::idle_check(void)
     if (game->tick_current - tick_last_did_something() >= roll) {
       // con("do it: %d last-did-something:%d roll:%d", game->tick_current, tick_last_did_something(), roll);
       auto d   = on_idle_tick_freq_dice();
-      auto mod = d.python_mod;
+      auto mod = d.callback_mod;
 
       if (mod == "me") {
         mod = name();
       }
 
-      py_call_void_fn(mod.c_str(), d.python_func.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+      native_call_void_fn(mod.c_str(), d.callback_func.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
       tick_last_did_something_set(game->tick_current);
       return true;
     }

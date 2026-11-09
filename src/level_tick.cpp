@@ -424,7 +424,7 @@ void Level::tick_(void)
       t->tick();
 
       //
-      // This is not very useful as monsters can trigger python scripts which
+      // This is not very useful as monsters can trigger callbacks which
       // can take a while to run e.g. a trap
       //
       IF_DEBUG2

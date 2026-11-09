@@ -62,7 +62,6 @@ help_full()
       log_warn "  dnf install -y SDL2 SDL2-devel"
       log_warn "  dnf install -y SDL2_image SDL2_image-devel"
       log_warn "  dnf install -y python3"
-      log_warn "  dnf install -y python3-devel"
       log_warn "  dnf install -y git"
       log_warn "  dnf install -y make automake gcc-c++"
       log_warn "  dnf install -y vim"
@@ -92,7 +91,6 @@ help_full()
                       libx11-6 \
                       libxext6 \
                       python3 \
-                      python3-dev \
                       ssh \
                       vim \
                       xutils-dev
@@ -151,7 +149,6 @@ help_full()
         ${MINGW_PKG_TYPE}-x86_64-openssl \
         ${MINGW_PKG_TYPE}-x86_64-portaudio \
         ${MINGW_PKG_TYPE}-x86_64-python \
-        ${MINGW_PKG_TYPE}-x86_64-python-pip \
         ${MINGW_PKG_TYPE}-x86_64-readline \
         ${MINGW_PKG_TYPE}-x86_64-smpeg2 \
         ${MINGW_PKG_TYPE}-x86_64-speex \
@@ -270,32 +267,10 @@ fi
 LDLIBS="$SDL_LIBS"
 LDLIBS="$LDLIBS -lSDL2_mixer"
 
-case $MY_OS_NAME in
-    *MING*|*MSYS*)
-        for i in \
-            $(which python3-config) \
-            /${MINGW_TYPE}/bin/python3-config
-        do
-            if [ -x "$i" ]; then
-                Python3_CONFIG=$i
-                break
-            fi
-        done
-    ;;
-    *)
-        for i in \
-            $(which python3-config) \
-            /usr/local/bin/python3-config \
-            /usr/bin/python3-config
-        do
-            if [ -x "$i" ]; then
-                Python3_CONFIG=$i
-                break
-            fi
-        done
-    ;;
-esac
-
+#
+# Python is no longer embedded in the game. A python3 interpreter is only needed at build time,
+# to run build/ramdisk.py.
+#
 case $MY_OS_NAME in
     *MING*|*MSYS*)
         for i in \
@@ -322,52 +297,13 @@ case $MY_OS_NAME in
     ;;
 esac
 
-python_help()
-{
-    log_warn "No python3 found"
+if [[ "$Python3" = "" ]]; then
+    log_err "I need a python3 interpreter to run the build tools (build/ramdisk.py)"
     help_full
     exit 1
-}
-
-Python3_SCORE=0
-
-if [ "$Python3_CONFIG" != "" ]; then
-    Python3_INC_PATH=$($Python3_CONFIG --cflags | sed -e 's/.*-I\([a-zA-Z\/@_0-9:\.]*\) .*/\1/g' -e 's/\-.*//g')
-
-    if [[ "$Python3_INC_PATH" != "" ]]; then
-        find "$Python3_INC_PATH" | grep -q Python.h
-        if [ $? -eq 0 ]; then
-            Python3_SCORE=$((Python3_SCORE + 1))
-        fi
-    fi
 fi
 
-if [[ "$Python3_CONFIG" != "" ]]; then
-    log_info "Python3                    : $Python3"
-    log_info "Python3 config             : $Python3_CONFIG"
-    log_info "Python3 include path       : $Python3_INC_PATH"
-    log_info "Python3 prefix             : "$($Python3_CONFIG --prefix)
-    log_info "Python3 exec-prefix        : "$($Python3_CONFIG --exec-prefix)
-    log_info "Python3 includes           : "$($Python3_CONFIG --includes)
-    log_info "Python3 libs               : "$($Python3_CONFIG --libs)
-    log_info "Python3 cflags             : "$($Python3_CONFIG --cflags)
-    log_info "Python3 ldflags            : "$($Python3_CONFIG --ldflags)
-    log_info "Python3 embed              : "$($Python3_CONFIG --embed)
-    #log_info "Python3 found              : $Python3_SCORE"
-fi
-
-if [[ $Python3_SCORE = "0" ]]; then
-    log_err "I need Python3"
-    python_help
-    exit 1
-fi
-
-Python_CONFIG=$Python3_CONFIG
-Python=$Python3
-PYVER=$($Python --version | sed -e 's/Python //g' -e 's/\.[0-9]*$//g')
-echo "PYVER=$PYVER" > build/windows/python.version.sh
-
-log_info "Python lib version         : $PYVER"
+log_info "Python3 (build tools only) : $Python3"
 
 #
 # Make the makefile
@@ -379,65 +315,13 @@ sed '/DO NOT DELETE/,$d' Makefile.base > Makefile.tmp
 mv Makefile.tmp Makefile
 )
 
-PYTHONPATH=$($Python -c "import os, sys; print(os.pathsep.join(x for x in sys.path if x))")
-
-case "$MY_OS_NAME" in
-    *Darwin*)
-        echo "$PYTHONPATH" | grep -q -i anaconda
-        if [[ $? -eq 0 ]];
-        then
-          log_info "Python anaconda is installed"
-          Python_LIBS=$($Python_CONFIG --ldflags)
-          if [ $? -ne 0 ]; then
-              log_err "Please install Python 3. $Python_CONFIG failed."
-              exit 1
-          fi
-        else
-          log_info "Python anaconda is not installed"
-          Python_LIBS=$($Python_CONFIG --ldflags --embed 2>/dev/null)
-          if [ $? -ne 0 ]; then
-              Python_LIBS=$($Python_CONFIG --ldflags)
-              if [ $? -ne 0 ]; then
-                  log_err "Please install Python 3. $Python_CONFIG failed."
-                  exit 1
-              fi
-          fi
-        fi
-      ;;
-    *)
-        Python_LIBS=$($Python_CONFIG --ldflags --embed 2>/dev/null)
-        if [ $? -ne 0 ]; then
-            Python_LIBS=$($Python_CONFIG --ldflags)
-            if [ $? -ne 0 ]; then
-                log_err "Please install Python 3. $Python_CONFIG failed."
-                exit 1
-            fi
-        fi
-      ;;
-esac
-
-#
-# Filter some junk out of the python config that can cause link errors
-#
-C_FLAGS+=" $($Python_CONFIG --cflags       | \
-           tr ' ' '\n' | sort | uniq       | \
-           grep  "\-I"                     | \
-           tr '\n' ' '                     | \
-           sed 's/\-fstack-protector/ /g'  | \
-           sed 's/\-arch i386/ /g'           \
-           )"
-#
-# -funwind-tables and -rdynamic for backtrace info on linux.
-# But it seemed to help little.
-#
-LDLIBS="$LDLIBS $Python_LIBS"
 
 #
 # Common config file
 #
 CONFIG_H=src/config.h
 echo "#include \"my_config.hpp\"" > $CONFIG_H
-C_FLAGS+="-include config.h"
+C_FLAGS+=" -I. -include config.h"
 rm -f src/precompiled.hpp.gch
 
 EXTRA_CHECKS=" -fsanitize=address -fsanitize=undefined -fno-omit-frame-pointer -fno-common"
@@ -509,7 +393,7 @@ case "$MY_OS_NAME" in
     *inux*)
         EXE=""
         LDFLAGS+=' -rdynamic'
-        LDLIBS+="-lGL "
+        LDLIBS+=" -lGL "
 
         if [[ $OPT_DEV2 != "" ]]; then
             C_FLAGS+="$EXTRA_CHECKS"
@@ -544,10 +428,7 @@ if [[ $OPT_DEV1 != "" ]]; then
 fi
 
 echo "#define MYVER \"$MYVER\"" >> $CONFIG_H
-echo "#define PYVER \"$PYVER\"" >> $CONFIG_H
 
-# log_info "PYVER                      : $PYVER"
-# log_info "PYTHONPATH                 : $PYTHONPATH"
 log_info "VERSION (game)             : $MYVER"
 
 cd src || exit
@@ -658,8 +539,7 @@ fi
 
 case "$MY_OS_NAME" in
     *MING*|*MSYS*)
-        echo "CC=/${MINGW_TYPE}/bin/clang++.exe" >> .Makefile
-
+        echo "CC=/${MINGW_TYPE}/bin/clang++.exe # AUTOGEN" >> .Makefile
         #
         # To resolve WinMain, add these at the end again
         #
@@ -726,8 +606,8 @@ fi
 
 cd ..
 
-echo USE_PRECOMPILED=yep make -f Makefile $CORES "$@" all
-USE_PRECOMPILED=yep make -f Makefile $CORES "$@" all
+echo USE_PRECOMPILED=yep make -f build/Makefile $CORES "$@" all
+USE_PRECOMPILED=yep make -f build/Makefile $CORES "$@" all
 
 if [ $? -eq 0 ]
 then
@@ -776,7 +656,7 @@ echo \$0: all done
 ###############################################################################
 # Execute the following, or run ./${TARGET}.sh
 ###############################################################################
-PYTHONPATH=/${MINGW_TYPE}/lib/python${PYVER}/:/${MINGW_TYPE}/lib/python${PYVER}/lib-dynload:/${MINGW_TYPE}/lib/python${PYVER}/site-packages PYTHONHOME=/${MINGW_TYPE}/bin ./${TARGET}.exe \$*
+./${TARGET}.exe \$*
 %%
 
             cat ${TARGET}.sh

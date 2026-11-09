@@ -4,7 +4,7 @@
 
 #include "my_game.hpp"
 #include "my_monst.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 
@@ -36,7 +36,7 @@ void Thing::on_you_are_declared_a_follower(Thingp leader)
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), leader->to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, leader->id.id, (unsigned int) curr_at.x,
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, leader->id.id, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_you_are_declared_a_follower call [%s] expected mod:function, got %d elems",
@@ -80,7 +80,7 @@ void Thing::on_death_of_a_follower(Thingp leader)
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), leader->to_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, leader->id.id, (unsigned int) curr_at.x,
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, leader->id.id, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_death_of_a_follower call [%s] expected mod:function, got %d elems", on_death_of_a_follower.c_str(),

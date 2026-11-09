@@ -4,7 +4,7 @@
 
 #include "my_level.hpp"
 #include "my_monst.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 
@@ -40,7 +40,7 @@ void Thing::on_owner_add(Thingp owner)
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), owner->to_short_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_owner_add call [%s] expected mod:function, got %d elems", on_owner_add.c_str(),
         (int) on_owner_add.size());
@@ -92,7 +92,7 @@ void Thing::on_owner_unset(Thingp owner)
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), owner->to_short_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_owner_unset call [%s] expected mod:function, got %d elems", on_owner_unset.c_str(),
         (int) on_owner_unset.size());

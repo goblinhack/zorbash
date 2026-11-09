@@ -4,14 +4,14 @@
 
 #include "my_game.hpp"
 #include "my_monst.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_sprintf.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_thing_attack_options.hpp"
 
 //
-// Python callback upon being hit
+// Callback upon being hit
 //
 void Thing::on_hit_and_still_alive(Thingp hitter,      // an arrow / monst /...
                                    Thingp real_hitter, // who fired the arrow?
@@ -46,7 +46,7 @@ void Thing::on_hit_and_still_alive(Thingp hitter,      // an arrow / monst /...
     //
     // Warning cannot handle negative values here for damage
     //
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, real_hitter->id.id, (unsigned int) curr_at.x,
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, real_hitter->id.id, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y, (unsigned int) crit, (unsigned int) damage);
   } else {
     ERR("Bad on_hit_and_still_alive call [%s] expected mod:function, got %d elems", on_hit_and_still_alive.c_str(),
@@ -83,7 +83,7 @@ void Thing::on_hit_and_now_dead(Thingp hitter,      // an arrow / monst /...
     //
     // Warning cannot handle negative values here for damage
     //
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, real_hitter->id.id, (unsigned int) curr_at.x,
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, real_hitter->id.id, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y, (unsigned int) crit, (unsigned int) damage);
   } else {
     ERR("Bad on_hit_and_now_dead call [%s] expected mod:function, got %d elems", on_hit_and_now_dead.c_str(),
@@ -92,7 +92,7 @@ void Thing::on_hit_and_now_dead(Thingp hitter,      // an arrow / monst /...
 }
 
 //
-// Python callback upon being miss
+// Callback upon being miss
 //
 void Thing::on_hit_dodge_do(Thingp hitter)
 {
@@ -121,7 +121,7 @@ void Thing::on_hit_dodge_do(Thingp hitter)
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), hitter->to_short_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) curr_at.x,
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_hit_dodge_do call [%s] expected mod:function, got %d elems", on_hit_dodge_do.c_str(),
@@ -156,7 +156,7 @@ void Thing::on_you_nat_attack_attempt(void)
 
     dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_you_nat_attack_attempt call [%s] expected mod:function, got %d elems",
         on_you_nat_attack_attempt.c_str(), (int) on_you_nat_attack_attempt.size());
@@ -190,7 +190,7 @@ void Thing::on_you_nat_attack_success(void)
 
     dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_you_nat_attack_success call [%s] expected mod:function, got %d elems",
         on_you_nat_attack_success.c_str(), (int) on_you_nat_attack_success.size());
@@ -2423,7 +2423,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   }
 
   //
-  // Python callback. Poison looks like an attack on self, so avoid.
+  // Callback. Poison looks like an attack on self, so avoid.
   //
   TRACE_NO_INDENT();
   if (real_hitter != this) {
@@ -2645,7 +2645,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   }
 
   //
-  // Python callback
+  // Callback
   //
   TRACE_NO_INDENT();
   if (is_dead || is_dying) {
@@ -2680,7 +2680,7 @@ int Thing::ai_hit_actual(Thingp              hitter,      // an arrow / monst /.
   }
 
   //
-  // Python callback. Poison looks like an attack on self, so avoid.
+  // Callback. Poison looks like an attack on self, so avoid.
   //
   TRACE_NO_INDENT();
   if (real_hitter != this) {

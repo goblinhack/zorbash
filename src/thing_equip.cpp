@@ -5,7 +5,7 @@
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
 #include "my_monst.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_thing_attack_options.hpp"
@@ -349,7 +349,7 @@ void Thing::on_equip(Thingp what)
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_equip call [%s] expected mod:function, got %d elems", on_equip.c_str(), (int) on_equip.size());
   }
@@ -383,7 +383,7 @@ void Thing::on_unequip(Thingp what)
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_unequip call [%s] expected mod:function, got %d elems", on_unequip.c_str(), (int) on_unequip.size());
   }
@@ -992,7 +992,7 @@ bool Thing::equip_use(bool forced, int equip, ThingAttackOptionsp attack_options
       attack_options->nat_att = true;
 
       //
-      // Python callback
+      // Callback
       //
       on_you_nat_attack_attempt();
     }

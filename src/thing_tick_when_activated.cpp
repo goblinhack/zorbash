@@ -3,12 +3,12 @@
 //
 
 #include "my_game.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 
 //
-// Python callback upon being tick
+// Callback upon being tick
 //
 bool Thing::on_tick_when_activated(void)
 {
@@ -42,7 +42,7 @@ bool Thing::on_tick_when_activated(void)
     dbg("Call %s.%s(owner=%s, item=%s, %d, %d)", mod.c_str(), fn.c_str(),
         owner ? owner->to_short_string().c_str() : "<>", to_string().c_str(), (unsigned int) curr_at.x,
         (unsigned int) curr_at.y);
-    return py_call_bool_fn(mod.c_str(), fn.c_str(), owner ? owner->id.id : 0, id.id, (unsigned int) curr_at.x,
+    return native_call_bool_fn(mod.c_str(), fn.c_str(), owner ? owner->id.id : 0, id.id, (unsigned int) curr_at.x,
                            (unsigned int) curr_at.y);
   }
 

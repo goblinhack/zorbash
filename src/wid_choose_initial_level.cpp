@@ -8,7 +8,7 @@
 #include "my_game.hpp"
 #include "my_globals_extra.hpp"
 #include "my_ptrcheck.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_sdl_proto.hpp"
 #include "my_string.hpp"
 #include "my_ui.hpp"
@@ -1152,7 +1152,7 @@ void Game::wid_choose_initial_dungeons(void)
   auto box_style           = UI_WID_STYLE_GRAY;
   auto box_highlight_style = UI_WID_STYLE_GRAY;
 
-  py_call_void_fn("events", "on_initial_dungeon_menu_select", 0);
+  native_call_void_fn("events", "on_initial_dungeon_menu_select", 0);
 
   pre_init();
 

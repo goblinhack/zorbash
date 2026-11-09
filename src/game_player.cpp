@@ -445,7 +445,7 @@ void Game::place_player(void)
         t->spell_add(w);
       }
       if (0) {
-        auto w = level->thing_new("spell_of_hasted", point(x, y));
+        auto w = level->thing_new("spell_of_haste", point(x, y));
         t->spell_add(w);
       }
       if (0) {

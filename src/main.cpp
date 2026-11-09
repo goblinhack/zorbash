@@ -8,6 +8,8 @@
 #include <signal.h>  // dirname
 #include <string.h>  // do not remove
 #include <strings.h> // do not remove
+#include <sys/stat.h> // mkdir
+#include <sys/types.h> // mkdir
 #include <time.h>    // do not remove
 #include <unistd.h>  // do not remove
 
@@ -22,7 +24,7 @@
 #include "my_globals_extra.hpp"
 #include "my_level_static.hpp"
 #include "my_music.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_ramdisk.hpp"
 #include "my_room.hpp"
 #include "my_sdl_proto.hpp"
@@ -131,11 +133,6 @@ void quit(void)
     DATA_PATH = nullptr;
   }
 
-  if (EXEC_PYTHONPATH) {
-    myfree(EXEC_PYTHONPATH);
-    EXEC_PYTHONPATH = nullptr;
-  }
-
   if (WORLD_PATH) {
     myfree(WORLD_PATH);
     WORLD_PATH = nullptr;
@@ -163,12 +160,6 @@ void quit(void)
 #endif
 
   LOG("FIN: Cleanup done");
-
-  LOG("FIN: py_fini");
-  //
-  // This might exit
-  //
-  py_fini();
 }
 
 void restart(void)
@@ -395,15 +386,6 @@ static void find_data_dir(void)
 }
 
 //
-// Hunt down the python/ dir.
-//
-static void find_python_dir(void)
-{
-  TRACE_AND_INDENT();
-  EXEC_PYTHONPATH = dynprintf("%spython%s" DIR_SEP, EXEC_DIR, PYVER);
-}
-
-//
 // Hunt down the world/ dir.
 //
 static void find_world_dir(void)
@@ -474,7 +456,6 @@ static void find_file_locations(void)
   TRACE_AND_INDENT();
   find_exec_dir();
   find_data_dir();
-  find_python_dir();
   find_world_dir();
   find_ttf_dir();
   find_gfx_dir();
@@ -1094,21 +1075,13 @@ int main(int argc, char *argv[])
 
   {
     TRACE_NO_INDENT();
-    CON("INI: Load python");
-    py_init(argv);
+    CON("INI: Load thing templates, tiles, sounds and rooms");
+    pcg_random_allowed++;
+    native_init();
+    pcg_random_allowed--;
     if (g_errored) {
       goto loop;
     }
-    LOG("INI: Loaded");
-    flush_the_console();
-  }
-
-  {
-    TRACE_NO_INDENT();
-    CON("INI: Load python modules");
-    pcg_random_allowed++;
-    py_call_void("init2");
-    pcg_random_allowed--;
     LOG("INI: Loaded");
     flush_the_console();
   }

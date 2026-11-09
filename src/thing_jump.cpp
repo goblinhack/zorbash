@@ -6,13 +6,13 @@
 #include "my_game.hpp"
 #include "my_math.hpp"
 #include "my_monst.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_vector_bounds_check.hpp"
 
 //
-// Python callback upon being jump
+// Callback upon being jump
 //
 void Thing::on_jump(void)
 {
@@ -37,7 +37,7 @@ void Thing::on_jump(void)
 
     dbg("Call %s.%s(%ss)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_jump call [%s] expected mod:function, got %d elems", on_jump.c_str(), (int) on_jump.size());
   }

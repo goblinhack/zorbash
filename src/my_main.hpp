@@ -26,7 +26,6 @@ void ctrlc_handler(int sig);
 void die(void);
 void topcon(const wchar_t *fmt);
 void myerr(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
-void py_myerr(const char *fmt, ...) CHECK_FORMAT_STR(printf, 1, 2);
 void quit(void);
 void restart(void);
 void common_error_handler(const std::string &error);

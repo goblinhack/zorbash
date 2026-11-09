@@ -9,7 +9,6 @@
 extern char *DATA_PATH;
 extern char *EXEC_DIR;
 extern char *EXEC_FULL_PATH_AND_NAME;
-extern char *EXEC_PYTHONPATH;
 extern char *GFX_PATH;
 extern char *TTF_PATH;
 extern char *WORLD_PATH;
@@ -79,10 +78,6 @@ extern int TILES_VISIBLE_DOWN;
 #define ERR                                                                                                          \
   TRACE_NO_INDENT();                                                                                                 \
   myerr
-
-#define PY_ERR                                                                                                       \
-  TRACE_NO_INDENT();                                                                                                 \
-  py_myerr
 
 #define dbg                                                                                                          \
   if (DEBUG1)                                                                                                        \

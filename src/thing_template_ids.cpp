@@ -802,7 +802,7 @@ std::initializer_list< std::string > tps = {
     "spell_of_dominate_monst3",
     "spell_of_dominate_monst4",
     "spell_of_dominate_monst5",
-    "spell_of_hasted",
+    "spell_of_haste",
     "spell_of_holding",
     "spell_of_holding_barrier",
     "spell_of_magic_missile",

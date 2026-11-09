@@ -4,7 +4,7 @@
 
 #include "my_array_bounds_check.hpp"
 #include "my_game.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_thing_attack_options.hpp"
@@ -33,7 +33,7 @@ void Thing::on_targeted_radially(void)
 
     dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_targeted_radially call [%s] expected mod:function, got %d elems", on_targeted_radially.c_str(),
         (int) on_targeted_radially.size());
@@ -65,7 +65,7 @@ void Thing::on_targeted(point target)
 
     dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) target.x, (unsigned int) target.y);
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) target.x, (unsigned int) target.y);
   } else {
     ERR("Bad on_targeted call [%s] expected mod:function, got %d elems", on_targeted.c_str(),
         (int) on_targeted.size());

@@ -4,7 +4,7 @@
 
 #include "my_game.hpp"
 #include "my_monst.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 
@@ -135,7 +135,7 @@ void Thing::on_eaten(Thingp what)
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_eaten call [%s] expected mod:function, got %d elems", on_eaten.c_str(), (int) on_eaten.size());
   }
@@ -174,7 +174,7 @@ void Thing::on_eating(Thingp what, int bite)
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) bite, (unsigned int) curr_at.x,
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) bite, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_eating call [%s] expected mod:function, got %d elems", on_eating.c_str(), (int) on_eating.size());

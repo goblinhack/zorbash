@@ -6,7 +6,7 @@
 #include "my_color_defs.hpp"
 #include "my_game.hpp"
 #include "my_ptrcheck.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_ui.hpp"
@@ -620,7 +620,7 @@ void Game::wid_choose_next_dungeons(Levelp current, bool is_ascending, bool is_d
     return;
   }
   CON("INF: Choose next dungeon");
-  py_call_void_fn("events", "on_initial_dungeon_menu_select", 0);
+  native_call_void_fn("events", "on_initial_dungeon_menu_select", 0);
 
   paused                    = true;
   player->is_changing_level = true;

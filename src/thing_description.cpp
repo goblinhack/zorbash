@@ -3,13 +3,13 @@
 //
 
 #include "my_main.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_thing_template.hpp"
 
 //
-// Python callback upon being tick
+// Callback upon being tick
 //
 std::vector< std::string > Thing::on_get_text_description_long(void)
 {
@@ -37,7 +37,7 @@ std::vector< std::string > Thing::on_get_text_description_long(void)
     dbg("Call %s.%s(owner=%s, item=%s, %d, %d)", mod.c_str(), fn.c_str(),
         owner ? owner->to_short_string().c_str() : "<>", to_string().c_str(), (unsigned int) curr_at.x,
         (unsigned int) curr_at.y);
-    return py_call_std_vector_string_fn(mod.c_str(), fn.c_str(), owner ? owner->id.id : 0, id.id,
+    return native_call_std_vector_string_fn(mod.c_str(), fn.c_str(), owner ? owner->id.id : 0, id.id,
                                         (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   }
 
@@ -58,7 +58,7 @@ const std::string Thing::text_description_long(void)
   TRACE_NO_INDENT();
 
   //
-  // If python overrides, return that string
+  // If a native callback overrides, return that string
   //
   auto override_description = on_get_text_description_long_do();
   if (! std::empty(override_description)) {

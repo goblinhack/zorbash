@@ -4,7 +4,7 @@
 
 #include "my_game.hpp"
 #include "my_monst.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_sound.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
@@ -35,7 +35,7 @@ void Thing::on_dropped(void)
 
     dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_dropped call [%s] expected mod:function, got %d elems", on_dropped.c_str(), (int) on_dropped.size());
   }

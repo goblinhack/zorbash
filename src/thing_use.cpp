@@ -4,7 +4,7 @@
 
 #include "my_game.hpp"
 #include "my_monst.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 
@@ -41,7 +41,7 @@ void Thing::on_use(Thingp what)
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, 0U, (unsigned int) curr_at.x,
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, 0U, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_use call [%s] expected mod:function, got %d elems", on_use.c_str(), (int) on_use.size());
@@ -81,7 +81,7 @@ void Thing::on_use_skill(Thingp what)
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, 0U, (unsigned int) curr_at.x,
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, 0U, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_use_skill call [%s] expected mod:function, got %d elems", on_use_skill.c_str(),
@@ -120,7 +120,7 @@ void Thing::on_swing(Thingp what)
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_swing call [%s] expected mod:function, got %d elems", on_swing.c_str(), (int) on_swing.size());
   }
@@ -162,7 +162,7 @@ void Thing::on_use(Thingp what, Thingp target)
       dbg("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
           what->to_short_string().c_str(), target->to_short_string().c_str());
 
-      py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, target->id.id, (unsigned int) target->curr_at.x,
+      native_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, target->id.id, (unsigned int) target->curr_at.x,
                       (unsigned int) target->curr_at.y);
     } else {
       ERR("Bad on_use call [%s] expected mod:function, got %d elems", on_use.c_str(), (int) on_use.size());
@@ -206,7 +206,7 @@ void Thing::on_use_skill(Thingp what, Thingp target)
       dbg("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
           what->to_short_string().c_str(), target->to_short_string().c_str());
 
-      py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, target->id.id, (unsigned int) curr_at.x,
+      native_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, target->id.id, (unsigned int) curr_at.x,
                       (unsigned int) curr_at.y);
     } else {
       ERR("Bad on_use_skill call [%s] expected mod:function, got %d elems", on_use_skill.c_str(),
@@ -245,7 +245,7 @@ void Thing::on_final_use(Thingp what)
 
     dbg("Call %s.%s(%s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(), what->to_short_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, 0U, (unsigned int) curr_at.x,
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, 0U, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_final_use call [%s] expected mod:function, got %d elems", on_final_use.c_str(),
@@ -287,7 +287,7 @@ void Thing::on_final_use(Thingp what, Thingp target)
       dbg("Call %s.%s(%s, %s, %s)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
           what->to_short_string().c_str(), target->to_short_string().c_str());
 
-      py_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, target->id.id, (unsigned int) target->curr_at.x,
+      native_call_void_fn(mod.c_str(), fn.c_str(), id.id, what->id.id, target->id.id, (unsigned int) target->curr_at.x,
                       (unsigned int) target->curr_at.y);
     } else {
       ERR("Bad on_final_use call [%s] expected mod:function, got %d elems", on_final_use.c_str(),

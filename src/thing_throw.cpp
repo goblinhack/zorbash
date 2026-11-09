@@ -5,7 +5,7 @@
 #include "my_game.hpp"
 #include "my_math.hpp"
 #include "my_monst.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 
@@ -33,7 +33,7 @@ void Thing::on_thrown(ThingId owner_id_when_thrown)
 
     dbg("Call %s.%s(%s, %u, %u)", mod.c_str(), fn.c_str(), to_short_string().c_str(), curr_at.x, curr_at.y);
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), owner_id_when_thrown.id, id.id, (unsigned int) curr_at.x,
+    native_call_void_fn(mod.c_str(), fn.c_str(), owner_id_when_thrown.id, id.id, (unsigned int) curr_at.x,
                     (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_thrown call [%s] expected mod:function, got %d elems", on_thrown.c_str(), (int) on_thrown.size());

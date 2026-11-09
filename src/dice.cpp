@@ -4,7 +4,6 @@
 
 #include "my_dice.hpp"
 #include "my_main.hpp"
-#include "my_python.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 
@@ -87,13 +86,13 @@ Dice::Dice(std::string s)
   hd = s;
 
   //
-  // Allow python function after ":" so "1d1+1:fire.call_me()" is allowed
+  // Allow a native callback after ":" so "1d1+1:fire.call_me()" is allowed
   //
   for (auto d : split_tokens(s, ':')) {
     std::size_t found = d.find("()");
     if (found != std::string::npos) {
       //
-      // Parse the python function call
+      // Parse the callback function call
       //
       auto bare_func = d.replace(found, 2, "");
       auto sp        = split_tokens(bare_func, '.');
@@ -101,13 +100,13 @@ Dice::Dice(std::string s)
         //
         // <module>.<func>()
         //
-        python_mod  = sp[ 0 ];
-        python_func = sp[ 1 ];
+        callback_mod  = sp[ 0 ];
+        callback_func = sp[ 1 ];
       } else {
         //
         // <func>()
         //
-        python_func = sp[ 0 ];
+        callback_func = sp[ 0 ];
       }
     } else {
       //
@@ -186,26 +185,3 @@ int d7(void) { return pcg_random_range_inclusive(1, 7); }
 int d8(void) { return pcg_random_range_inclusive(1, 8); }
 int d9(void) { return pcg_random_range_inclusive(1, 9); }
 
-PyObject *py_d10000(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d10000()); }
-PyObject *py_d1000(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d1000()); }
-PyObject *py_d100(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d100()); }
-PyObject *py_d10(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d10()); }
-PyObject *py_d11(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d11()); }
-PyObject *py_d12(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d12()); }
-PyObject *py_d13(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d13()); }
-PyObject *py_d14(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d14()); }
-PyObject *py_d15(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d15()); }
-PyObject *py_d16(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d16()); }
-PyObject *py_d17(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d17()); }
-PyObject *py_d18(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d18()); }
-PyObject *py_d19(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d19()); }
-PyObject *py_d20(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d20()); }
-PyObject *py_d2(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d2()); }
-PyObject *py_d3(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d3()); }
-PyObject *py_d4(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d4()); }
-PyObject *py_d50(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d50()); }
-PyObject *py_d5(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d5()); }
-PyObject *py_d6(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d6()); }
-PyObject *py_d7(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d7()); }
-PyObject *py_d8(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d8()); }
-PyObject *py_d9(PyObject *obj, PyObject *args, PyObject *keywds) { return Py_BuildValue("i", d9()); }

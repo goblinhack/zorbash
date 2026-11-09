@@ -4,7 +4,7 @@
 
 #include "my_game.hpp"
 #include "my_monst.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_thing.hpp"
 #include "my_wid_actionbar.hpp"
 
@@ -181,7 +181,7 @@ void Thing::level_change(Levelp l)
   }
 
   if (is_player()) {
-    py_call_void_fn("events", "on_level_change", level->dungeon_walk_order_level_no, level->is_boss_level);
+    native_call_void_fn("events", "on_level_change", level->dungeon_walk_order_level_no, level->is_boss_level);
   }
 
   //

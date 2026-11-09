@@ -4,7 +4,7 @@
 
 #include "my_level.hpp"
 #include "my_monst.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 
@@ -71,7 +71,7 @@ int Thing::on_owner_rcv_dmg_digest(Thingp owner, Thingp hitter, Thingp real_hitt
     dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
         owner->to_short_string().c_str(), hitter->to_short_string().c_str(), damage);
 
-    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, hitter->id.id, real_hitter->id.id,
+    return native_call_int_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, hitter->id.id, real_hitter->id.id,
                           (unsigned int) curr_at.x, (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
@@ -111,7 +111,7 @@ int Thing::on_rcv_dmg_digest(Thingp hitter, Thingp real_hitter, int damage)
     dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
         hitter->to_short_string().c_str(), real_hitter->to_short_string().c_str(), damage);
 
-    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, real_hitter->id.id, (unsigned int) curr_at.x,
+    return native_call_int_fn(mod.c_str(), fn.c_str(), id.id, hitter->id.id, real_hitter->id.id, (unsigned int) curr_at.x,
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
@@ -208,7 +208,7 @@ int Thing::on_attacking_dmg_digest(Thingp victim, int damage)
     dbg("Call %s.%s(%s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
         victim->to_short_string().c_str(), damage);
 
-    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, victim->id.id, (unsigned int) curr_at.x,
+    return native_call_int_fn(mod.c_str(), fn.c_str(), id.id, victim->id.id, (unsigned int) curr_at.x,
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 
@@ -254,7 +254,7 @@ int Thing::on_owner_attack_dmg_digest(Thingp owner, Thingp victim, int damage)
     dbg("Call %s.%s(%s, %s, %s, %d)", mod.c_str(), fn.c_str(), to_short_string().c_str(),
         owner->to_short_string().c_str(), victim->to_short_string().c_str(), damage);
 
-    return py_call_int_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, victim->id.id, (unsigned int) curr_at.x,
+    return native_call_int_fn(mod.c_str(), fn.c_str(), id.id, owner->id.id, victim->id.id, (unsigned int) curr_at.x,
                           (unsigned int) curr_at.y, (unsigned int) damage);
   }
 

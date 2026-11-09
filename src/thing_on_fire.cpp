@@ -5,13 +5,13 @@
 #include "my_array_bounds_check.hpp"
 #include "my_level.hpp"
 #include "my_monst.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 #include "my_vector_bounds_check.hpp"
 
 //
-// Python callback upon being fire
+// Callback upon being fire
 //
 void Thing::on_fire(void)
 {
@@ -36,7 +36,7 @@ void Thing::on_fire(void)
 
     dbg("Call %s.%s(%s)", mod.c_str(), fn.c_str(), to_short_string().c_str());
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_fire call [%s] expected mod:function, got %d elems", on_fire.c_str(), (int) on_fire.size());
   }

@@ -1,0 +1,3520 @@
+{
+ "if_matches_then_dead": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "what",
+    "str"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "id",
+   "what",
+   "x",
+   "y"
+  ]
+ },
+ "level_is_acid_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y"
+  ],
+  "defaults": {}
+ },
+ "level_is_alive_monst_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y"
+  ],
+  "defaults": {}
+ },
+ "level_is_block_of_crystal_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y"
+  ],
+  "defaults": {}
+ },
+ "level_is_block_of_ice_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y"
+  ],
+  "defaults": {}
+ },
+ "level_is_brazier_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y"
+  ],
+  "defaults": {}
+ },
+ "level_is_bridge_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y"
+  ],
+  "defaults": {}
+ },
+ "level_is_carnivorous_plant_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y"
+  ],
+  "defaults": {}
+ },
+ "level_is_chasm_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y"
+  ],
+  "defaults": {}
+ },
+ "level_is_corridor_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y"
+  ],
+  "defaults": {}
+ },
+ "level_is_dirt_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y"
+  ],
+  "defaults": {}
+ },
+ "level_is_fire_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y"
+  ],
+  "defaults": {}
+ },
+ "level_is_floor_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y"
+  ],
+  "defaults": {}
+ },
+ "level_is_food_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y"
+  ],
+  "defaults": {}
+ },
+ "level_is_lava_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y"
+  ],
+  "defaults": {}
+ },
+ "level_is_monst_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y"
+  ],
+  "defaults": {}
+ },
+ "level_is_ooze_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y"
+  ],
+  "defaults": {}
+ },
+ "level_is_player_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y"
+  ],
+  "defaults": {}
+ },
+ "level_is_rock_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y"
+  ],
+  "defaults": {}
+ },
+ "level_is_spectral_blade_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y"
+  ],
+  "defaults": {}
+ },
+ "level_is_wall_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y"
+  ],
+  "defaults": {}
+ },
+ "level_is_water_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y"
+  ],
+  "defaults": {}
+ },
+ "map_load_room": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "room_data",
+    "list_str"
+   ],
+   [
+    "xxx",
+    "int"
+   ],
+   [
+    "yyy",
+    "int"
+   ],
+   [
+    "room_name",
+    "str"
+   ],
+   [
+    "up",
+    "int"
+   ],
+   [
+    "down",
+    "int"
+   ],
+   [
+    "left",
+    "int"
+   ],
+   [
+    "right",
+    "int"
+   ],
+   [
+    "is_ascend_dungeon",
+    "int"
+   ],
+   [
+    "is_descend_dungeon",
+    "int"
+   ],
+   [
+    "is_lock",
+    "int"
+   ],
+   [
+    "is_key",
+    "int"
+   ],
+   [
+    "is_secret",
+    "int"
+   ],
+   [
+    "biome_dungeon",
+    "int"
+   ],
+   [
+    "biome_swamp",
+    "int"
+   ],
+   [
+    "biome_ice",
+    "int"
+   ],
+   [
+    "biome_chasms",
+    "int"
+   ],
+   [
+    "biome_lava",
+    "int"
+   ],
+   [
+    "biome_flooded",
+    "int"
+   ],
+   [
+    "depth",
+    "int"
+   ]
+  ],
+  "defaults": {
+   "room_data": "{}",
+   "xxx": "0",
+   "yyy": "0",
+   "room_name": "nullptr",
+   "up": "false",
+   "down": "false",
+   "left": "false",
+   "right": "false",
+   "is_ascend_dungeon": "false",
+   "is_descend_dungeon": "false",
+   "is_lock": "false",
+   "is_key": "false",
+   "is_secret": "false",
+   "biome_dungeon": "false",
+   "biome_swamp": "false",
+   "biome_ice": "false",
+   "biome_chasms": "false",
+   "biome_lava": "false",
+   "biome_flooded": "false",
+   "depth": "0"
+  },
+  "kwnames": [
+   "room_data",
+   "xxx",
+   "yyy",
+   "room_name",
+   "up",
+   "down",
+   "left",
+   "right",
+   "entrance",
+   "exit",
+   "lock",
+   "key",
+   "secret",
+   "biome_dungeon",
+   "biome_swamp",
+   "biome_ice",
+   "biome_chasms",
+   "biome_lava",
+   "biome_flooded",
+   "depth"
+  ]
+ },
+ "map_load_skill_tree": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "skill_data",
+    "list_str"
+   ],
+   [
+    "tree_data",
+    "list_str"
+   ],
+   [
+    "tree_name_arg",
+    "str"
+   ]
+  ],
+  "defaults": {
+   "skill_data": "{}",
+   "tree_data": "{}",
+   "tree_name_arg": "nullptr"
+  },
+  "kwnames": [
+   "skill_data",
+   "tree_data",
+   "tree_name"
+  ]
+ },
+ "map_load_spell_tree": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "spell_data",
+    "list_str"
+   ],
+   [
+    "tree_data",
+    "list_str"
+   ],
+   [
+    "tree_name_arg",
+    "str"
+   ]
+  ],
+  "defaults": {
+   "spell_data": "{}",
+   "tree_data": "{}",
+   "tree_name_arg": "nullptr"
+  },
+  "kwnames": [
+   "spell_data",
+   "tree_data",
+   "tree_name"
+  ]
+ },
+ "music_load": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "rate",
+    "thing"
+   ],
+   [
+    "file",
+    "str"
+   ],
+   [
+    "name",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "rate",
+   "file",
+   "name"
+  ]
+ },
+ "music_play": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "name",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "name"
+  ]
+ },
+ "place_at": {
+  "kind": "native",
+  "ret": "thing",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "what",
+    "str"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "id",
+   "what",
+   "x",
+   "y"
+  ]
+ },
+ "sound_load": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "volume",
+    "float"
+   ],
+   [
+    "file",
+    "str"
+   ],
+   [
+    "name",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "volume",
+   "file",
+   "name"
+  ]
+ },
+ "sound_play": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "name",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "name"
+  ]
+ },
+ "spawn_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "what",
+    "str"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "id",
+   "what",
+   "x",
+   "y"
+  ]
+ },
+ "spawn_at_my_position": {
+  "kind": "native",
+  "ret": "thing",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "what",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "id",
+   "what"
+  ]
+ },
+ "spawn_darkness_around_thing": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "radius",
+    "thing"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "id",
+   "radius"
+  ]
+ },
+ "spawn_gas_confusion_around_thing": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "radius",
+    "thing"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "id",
+   "radius"
+  ]
+ },
+ "spawn_gas_explosive_around_thing": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "radius",
+    "thing"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "id",
+   "radius"
+  ]
+ },
+ "spawn_gas_healing_around_thing": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "radius",
+    "thing"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "id",
+   "radius"
+  ]
+ },
+ "spawn_gas_paralysis_around_thing": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "radius",
+    "thing"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "id",
+   "radius"
+  ]
+ },
+ "spawn_gas_poison_around_thing": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "radius",
+    "thing"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "id",
+   "radius"
+  ]
+ },
+ "spawn_minion_at_my_position": {
+  "kind": "native",
+  "ret": "thing",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "what",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "id",
+   "what"
+  ]
+ },
+ "spawn_minion_next_to": {
+  "kind": "native",
+  "ret": "thing",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "what",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "id",
+   "what"
+  ]
+ },
+ "spawn_next_to": {
+  "kind": "native",
+  "ret": "thing",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "what",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "id",
+   "what"
+  ]
+ },
+ "spawn_radius_range": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "what",
+    "str"
+   ],
+   [
+    "radius_min",
+    "int"
+   ],
+   [
+    "radius_max",
+    "int"
+   ]
+  ],
+  "defaults": {
+   "radius_min": "0",
+   "radius_max": "0"
+  },
+  "kwnames": [
+   "id",
+   "what",
+   "min",
+   "max"
+  ]
+ },
+ "spawn_set_fire_to_things_around_me": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "what",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "id",
+   "what"
+  ]
+ },
+ "spawn_things_around_me": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "what",
+    "str"
+   ],
+   [
+    "radius",
+    "int"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "id",
+   "what",
+   "radius"
+  ]
+ },
+ "spawn_using_items_radius_range": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "parent_id",
+    "thing"
+   ],
+   [
+    "victim_id",
+    "thing"
+   ],
+   [
+    "what",
+    "str"
+   ],
+   [
+    "radius_min",
+    "int"
+   ],
+   [
+    "radius_max",
+    "int"
+   ]
+  ],
+  "defaults": {
+   "radius_min": "0",
+   "radius_max": "0"
+  },
+  "kwnames": [
+   "id",
+   "parent_id",
+   "victim_id",
+   "what",
+   "min",
+   "max"
+  ]
+ },
+ "tex_load": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "file",
+    "str"
+   ],
+   [
+    "name",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "file",
+   "name"
+  ]
+ },
+ "thing_attack_num_get": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_beckon": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "me_id",
+    "thing"
+   ],
+   [
+    "it_id",
+    "thing"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "me",
+   "it"
+  ]
+ },
+ "thing_blinded_count_incr": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_blinded_count_set": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_buff_add": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "owner_id",
+    "thing"
+   ],
+   [
+    "what",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "owner",
+   "what"
+  ]
+ },
+ "thing_buff_remove": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "owner_id",
+    "thing"
+   ],
+   [
+    "what",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "owner",
+   "what"
+  ]
+ },
+ "thing_carry": {
+  "kind": "native",
+  "ret": "thing",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "what",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "t",
+   "what"
+  ]
+ },
+ "thing_charge_count": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_charge_count_incr": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_confused_count_incr": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_dead": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "reason",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "t",
+   "reason"
+  ]
+ },
+ "thing_debuff_add": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "owner_id",
+    "thing"
+   ],
+   [
+    "what",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "owner",
+   "what"
+  ]
+ },
+ "thing_debuff_remove": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "owner_id",
+    "thing"
+   ],
+   [
+    "what",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "owner",
+   "what"
+  ]
+ },
+ "thing_discord": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "it"
+  ]
+ },
+ "thing_dmg_current": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_dmg_current_incr": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_dmg_current_set": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_dmg_energy": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_effect_radius_get": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_enchant_count_get": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_enemy": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "what",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "t",
+   "what"
+  ]
+ },
+ "thing_entranced_count_incr": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_friend": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "what",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "me",
+   "what"
+  ]
+ },
+ "thing_friend_add": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "it_id",
+    "thing"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "me",
+   "it"
+  ]
+ },
+ "thing_gold": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_gold_decr": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_health": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_health_incr": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_health_max": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_health_max_incr": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_health_set": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_initial_charge_count": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_alive_monst": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_burnt": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_combustible": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_dead": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_dead_or_dying": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_ethereal": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_fire": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_floor": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_frozen": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_gas_blocker": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_immune_to_vorpal_weapons": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_interesting": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_lava": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_missile": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_monst": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_moveable": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_player": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_pointy": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_portal": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_projectile": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_reflective": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_resurrected_or_resurrecting": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_same_mob": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "owner_id",
+    "thing"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "t",
+   "owner"
+  ]
+ },
+ "thing_is_sleeping": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_slime": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_the_grid": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_undead": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_is_water": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_jump_distance_bonus_incr": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_level_get": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_move_penalty_incr": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_move_speed_bonus_incr": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_msg": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "owner_id",
+    "thing"
+   ],
+   [
+    "msg",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "owner",
+   "msg"
+  ]
+ },
+ "thing_msg_if_not_dead_or_dying": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "owner_id",
+    "thing"
+   ],
+   [
+    "msg",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "owner",
+   "msg"
+  ]
+ },
+ "thing_name_get": {
+  "kind": "native",
+  "ret": "str",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_necrotized_amount_get": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_noise_incr": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_paralysis_count_incr": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_perma_death": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "reason",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "t",
+   "reason"
+  ]
+ },
+ "thing_poisoned_amount_get": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_poisoned_amount_set": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_polymorph": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "into",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "t",
+   "into"
+  ]
+ },
+ "thing_popup": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "owner_id",
+    "thing"
+   ],
+   [
+    "msg",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "owner",
+   "msg"
+  ]
+ },
+ "thing_possible_to_attack": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "hitter_id",
+    "thing"
+   ],
+   [
+    "victim_id",
+    "thing"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "hitter",
+   "target"
+  ]
+ },
+ "thing_raging_set": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_repulse": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "me_id",
+    "thing"
+   ],
+   [
+    "it_id",
+    "thing"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "me",
+   "it"
+  ]
+ },
+ "thing_resurrect": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "reason",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "t",
+   "reason"
+  ]
+ },
+ "thing_set_leader": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "owner_id",
+    "thing"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "t",
+   "owner"
+  ]
+ },
+ "thing_set_mob": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "owner_id",
+    "thing"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "t",
+   "owner"
+  ]
+ },
+ "thing_shoot_projectile_or_laser_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "owner_id",
+    "thing"
+   ],
+   [
+    "item",
+    "str"
+   ],
+   [
+    "victim_id",
+    "thing"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "owner",
+   "item",
+   "target"
+  ]
+ },
+ "thing_shove_bonus_incr": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_skill_activate": {
+  "kind": "native",
+  "ret": "thing",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "oid",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "oid"
+  ],
+  "defaults": {}
+ },
+ "thing_skill_deactivate": {
+  "kind": "native",
+  "ret": "thing",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "oid",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "oid"
+  ],
+  "defaults": {}
+ },
+ "thing_sound_play_channel": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "owner_id",
+    "thing"
+   ],
+   [
+    "channel",
+    "int"
+   ],
+   [
+    "name",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "owner",
+   "channel",
+   "name"
+  ]
+ },
+ "thing_speaks": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "owner_id",
+    "thing"
+   ],
+   [
+    "msg",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "owner",
+   "msg"
+  ]
+ },
+ "thing_spell_cast_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "owner_id",
+    "thing"
+   ],
+   [
+    "item",
+    "str"
+   ],
+   [
+    "victim_id",
+    "thing"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "owner",
+   "item",
+   "target"
+  ]
+ },
+ "thing_stamina": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_stamina_decr": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_stamina_incr": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_stamina_max": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_stamina_max_incr": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_stamina_set": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_stat_con": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_stat_con_decr": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_stat_con_incr": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_stat_def_bonus_incr": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_stat_def_incr": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_stat_int": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_stat_int_bonus": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_stat_psi_bonus": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_stat_psi_incr": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_stat_str_incr": {
+  "kind": "native",
+  "ret": "int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "value",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "value"
+  ],
+  "defaults": {}
+ },
+ "thing_teleport": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "id",
+   "x",
+   "y"
+  ]
+ },
+ "thing_teleport_randomly": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "t"
+  ]
+ },
+ "thing_throw_at": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "owner_id",
+    "thing"
+   ],
+   [
+    "item",
+    "str"
+   ],
+   [
+    "victim_id",
+    "thing"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "owner",
+   "item",
+   "target"
+  ]
+ },
+ "thing_top_owner_id_get": {
+  "kind": "native",
+  "ret": "thing",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_wake": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "reason",
+    "str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "t",
+   "reason"
+  ]
+ },
+ "tile_load_arr": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "file",
+    "str"
+   ],
+   [
+    "name",
+    "str"
+   ],
+   [
+    "width",
+    "int"
+   ],
+   [
+    "height",
+    "int"
+   ],
+   [
+    "e",
+    "list_str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "file",
+   "name",
+   "width",
+   "height",
+   "arr"
+  ]
+ },
+ "tile_load_arr_sprites": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "file",
+    "str"
+   ],
+   [
+    "name",
+    "str"
+   ],
+   [
+    "width",
+    "int"
+   ],
+   [
+    "height",
+    "int"
+   ],
+   [
+    "e",
+    "list_str"
+   ]
+  ],
+  "defaults": {},
+  "kwnames": [
+   "file",
+   "name",
+   "width",
+   "height",
+   "arr"
+  ]
+ },
+ "thing_hit": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "owner",
+    "thing"
+   ],
+   [
+    "hitter",
+    "thing"
+   ],
+   [
+    "target",
+    "thing"
+   ],
+   [
+    "damage",
+    "int"
+   ],
+   [
+    "crit",
+    "int"
+   ],
+   [
+    "thrown",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "owner",
+   "hitter",
+   "target",
+   "damage",
+   "crit",
+   "thrown"
+  ],
+  "defaults": {
+   "damage": "0",
+   "crit": "0",
+   "thrown": "0"
+  }
+ },
+ "thing_hit_dmg_energy": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "owner",
+    "thing"
+   ],
+   [
+    "hitter",
+    "thing"
+   ],
+   [
+    "target",
+    "thing"
+   ],
+   [
+    "damage",
+    "int"
+   ],
+   [
+    "crit",
+    "int"
+   ],
+   [
+    "thrown",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "owner",
+   "hitter",
+   "target",
+   "damage",
+   "crit",
+   "thrown"
+  ],
+  "defaults": {
+   "damage": "0",
+   "crit": "0",
+   "thrown": "0"
+  }
+ },
+ "thing_hit_dmg_fire": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "owner",
+    "thing"
+   ],
+   [
+    "hitter",
+    "thing"
+   ],
+   [
+    "target",
+    "thing"
+   ],
+   [
+    "damage",
+    "int"
+   ],
+   [
+    "crit",
+    "int"
+   ],
+   [
+    "thrown",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "owner",
+   "hitter",
+   "target",
+   "damage",
+   "crit",
+   "thrown"
+  ],
+  "defaults": {
+   "damage": "0",
+   "crit": "0",
+   "thrown": "0"
+  }
+ },
+ "thing_hit_dmg_impact": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "owner",
+    "thing"
+   ],
+   [
+    "hitter",
+    "thing"
+   ],
+   [
+    "target",
+    "thing"
+   ],
+   [
+    "damage",
+    "int"
+   ],
+   [
+    "crit",
+    "int"
+   ],
+   [
+    "thrown",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "owner",
+   "hitter",
+   "target",
+   "damage",
+   "crit",
+   "thrown"
+  ],
+  "defaults": {
+   "damage": "0",
+   "crit": "0",
+   "thrown": "0"
+  }
+ },
+ "thing_hit_dmg_missile": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "owner",
+    "thing"
+   ],
+   [
+    "hitter",
+    "thing"
+   ],
+   [
+    "target",
+    "thing"
+   ],
+   [
+    "damage",
+    "int"
+   ],
+   [
+    "crit",
+    "int"
+   ],
+   [
+    "thrown",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "owner",
+   "hitter",
+   "target",
+   "damage",
+   "crit",
+   "thrown"
+  ],
+  "defaults": {
+   "damage": "0",
+   "crit": "0",
+   "thrown": "0"
+  }
+ },
+ "thing_hit_dmg_poison": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "owner",
+    "thing"
+   ],
+   [
+    "hitter",
+    "thing"
+   ],
+   [
+    "target",
+    "thing"
+   ],
+   [
+    "damage",
+    "int"
+   ],
+   [
+    "crit",
+    "int"
+   ],
+   [
+    "thrown",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "owner",
+   "hitter",
+   "target",
+   "damage",
+   "crit",
+   "thrown"
+  ],
+  "defaults": {
+   "damage": "0",
+   "crit": "0",
+   "thrown": "0"
+  }
+ },
+ "thing_hit_dmg_stamina": {
+  "kind": "native",
+  "ret": "bool",
+  "params": [
+   [
+    "owner",
+    "thing"
+   ],
+   [
+    "hitter",
+    "thing"
+   ],
+   [
+    "target",
+    "thing"
+   ],
+   [
+    "damage",
+    "int"
+   ],
+   [
+    "crit",
+    "int"
+   ],
+   [
+    "thrown",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "owner",
+   "hitter",
+   "target",
+   "damage",
+   "crit",
+   "thrown"
+  ],
+  "defaults": {
+   "damage": "0",
+   "crit": "0",
+   "thrown": "0"
+  }
+ },
+ "level_get_all": {
+  "kind": "native",
+  "ret": "list_thing",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y"
+  ],
+  "defaults": {}
+ },
+ "level_flood_fill_get_all_things": {
+  "kind": "native",
+  "ret": "list_thing",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ],
+   [
+    "filter",
+    "str"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y",
+   "filter"
+  ],
+  "defaults": {}
+ },
+ "level_flood_fill_gas_get_all_grid_things": {
+  "kind": "native",
+  "ret": "list_thing",
+  "params": [
+   [
+    "id",
+    "thing"
+   ],
+   [
+    "x",
+    "int"
+   ],
+   [
+    "y",
+    "int"
+   ],
+   [
+    "distance",
+    "int"
+   ]
+  ],
+  "kwnames": [
+   "id",
+   "x",
+   "y",
+   "distance"
+  ],
+  "defaults": {}
+ },
+ "thing_all_followers_get": {
+  "kind": "native",
+  "ret": "list_thing",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_get_followers": {
+  "kind": "native",
+  "ret": "list_thing",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ },
+ "thing_coords_get": {
+  "kind": "native",
+  "ret": "pair_int",
+  "params": [
+   [
+    "id",
+    "thing"
+   ]
+  ],
+  "kwnames": [
+   "id"
+  ],
+  "defaults": {}
+ }
+}

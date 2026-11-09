@@ -3,7 +3,7 @@
 //
 
 #include "my_game.hpp"
-#include "my_python.hpp"
+#include "my_native.hpp"
 #include "my_string.hpp"
 #include "my_thing.hpp"
 
@@ -27,7 +27,7 @@ void Thing::on_close(void)
       mod = name();
     }
 
-    py_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
+    native_call_void_fn(mod.c_str(), fn.c_str(), id.id, (unsigned int) curr_at.x, (unsigned int) curr_at.y);
   } else {
     ERR("Bad on_close call [%s] expected mod:function, got %d elems", on_close.c_str(), (int) on_close.size());
   }
